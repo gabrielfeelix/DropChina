@@ -481,6 +481,29 @@ a.button {
 }
 
 /* ===== FOOTER — Estilo VISION (escuro) ===== */
+
+/* Logo "DropChina" maior no footer (primeira coluna - brand group) */
+footer .group:first-child h3,
+footer .footer .group:first-child h3,
+.section--footer .group:first-child h3 {
+  font-size: 1.75rem !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px;
+}
+
+/* Badge Platinum: parágrafo com 🏆 no início (último <p> do brand group) */
+footer .group:first-child p:last-of-type,
+.section--footer .group:first-child p:last-of-type {
+  display: inline-block;
+  background: rgba(15, 79, 168, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  margin-top: 4px;
+}
+
 footer .section--footer,
 .footer-section,
 section[class*="footer"]:not(.header-section) {

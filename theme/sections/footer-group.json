@@ -46,7 +46,7 @@
             "text_brand_name": {
               "type": "text",
               "settings": {
-                "text": "<h3 style=\"font-size:1.75rem;letter-spacing:-0.02em;color:#fff\">DropChina</h3>",
+                "text": "<h3>DropChina</h3>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -116,7 +116,7 @@
             "text_platinum_badge": {
               "type": "text",
               "settings": {
-                "text": "<p style=\"display:inline-block;background:rgba(15,79,168,0.15);border:1px solid rgba(255,255,255,0.1);padding:8px 14px;border-radius:8px;font-size:0.8125rem\">🏆 Vendedor Platinum no Mercado Livre — +50 mil vendas</p>",
+                "text": "<p>🏆 Vendedor Platinum no Mercado Livre — +50 mil vendas</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -227,7 +227,7 @@
             "text_newsletter_heading": {
               "type": "text",
               "settings": {
-                "text": "<h5 style=\"color:#fff\">Receba ofertas exclusivas</h5>",
+                "text": "<h5>Receba ofertas exclusivas</h5>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
