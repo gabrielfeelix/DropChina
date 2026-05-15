@@ -1350,6 +1350,58 @@
         "padding-block-start": 64,
         "padding-block-end": 64
       }
+    },
+    "testimonials_section": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Recebi rapidíssimo",
+            "quote": "Comprei o cartucho HP 667 e chegou em 2 dias, exatamente como descrito. Recomendo demais!",
+            "author": "Maria S."
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Atendimento nota 10",
+            "quote": "Tirei dúvida no WhatsApp antes de comprar, responderam em minutos. Compra fácil e produto excelente.",
+            "author": "João P."
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Ótimo custo-benefício",
+            "quote": "O kit de toners compatíveis funcionou perfeitamente, qualidade impressionante pelo preço.",
+            "author": "Carlos M."
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Já é a quarta compra",
+            "quote": "Cliente fiel da DropChina. Sempre confiável, sempre cumprem o prazo. Vendedor Platinum se vê.",
+            "author": "Ana B."
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "name": "Testimonials",
+      "settings": {
+        "eyebrow": "AVALIAÇÕES",
+        "heading": "Amados pelos clientes",
+        "subheading": "Mais de 50 mil clientes já confiaram na DropChina no Mercado Livre.",
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -1360,6 +1412,7 @@
     "promo_banner",
     "second_collection",
     "guarantees",
+    "testimonials_section",
     "story_block"
   ]
 }

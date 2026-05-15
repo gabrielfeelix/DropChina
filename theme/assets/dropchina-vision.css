@@ -1,0 +1,751 @@
+/* ============================================================
+   DropChina — VISION-style overrides
+   Replica o look-and-feel do tema VISION (Apple-clean)
+   ============================================================ */
+
+/* ===== TIPOGRAFIA ===== */
+body {
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* ===== CARD DE PRODUTO — Visual VISION ===== */
+
+/* Container do card: fundo cinza Apple, sem border, raio generoso */
+.product-card,
+[class*="product-card"] > .resource-card,
+.resource-card--product-card {
+  background: #f0f0f2;
+  border: none !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  transition: transform 320ms cubic-bezier(0.4, 0.0, 0.2, 1),
+              box-shadow 320ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -12px rgba(15, 79, 168, 0.12);
+}
+
+/* Imagem do produto: padding generoso, fundo transparente */
+.product-card .product-card__gallery,
+.product-card .resource-card__image-wrapper,
+.product-card-gallery {
+  background: transparent;
+  padding: 24px 24px 8px;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+}
+
+.product-card .product-card__gallery img,
+.product-card-gallery img {
+  transition: transform 480ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  mix-blend-mode: multiply;
+}
+
+.product-card:hover .product-card__gallery img,
+.product-card:hover .product-card-gallery img {
+  transform: scale(1.04);
+}
+
+/* Tag "Sold out" / "Esgotado" estilo VISION (overlay top-left) */
+.product-card .product-card__badges,
+.product-card .badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+}
+
+.badge--sold-out,
+.product-badge--sold-out {
+  background: rgba(26, 26, 26, 0.85);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+/* Container do conteúdo (info do produto fora da imagem) */
+.product-card .resource-card__info,
+.product-card .product-card__group {
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  padding: 16px 20px 20px !important;
+}
+
+/* Vendor (brand name) em uppercase pequeno, estilo VISION */
+.product-card .product-card__vendor,
+.product-card [data-product-vendor] {
+  display: block;
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7280 !important;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+/* Título: peso normal, fonte sans, line-height confortável */
+.product-card .product-card__title,
+.product-card .product-title,
+.product-card a.resource-card__title {
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+  color: #1a1a1a !important;
+  margin-bottom: 4px;
+}
+
+/* Preço: bold escuro, com parcelamento embaixo em texto cinza */
+.product-card .product-card__price,
+.product-card .price,
+.product-card price-component {
+  font-size: 0.9375rem !important;
+  font-weight: 700 !important;
+  color: #1a1a1a !important;
+  letter-spacing: -0.01em !important;
+}
+
+.product-card .price__sale {
+  color: #1a1a1a !important;
+}
+
+.product-card .price__compare {
+  color: #9ca3af !important;
+  text-decoration: line-through;
+  font-weight: 500 !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Swatches de cor — pequenos circulos coloridos */
+.product-card .swatches,
+.product-card swatches-variant-picker-component {
+  margin-top: 8px;
+}
+
+/* "Available in N colors" texto cinza */
+.product-card .product-card__color-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Estrelas e rating (review block) */
+.product-card .review,
+.product-card .reviews,
+.product-card review-component {
+  font-size: 0.75rem !important;
+  color: #f59e0b;
+  margin-top: 6px;
+}
+
+.product-card .review__count,
+.product-card .review__number {
+  color: #6b7280 !important;
+  margin-left: 4px;
+}
+
+/* Tags (Voice Command, Affordable, etc.) — chips arredondados cinza */
+.product-card .tags,
+.product-card .product-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.product-card .tag,
+.product-card .product-card__tag,
+.product-card-tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: #f3f4f6;
+  color: #4b5563;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Status de estoque colorido */
+.product-card .stock-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+
+.product-card .stock-indicator::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.product-card .stock-indicator--low::before {
+  background: #ef4444;
+}
+
+/* ===== HERO — Banner arredondado estilo VISION ===== */
+
+/* Hero do Tinker: usa .hero e .hero-wrapper */
+.shopify-section:has(.hero-wrapper),
+.shopify-section:has(.hero) {
+  padding-inline: clamp(12px, 3vw, 32px);
+  padding-block: 12px 0;
+  background: #fff;
+}
+
+.hero,
+.hero-wrapper > .hero,
+.hero__container {
+  border-radius: 28px !important;
+  overflow: hidden;
+  margin-inline: auto;
+  max-width: var(--page-width, 1440px);
+}
+
+/* Reduzir altura do hero pra ficar mais "compacto VISION" */
+@media (min-width: 750px) {
+  .hero {
+    min-height: clamp(420px, 55svh, 620px);
+  }
+}
+
+/* Quando o hero tem imagem de fundo, garantir cantos arredondados */
+.hero__media,
+.hero__blurred-image {
+  border-radius: 28px !important;
+  overflow: hidden;
+}
+
+/* ===== BANNER COMPACTO ARREDONDADO ===== */
+
+/* Banners de categoria/promo no estilo VISION (3 cards arredondados brancos) */
+.banner-card,
+.media-with-content--card {
+  background: #fff;
+  border-radius: 20px !important;
+  padding: 32px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.banner-card:hover {
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Categoria card image: aparece à direita, pequena */
+.collection-card,
+.collection-card--vision {
+  border-radius: 20px !important;
+  overflow: hidden;
+  background: #fff;
+  transition: all 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  border: 1px solid #f0f0f2;
+}
+
+.collection-card:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== HEADER — 2 fileiras estilo VISION ===== */
+
+header.header-section,
+.header-section,
+header-component {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Search bar maior e arredondada (estilo VISION) */
+.header__search input,
+search-modal input[type="search"],
+.predictive-search input {
+  background: #f5f5f7 !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-size: 0.875rem;
+  transition: all 200ms ease;
+}
+
+.header__search input:focus,
+search-modal input[type="search"]:focus {
+  background: #fff !important;
+  border-color: #0f4fa8 !important;
+  box-shadow: 0 0 0 4px rgba(15, 79, 168, 0.1);
+}
+
+/* Carrinho com badge */
+.header__cart-link,
+[data-cart-icon-bubble] {
+  position: relative;
+}
+
+.cart-count,
+.header__cart-count,
+.cart-icon__bubble {
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+}
+
+/* Menu links (linha de baixo) */
+.header__menu a,
+.header-menu__link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.005em;
+  transition: color 160ms ease;
+}
+
+.header__menu a:hover,
+.header-menu__link:hover {
+  color: #0f4fa8;
+}
+
+/* Linha entre as 2 fileiras do header (separator subtil) */
+.header__row--top {
+  padding-block: 14px;
+}
+
+.header__row--bottom {
+  padding-block: 12px;
+  border-top: 1px solid #f0f0f2;
+}
+
+/* ===== ANNOUNCEMENT BAR ===== */
+.header-announcements,
+.section--header-announcements {
+  background: #0f4fa8;
+  color: #fff;
+}
+
+.header-announcements .announcement,
+.header-announcements__text,
+.announcement-bar__text,
+.section--header-announcements * {
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+  color: #fff !important;
+}
+
+/* ===== COLLECTION CARDS (categorias bento) ===== */
+.collection-card,
+.resource-card--collection-card,
+[class*="collection-card"] {
+  border-radius: 20px !important;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #f0f0f2;
+  transition: all 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.collection-card:hover {
+  border-color: #d4d4d8;
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.collection-card img {
+  transition: transform 480ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.collection-card:hover img {
+  transform: scale(1.04);
+}
+
+/* ===== Garantir que .product-card__link não interfira no clique ===== */
+.product-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== SEÇÕES — espaço generoso ===== */
+.section--page-width,
+.section--full-width {
+  padding-block: 56px;
+}
+
+/* Marquee container (trust + guarantees) */
+.marquee {
+  padding-block: 20px;
+}
+
+.marquee-track {
+  gap: 56px;
+}
+
+/* ===== PDP estilo VISION — galeria com cantos generosos ===== */
+.product-media-gallery,
+.product-information__media,
+.product-gallery {
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+
+.product-media-gallery img {
+  border-radius: 16px;
+}
+
+/* ===== BUTTONS — Estilo Apple/VISION ===== */
+.button,
+button.button,
+a.button {
+  border-radius: 999px !important;
+  padding: 12px 28px !important;
+  font-weight: 600 !important;
+  font-size: 0.9375rem !important;
+  letter-spacing: -0.005em;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -4px rgba(15, 79, 168, 0.25);
+}
+
+.button--secondary {
+  background: #f5f5f7 !important;
+  color: #1a1a1a !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.button--secondary:hover {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border-color: #1a1a1a !important;
+}
+
+/* ===== TABS / CHIPS ===== */
+.tabs,
+.chip-group {
+  display: inline-flex;
+  gap: 8px;
+  background: transparent;
+}
+
+.chip,
+.tab,
+.tab-button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #f5f5f7;
+  color: #1a1a1a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 160ms ease;
+}
+
+.chip:hover,
+.tab:hover {
+  background: #ebebed;
+}
+
+.chip[aria-pressed="true"],
+.chip--active,
+.tab[aria-selected="true"],
+.tab--active {
+  background: #0f4fa8;
+  color: #fff;
+}
+
+/* ===== FOOTER — Estilo VISION (escuro) ===== */
+footer .section--footer,
+.footer-section,
+section[class*="footer"]:not(.header-section) {
+  background: #2d3032;
+  color: #d4d6d8;
+}
+
+footer h2, footer h3, footer h4, footer h5,
+footer .menu__heading {
+  color: #fff !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px;
+  letter-spacing: -0.005em !important;
+}
+
+footer a {
+  color: #b8bbbe !important;
+  font-size: 0.875rem;
+  transition: color 160ms ease;
+}
+
+footer a:hover {
+  color: #fff !important;
+}
+
+footer .social-links a,
+footer .social-link {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  padding: 10px;
+}
+
+/* Newsletter no footer */
+footer .email-signup input,
+footer email-signup-component input {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+
+footer .email-signup input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+footer .email-signup button {
+  background: #fff !important;
+  color: #1a1a1a !important;
+  border-radius: 12px !important;
+}
+
+/* Footer copyright bar */
+.footer-utilities,
+.footer-section--utilities {
+  background: #1f2123;
+  color: #8a8d90;
+  font-size: 0.75rem;
+  padding: 16px 0;
+}
+
+.footer-utilities a {
+  color: #b8bbbe !important;
+}
+
+/* ===== TESTIMONIALS — Cards brancos arredondados ===== */
+.testimonial-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 280ms ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.testimonial-card__rating {
+  color: #f59e0b;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.testimonial-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+}
+
+.testimonial-card__quote {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f2;
+}
+
+.testimonial-card__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb linear-gradient(135deg, #d4d4d8, #a1a1aa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.testimonial-card__name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ===== CART DRAWER (sidecart) — VISION style ===== */
+cart-drawer-component,
+.cart-drawer,
+[data-cart-drawer] {
+  --cart-drawer-bg: #f5f5f7;
+}
+
+.cart-drawer__inner,
+cart-drawer-component .drawer-content {
+  background: var(--cart-drawer-bg);
+}
+
+.cart-drawer__header {
+  background: #fff;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cart-drawer__items .cart-item,
+.cart-drawer cart-items-component li {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.cart-drawer__footer,
+cart-drawer-component .cart-summary {
+  background: #fff;
+  padding: 24px;
+  border-top: 1px solid #e5e7eb;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Free shipping bar (se existir) */
+.free-shipping-bar {
+  background: #f5f5f7;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px 24px;
+  font-size: 0.8125rem;
+  color: #1a1a1a;
+}
+
+.free-shipping-bar__progress {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.free-shipping-bar__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0f4fa8, #1d6fd8);
+  border-radius: 999px;
+  transition: width 320ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ===== MICRO-INTERAÇÕES ===== */
+
+/* Fade-in suave para sections quando aparecem (usar com Intersection Observer no JS - aqui só prepara) */
+.section[data-animate-on-scroll],
+[data-fade-in] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms cubic-bezier(0.4, 0.0, 0.2, 1),
+              transform 600ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.section[data-animate-on-scroll].is-visible,
+[data-fade-in].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== AJUSTES GERAIS ===== */
+
+/* Background do site */
+body {
+  background: #fff;
+}
+
+/* Inputs e form fields globais */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+  border-radius: 10px !important;
+  transition: all 200ms ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(15, 79, 168, 0.1);
+}
+
+/* Remove sublinhados padrão de links */
+a {
+  text-decoration: none;
+}
+
+/* Page padding consistent */
+.section--page-width {
+  padding-inline: clamp(16px, 4vw, 64px);
+}
+
+/* ===== SECTION TITLE STYLE ===== */
+.section-title,
+.section h2.section-heading {
+  font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
