@@ -1,0 +1,42 @@
+# Segredos — NUNCA comittar
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Tokens e auth da Shopify CLI
+.shopify/
+.shopifyrc
+
+# Node
+node_modules/
+*.log
+npm-debug.log*
+
+# Backups e temporários
+*.tmp.*
+*.swp
+*.swo
+*~
+.DS_Store
+*:Zone.Identifier
+
+# Theme exports brutos (zips)
+*.zip
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# App scaffold criado por shopify app init (sub-repo independente, não usado neste projeto)
+dropchina-setup/
+
+# Arquivo placeholder vazio
+index.html
