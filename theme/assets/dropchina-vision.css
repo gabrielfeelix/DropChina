@@ -202,34 +202,49 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== HERO — Banner arredondado estilo VISION ===== */
 
-/* Hero do Tinker: usa .hero e .hero-wrapper */
-.shopify-section:has(.hero-wrapper),
-.shopify-section:has(.hero) {
-  padding-inline: clamp(12px, 3vw, 32px);
-  padding-block: 12px 0;
-  background: #fff;
+/* Wrapper externo da section do hero: dá padding lateral pra o hero
+   ficar dentro do page-width e arredondado */
+.shopify-section.hero-wrapper,
+.shopify-section-group-template--index .hero-wrapper {
+  padding-inline: clamp(12px, 3vw, 32px) !important;
+  padding-block: 16px 0 !important;
+  background: #fff !important;
+  display: block;
 }
 
-.hero,
-.hero-wrapper > .hero,
-.hero__container {
+/* Hero principal: arredondado, max-width, margin auto */
+.hero-wrapper .hero,
+.hero.color-scheme-3,
+section.hero {
   border-radius: 28px !important;
-  overflow: hidden;
-  margin-inline: auto;
-  max-width: var(--page-width, 1440px);
+  overflow: hidden !important;
+  margin-inline: auto !important;
+  max-width: var(--page-width, 1440px) !important;
+  position: relative;
 }
 
-/* Reduzir altura do hero pra ficar mais "compacto VISION" */
+/* O container interno usa section--full-width — neutralizar pra ficar dentro do hero arredondado */
+.hero .hero__container.section--full-width,
+.hero .hero__container {
+  border-radius: inherit;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Reduzir altura do hero pra ficar compacto */
 @media (min-width: 750px) {
   .hero {
     min-height: clamp(420px, 55svh, 620px);
   }
 }
 
-/* Quando o hero tem imagem de fundo, garantir cantos arredondados */
+/* Garantir que imagens internas do hero respeitem o radius */
 .hero__media,
+.hero__media-grid,
 .hero__blurred-image {
-  border-radius: 28px !important;
+  border-radius: 0 !important;
   overflow: hidden;
 }
 
@@ -250,61 +265,103 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-2px);
 }
 
-/* Categoria card image: aparece à direita, pequena */
-.collection-card,
-.collection-card--vision {
-  border-radius: 20px !important;
-  overflow: hidden;
-  background: #fff;
-  transition: all 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
-  border: 1px solid #f0f0f2;
-}
+/* ===== HEADER — 2 fileiras estilo VISION (classes reais Tinker) ===== */
 
-.collection-card:hover {
-  border-color: #e5e7eb;
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
-}
-
-/* ===== HEADER — 2 fileiras estilo VISION ===== */
-
-header.header-section,
 .header-section,
-header-component {
-  background: #fff;
+header.header,
+.header,
+header.header.header--collapse-row-paddings {
+  background: #fff !important;
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Search bar maior e arredondada (estilo VISION) */
+/* Row top: logo+search+actions com padding mais generoso */
+.header__row--top {
+  padding-block: 14px !important;
+  background: #fff;
+}
+
+/* Row bottom: menu de categorias */
+.header__row--bottom {
+  padding-block: 10px !important;
+  background: #fff;
+  border-top: 1px solid #f0f0f2;
+}
+
+/* Columns alignment */
+.header__column--left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__column--center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header__column--right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Logo do header */
+.header-logo,
+.header-logo__image-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Search modal/predictive */
 .header__search input,
 search-modal input[type="search"],
-.predictive-search input {
+.predictive-search input,
+.predictive-search-form input {
   background: #f5f5f7 !important;
   border: 1px solid transparent !important;
   border-radius: 12px !important;
   padding: 12px 16px !important;
-  font-size: 0.875rem;
+  font-size: 0.875rem !important;
   transition: all 200ms ease;
 }
 
 .header__search input:focus,
-search-modal input[type="search"]:focus {
+search-modal input[type="search"]:focus,
+.predictive-search-form input:focus {
   background: #fff !important;
   border-color: #0f4fa8 !important;
-  box-shadow: 0 0 0 4px rgba(15, 79, 168, 0.1);
+  box-shadow: 0 0 0 4px rgba(15, 79, 168, 0.1) !important;
 }
 
-/* Carrinho com badge */
-.header__cart-link,
-[data-cart-icon-bubble] {
+/* Header actions (account + cart icons) */
+.header-actions__action {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: background 160ms ease;
+}
+
+.header-actions__action:hover {
+  background: #f5f5f7;
+}
+
+.header-actions__cart-icon {
   position: relative;
 }
 
+/* Cart count badge */
 .cart-count,
 .header__cart-count,
-.cart-icon__bubble {
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 0.6875rem;
+.cart-icon__bubble,
+[data-cart-count] {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  font-size: 0.6875rem !important;
   font-weight: 600;
   min-width: 20px;
   height: 20px;
@@ -313,25 +370,35 @@ search-modal input[type="search"]:focus {
   align-items: center;
   justify-content: center;
   padding: 0 6px;
+  position: absolute;
+  top: -4px;
+  right: -4px;
 }
 
-/* Menu links (linha de baixo) */
+/* Menu (linha de baixo) — Tinker usa .header-menu / .header-menu__inner */
+.header-menu,
+.header-menu__inner {
+  gap: 28px;
+}
+
+.header-menu a,
 .header__menu a,
 .header-menu__link {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  letter-spacing: -0.005em;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  color: #1a1a1a !important;
+  letter-spacing: -0.005em !important;
   transition: color 160ms ease;
 }
 
+.header-menu a:hover,
 .header__menu a:hover,
 .header-menu__link:hover {
-  color: #0f4fa8;
+  color: #0f4fa8 !important;
 }
 
-/* Linha entre as 2 fileiras do header (separator subtil) */
-.header__row--top {
+/* Remove styling antigo redundante */
+.header__row--top-legacy {
   padding-block: 14px;
 }
 
@@ -340,46 +407,57 @@ search-modal input[type="search"]:focus {
   border-top: 1px solid #f0f0f2;
 }
 
-/* ===== ANNOUNCEMENT BAR ===== */
-.header-announcements,
-.section--header-announcements {
-  background: #0f4fa8;
-  color: #fff;
+/* ===== ANNOUNCEMENT BAR (real class: .announcement-bar) ===== */
+.announcement-bar {
+  background: #0f4fa8 !important;
+  color: #fff !important;
+  padding-block: 10px !important;
 }
 
-.header-announcements .announcement,
-.header-announcements__text,
 .announcement-bar__text,
-.section--header-announcements * {
+.announcement-bar__link,
+.announcement-bar * {
   font-size: 0.8125rem !important;
   font-weight: 500 !important;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.01em !important;
   color: #fff !important;
 }
 
-/* ===== COLLECTION CARDS (categorias bento) ===== */
+/* ===== COLLECTION CARDS (categorias bento — classes reais do Tinker) ===== */
 .collection-card,
+.collection-card__inner,
+.collection-card__link,
 .resource-card--collection-card,
 [class*="collection-card"] {
   border-radius: 20px !important;
   overflow: hidden;
-  background: #fff;
+}
+
+.collection-card__inner {
+  background: #fff !important;
   border: 1px solid #f0f0f2;
   transition: all 280ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.collection-card:hover {
+.collection-card__inner:hover,
+.collection-card__link:hover .collection-card__inner {
   border-color: #d4d4d8;
   box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
-.collection-card img {
+.collection-card__inner img,
+.collection-card__link img {
   transition: transform 480ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.collection-card:hover img {
+.collection-card__inner:hover img,
+.collection-card__link:hover img {
   transform: scale(1.04);
+}
+
+.collection-card__content {
+  padding: 20px !important;
 }
 
 /* ===== Garantir que .product-card__link não interfira no clique ===== */
