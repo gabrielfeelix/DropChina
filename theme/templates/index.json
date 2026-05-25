@@ -1414,11 +1414,52 @@
         "b3",
         "b4"
       ]
+    },
+    "promo_banners_main": {
+      "type": "promo-cards",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "Toner Brother TN-660",
+            "price": "139,90",
+            "cta_label": "Confira",
+            "eyebrow": "MAIS VENDIDO",
+            "link": "shopify://collections/toners"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Impressora HP Multifuncional",
+            "price": "899,00",
+            "cta_label": "Confira",
+            "eyebrow": "WI-FI \u00b7 C\u00d3PIA \u00b7 SCANNER",
+            "link": "shopify://collections/impressoras"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "title": "Monitor 24\" Full HD",
+            "price": "1.249,00",
+            "cta_label": "Confira",
+            "eyebrow": "ESCRIT\u00d3RIO PREMIUM",
+            "link": "shopify://collections/monitores"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
     }
   },
   "order": [
     "hero_main",
     "trust_badges_main",
+    "promo_banners_main",
     "trust_marquee",
     "categories_grid",
     "best_sellers",

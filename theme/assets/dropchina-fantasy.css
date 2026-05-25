@@ -494,3 +494,139 @@ section.slideshow [aria-label*="Next"]:hover {
     gap: 16px;
   }
 }
+
+/* ============================================================
+   PROMO CARDS 3-COL (banners pretos com CTA verde "Confira")
+   ============================================================ */
+
+.promo-cards {
+  background: var(--dc-white);
+  padding-block: 48px;
+}
+
+.promo-cards__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.promo-card {
+  background: var(--dc-black-card);
+  border-radius: var(--dc-radius-lg);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--dc-text-on-dark);
+  text-decoration: none;
+  min-height: 200px;
+  transition: transform var(--dc-duration) var(--dc-ease),
+              box-shadow var(--dc-duration) var(--dc-ease);
+}
+
+.promo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.3);
+}
+
+.promo-card:focus-visible {
+  outline: 3px solid var(--dc-focus-ring);
+  outline-offset: 4px;
+}
+
+.promo-card__image {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 160px;
+}
+
+.promo-card__image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 140px;
+}
+
+.promo-card__image--placeholder svg {
+  opacity: 0.6;
+}
+
+.promo-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.promo-card__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dc-text-muted-dark);
+  margin: 0 0 8px;
+}
+
+.promo-card__title {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25;
+  color: var(--dc-text-on-dark) !important;
+  margin: 0 0 8px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.promo-card__price {
+  font-size: 1rem;
+  color: var(--dc-text-muted-dark);
+  margin: 0 0 16px;
+}
+
+.promo-card__price strong {
+  color: var(--dc-text-on-dark);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.promo-card__cta {
+  display: inline-block;
+  background: var(--dc-green);
+  color: var(--dc-text-on-dark);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 12px 24px;
+  border-radius: var(--dc-radius-pill);
+  transition: background var(--dc-duration) var(--dc-ease);
+}
+
+.promo-card:hover .promo-card__cta {
+  background: var(--dc-green-hover);
+}
+
+@media (max-width: 1024px) {
+  .promo-cards__container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+  .promo-card__image {
+    flex: 0 0 auto;
+    width: 60%;
+  }
+  .promo-card__title {
+    -webkit-line-clamp: 3;
+  }
+}
