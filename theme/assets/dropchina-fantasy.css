@@ -90,6 +90,14 @@
    Estas regras garantem que TODO texto e ícone do top row fique branco
    e estilizam a busca como input retangular estilo Fantasy. */
 
+/* Limpar bordas indesejadas dos rows do header */
+header.header .header__row,
+header.header .header__row--top {
+  border: none !important;
+  --border-bottom-width: 0 !important;
+  --border-bottom-width-mobile: 0 !important;
+}
+
 /* ---------- Top row: força texto branco em TODOS os descendentes ---------- */
 header.header,
 header.header .header__main-row,
@@ -131,7 +139,17 @@ header.header .header__column--right svg {
   stroke: currentColor;
 }
 
-/* Logo: variante inversa quando dark */
+/* Logo: branco no header preto (cobre tanto img quanto text-logo) */
+header.header .header-logo,
+header.header .header-logo__image-container,
+header.header .header-logo__image-container span {
+  color: var(--dc-text-on-dark) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+/* Se houver IMG do logo (não-inverse), invertê-la pra branco */
 header.header .header-logo__image-container:not(.header-logo__image-container--inverse) img {
   filter: brightness(0) invert(1);
 }
@@ -140,11 +158,27 @@ header.header .header-logo__image-container:not(.header-logo__image-container--i
 /* Tinker renderiza <search-button> com .search-action--text quando display_style=text.
    Transformamos esse botão num "fake input": pill cinza-escuro com placeholder visível. */
 
+/* Forçar visibilidade da search em todas as larguras */
+@media (min-width: 750px) {
+  header.header [data-menu-style='menu'] .search-action--hidden-on-menu,
+  header.header .search-action--hidden-on-menu {
+    display: flex !important;
+  }
+}
+
 header.header search-button.search-action,
 header.header .search-action {
   flex: 1;
   min-width: 0;
   max-width: 560px;
+  display: flex !important;
+}
+
+/* Garantir que o texto "Pesquisa" sempre apareça (Tinker o oculta com mobile:hidden) */
+header.header .search-action button.button-unstyled span.mobile\:hidden,
+header.header .search-action button.button-unstyled > span:not(.svg-wrapper) {
+  display: inline-block !important;
+  color: inherit !important;
 }
 
 header.header .search-action button.button-unstyled {
@@ -344,14 +378,20 @@ section.slideshow .slideshow {
 /* Slides altura mínima alta no desktop */
 #shopify-section-hero_main .slide,
 #shopify-section-hero_main [class*="slide-"] {
-  min-height: 480px;
+  min-height: 360px;
   border-radius: 0 !important;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(15, 79, 168, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0a0d 0%, #000000 100%);
+  background-size: cover;
+  background-position: center;
 }
 
 @media (min-width: 768px) {
   #shopify-section-hero_main .slide,
   #shopify-section-hero_main [class*="slide-"] {
-    min-height: 540px;
+    min-height: 420px;
   }
 }
 
