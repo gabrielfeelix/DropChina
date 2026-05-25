@@ -90,12 +90,21 @@
    Estas regras garantem que TODO texto e ícone do top row fique branco
    e estilizam a busca como input retangular estilo Fantasy. */
 
-/* Limpar bordas indesejadas dos rows do header */
+/* Limpar bordas indesejadas dos rows do header (Tinker aplica border-bottom
+   via --border-bottom-width que pode vazar; matar TODAS as bordas internas) */
 header.header .header__row,
-header.header .header__row--top {
+header.header .header__row--top,
+header.header .header__row--top.divider--page-width .header__columns,
+header.header .header__row--top:not(.divider--page-width) {
   border: none !important;
+  border-bottom: none !important;
   --border-bottom-width: 0 !important;
   --border-bottom-width-mobile: 0 !important;
+}
+
+/* Announcement bar (faixa do topo) — sem qualquer border-bottom branco escapando */
+.announcement-bar {
+  border-bottom: none !important;
 }
 
 /* ---------- Top row: força texto branco em TODOS os descendentes ---------- */

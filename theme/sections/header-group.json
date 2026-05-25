@@ -100,10 +100,10 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "center",
+        "menu_position": "left",
         "menu_row": "bottom",
         "show_search": true,
-        "search_position": "right",
+        "search_position": "left",
         "search_row": "top",
         "show_country": false,
         "country_selector_style": false,
