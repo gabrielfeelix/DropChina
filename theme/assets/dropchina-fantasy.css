@@ -165,3 +165,96 @@ header.header .header__navigation-bar-row .mega-menu__list a,
 header.header .header__navigation-bar-row [class*="menu"] a {
   color: var(--dc-text) !important;
 }
+
+/* ============================================================
+   FOOTER PRETO INSTITUCIONAL
+   ============================================================ */
+
+/* Section root - Tinker usa #shopify-section-footer com .section interno.
+   scheme-8 já pinta o background preto. Refinamos tipografia + cores
+   pra alinhar com o look Fantasy/Apple. */
+
+#shopify-section-footer .section,
+#shopify-section-footer-utilities .section {
+  padding-block: 56px !important;
+}
+
+/* Headings das colunas (Institucional, Compre por telefone, etc) */
+#shopify-section-footer h3,
+#shopify-section-footer h4,
+#shopify-section-footer h5,
+#shopify-section-footer-utilities h5 {
+  color: var(--dc-text-on-dark) !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+/* Body text e links muted */
+#shopify-section-footer a,
+#shopify-section-footer p,
+#shopify-section-footer-utilities a,
+#shopify-section-footer-utilities p,
+#shopify-section-footer-utilities .footer-utilities__text {
+  color: var(--dc-text-muted-dark) !important;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+#shopify-section-footer a:hover,
+#shopify-section-footer-utilities a:hover {
+  color: var(--dc-text-on-dark) !important;
+}
+
+/* Logo: aplicar invert se não houver variante --inverse */
+#shopify-section-footer .header-logo__image-container:not(.header-logo__image-container--inverse) img,
+#shopify-section-footer .image img[alt*="logo" i] {
+  filter: brightness(0) invert(1);
+  max-height: 56px;
+}
+
+/* Linha de copyright (footer-utilities) — separador sutil */
+#shopify-section-footer-utilities {
+  border-top: 1px solid var(--dc-black-soft);
+}
+
+#shopify-section-footer-utilities .footer-utilities__text {
+  color: var(--dc-text-muted) !important;
+  font-size: 0.8125rem;
+}
+
+/* Redes sociais — ícones em pílulas circulares com hover verde */
+#shopify-section-footer .social-icons__wrapper a,
+#shopify-section-footer [class*="social-link"] {
+  color: var(--dc-text-on-dark) !important;
+  background: var(--dc-black-soft);
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--dc-duration) var(--dc-ease);
+}
+
+#shopify-section-footer .social-icons__wrapper a:hover,
+#shopify-section-footer [class*="social-link"]:hover {
+  background: var(--dc-green) !important;
+}
+
+#shopify-section-footer .social-icons__wrapper svg,
+#shopify-section-footer [class*="social-link"] svg {
+  width: 18px;
+  height: 18px;
+  color: var(--dc-text-on-dark);
+}
+
+/* Links de WhatsApp no footer — destacar com cor verde */
+#shopify-section-footer a[href*="wa.me"],
+#shopify-section-footer a[href*="whatsapp"] {
+  color: var(--dc-green) !important;
+  font-weight: 600;
+}
