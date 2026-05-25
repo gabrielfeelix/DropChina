@@ -1372,10 +1372,53 @@
         "padding_top": 80,
         "padding_bottom": 80
       }
+    },
+    "trust_badges_main": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "title": "Seguran\u00e7a",
+            "sub": "Loja com SSL de prote\u00e7\u00e3o"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "title": "Envio",
+            "sub": "Envio para todo Brasil",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><rect x='1' y='3' width='15' height='13'/><polygon points='16 8 20 8 23 11 23 16 16 16 16 8'/><circle cx='5.5' cy='18.5' r='2.5'/><circle cx='18.5' cy='18.5' r='2.5'/></svg>"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "title": "PIX",
+            "sub": "Economize pagando no PIX",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 22 12 12 22 2 12 12 2'/></svg>"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "title": "Promo\u00e7\u00f5es",
+            "sub": "Promo\u00e7\u00f5es di\u00e1rias",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2'/></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
     }
   },
   "order": [
     "hero_main",
+    "trust_badges_main",
     "trust_marquee",
     "categories_grid",
     "best_sellers",

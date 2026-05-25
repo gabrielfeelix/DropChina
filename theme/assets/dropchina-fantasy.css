@@ -419,3 +419,78 @@ section.slideshow [aria-label*="Next"]:hover {
   color: var(--dc-text-on-dark) !important;
   border-color: var(--dc-green) !important;
 }
+
+/* ============================================================
+   TRUST BADGES (faixa 4 colunas Segurança/Envio/PIX/Promoções)
+   ============================================================ */
+
+.trust-badges {
+  background: var(--dc-white);
+  border-top: 1px solid var(--dc-border);
+  border-bottom: 1px solid var(--dc-border);
+  padding-block: 28px;
+}
+
+.trust-badges__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.trust-badges__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.trust-badges__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-badges__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.trust-badges__text {
+  min-width: 0;
+}
+
+.trust-badges__title {
+  font-size: 0.9375rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 2px !important;
+  color: var(--dc-text) !important;
+  line-height: 1.2;
+}
+
+.trust-badges__sub {
+  font-size: 0.8125rem;
+  color: var(--dc-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .trust-badges__container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-inline: 16px;
+  }
+  .trust-badges {
+    padding-block: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-badges__container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

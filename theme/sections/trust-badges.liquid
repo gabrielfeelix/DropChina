@@ -1,0 +1,88 @@
+<section class="trust-badges" aria-label="Garantias da loja">
+  <div class="trust-badges__container">
+    {%- for block in section.blocks -%}
+      <div class="trust-badges__item" {{ block.shopify_attributes }}>
+        <div class="trust-badges__icon" aria-hidden="true">
+          {{ block.settings.icon_svg }}
+        </div>
+        <div class="trust-badges__text">
+          <h3 class="trust-badges__title">{{ block.settings.title | escape }}</h3>
+          <p class="trust-badges__sub">{{ block.settings.sub | escape }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "tag": "section",
+  "class": "section-trust-badges",
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Ícone SVG inline",
+          "default": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Segurança"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Subtítulo",
+          "default": "Loja com SSL de proteção"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Segurança",
+            "sub": "Loja com SSL de proteção"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Envio",
+            "sub": "Envio para todo Brasil",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><rect x='1' y='3' width='15' height='13'/><polygon points='16 8 20 8 23 11 23 16 16 16 16 8'/><circle cx='5.5' cy='18.5' r='2.5'/><circle cx='18.5' cy='18.5' r='2.5'/></svg>"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "PIX",
+            "sub": "Economize pagando no PIX",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 22 12 12 22 2 12 12 2'/></svg>"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "title": "Promoções",
+            "sub": "Promoções diárias",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2'/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
