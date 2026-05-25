@@ -175,7 +175,7 @@ header.header .header__navigation-bar-row [class*="menu"] a {
    pra alinhar com o look Fantasy/Apple. */
 
 #shopify-section-footer .section,
-#shopify-section-footer-utilities .section {
+#shopify-section-utilities .section {
   padding-block: 56px !important;
 }
 
@@ -183,7 +183,7 @@ header.header .header__navigation-bar-row [class*="menu"] a {
 #shopify-section-footer h3,
 #shopify-section-footer h4,
 #shopify-section-footer h5,
-#shopify-section-footer-utilities h5 {
+#shopify-section-utilities h5 {
   color: var(--dc-text-on-dark) !important;
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
@@ -195,9 +195,9 @@ header.header .header__navigation-bar-row [class*="menu"] a {
 /* Body text e links muted */
 #shopify-section-footer a,
 #shopify-section-footer p,
-#shopify-section-footer-utilities a,
-#shopify-section-footer-utilities p,
-#shopify-section-footer-utilities .footer-utilities__text {
+#shopify-section-utilities a,
+#shopify-section-utilities p,
+#shopify-section-utilities .footer-utilities__text {
   color: var(--dc-text-muted-dark) !important;
   font-size: 0.875rem;
   line-height: 1.6;
@@ -205,7 +205,7 @@ header.header .header__navigation-bar-row [class*="menu"] a {
 }
 
 #shopify-section-footer a:hover,
-#shopify-section-footer-utilities a:hover {
+#shopify-section-utilities a:hover {
   color: var(--dc-text-on-dark) !important;
 }
 
@@ -217,11 +217,11 @@ header.header .header__navigation-bar-row [class*="menu"] a {
 }
 
 /* Linha de copyright (footer-utilities) — separador sutil */
-#shopify-section-footer-utilities {
+#shopify-section-utilities {
   border-top: 1px solid var(--dc-black-soft);
 }
 
-#shopify-section-footer-utilities .footer-utilities__text {
+#shopify-section-utilities .footer-utilities__text {
   color: var(--dc-text-muted) !important;
   font-size: 0.8125rem;
 }
