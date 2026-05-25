@@ -33,6 +33,8 @@
   --dc-radius-sm: 10px;
   --dc-radius-md: 12px;
   --dc-radius-lg: 16px;
+  --dc-radius-xl: 20px;
+  --dc-radius-2xl: 24px;
   --dc-radius-pill: 999px;
 
   /* Sombra */
@@ -42,6 +44,35 @@
 
   /* Easing */
   --dc-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Backward-compat aliases (remove when dropchina-vision.css is archived in Phase 10) */
+  --dc-accent: var(--dc-orange);
+  --dc-accent-hover: var(--dc-orange-hover);
+
+  /* Whites & dark surfaces (Tasks 1.2, 1.3, 4.1) */
+  --dc-white: #ffffff;
+  --dc-black-soft: #1a1a1a;
+  --dc-black-card: #0d0d0f;
+  --dc-border-dark: #333333;
+  --dc-text-on-dark: #ffffff;
+  --dc-text-muted-dark: #b8bbbe;
+
+  /* Duration scale */
+  --dc-duration: 200ms;
+  --dc-duration-slow: 320ms;
+  --dc-duration-slower: 480ms;
+
+  /* Z-index scale */
+  --dc-z-base: 1;
+  --dc-z-sticky: 100;
+  --dc-z-float: 999;
+
+  /* Semantic aliases for design intent */
+  --dc-focus-ring: var(--dc-blue);
+  --dc-price-pix: var(--dc-blue);
+  --dc-cta-buy: var(--dc-green);
+  --dc-cta-buy-hover: var(--dc-green-hover);
+  --dc-urgency: var(--dc-orange);
 }
 
 /* Reduced motion respeitado */
@@ -50,4 +81,5 @@
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  html { scroll-behavior: auto !important; }
 }
