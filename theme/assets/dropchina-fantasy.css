@@ -237,31 +237,50 @@ header.header .search-action button.button-unstyled .svg-wrapper svg {
   }
 }
 
-/* ---------- Navigation bar row (categorias) — fundo branco ---------- */
-header.header .header__navigation-bar-row,
-header.header .header__navigation-bar-row .header__row {
-  background: var(--dc-white) !important;
-}
+/* ---------- Navigation bar row (categorias) — fundo BRANCO com texto PRETO ----------
+   Tinker aplica .color-scheme-8 com --color-foreground:#fff. Sobrescrevemos as
+   próprias CSS vars dentro do nav row pra forçar fundo branco e texto preto,
+   ignorando o scheme. */
 
 header.header .header__navigation-bar-row,
-header.header .header__navigation-bar-row a,
-header.header .header__navigation-bar-row button,
-header.header .header__navigation-bar-row span {
+header.header .header__navigation-bar-row.color-scheme-8 {
+  background: var(--dc-white) !important;
+  background-color: var(--dc-white) !important;
+  /* Sobrescrever as CSS variables que os filhos consomem */
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-foreground-heading: #1a1a1a;
+  --color-primary: #0f4fa8;
+  --color-primary-hover: #0a3d80;
+  --color-border: #e5e7eb;
   color: var(--dc-text) !important;
 }
 
-header.header .header__navigation-bar-row a:hover {
-  color: var(--dc-blue) !important;
-}
-
+/* Todos os textos/links/botões/svgs dentro do nav row ficam pretos */
+header.header .header__navigation-bar-row *,
+header.header .header__navigation-bar-row a,
+header.header .header__navigation-bar-row button,
+header.header .header__navigation-bar-row span,
+header.header .header__navigation-bar-row li,
 header.header .header__navigation-bar-row svg {
   color: var(--dc-text) !important;
 }
 
+header.header .header__navigation-bar-row a:hover,
+header.header .header__navigation-bar-row a:hover * {
+  color: var(--dc-blue) !important;
+}
+
 /* Mega menu items mantêm cor consistente */
 header.header .header__navigation-bar-row .mega-menu__list a,
+header.header .header__navigation-bar-row .mega-menu__list a *,
 header.header .header__navigation-bar-row [class*="menu"] a {
   color: var(--dc-text) !important;
+}
+
+/* Border-bottom separator branca → cinza claro */
+header.header .header__navigation-bar-row {
+  border-bottom: 1px solid var(--dc-border) !important;
 }
 
 /* ============================================================
