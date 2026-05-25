@@ -8,7 +8,7 @@
         "announcement_frete": {
           "type": "_announcement",
           "settings": {
-            "text": "🚚 Frete grátis em compras acima de R$ 200",
+            "text": "\ud83d\ude9a Frete gr\u00e1tis em compras acima de R$ 200",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
             "font_size": "var(--font-size--body-md)",
@@ -21,7 +21,7 @@
         "announcement_pix": {
           "type": "_announcement",
           "settings": {
-            "text": "💰 Pague com PIX e ganhe 5% de desconto",
+            "text": "\ud83d\udcb0 Pague com PIX e ganhe 5% de desconto",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
             "font_size": "var(--font-size--body-md)",
@@ -34,7 +34,7 @@
         "announcement_platinum": {
           "type": "_announcement",
           "settings": {
-            "text": "🏆 Vendedor Platinum no Mercado Livre — +50 mil vendas",
+            "text": "\ud83c\udfc6 Vendedor Platinum no Mercado Livre \u2014 +50 mil vendas",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
             "font_size": "var(--font-size--body-md)",
@@ -126,7 +126,8 @@
         "enable_transparent_header_product": false,
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,
-        "collection_color_scheme": "default"
+        "collection_color_scheme": "default",
+        "actions_display_style": "text"
       }
     }
   },

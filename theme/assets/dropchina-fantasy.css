@@ -86,73 +86,133 @@
 
 /* ===== HEADER PRETO FULL-WIDTH (selectors Tinker reais) ===== */
 
-/* O scheme-8 já pinta o background preto via Tinker.
-   As regras abaixo cuidam dos detalhes: cor de texto no top row,
-   pill da busca, logo invertido, e o row de navegação inferior em branco. */
+/* O scheme-8 pinta o background preto via Tinker.
+   Estas regras garantem que TODO texto e ícone do top row fique branco
+   e estilizam a busca como input retangular estilo Fantasy. */
 
-/* Top row: preto com texto branco */
+/* ---------- Top row: força texto branco em TODOS os descendentes ---------- */
+header.header,
 header.header .header__main-row,
-header.header .header__row--top {
-  color: var(--dc-text-on-dark);
-}
-
-header.header .header__main-row a,
-header.header .header__row--top a {
+header.header .header__row,
+header.header .header__column,
+header.header .header__columns,
+header.header .header-actions__action,
+header.header .header-actions__text-style,
+header.header .header__heading,
+header.header .button-unstyled,
+header.header .dropdown-localization__button,
+header.header .localization-selector,
+header.header .currency-code {
   color: var(--dc-text-on-dark) !important;
 }
 
-header.header .header__main-row a:hover,
-header.header .header__row--top a:hover {
+/* Links e botões */
+header.header .header__row a,
+header.header .header__row button,
+header.header .header__row span,
+header.header .header__column a,
+header.header .header__column button,
+header.header .header__column span {
+  color: var(--dc-text-on-dark) !important;
+}
+
+/* Hover verde Fantasy nos links do top row apenas (não no navigation-bar) */
+header.header .header__row:not(.header__navigation-bar-row) a:hover,
+header.header .header__row:not(.header__navigation-bar-row) button:hover {
   color: var(--dc-green) !important;
 }
 
-/* Ícones do top row brancos */
-header.header .header__main-row svg,
-header.header .header__row--top svg,
+/* Ícones brancos no top row */
+header.header .header__row:not(.header__navigation-bar-row) svg,
+header.header .header-actions svg,
 header.header .header__column--right svg {
-  color: var(--dc-text-on-dark);
+  color: var(--dc-text-on-dark) !important;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
-/* Logo: usar a variante --inverse quando o scheme é dark.
-   Tinker já tem suporte nativo via .header-logo__image-container--inverse,
-   só garantimos que ela seja preferida se o usuário não subiu logo inverso. */
+/* Logo: variante inversa quando dark */
 header.header .header-logo__image-container:not(.header-logo__image-container--inverse) img {
   filter: brightness(0) invert(1);
 }
 
-/* Busca pill estilo Fantasy — desktop apenas (mobile mantém compacta) */
-@media (min-width: 768px) {
-  header.header .predictive-search-form__header-inner,
-  header.header .search-action .predictive-search-form {
-    background: var(--dc-black-soft) !important;
-    border: 1px solid var(--dc-border-dark) !important;
-    border-radius: var(--dc-radius-pill) !important;
-    padding: 8px 16px !important;
-  }
+/* ---------- Busca como INPUT RETANGULAR estilo Fantasy ---------- */
+/* Tinker renderiza <search-button> com .search-action--text quando display_style=text.
+   Transformamos esse botão num "fake input": pill cinza-escuro com placeholder visível. */
 
-  header.header .predictive-search-form input[type="search"],
-  header.header .predictive-search-form__input {
-    background: transparent !important;
-    color: var(--dc-text-on-dark) !important;
-    border: none !important;
-    padding: 6px 8px !important;
-  }
+header.header search-button.search-action,
+header.header .search-action {
+  flex: 1;
+  min-width: 0;
+  max-width: 560px;
+}
 
-  header.header .predictive-search-form input::placeholder {
-    color: #888 !important;
+header.header .search-action button.button-unstyled {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  background: var(--dc-black-soft) !important;
+  border: 1px solid var(--dc-border-dark) !important;
+  border-radius: var(--dc-radius-pill) !important;
+  padding: 12px 20px !important;
+  color: #888 !important;
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  text-align: left;
+  cursor: text;
+  transition: background var(--dc-duration) var(--dc-ease),
+              border-color var(--dc-duration) var(--dc-ease);
+}
+
+header.header .search-action button.button-unstyled:hover {
+  background: #222222 !important;
+  border-color: #555555 !important;
+  color: #ccc !important;
+}
+
+header.header .search-action button.button-unstyled:focus-visible {
+  outline: 2px solid var(--dc-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Texto "Pesquisar" visível como placeholder */
+header.header .search-action button.button-unstyled span:not(.svg-wrapper) {
+  display: inline !important;
+  color: inherit !important;
+}
+
+/* Ícone lupa à esquerda dentro do "input" */
+header.header .search-action button.button-unstyled .svg-wrapper {
+  display: inline-flex !important;
+  order: -1;
+  flex-shrink: 0;
+}
+
+header.header .search-action button.button-unstyled .svg-wrapper svg {
+  width: 18px;
+  height: 18px;
+  color: #888;
+}
+
+/* Mobile: search compacta */
+@media (max-width: 768px) {
+  header.header .search-action button.button-unstyled {
+    padding: 10px 16px !important;
+    font-size: 0.875rem !important;
   }
 }
 
-/* Navigation bar row (categorias) — em branco abaixo do header preto.
-   Esta row tem seu próprio color_scheme_bottom (scheme-8) que pinta tudo preto;
-   sobrescrevemos pra deixar branca como no Fantasy. */
-header.header .header__navigation-bar-row {
+/* ---------- Navigation bar row (categorias) — fundo branco ---------- */
+header.header .header__navigation-bar-row,
+header.header .header__navigation-bar-row .header__row {
   background: var(--dc-white) !important;
-  color: var(--dc-text) !important;
-  border-bottom: 1px solid var(--dc-border);
 }
 
-header.header .header__navigation-bar-row a {
+header.header .header__navigation-bar-row,
+header.header .header__navigation-bar-row a,
+header.header .header__navigation-bar-row button,
+header.header .header__navigation-bar-row span {
   color: var(--dc-text) !important;
 }
 
@@ -160,7 +220,11 @@ header.header .header__navigation-bar-row a:hover {
   color: var(--dc-blue) !important;
 }
 
-/* Mega menu items mantêm cor de texto consistente */
+header.header .header__navigation-bar-row svg {
+  color: var(--dc-text) !important;
+}
+
+/* Mega menu items mantêm cor consistente */
 header.header .header__navigation-bar-row .mega-menu__list a,
 header.header .header__navigation-bar-row [class*="menu"] a {
   color: var(--dc-text) !important;
