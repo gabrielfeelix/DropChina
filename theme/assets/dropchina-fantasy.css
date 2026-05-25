@@ -237,50 +237,67 @@ header.header .search-action button.button-unstyled .svg-wrapper svg {
   }
 }
 
-/* ---------- Navigation bar row (categorias) — fundo BRANCO com texto PRETO ----------
-   Tinker aplica .color-scheme-8 com --color-foreground:#fff. Sobrescrevemos as
-   próprias CSS vars dentro do nav row pra forçar fundo branco e texto preto,
-   ignorando o scheme. */
+/* ---------- Categorias row (.header__row--bottom) — fundo BRANCO + texto PRETO ----------
+   Markup real do Tinker: o menu de categorias mora em
+   <div class="header__row header__row--bottom color-scheme-8">
+   contendo <header-menu><div class="header-menu__inner"><nav class="menu-list">
+   <overflow-list><ul><li class="menu-list__list-item"><a class="menu-list__link">
 
-header.header .header__navigation-bar-row,
-header.header .header__navigation-bar-row.color-scheme-8 {
+   .color-scheme-8 define --color-foreground:#fff que os links consomem.
+   Sobrescrevemos as vars no próprio row pra inverter o scheme localmente. */
+
+header.header .header__row--bottom,
+header.header .header__row--bottom.color-scheme-8 {
   background: var(--dc-white) !important;
   background-color: var(--dc-white) !important;
-  /* Sobrescrever as CSS variables que os filhos consomem */
+  /* Override das CSS vars do scheme dentro do row inteiro */
   --color-background: #ffffff;
   --color-foreground: #1a1a1a;
   --color-foreground-heading: #1a1a1a;
   --color-primary: #0f4fa8;
   --color-primary-hover: #0a3d80;
   --color-border: #e5e7eb;
+  --menu-top-level-color: #1a1a1a;
+  color: var(--dc-text) !important;
+  border-bottom: 1px solid var(--dc-border) !important;
+}
+
+/* Forçar cor preta em TODOS os textos dentro do row inferior */
+header.header .header__row--bottom *,
+header.header .header__row--bottom a,
+header.header .header__row--bottom button,
+header.header .header__row--bottom span,
+header.header .header__row--bottom li,
+header.header .header__row--bottom .menu-list__link,
+header.header .header__row--bottom .menu-list__link-title,
+header.header .header__row--bottom .menu-list__list-item {
   color: var(--dc-text) !important;
 }
 
-/* Todos os textos/links/botões/svgs dentro do nav row ficam pretos */
-header.header .header__navigation-bar-row *,
-header.header .header__navigation-bar-row a,
-header.header .header__navigation-bar-row button,
-header.header .header__navigation-bar-row span,
-header.header .header__navigation-bar-row li,
-header.header .header__navigation-bar-row svg {
+/* SVGs também */
+header.header .header__row--bottom svg {
   color: var(--dc-text) !important;
+  stroke: var(--dc-text);
 }
 
-header.header .header__navigation-bar-row a:hover,
-header.header .header__navigation-bar-row a:hover * {
+/* Hover azul DropChina */
+header.header .header__row--bottom .menu-list__link:hover,
+header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title,
+header.header .header__row--bottom a:hover,
+header.header .header__row--bottom a:hover * {
   color: var(--dc-blue) !important;
 }
 
-/* Mega menu items mantêm cor consistente */
-header.header .header__navigation-bar-row .mega-menu__list a,
-header.header .header__navigation-bar-row .mega-menu__list a *,
-header.header .header__navigation-bar-row [class*="menu"] a {
-  color: var(--dc-text) !important;
+/* Item ativo (página atual) */
+header.header .header__row--bottom .menu-list__link--active,
+header.header .header__row--bottom .menu-list__link--active .menu-list__link-title {
+  color: var(--dc-blue) !important;
+  font-weight: 600 !important;
 }
 
-/* Border-bottom separator branca → cinza claro */
+/* Compat com .header__navigation-bar-row vazio (deixa também branco se aparecer) */
 header.header .header__navigation-bar-row {
-  border-bottom: 1px solid var(--dc-border) !important;
+  background: var(--dc-white) !important;
 }
 
 /* ============================================================
