@@ -2,12 +2,13 @@
   Botão WhatsApp flutuante — visível em todas as páginas
 {% endcomment %}
 
-{% if section.settings.phone != blank %}
+{%- assign phone_digits = section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' -%}
+{% if phone_digits != blank %}
   <a
-    href="https://wa.me/{{ section.settings.phone }}{% if section.settings.message != blank %}?text={{ section.settings.message | url_encode }}{% endif %}"
+    href="https://wa.me/{{ phone_digits }}{% if section.settings.message != blank %}?text={{ section.settings.message | url_encode }}{% endif %}"
     class="whatsapp-float"
     target="_blank"
-    rel="noopener"
+    rel="noopener noreferrer"
     aria-label="{{ section.settings.aria_label | default: 'Fale conosco no WhatsApp' }}"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#fff" aria-hidden="true" focusable="false">
