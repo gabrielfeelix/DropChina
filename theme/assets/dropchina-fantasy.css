@@ -238,64 +238,28 @@ header.header .search-action button.button-unstyled .svg-wrapper svg {
 }
 
 /* ---------- Categorias row (.header__row--bottom) — fundo BRANCO + texto PRETO ----------
-   Markup real do Tinker: o menu de categorias mora em
-   <div class="header__row header__row--bottom color-scheme-8">
-   contendo <header-menu><div class="header-menu__inner"><nav class="menu-list">
-   <overflow-list><ul><li class="menu-list__list-item"><a class="menu-list__link">
+   Solução real: color_scheme_bottom mudado pra scheme-1 (branco) via JSON.
+   Esses overrides agora só refinam hover/active. */
 
-   .color-scheme-8 define --color-foreground:#fff que os links consomem.
-   Sobrescrevemos as vars no próprio row pra inverter o scheme localmente. */
-
-header.header .header__row--bottom,
-header.header .header__row--bottom.color-scheme-8 {
-  background: var(--dc-white) !important;
-  background-color: var(--dc-white) !important;
-  /* Override das CSS vars do scheme dentro do row inteiro */
-  --color-background: #ffffff;
-  --color-foreground: #1a1a1a;
-  --color-foreground-heading: #1a1a1a;
-  --color-primary: #0f4fa8;
-  --color-primary-hover: #0a3d80;
-  --color-border: #e5e7eb;
-  --menu-top-level-color: #1a1a1a;
-  color: var(--dc-text) !important;
+/* Separador visual entre top (preto) e bottom (branco) */
+header.header .header__row--bottom {
   border-bottom: 1px solid var(--dc-border) !important;
 }
 
-/* Forçar cor preta em TODOS os textos dentro do row inferior */
-header.header .header__row--bottom *,
-header.header .header__row--bottom a,
-header.header .header__row--bottom button,
-header.header .header__row--bottom span,
-header.header .header__row--bottom li,
-header.header .header__row--bottom .menu-list__link,
-header.header .header__row--bottom .menu-list__link-title,
-header.header .header__row--bottom .menu-list__list-item {
-  color: var(--dc-text) !important;
-}
-
-/* SVGs também */
-header.header .header__row--bottom svg {
-  color: var(--dc-text) !important;
-  stroke: var(--dc-text);
-}
-
-/* Hover azul DropChina */
+/* Hover azul DropChina nos itens do menu de categorias */
 header.header .header__row--bottom .menu-list__link:hover,
-header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title,
-header.header .header__row--bottom a:hover,
-header.header .header__row--bottom a:hover * {
+header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title {
   color: var(--dc-blue) !important;
 }
 
-/* Item ativo (página atual) */
+/* Item ativo (página atual) — azul + peso 600 */
 header.header .header__row--bottom .menu-list__link--active,
 header.header .header__row--bottom .menu-list__link--active .menu-list__link-title {
   color: var(--dc-blue) !important;
   font-weight: 600 !important;
 }
 
-/* Compat com .header__navigation-bar-row vazio (deixa também branco se aparecer) */
+/* Compat: nav-bar row vazia (caso role apareça) */
 header.header .header__navigation-bar-row {
   background: var(--dc-white) !important;
 }
