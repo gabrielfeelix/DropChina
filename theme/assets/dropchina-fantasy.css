@@ -84,65 +84,84 @@
   html { scroll-behavior: auto !important; }
 }
 
-/* ===== HEADER PRETO FULL-WIDTH ===== */
-.section-header,
-header.section-header {
-  background: var(--dc-black) !important;
-  color: var(--dc-text-on-dark) !important;
-  border-bottom: 1px solid var(--dc-black-soft);
+/* ===== HEADER PRETO FULL-WIDTH (selectors Tinker reais) ===== */
+
+/* O scheme-8 já pinta o background preto via Tinker.
+   As regras abaixo cuidam dos detalhes: cor de texto no top row,
+   pill da busca, logo invertido, e o row de navegação inferior em branco. */
+
+/* Top row: preto com texto branco */
+header.header .header__main-row,
+header.header .header__row--top {
+  color: var(--dc-text-on-dark);
 }
 
-.section-header a,
-.section-header .menu__list a,
-.section-header .header__icons a {
+header.header .header__main-row a,
+header.header .header__row--top a {
   color: var(--dc-text-on-dark) !important;
 }
 
-.section-header a:hover,
-.section-header .menu__list a:hover {
+header.header .header__main-row a:hover,
+header.header .header__row--top a:hover {
   color: var(--dc-green) !important;
 }
 
-/* Busca grande pill no header */
-.section-header search-modal-trigger,
-.section-header .search__input,
-.section-header [class*="search"] input[type="search"] {
-  background: var(--dc-black-soft) !important;
-  color: var(--dc-text-on-dark) !important;
-  border: 1px solid var(--dc-border-dark) !important;
-  border-radius: var(--dc-radius-pill) !important;
-  padding: 14px 24px !important;
-  width: 100% !important;
-  min-width: 400px;
+/* Ícones do top row brancos */
+header.header .header__main-row svg,
+header.header .header__row--top svg,
+header.header .header__column--right svg {
+  color: var(--dc-text-on-dark);
 }
 
-.section-header [class*="search"] input::placeholder {
-  color: #888 !important;
-}
-
-/* Logo: garantir cor branca/invertida se SVG */
-.section-header .header__logo img,
-.section-header [class*="logo"] img {
+/* Logo: usar a variante --inverse quando o scheme é dark.
+   Tinker já tem suporte nativo via .header-logo__image-container--inverse,
+   só garantimos que ela seja preferida se o usuário não subiu logo inverso. */
+header.header .header-logo__image-container:not(.header-logo__image-container--inverse) img {
   filter: brightness(0) invert(1);
 }
 
-/* Carrinho/conta icons brancos */
-.section-header svg {
-  color: var(--dc-text-on-dark) !important;
-  stroke: var(--dc-text-on-dark);
+/* Busca pill estilo Fantasy — desktop apenas (mobile mantém compacta) */
+@media (min-width: 768px) {
+  header.header .predictive-search-form__header-inner,
+  header.header .search-action .predictive-search-form {
+    background: var(--dc-black-soft) !important;
+    border: 1px solid var(--dc-border-dark) !important;
+    border-radius: var(--dc-radius-pill) !important;
+    padding: 8px 16px !important;
+  }
+
+  header.header .predictive-search-form input[type="search"],
+  header.header .predictive-search-form__input {
+    background: transparent !important;
+    color: var(--dc-text-on-dark) !important;
+    border: none !important;
+    padding: 6px 8px !important;
+  }
+
+  header.header .predictive-search-form input::placeholder {
+    color: #888 !important;
+  }
 }
 
-/* Menu secundário (categorias) — fundo branco abaixo do header preto */
-.section-header-bottom,
-.header-group__menu-row {
-  background: var(--dc-white);
+/* Navigation bar row (categorias) — em branco abaixo do header preto.
+   Esta row tem seu próprio color_scheme_bottom (scheme-8) que pinta tudo preto;
+   sobrescrevemos pra deixar branca como no Fantasy. */
+header.header .header__navigation-bar-row {
+  background: var(--dc-white) !important;
+  color: var(--dc-text) !important;
   border-bottom: 1px solid var(--dc-border);
 }
 
-.section-header-bottom a {
+header.header .header__navigation-bar-row a {
   color: var(--dc-text) !important;
 }
 
-.section-header-bottom a:hover {
+header.header .header__navigation-bar-row a:hover {
   color: var(--dc-blue) !important;
+}
+
+/* Mega menu items mantêm cor de texto consistente */
+header.header .header__navigation-bar-row .mega-menu__list a,
+header.header .header__navigation-bar-row [class*="menu"] a {
+  color: var(--dc-text) !important;
 }
