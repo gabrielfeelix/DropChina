@@ -679,3 +679,199 @@ section.slideshow [aria-label*="Next"]:hover {
     -webkit-line-clamp: 3;
   }
 }
+
+
+/* ============================================================
+   HEADER POLISH — Fantasy Gaming look (round 2)
+   Search pill grande, action area com ícones visíveis,
+   "Todas as categorias" no início da nav row
+   ============================================================ */
+
+/* ---------- Search: pill grande visível com lupa à direita ---------- */
+
+/* O search-action está no header__column--left ao lado do logo.
+   Garantir que ocupa espaço generoso e não colapsa. */
+
+header.header .header__column--left {
+  flex: 1 1 auto !important;
+  align-items: center;
+  gap: 24px;
+}
+
+header.header .header__column--left search-button.search-action {
+  flex: 1 1 0 !important;
+  min-width: 280px !important;
+  max-width: 560px !important;
+  width: 100%;
+  display: flex !important;
+}
+
+header.header .header__column--left search-button.search-action button.button-unstyled {
+  width: 100% !important;
+  justify-content: space-between !important;
+  background: #1a1a1a !important;
+  color: #9ca3af !important;
+  padding: 14px 24px !important;
+  font-size: 0.9375rem !important;
+}
+
+/* Reordenar: texto "Pesquisa" à esquerda, lupa à direita (estilo Fantasy) */
+header.header .header__column--left .search-action button.button-unstyled .svg-wrapper {
+  order: 2 !important;
+  margin-left: auto;
+}
+
+header.header .header__column--left .search-action button.button-unstyled > span:not(.svg-wrapper) {
+  order: 1 !important;
+  display: inline-block !important;
+  flex: 1;
+  text-align: left;
+}
+
+header.header .header__column--left .search-action button.button-unstyled .svg-wrapper svg {
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+}
+
+/* Trocar texto "Pesquisa" por "Digite o que você procura" via CSS content */
+header.header .header__column--left .search-action button.button-unstyled span.mobile\:hidden {
+  font-size: 0 !important;
+}
+header.header .header__column--left .search-action button.button-unstyled span.mobile\:hidden::after {
+  content: "Digite o que você procura";
+  font-size: 0.9375rem;
+}
+
+/* ---------- Action area: account + cart com ícones grandes visíveis ---------- */
+
+/* Tornar os ícones SVG dos botões account/cart maiores e mais presentes */
+header.header .header__column--right {
+  gap: 20px;
+  align-items: center;
+}
+
+header.header .account-button,
+header.header .header-actions__cart-icon {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 4px !important;
+}
+
+header.header .account-button__icon svg,
+header.header .header-actions__cart-icon svg {
+  width: 28px !important;
+  height: 28px !important;
+  color: var(--dc-text-on-dark) !important;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* Texto do account/cart em branco + 2 linhas pequenas */
+header.header .account-button__text,
+header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
+  color: var(--dc-text-on-dark) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2;
+  text-align: left;
+  display: inline-flex !important;
+  flex-direction: column;
+}
+
+/* Trocar texto "Conta" por 2 linhas via CSS content */
+header.header .account-button__text {
+  font-size: 0 !important;
+}
+header.header .account-button__text::before {
+  content: "Bem-vindo(a)";
+  display: block;
+  font-size: 0.75rem;
+  color: #b8bbbe;
+  font-weight: 400;
+}
+header.header .account-button__text::after {
+  content: "Entrar ou Cadastrar";
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--dc-text-on-dark);
+}
+
+/* Cart icon — adicionar badge dourado contador "0" */
+header.header .header-actions__cart-icon {
+  position: relative;
+}
+
+header.header .header-actions__cart-icon::after {
+  content: attr(data-cart-count);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #fbbf24;
+  color: #1a1a1a;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Texto do Cart sumir (só ícone + badge) */
+header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
+  display: none !important;
+}
+
+/* ---------- "Todas as categorias ☰" no início da nav row ---------- */
+header.header .header__row--bottom .menu-list {
+  position: relative;
+  padding-left: 200px;
+}
+
+header.header .header__row--bottom .menu-list::before {
+  content: "Todas as categorias";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--dc-text);
+  cursor: pointer;
+  padding-left: 28px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round'><line x1='3' y1='6' x2='21' y2='6'/><line x1='3' y1='12' x2='21' y2='12'/><line x1='3' y1='18' x2='21' y2='18'/></svg>");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 20px 20px;
+}
+
+header.header .header__row--bottom .menu-list::before:hover {
+  color: var(--dc-blue);
+}
+
+/* Mobile — desabilitar "Todas as categorias" (já tem hambúrguer no drawer) */
+@media (max-width: 768px) {
+  header.header .header__row--bottom .menu-list {
+    padding-left: 0;
+  }
+  header.header .header__row--bottom .menu-list::before {
+    display: none;
+  }
+}
+
+/* ---------- Padding generoso no top row ---------- */
+header.header .header__row--top .header__columns {
+  padding-block: 16px !important;
+}
+
+header.header .header__row--bottom .header__columns {
+  padding-block: 12px !important;
+}
