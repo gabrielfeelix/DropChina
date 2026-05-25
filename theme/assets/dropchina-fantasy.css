@@ -83,3 +83,66 @@
   }
   html { scroll-behavior: auto !important; }
 }
+
+/* ===== HEADER PRETO FULL-WIDTH ===== */
+.section-header,
+header.section-header {
+  background: var(--dc-black) !important;
+  color: var(--dc-text-on-dark) !important;
+  border-bottom: 1px solid var(--dc-black-soft);
+}
+
+.section-header a,
+.section-header .menu__list a,
+.section-header .header__icons a {
+  color: var(--dc-text-on-dark) !important;
+}
+
+.section-header a:hover,
+.section-header .menu__list a:hover {
+  color: var(--dc-green) !important;
+}
+
+/* Busca grande pill no header */
+.section-header search-modal-trigger,
+.section-header .search__input,
+.section-header [class*="search"] input[type="search"] {
+  background: var(--dc-black-soft) !important;
+  color: var(--dc-text-on-dark) !important;
+  border: 1px solid var(--dc-border-dark) !important;
+  border-radius: var(--dc-radius-pill) !important;
+  padding: 14px 24px !important;
+  width: 100% !important;
+  min-width: 400px;
+}
+
+.section-header [class*="search"] input::placeholder {
+  color: #888 !important;
+}
+
+/* Logo: garantir cor branca/invertida se SVG */
+.section-header .header__logo img,
+.section-header [class*="logo"] img {
+  filter: brightness(0) invert(1);
+}
+
+/* Carrinho/conta icons brancos */
+.section-header svg {
+  color: var(--dc-text-on-dark) !important;
+  stroke: var(--dc-text-on-dark);
+}
+
+/* Menu secundário (categorias) — fundo branco abaixo do header preto */
+.section-header-bottom,
+.header-group__menu-row {
+  background: var(--dc-white);
+  border-bottom: 1px solid var(--dc-border);
+}
+
+.section-header-bottom a {
+  color: var(--dc-text) !important;
+}
+
+.section-header-bottom a:hover {
+  color: var(--dc-blue) !important;
+}
