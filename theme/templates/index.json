@@ -189,7 +189,7 @@
       "settings": {
         "display_mode": "full_frame",
         "section_width": "full-width",
-        "slide_height": "medium",
+        "slide_height": "small",
         "autoplay": true,
         "autoplay_speed": 6,
         "color_scheme": "scheme-8",

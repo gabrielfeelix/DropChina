@@ -384,10 +384,11 @@ section.slideshow .slideshow {
   margin: 0 !important;
 }
 
-/* Slides altura mínima alta no desktop */
+/* Slides altura COMPACTA — Fantasy-style hero não-gigante */
 #shopify-section-hero_main .slide,
-#shopify-section-hero_main [class*="slide-"] {
-  min-height: 360px;
+#shopify-section-hero_main slideshow-slide {
+  min-height: 220px !important;
+  max-height: 320px !important;
   border-radius: 0 !important;
   background-image:
     radial-gradient(circle at 20% 20%, rgba(15, 79, 168, 0.18) 0%, transparent 50%),
@@ -399,9 +400,20 @@ section.slideshow .slideshow {
 
 @media (min-width: 768px) {
   #shopify-section-hero_main .slide,
-  #shopify-section-hero_main [class*="slide-"] {
-    min-height: 420px;
+  #shopify-section-hero_main slideshow-slide {
+    min-height: 280px !important;
+    max-height: 360px !important;
   }
+}
+
+/* Reduzir tipografia do hero pra combinar com altura menor */
+#shopify-section-hero_main h1,
+#shopify-section-hero_main h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.75rem) !important;
+}
+
+#shopify-section-hero_main p {
+  font-size: 0.9375rem !important;
 }
 
 /* Setas circulares brancas com backdrop blur */
@@ -1144,4 +1156,76 @@ product-card.product-card:hover,
   #shopify-section-second_collection {
     padding-block: 32px;
   }
+}
+
+/* ============================================================
+   SEARCH BAR — visibilidade forçada (override Tinker hidden CSS)
+   Tinker oculta .search-action--hidden-on-menu via [data-menu-style='menu'].
+   Como nosso menu é mode 'menu', a search fica display:none.
+   Forçar PRIMEIRA search visível como pill grande Fantasy.
+   ============================================================ */
+
+#header-component[data-menu-style='menu'] header.header .header__column--left search-button.search-action--hidden-on-menu {
+  display: flex !important;
+}
+
+/* Garantir só uma search visível (esconder a drawer-search no left column) */
+#header-component[data-menu-style='menu'] header.header .header__column--left search-button.search-action--hidden-on-drawer {
+  display: none !important;
+}
+
+/* Esconder o "Pesquisa" texto small e mostrar placeholder Fantasy */
+header.header .header__column--left search-button.search-action button.button-unstyled span.mobile\:hidden {
+  font-size: 0 !important;
+  position: relative;
+}
+header.header .header__column--left search-button.search-action button.button-unstyled span.mobile\:hidden::after {
+  content: "Digite o que você procura";
+  font-size: 0.9375rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+/* Pill cinza-escuro grande visivel ocupando espaço */
+header.header .header__column--left {
+  flex: 1 1 auto !important;
+  gap: 24px !important;
+  align-items: center !important;
+}
+
+header.header .header__column--left search-button.search-action {
+  flex: 1 1 0 !important;
+  min-width: 320px !important;
+  max-width: 640px !important;
+  width: 100% !important;
+}
+
+header.header .header__column--left search-button.search-action button.button-unstyled {
+  width: 100% !important;
+  min-height: 48px !important;
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: var(--dc-radius-pill) !important;
+  padding: 12px 24px !important;
+  color: #9ca3af !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+
+header.header .header__column--left search-button.search-action button.button-unstyled .svg-wrapper {
+  order: 2 !important;
+  margin-left: auto !important;
+  display: inline-flex !important;
+}
+
+header.header .header__column--left search-button.search-action button.button-unstyled .svg-wrapper svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: #9ca3af !important;
 }
