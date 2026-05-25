@@ -1,235 +1,200 @@
 {
   "sections": {
     "hero_main": {
-      "type": "hero",
+      "type": "slideshow",
       "blocks": {
-        "group_hero_content": {
-          "type": "group",
-          "name": "t:names.group",
+        "slide_1": {
+          "type": "_slide",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 24,
-            "width": "custom",
-            "custom_width": 55,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "horizontal_alignment_flex_direction_column": "center",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-8",
+            "padding-inline-start": 48,
+            "padding-inline-end": 48,
+            "padding-block-start": 64,
+            "padding-block-end": 64
           },
           "blocks": {
-            "text_eyebrow": {
+            "eyebrow": {
               "type": "text",
-              "name": "Eyebrow",
               "settings": {
-                "text": "<p>VENDEDOR PLATINUM • +50 MIL VENDAS</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
+                "text": "<p>OFICIAL \u00b7 VENDEDOR PLATINUM</p>",
                 "type_preset": "custom",
-                "font": "var(--font-body--family)",
                 "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.08em",
                 "case": "uppercase",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "letter_spacing": "0.16em",
+                "alignment": "center",
+                "color": "#22c55e"
+              }
             },
-            "text_headline": {
+            "heading": {
               "type": "text",
-              "name": "Headline",
               "settings": {
-                "text": "<h1>Tecnologia para sua<br>casa e escritório</h1>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
+                "text": "<h2>Toners e Cartuchos</h2>",
                 "type_preset": "h1",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "1.05",
-                "letter_spacing": "-0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "alignment": "center",
+                "color": "#ffffff"
+              }
             },
-            "text_subheadline": {
+            "subheading": {
               "type": "text",
-              "name": "Sub",
               "settings": {
-                "text": "<p>Cartuchos, toners, impressoras, monitores e mais — com a confiança de quem é Platinum no Mercado Livre.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
+                "text": "<p>At\u00e9 50% de economia em rendimento por p\u00e1gina</p>",
                 "font_size": "1.125rem",
-                "line_height": "1.5",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "alignment": "center",
+                "color": "#e5e7eb",
+                "padding-block-end": 16
+              }
             },
-            "group_hero_buttons": {
-              "type": "group",
-              "name": "Buttons",
+            "button": {
+              "type": "button",
               "settings": {
-                "content_direction": "row",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 8,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "button_primary": {
-                  "type": "button",
-                  "settings": {
-                    "label": "Ver produtos",
-                    "link": "shopify://collections/all",
-                    "open_in_new_tab": false,
-                    "style_class": "button",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
-                },
-                "button_secondary": {
-                  "type": "button",
-                  "settings": {
-                    "label": "Sobre a DropChina",
-                    "link": "shopify://pages/about",
-                    "open_in_new_tab": false,
-                    "style_class": "button button--secondary",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "button_primary",
-                "button_secondary"
-              ]
+                "label": "Ver Toners",
+                "link": "shopify://collections/toners",
+                "style": "primary"
+              }
             }
           },
           "block_order": [
-            "text_eyebrow",
-            "text_headline",
-            "text_subheadline",
-            "group_hero_buttons"
+            "eyebrow",
+            "heading",
+            "subheading",
+            "button"
+          ]
+        },
+        "slide_2": {
+          "type": "_slide",
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "center",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-8",
+            "padding-inline-start": 48,
+            "padding-inline-end": 48,
+            "padding-block-start": 64,
+            "padding-block-end": 64
+          },
+          "blocks": {
+            "eyebrow2": {
+              "type": "text",
+              "settings": {
+                "text": "<p>FRETE GR\u00c1TIS \u00b7 TODO BRASIL</p>",
+                "type_preset": "custom",
+                "font_size": "0.875rem",
+                "case": "uppercase",
+                "letter_spacing": "0.16em",
+                "alignment": "center",
+                "color": "#22c55e"
+              }
+            },
+            "heading2": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Impressoras Multifuncionais</h2>",
+                "type_preset": "h1",
+                "alignment": "center",
+                "color": "#ffffff"
+              }
+            },
+            "subheading2": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Wi-Fi, c\u00f3pia, scanner \u2014 tudo em um</p>",
+                "font_size": "1.125rem",
+                "alignment": "center",
+                "color": "#e5e7eb",
+                "padding-block-end": 16
+              }
+            },
+            "button2": {
+              "type": "button",
+              "settings": {
+                "label": "Ver Impressoras",
+                "link": "shopify://collections/impressoras",
+                "style": "primary"
+              }
+            }
+          },
+          "block_order": [
+            "eyebrow2",
+            "heading2",
+            "subheading2",
+            "button2"
+          ]
+        },
+        "slide_3": {
+          "type": "_slide",
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "center",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-8",
+            "padding-inline-start": 48,
+            "padding-inline-end": 48,
+            "padding-block-start": 64,
+            "padding-block-end": 64
+          },
+          "blocks": {
+            "eyebrow3": {
+              "type": "text",
+              "settings": {
+                "text": "<p>PIX \u00b7 5% DE DESCONTO</p>",
+                "type_preset": "custom",
+                "font_size": "0.875rem",
+                "case": "uppercase",
+                "letter_spacing": "0.16em",
+                "alignment": "center",
+                "color": "#e85d04"
+              }
+            },
+            "heading3": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Perif\u00e9ricos Premium</h2>",
+                "type_preset": "h1",
+                "alignment": "center",
+                "color": "#ffffff"
+              }
+            },
+            "subheading3": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Mouses, teclados, webcams e fones para escrit\u00f3rio</p>",
+                "font_size": "1.125rem",
+                "alignment": "center",
+                "color": "#e5e7eb",
+                "padding-block-end": 16
+              }
+            },
+            "button3": {
+              "type": "button",
+              "settings": {
+                "label": "Ver Perif\u00e9ricos",
+                "link": "shopify://collections/perifericos",
+                "style": "primary"
+              }
+            }
+          },
+          "block_order": [
+            "eyebrow3",
+            "heading3",
+            "subheading3",
+            "button3"
           ]
         }
       },
       "block_order": [
-        "group_hero_content"
+        "slide_1",
+        "slide_2",
+        "slide_3"
       ],
-      "name": "Hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 75,
-        "color_scheme": "scheme-3",
-        "toggle_overlay": true,
-        "overlay_color": "#0a3d8099",
-        "overlay_style": "gradient",
-        "gradient_direction": "to right",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 64,
-        "padding-block-end": 64
+        "display_mode": "full_frame",
+        "section_width": "full-width",
+        "slide_height": "large",
+        "autoplay": true,
+        "autoplay_speed": 6,
+        "color_scheme": "scheme-8",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "trust_marquee": {
@@ -238,7 +203,7 @@
         "marquee_text_1": {
           "type": "text",
           "settings": {
-            "text": "<p>★ Vendedor Platinum no Mercado Livre</p>",
+            "text": "<p>\u2605 Vendedor Platinum no Mercado Livre</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -250,7 +215,7 @@
         "marquee_text_2": {
           "type": "text",
           "settings": {
-            "text": "<p>✓ Frete grátis acima de R$ 200</p>",
+            "text": "<p>\u2713 Frete gr\u00e1tis acima de R$ 200</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -262,7 +227,7 @@
         "marquee_text_3": {
           "type": "text",
           "settings": {
-            "text": "<p>● PIX com 5% de desconto</p>",
+            "text": "<p>\u25cf PIX com 5% de desconto</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -274,7 +239,7 @@
         "marquee_text_4": {
           "type": "text",
           "settings": {
-            "text": "<p>↻ Troca garantida em 7 dias</p>",
+            "text": "<p>\u21bb Troca garantida em 7 dias</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -286,7 +251,7 @@
         "marquee_text_5": {
           "type": "text",
           "settings": {
-            "text": "<p>♥ +50 mil clientes atendidos</p>",
+            "text": "<p>\u2665 +50 mil clientes atendidos</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -821,7 +786,7 @@
             "text_promo_body": {
               "type": "text",
               "settings": {
-                "text": "<p>Desconto aplicado automaticamente no checkout. Válido para todos os produtos da loja, sem valor mínimo.</p>",
+                "text": "<p>Desconto aplicado automaticamente no checkout. V\u00e1lido para todos os produtos da loja, sem valor m\u00ednimo.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -1147,7 +1112,7 @@
         "guarantee_1": {
           "type": "text",
           "settings": {
-            "text": "<p>🚚 Frete grátis acima de R$ 200</p>",
+            "text": "<p>\ud83d\ude9a Frete gr\u00e1tis acima de R$ 200</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1.125rem",
@@ -1159,7 +1124,7 @@
         "guarantee_2": {
           "type": "text",
           "settings": {
-            "text": "<p>💰 5% off pagando no PIX</p>",
+            "text": "<p>\ud83d\udcb0 5% off pagando no PIX</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1.125rem",
@@ -1171,7 +1136,7 @@
         "guarantee_3": {
           "type": "text",
           "settings": {
-            "text": "<p>↻ Troca em até 7 dias</p>",
+            "text": "<p>\u21bb Troca em at\u00e9 7 dias</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1.125rem",
@@ -1183,7 +1148,7 @@
         "guarantee_4": {
           "type": "text",
           "settings": {
-            "text": "<p>💬 Atendimento por WhatsApp</p>",
+            "text": "<p>\ud83d\udcac Atendimento por WhatsApp</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1.125rem",
@@ -1243,7 +1208,7 @@
               "type": "text",
               "name": "Eyebrow",
               "settings": {
-                "text": "<p>NOSSA HISTÓRIA</p>",
+                "text": "<p>NOSSA HIST\u00d3RIA</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1269,7 +1234,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Mais de 50 mil clientes já confiaram na DropChina</h2>",
+                "text": "<h2>Mais de 50 mil clientes j\u00e1 confiaram na DropChina</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1294,7 +1259,7 @@
             "story_body": {
               "type": "text",
               "settings": {
-                "text": "<p>Começamos vendendo no Mercado Livre e conquistamos o selo Platinum entregando produto certo, no prazo, com atendimento que responde rápido. Agora trazemos a mesma confiança para a nossa loja própria — com mais variedade, melhores preços e o mesmo cuidado de sempre.</p>",
+                "text": "<p>Come\u00e7amos vendendo no Mercado Livre e conquistamos o selo Platinum entregando produto certo, no prazo, com atendimento que responde r\u00e1pido. Agora trazemos a mesma confian\u00e7a para a nossa loja pr\u00f3pria \u2014 com mais variedade, melhores pre\u00e7os e o mesmo cuidado de sempre.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -1358,7 +1323,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "Recebi rapidíssimo",
+            "title": "Recebi rapid\u00edssimo",
             "quote": "Comprei o cartucho HP 667 e chegou em 2 dias, exatamente como descrito. Recomendo demais!",
             "author": "Maria S."
           }
@@ -1368,16 +1333,16 @@
           "settings": {
             "rating": 5,
             "title": "Atendimento nota 10",
-            "quote": "Tirei dúvida no WhatsApp antes de comprar, responderam em minutos. Compra fácil e produto excelente.",
-            "author": "João P."
+            "quote": "Tirei d\u00favida no WhatsApp antes de comprar, responderam em minutos. Compra f\u00e1cil e produto excelente.",
+            "author": "Jo\u00e3o P."
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "Ótimo custo-benefício",
-            "quote": "O kit de toners compatíveis funcionou perfeitamente, qualidade impressionante pelo preço.",
+            "title": "\u00d3timo custo-benef\u00edcio",
+            "quote": "O kit de toners compat\u00edveis funcionou perfeitamente, qualidade impressionante pelo pre\u00e7o.",
             "author": "Carlos M."
           }
         },
@@ -1385,18 +1350,23 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "Já é a quarta compra",
-            "quote": "Cliente fiel da DropChina. Sempre confiável, sempre cumprem o prazo. Vendedor Platinum se vê.",
+            "title": "J\u00e1 \u00e9 a quarta compra",
+            "quote": "Cliente fiel da DropChina. Sempre confi\u00e1vel, sempre cumprem o prazo. Vendedor Platinum se v\u00ea.",
             "author": "Ana B."
           }
         }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "name": "Testimonials",
       "settings": {
-        "eyebrow": "AVALIAÇÕES",
+        "eyebrow": "AVALIA\u00c7\u00d5ES",
         "heading": "Amados pelos clientes",
-        "subheading": "Mais de 50 mil clientes já confiaram na DropChina no Mercado Livre.",
+        "subheading": "Mais de 50 mil clientes j\u00e1 confiaram na DropChina no Mercado Livre.",
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,

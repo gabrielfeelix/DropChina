@@ -322,3 +322,100 @@ header.header .header__navigation-bar-row [class*="menu"] a {
   color: var(--dc-green) !important;
   font-weight: 600;
 }
+
+/* ============================================================
+   HERO SLIDESHOW FULL-BLEED (estilo Fantasy cinematográfico)
+   ============================================================ */
+
+/* Section root: zero radius/margin, full-bleed */
+#shopify-section-hero_main,
+section.slideshow {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#shopify-section-hero_main .slideshow,
+section.slideshow .slideshow {
+  border-radius: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Slides altura mínima alta no desktop */
+#shopify-section-hero_main .slide,
+#shopify-section-hero_main [class*="slide-"] {
+  min-height: 480px;
+  border-radius: 0 !important;
+}
+
+@media (min-width: 768px) {
+  #shopify-section-hero_main .slide,
+  #shopify-section-hero_main [class*="slide-"] {
+    min-height: 540px;
+  }
+}
+
+/* Setas circulares brancas com backdrop blur */
+#shopify-section-hero_main [class*="slideshow-controls"] button,
+#shopify-section-hero_main [class*="arrow"] button,
+section.slideshow [aria-label*="Previous"],
+section.slideshow [aria-label*="Next"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  color: var(--dc-text-on-dark) !important;
+  transition: background var(--dc-duration) var(--dc-ease);
+}
+
+#shopify-section-hero_main [class*="slideshow-controls"] button:hover,
+section.slideshow [aria-label*="Previous"]:hover,
+section.slideshow [aria-label*="Next"]:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Dots */
+#shopify-section-hero_main [class*="dot"],
+#shopify-section-hero_main [class*="pagination"] button {
+  background: rgba(255, 255, 255, 0.4) !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+}
+
+#shopify-section-hero_main [aria-current="true"],
+#shopify-section-hero_main [class*="pagination"] [aria-current="true"] {
+  background: var(--dc-white) !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+/* Tipografia do hero — H1 grande responsivo */
+#shopify-section-hero_main h1,
+#shopify-section-hero_main h2 {
+  font-size: clamp(2.25rem, 5vw, 4.5rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+}
+
+/* CTA primary forte estilo Fantasy */
+#shopify-section-hero_main .button--primary,
+#shopify-section-hero_main button.button {
+  background: var(--dc-white) !important;
+  color: var(--dc-text) !important;
+  border-color: var(--dc-white) !important;
+  font-weight: 700 !important;
+  padding: 14px 32px !important;
+}
+
+#shopify-section-hero_main .button--primary:hover,
+#shopify-section-hero_main button.button:hover {
+  background: var(--dc-green) !important;
+  color: var(--dc-text-on-dark) !important;
+  border-color: var(--dc-green) !important;
+}
