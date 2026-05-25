@@ -1053,3 +1053,95 @@ product-card.product-card:hover,
     font-size: 1rem !important;
   }
 }
+
+/* ============================================================
+   CARROSSÉIS DE PRODUTO (Destaques + Mais vendidos)
+   product-list com layout_type: carousel — Tinker injeta slideshow controls.
+   Estilizamos setas circulares brancas e títulos centralizados.
+   ============================================================ */
+
+/* Section root */
+#shopify-section-best_sellers,
+#shopify-section-second_collection,
+.shopify-section[id*="best_sellers"],
+.shopify-section[id*="second_collection"] {
+  background: var(--dc-white);
+  padding-block: 56px;
+}
+
+/* Heading centralizado */
+#shopify-section-best_sellers h2,
+#shopify-section-second_collection h2 {
+  text-align: center !important;
+  font-size: clamp(1.5rem, 3vw, 2rem) !important;
+  font-weight: 700 !important;
+  margin-bottom: 32px !important;
+  color: var(--dc-text) !important;
+}
+
+/* Container do carrossel — espaçamento e gap entre cards */
+#shopify-section-best_sellers .product-list,
+#shopify-section-second_collection .product-list,
+#shopify-section-best_sellers slideshow-slides,
+#shopify-section-second_collection slideshow-slides {
+  gap: 16px !important;
+}
+
+/* Setas do carrossel — circulares brancas com borda fina */
+#shopify-section-best_sellers slideshow-controls button,
+#shopify-section-second_collection slideshow-controls button,
+#shopify-section-best_sellers [aria-label*="Previous"],
+#shopify-section-best_sellers [aria-label*="Next"],
+#shopify-section-second_collection [aria-label*="Previous"],
+#shopify-section-second_collection [aria-label*="Next"] {
+  background: var(--dc-white) !important;
+  border: 1px solid var(--dc-border) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  box-shadow: var(--dc-shadow-sm);
+  color: var(--dc-text) !important;
+  transition: background var(--dc-duration) var(--dc-ease),
+              border-color var(--dc-duration) var(--dc-ease);
+}
+
+#shopify-section-best_sellers slideshow-controls button:hover,
+#shopify-section-second_collection slideshow-controls button:hover,
+#shopify-section-best_sellers [aria-label*="Previous"]:hover,
+#shopify-section-best_sellers [aria-label*="Next"]:hover,
+#shopify-section-second_collection [aria-label*="Previous"]:hover,
+#shopify-section-second_collection [aria-label*="Next"]:hover {
+  background: var(--dc-surface) !important;
+  border-color: #d4d4d8 !important;
+}
+
+#shopify-section-best_sellers slideshow-controls svg,
+#shopify-section-second_collection slideshow-controls svg {
+  width: 18px;
+  height: 18px;
+  color: var(--dc-text);
+}
+
+/* Dots/pagination minimizar */
+#shopify-section-best_sellers [class*="pagination"] button,
+#shopify-section-second_collection [class*="pagination"] button {
+  background: var(--dc-border) !important;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+#shopify-section-best_sellers [class*="pagination"] [aria-current="true"],
+#shopify-section-second_collection [class*="pagination"] [aria-current="true"] {
+  background: var(--dc-blue) !important;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Mobile — padding menor */
+@media (max-width: 768px) {
+  #shopify-section-best_sellers,
+  #shopify-section-second_collection {
+    padding-block: 32px;
+  }
+}
