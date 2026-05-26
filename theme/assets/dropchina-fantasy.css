@@ -1036,8 +1036,17 @@ product-card.product-card:hover,
   position: relative;
 }
 
-/* Search strip absolute centralizada VIEWPORT-based (left:0 right:0 + margin auto)
-   ao invés de left:50% que depende do parent. */
+/* Search ancorada na MESMA LINHA do logo (top row preto), DENTRO dele,
+   centralizada horizontalmente. Logo fica esquerda, ícones direita,
+   search entre os dois EXATAMENTE no meio da row.
+
+   Estratégia: usar a announcement-bar como referência. Posicionar a
+   search começando logo abaixo da announcement bar (que tem altura
+   variável) + half do top row pra ficar centralizada verticalmente.
+
+   announcement bar = ~32px. top row = ~60px. Centro do top row =
+   ~62px do topo do header-group. Ajustar até bater visualmente. */
+
 .dc-search-strip {
   background: transparent;
   padding: 0;
@@ -1050,7 +1059,10 @@ product-card.product-card:hover,
   z-index: 10;
   width: 100%;
   max-width: 640px;
-  top: 32px;
+  /* Posição vertical: anchor no centro do TOP ROW (não da viewport).
+     Top row começa após announcement-bar e tem ~70px de altura.
+     Centro do top row = ~70px do topo (faixa azul ~35px + half-row ~35px) */
+  top: 70px;
   pointer-events: none;
   display: flex;
   align-items: center;
@@ -1066,14 +1078,14 @@ product-card.product-card:hover,
   pointer-events: auto;
 }
 
-/* Em desktop a search fica no top row entre logo e actions */
+/* Em desktop refinar offset top pra match exato do centro do top row */
 @media (min-width: 768px) {
   .dc-search-strip {
-    top: 36px;  /* Match com altura da announcement bar + offset top */
+    top: 70px;
   }
 }
 
-/* Em mobile a search vai abaixo do header (volta ao layout original 3ª linha) */
+/* Em mobile: search numa linha dedicada abaixo do header */
 @media (max-width: 767px) {
   .dc-search-strip {
     position: static;
@@ -1082,6 +1094,14 @@ product-card.product-card:hover,
     padding: 8px 16px 12px;
     max-width: 100%;
   }
+}
+
+/* AJUSTAR ALTURA DO INPUT pra MENOR e match com logo height
+   (logo aprox 32px altura; input fica 40px com padding) */
+.dc-search-strip__input,
+.dc-search-strip input.search-input {
+  padding: 10px 56px 10px 20px !important;
+  font-size: 0.875rem !important;
 }
 
 /* Override do scheme-1 herdado pela predictive-search-component */
