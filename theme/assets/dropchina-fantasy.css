@@ -715,10 +715,10 @@ header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
 
 /* ---------- Nav row CENTRALIZADA + altura compacta ---------- */
 
-/* Container do row: padding vertical reduzido */
+/* Container do row: padding vertical bem compacto */
 header.header .header__row--bottom,
 header.header .header__row--bottom .header__columns {
-  padding-block: 8px !important;
+  padding-block: 4px !important;
   min-height: 0 !important;
 }
 
@@ -741,8 +741,30 @@ header.header .header__row--bottom .menu-list__list-item {
 }
 
 header.header .header__row--bottom .menu-list__link {
-  padding-block: 6px !important;
+  padding-block: 4px !important;
   font-size: 0.875rem !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Chevron accordion ao lado de cada categoria */
+header.header .header__row--bottom .menu-list__link-title::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title::after {
+  opacity: 1;
+  transform: rotate(225deg) translateY(0);
 }
 
 /* ---------- Padding generoso no top row ---------- */
