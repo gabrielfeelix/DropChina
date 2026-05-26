@@ -19,8 +19,11 @@
 
       wrapper.hidden = true;
 
+      console.log('[DC Search] Initialized', { input, results, wrapper });
+
       input.addEventListener('input', function(e) {
         const q = input.value.trim();
+        console.log('[DC Search] Input event:', q);
         if (dcSearchTimer) clearTimeout(dcSearchTimer);
         if (dcSearchAbort) dcSearchAbort.abort();
         if (!q) {
@@ -31,19 +34,27 @@
         dcSearchTimer = setTimeout(function() {
           dcSearchAbort = new AbortController();
           const url = '/search/suggest?section_id=predictive-search&q=' + encodeURIComponent(q) + '&resources%5Blimit%5D=8&resources%5Btype%5D=product%2Ccollection';
+          console.log('[DC Search] Fetching:', url);
           fetch(url, { signal: dcSearchAbort.signal })
-            .then(function(r) { return r.text(); })
+            .then(function(r) {
+              console.log('[DC Search] Response status:', r.status);
+              return r.text();
+            })
             .then(function(html) {
               const tmp = document.createElement('div');
               tmp.innerHTML = html;
               const inner = tmp.querySelector('#predictive-search-results') || tmp.querySelector('.predictive-search-dropdown') || tmp.querySelector('.shopify-section');
+              console.log('[DC Search] Parsed inner:', inner);
               if (inner) {
                 results.innerHTML = inner.innerHTML;
                 wrapper.hidden = false;
+                console.log('[DC Search] Injected. Dropdown should be visible now.');
+              } else {
+                console.warn('[DC Search] No inner container found in response. HTML preview:', html.slice(0, 500));
               }
             })
             .catch(function(err) {
-              if (err.name !== 'AbortError') console.error('Search error', err);
+              if (err.name !== 'AbortError') console.error('[DC Search] Error:', err);
             });
         }, 200);
       });
