@@ -1454,3 +1454,46 @@ search-button *,
   color: #ffffff !important;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
+
+/* ============================================================
+   HERO FIX REAL — esconder SVG placeholder Tinker + aplicar bg no container
+   Tinker renderiza SVG ilustrativo gigante em .slide__image-container quando
+   não há image configurada. Esconder SVG + aplicar background-image no
+   .slide__image-container ao invés do slideshow-slide.
+   ============================================================ */
+
+[id*="hero_main"] .slide__image-container svg.slide__image {
+  display: none !important;
+}
+
+[id*="hero_main"] .slide__image-container {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+[id*="hero_main"] slideshow-slide:nth-of-type(1) .slide__image-container {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&q=80&fit=crop") !important;
+}
+
+[id*="hero_main"] slideshow-slide:nth-of-type(2) .slide__image-container {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=1920&q=80&fit=crop") !important;
+}
+
+[id*="hero_main"] slideshow-slide:nth-of-type(3) .slide__image-container {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1920&q=80&fit=crop") !important;
+}
+
+/* Garantir que o image-container ocupa tudo */
+[id*="hero_main"] .slide__image-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
