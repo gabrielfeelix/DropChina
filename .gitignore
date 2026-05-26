@@ -40,3 +40,6 @@ dropchina-setup/
 
 # Arquivo placeholder vazio
 index.html
+
+# Banners staging (banners originais do user, antes de copiar pra theme/assets)
+banner*.png
