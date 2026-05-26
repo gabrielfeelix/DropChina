@@ -1036,63 +1036,41 @@ product-card.product-card:hover,
   position: relative;
 }
 
-/* Search ancorada na MESMA LINHA do logo (top row preto), DENTRO dele,
-   centralizada horizontalmente. Logo fica esquerda, ícones direita,
-   search entre os dois EXATAMENTE no meio da row.
-
-   Estratégia: usar a announcement-bar como referência. Posicionar a
-   search começando logo abaixo da announcement bar (que tem altura
-   variável) + half do top row pra ficar centralizada verticalmente.
-
-   announcement bar = ~32px. top row = ~60px. Centro do top row =
-   ~62px do topo do header-group. Ajustar até bater visualmente. */
+/* Search como linha INLINE entre top e bottom row do header preto.
+   NÃO absolute (estava flutuando vazando pra baixo).
+   É um row próprio dentro do header preto, abaixo do logo+icons,
+   antes da nav de categorias branca. */
 
 .dc-search-strip {
-  background: transparent;
-  padding: 0;
-  position: absolute;
-  left: 0 !important;
-  right: 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  transform: none !important;
-  z-index: 10;
-  width: 100%;
-  max-width: 640px;
-  /* Posição vertical: anchor no centro do TOP ROW (não da viewport).
-     Top row começa após announcement-bar e tem ~70px de altura.
-     Centro do top row = ~70px do topo (faixa azul ~35px + half-row ~35px) */
-  top: 70px;
-  pointer-events: none;
+  background: var(--dc-black);
+  background-color: var(--dc-black) !important;
+  padding: 12px 24px 16px;
+  position: relative;
   display: flex;
   align-items: center;
-  padding-inline: 16px;
+  justify-content: center;
+  width: 100%;
+  /* override absolute anteriores */
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  margin: 0;
+  z-index: 1;
 }
 
 .dc-search-strip__form {
   width: 100%;
+  max-width: 640px;
   position: relative;
   display: flex;
   align-items: center;
   gap: 0;
-  pointer-events: auto;
 }
 
-/* Em desktop refinar offset top pra match exato do centro do top row */
-@media (min-width: 768px) {
-  .dc-search-strip {
-    top: 70px;
-  }
-}
-
-/* Em mobile: search numa linha dedicada abaixo do header */
+/* Mobile: padding menor */
 @media (max-width: 767px) {
   .dc-search-strip {
-    position: static;
-    transform: none;
-    background: var(--dc-black);
     padding: 8px 16px 12px;
-    max-width: 100%;
   }
 }
 
