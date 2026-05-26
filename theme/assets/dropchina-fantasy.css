@@ -1341,28 +1341,38 @@ search-button *,
    do <slideshow-component>. Sobrescrever pra valores compactos Fantasy.
    ============================================================ */
 
-/* Banners 2172x724. Voltar pra alturas fixas confiáveis pra não quebrar
-   o layout flex do carrossel Tinker. Aspect-ratio causava problemas com
-   border-radius/transforms do tema. */
+/* Banners 2172x724. Altura desktop 440px (compacta), mobile 200px.
+   Background-size: contain pra mostrar banner INTEIRO sem corte
+   (vai criar laterais pretas se viewport for mais wide que 3:1). */
 [id*="hero_main"] slideshow-component,
 [id*="hero_main"] .slideshow {
-  --slide-min-height: 180px !important;
-  --slide-min-height-desktop: 380px !important;
+  --slide-min-height: 200px !important;
+  --slide-min-height-desktop: 440px !important;
 }
 
 [id*="hero_main"] slideshow-slides,
 [id*="hero_main"] slideshow-slide {
-  min-height: 180px !important;
-  max-height: 380px !important;
-  height: 380px !important;
+  min-height: 200px !important;
+  max-height: 440px !important;
+  height: 440px !important;
   position: relative !important;
 }
 
 @media (max-width: 768px) {
   [id*="hero_main"] slideshow-slides,
   [id*="hero_main"] slideshow-slide {
-    height: 180px !important;
+    height: 200px !important;
   }
+}
+
+/* Background banner: COVER pra preencher slide sem letterbox.
+   Banner é 3:1, slide ~3.5:1 (1920x440) → crop pequeno nas laterais,
+   centralizado, sem corte vertical. */
+[id*="hero_main"] .slide__image-container {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: var(--dc-black) !important;
 }
 
 /* Remover border-radius/transforms que o Tinker possa estar aplicando */
@@ -1593,16 +1603,17 @@ search-button *,
    Se user quiser mostrar texto novamente, basta desabilitar essa regra.
    ============================================================ */
 
+/* Esconder TODO o conteúdo do slide (text-blocks E botões CTA).
+   Banner do user já tem capa/branding/CTA embutidos — qualquer texto
+   ou botão sobreposto duplica/atrapalha. */
+[id*="hero_main"] slideshow-slide .slide__content,
 [id*="hero_main"] slideshow-slide .slide__content .text-block,
-[id*="hero_main"] slideshow-slide .slide__content rte-formatter {
-  display: none !important;
-}
-
-/* Manter botões CTA visíveis (opcional — caso slides queiram CTA) */
+[id*="hero_main"] slideshow-slide .slide__content rte-formatter,
 [id*="hero_main"] slideshow-slide .slide__content .button-wrapper,
 [id*="hero_main"] slideshow-slide .slide__content a.button,
-[id*="hero_main"] slideshow-slide .slide__content button.button {
-  display: inline-flex !important;
+[id*="hero_main"] slideshow-slide .slide__content button.button,
+[id*="hero_main"] slideshow-slide .slide__content .group-block-content {
+  display: none !important;
 }
 
 /* ============================================================
