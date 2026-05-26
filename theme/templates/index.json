@@ -191,10 +191,11 @@
         "section_width": "full-width",
         "slide_height": "small",
         "autoplay": true,
-        "autoplay_speed": 6,
+        "autoplay_speed": 5,
         "color_scheme": "scheme-8",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "slideshow_gap": 0
       }
     },
     "trust_marquee": {

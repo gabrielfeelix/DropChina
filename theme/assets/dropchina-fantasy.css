@@ -1730,3 +1730,26 @@ search-button *,
   z-index: 1;
   background: transparent !important;
 }
+
+/* ============================================================
+   HERO SLIDESHOW LOOP — instantâneo (não rolar todos slides ao voltar)
+   Tinker tem scroll-behavior:smooth que faz o reset 3→0 ser visualmente
+   uma rolagem completa (causa "espaço preto" entre slides intermediários).
+   Forçar reset jump = teleporte instantâneo.
+   ============================================================ */
+
+[id*="hero_main"] slideshow-slides {
+  scroll-behavior: auto !important;
+  scroll-snap-type: x mandatory !important;
+}
+
+/* No reset (quando JS Tinker dispara refresh do timeline), suprimir animation */
+[id*="hero_main"] slideshow-component[refreshing-timeline] slideshow-slides {
+  scroll-behavior: auto !important;
+}
+
+/* Garantir que cada slide tem snap point */
+[id*="hero_main"] slideshow-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
