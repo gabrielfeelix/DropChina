@@ -678,35 +678,11 @@ header.header .header-actions__cart-icon svg {
   stroke-width: 1.5;
 }
 
-/* Texto do account/cart em branco + 2 linhas pequenas */
+/* Modo ICON: esconder QUALQUER texto residual no account/cart */
 header.header .account-button__text,
-header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
-  color: var(--dc-text-on-dark) !important;
-  font-size: 0.8125rem !important;
-  font-weight: 500 !important;
-  line-height: 1.2;
-  text-align: left;
-  display: inline-flex !important;
-  flex-direction: column;
-}
-
-/* Trocar texto "Conta" por 2 linhas via CSS content */
-header.header .account-button__text {
-  font-size: 0 !important;
-}
-header.header .account-button__text::before {
-  content: "Bem-vindo(a)";
-  display: block;
-  font-size: 0.75rem;
-  color: #b8bbbe;
-  font-weight: 400;
-}
-header.header .account-button__text::after {
-  content: "Entrar ou Cadastrar";
-  display: block;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--dc-text-on-dark);
+header.header .header-actions__cart-icon--text > span:not(.svg-wrapper),
+header.header .header-actions__cart-icon > span:not(.svg-wrapper) {
+  display: none !important;
 }
 
 /* Cart icon — adicionar badge dourado contador "0" */
@@ -1107,13 +1083,28 @@ product-card.product-card:hover,
   }
 }
 
-.dc-search-strip__input {
+/* Override do scheme-1 herdado pela predictive-search-component */
+.dc-search-strip,
+.dc-search-strip__component,
+.dc-search-strip .predictive-search,
+.dc-search-strip .predictive-search-form,
+.dc-search-strip .predictive-search-form__header,
+.dc-search-strip .predictive-search-form__header-inner {
+  background: transparent !important;
+  background-color: transparent !important;
+  --color-background: transparent;
+}
+
+.dc-search-strip__input,
+.dc-search-strip input.search-input,
+.dc-search-strip .predictive-search-form input[type="search"] {
   width: 100%;
   background: #1a1a1a !important;
+  background-color: #1a1a1a !important;
   border: 1px solid #333 !important;
   border-radius: 999px !important;
   padding: 14px 56px 14px 24px !important;
-  color: #fff !important;
+  color: #ffffff !important;
   font-size: 0.9375rem !important;
   outline: none;
   transition: border-color var(--dc-duration) var(--dc-ease),

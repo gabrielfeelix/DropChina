@@ -127,7 +127,7 @@
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default",
-        "actions_display_style": "text"
+        "actions_display_style": "icon"
       }
     }
   },
