@@ -106,10 +106,18 @@
     function repositionDropdown() {
       if (wrapper.hidden) return;
       var r = input.getBoundingClientRect();
+      // Centralizar dropdown horizontalmente baseado no centro do input
+      var inputCenter = r.left + (r.width / 2);
+      var dropdownWidth = Math.min(window.innerWidth - 32, 960); // 960px max, 16px gutter
+      var left = Math.max(16, inputCenter - (dropdownWidth / 2));
+      // Não passar do limite direito
+      if (left + dropdownWidth > window.innerWidth - 16) {
+        left = window.innerWidth - dropdownWidth - 16;
+      }
       wrapper.style.position = 'fixed';
       wrapper.style.top = (r.bottom + 8) + 'px';
-      wrapper.style.left = r.left + 'px';
-      wrapper.style.width = r.width + 'px';
+      wrapper.style.left = left + 'px';
+      wrapper.style.width = dropdownWidth + 'px';
     }
 
     window.addEventListener('scroll', repositionDropdown, { passive: true });

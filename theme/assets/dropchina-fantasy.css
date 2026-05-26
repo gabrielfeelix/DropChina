@@ -1997,11 +1997,25 @@ search-button *,
 .dc-search-input__results .predictive-search-results__list,
 .dc-search-input__results .predictive-search-results__wrapper-products {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
-  gap: 12px !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 14px !important;
   padding: 0 !important;
   margin: 0 !important;
   list-style: none !important;
+}
+
+@media (max-width: 900px) {
+  .dc-search-input__results .predictive-search-results__list,
+  .dc-search-input__results .predictive-search-results__wrapper-products {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .dc-search-input__results .predictive-search-results__list,
+  .dc-search-input__results .predictive-search-results__wrapper-products {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
 /* CADA card de produto: bg cinza-escuro, padding, hover */
@@ -2030,15 +2044,29 @@ search-button *,
   transform: translateY(-2px);
 }
 
-/* Imagem do card */
-.dc-search-input__results .resource-card__image-container,
-.dc-search-input__results .resource-card__image {
+/* Imagem do card — container fundo branco com produto centralizado */
+.dc-search-input__results .resource-card__image-container {
   width: 100% !important;
   aspect-ratio: 1 / 1 !important;
-  background: #fff;
+  background: #ffffff !important;
   border-radius: var(--dc-radius-sm);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dc-search-input__results .resource-card__image {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
   object-fit: contain !important;
-  padding: 8px;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  aspect-ratio: auto !important;
 }
 
 /* Conteúdo card (nome + preço) */
