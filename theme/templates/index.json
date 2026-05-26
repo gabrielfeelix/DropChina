@@ -6,11 +6,12 @@
         "slide_1": {
           "type": "_slide",
           "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-8",
-            "padding-inline-start": 48,
-            "padding-inline-end": 48,
+            "color_scheme": "scheme-5",
+            "padding-inline-start": 64,
+            "padding-inline-end": 64,
             "padding-block-start": 64,
             "padding-block-end": 64
           },
@@ -18,40 +19,40 @@
             "eyebrow": {
               "type": "text",
               "settings": {
-                "text": "<p>OFICIAL \u00b7 VENDEDOR PLATINUM</p>",
+                "text": "<p>EDI\u00c7\u00c3O LIMITADA</p>",
                 "type_preset": "custom",
-                "font_size": "0.875rem",
+                "font_size": "0.75rem",
                 "case": "uppercase",
-                "letter_spacing": "0.16em",
-                "alignment": "center",
-                "color": "#22c55e"
+                "letter_spacing": "0.14em",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.7)"
               }
             },
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>Toners e Cartuchos</h2>",
+                "text": "<h2>Pacotes Panini World Cup 2026</h2>",
                 "type_preset": "h1",
-                "alignment": "center",
+                "alignment": "left",
                 "color": "#ffffff"
               }
             },
             "subheading": {
               "type": "text",
               "settings": {
-                "text": "<p>At\u00e9 50% de economia em rendimento por p\u00e1gina</p>",
-                "font_size": "1.125rem",
-                "alignment": "center",
-                "color": "#e5e7eb",
+                "text": "<p>Figurinhas, \u00e1lbuns e box completos. Estoque oficial, envio r\u00e1pido.</p>",
+                "font_size": "1.0625rem",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.85)",
                 "padding-block-end": 16
               }
             },
             "button": {
               "type": "button",
               "settings": {
-                "label": "Ver Toners",
-                "link": "shopify://collections/toners",
-                "style": "primary"
+                "label": "Ver cole\u00e7\u00e3o",
+                "link": "shopify://collections/all",
+                "style_class": "button button--primary"
               }
             }
           },
@@ -65,11 +66,12 @@
         "slide_2": {
           "type": "_slide",
           "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-8",
-            "padding-inline-start": 48,
-            "padding-inline-end": 48,
+            "color_scheme": "scheme-5",
+            "padding-inline-start": 64,
+            "padding-inline-end": 64,
             "padding-block-start": 64,
             "padding-block-end": 64
           },
@@ -77,40 +79,40 @@
             "eyebrow2": {
               "type": "text",
               "settings": {
-                "text": "<p>FRETE GR\u00c1TIS \u00b7 TODO BRASIL</p>",
+                "text": "<p>M\u00caS DA IMPRESS\u00c3O</p>",
                 "type_preset": "custom",
-                "font_size": "0.875rem",
+                "font_size": "0.75rem",
                 "case": "uppercase",
-                "letter_spacing": "0.16em",
-                "alignment": "center",
-                "color": "#22c55e"
+                "letter_spacing": "0.14em",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.7)"
               }
             },
             "heading2": {
               "type": "text",
               "settings": {
-                "text": "<h2>Impressoras Multifuncionais</h2>",
+                "text": "<h2>Toners e cartuchos premium</h2>",
                 "type_preset": "h1",
-                "alignment": "center",
+                "alignment": "left",
                 "color": "#ffffff"
               }
             },
             "subheading2": {
               "type": "text",
               "settings": {
-                "text": "<p>Wi-Fi, c\u00f3pia, scanner \u2014 tudo em um</p>",
-                "font_size": "1.125rem",
-                "alignment": "center",
-                "color": "#e5e7eb",
+                "text": "<p>Cartuchos compat\u00edveis e originais a partir de R$ 36. Compre 3 leve 4 em itens selecionados.</p>",
+                "font_size": "1.0625rem",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.85)",
                 "padding-block-end": 16
               }
             },
             "button2": {
               "type": "button",
               "settings": {
-                "label": "Ver Impressoras",
-                "link": "shopify://collections/impressoras",
-                "style": "primary"
+                "label": "Comprar agora",
+                "link": "shopify://collections/toners",
+                "style_class": "button button--primary"
               }
             }
           },
@@ -124,11 +126,12 @@
         "slide_3": {
           "type": "_slide",
           "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-8",
-            "padding-inline-start": 48,
-            "padding-inline-end": 48,
+            "color_scheme": "scheme-5",
+            "padding-inline-start": 64,
+            "padding-inline-end": 64,
             "padding-block-start": 64,
             "padding-block-end": 64
           },
@@ -136,40 +139,40 @@
             "eyebrow3": {
               "type": "text",
               "settings": {
-                "text": "<p>PIX \u00b7 5% DE DESCONTO</p>",
+                "text": "<p>SETUP GAMER</p>",
                 "type_preset": "custom",
-                "font_size": "0.875rem",
+                "font_size": "0.75rem",
                 "case": "uppercase",
-                "letter_spacing": "0.16em",
-                "alignment": "center",
-                "color": "#e85d04"
+                "letter_spacing": "0.14em",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.7)"
               }
             },
             "heading3": {
               "type": "text",
               "settings": {
-                "text": "<h2>Perif\u00e9ricos Premium</h2>",
+                "text": "<h2>Placas de v\u00eddeo a partir de R$ 293</h2>",
                 "type_preset": "h1",
-                "alignment": "center",
+                "alignment": "left",
                 "color": "#ffffff"
               }
             },
             "subheading3": {
               "type": "text",
               "settings": {
-                "text": "<p>Mouses, teclados, webcams e fones para escrit\u00f3rio</p>",
-                "font_size": "1.125rem",
-                "alignment": "center",
-                "color": "#e5e7eb",
+                "text": "<p>GT 730, RX 550, GTX 1650 e fontes a pre\u00e7o de atacado. Em at\u00e9 18x sem juros no cart\u00e3o.</p>",
+                "font_size": "1.0625rem",
+                "alignment": "left",
+                "color": "rgba(255,255,255,0.85)",
                 "padding-block-end": 16
               }
             },
             "button3": {
               "type": "button",
               "settings": {
-                "label": "Ver Perif\u00e9ricos",
-                "link": "shopify://collections/perifericos",
-                "style": "primary"
+                "label": "Montar setup",
+                "link": "shopify://collections/all",
+                "style_class": "button button--primary"
               }
             }
           },
@@ -188,12 +191,12 @@
       ],
       "settings": {
         "display_mode": "full_frame",
-        "section_width": "full-width",
-        "slide_height": "small",
+        "section_width": "page-width",
+        "slide_height": "medium",
         "autoplay": true,
-        "autoplay_speed": 5,
-        "color_scheme": "scheme-8",
-        "padding-block-start": 0,
+        "autoplay_speed": 7,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 18,
         "padding-block-end": 0,
         "slideshow_gap": 0
       }
@@ -204,7 +207,7 @@
         "marquee_text_1": {
           "type": "text",
           "settings": {
-            "text": "<p>\u2605 Vendedor Platinum no Mercado Livre</p>",
+            "text": "<p>\u00b7 Frete GR\u00c1TIS em compras acima de R$ 199</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -216,7 +219,7 @@
         "marquee_text_2": {
           "type": "text",
           "settings": {
-            "text": "<p>\u2713 Frete gr\u00e1tis acima de R$ 200</p>",
+            "text": "<p>\u00b7 At\u00e9 18x sem juros no cart\u00e3o</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -228,7 +231,7 @@
         "marquee_text_3": {
           "type": "text",
           "settings": {
-            "text": "<p>\u25cf PIX com 5% de desconto</p>",
+            "text": "<p>\u00b7 10% OFF no Pix em toda a loja</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -240,7 +243,7 @@
         "marquee_text_4": {
           "type": "text",
           "settings": {
-            "text": "<p>\u21bb Troca garantida em 7 dias</p>",
+            "text": "<p>\u00b7 Garantia oficial em todos os produtos</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -252,7 +255,7 @@
         "marquee_text_5": {
           "type": "text",
           "settings": {
-            "text": "<p>\u2665 +50 mil clientes atendidos</p>",
+            "text": "<p>\u00b7 Envio em at\u00e9 24h para todo o Brasil</p>",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -331,7 +334,7 @@
               "type": "text",
               "name": "Eyebrow",
               "settings": {
-                "text": "<p>NAVEGUE POR</p>",
+                "text": "<p>NOSSA LOJA</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -357,7 +360,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h2>Categorias</h2>",
+                "text": "<h2>Confira tudo o que temos pra você</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -736,7 +739,7 @@
               "type": "text",
               "name": "Eyebrow",
               "settings": {
-                "text": "<p>OFERTA EXCLUSIVA</p>",
+                "text": "<p>NEWSLETTER DROPCHINA</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -762,7 +765,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Pague no PIX e ganhe<br>5% de desconto</h2>",
+                "text": "<h2>Ofertas direto no seu e-mail toda terça</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -787,7 +790,7 @@
             "text_promo_body": {
               "type": "text",
               "settings": {
-                "text": "<p>Desconto aplicado automaticamente no checkout. V\u00e1lido para todos os produtos da loja, sem valor m\u00ednimo.</p>",
+                "text": "<p>Receba antes os cupons exclusivos, lan\u00e7amentos e os melhores pre\u00e7os em tech.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -812,10 +815,10 @@
             "button_promo": {
               "type": "button",
               "settings": {
-                "label": "Aproveitar agora",
+                "label": "Inscrever-me",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
-                "style_class": "button button--urgent",
+                "style_class": "button button--primary",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -884,7 +887,7 @@
               "type": "_product-list-text",
               "name": "Eyebrow",
               "settings": {
-                "text": "<p>NOVIDADES</p>",
+                "text": "<p>OFERTAS-RELÂMPAGO</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -910,7 +913,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>Acabaram de chegar</h2>",
+                "text": "<h2>Aproveite antes que acabe</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1209,7 +1212,7 @@
               "type": "text",
               "name": "Eyebrow",
               "settings": {
-                "text": "<p>NOSSA HIST\u00d3RIA</p>",
+                "text": "<p>ATACADO \u00b7 CNPJ</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1235,7 +1238,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Mais de 50 mil clientes j\u00e1 confiaram na DropChina</h2>",
+                "text": "<h2>Compre como revendedor e pague menos</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1260,7 +1263,7 @@
             "story_body": {
               "type": "text",
               "settings": {
-                "text": "<p>Come\u00e7amos vendendo no Mercado Livre e conquistamos o selo Platinum entregando produto certo, no prazo, com atendimento que responde r\u00e1pido. Agora trazemos a mesma confian\u00e7a para a nossa loja pr\u00f3pria \u2014 com mais variedade, melhores pre\u00e7os e o mesmo cuidado de sempre.</p>",
+                "text": "<p>Tabela exclusiva para CNPJ a partir de 10 unidades, com nota fiscal, entrega em todo o Brasil e gerente de conta dedicado.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -1285,10 +1288,10 @@
             "button_story": {
               "type": "button",
               "settings": {
-                "label": "Conhecer a loja",
+                "label": "Cadastrar CNPJ",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
-                "style_class": "button",
+                "style_class": "button button--primary",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -1324,36 +1327,36 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "Recebi rapid\u00edssimo",
-            "quote": "Comprei o cartucho HP 667 e chegou em 2 dias, exatamente como descrito. Recomendo demais!",
-            "author": "Maria S."
+            "title": "Comprou Toner Evolut 105a",
+            "quote": "Chegou em 2 dias \u00fateis, embalagem impec\u00e1vel e a impress\u00e3o ficou id\u00eantica \u00e0 do toner original. J\u00e1 \u00e9 minha 3\u00aa compra na DropChina.",
+            "author": "Mariana A."
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "Atendimento nota 10",
-            "quote": "Tirei d\u00favida no WhatsApp antes de comprar, responderam em minutos. Compra f\u00e1cil e produto excelente.",
-            "author": "Jo\u00e3o P."
+            "title": "Comprou Placa de V\u00eddeo GT 730",
+            "quote": "Atendimento via WhatsApp foi r\u00e1pido pra tirar d\u00favidas sobre compatibilidade. A placa veio lacrada, em perfeito estado e funcionou de primeira.",
+            "author": "Rafael S."
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "\u00d3timo custo-benef\u00edcio",
-            "quote": "O kit de toners compat\u00edveis funcionou perfeitamente, qualidade impressionante pelo pre\u00e7o.",
-            "author": "Carlos M."
+            "title": "Comprou Headset JBL Quantum 100",
+            "quote": "Som muito bom, confort\u00e1vel pra usar o dia todo. Comprei pra empresa em quantidade e ganhei desconto de revendedor. Recomendo.",
+            "author": "Carla B."
           }
         },
         "t4": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "title": "J\u00e1 \u00e9 a quarta compra",
-            "quote": "Cliente fiel da DropChina. Sempre confi\u00e1vel, sempre cumprem o prazo. Vendedor Platinum se v\u00ea.",
-            "author": "Ana B."
+            "title": "Comprou Kit Cartucho HP 667",
+            "quote": "Frete gr\u00e1tis cumprido no prazo, produto original e ainda economizei 18% no Pix. Vou voltar com certeza.",
+            "author": "Pedro L."
           }
         }
       },
@@ -1365,9 +1368,9 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "eyebrow": "AVALIA\u00c7\u00d5ES",
-        "heading": "Amados pelos clientes",
-        "subheading": "Mais de 50 mil clientes j\u00e1 confiaram na DropChina no Mercado Livre.",
+        "eyebrow": "AVALIA\u00c7\u00d5ES VERIFICADAS",
+        "heading": "4,9 / 5 em mais de 12 mil compras",
+        "subheading": "Compras avaliadas por clientes reais. Notas verificadas e sem edi\u00e7\u00e3o.",
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,
@@ -1380,32 +1383,33 @@
         "b1": {
           "type": "badge",
           "settings": {
-            "title": "Seguran\u00e7a",
-            "sub": "Loja com SSL de prote\u00e7\u00e3o"
+            "title": "Frete gr\u00e1tis",
+            "sub": "Em compras a partir de R$ 199",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 7h11v9H3z'/><path d='M14 10h4l3 3v3h-7z'/><circle cx='7' cy='18' r='1.6'/><circle cx='17' cy='18' r='1.6'/></svg>"
           }
         },
         "b2": {
           "type": "badge",
           "settings": {
-            "title": "Envio",
-            "sub": "Envio para todo Brasil",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><rect x='1' y='3' width='15' height='13'/><polygon points='16 8 20 8 23 11 23 16 16 16 16 8'/><circle cx='5.5' cy='18.5' r='2.5'/><circle cx='18.5' cy='18.5' r='2.5'/></svg>"
+            "title": "Garantia oficial",
+            "sub": "12 meses em todos os produtos",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z'/><path d='m9 12 2 2 4-4'/></svg>"
           }
         },
         "b3": {
           "type": "badge",
           "settings": {
-            "title": "PIX",
-            "sub": "Economize pagando no PIX",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 22 12 12 22 2 12 12 2'/></svg>"
+            "title": "Troca f\u00e1cil",
+            "sub": "7 dias para trocar ou devolver",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 12a9 9 0 0 1 15.5-6.3L21 8'/><path d='M21 4v4h-4'/><path d='M21 12a9 9 0 0 1-15.5 6.3L3 16'/><path d='M3 20v-4h4'/></svg>"
           }
         },
         "b4": {
           "type": "badge",
           "settings": {
-            "title": "Promo\u00e7\u00f5es",
-            "sub": "Promo\u00e7\u00f5es di\u00e1rias",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0f4fa8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='32' height='32'><polygon points='12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2'/></svg>"
+            "title": "Atendimento humano",
+            "sub": "Seg a s\u00e1b, das 8h \u00e0s 20h",
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4'/><path d='M4 13v4a2 2 0 0 0 2 2h2v-6H4'/></svg>"
           }
         }
       },
@@ -1422,31 +1426,31 @@
         "c1": {
           "type": "card",
           "settings": {
-            "title": "Toner Brother TN-660",
-            "price": "139,90",
-            "cta_label": "Confira",
-            "eyebrow": "MAIS VENDIDO",
+            "title": "Toners e cartuchos premium",
+            "price": "",
+            "cta_label": "Comprar agora",
+            "eyebrow": "M\u00caS DA IMPRESS\u00c3O",
             "link": "shopify://collections/toners"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
-            "title": "Impressora HP Multifuncional",
-            "price": "899,00",
-            "cta_label": "Confira",
-            "eyebrow": "WI-FI \u00b7 C\u00d3PIA \u00b7 SCANNER",
-            "link": "shopify://collections/impressoras"
+            "title": "Pacotes Panini World Cup 2026",
+            "price": "",
+            "cta_label": "Ver cole\u00e7\u00e3o",
+            "eyebrow": "EDI\u00c7\u00c3O LIMITADA",
+            "link": "shopify://collections/all"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
-            "title": "Monitor 24\" Full HD",
-            "price": "1.249,00",
-            "cta_label": "Confira",
-            "eyebrow": "ESCRIT\u00d3RIO PREMIUM",
-            "link": "shopify://collections/monitores"
+            "title": "Placas de v\u00eddeo a partir de R$ 293",
+            "price": "",
+            "cta_label": "Montar setup",
+            "eyebrow": "SETUP GAMER",
+            "link": "shopify://collections/all"
           }
         }
       },
@@ -1505,7 +1509,7 @@
         "br6"
       ],
       "settings": {
-        "heading": "Escolha pela marca"
+        "heading": "+50 marcas que você confia"
       }
     },
     "youtube_main": {
@@ -1522,16 +1526,13 @@
   "order": [
     "hero_main",
     "trust_badges_main",
-    "promo_banners_main",
-    "trust_marquee",
     "categories_grid",
     "best_sellers",
-    "promo_banner",
+    "promo_banners_main",
     "second_collection",
-    "guarantees",
-    "youtube_main",
-    "brand_carousel_main",
+    "story_block",
     "testimonials_section",
-    "story_block"
+    "brand_carousel_main",
+    "promo_banner"
   ]
 }

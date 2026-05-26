@@ -1,20 +1,66 @@
 <style>
+  /* DropChina hero slideshow — backgrounds com gradient escuro pra contraste de texto.
+     Ordem: 1) World Cup Panini, 2) Toner Evolut, 3) GPU GT 730  */
   [id*="hero_main"] slideshow-slide:nth-of-type(1) .slide__image-container {
-    background-image: url("{{ 'hero-banner-1.png' | asset_url }}") !important;
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.18) 0%, rgba(13,17,21,0.65) 100%),
+      url("{{ 'banner-worldcup.png' | asset_url }}") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
   }
   [id*="hero_main"] slideshow-slide:nth-of-type(2) .slide__image-container {
-    background-image: url("{{ 'hero-banner-2.png' | asset_url }}") !important;
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.18) 0%, rgba(13,17,21,0.65) 100%),
+      url("{{ 'banner-toner.png' | asset_url }}") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
   }
   [id*="hero_main"] slideshow-slide:nth-of-type(3) .slide__image-container {
-    background-image: url("{{ 'hero-banner-3.png' | asset_url }}") !important;
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.18) 0%, rgba(13,17,21,0.65) 100%),
+      url("{{ 'banner-gpu.png' | asset_url }}") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
   }
+
+  /* Promo cards (3 banners image-led) usando mesma técnica via background */
+  [id*="promo_banners_main"] .promo-cards-grid > *:nth-child(1) {
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.05) 0%, rgba(13,17,21,0.35) 50%, rgba(13,17,21,0.85) 100%),
+      url("{{ 'banner-toner.png' | asset_url }}") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  [id*="promo_banners_main"] .promo-cards-grid > *:nth-child(2) {
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.05) 0%, rgba(13,17,21,0.35) 50%, rgba(13,17,21,0.85) 100%),
+      url("{{ 'banner-worldcup.png' | asset_url }}") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  [id*="promo_banners_main"] .promo-cards-grid > *:nth-child(3) {
+    background-image:
+      linear-gradient(180deg, rgba(13,17,21,0.05) 0%, rgba(13,17,21,0.35) 50%, rgba(13,17,21,0.85) 100%),
+      url("{{ 'banner-gpu.png' | asset_url }}") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* Story block como banner Atacado — handshake */
+  [id*="story_block"] .media-with-content {
+    background-image:
+      linear-gradient(90deg, rgba(10,29,74,0.10) 0%, rgba(10,29,74,0.55) 35%, rgba(10,29,74,0.92) 65%, rgba(10,29,74,0.98) 100%),
+      url("{{ 'atacado-bg.png' | asset_url }}") !important;
+    background-size: cover !important;
+    background-position: center left !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    min-height: 460px;
+  }
+  [id*="story_block"] .media-with-content * { color: #fff !important; }
+  [id*="story_block"] .media-with-content h2 { color: #fff !important; }
+  [id*="story_block"] .media-with-content p { color: rgba(255,255,255,0.85) !important; }
 </style>

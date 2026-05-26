@@ -1,2192 +1,1355 @@
 /* ============================================================
-   DropChina — Fantasy Gaming look
-   Substitui o VISION-style. Header preto, cards comerciais,
-   carrosséis múltiplos, paleta azul DropChina + verde Fantasy.
+   DropChina — Design System (skin override)
+   Replica integral do DropChina-claudedesign aplicado sobre
+   o tema Tinker/Horizon. Mantemos o nome do arquivo para não
+   quebrar referências em theme.liquid.
    ============================================================ */
 
 :root {
-  /* Cores */
-  --dc-black: #000000;
-  --dc-text: #1a1a1a;
-  --dc-text-muted: #6b7280;
-  --dc-bg: #ffffff;
-  --dc-surface: #f5f5f7;
-  --dc-border: #e5e7eb;
+  /* Brand (from logo) */
+  --dc-green: #1f7a3a;
+  --dc-yellow: #f5c518;
+  --dc-red: #d62828;
 
-  /* Cor de marca DropChina mantida */
-  --dc-blue: #0f4fa8;
-  --dc-blue-hover: #0a3d80;
+  /* Neutrals — clean white */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f4f5f7;
+  --surface-3: #fafbfc;
+  --ink: #0d1115;
+  --ink-2: #2a3038;
+  --muted: #6b7280;
+  --muted-2: #9ca3af;
+  --line: #ececef;
+  --line-strong: #d9dade;
 
-  /* Cor de urgência DropChina */
-  --dc-orange: #e85d04;
-  --dc-orange-hover: #c44d03;
+  /* Accent (CTA) */
+  --accent: var(--dc-red);
+  --accent-ink: #ffffff;
+  --accent-soft: #fdecec;
 
-  /* Cor verde Fantasy (CTAs compra + WhatsApp) */
-  --dc-green: #22c55e;
-  --dc-green-hover: #16a34a;
+  /* Success / sale */
+  --success: #1f7a3a;
+  --sale: #ff4d2e;
 
-  /* Cor varejo BR (preço com desconto) */
-  --dc-red: #ff3b30;
+  /* Radius */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 28px;
+  --r-pill: 999px;
 
-  /* Raio */
-  --dc-radius-xs: 8px;
-  --dc-radius-sm: 10px;
-  --dc-radius-md: 12px;
-  --dc-radius-lg: 16px;
-  --dc-radius-xl: 20px;
-  --dc-radius-2xl: 24px;
-  --dc-radius-pill: 999px;
+  /* Type */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Sombra */
-  --dc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --dc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --dc-shadow-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.12);
-
-  /* Easing */
-  --dc-ease: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Backward-compat aliases (remove when dropchina-vision.css is archived in Phase 10) */
-  --dc-accent: var(--dc-orange);
-  --dc-accent-hover: var(--dc-orange-hover);
-
-  /* Whites & dark surfaces (Tasks 1.2, 1.3, 4.1) */
-  --dc-white: #ffffff;
-  --dc-black-soft: #1a1a1a;
-  --dc-black-card: #0d0d0f;
-  --dc-border-dark: #333333;
-  --dc-text-on-dark: #ffffff;
-  --dc-text-muted-dark: #b8bbbe;
-
-  /* Duration scale */
-  --dc-duration: 200ms;
-  --dc-duration-slow: 320ms;
-  --dc-duration-slower: 480ms;
-
-  /* Z-index scale */
-  --dc-z-base: 1;
-  --dc-z-sticky: 100;
-  --dc-z-float: 999;
-
-  /* Semantic aliases for design intent */
-  --dc-focus-ring: var(--dc-blue);
-  --dc-price-pix: var(--dc-blue);
-  --dc-cta-buy: var(--dc-green);
-  --dc-cta-buy-hover: var(--dc-green-hover);
-  --dc-urgency: var(--dc-orange);
+  /* Shadow */
+  --shadow-1: 0 1px 2px rgba(20, 22, 24, 0.04), 0 1px 1px rgba(20, 22, 24, 0.03);
+  --shadow-2: 0 6px 24px -8px rgba(20, 22, 24, 0.10), 0 2px 6px rgba(20, 22, 24, 0.04);
+  --shadow-lift: 0 18px 40px -16px rgba(20, 22, 24, 0.18);
 }
 
-/* Reduced motion respeitado */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto !important; }
+/* ===== Apply DropChina fonts globally over Shopify settings ===== */
+html,
+body,
+button,
+input,
+textarea,
+select,
+.section,
+.product-card,
+.collection-card,
+[class*="header"],
+[class*="footer"] {
+  font-family: var(--font-sans) !important;
 }
 
-/* ===== HEADER PRETO FULL-WIDTH (selectors Tinker reais) ===== */
+h1, h2, h3, h4, .h1, .h2, .h3, .h4,
+[class*="heading"],
+[class*="title"] {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.02em;
+}
 
-/* O scheme-8 pinta o background preto via Tinker.
-   Estas regras garantem que TODO texto e ícone do top row fique branco
-   e estilizam a busca como input retangular estilo Fantasy. */
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
-/* Limpar bordas indesejadas dos rows do header (Tinker aplica border-bottom
-   via --border-bottom-width que pode vazar; matar TODAS as bordas internas) */
-header.header .header__row,
-header.header .header__row--top,
-header.header .header__row--top.divider--page-width .header__columns,
-header.header .header__row--top:not(.divider--page-width) {
+/* ================================
+   Layout container (page width)
+   ================================ */
+.page-width,
+.page-width-full,
+.section--page-width > .section-content-wrapper,
+.section--page-width .section-content,
+.section .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
+}
+
+/* ============================================================
+   ANNOUNCEMENT BAR — marquee preto com pontinhos amarelos
+   ============================================================ */
+.announcement-bar,
+#shopify-section-announcement-bar .announcement-bar {
+  background: var(--ink) !important;
+  color: #f6efe2 !important;
+  font-size: 13px;
+  letter-spacing: 0.01em;
   border: none !important;
-  border-bottom: none !important;
-  --border-bottom-width: 0 !important;
-  --border-bottom-width-mobile: 0 !important;
+  padding-block: 0 !important;
+  min-height: 36px;
+}
+.announcement-bar .announcement-bar__slides {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.announcement-bar [class*="text"],
+.announcement-bar p,
+.announcement-bar span,
+.announcement-bar a {
+  color: #f6efe2 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}
+.announcement-bar .slideshow-control,
+.announcement-bar slideshow-arrows {
+  display: none !important;
 }
 
-/* Announcement bar (faixa do topo) — sem qualquer border-bottom branco escapando */
-.announcement-bar {
-  border-bottom: none !important;
+/* Marquee (faixa anúncio horizontal) */
+[id*="trust_marquee"] .marquee,
+[id*="guarantees"] .marquee,
+.marquee-section {
+  background: var(--ink) !important;
+  color: #f6efe2 !important;
+  padding-block: 10px !important;
+}
+[id*="trust_marquee"] .marquee p,
+[id*="trust_marquee"] .marquee span,
+[id*="guarantees"] .marquee p,
+[id*="guarantees"] .marquee span {
+  color: #f6efe2 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.01em;
+  font-family: var(--font-sans) !important;
 }
 
-/* ---------- Top row: força texto branco em TODOS os descendentes ---------- */
+/* ============================================================
+   TOPBAR utility row (Sobre · Blog · Suporte · ...) — gerado
+   por header-utilities ou via dc-utility-bar block
+   ============================================================ */
+.dc-topbar {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--muted);
+}
+.dc-topbar-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+}
+.dc-topbar-inner .dc-topbar-links { display: flex; gap: 22px; }
+.dc-topbar-inner a { color: var(--muted); text-decoration: none; }
+.dc-topbar-inner a:hover { color: var(--ink); }
+.dc-topbar-inner .dc-topbar-right { display: flex; align-items: center; gap: 18px; }
+.dc-topbar-inner .dc-topbar-right .strong { color: var(--ink); font-weight: 600; }
+.dc-flag {
+  width: 18px;
+  height: 13px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #009c3b 0 33%, #ffdf00 33% 66%, #002776 66% 100%);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ============================================================
+   HEADER — fundo branco, logo · busca pill · ícones · 84px
+   Sobrepõe os schemes pretos do Tinker pra alinhar com referência
+   ============================================================ */
 header.header,
-header.header .header__main-row,
+.header,
+#header-component,
+header-component {
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--ink) !important;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+}
+
+/* Remove o overlay de scheme-8 preto que vinha do Tinker */
+header.header .section-background,
+header-component .section-background {
+  background: var(--bg) !important;
+}
+
+/* Linha principal do header */
 header.header .header__row,
-header.header .header__column,
-header.header .header__columns,
-header.header .header-actions__action,
-header.header .header-actions__text-style,
-header.header .header__heading,
-header.header .button-unstyled,
-header.header .dropdown-localization__button,
-header.header .localization-selector,
-header.header .currency-code {
-  color: var(--dc-text-on-dark) !important;
+header.header .header__main-row,
+header.header .header__row--top {
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+  min-height: 84px;
 }
 
-/* Links e botões */
-header.header .header__row a,
-header.header .header__row button,
-header.header .header__row span,
-header.header .header__column a,
-header.header .header__column button,
-header.header .header__column span {
-  color: var(--dc-text-on-dark) !important;
+/* Textos / ícones do header voltam pra preto */
+header.header,
+header.header *,
+header.header a,
+header.header button,
+header.header span,
+header.header svg {
+  color: var(--ink) !important;
 }
-
-/* Hover verde Fantasy nos links do top row apenas (não no navigation-bar) */
-header.header .header__row:not(.header__navigation-bar-row) a:hover,
-header.header .header__row:not(.header__navigation-bar-row) button:hover {
-  color: var(--dc-green) !important;
-}
-
-/* Ícones brancos no top row */
-header.header .header__row:not(.header__navigation-bar-row) svg,
-header.header .header-actions svg,
-header.header .header__column--right svg {
-  color: var(--dc-text-on-dark) !important;
+header.header svg {
   fill: currentColor;
   stroke: currentColor;
 }
+/* logo color image: NÃO inverter (queremos o logo colorido) */
+header.header .header-logo__image-container img,
+header.header .header-logo img {
+  filter: none !important;
+  max-height: 44px !important;
+  width: auto !important;
+}
 
-/* Logo: branco no header preto (cobre tanto img quanto text-logo) */
-header.header .header-logo,
-header.header .header-logo__image-container,
-header.header .header-logo__image-container span {
-  color: var(--dc-text-on-dark) !important;
+/* Hover sobre os links do top — sem verde */
+header.header .header__row a:hover,
+header.header .header__row button:hover {
+  color: var(--ink-2) !important;
+}
+
+/* ===== Search input (pill grande, ícone preto round dentro) ===== */
+header.header .dc-search,
+header.header [class*="search-bar"] form,
+header.header .search-modal__form,
+header.header .predictive-search-form {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  margin-inline: auto;
+}
+header.header input[type="search"],
+header.header input[type="text"],
+header.header .dc-search input {
+  width: 100% !important;
+  height: 50px !important;
+  border-radius: var(--r-pill) !important;
+  border: 1px solid var(--line-strong) !important;
+  background: var(--surface) !important;
+  padding: 0 56px 0 22px !important;
+  font-size: 15px !important;
+  color: var(--ink) !important;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+header.header input[type="search"]:focus,
+header.header input[type="text"]:focus {
+  border-color: var(--ink) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 12%, transparent) !important;
+}
+header.header input[type="search"]::placeholder,
+header.header input[type="text"]::placeholder {
+  color: var(--muted-2) !important;
+}
+header.header .dc-search button,
+header.header .search-bar__submit {
+  position: absolute !important;
+  right: 6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 999px !important;
+  background: var(--ink) !important;
+  color: white !important;
+  border: none !important;
+  display: grid;
+  place-items: center;
+}
+header.header .dc-search button svg,
+header.header .search-bar__submit svg {
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
+  width: 18px;
+  height: 18px;
+}
+
+/* Ícones do header (heart, user, cart) — pílulas redondas com hover sutil */
+header.header .header-actions__action,
+header.header .header-actions a,
+header.header .header-actions button {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  position: relative;
+  transition: background 0.18s;
+}
+header.header .header-actions__action:hover {
+  background: var(--surface-2) !important;
+}
+header.header .cart-bubble,
+header.header [class*="cart-count"],
+header.header [class*="badge"] {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--accent) !important;
+  color: white !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  border: none !important;
 }
 
-/* Se houver IMG do logo (não-inverse), invertê-la pra branco */
-header.header .header-logo__image-container:not(.header-logo__image-container--inverse) img {
-  filter: brightness(0) invert(1);
-}
-
-/* ---------- Categorias row (.header__row--bottom) — fundo BRANCO + texto PRETO ----------
-   Solução real: color_scheme_bottom mudado pra scheme-1 (branco) via JSON.
-   Esses overrides agora só refinam hover/active. */
-
-/* Separador visual entre top (preto) e bottom (branco) */
-header.header .header__row--bottom {
-  border-bottom: 1px solid var(--dc-border) !important;
-}
-
-/* Hover azul DropChina nos itens do menu de categorias */
-header.header .header__row--bottom .menu-list__link:hover,
-header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title {
-  color: var(--dc-blue) !important;
-}
-
-/* Item ativo (página atual) — azul + peso 600 */
-header.header .header__row--bottom .menu-list__link--active,
-header.header .header__row--bottom .menu-list__link--active .menu-list__link-title {
-  color: var(--dc-blue) !important;
-  font-weight: 600 !important;
-}
-
-/* Compat: nav-bar row vazia (caso role apareça) */
+/* ===== NAV (categories row) — fundo branco preto-em-cima ===== */
+header.header .header__row--bottom,
 header.header .header__navigation-bar-row {
-  background: var(--dc-white) !important;
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--line) !important;
+  min-height: 56px;
+}
+header.header .header__row--bottom .menu-list,
+header.header .menu-list {
+  gap: 28px !important;
+}
+header.header .header__row--bottom .menu-list__link,
+header.header .header__row--bottom .menu-list__link-title,
+header.header .menu-list__link,
+header.header .menu-list__link-title {
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: var(--ink-2) !important;
+  font-family: var(--font-sans) !important;
+}
+header.header .header__row--bottom .menu-list__link:hover,
+header.header .menu-list__link:hover {
+  color: var(--ink) !important;
+}
+
+/* "Todas as categorias" trigger pill preto */
+.dc-cat-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 18px 0 14px;
+  border-radius: var(--r-pill);
+  font-size: 14.5px;
+  font-weight: 600;
+  background: var(--ink);
+  color: white !important;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.18s;
+  font-family: var(--font-sans);
+}
+.dc-cat-trigger svg { color: white !important; stroke: white !important; }
+.dc-cat-trigger:hover { background: var(--accent); }
+
+/* Nav-tag (-40%) */
+.dc-nav-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  color: var(--accent) !important;
+  text-transform: uppercase;
+  margin-left: 4px;
 }
 
 /* ============================================================
-   FOOTER PRETO INSTITUCIONAL
+   BUTTONS — pill, com hover invertido
    ============================================================ */
-
-/* Section root - Tinker usa #shopify-section-footer com .section interno.
-   scheme-8 já pinta o background preto. Refinamos tipografia + cores
-   pra alinhar com o look Fantasy/Apple. */
-
-#shopify-section-footer .section,
-#shopify-section-utilities .section {
-  padding-block: 56px !important;
-}
-
-/* Headings das colunas (Institucional, Compre por telefone, etc) */
-#shopify-section-footer h3,
-#shopify-section-footer h4,
-#shopify-section-footer h5,
-#shopify-section-utilities h5 {
-  color: var(--dc-text-on-dark) !important;
-  font-size: 0.9375rem !important;
-  font-weight: 600 !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-  margin-bottom: 16px !important;
-}
-
-/* Body text e links muted */
-#shopify-section-footer a,
-#shopify-section-footer p,
-#shopify-section-utilities a,
-#shopify-section-utilities p,
-#shopify-section-utilities .footer-utilities__text {
-  color: var(--dc-text-muted-dark) !important;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  text-decoration: none;
-}
-
-#shopify-section-footer a:hover,
-#shopify-section-utilities a:hover {
-  color: var(--dc-text-on-dark) !important;
-}
-
-/* Logo: aplicar invert se não houver variante --inverse */
-#shopify-section-footer .header-logo__image-container:not(.header-logo__image-container--inverse) img,
-#shopify-section-footer .image img[alt*="logo" i] {
-  filter: brightness(0) invert(1);
-  max-height: 56px;
-}
-
-/* Linha de copyright (footer-utilities) — separador sutil */
-#shopify-section-utilities {
-  border-top: 1px solid var(--dc-black-soft);
-}
-
-#shopify-section-utilities .footer-utilities__text {
-  color: var(--dc-text-muted) !important;
-  font-size: 0.8125rem;
-}
-
-/* Redes sociais — ícones em pílulas circulares com hover verde */
-#shopify-section-footer .social-icons__wrapper a,
-#shopify-section-footer [class*="social-link"] {
-  color: var(--dc-text-on-dark) !important;
-  background: var(--dc-black-soft);
-  border-radius: 50% !important;
-  width: 36px;
-  height: 36px;
+.button,
+button.button,
+.shopify-payment-button__button,
+a.button,
+[class*="button--"] {
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  transition: background var(--dc-duration) var(--dc-ease);
+  gap: 10px;
+  height: 52px;
+  padding: 0 26px !important;
+  border-radius: var(--r-pill) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  font-family: var(--font-sans) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  transition: transform 0.18s, background 0.18s, color 0.18s, box-shadow 0.18s !important;
+  border: 1px solid transparent !important;
+  white-space: nowrap;
+  text-decoration: none !important;
 }
+.button:active { transform: translateY(1px); }
 
-#shopify-section-footer .social-icons__wrapper a:hover,
-#shopify-section-footer [class*="social-link"]:hover {
-  background: var(--dc-green) !important;
+.button--primary,
+.button.button--primary,
+button[class*="primary"] {
+  background: var(--ink) !important;
+  color: white !important;
+  border-color: var(--ink) !important;
 }
-
-#shopify-section-footer .social-icons__wrapper svg,
-#shopify-section-footer [class*="social-link"] svg {
-  width: 18px;
-  height: 18px;
-  color: var(--dc-text-on-dark);
+.button--primary:hover,
+.button.button--primary:hover {
+  background: var(--accent) !important;
+  color: white !important;
+  border-color: var(--accent) !important;
 }
-
-/* Links de WhatsApp no footer — destacar com cor verde */
-#shopify-section-footer a[href*="wa.me"],
-#shopify-section-footer a[href*="whatsapp"] {
-  color: var(--dc-green) !important;
-  font-weight: 600;
+.button--secondary,
+.button--outline {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border-color: var(--line-strong) !important;
+}
+.button--secondary:hover,
+.button--outline:hover {
+  border-color: var(--ink) !important;
+  background: var(--ink) !important;
+  color: white !important;
+}
+.button--urgent {
+  background: var(--accent) !important;
+  color: white !important;
+  border-color: var(--accent) !important;
+}
+.button--urgent:hover {
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
 }
 
 /* ============================================================
-   HERO SLIDESHOW FULL-BLEED (estilo Fantasy cinematográfico)
+   SECTIONS — paddings + section head
    ============================================================ */
+.section {
+  padding-block: 56px;
+}
+section[class*="--tight"] { padding-block: 32px; }
 
-/* Section root hero: ZERO padding/margin (sem faixas pretas em cima/embaixo) */
+.section-content-wrapper > .section-header,
+.section-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+[class*="eyebrow"],
+p[data-preset="custom"][style*="uppercase"] {
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  font-weight: 600 !important;
+  margin: 0 0 10px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0;
+}
+h1 { font-size: 64px; line-height: 1.02; }
+h2 { font-size: 44px; line-height: 1.04; }
+h3 { font-size: 26px; line-height: 1.15; }
+h4 { font-size: 18px; line-height: 1.25; }
+
+/* ============================================================
+   HERO SLIDESHOW — full-bleed banner com setas brancas
+   ============================================================ */
 [id*="hero_main"],
-[id*="hero_main"] .slideshow-section,
-[id*="hero_main"] .section,
-[id*="hero_main"] > div,
-section.slideshow {
-  margin: 0 !important;
-  padding: 0 !important;
+.slideshow-section,
+section.slideshow,
+[class*="slideshow"] {
+  padding-block: 18px 0 !important;
+  margin-block: 0 !important;
+}
+[id*="hero_main"] .section-content-wrapper,
+[class*="slideshow"] .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
 }
 
 [id*="hero_main"] .slideshow,
-section.slideshow .slideshow {
-  border-radius: 0 !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Background dos slides — TRANSPARENTE (banner via .slide__image-container) */
-[id*="hero_main"] .slide,
-[id*="hero_main"] slideshow-slide {
-  border-radius: 0 !important;
-  background: transparent !important;
-}
-
-/* Reduzir tipografia do hero pra combinar com altura menor */
-[id*="hero_main"] h1,
-[id*="hero_main"] h2 {
-  font-size: clamp(1.5rem, 3.5vw, 2.75rem) !important;
-}
-
-[id*="hero_main"] p {
-  font-size: 0.9375rem !important;
-}
-
-/* ============================================================
-   HERO SETAS — esconder default Tinker, custom limpa
-   ============================================================ */
-
-/* ============================================================
-   HERO SETAS — usar apenas style-arrows_large (seta horizontal),
-   esconder style-chevron (apontava baixo, ficava verde estranho)
-   ============================================================ */
-
-/* Esconder counter, pagination, e a chevron (estilo errado) */
-[id*="hero_main"] .slideshow-controls__counter,
-[id*="hero_main"] .slideshow-controls__pagination,
-[id*="hero_main"] .slideshow-controls__counter-pagination,
-[id*="hero_main"] .slideshow-control--style-chevron {
-  display: none !important;
-}
-
-/* Container slideshow-controls sem background */
-[id*="hero_main"] slideshow-controls {
-  background: transparent !important;
-}
-
-/* APENAS as setas arrows_large (seta horizontal real ←→) */
-[id*="hero_main"] .slideshow-control--style-arrows_large {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: absolute !important;
-  top: 50% !important;
-  transform: translateY(-50%);
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-  border-radius: 50% !important;
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  background-image: none !important;
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
-  cursor: pointer;
-  z-index: 10;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  isolation: isolate;
-  aspect-ratio: 1 / 1 !important;
-  color: #1a1a1a !important;
-}
-
-[id*="hero_main"] .slideshow-control--style-arrows_large.slideshow-control--previous {
-  left: 16px !important;
-}
-
-[id*="hero_main"] .slideshow-control--style-arrows_large.slideshow-control--next {
-  right: 16px !important;
-}
-
-[id*="hero_main"] .slideshow-control--style-arrows_large:hover {
-  background: #f5f5f7 !important;
-  background-color: #f5f5f7 !important;
-}
-
-/* Ícone arrow preto SEM nada que possa pintar verde */
-[id*="hero_main"] .slideshow-control--style-arrows_large svg,
-[id*="hero_main"] .slideshow-control--style-arrows_large .svg-wrapper,
-[id*="hero_main"] .slideshow-control--style-arrows_large .icon-arrow {
-  width: 20px !important;
-  height: 20px !important;
-  color: #1a1a1a !important;
-  stroke: #1a1a1a !important;
-  fill: none !important;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-}
-
-[id*="hero_main"] .slideshow-control--style-arrows_large svg path {
-  stroke: #1a1a1a !important;
-  fill: none !important;
-}
-
-/* flip-x do prev mantém a seta apontando esquerda */
-[id*="hero_main"] .slideshow-control--style-arrows_large.flip-x .svg-wrapper {
-  transform: scaleX(-1);
-}
-
-/* Tipografia do hero — H1 grande responsivo */
-[id*="hero_main"] h1,
-[id*="hero_main"] h2 {
-  font-size: clamp(2.25rem, 5vw, 4.5rem) !important;
-  font-weight: 800 !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.02em !important;
-  margin: 0 !important;
-}
-
-/* CTA primary forte estilo Fantasy */
-[id*="hero_main"] .button--primary,
-[id*="hero_main"] button.button {
-  background: var(--dc-white) !important;
-  color: var(--dc-text) !important;
-  border-color: var(--dc-white) !important;
-  font-weight: 700 !important;
-  padding: 14px 32px !important;
-}
-
-[id*="hero_main"] .button--primary:hover,
-[id*="hero_main"] button.button:hover {
-  background: var(--dc-green) !important;
-  color: var(--dc-text-on-dark) !important;
-  border-color: var(--dc-green) !important;
-}
-
-/* ============================================================
-   TRUST BADGES (faixa 4 colunas Segurança/Envio/PIX/Promoções)
-   ============================================================ */
-
-.trust-badges {
-  background: var(--dc-white);
-  border-top: 1px solid var(--dc-border);
-  border-bottom: 1px solid var(--dc-border);
-  padding-block: 28px;
-}
-
-.trust-badges__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-inline: 24px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-}
-
-.trust-badges__item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.trust-badges__icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.trust-badges__icon svg {
-  width: 32px;
-  height: 32px;
-}
-
-.trust-badges__text {
-  min-width: 0;
-}
-
-.trust-badges__title {
-  font-size: 0.9375rem !important;
-  font-weight: 700 !important;
-  margin: 0 0 2px !important;
-  color: var(--dc-text) !important;
-  line-height: 1.2;
-}
-
-.trust-badges__sub {
-  font-size: 0.8125rem;
-  color: var(--dc-text-muted);
-  margin: 0;
-  line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-  .trust-badges__container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding-inline: 16px;
-  }
-  .trust-badges {
-    padding-block: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .trust-badges__container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-/* ============================================================
-   PROMO CARDS 3-COL (banners pretos com CTA verde "Confira")
-   ============================================================ */
-
-.promo-cards {
-  background: var(--dc-white);
-  padding-block: 48px;
-}
-
-.promo-cards__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-inline: 24px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.promo-card {
-  background: var(--dc-black-card);
-  border-radius: var(--dc-radius-lg);
-  padding: 32px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  color: var(--dc-text-on-dark);
-  text-decoration: none;
-  min-height: 200px;
-  transition: transform var(--dc-duration) var(--dc-ease),
-              box-shadow var(--dc-duration) var(--dc-ease);
-}
-
-.promo-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.3);
-}
-
-.promo-card:focus-visible {
-  outline: 3px solid var(--dc-focus-ring);
-  outline-offset: 4px;
-}
-
-.promo-card__image {
-  flex: 0 0 40%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-height: 160px;
-}
-
-.promo-card__image img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  max-height: 140px;
-}
-
-.promo-card__image--placeholder svg {
-  opacity: 0.6;
-}
-
-.promo-card__body {
-  flex: 1;
-  min-width: 0;
-}
-
-.promo-card__eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--dc-text-muted-dark);
-  margin: 0 0 8px;
-}
-
-.promo-card__title {
-  font-size: 1.125rem !important;
-  font-weight: 700 !important;
-  line-height: 1.25;
-  color: var(--dc-text-on-dark) !important;
-  margin: 0 0 8px !important;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.promo-card__price {
-  font-size: 1rem;
-  color: var(--dc-text-muted-dark);
-  margin: 0 0 16px;
-}
-
-.promo-card__price strong {
-  color: var(--dc-text-on-dark);
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
-.promo-card__cta {
-  display: inline-block;
-  background: var(--dc-green);
-  color: var(--dc-text-on-dark);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  padding: 12px 24px;
-  border-radius: var(--dc-radius-pill);
-  transition: background var(--dc-duration) var(--dc-ease);
-}
-
-.promo-card:hover .promo-card__cta {
-  background: var(--dc-green-hover);
-}
-
-@media (max-width: 1024px) {
-  .promo-cards__container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .promo-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 24px;
-  }
-  .promo-card__image {
-    flex: 0 0 auto;
-    width: 60%;
-  }
-  .promo-card__title {
-    -webkit-line-clamp: 3;
-  }
-}
-
-
-/* ============================================================
-   HEADER POLISH — Fantasy Gaming look (round 2)
-   Search pill grande, action area com ícones visíveis,
-   "Todas as categorias" no início da nav row
-   ============================================================ */
-
-/* ---------- Action area: account + cart com ícones grandes visíveis ---------- */
-
-/* Tornar os ícones SVG dos botões account/cart maiores e mais presentes */
-header.header .header__column--right {
-  gap: 20px;
-  align-items: center;
-}
-
-header.header .account-button,
-header.header .header-actions__cart-icon {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 8px 4px !important;
-}
-
-header.header .account-button__icon svg,
-header.header .header-actions__cart-icon svg {
-  width: 28px !important;
-  height: 28px !important;
-  color: var(--dc-text-on-dark) !important;
-  stroke: currentColor;
-  stroke-width: 1.5;
-}
-
-/* Modo ICON: esconder QUALQUER texto residual no account/cart */
-header.header .account-button__text,
-header.header .header-actions__cart-icon--text > span:not(.svg-wrapper),
-header.header .header-actions__cart-icon > span:not(.svg-wrapper) {
-  display: none !important;
-}
-
-/* Cart icon — adicionar badge dourado contador "0" */
-header.header .header-actions__cart-icon {
+.slideshow__slides,
+[class*="slideshow-container"],
+.slideshow-component {
+  border-radius: var(--r-xl) !important;
+  overflow: hidden !important;
+  aspect-ratio: 1320 / 460;
+  background: #0d1115;
+  box-shadow: 0 12px 36px -16px rgba(13, 17, 21, 0.18);
   position: relative;
 }
 
-header.header .header-actions__cart-icon::after {
-  content: attr(data-cart-count);
+[id*="hero_main"] .slide,
+[id*="hero_main"] [class*="slideshow__slide"],
+.slideshow .slide-content {
+  border-radius: var(--r-xl) !important;
+  overflow: hidden;
+}
+
+[id*="hero_main"] img,
+.slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 !important;
+}
+
+/* Setas do slideshow brancas redondas (referência) */
+.slideshow-control,
+.slideshow .slideshow-control,
+slideshow-arrows .slideshow-control {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(8px) !important;
+  color: var(--ink) !important;
+  display: grid !important;
+  place-items: center !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.2s, background 0.2s !important;
+  z-index: 3;
+  opacity: 1 !important;
+}
+.slideshow-control:hover {
+  background: white !important;
+  transform: scale(1.06) !important;
+}
+.slideshow-control svg { color: var(--ink) !important; stroke: var(--ink) !important; }
+
+/* Indicadores (dots) do slideshow brancos */
+.slideshow-indicators,
+[class*="slideshow__indicators"] {
   position: absolute;
-  top: 0;
-  right: 0;
-  background: #fbbf24;
-  color: #1a1a1a;
-  font-size: 0.6875rem;
-  font-weight: 800;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
+  gap: 8px;
+  z-index: 3;
+}
+.slideshow-indicator,
+[class*="slideshow__indicator"] {
+  width: 28px !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.35) !important;
+  border: 0 !important;
+  transition: width 0.3s, background 0.3s !important;
+  padding: 0 !important;
+}
+.slideshow-indicator[aria-current="true"],
+.slideshow-indicator.active,
+[class*="indicator"][aria-current="true"] {
+  width: 56px !important;
+  background: white !important;
 }
 
-/* Texto do Cart sumir (só ícone + badge) */
-header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
-  display: none !important;
+/* ============================================================
+   TRUST STRIP — Frete grátis, Garantia, Troca, Atendimento
+   ============================================================ */
+[id*="trust_badges_main"],
+[class*="trust-badges"] {
+  background: var(--surface-3) !important;
+  border-top: 1px solid var(--line) !important;
+  border-bottom: 1px solid var(--line) !important;
+  padding-block: 28px !important;
 }
-
-/* ---------- Nav row CENTRALIZADA + altura compacta ---------- */
-
-/* Container do row: padding vertical bem compacto */
-header.header .header__row--bottom,
-header.header .header__row--bottom .header__columns {
-  padding-block: 4px !important;
-  min-height: 0 !important;
+[id*="trust_badges_main"] .section-content-wrapper,
+[class*="trust-badges"] .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
 }
-
-/* Menu-list centralizado horizontalmente */
-header.header .header__row--bottom .header__column {
-  justify-content: center !important;
-  text-align: center;
+[class*="trust-badges__grid"],
+[class*="trust-badges"] .badges-grid,
+[class*="trust-badges"] > div:first-child {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
 }
-
-header.header .header__row--bottom .menu-list,
-header.header .header__row--bottom .overflow-menu {
-  margin-inline: auto !important;
-  justify-content: center !important;
+[class*="trust-badges"] [class*="badge"] {
   display: flex !important;
+  gap: 14px !important;
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+[class*="trust-badges"] [class*="badge"] svg {
+  width: 44px !important;
+  height: 44px !important;
+  padding: 10px !important;
+  border-radius: var(--r-md) !important;
+  background: var(--surface-2) !important;
+  color: var(--ink) !important;
+  flex: none;
+}
+[class*="trust-badges"] [class*="badge__title"],
+[class*="trust-badges"] h3,
+[class*="trust-badges"] h4 {
+  font-size: 14.5px !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+[class*="trust-badges"] [class*="badge__subtitle"],
+[class*="trust-badges"] p {
+  font-size: 12.5px !important;
+  color: var(--muted) !important;
+  margin: 2px 0 0 !important;
 }
 
-/* Items do menu: padding entre eles reduzido */
-header.header .header__row--bottom .menu-list__list-item {
-  padding-inline: 12px !important;
+/* ============================================================
+   COLLECTION/CATEGORY CARDS — bento style, fotografia clean
+   ============================================================ */
+.collection-list,
+.collection-card,
+.collection-cards-grid {
+  background: transparent !important;
+}
+.collection-card {
+  border-radius: var(--r-lg) !important;
+  overflow: hidden !important;
+  transition: transform 0.22s, box-shadow 0.22s !important;
+}
+.collection-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -18px rgba(13, 17, 21, 0.18);
+}
+.collection-card__image,
+.collection-card img {
+  border-radius: var(--r-lg) !important;
+}
+.collection-card__title,
+.collection-card [class*="title"] {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  letter-spacing: -0.01em !important;
 }
 
-header.header .header__row--bottom .menu-list__link {
-  padding-block: 4px !important;
-  font-size: 0.875rem !important;
+/* ============================================================
+   PRODUCT CARD — clean, branco, badges pill, hover-lift
+   ============================================================ */
+.product-card,
+[class*="product-card"]:not([class*="--gallery"]) {
+  background: var(--surface) !important;
+  border-radius: var(--r-lg) !important;
+  border: 1px solid var(--line) !important;
+  overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s !important;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--line-strong);
+}
+.product-card__media,
+.product-card .product-media,
+[class*="product-card-gallery"] {
+  position: relative;
+  background: var(--surface-2);
+  aspect-ratio: 1 / 1;
+  border-radius: 0 !important;
+}
+.product-card__media img,
+.product-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Badges */
+.product-card__badge,
+.badge,
+[class*="product-badge"] {
+  position: absolute;
+  top: 12px;
+  left: 12px;
   display: inline-flex !important;
   align-items: center;
   gap: 6px;
+  padding: 6px 12px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--r-pill) !important;
+  background: var(--ink) !important;
+  color: white !important;
+  border: 0 !important;
+  font-family: var(--font-sans) !important;
+}
+.badge--sale,
+[class*="badge--sale"],
+[class*="badge"][class*="sale"] {
+  background: var(--sale) !important;
+  color: white !important;
+}
+.badge--new {
+  background: var(--dc-green) !important;
+  color: white !important;
 }
 
-/* Chevron accordion ao lado de cada categoria */
-header.header .header__row--bottom .menu-list__link-title::after {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-left: 6px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translateY(-2px);
-  transition: transform 0.2s ease;
-  opacity: 0.6;
-}
-
-header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title::after {
-  opacity: 1;
-  transform: rotate(225deg) translateY(0);
-}
-
-/* ---------- Padding generoso no top row ---------- */
-header.header .header__row--top .header__columns {
-  padding-block: 16px !important;
-}
-
-header.header .header__row--bottom .header__columns {
-  padding-block: 12px !important;
-}
-
-/* ============================================================
-   CARD DE PRODUTO — Estilo Fantasy Gaming
-   <product-card class="product-card size-style"> com inner content em
-   .product-card__content (group-block scheme-2 / scheme-1) e gallery em
-   .card-gallery. Tinker injeta --border-* via inline style — usar !important.
-   ============================================================ */
-
-/* Card outer: branco com borda fina + sombra suave no hover */
-product-card.product-card,
-.product-card {
-  background: var(--dc-white) !important;
-  border-radius: var(--dc-radius-md) !important;
-  overflow: hidden !important;
-  transition: box-shadow var(--dc-duration) var(--dc-ease),
-              transform var(--dc-duration) var(--dc-ease) !important;
-  position: relative;
-}
-
-product-card.product-card:hover,
-.product-card:hover {
-  box-shadow: var(--dc-shadow-md);
-  transform: translateY(-2px);
-}
-
-/* Conteúdo do card (com inline style do Tinker: --border-radius:16px) */
-.product-card .product-card__content {
-  background: var(--dc-white) !important;
-  border: 1px solid var(--dc-border) !important;
-  border-radius: var(--dc-radius-md) !important;
-  overflow: hidden !important;
-  --border-color: rgb(229 231 235);
-  --border-radius: var(--dc-radius-md);
-}
-
-/* Gallery: imagem do produto em fundo branco, padding generoso */
-.product-card .card-gallery {
-  background: var(--dc-white) !important;
-  padding: 16px !important;
-  min-height: 220px;
+/* Card body */
+.product-card__content,
+.product-card-body,
+[class*="product-card-group"] {
+  padding: 16px 16px 18px !important;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom: 1px solid var(--dc-border);
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
 }
-
-.product-card .card-gallery img {
-  max-height: 200px;
-  object-fit: contain;
-  mix-blend-mode: normal;
-  transition: transform var(--dc-duration-slow) var(--dc-ease);
+.product-card__vendor,
+.product-vendor {
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  font-weight: 600 !important;
 }
-
-.product-card:hover .card-gallery img {
-  transform: scale(1.04);
-}
-
-/* Badge "% OFF" — círculo PRETO top-left (estilo Fantasy) */
-.product-card .badge,
-.product-card .product-badges,
-.product-card [class*="product-badge"],
-.product-card .product-card__badges {
-  position: absolute !important;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-}
-
-.product-card .badge {
-  background: var(--dc-black) !important;
-  color: var(--dc-text-on-dark) !important;
-  font-size: 0.6875rem !important;
-  font-weight: 800 !important;
-  padding: 6px 10px !important;
-  border-radius: var(--dc-radius-pill) !important;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-}
-
-/* Conteúdo abaixo da imagem (título + preço) */
-.product-card .group-block-content,
-.product-card .product-card__content > .group-block {
-  background: var(--dc-white) !important;
-  padding: 16px 20px 20px !important;
-  border-radius: 0 !important;
-}
-
-/* Título do produto: cor preta, weight médio, 2 linhas máx */
-.product-card .product-card__content a:not(.contents),
-.product-card h3,
-.product-card .group-block-content a {
-  color: var(--dc-text) !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  line-height: 1.4;
-  text-decoration: none;
+.product-card__title,
+.product-title {
+  font-family: var(--font-sans) !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  line-height: 1.35 !important;
+  margin: 0;
+  letter-spacing: 0 !important;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 2.6em;
-  margin-bottom: 12px;
+  min-height: 2.7em;
 }
 
-/* Preço cheio riscado (compare-at) — cinza pequeno */
-.product-card s,
-.product-card .price__compare-at,
-.product-card .price__compare,
-.product-card [class*="compare"] {
-  font-size: 0.75rem;
-  color: var(--dc-text-muted) !important;
+/* Price */
+.price,
+.product-card .price,
+[class*="price"] {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.02em !important;
+}
+.price__current,
+.price-item,
+.price-item--regular,
+.price-item--sale {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  font-family: var(--font-display) !important;
+}
+.price__compare,
+.price-item--compare,
+s.price-item {
+  font-size: 13px !important;
+  color: var(--muted-2) !important;
   text-decoration: line-through;
-  display: block;
-  margin-bottom: 2px;
-}
-
-/* Preço PIX (atual) — AZUL DROPCHINA grande e bold */
-.product-card .price__current,
-.product-card .price__regular,
-.product-card .product-price__price,
-.product-card product-price,
-.product-card [class*="price-item"] {
-  font-size: 1.25rem !important;
-  font-weight: 800 !important;
-  color: var(--dc-price-pix) !important;
-  line-height: 1.1;
-  display: block;
-}
-
-/* Quick-add button (botão "Adicionar" no Tinker) — estilo Fantasy verde */
-.product-card .quick-add__button,
-.product-card [class*="quick-add"] button,
-.product-card form button[type="submit"] {
-  background: var(--dc-blue) !important;
-  color: var(--dc-text-on-dark) !important;
-  border: none !important;
-  border-radius: var(--dc-radius-sm) !important;
-  font-size: 0.8125rem !important;
-  font-weight: 700 !important;
-  padding: 10px 16px !important;
-  transition: background var(--dc-duration) var(--dc-ease);
-}
-
-.product-card .quick-add__button:hover,
-.product-card [class*="quick-add"] button:hover {
-  background: var(--dc-blue-hover) !important;
-}
-
-/* Coração favorito (top-right) — adicionar via pseudo-element no .card-gallery
-   (Tinker não tem wishlist nativo no card; deixar placeholder visual sutil) */
-
-/* Estado "Sold out" / esgotado overlay */
-.product-card .badge--sold-out,
-.product-card [class*="sold-out"] {
-  background: rgba(0, 0, 0, 0.8) !important;
-  color: var(--dc-text-on-dark) !important;
-}
-
-/* Mobile — cards menores */
-@media (max-width: 768px) {
-  .product-card .card-gallery {
-    min-height: 160px;
-    padding: 12px !important;
-  }
-  .product-card .card-gallery img {
-    max-height: 140px;
-  }
-  .product-card .group-block-content,
-  .product-card .product-card__content > .group-block {
-    padding: 12px 14px 16px !important;
-  }
-  .product-card .price__current,
-  .product-card product-price {
-    font-size: 1rem !important;
-  }
-}
-
-/* ============================================================
-   CARROSSÉIS DE PRODUTO (Destaques + Mais vendidos)
-   product-list com layout_type: carousel — Tinker injeta slideshow controls.
-   Estilizamos setas circulares brancas e títulos centralizados.
-   ============================================================ */
-
-/* Section root */
-[id*="best_sellers"],
-[id*="second_collection"],
-.shopify-section[id*="best_sellers"],
-.shopify-section[id*="second_collection"] {
-  background: var(--dc-white);
-  padding-block: 56px;
-}
-
-/* Heading centralizado */
-[id*="best_sellers"] h2,
-[id*="second_collection"] h2 {
-  text-align: center !important;
-  font-size: clamp(1.5rem, 3vw, 2rem) !important;
-  font-weight: 700 !important;
-  margin-bottom: 32px !important;
-  color: var(--dc-text) !important;
-}
-
-/* Container do carrossel — espaçamento e gap entre cards */
-[id*="best_sellers"] .product-list,
-[id*="second_collection"] .product-list,
-[id*="best_sellers"] slideshow-slides,
-[id*="second_collection"] slideshow-slides {
-  gap: 16px !important;
-}
-
-/* Setas do carrossel — circulares brancas com borda fina */
-[id*="best_sellers"] slideshow-controls button,
-[id*="second_collection"] slideshow-controls button,
-[id*="best_sellers"] [aria-label*="Previous"],
-[id*="best_sellers"] [aria-label*="Next"],
-[id*="second_collection"] [aria-label*="Previous"],
-[id*="second_collection"] [aria-label*="Next"] {
-  background: var(--dc-white) !important;
-  border: 1px solid var(--dc-border) !important;
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 50% !important;
-  box-shadow: var(--dc-shadow-sm);
-  color: var(--dc-text) !important;
-  transition: background var(--dc-duration) var(--dc-ease),
-              border-color var(--dc-duration) var(--dc-ease);
-}
-
-[id*="best_sellers"] slideshow-controls button:hover,
-[id*="second_collection"] slideshow-controls button:hover,
-[id*="best_sellers"] [aria-label*="Previous"]:hover,
-[id*="best_sellers"] [aria-label*="Next"]:hover,
-[id*="second_collection"] [aria-label*="Previous"]:hover,
-[id*="second_collection"] [aria-label*="Next"]:hover {
-  background: var(--dc-surface) !important;
-  border-color: #d4d4d8 !important;
-}
-
-[id*="best_sellers"] slideshow-controls svg,
-[id*="second_collection"] slideshow-controls svg {
-  width: 18px;
-  height: 18px;
-  color: var(--dc-text);
-}
-
-/* Dots/pagination minimizar */
-[id*="best_sellers"] [class*="pagination"] button,
-[id*="second_collection"] [class*="pagination"] button {
-  background: var(--dc-border) !important;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-[id*="best_sellers"] [class*="pagination"] [aria-current="true"],
-[id*="second_collection"] [class*="pagination"] [aria-current="true"] {
-  background: var(--dc-blue) !important;
-  width: 24px;
-  border-radius: 4px;
-}
-
-/* Mobile — padding menor */
-@media (max-width: 768px) {
-  [id*="best_sellers"],
-  [id*="second_collection"] {
-    padding-block: 32px;
-  }
-}
-
-/* ============================================================
-   SEARCH BAR — Estratégia FINAL: section própria + Tinker search OFF
-   Renderizar nossa section dropchina-search-bar.liquid como faixa
-   entre top row (preto) e bottom row (branco) com pill grande
-   (regras de hide da search-action nativa estão no FINAL do arquivo)
-   ============================================================ */
-
-/* Container #header-group precisa ser relative pro absolute funcionar */
-#header-group {
-  position: relative;
-}
-
-/* Search como linha INLINE entre top e bottom row do header preto.
-   NÃO absolute (estava flutuando vazando pra baixo).
-   É um row próprio dentro do header preto, abaixo do logo+icons,
-   antes da nav de categorias branca. */
-
-.dc-search-strip {
-  background: var(--dc-black);
-  background-color: var(--dc-black) !important;
-  padding: 12px 24px 16px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  /* override absolute anteriores */
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  margin: 0;
-  z-index: 1;
-}
-
-.dc-search-strip__form {
-  width: 100%;
-  max-width: 640px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-/* Mobile: padding menor */
-@media (max-width: 767px) {
-  .dc-search-strip {
-    padding: 8px 16px 12px;
-  }
-}
-
-/* AJUSTAR ALTURA DO INPUT pra MENOR e match com logo height
-   (logo aprox 32px altura; input fica 40px com padding) */
-.dc-search-strip__input,
-.dc-search-strip input.search-input {
-  padding: 10px 56px 10px 20px !important;
-  font-size: 0.875rem !important;
-}
-
-/* Override do scheme-1 herdado pela predictive-search-component */
-.dc-search-strip,
-.dc-search-strip__component,
-.dc-search-strip .predictive-search,
-.dc-search-strip .predictive-search-form,
-.dc-search-strip .predictive-search-form__header,
-.dc-search-strip .predictive-search-form__header-inner {
-  background: transparent !important;
-  background-color: transparent !important;
-  --color-background: transparent;
-}
-
-.dc-search-strip__input,
-.dc-search-strip input.search-input,
-.dc-search-strip .predictive-search-form input[type="search"] {
-  width: 100%;
-  background: #1a1a1a !important;
-  background-color: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  border-radius: 999px !important;
-  padding: 14px 56px 14px 24px !important;
-  color: #ffffff !important;
-  font-size: 0.9375rem !important;
-  outline: none;
-  transition: border-color var(--dc-duration) var(--dc-ease),
-              background var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-strip__input::placeholder {
-  color: #888 !important;
-}
-
-.dc-search-strip__input:focus {
-  border-color: var(--dc-blue) !important;
-  background: #222 !important;
-}
-
-.dc-search-strip__submit {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #9ca3af;
-  cursor: pointer;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-strip__submit:hover {
-  color: var(--dc-white);
-}
-
-@media (max-width: 768px) {
-  .dc-search-strip {
-    padding: 8px 16px 12px;
-  }
-  .dc-search-strip__input {
-    padding: 12px 48px 12px 20px !important;
-    font-size: 0.875rem !important;
-  }
-}
-
-/* ============================================================
-   BRAND CAROUSEL — Vitrine "Escolha pela marca" (B&W com hover colorido)
-   Tinker collection-list pode ser reusada OU criar section dedicada.
-   Por agora estilizamos o categories_grid pra ficar com aspecto B&W
-   apenas se ele aparecer com imagens de marca.
-   ============================================================ */
-
-/* Container de marcas — bg cinza claro */
-.brand-carousel,
-section[class*="brand"] {
-  background: var(--dc-surface);
-  padding-block: 48px;
-}
-
-.brand-carousel__container,
-section[class*="brand"] .container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-inline: 24px;
-}
-
-.brand-carousel__title,
-section[class*="brand"] h2 {
-  font-size: 1.5rem !important;
-  font-weight: 700 !important;
-  text-align: center !important;
-  margin-bottom: 32px !important;
-  color: var(--dc-text) !important;
-}
-
-.brand-carousel__track {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 48px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-block: 8px;
-}
-
-.brand-carousel__track::-webkit-scrollbar { display: none; }
-
-.brand-carousel__item {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  width: 160px;
-  scroll-snap-align: center;
-  transition: filter var(--dc-duration) var(--dc-ease),
-              opacity var(--dc-duration) var(--dc-ease);
-  filter: grayscale(1);
-  opacity: 0.6;
-}
-
-.brand-carousel__item:hover {
-  filter: grayscale(0);
-  opacity: 1;
-}
-
-.brand-carousel__logo {
-  max-width: 100%;
-  max-height: 60px;
-  object-fit: contain;
-}
-
-.brand-carousel__placeholder {
-  font-weight: 700;
-  color: var(--dc-text-muted);
-  font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-  .brand-carousel__track { gap: 24px; }
-  .brand-carousel__item { width: 120px; height: 60px; }
-}
-
-/* ============================================================
-   YOUTUBE EMBED (vídeo do influencer)
-   ============================================================ */
-
-.youtube-embed {
-  background: var(--dc-white);
-  padding-block: 48px;
-}
-
-.youtube-embed__container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding-inline: 24px;
-  text-align: center;
-}
-
-.youtube-embed__title {
-  font-size: 1.5rem !important;
-  font-weight: 700 !important;
-  color: var(--dc-text) !important;
-  margin-bottom: 24px !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.youtube-embed__icon {
-  color: var(--dc-red);
-}
-
-.youtube-embed__frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--dc-radius-lg);
-  overflow: hidden;
-  box-shadow: var(--dc-shadow-lg);
-  background: var(--dc-black);
-}
-
-.youtube-embed__frame iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.youtube-embed__cta {
-  display: inline-block;
-  margin-top: 16px;
-  font-size: 0.875rem;
-  color: var(--dc-text-muted);
-  text-decoration: underline;
-}
-
-.youtube-embed__cta:hover {
-  color: var(--dc-blue);
-}
-
-.youtube-embed__empty {
-  text-align: center;
-  color: var(--dc-text-muted);
-  font-size: 0.875rem;
-  padding: 32px;
-  background: var(--dc-surface);
-  border-radius: var(--dc-radius-md);
-}
-
-/* ============================================================
-   DEPOIMENTOS — Estilo Fantasy com aspas tipográficas ❝ ❞
-   Aplica em testimonials_section existente
-   ============================================================ */
-
-[id*="testimonials_section"],
-section[id*="testimonials"] {
-  background: var(--dc-surface);
-  padding-block: 64px !important;
-}
-
-[id*="testimonials_section"] h2,
-section[id*="testimonials"] h2 {
-  text-align: center !important;
-  font-size: 1.75rem !important;
-  font-weight: 700 !important;
-  margin-bottom: 40px !important;
-  color: var(--dc-text) !important;
-}
-
-/* Card individual de depoimento */
-[id*="testimonials_section"] .testimonial-card,
-section[id*="testimonials"] [class*="testimonial-card"],
-section[id*="testimonials"] .group-block-content {
-  background: var(--dc-white) !important;
-  border: 1px solid var(--dc-border) !important;
-  border-radius: var(--dc-radius-md) !important;
-  padding: 28px 24px !important;
-  position: relative;
-  text-align: center;
-  box-shadow: none !important;
-}
-
-/* Aspas grandes ❝ ❞ tipográficas */
-[id*="testimonials_section"] [class*="testimonial-card"]::before,
-section[id*="testimonials"] .group-block-content::before {
-  content: "❝";
-  position: absolute;
-  top: 8px;
-  left: 16px;
-  font-size: 2.5rem;
-  color: var(--dc-border);
-  font-family: Georgia, serif;
-  line-height: 1;
-}
-
-[id*="testimonials_section"] [class*="testimonial-card"]::after,
-section[id*="testimonials"] .group-block-content::after {
-  content: "❞";
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-  font-size: 2.5rem;
-  color: var(--dc-border);
-  font-family: Georgia, serif;
-  line-height: 1;
-}
-
-/* Texto do depoimento */
-section[id*="testimonials"] .group-block-content p {
-  font-size: 0.9375rem !important;
-  line-height: 1.5;
-  color: var(--dc-text);
-  margin-bottom: 16px;
-  padding-inline: 16px;
-}
-
-/* Estrelas amarelas */
-section[id*="testimonials"] [class*="rating"],
-section[id*="testimonials"] [aria-label*="estrelas"],
-section[id*="testimonials"] [aria-label*="stars"] {
-  color: #f59e0b !important;
-  font-size: 1rem !important;
-  display: flex !important;
-  justify-content: center;
-  gap: 2px;
-}
-
-/* ============================================================
-   SEARCH NATIVA TINKER — Esconder COMPLETAMENTE
-   Substituída por sections/dropchina-search-bar.liquid (input real)
-   ============================================================ */
-
-search-button,
-search-button *,
-.search-action,
-.search-action *,
-.search-modal,
-.search-action--hidden-on-menu,
-.search-action--hidden-on-drawer {
-  display: none !important;
-  visibility: hidden !important;
-  position: absolute !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  opacity: 0 !important;
-}
-
-/* ============================================================
-   HERO HEIGHT FIX — override --slide-min-height inline style
-   Tinker injeta --slide-min-height: 17.5rem / 26.25rem no style inline
-   do <slideshow-component>. Sobrescrever pra valores compactos Fantasy.
-   ============================================================ */
-
-/* Banners 1920x507 (aspect ~3.79:1). Altura desktop 507px exato. */
-[id*="hero_main"] slideshow-component,
-[id*="hero_main"] .slideshow {
-  --slide-min-height: 200px !important;
-  --slide-min-height-desktop: 507px !important;
-}
-
-[id*="hero_main"] slideshow-slides,
-[id*="hero_main"] slideshow-slide {
-  min-height: 200px !important;
-  max-height: 507px !important;
-  height: 507px !important;
-  position: relative !important;
-}
-
-@media (max-width: 768px) {
-  [id*="hero_main"] slideshow-slides,
-  [id*="hero_main"] slideshow-slide {
-    height: 200px !important;
-  }
-}
-
-/* Background banner: COVER, centralizado */
-[id*="hero_main"] .slide__image-container {
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-color: var(--dc-black) !important;
-}
-
-/* Remover border-radius/transforms que o Tinker possa estar aplicando */
-[id*="hero_main"] .slide__image-container,
-[id*="hero_main"] .slide__image-container--rounded {
-  border-radius: 0 !important;
-  transform: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  inset: 0 !important;
-}
-
-/* ============================================================
-   HERO BACKGROUND IMAGES — Unsplash placeholders por slide
-   Até user subir imagens reais via theme editor (image setting do _slide),
-   usamos URLs Unsplash diretamente como background-image.
-   ============================================================ */
-
-/* Slides 1-3: backgrounds vêm do snippet dropchina-hero-images.liquid
-   (precisa de Liquid asset_url, então é renderizado via {% render %} no theme.liquid) */
-
-/* Garantir que o texto fica branco e legível sobre as imagens */
-[id*="hero_main"] slideshow-slide h1,
-[id*="hero_main"] slideshow-slide h2,
-[id*="hero_main"] slideshow-slide p {
-  color: #ffffff !important;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-}
-
-/* ============================================================
-   HERO FIX REAL — esconder SVG placeholder Tinker + aplicar bg no container
-   Tinker renderiza SVG ilustrativo gigante em .slide__image-container quando
-   não há image configurada. Esconder SVG + aplicar background-image no
-   .slide__image-container ao invés do slideshow-slide.
-   ============================================================ */
-
-[id*="hero_main"] .slide__image-container svg.slide__image {
-  display: none !important;
-}
-
-[id*="hero_main"] .slide__image-container {
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-}
-
-/* Background-images dos 3 slides vêm do snippet dropchina-hero-images.liquid
-   (Liquid asset_url precisa ser renderizado, não funciona em CSS .css puro) */
-
-/* Garantir que o image-container ocupa tudo */
-[id*="hero_main"] .slide__image-container {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* ============================================================
-   SEARCH PREDICTIVE DROPDOWN — resultados em tempo real
-   Tinker carrega /search/suggest via AJAX e injeta em ref="resultsContainer"
-   ============================================================ */
-
-.dc-search-strip__input-wrapper {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.dc-search-strip__component {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  display: block;
-}
-
-/* Dropdown container — aparece quando há resultados */
-.dc-search-strip__results {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  background: var(--dc-white);
-  border: 1px solid var(--dc-border);
-  border-radius: var(--dc-radius-md);
-  box-shadow: var(--dc-shadow-lg);
-  z-index: 100;
-  max-height: 70vh;
-  overflow-y: auto;
-  padding: 8px 0;
-}
-
-/* Estado vazio: esconder quando não há resultados */
-.dc-search-strip__results:empty {
-  display: none;
-}
-
-/* Item de resultado (produto) */
-.dc-search-strip__results .predictive-search-results__inner,
-.dc-search-strip__results > div {
-  padding: 0;
-}
-
-/* Cards de produto dentro do dropdown */
-.dc-search-strip__results .resource-card,
-.dc-search-strip__results [class*="result-item"],
-.dc-search-strip__results a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  color: var(--dc-text);
-  text-decoration: none;
-  border-bottom: 1px solid var(--dc-surface);
-  transition: background var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-strip__results a:hover,
-.dc-search-strip__results .resource-card:hover {
-  background: var(--dc-surface);
-}
-
-.dc-search-strip__results img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  border-radius: var(--dc-radius-xs);
-  flex-shrink: 0;
-}
-
-.dc-search-strip__results h3,
-.dc-search-strip__results [class*="title"] {
-  font-size: 0.875rem !important;
   font-weight: 500 !important;
-  margin: 0 !important;
-  color: var(--dc-text) !important;
-  line-height: 1.3;
 }
-
-.dc-search-strip__results [class*="price"] {
-  font-size: 0.875rem !important;
+.price__savings,
+[class*="savings"],
+.price-percent {
+  display: inline-block;
+  font-size: 12px !important;
   font-weight: 700 !important;
-  color: var(--dc-blue) !important;
-  margin-left: auto;
+  color: var(--success) !important;
 }
-
-/* Heading "PRODUTOS" / "COLEÇÕES" como Impressorajato ref */
-.dc-search-strip__results h2,
-.dc-search-strip__results [class*="results-list-heading"] {
-  font-size: 0.6875rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--dc-text-muted) !important;
-  padding: 12px 16px 6px !important;
-  margin: 0 !important;
-  border-bottom: none !important;
-}
-
-/* "Ver mais resultados para X" link no rodapé */
-.dc-search-strip__results [class*="see-all"],
-.dc-search-strip__results button[type="submit"] {
-  display: block;
-  text-align: center;
-  padding: 14px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--dc-blue) !important;
-  background: var(--dc-surface);
-  text-decoration: none;
-  border: none;
-  border-top: 1px solid var(--dc-border);
-  width: 100%;
-  cursor: pointer;
-}
-
-.dc-search-strip__results [class*="see-all"]:hover {
-  background: var(--dc-border);
-}
-
-/* Esconder caixa de loading inicial */
-.dc-search-strip__results [class*="loading-state"]:empty {
-  display: none;
-}
-
-/* Mobile: dropdown full-width */
-@media (max-width: 768px) {
-  .dc-search-strip__results {
-    max-height: 60vh;
-  }
+.price__installments,
+[class*="installments"] {
+  font-size: 12.5px !important;
+  color: var(--muted) !important;
 }
 
 /* ============================================================
-   HERO SLIDE CONTENT — transparente sobre banner
-   .slide__content tem class color-scheme-8 que pinta bg preto sobre o
-   .slide__image-container (onde está nosso banner). Forçar transparent
-   pra deixar o banner aparecer atrás do texto.
+   PRODUCT LIST / GRID — 4 cols default, 16-18 gap
    ============================================================ */
-
-[id*="hero_main"] .slide__content,
-[id*="hero_main"] .slide__content.color-scheme-8 {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* O image-container deve ficar atrás (z-index 0) e o content por cima (z-index 1)
-   pra texto aparecer sobre o banner */
-[id*="hero_main"] .slide__image-container {
-  z-index: 0;
-}
-
-[id*="hero_main"] .slide__content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Garantir que slideshow-slide é o container relativo pros 2 filhos */
-[id*="hero_main"] slideshow-slide {
-  position: relative !important;
-}
-
-/* ============================================================
-   HERO SLIDE TEXT — esconder texto sobreposto (banners têm capa própria)
-   Como os 3 banners do user já têm título/branding embutidos, esconder
-   o eyebrow/heading/sub/button text-blocks sobrepostos pra evitar duplicação.
-   Se user quiser mostrar texto novamente, basta desabilitar essa regra.
-   ============================================================ */
-
-/* Esconder TODO o conteúdo do slide (text-blocks E botões CTA).
-   Banner do user já tem capa/branding/CTA embutidos — qualquer texto
-   ou botão sobreposto duplica/atrapalha. */
-[id*="hero_main"] slideshow-slide .slide__content,
-[id*="hero_main"] slideshow-slide .slide__content .text-block,
-[id*="hero_main"] slideshow-slide .slide__content rte-formatter,
-[id*="hero_main"] slideshow-slide .slide__content .button-wrapper,
-[id*="hero_main"] slideshow-slide .slide__content a.button,
-[id*="hero_main"] slideshow-slide .slide__content button.button,
-[id*="hero_main"] slideshow-slide .slide__content .group-block-content {
-  display: none !important;
-}
-
-/* ============================================================
-   HERO SETAS — DEIXAR DEFAULT TINKER (não sobrescrever)
-   Bloco antigo causava halo gigante + blur. Tinker já estiliza as setas
-   nativamente como SVG chevron transparente.
-   ============================================================ */
-
-/* Dots position bottom direita */
-[id*="hero_main"] [class*="pagination"],
-[id*="hero_main"] [class*="dots"] {
-  position: absolute !important;
-  bottom: 16px !important;
-  right: 16px !important;
-  z-index: 5;
-}
-
-/* ============================================================
-   HERO RESET — border-radius 0 apenas em containers (NÃO nas setas/dots!)
-   ============================================================ */
-
-[id*="hero_main"] slideshow-component,
-[id*="hero_main"] slideshow-container,
-[id*="hero_main"] slideshow-slides,
-[id*="hero_main"] slideshow-slide,
-[id*="hero_main"] .slide,
-[id*="hero_main"] .slide__image-container,
-[id*="hero_main"] .slide__image-container--rounded,
-[id*="hero_main"] .slide__content,
-[id*="hero_main"] .slideshow-section {
-  border-radius: 0 !important;
-  --corner-radius: 0 !important;
-  clip-path: none !important;
-  mask: none !important;
-  -webkit-mask: none !important;
-  transform: none !important;
-  filter: none !important;
-  -webkit-filter: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Garantir que .slide__image-container ocupa todo o slide */
-[id*="hero_main"] .slide__image-container {
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0;
-}
-
-[id*="hero_main"] .slide__content {
-  position: relative;
-  z-index: 1;
-  background: transparent !important;
-}
-
-/* ============================================================
-   HERO SLIDESHOW LOOP — instantâneo (não rolar todos slides ao voltar)
-   Tinker tem scroll-behavior:smooth que faz o reset 3→0 ser visualmente
-   uma rolagem completa (causa "espaço preto" entre slides intermediários).
-   Forçar reset jump = teleporte instantâneo.
-   ============================================================ */
-
-[id*="hero_main"] slideshow-slides {
-  scroll-behavior: auto !important;
-  scroll-snap-type: x mandatory !important;
-}
-
-/* No reset (quando JS Tinker dispara refresh do timeline), suprimir animation */
-[id*="hero_main"] slideshow-component[refreshing-timeline] slideshow-slides {
-  scroll-behavior: auto !important;
-}
-
-/* Garantir que cada slide tem snap point */
-[id*="hero_main"] slideshow-slide {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* ============================================================
-   DC SEARCH INPUT — search inline DENTRO do top row do header
-   Renderizada via {% render 'dc-search-input' %} substituindo o
-   search-button Tinker no header.liquid linha ~102.
-   ============================================================ */
-
-.dc-search-input {
-  flex: 1 1 auto;
-  display: block;
-  min-width: 480px;
-  max-width: 960px;
-  width: 100%;
-  margin-inline: auto;
-  position: relative !important;
-  /* override scheme-1 hereditario */
-  background: transparent !important;
-  background-color: transparent !important;
-  --color-background: transparent;
-}
-
-/* Form e wrapper inner mantêm relative pra ancorar o dropdown */
-.dc-search-input__form {
-  position: relative;
-}
-
-/* Dropdown TEM que ser ancorado no form (que é direct parent do
-   results-wrapper) — garantir z-index alto pra ficar SOBRE tudo */
-.dc-search-input__results-wrapper {
-  z-index: 9999 !important;
-}
-
-.dc-search-input__form {
-  width: 100%;
-  position: relative;
-  background: transparent !important;
-}
-
-.dc-search-input__inner {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-.dc-search-input__inner .predictive-search-form__header-inner {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* INPUT estilizado */
-.dc-search-input__field,
-.dc-search-input input.search-input,
-.dc-search-input .predictive-search-form input[type="search"] {
-  width: 100%;
-  background: #1a1a1a !important;
-  background-color: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  border-radius: 999px !important;
-  padding: 10px 48px 10px 20px !important;
-  color: #ffffff !important;
-  font-size: 0.875rem !important;
-  outline: none;
-  height: auto;
-  min-height: 40px;
-  transition: border-color var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-input__field::placeholder {
-  color: #888 !important;
-}
-
-.dc-search-input__field:focus {
-  border-color: var(--dc-blue) !important;
-  background: #222 !important;
-}
-
-/* Submit button (lupa à direita) */
-.dc-search-input__submit {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent !important;
-  border: none !important;
-  color: #9ca3af !important;
-  cursor: pointer;
-  padding: 6px 10px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.dc-search-input__submit:hover {
-  color: #ffffff !important;
-}
-
-.dc-search-input__submit svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* Reset button (X) — fica antes do submit */
-.dc-search-input__reset {
-  position: absolute;
-  right: 44px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent !important;
-  border: none !important;
-  color: #888 !important;
-  font-size: 14px;
-  padding: 4px 8px !important;
-  cursor: pointer;
-  z-index: 2;
-}
-
-/* RESULTS dropdown */
-.dc-search-input__results-wrapper {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  background: var(--dc-white);
-  border: 1px solid var(--dc-border);
-  border-radius: var(--dc-radius-md);
-  box-shadow: var(--dc-shadow-lg);
-  z-index: 100;
-  max-height: 70vh;
-  overflow-y: auto;
-  display: block;
-}
-
-/* hidden atributo HTML força display:none — quando removemos via JS deve aparecer */
-.dc-search-input__results-wrapper[hidden] {
-  display: none !important;
-}
-
-.dc-search-input__results-wrapper:not([hidden]) {
-  display: block !important;
-}
-
-.dc-search-input__results {
-  padding: 8px 0;
-}
-
-.dc-search-input__results .predictive-search-results__title {
-  font-size: 0.6875rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--dc-text-muted) !important;
-  padding: 12px 16px 6px !important;
-  margin: 0 !important;
-}
-
-.dc-search-input__results a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  color: var(--dc-text);
-  text-decoration: none;
-  transition: background var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-input__results a:hover {
-  background: var(--dc-surface);
-}
-
-.dc-search-input__results img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  border-radius: var(--dc-radius-xs);
-  flex-shrink: 0;
-}
-
-.dc-search-input__view-all {
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--dc-blue) !important;
-  background: var(--dc-surface);
-  border: none;
-  border-top: 1px solid var(--dc-border);
-  cursor: pointer;
-}
-
-/* Mobile: input mais compacto */
-@media (max-width: 768px) {
-  .dc-search-input__field {
-    padding: 8px 40px 8px 16px !important;
-    font-size: 0.8125rem !important;
-    min-height: 36px;
-  }
-}
-
-/* ============================================================
-   DC SEARCH RESULTS — Layout estilo PCyes (cards grid + termos lateral)
-   ============================================================ */
-
-/* Dropdown bem maior pra acomodar grid de cards */
-.dc-search-input__results-wrapper {
-  width: max(720px, 100%) !important;
-  max-width: 90vw;
-  max-height: 75vh;
-  padding: 24px;
-  background: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  border-radius: var(--dc-radius-lg);
-  color: var(--dc-text-on-dark);
-}
-
-/* Resultados wrapper interno */
-.dc-search-input__results .predictive-search-results__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Heading "Produtos mais buscados" estilo PCyes */
-.dc-search-input__results .predictive-search-results__title {
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-  color: var(--dc-text-on-dark) !important;
-  padding: 0 !important;
-  margin: 0 0 12px 0 !important;
-  border: none !important;
-}
-
-/* Grid de produtos: 4-5 cards lado a lado */
-.dc-search-input__results .predictive-search-results__products {
-  width: 100%;
-}
-
-.dc-search-input__results .predictive-search-results__list,
-.dc-search-input__results .predictive-search-results__wrapper-products {
+.product-list,
+[class*="product-list"] .products-grid,
+.products-grid,
+.collection-product-grid {
   display: grid !important;
-  grid-template-columns: repeat(5, 1fr) !important;
-  gap: 14px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  list-style: none !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 18px !important;
 }
-
-@media (max-width: 900px) {
-  .dc-search-input__results .predictive-search-results__list,
-  .dc-search-input__results .predictive-search-results__wrapper-products {
+@media (max-width: 1180px) {
+  .product-list,
+  .products-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
 }
-
-@media (max-width: 600px) {
-  .dc-search-input__results .predictive-search-results__list,
-  .dc-search-input__results .predictive-search-results__wrapper-products {
+@media (max-width: 920px) {
+  .product-list,
+  .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-/* CADA card de produto: bg cinza-escuro, padding, hover */
-.dc-search-input__results .predictive-search-results__card,
-.dc-search-input__results .resource-card {
-  background: #2a2a2a !important;
-  border-radius: var(--dc-radius-md) !important;
-  padding: 12px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  text-decoration: none;
-  color: var(--dc-text-on-dark) !important;
-  transition: background var(--dc-duration) var(--dc-ease),
-              transform var(--dc-duration) var(--dc-ease);
-  border: 1px solid transparent;
+/* ============================================================
+   PROMO CARDS (banner-promos) — image-led, gradient overlay
+   ============================================================ */
+[id*="promo_banners_main"],
+.promo-cards {
+  padding-block: 56px !important;
+}
+.promo-cards .promo-cards-grid,
+.promo-cards__grid,
+[class*="promo-cards"] > .grid {
+  display: grid !important;
+  grid-template-columns: 1.6fr 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  gap: 16px !important;
+  min-height: 560px;
+}
+.promo-cards .promo-cards-grid > *:first-child {
+  grid-row: span 2;
+}
+.promo-card,
+[class*="promo-card"] {
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  border-radius: var(--r-xl) !important;
+  display: block !important;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.3s ease !important;
+  min-height: 270px;
 }
-
-.dc-search-input__results .predictive-search-results__card:hover,
-.dc-search-input__results .resource-card:hover {
-  background: #333 !important;
-  border-color: var(--dc-blue) !important;
-  transform: translateY(-2px);
+.promo-card:hover { transform: translateY(-2px); }
+.promo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 17, 21, 0.05) 0%, rgba(13, 17, 21, 0.35) 50%, rgba(13, 17, 21, 0.85) 100%);
+  z-index: 1;
 }
-
-/* Imagem do card — container fundo branco com produto centralizado */
-.dc-search-input__results .resource-card__image-container {
+.promo-card__image,
+.promo-card img,
+.promo-card .background-media {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  background: #ffffff !important;
-  border-radius: var(--dc-radius-sm);
-  padding: 12px;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0;
+  transition: transform 0.6s ease;
+}
+.promo-card:hover .promo-card__image,
+.promo-card:hover img { transform: scale(1.04); }
+.promo-card__content,
+.promo-card .promo-content {
+  position: absolute !important;
+  inset: 0 !important;
+  padding: 28px 32px !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  color: white !important;
+  gap: 4px;
+}
+.promo-card__eyebrow,
+.promo-card .eyebrow {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  opacity: 0.85 !important;
+  color: white !important;
+  margin-bottom: 6px;
+}
+.promo-card__title,
+.promo-card h3,
+.promo-card h4 {
+  font-family: var(--font-display) !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.02em !important;
+  color: white !important;
+  margin: 0;
+  max-width: 16ch;
+}
+.promo-cards-grid > *:first-child .promo-card__title,
+.promo-cards-grid > *:first-child h3 {
+  font-size: 44px !important;
+}
+.promo-card .button,
+.promo-card .cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: 16px !important;
+  background: white !important;
+  color: var(--ink) !important;
+  padding: 10px 18px !important;
+  border-radius: var(--r-pill) !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  height: auto !important;
+  align-self: flex-start !important;
+  border: 0 !important;
+}
+.promo-card:hover .button,
+.promo-card:hover .cta {
+  background: var(--accent) !important;
+  color: white !important;
+}
+
+@media (max-width: 920px) {
+  .promo-cards .promo-cards-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    min-height: auto !important;
+  }
+  .promo-cards .promo-cards-grid > *:first-child {
+    grid-row: auto !important;
+    min-height: 280px;
+  }
+}
+
+/* ============================================================
+   ATACADO / CNPJ — split banner navy + handshake
+   ============================================================ */
+[id*="story_block"] .media-with-content,
+[class*="media-with-content"][data-variant="atacado"] {
+  position: relative;
+  border-radius: var(--r-xl) !important;
+  overflow: hidden !important;
+  min-height: 460px;
+  isolation: isolate;
+  background: #0a1d4a !important;
+}
+
+/* Estilizar story_block como banner atacado quando o background usar atacado-bg */
+[id*="story_block"] .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
+}
+
+/* ============================================================
+   BRAND CAROUSEL (marcas oficiais)
+   ============================================================ */
+[id*="brand_carousel_main"],
+.brand-carousel {
+  padding-block: 40px !important;
+}
+[id*="brand_carousel_main"] h2,
+[id*="brand_carousel_main"] h3,
+.brand-carousel h2,
+.brand-carousel h3 {
+  font-family: var(--font-display) !important;
+  font-size: 26px !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 24px;
+}
+.brand-carousel__track,
+.brand-carousel-track {
   display: flex;
+  gap: 64px;
+  padding-inline: 32px;
+}
+.brand-carousel__cell,
+.brand-carousel-cell,
+[class*="brand"] {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  color: var(--muted) !important;
+  letter-spacing: -0.01em !important;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  transition: color 0.2s;
+}
+.brand-carousel__cell:hover,
+.brand-carousel-cell:hover { color: var(--ink) !important; }
+
+/* ============================================================
+   TESTIMONIALS / REVIEWS
+   ============================================================ */
+[id*="testimonials"] {
+  background: var(--surface-3) !important;
+  padding-block: 80px !important;
+}
+[id*="testimonials"] .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
+}
+[id*="testimonials"] h2 {
+  font-family: var(--font-display) !important;
+  font-size: 38px !important;
+}
+.testimonial-card,
+[class*="testimonial"] {
+  background: white !important;
+  border-radius: var(--r-lg) !important;
+  border: 1px solid var(--line) !important;
+  padding: 24px !important;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.testimonial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+.testimonial-card p,
+[class*="testimonial"] p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.testimonial-card .author,
+.testimonial-card [class*="author"] {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+  margin-top: 12px;
+}
+
+/* ============================================================
+   PROMO BANNER (PIX 5% block) — newsletter-style preto
+   ============================================================ */
+[id*="promo_banner"] {
+  padding-block: 56px !important;
+}
+[id*="promo_banner"] [class*="media-with-content"] {
+  background: var(--ink) !important;
+  color: white !important;
+  border-radius: var(--r-xl) !important;
+  padding: 56px !important;
+  overflow: hidden;
+}
+[id*="promo_banner"] h2,
+[id*="promo_banner"] h3 {
+  color: white !important;
+  font-size: 40px !important;
+  line-height: 1.05 !important;
+  max-width: 14ch;
+}
+[id*="promo_banner"] p {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ============================================================
+   FOOTER — branco / borda topo / colunas
+   ============================================================ */
+#shopify-section-footer,
+#shopify-section-utilities,
+footer,
+footer-component {
+  background: var(--bg) !important;
+  color: var(--ink-2) !important;
+  border-top: 1px solid var(--line) !important;
+  padding-block: 64px 28px !important;
+}
+
+#shopify-section-footer .section,
+#shopify-section-footer * {
+  background: transparent !important;
+}
+
+#shopify-section-footer h3,
+#shopify-section-footer h4,
+#shopify-section-footer h5 {
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 16px !important;
+  color: var(--ink) !important;
+}
+
+#shopify-section-footer a,
+#shopify-section-footer p,
+#shopify-section-footer span {
+  color: var(--muted) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+#shopify-section-footer a:hover {
+  color: var(--ink) !important;
+}
+
+#shopify-section-footer img[alt*="logo" i],
+#shopify-section-footer .header-logo img {
+  filter: none !important;
+  max-height: 36px !important;
+}
+
+/* Social icons no footer — branco com hover preto */
+#shopify-section-footer .social-icons__wrapper a,
+#shopify-section-footer [class*="social-link"] {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 999px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--ink-2) !important;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  transition: background 0.18s, color 0.18s;
+}
+#shopify-section-footer .social-icons__wrapper a:hover,
+#shopify-section-footer [class*="social-link"]:hover {
+  background: var(--ink) !important;
+  color: white !important;
+  border-color: var(--ink) !important;
+}
+#shopify-section-footer .social-icons__wrapper svg,
+#shopify-section-footer [class*="social-link"] svg {
+  width: 16px;
+  height: 16px;
+  color: inherit !important;
 }
 
-.dc-search-input__results .resource-card__image {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  aspect-ratio: auto !important;
+#shopify-section-utilities,
+.footer-utilities,
+[id*="utilities"] {
+  background: var(--bg) !important;
+  border-top: 1px solid var(--line) !important;
+  margin-top: 0 !important;
+  padding-block: 22px !important;
+}
+#shopify-section-utilities *,
+.footer-utilities * {
+  color: var(--muted) !important;
+  font-size: 13px !important;
 }
 
-/* Conteúdo card (nome + preço) */
-.dc-search-input__results .resource-card__content {
-  color: var(--dc-text-on-dark) !important;
-  gap: 4px !important;
+/* Payment chips */
+.payment-icons,
+[class*="payment-icon"] {
+  display: inline-flex;
+  gap: 6px;
+}
+.payment-icons li,
+[class*="payment-icon"] svg {
+  background: var(--surface) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 6px !important;
+  height: 26px !important;
+  padding: 0 8px !important;
+  color: var(--ink-2) !important;
 }
 
-.dc-search-input__results .resource-card__title,
-.dc-search-input__results .resource-card__content > a,
-.dc-search-input__results .resource-card .heading {
-  font-size: 0.8125rem !important;
-  font-weight: 500 !important;
-  color: var(--dc-text-on-dark) !important;
-  line-height: 1.3 !important;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-decoration: none;
+/* ============================================================
+   PLP (Collection page)
+   ============================================================ */
+.template-collection main,
+.template-search main {
+  background: var(--bg);
+}
+[id*="main-collection"] .section-content-wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-inline: 28px;
+}
+.collection-header,
+.collection__header {
+  padding-block: 36px 28px !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+.collection-header h1,
+.collection__title {
+  font-family: var(--font-display) !important;
+  font-size: 48px !important;
+  letter-spacing: -0.03em !important;
+  margin: 6px 0 12px !important;
+}
+.collection-description,
+.collection__description {
+  font-size: 15.5px !important;
+  color: var(--muted) !important;
+  max-width: 60ch;
 }
 
-/* Preço */
-.dc-search-input__results .price,
-.dc-search-input__results .resource-card .price {
-  font-size: 0.875rem !important;
-  font-weight: 700 !important;
-  color: var(--dc-blue) !important;
-  margin-top: auto !important;
-}
-
-/* Preço compare riscado */
-.dc-search-input__results .price s,
-.dc-search-input__results .price__compare {
-  font-size: 0.6875rem;
-  color: #888;
-  text-decoration: line-through;
-  font-weight: 400;
-  display: block;
-}
-
-/* "Ver mais resultados" footer */
-.dc-search-input__footer {
-  border-top: 1px solid #333 !important;
-  margin-top: 16px;
-  padding-top: 12px;
-}
-
-.dc-search-input__view-all {
-  width: 100%;
-  background: transparent !important;
-  color: var(--dc-blue) !important;
-  border: none;
-  padding: 12px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: color var(--dc-duration) var(--dc-ease);
-}
-
-.dc-search-input__view-all:hover {
-  color: var(--dc-text-on-dark) !important;
-}
-
-/* Coleções: mostrar como tags/pills horizontais */
-.dc-search-input__results .predictive-search-results__collections {
-  margin-top: 8px;
-}
-
-.dc-search-input__results .predictive-search-results__list--collections {
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.dc-search-input__results .predictive-search-results__card--collection {
-  background: #333 !important;
-  border-radius: var(--dc-radius-pill) !important;
-  padding: 6px 14px !important;
-  font-size: 0.8125rem !important;
-  min-height: 0 !important;
-  flex-direction: row !important;
+/* Toolbar */
+.facets,
+.collection-toolbar,
+[class*="facets"] {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.facets__sort,
+.collection-sort,
+select[class*="sort"] {
+  border: 1px solid var(--line-strong) !important;
+  background: var(--surface) !important;
+  border-radius: var(--r-pill) !important;
+  padding: 8px 36px 8px 14px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  font-family: inherit !important;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
 }
 
-/* Mobile: full-width dropdown */
-@media (max-width: 768px) {
-  .dc-search-input__results-wrapper {
-    width: calc(100vw - 32px) !important;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 16px;
-  }
-
-  .dc-search-input__results .predictive-search-results__list,
-  .dc-search-input__results .predictive-search-results__wrapper-products {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+/* Filter sidebar */
+.facets-form,
+.collection-facets,
+[class*="filter-sidebar"] {
+  position: sticky;
+  top: 100px;
+  background: var(--surface) !important;
+  border-radius: var(--r-lg) !important;
+  border: 1px solid var(--line) !important;
+  padding: 4px 0;
+  align-self: start;
 }
+
+/* Pagination */
+.pagination-wrapper,
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 36px;
+}
+.pagination__item,
+.pagination a,
+.pagination__current {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--ink-2) !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.pagination__current,
+.pagination [aria-current="page"] {
+  background: var(--ink) !important;
+  color: white !important;
+}
+
+/* ============================================================
+   PRODUCT PAGE
+   ============================================================ */
+.template-product main {
+  background: var(--bg);
+}
+.product__title h1,
+.product-title h1 {
+  font-family: var(--font-display) !important;
+  font-size: 36px !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+}
+.product__price,
+.product .price {
+  font-family: var(--font-display) !important;
+}
+
+/* ============================================================
+   CART DRAWER
+   ============================================================ */
+.cart-drawer,
+cart-drawer-component {
+  background: var(--surface) !important;
+}
+.cart-drawer__title,
+.cart-drawer h2 {
+  font-family: var(--font-display) !important;
+  font-size: 22px !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ============================================================
+   WHATSAPP FLOAT (mantém estilo existente)
+   ============================================================ */
+.whatsapp-float {
+  background: #25d366 !important;
+}
+
+/* ============================================================
+   YOUTUBE EMBED section
+   ============================================================ */
+[id*="youtube_main"] h2 {
+  font-family: var(--font-display) !important;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   RESPONSIVE — mobile breakpoints
+   ============================================================ */
+@media (max-width: 920px) {
+  h1 { font-size: 38px; }
+  h2 { font-size: 30px; }
+  .section { padding-block: 36px; }
+  .dc-topbar { display: none; }
+  header.header input[type="search"] { height: 44px !important; }
+}
+
+/* ============================================================
+   OVERRIDE FINAL — neutralizar verde Fantasy do scheme-8
+   no header (queremos branco + preto agora)
+   ============================================================ */
+header.header [class*="scheme-8"],
+header.header.color-scheme-8 {
+  background: var(--bg) !important;
+}
+header.header * { color: inherit; }
+header.header .menu-list__link-title { color: var(--ink-2) !important; }

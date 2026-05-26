@@ -8,11 +8,24 @@
         "announcement_frete": {
           "type": "_announcement",
           "settings": {
-            "text": "\ud83d\ude9a Frete gr\u00e1tis em compras acima de R$ 200",
+            "text": "Frete GR\u00c1TIS em compras acima de R$ 199",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
-            "font_size": "var(--font-size--body-md)",
-            "weight": "500",
+            "font_size": "0.8125rem",
+            "weight": "400",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_juros": {
+          "type": "_announcement",
+          "settings": {
+            "text": "At\u00e9 18x sem juros no cart\u00e3o",
+            "link": "shopify://collections/all",
+            "font": "var(--font-primary--family)",
+            "font_size": "0.8125rem",
+            "weight": "400",
             "letter_spacing": "normal",
             "case": "none"
           },
@@ -21,24 +34,37 @@
         "announcement_pix": {
           "type": "_announcement",
           "settings": {
-            "text": "\ud83d\udcb0 Pague com PIX e ganhe 5% de desconto",
+            "text": "10% OFF no Pix em toda a loja",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
-            "font_size": "var(--font-size--body-md)",
-            "weight": "500",
+            "font_size": "0.8125rem",
+            "weight": "400",
             "letter_spacing": "normal",
             "case": "none"
           },
           "blocks": {}
         },
-        "announcement_platinum": {
+        "announcement_garantia": {
           "type": "_announcement",
           "settings": {
-            "text": "\ud83c\udfc6 Vendedor Platinum no Mercado Livre \u2014 +50 mil vendas",
+            "text": "Garantia oficial em todos os produtos",
             "link": "shopify://collections/all",
             "font": "var(--font-primary--family)",
-            "font_size": "var(--font-size--body-md)",
-            "weight": "500",
+            "font_size": "0.8125rem",
+            "weight": "400",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_envio": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Envio em at\u00e9 24h para todo o Brasil",
+            "link": "shopify://collections/all",
+            "font": "var(--font-primary--family)",
+            "font_size": "0.8125rem",
+            "weight": "400",
             "letter_spacing": "normal",
             "case": "none"
           },
@@ -47,8 +73,10 @@
       },
       "block_order": [
         "announcement_frete",
+        "announcement_juros",
         "announcement_pix",
-        "announcement_platinum"
+        "announcement_garantia",
+        "announcement_envio"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
@@ -118,9 +146,9 @@
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
-        "color_scheme_top": "scheme-8",
+        "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "scheme-1",
-        "color_scheme_transparent": "scheme-8",
+        "color_scheme_transparent": "scheme-1",
         "enable_transparent_header_home": false,
         "home_color_scheme": "default",
         "enable_transparent_header_product": false,
