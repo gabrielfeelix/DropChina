@@ -1,0 +1,88 @@
+{%- doc -%}
+  Renders the DropChina custom search input (predictive-search) inline
+  inside the header top row (between logo and actions).
+{%- enddoc -%}
+
+<predictive-search-component
+  class="dc-search-input predictive-search color-scheme-1"
+  data-section-id="predictive-search"
+  role="search"
+  aria-label="Buscar produtos"
+>
+  <form
+    action="{{ routes.search_url | default: '/search' }}"
+    method="get"
+    role="search"
+    class="predictive-search-form dc-search-input__form"
+    ref="form"
+    on:keydown="/onSearchKeyDown"
+  >
+    <div class="predictive-search-form__header dc-search-input__inner">
+      <div class="predictive-search-form__header-inner">
+        <input
+          class="search-input dc-search-input__field"
+          id="dc-search-input"
+          type="search"
+          name="q"
+          role="combobox"
+          aria-expanded="false"
+          aria-owns="dc-search-results"
+          aria-controls="dc-search-results"
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          placeholder="Digite o que você procura"
+          ref="searchInput"
+          on:input="/search"
+          on:keydown="/onSearchKeyDown"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+
+        <button
+          type="submit"
+          class="dc-search-input__submit"
+          aria-label="Buscar"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="button-unstyled dc-search-input__reset"
+          ref="resetButton"
+          hidden
+          on:click="/resetSearch"
+          aria-label="Limpar busca"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <div class="predictive-search-form__content-wrapper dc-search-input__results-wrapper">
+      <div
+        id="dc-search-results"
+        class="predictive-search-form__content dc-search-input__results"
+        ref="predictiveSearchResults"
+        on:click="/handleModalClick"
+        role="listbox"
+        aria-label="Resultados da busca"
+      ></div>
+
+      <div class="predictive-search-form__footer dc-search-input__footer" hidden>
+        <button
+          class="button predictive-search__search-button dc-search-input__view-all"
+          ref="viewAllButton"
+          type="submit"
+        >
+          Ver todos os resultados
+        </button>
+      </div>
+    </div>
+  </form>
+</predictive-search-component>

@@ -70,9 +70,8 @@
     render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
   endcapture
 
-  if shop.customer_accounts_enabled
-    assign search_class = 'search-action--hidden-on-drawer'
-  endif
+  # search_class removido — não usamos mais search-action--hidden-on-drawer
+  # (substituído por dc-search-input customizado)
 
   # Handle localization positioning
   if section.settings.localization_position == 'left'
@@ -99,7 +98,7 @@
     endif
   endif
   capture search
-    render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
+    render 'dc-search-input'
   endcapture
 
   # Skip drawer search under specific conditions:
