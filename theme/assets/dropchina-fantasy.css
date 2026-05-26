@@ -326,84 +326,102 @@ section.slideshow .slideshow {
    HERO SETAS — esconder default Tinker, custom limpa
    ============================================================ */
 
-/* Container <slideshow-controls> visível mas TRANSPARENTE (era o balão estranho)
-   e os arrows-wrapper também sem background */
-[id*="hero_main"] slideshow-controls,
-[id*="hero_main"] .slideshow-controls,
-[id*="hero_main"] .slideshow-controls__arrows {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-}
+/* ============================================================
+   HERO SETAS — Override TOTAL do Tinker (shape verde + mix-blend)
+   Causa: .slideshow-control--shape-circle aplica background-color do
+   primary-button (verde scheme-8) + algum mix-blend-mode invertia cor.
+   ============================================================ */
 
-/* Esconder o counter "1/3" pill (era o "balão" verde/rosa que via no print) */
-[id*="hero_main"] .slideshow-controls__counter {
-  display: none !important;
-}
-
-/* Esconder a pagination dots NUMERADA (dourada) */
+/* Esconder counter e pagination dots Tinker */
+[id*="hero_main"] .slideshow-controls__counter,
 [id*="hero_main"] .slideshow-controls__pagination,
 [id*="hero_main"] .slideshow-controls__counter-pagination {
   display: none !important;
 }
 
-/* Mostrar APENAS os botões prev/next individuais como chevrons simples */
+/* Container slideshow-controls sem background */
+[id*="hero_main"] slideshow-controls {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* SETAS: reset completo + estilo branco simples */
+[id*="hero_main"] .slideshow-control,
 [id*="hero_main"] .slideshow-control--previous,
 [id*="hero_main"] .slideshow-control--next,
-[id*="hero_main"] [aria-label*="anterior"],
-[id*="hero_main"] [aria-label*="próximo"],
-[id*="hero_main"] [ref="previous"],
-[id*="hero_main"] [ref="next"] {
-  display: flex !important;
+[id*="hero_main"] .slideshow-control.slideshow-control--shape-circle,
+[id*="hero_main"] .slideshow-control.slideshow-control--shape-square,
+[id*="hero_main"] button[ref="previous"],
+[id*="hero_main"] button[ref="next"] {
+  /* Reset color/blend */
+  background: var(--dc-white) !important;
+  background-color: var(--dc-white) !important;
+  background-image: none !important;
+  color: #1a1a1a !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  isolation: isolate;
+
+  /* Shape */
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+
+  /* Position */
   position: absolute !important;
   top: 50% !important;
   transform: translateY(-50%);
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.9) !important;
-  border: none !important;
-  color: #1a1a1a !important;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   z-index: 10;
-  padding: 0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: background var(--dc-duration) var(--dc-ease);
-  overflow: hidden;
+
+  /* Inner alignment */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+
+  /* aspect-ratio override */
+  aspect-ratio: 1 / 1 !important;
 }
 
-[id*="hero_main"] .slideshow-control--previous,
-[id*="hero_main"] [ref="previous"] {
+[id*="hero_main"] .slideshow-control--previous {
   left: 16px !important;
 }
 
-[id*="hero_main"] .slideshow-control--next,
-[id*="hero_main"] [ref="next"] {
+[id*="hero_main"] .slideshow-control--next {
   right: 16px !important;
 }
 
-[id*="hero_main"] .slideshow-control--previous:hover,
-[id*="hero_main"] .slideshow-control--next:hover {
-  background: var(--dc-white) !important;
+[id*="hero_main"] .slideshow-control:hover {
+  background: #f5f5f7 !important;
+  background-color: #f5f5f7 !important;
 }
 
-[id*="hero_main"] .slideshow-control--previous svg,
-[id*="hero_main"] .slideshow-control--next svg {
+/* Ícone chevron preto SEM mix-blend */
+[id*="hero_main"] .slideshow-control svg,
+[id*="hero_main"] .slideshow-control .svg-wrapper,
+[id*="hero_main"] .slideshow-control .icon-caret,
+[id*="hero_main"] .slideshow-control .icon-arrow {
   width: 14px !important;
   height: 14px !important;
   color: #1a1a1a !important;
-  stroke: #1a1a1a;
+  stroke: #1a1a1a !important;
+  fill: none;
+  mix-blend-mode: normal !important;
+  filter: none !important;
 }
 
-/* Reverter flip-x do botão previous (Tinker default usa flip pra fazer prev/next) */
-[id*="hero_main"] .slideshow-control.flip-x svg {
+[id*="hero_main"] .slideshow-control svg path {
+  stroke: #1a1a1a !important;
+  fill: none !important;
+}
+
+/* flip-x do prev mantém o chevron apontando esquerda */
+[id*="hero_main"] .slideshow-control.flip-x .svg-wrapper {
   transform: scaleX(-1);
 }
 
