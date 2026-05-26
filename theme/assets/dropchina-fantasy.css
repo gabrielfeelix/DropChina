@@ -737,44 +737,36 @@ header.header .header-actions__cart-icon--text > span:not(.svg-wrapper) {
   display: none !important;
 }
 
-/* ---------- "Todas as categorias ☰" no início da nav row ---------- */
-header.header .header__row--bottom .menu-list {
-  position: relative;
-  padding-left: 200px;
+/* ---------- Nav row CENTRALIZADA + altura compacta ---------- */
+
+/* Container do row: padding vertical reduzido */
+header.header .header__row--bottom,
+header.header .header__row--bottom .header__columns {
+  padding-block: 8px !important;
+  min-height: 0 !important;
 }
 
-header.header .header__row--bottom .menu-list::before {
-  content: "Todas as categorias";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 0.9375rem;
-  color: var(--dc-text);
-  cursor: pointer;
-  padding-left: 28px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round'><line x1='3' y1='6' x2='21' y2='6'/><line x1='3' y1='12' x2='21' y2='12'/><line x1='3' y1='18' x2='21' y2='18'/></svg>");
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 20px 20px;
+/* Menu-list centralizado horizontalmente */
+header.header .header__row--bottom .header__column {
+  justify-content: center !important;
+  text-align: center;
 }
 
-header.header .header__row--bottom .menu-list::before:hover {
-  color: var(--dc-blue);
+header.header .header__row--bottom .menu-list,
+header.header .header__row--bottom .overflow-menu {
+  margin-inline: auto !important;
+  justify-content: center !important;
+  display: flex !important;
 }
 
-/* Mobile — desabilitar "Todas as categorias" (já tem hambúrguer no drawer) */
-@media (max-width: 768px) {
-  header.header .header__row--bottom .menu-list {
-    padding-left: 0;
-  }
-  header.header .header__row--bottom .menu-list::before {
-    display: none;
-  }
+/* Items do menu: padding entre eles reduzido */
+header.header .header__row--bottom .menu-list__list-item {
+  padding-inline: 12px !important;
+}
+
+header.header .header__row--bottom .menu-list__link {
+  padding-block: 6px !important;
+  font-size: 0.875rem !important;
 }
 
 /* ---------- Padding generoso no top row ---------- */
