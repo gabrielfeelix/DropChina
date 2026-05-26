@@ -19,58 +19,73 @@
       ref="form"
       on:keydown="/onSearchKeyDown"
     >
-      <div class="dc-search-strip__input-wrapper">
-        <input
-          class="search-input dc-search-strip__input"
-          id="dc-search-input"
-          type="search"
-          name="q"
-          role="combobox"
-          aria-expanded="false"
-          aria-owns="dc-search-results"
-          aria-controls="dc-search-results"
-          aria-haspopup="listbox"
-          aria-autocomplete="list"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-          placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
-          ref="searchInput"
-          on:input="/search"
-          on:keydown="/onSearchKeyDown"
-        >
-        <input type="hidden" name="options[prefix]" value="last">
+      <div class="predictive-search-form__header">
+        <div class="predictive-search-form__header-inner dc-search-strip__input-wrapper">
+          <input
+            class="search-input dc-search-strip__input"
+            id="dc-search-input"
+            type="search"
+            name="q"
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="dc-search-results"
+            aria-controls="dc-search-results"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
+            ref="searchInput"
+            on:input="/search"
+            on:keydown="/onSearchKeyDown"
+          >
+          <input type="hidden" name="options[prefix]" value="last">
 
-        <button
-          type="submit"
-          class="dc-search-strip__submit"
-          aria-label="Buscar"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-        </button>
+          <button
+            type="submit"
+            class="dc-search-strip__submit"
+            aria-label="Buscar"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
 
-        <button
-          type="button"
-          class="button-unstyled dc-search-strip__reset"
-          ref="resetButton"
-          hidden
-          on:click="/resetSearch"
-          aria-label="Limpar busca"
-        >
-          ✕
-        </button>
+          <button
+            type="button"
+            class="button-unstyled dc-search-strip__reset"
+            ref="resetButton"
+            hidden
+            on:click="/resetSearch"
+            aria-label="Limpar busca"
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
-      <div
-        id="dc-search-results"
-        class="dc-search-strip__results"
-        ref="resultsContainer"
-        role="listbox"
-        aria-label="Resultados da busca"
-      ></div>
+      <div class="predictive-search-form__content-wrapper dc-search-strip__results-wrapper">
+        <div
+          id="dc-search-results"
+          class="predictive-search-form__content dc-search-strip__results"
+          ref="predictiveSearchResults"
+          on:click="/handleModalClick"
+          role="listbox"
+          aria-label="Resultados da busca"
+        ></div>
+
+        <div class="predictive-search-form__footer dc-search-strip__footer" hidden>
+          <button
+            class="button predictive-search__search-button dc-search-strip__view-all"
+            ref="viewAllButton"
+            type="submit"
+          >
+            Ver todos os resultados
+          </button>
+        </div>
+      </div>
     </form>
   </predictive-search-component>
 </div>
