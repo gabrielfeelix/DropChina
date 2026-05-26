@@ -6,7 +6,7 @@
 
 <div class="dc-search-strip">
   <predictive-search-component
-    class="dc-search-strip__component"
+    class="dc-search-strip__component predictive-search color-scheme-1"
     data-section-id="predictive-search"
     role="search"
     aria-label="{{ section.settings.placeholder | default: 'Buscar produtos' | escape }}"
@@ -15,28 +15,31 @@
       action="{{ routes.search_url | default: '/search' }}"
       method="get"
       role="search"
-      class="dc-search-strip__form predictive-search-form"
+      class="predictive-search-form dc-search-strip__form"
       ref="form"
+      on:keydown="/onSearchKeyDown"
     >
       <div class="dc-search-strip__input-wrapper">
         <input
-          ref="input"
+          class="search-input dc-search-strip__input"
           id="dc-search-input"
           type="search"
           name="q"
-          placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
-          class="dc-search-strip__input predictive-search-form__input"
-          aria-label="{{ section.settings.placeholder | default: 'Buscar' | escape }}"
-          aria-controls="dc-search-results"
+          role="combobox"
           aria-expanded="false"
+          aria-owns="dc-search-results"
+          aria-controls="dc-search-results"
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
           autocomplete="off"
           autocorrect="off"
           spellcheck="false"
+          placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
+          ref="searchInput"
+          on:input="/search"
+          on:keydown="/onSearchKeyDown"
         >
         <input type="hidden" name="options[prefix]" value="last">
-        <input type="hidden" name="options[unavailable_products]" value="last">
-        <input type="hidden" name="resources[type]" value="product,collection,page">
-        <input type="hidden" name="resources[limit]" value="6">
 
         <button
           type="submit"
@@ -47,6 +50,17 @@
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
+        </button>
+
+        <button
+          type="button"
+          class="button-unstyled dc-search-strip__reset"
+          ref="resetButton"
+          hidden
+          on:click="/resetSearch"
+          aria-label="Limpar busca"
+        >
+          ✕
         </button>
       </div>
 

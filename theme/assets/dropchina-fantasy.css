@@ -1384,26 +1384,44 @@ search-button *,
    do <slideshow-component>. Sobrescrever pra valores compactos Fantasy.
    ============================================================ */
 
-/* Banners 2172x724 (3:1 aspect ratio). Calcular altura como % de largura
-   pra preservar proporção em qualquer viewport, com cap mínimo e máximo. */
+/* Banners 2172x724 (aspect 3:1). aspect-ratio puro no slide pra evitar
+   letterbox (faixas pretas). Remover min/max-height pra deixar o ratio
+   ditar a altura. */
 [id*="hero_main"] slideshow-component,
 [id*="hero_main"] .slideshow {
-  --slide-min-height: 180px !important;
-  --slide-min-height-desktop: 420px !important;
+  --slide-min-height: 0 !important;
+  --slide-min-height-desktop: 0 !important;
+  width: 100%;
+  display: block;
 }
 
-[id*="hero_main"] slideshow-slides,
+[id*="hero_main"] slideshow-slides {
+  aspect-ratio: 3 / 1 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  height: auto !important;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
 [id*="hero_main"] slideshow-slide {
-  aspect-ratio: 3 / 1;
-  min-height: 180px !important;
-  max-height: 500px !important;
+  aspect-ratio: 3 / 1 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  height: auto !important;
+  width: 100%;
+  flex-shrink: 0;
+  position: relative !important;
+  background: transparent !important;
 }
 
-@media (min-width: 750px) {
+/* Em mobile, deixar slide um pouco mais alto (banner ainda visível, mas
+   menos drástico) */
+@media (max-width: 768px) {
   [id*="hero_main"] slideshow-slides,
   [id*="hero_main"] slideshow-slide {
-    min-height: 360px !important;
-    max-height: 500px !important;
+    aspect-ratio: 16 / 9 !important;
   }
 }
 
@@ -1634,4 +1652,72 @@ search-button *,
 [id*="hero_main"] slideshow-slide .slide__content a.button,
 [id*="hero_main"] slideshow-slide .slide__content button.button {
   display: inline-flex !important;
+}
+
+/* ============================================================
+   HERO SETAS — estilo Fantasy: circulares dentro do banner
+   ============================================================ */
+
+[id*="hero_main"] slideshow-controls,
+[id*="hero_main"] [class*="slideshow-controls"] {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none;
+  z-index: 5;
+}
+
+[id*="hero_main"] slideshow-controls button,
+[id*="hero_main"] [class*="slideshow-controls"] button,
+[id*="hero_main"] [aria-label*="Previous"],
+[id*="hero_main"] [aria-label*="Next"] {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: var(--dc-text-on-dark) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+[id*="hero_main"] slideshow-controls button:first-of-type,
+[id*="hero_main"] [aria-label*="Previous"] {
+  left: 16px !important;
+  right: auto !important;
+}
+
+[id*="hero_main"] slideshow-controls button:last-of-type,
+[id*="hero_main"] [aria-label*="Next"] {
+  right: 16px !important;
+  left: auto !important;
+}
+
+[id*="hero_main"] slideshow-controls button:hover,
+[id*="hero_main"] [aria-label*="Previous"]:hover,
+[id*="hero_main"] [aria-label*="Next"]:hover {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+[id*="hero_main"] slideshow-controls svg {
+  width: 20px;
+  height: 20px;
+  color: var(--dc-text-on-dark);
+}
+
+/* Dots position bottom direita */
+[id*="hero_main"] [class*="pagination"],
+[id*="hero_main"] [class*="dots"] {
+  position: absolute !important;
+  bottom: 16px !important;
+  right: 16px !important;
+  z-index: 5;
 }
