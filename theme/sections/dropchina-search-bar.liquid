@@ -1,20 +1,64 @@
-<div class="dc-search-strip" role="search" aria-label="Buscar produtos">
-  <form action="{{ routes.search_url | default: '/search' }}" method="get" class="dc-search-strip__form">
-    <input
-      type="search"
-      name="q"
-      placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
-      class="dc-search-strip__input"
-      aria-label="{{ section.settings.placeholder | default: 'Buscar' | escape }}"
-      autocomplete="off"
+<script
+  src="{{ 'predictive-search.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<div class="dc-search-strip">
+  <predictive-search-component
+    class="dc-search-strip__component"
+    data-section-id="predictive-search"
+    role="search"
+    aria-label="{{ section.settings.placeholder | default: 'Buscar produtos' | escape }}"
+  >
+    <form
+      action="{{ routes.search_url | default: '/search' }}"
+      method="get"
+      role="search"
+      class="dc-search-strip__form predictive-search-form"
+      ref="form"
     >
-    <button type="submit" class="dc-search-strip__submit" aria-label="Buscar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-    </button>
-  </form>
+      <div class="dc-search-strip__input-wrapper">
+        <input
+          ref="input"
+          id="dc-search-input"
+          type="search"
+          name="q"
+          placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
+          class="dc-search-strip__input predictive-search-form__input"
+          aria-label="{{ section.settings.placeholder | default: 'Buscar' | escape }}"
+          aria-controls="dc-search-results"
+          aria-expanded="false"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        >
+        <input type="hidden" name="options[prefix]" value="last">
+        <input type="hidden" name="options[unavailable_products]" value="last">
+        <input type="hidden" name="resources[type]" value="product,collection,page">
+        <input type="hidden" name="resources[limit]" value="6">
+
+        <button
+          type="submit"
+          class="dc-search-strip__submit"
+          aria-label="Buscar"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        id="dc-search-results"
+        class="dc-search-strip__results"
+        ref="resultsContainer"
+        role="listbox"
+        aria-label="Resultados da busca"
+      ></div>
+    </form>
+  </predictive-search-component>
 </div>
 
 {% schema %}
