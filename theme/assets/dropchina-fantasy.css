@@ -1036,20 +1036,21 @@ product-card.product-card:hover,
   position: relative;
 }
 
-/* Search strip absolute posicionada sobre o header top row */
+/* Search strip absolute centralizada VIEWPORT-based (left:0 right:0 + margin auto)
+   ao invés de left:50% que depende do parent. */
 .dc-search-strip {
   background: transparent;
   padding: 0;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important;
   z-index: 10;
   width: 100%;
   max-width: 640px;
-  /* Posicionar verticalmente: começa logo abaixo da announcement bar
-     e ocupa altura do top row (precisaríamos calcular dinamicamente,
-     mas a regra inline-style do Tinker injeta --header-group-height) */
-  top: 32px;  /* Ajustar conforme altura da announcement bar */
+  top: 32px;
   pointer-events: none;
   display: flex;
   align-items: center;
