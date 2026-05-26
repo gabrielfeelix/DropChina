@@ -1229,3 +1229,33 @@ header.header .header__column--left search-button.search-action button.button-un
   height: 20px !important;
   color: #9ca3af !important;
 }
+
+/* ============================================================
+   SEARCH-BUTTON custom element — display fix
+   <search-button> é custom element sem display nativo (inline).
+   Por isso flex/min-width não pegam. Forçar display:block + restantes.
+   ============================================================ */
+
+search-button {
+  display: block !important;
+}
+
+search-button.search-action {
+  display: flex !important;
+}
+
+/* Garantir que ambas as searches aparecem (top desktop) */
+header.header search-button.search-action--hidden-on-menu,
+header.header search-button.search-action--hidden-on-drawer {
+  display: flex !important;
+}
+
+/* Mas só queremos UMA visível — esconder a drawer-search */
+header.header .header__column--left search-button.search-action--hidden-on-drawer {
+  display: none !important;
+}
+
+/* O texto "Pesquisa" precisa estar visível mesmo desktop */
+header.header search-button.search-action button.button-unstyled span.mobile\:hidden {
+  display: inline-block !important;
+}
