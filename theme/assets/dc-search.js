@@ -62,8 +62,22 @@
             if (section) {
               results.innerHTML = section.innerHTML;
               wrapper.hidden = false;
+
+              // Position FIXED relativo ao viewport, ancorado abaixo do input
+              var inputRect = input.getBoundingClientRect();
+              wrapper.style.position = 'fixed';
+              wrapper.style.top = (inputRect.bottom + 8) + 'px';
+              wrapper.style.left = inputRect.left + 'px';
+              wrapper.style.width = inputRect.width + 'px';
               wrapper.style.display = 'block';
-              console.log('[DC Search] Injected. Results children:', results.children.length);
+              wrapper.style.zIndex = '99999';
+              wrapper.style.visibility = 'visible';
+              wrapper.style.opacity = '1';
+
+              var rect = wrapper.getBoundingClientRect();
+              console.log('[DC Search] Injected & positioned. children:', results.children.length,
+                'wrapper rect:', { top: rect.top, left: rect.left, width: rect.width, height: rect.height },
+                'input rect:', { bottom: inputRect.bottom, left: inputRect.left, width: inputRect.width });
             } else {
               console.warn('[DC Search] Section not found. HTML preview:', html.slice(0, 300));
             }
@@ -75,12 +89,31 @@
     });
 
     input.addEventListener('blur', function() {
-      setTimeout(function() { wrapper.hidden = true; }, 200);
+      setTimeout(function() {
+        wrapper.hidden = true;
+        wrapper.style.display = 'none';
+      }, 200);
     });
 
     input.addEventListener('focus', function() {
-      if (results.innerHTML.trim()) wrapper.hidden = false;
+      if (results.innerHTML.trim()) {
+        wrapper.hidden = false;
+        wrapper.style.display = 'block';
+        repositionDropdown();
+      }
     });
+
+    function repositionDropdown() {
+      if (wrapper.hidden) return;
+      var r = input.getBoundingClientRect();
+      wrapper.style.position = 'fixed';
+      wrapper.style.top = (r.bottom + 8) + 'px';
+      wrapper.style.left = r.left + 'px';
+      wrapper.style.width = r.width + 'px';
+    }
+
+    window.addEventListener('scroll', repositionDropdown, { passive: true });
+    window.addEventListener('resize', repositionDropdown);
   }
 
   if (document.readyState === 'loading') {
