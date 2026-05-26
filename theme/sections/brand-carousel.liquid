@@ -1,0 +1,65 @@
+<section class="brand-carousel" aria-label="{{ section.settings.heading | default: 'Marcas' | escape }}">
+  <div class="brand-carousel__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="brand-carousel__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="brand-carousel__track" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign brand_alt = block.settings.alt | default: 'Marca' -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="brand-carousel__item"
+          role="listitem"
+          aria-label="{{ brand_alt | escape }}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.logo -%}
+            {{ block.settings.logo | image_url: width: 240 | image_tag:
+                 loading: 'lazy',
+                 alt: brand_alt,
+                 class: 'brand-carousel__logo',
+                 widths: '120, 240' }}
+          {%- else -%}
+            <span class="brand-carousel__placeholder">{{ brand_alt | escape }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand carousel",
+  "tag": "section",
+  "class": "section-brand-carousel",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Escolha pela marca" }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marca",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo (PNG transparente)" },
+        { "type": "text", "id": "alt", "label": "Nome da marca", "default": "Marca" },
+        { "type": "url", "id": "link", "label": "Link (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Escolha pela marca",
+      "blocks": [
+        { "type": "brand", "settings": { "alt": "HP" } },
+        { "type": "brand", "settings": { "alt": "Brother" } },
+        { "type": "brand", "settings": { "alt": "Epson" } },
+        { "type": "brand", "settings": { "alt": "Canon" } },
+        { "type": "brand", "settings": { "alt": "Logitech" } },
+        { "type": "brand", "settings": { "alt": "Samsung" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
