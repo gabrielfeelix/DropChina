@@ -1764,11 +1764,22 @@ search-button *,
   min-width: 0;
   max-width: 640px;
   margin-inline: auto;
-  position: relative;
+  position: relative !important;
   /* override scheme-1 hereditario */
   background: transparent !important;
   background-color: transparent !important;
   --color-background: transparent;
+}
+
+/* Form e wrapper inner mantêm relative pra ancorar o dropdown */
+.dc-search-input__form {
+  position: relative;
+}
+
+/* Dropdown TEM que ser ancorado no form (que é direct parent do
+   results-wrapper) — garantir z-index alto pra ficar SOBRE tudo */
+.dc-search-input__results-wrapper {
+  z-index: 9999 !important;
 }
 
 .dc-search-input__form {
