@@ -1377,3 +1377,39 @@ search-button *,
   pointer-events: none !important;
   opacity: 0 !important;
 }
+
+/* ============================================================
+   HERO HEIGHT FIX — override --slide-min-height inline style
+   Tinker injeta --slide-min-height: 17.5rem / 26.25rem no style inline
+   do <slideshow-component>. Sobrescrever pra valores compactos Fantasy.
+   ============================================================ */
+
+[id*="hero_main"] slideshow-component,
+[id*="hero_main"] .slideshow {
+  --slide-min-height: 200px !important;
+  --slide-min-height-desktop: 320px !important;
+}
+
+[id*="hero_main"] slideshow-slides {
+  min-height: 200px !important;
+  max-height: 320px !important;
+}
+
+@media (min-width: 750px) {
+  [id*="hero_main"] slideshow-slides {
+    min-height: 320px !important;
+    max-height: 420px !important;
+  }
+}
+
+[id*="hero_main"] slideshow-slide {
+  min-height: 200px !important;
+  max-height: 320px !important;
+}
+
+@media (min-width: 750px) {
+  [id*="hero_main"] slideshow-slide {
+    min-height: 320px !important;
+    max-height: 420px !important;
+  }
+}
