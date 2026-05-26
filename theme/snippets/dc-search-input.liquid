@@ -1,11 +1,71 @@
 {%- doc -%}
-  Renders the DropChina custom search input (predictive-search) inline
-  inside the header top row (between logo and actions).
+  Renders the DropChina custom search input inline inside the header top row.
+  Usa fetch direto pra /search/suggest + injeção manual (não depende do
+  predictive-search.js JS do Tinker que tinha problemas de morph).
 {%- enddoc -%}
 
-<predictive-search-component
+<script>
+  (function() {
+    if (window.__dcSearchInit) return;
+    window.__dcSearchInit = true;
+    let dcSearchTimer = null;
+    let dcSearchAbort = null;
+
+    function initDcSearch() {
+      const input = document.querySelector('.dc-search-input__field');
+      const results = document.querySelector('.dc-search-input__results');
+      const wrapper = document.querySelector('.dc-search-input__results-wrapper');
+      if (!input || !results || !wrapper) return;
+
+      wrapper.hidden = true;
+
+      input.addEventListener('input', function(e) {
+        const q = input.value.trim();
+        if (dcSearchTimer) clearTimeout(dcSearchTimer);
+        if (dcSearchAbort) dcSearchAbort.abort();
+        if (!q) {
+          wrapper.hidden = true;
+          results.innerHTML = '';
+          return;
+        }
+        dcSearchTimer = setTimeout(function() {
+          dcSearchAbort = new AbortController();
+          const url = '/search/suggest?section_id=predictive-search&q=' + encodeURIComponent(q) + '&resources%5Blimit%5D=8&resources%5Btype%5D=product%2Ccollection';
+          fetch(url, { signal: dcSearchAbort.signal })
+            .then(function(r) { return r.text(); })
+            .then(function(html) {
+              const tmp = document.createElement('div');
+              tmp.innerHTML = html;
+              const inner = tmp.querySelector('#predictive-search-results') || tmp.querySelector('.predictive-search-dropdown') || tmp.querySelector('.shopify-section');
+              if (inner) {
+                results.innerHTML = inner.innerHTML;
+                wrapper.hidden = false;
+              }
+            })
+            .catch(function(err) {
+              if (err.name !== 'AbortError') console.error('Search error', err);
+            });
+        }, 200);
+      });
+
+      input.addEventListener('blur', function() {
+        setTimeout(function() { wrapper.hidden = true; }, 200);
+      });
+      input.addEventListener('focus', function() {
+        if (results.innerHTML.trim()) wrapper.hidden = false;
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDcSearch);
+    } else {
+      initDcSearch();
+    }
+  })();
+</script>
+
+<div
   class="dc-search-input predictive-search color-scheme-1"
-  data-section-id="predictive-search"
   role="search"
   aria-label="Buscar produtos"
 >
@@ -85,4 +145,4 @@
       </div>
     </div>
   </form>
-</predictive-search-component>
+</div>
