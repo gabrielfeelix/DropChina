@@ -1873,11 +1873,16 @@ search-button *,
   z-index: 100;
   max-height: 70vh;
   overflow-y: auto;
+  display: block;
 }
 
-.dc-search-input__results-wrapper:empty,
-.dc-search-input__results:empty + .dc-search-input__footer[hidden] {
-  display: none;
+/* hidden atributo HTML força display:none — quando removemos via JS deve aparecer */
+.dc-search-input__results-wrapper[hidden] {
+  display: none !important;
+}
+
+.dc-search-input__results-wrapper:not([hidden]) {
+  display: block !important;
 }
 
 .dc-search-input__results {

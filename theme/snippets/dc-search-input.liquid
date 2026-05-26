@@ -41,16 +41,18 @@
               return r.text();
             })
             .then(function(html) {
-              const tmp = document.createElement('div');
-              tmp.innerHTML = html;
-              const inner = tmp.querySelector('#predictive-search-results') || tmp.querySelector('.predictive-search-dropdown') || tmp.querySelector('.shopify-section');
-              console.log('[DC Search] Parsed inner:', inner);
-              if (inner) {
-                results.innerHTML = inner.innerHTML;
+              console.log('[DC Search] HTML length:', html.length);
+              // Usar DOMParser oficial Shopify pattern
+              const doc = new DOMParser().parseFromString(html, 'text/html');
+              const section = doc.querySelector('#shopify-section-predictive-search');
+              console.log('[DC Search] Section found:', !!section);
+              if (section) {
+                results.innerHTML = section.innerHTML;
                 wrapper.hidden = false;
-                console.log('[DC Search] Injected. Dropdown should be visible now.');
+                wrapper.style.display = 'block';
+                console.log('[DC Search] Injected. Wrapper hidden:', wrapper.hidden, 'display:', getComputedStyle(wrapper).display);
               } else {
-                console.warn('[DC Search] No inner container found in response. HTML preview:', html.slice(0, 500));
+                console.warn('[DC Search] #shopify-section-predictive-search not found. First 300 chars:', html.slice(0, 300));
               }
             })
             .catch(function(err) {
