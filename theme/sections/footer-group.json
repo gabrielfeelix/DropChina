@@ -16,7 +16,7 @@
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 16,
-            "width": "fill",
+            "width": "custom",
             "custom_width": 30,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
@@ -57,41 +57,25 @@
                 "letter_spacing": "-0.02em",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "color": ""
+              }
             },
             "text_brand_tagline": {
               "type": "text",
               "settings": {
-                "text": "<p>Tecnologia para sua casa e escritório,<br>com a confiança Platinum no Mercado Livre.</p>",
+                "text": "<p>Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "1.5",
+                "font_size": "0.875rem",
+                "line_height": "1.55",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "color": ""
+              }
             },
             "social_links_brand": {
               "type": "social-links",
@@ -110,47 +94,38 @@
                 "tumblr_url": "",
                 "vimeo_url": "",
                 "custom_url": "https://lista.mercadolivre.com.br/loja/dropchina-297222/"
-              },
-              "blocks": {}
+              }
             },
-            "text_platinum_badge": {
+            "text_attendance": {
               "type": "text",
               "settings": {
-                "text": "<p>🏆 Vendedor Platinum no Mercado Livre — +50 mil vendas</p>",
+                "text": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
-                "font_size": "0.8125rem",
-                "line_height": "1.4",
+                "font_size": "0.75rem",
+                "line_height": "1.45",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "color": ""
+              }
             }
           },
           "block_order": [
             "text_brand_name",
             "text_brand_tagline",
             "social_links_brand",
-            "text_platinum_badge"
+            "text_attendance"
           ]
         },
         "menu_shop": {
           "type": "menu",
           "settings": {
             "menu": "footer-shop",
-            "heading": "Comprar",
+            "heading": "Loja",
             "menu_spacing": 10,
             "show_as_accordion": false,
             "accordion_icon": "caret",
@@ -158,19 +133,14 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "heading_preset": "custom",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "link_preset": "paragraph"
+          }
         },
-        "menu_help": {
+        "menu_support": {
           "type": "menu",
           "settings": {
             "menu": "footer-help",
-            "heading": "Atendimento",
+            "heading": "Suporte",
             "menu_spacing": 10,
             "show_as_accordion": false,
             "accordion_icon": "caret",
@@ -178,15 +148,25 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "heading_preset": "custom",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "link_preset": "paragraph"
+          }
         },
-        "group_newsletter": {
+        "menu_dropchina": {
+          "type": "menu",
+          "settings": {
+            "menu": "main-menu",
+            "heading": "DropChina",
+            "menu_spacing": 10,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading_preset": "custom",
+            "link_preset": "paragraph"
+          }
+        },
+        "group_contact": {
           "type": "group",
           "settings": {
             "content_direction": "column",
@@ -196,9 +176,9 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 12,
+            "gap": 10,
             "width": "fill",
-            "custom_width": 30,
+            "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -224,100 +204,58 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_newsletter_heading": {
+            "contact_heading": {
               "type": "text",
               "settings": {
-                "text": "<h5>Receba ofertas exclusivas</h5>",
+                "text": "<h5>Contato</h5>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h5",
-                "font": "var(--font-primary--family)",
-                "font_size": "0.9375rem",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8125rem",
                 "line_height": "1.4",
-                "letter_spacing": "normal",
-                "case": "none",
+                "letter_spacing": "0.05em",
+                "case": "uppercase",
                 "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "color": ""
+              }
             },
-            "text_newsletter_sub": {
+            "contact_lines": {
               "type": "text",
               "settings": {
-                "text": "<p>Cadastre seu e-mail e receba descontos, novidades e cupons direto na sua caixa.</p>",
+                "text": "<p>Fale conosco<br>WhatsApp comercial<br>Suporte técnico<br>FAQ</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
                 "font_size": "0.875rem",
-                "line_height": "1.5",
+                "line_height": "1.9",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "email_signup_footer": {
-              "type": "email-signup",
-              "name": "t:names.email_signup",
-              "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "inherit_color_scheme": true,
-                "heading": "",
-                "heading_preset": "h5",
-                "color_scheme": "",
-                "border_style": "all",
-                "border_width": 1,
-                "border_radius": 12,
-                "input_type_preset": "paragraph",
-                "style_class": "button",
-                "display_type": "arrow",
-                "label": "Cadastrar",
-                "integrated_button": true,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "color": ""
+              }
             }
           },
           "block_order": [
-            "text_newsletter_heading",
-            "text_newsletter_sub",
-            "email_signup_footer"
+            "contact_heading",
+            "contact_lines"
           ]
         }
       },
       "block_order": [
         "group_brand",
         "menu_shop",
-        "menu_help",
-        "group_newsletter"
+        "menu_support",
+        "menu_dropchina",
+        "group_contact"
       ],
       "name": "Footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 32,
+        "gap": 40,
         "color_scheme": "scheme-1",
         "padding-block-start": 64,
         "padding-block-end": 32
@@ -332,8 +270,7 @@
             "show_powered_by": false,
             "font_size": "0.75rem",
             "case": "none"
-          },
-          "blocks": {}
+          }
         },
         "footer_policy_list_rfGrqz": {
           "type": "footer-policy-list",
@@ -341,8 +278,7 @@
           "settings": {
             "font_size": "0.75rem",
             "case": "none"
-          },
-          "blocks": {}
+          }
         }
       },
       "block_order": [

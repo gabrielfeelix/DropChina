@@ -13,7 +13,8 @@
             "padding-inline-start": 64,
             "padding-inline-end": 64,
             "padding-block-start": 64,
-            "padding-block-end": 64
+            "padding-block-end": 64,
+            "background_asset": "banner-worldcup.png"
           },
           "blocks": {
             "eyebrow": {
@@ -73,7 +74,8 @@
             "padding-inline-start": 64,
             "padding-inline-end": 64,
             "padding-block-start": 64,
-            "padding-block-end": 64
+            "padding-block-end": 64,
+            "background_asset": "banner-toner.png"
           },
           "blocks": {
             "eyebrow2": {
@@ -133,7 +135,8 @@
             "padding-inline-start": 64,
             "padding-inline-end": 64,
             "padding-block-start": 64,
-            "padding-block-end": 64
+            "padding-block-end": 64,
+            "background_asset": "banner-gpu.png"
           },
           "blocks": {
             "eyebrow3": {
@@ -202,189 +205,78 @@
       }
     },
     "categories_grid": {
-      "type": "collection-list",
+      "type": "dc-categories-grid",
       "blocks": {
-        "header_categories": {
-          "type": "group",
-          "name": "t:names.header",
+        "cat_0": {
+          "type": "category",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 8,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 24,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_categories_eyebrow": {
-              "type": "text",
-              "name": "Eyebrow",
-              "settings": {
-                "text": "<p>NOSSA LOJA</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.08em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_categories_heading": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h2>Confira tudo o que temos pra você</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "1.1",
-                "letter_spacing": "-0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_categories_eyebrow",
-            "text_categories_heading"
-          ]
+            "name": "Cartuchos & Tintas",
+            "count": "320+ produtos",
+            "link": "shopify://collections/cartuchos-de-tinta",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='34' y='36' width='92' height='14' rx='6' fill='#3a414a'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>"
+          }
         },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "name": "t:names.collection_card",
-          "static": true,
+        "cat_1": {
+          "type": "category",
           "settings": {
-            "placement": "on_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-end",
-            "collection_card_gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "scheme-6",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 12
-          },
-          "blocks": {
-            "collection_title_card": {
-              "type": "collection-title",
-              "name": "t:names.collection_title",
-              "settings": {
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-primary--family)",
-                "font_size": "1.25rem",
-                "line_height": "1.2",
-                "letter_spacing": "-0.01em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "static": true,
-              "settings": {
-                "image_ratio": "square",
-                "toggle_overlay": true,
-                "overlay_color": "#0a3d8055",
-                "overlay_style": "gradient",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 12
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "collection_title_card"
-          ]
+            "name": "Toners",
+            "count": "180+ produtos",
+            "link": "shopify://collections/toners",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "name": "Impressoras",
+            "count": "64 produtos",
+            "link": "shopify://collections/impressoras",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "name": "Placas de Vídeo",
+            "count": "42 produtos",
+            "link": "shopify://collections/placas-de-video",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "name": "Áudio & Headsets",
+            "count": "150+ produtos",
+            "link": "shopify://collections/perifericos",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/><circle cx='39' cy='82' r='3' fill='#f59e0b'/></svg>"
+          }
+        },
+        "cat_5": {
+          "type": "category",
+          "settings": {
+            "name": "Periféricos",
+            "count": "210+ produtos",
+            "link": "shopify://collections/perifericos",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>"
+          }
         }
       },
       "block_order": [
-        "header_categories"
+        "cat_0",
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5"
       ],
       "name": "Categories",
       "settings": {
-        "layout_type": "bento",
-        "carousel_on_mobile": true,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "55cqw",
-        "columns_gap": 16,
-        "bento_gap": 16,
-        "rows_gap": 16,
-        "max_collections": 7,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 12,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 64,
+        "eyebrow": "NOSSA LOJA",
+        "heading": "Confira tudo o que temos pra você",
+        "cta_label": "Ver todas",
+        "cta_link": "shopify://collections/all",
+        "padding-block-start": 56,
         "padding-block-end": 32
       }
     },
@@ -1024,139 +916,47 @@
       }
     },
     "story_block": {
-      "type": "media-with-content",
+      "type": "atacado-banner",
       "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "static": true,
+        "perk_1": {
+          "type": "perk",
           "settings": {
-            "media_type": "image",
-            "video_loop": true,
-            "video_autoplay": false,
-            "image_position": "cover",
-            "video_position": "cover"
-          },
-          "blocks": {}
+            "number": "−15%",
+            "label": "<p>Desconto progressivo<br>a partir de 10 un.</p>"
+          }
         },
-        "content": {
-          "type": "_content-without-appearance",
-          "static": true,
+        "perk_2": {
+          "type": "perk",
           "settings": {
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20
-          },
-          "blocks": {
-            "story_eyebrow": {
-              "type": "text",
-              "name": "Eyebrow",
-              "settings": {
-                "text": "<p>ATACADO · CNPJ</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.08em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "story_heading": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>Compre como revendedor e pague menos</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "1.1",
-                "letter_spacing": "-0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "story_body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Tabela exclusiva para CNPJ a partir de 10 unidades, com nota fiscal, entrega em todo o Brasil e gerente de conta dedicado.</p>",
-                "width": "fit-content",
-                "max_width": "narrow",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "1.6",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_story": {
-              "type": "button",
-              "settings": {
-                "label": "Cadastrar CNPJ",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button button--primary",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "story_eyebrow",
-            "story_heading",
-            "story_body",
-            "button_story"
-          ]
+            "number": "24h",
+            "label": "<p>Envio para todo<br>o Brasil</p>"
+          }
+        },
+        "perk_3": {
+          "type": "perk",
+          "settings": {
+            "number": "NF",
+            "label": "<p>Nota fiscal<br>sempre</p>"
+          }
         }
       },
-      "name": "Story",
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3"
+      ],
+      "name": "Atacado CNPJ",
       "settings": {
-        "media_position": "left",
-        "media_width": "medium",
-        "media_height": "60svh",
-        "section_width": "page-width",
-        "extend_media": false,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 64,
-        "padding-block-end": 64
+        "eyebrow": "ATACADO · CNPJ",
+        "heading": "Compre como revendedor e pague menos",
+        "lead": "Tabela exclusiva para CNPJ a partir de 10 unidades, com nota fiscal, entrega em todo o Brasil e gerente de conta dedicado.",
+        "background_asset": "atacado-bg.png",
+        "primary_cta_label": "Cadastrar CNPJ",
+        "primary_cta_link": "shopify://collections/all",
+        "secondary_cta_label": "Falar no WhatsApp",
+        "secondary_cta_link": "https://wa.me/55",
+        "padding-block-start": 56,
+        "padding-block-end": 56
       }
     },
     "testimonials_section": {
@@ -1269,7 +1069,8 @@
             "price": "",
             "cta_label": "Comprar agora",
             "eyebrow": "MÊS DA IMPRESSÃO",
-            "link": "shopify://collections/toners"
+            "link": "shopify://collections/toners",
+            "background_asset": "banner-toner.png"
           }
         },
         "c2": {
@@ -1279,7 +1080,8 @@
             "price": "",
             "cta_label": "Ver coleção",
             "eyebrow": "EDIÇÃO LIMITADA",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "background_asset": "banner-worldcup.png"
           }
         },
         "c3": {
@@ -1289,7 +1091,8 @@
             "price": "",
             "cta_label": "Montar setup",
             "eyebrow": "SETUP GAMER",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "background_asset": "banner-gpu.png"
           }
         }
       },

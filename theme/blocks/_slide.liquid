@@ -29,11 +29,11 @@
     {% endstyle %}
   {% endif %}
 
-  <div class="slide__image-container{% if rounded_image_corners %} slide__image-container--rounded{% endif %}">
+  <div class="slide__image-container{% if rounded_image_corners %} slide__image-container--rounded{% endif %}"{% if block_settings.background_asset != blank %} data-bg-asset="{{ block_settings.background_asset }}" style="background-image: linear-gradient(180deg, rgba(13,17,21,0.15) 0%, rgba(13,17,21,0.65) 100%), url('{{ block_settings.background_asset | asset_url }}'); background-size: cover; background-position: center;"{% endif %}>
     {%- if block_settings.toggle_overlay -%}
       {% render 'overlay', settings: block_settings %}
     {%- endif -%}
-    {%- if preview_image -%}
+    {%- if block_settings.background_asset == blank and preview_image -%}
       {%- liquid
         assign height = preview_image.width | divided_by: preview_image.aspect_ratio | round
         assign media_width_desktop = '100vw'
@@ -242,6 +242,12 @@
       "id": "image_1",
       "label": "t:settings.image",
       "visible_if": "{{ block.settings.media_type_1 == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Background asset (theme/assets filename)",
+      "info": "DropChina fallback: nome do arquivo em theme/assets (ex: banner-toner.png). Sobrepõe a imagem acima."
     },
     {
       "type": "video",

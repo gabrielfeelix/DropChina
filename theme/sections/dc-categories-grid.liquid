@@ -1,0 +1,172 @@
+<section class="dc-categories section section--page-width spacing-style" style="{% render 'spacing-padding', settings: section.settings %}">
+  <div class="dc-categories__head">
+    <div>
+      <p class="dc-categories__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="dc-categories__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_link | default: '#' }}" class="dc-categories__cta-all">
+        {{ section.settings.cta_label | escape }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="dc-categories__grid">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category' -%}
+        <a href="{{ block.settings.link | default: '#' }}" class="dc-cat" {{ block.shopify_attributes }}>
+          <div class="dc-cat__art">
+            {%- if block.settings.icon_svg != blank -%}
+              {{ block.settings.icon_svg }}
+            {%- else -%}
+              <svg viewBox="0 0 160 140" width="100%" height="100%" aria-hidden="true">
+                <ellipse cx="80" cy="124" rx="56" ry="6" fill="rgba(13,17,21,0.10)"/>
+                <rect x="34" y="36" width="92" height="64" rx="6" fill="#2a3038"/>
+                <rect x="44" y="58" width="40" height="34" rx="2" fill="#0e8aa5"/>
+              </svg>
+            {%- endif -%}
+          </div>
+          <div class="dc-cat__name">{{ block.settings.name | escape }}</div>
+          <div class="dc-cat__count">{{ block.settings.count | escape }}</div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-categories { padding-block: 56px; }
+  .dc-categories__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .dc-categories__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .dc-categories__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 44px;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0;
+    color: #0d1115;
+  }
+  .dc-categories__cta-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    color: #0d1115;
+    font-weight: 600;
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .dc-categories__cta-all:hover { border-color: #0d1115; background: #0d1115; color: #fff; }
+  .dc-categories__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .dc-cat {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 22px;
+    padding: 20px 12px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    transition: transform 0.22s, background 0.22s, border-color 0.22s, box-shadow 0.22s;
+    cursor: pointer;
+    color: #0d1115;
+    text-decoration: none;
+  }
+  .dc-cat:hover {
+    transform: translateY(-3px);
+    background: #fff;
+    border-color: #ececef;
+    box-shadow: 0 16px 36px -18px rgba(13, 17, 21, 0.18);
+  }
+  .dc-cat__art {
+    width: 130px;
+    height: 110px;
+    margin-bottom: 6px;
+    display: grid;
+    place-items: center;
+    transition: transform 0.3s ease;
+  }
+  .dc-cat:hover .dc-cat__art { transform: translateY(-2px) scale(1.04); }
+  .dc-cat__name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #0d1115;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+  }
+  .dc-cat__count {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  @media (max-width: 1100px) { .dc-categories__grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 700px) {
+    .dc-categories__grid { grid-template-columns: repeat(3, 1fr); }
+    .dc-categories__title { font-size: 30px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Categorias",
+  "tag": "section",
+  "class": "section-dc-categories",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NOSSA LOJA" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Confira tudo o que temos pra você" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Ver todas" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding-block-start", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 56 },
+    { "type": "range", "id": "padding-block-end", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "Cartuchos & Tintas" },
+        { "type": "text", "id": "count", "label": "Contagem (label)", "default": "320+ produtos" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "html", "id": "icon_svg", "label": "SVG do ícone (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorias DropChina",
+      "blocks": [
+        { "type": "category", "settings": { "name": "Cartuchos & Tintas", "count": "320+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>" } },
+        { "type": "category", "settings": { "name": "Toners", "count": "180+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='40' width='92' height='60' rx='6' fill='#1a1d20'/><rect x='44' y='50' width='72' height='8' rx='2' fill='#3a414a'/></svg>" } },
+        { "type": "category", "settings": { "name": "Impressoras", "count": "64 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>" } },
+        { "type": "category", "settings": { "name": "Placas de Vídeo", "count": "42 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>" } },
+        { "type": "category", "settings": { "name": "Áudio & Headsets", "count": "150+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/></svg>" } },
+        { "type": "category", "settings": { "name": "Periféricos", "count": "210+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
