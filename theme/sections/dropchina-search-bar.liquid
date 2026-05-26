@@ -1,0 +1,32 @@
+<div class="dc-search-strip" role="search" aria-label="Buscar produtos">
+  <form action="{{ routes.search_url | default: '/search' }}" method="get" class="dc-search-strip__form">
+    <input
+      type="search"
+      name="q"
+      placeholder="{{ section.settings.placeholder | default: 'Digite o que você procura' | escape }}"
+      class="dc-search-strip__input"
+      aria-label="{{ section.settings.placeholder | default: 'Buscar' | escape }}"
+      autocomplete="off"
+    >
+    <button type="submit" class="dc-search-strip__submit" aria-label="Buscar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+{% schema %}
+{
+  "name": "DropChina Search Bar",
+  "tag": "section",
+  "class": "section-dc-search-strip",
+  "settings": [
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Digite o que você procura" }
+  ],
+  "presets": [
+    { "name": "DropChina Search Bar" }
+  ]
+}
+{% endschema %}

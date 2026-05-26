@@ -1231,33 +1231,85 @@ header.header .header__column--left search-button.search-action button.button-un
 }
 
 /* ============================================================
-   SEARCH-BUTTON custom element — display fix
-   <search-button> é custom element sem display nativo (inline).
-   Por isso flex/min-width não pegam. Forçar display:block + restantes.
+   SEARCH BAR — Estratégia FINAL: section própria + Tinker search OFF
+   - Esconder TODAS as <search-action> nativas do Tinker (que renderizam
+     "esquis" cortado em 2 colunas)
+   - Renderizar nossa section dropchina-search-bar.liquid como faixa
+     entre top row (preto) e bottom row (branco) com pill grande
    ============================================================ */
 
-search-button {
-  display: block !important;
-}
-
-search-button.search-action {
-  display: flex !important;
-}
-
-/* Garantir que ambas as searches aparecem (top desktop) */
-header.header search-button.search-action--hidden-on-menu,
-header.header search-button.search-action--hidden-on-drawer {
-  display: flex !important;
-}
-
-/* Mas só queremos UMA visível — esconder a drawer-search */
-header.header .header__column--left search-button.search-action--hidden-on-drawer {
+/* Esconder TUDO que seja search-action original */
+header.header search-button,
+header.header search-button.search-action,
+header.header .search-action {
   display: none !important;
 }
 
-/* O texto "Pesquisa" precisa estar visível mesmo desktop */
-header.header search-button.search-action button.button-unstyled span.mobile\:hidden {
-  display: inline-block !important;
+/* Faixa da search customizada */
+.dc-search-strip {
+  background: var(--dc-black);
+  padding: 12px 24px 20px;
+}
+
+.dc-search-strip__form {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.dc-search-strip__input {
+  width: 100%;
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 999px !important;
+  padding: 14px 56px 14px 24px !important;
+  color: #fff !important;
+  font-size: 0.9375rem !important;
+  outline: none;
+  transition: border-color var(--dc-duration) var(--dc-ease),
+              background var(--dc-duration) var(--dc-ease);
+}
+
+.dc-search-strip__input::placeholder {
+  color: #888 !important;
+}
+
+.dc-search-strip__input:focus {
+  border-color: var(--dc-blue) !important;
+  background: #222 !important;
+}
+
+.dc-search-strip__submit {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--dc-duration) var(--dc-ease);
+}
+
+.dc-search-strip__submit:hover {
+  color: var(--dc-white);
+}
+
+@media (max-width: 768px) {
+  .dc-search-strip {
+    padding: 8px 16px 12px;
+  }
+  .dc-search-strip__input {
+    padding: 12px 48px 12px 20px !important;
+    font-size: 0.875rem !important;
+  }
 }
 
 /* ============================================================
