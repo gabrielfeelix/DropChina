@@ -327,101 +327,84 @@ section.slideshow .slideshow {
    ============================================================ */
 
 /* ============================================================
-   HERO SETAS — Override TOTAL do Tinker (shape verde + mix-blend)
-   Causa: .slideshow-control--shape-circle aplica background-color do
-   primary-button (verde scheme-8) + algum mix-blend-mode invertia cor.
+   HERO SETAS — usar apenas style-arrows_large (seta horizontal),
+   esconder style-chevron (apontava baixo, ficava verde estranho)
    ============================================================ */
 
-/* Esconder counter e pagination dots Tinker */
+/* Esconder counter, pagination, e a chevron (estilo errado) */
 [id*="hero_main"] .slideshow-controls__counter,
 [id*="hero_main"] .slideshow-controls__pagination,
-[id*="hero_main"] .slideshow-controls__counter-pagination {
+[id*="hero_main"] .slideshow-controls__counter-pagination,
+[id*="hero_main"] .slideshow-control--style-chevron {
   display: none !important;
 }
 
 /* Container slideshow-controls sem background */
 [id*="hero_main"] slideshow-controls {
   background: transparent !important;
-  background-color: transparent !important;
 }
 
-/* SETAS: reset completo + estilo branco simples */
-[id*="hero_main"] .slideshow-control,
-[id*="hero_main"] .slideshow-control--previous,
-[id*="hero_main"] .slideshow-control--next,
-[id*="hero_main"] .slideshow-control.slideshow-control--shape-circle,
-[id*="hero_main"] .slideshow-control.slideshow-control--shape-square,
-[id*="hero_main"] button[ref="previous"],
-[id*="hero_main"] button[ref="next"] {
-  /* Reset color/blend */
-  background: var(--dc-white) !important;
-  background-color: var(--dc-white) !important;
-  background-image: none !important;
-  color: #1a1a1a !important;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  isolation: isolate;
-
-  /* Shape */
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
-  min-height: 40px !important;
-  border-radius: 50% !important;
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-
-  /* Position */
-  position: absolute !important;
-  top: 50% !important;
-  transform: translateY(-50%);
-  z-index: 10;
-
-  /* Inner alignment */
+/* APENAS as setas arrows_large (seta horizontal real ←→) */
+[id*="hero_main"] .slideshow-control--style-arrows_large {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
   cursor: pointer;
-
-  /* aspect-ratio override */
+  z-index: 10;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  isolation: isolate;
   aspect-ratio: 1 / 1 !important;
+  color: #1a1a1a !important;
 }
 
-[id*="hero_main"] .slideshow-control--previous {
+[id*="hero_main"] .slideshow-control--style-arrows_large.slideshow-control--previous {
   left: 16px !important;
 }
 
-[id*="hero_main"] .slideshow-control--next {
+[id*="hero_main"] .slideshow-control--style-arrows_large.slideshow-control--next {
   right: 16px !important;
 }
 
-[id*="hero_main"] .slideshow-control:hover {
+[id*="hero_main"] .slideshow-control--style-arrows_large:hover {
   background: #f5f5f7 !important;
   background-color: #f5f5f7 !important;
 }
 
-/* Ícone chevron preto SEM mix-blend */
-[id*="hero_main"] .slideshow-control svg,
-[id*="hero_main"] .slideshow-control .svg-wrapper,
-[id*="hero_main"] .slideshow-control .icon-caret,
-[id*="hero_main"] .slideshow-control .icon-arrow {
-  width: 14px !important;
-  height: 14px !important;
+/* Ícone arrow preto SEM nada que possa pintar verde */
+[id*="hero_main"] .slideshow-control--style-arrows_large svg,
+[id*="hero_main"] .slideshow-control--style-arrows_large .svg-wrapper,
+[id*="hero_main"] .slideshow-control--style-arrows_large .icon-arrow {
+  width: 20px !important;
+  height: 20px !important;
   color: #1a1a1a !important;
   stroke: #1a1a1a !important;
-  fill: none;
+  fill: none !important;
   mix-blend-mode: normal !important;
   filter: none !important;
 }
 
-[id*="hero_main"] .slideshow-control svg path {
+[id*="hero_main"] .slideshow-control--style-arrows_large svg path {
   stroke: #1a1a1a !important;
   fill: none !important;
 }
 
-/* flip-x do prev mantém o chevron apontando esquerda */
-[id*="hero_main"] .slideshow-control.flip-x .svg-wrapper {
+/* flip-x do prev mantém a seta apontando esquerda */
+[id*="hero_main"] .slideshow-control--style-arrows_large.flip-x .svg-wrapper {
   transform: scaleX(-1);
 }
 
