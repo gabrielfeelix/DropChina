@@ -1407,3 +1407,81 @@ section[class*="brand"] h2 {
   background: var(--dc-surface);
   border-radius: var(--dc-radius-md);
 }
+
+/* ============================================================
+   DEPOIMENTOS — Estilo Fantasy com aspas tipográficas ❝ ❞
+   Aplica em testimonials_section existente
+   ============================================================ */
+
+#shopify-section-testimonials_section,
+section[id*="testimonials"] {
+  background: var(--dc-surface);
+  padding-block: 64px !important;
+}
+
+#shopify-section-testimonials_section h2,
+section[id*="testimonials"] h2 {
+  text-align: center !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 40px !important;
+  color: var(--dc-text) !important;
+}
+
+/* Card individual de depoimento */
+#shopify-section-testimonials_section .testimonial-card,
+section[id*="testimonials"] [class*="testimonial-card"],
+section[id*="testimonials"] .group-block-content {
+  background: var(--dc-white) !important;
+  border: 1px solid var(--dc-border) !important;
+  border-radius: var(--dc-radius-md) !important;
+  padding: 28px 24px !important;
+  position: relative;
+  text-align: center;
+  box-shadow: none !important;
+}
+
+/* Aspas grandes ❝ ❞ tipográficas */
+#shopify-section-testimonials_section [class*="testimonial-card"]::before,
+section[id*="testimonials"] .group-block-content::before {
+  content: "❝";
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 2.5rem;
+  color: var(--dc-border);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+#shopify-section-testimonials_section [class*="testimonial-card"]::after,
+section[id*="testimonials"] .group-block-content::after {
+  content: "❞";
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 2.5rem;
+  color: var(--dc-border);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Texto do depoimento */
+section[id*="testimonials"] .group-block-content p {
+  font-size: 0.9375rem !important;
+  line-height: 1.5;
+  color: var(--dc-text);
+  margin-bottom: 16px;
+  padding-inline: 16px;
+}
+
+/* Estrelas amarelas */
+section[id*="testimonials"] [class*="rating"],
+section[id*="testimonials"] [aria-label*="estrelas"],
+section[id*="testimonials"] [aria-label*="stars"] {
+  color: #f59e0b !important;
+  font-size: 1rem !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 2px;
+}
