@@ -163,89 +163,6 @@ header.header .header-logo__image-container:not(.header-logo__image-container--i
   filter: brightness(0) invert(1);
 }
 
-/* ---------- Busca como INPUT RETANGULAR estilo Fantasy ---------- */
-/* Tinker renderiza <search-button> com .search-action--text quando display_style=text.
-   Transformamos esse botão num "fake input": pill cinza-escuro com placeholder visível. */
-
-/* Forçar visibilidade da search em todas as larguras */
-@media (min-width: 750px) {
-  header.header [data-menu-style='menu'] .search-action--hidden-on-menu,
-  header.header .search-action--hidden-on-menu {
-    display: flex !important;
-  }
-}
-
-header.header search-button.search-action,
-header.header .search-action {
-  flex: 1;
-  min-width: 0;
-  max-width: 560px;
-  display: flex !important;
-}
-
-/* Garantir que o texto "Pesquisa" sempre apareça (Tinker o oculta com mobile:hidden) */
-header.header .search-action button.button-unstyled span.mobile\:hidden,
-header.header .search-action button.button-unstyled > span:not(.svg-wrapper) {
-  display: inline-block !important;
-  color: inherit !important;
-}
-
-header.header .search-action button.button-unstyled {
-  width: 100%;
-  display: flex !important;
-  align-items: center;
-  gap: 12px;
-  background: var(--dc-black-soft) !important;
-  border: 1px solid var(--dc-border-dark) !important;
-  border-radius: var(--dc-radius-pill) !important;
-  padding: 12px 20px !important;
-  color: #888 !important;
-  font-size: 0.9375rem !important;
-  font-weight: 400 !important;
-  text-align: left;
-  cursor: text;
-  transition: background var(--dc-duration) var(--dc-ease),
-              border-color var(--dc-duration) var(--dc-ease);
-}
-
-header.header .search-action button.button-unstyled:hover {
-  background: #222222 !important;
-  border-color: #555555 !important;
-  color: #ccc !important;
-}
-
-header.header .search-action button.button-unstyled:focus-visible {
-  outline: 2px solid var(--dc-focus-ring);
-  outline-offset: 2px;
-}
-
-/* Texto "Pesquisar" visível como placeholder */
-header.header .search-action button.button-unstyled span:not(.svg-wrapper) {
-  display: inline !important;
-  color: inherit !important;
-}
-
-/* Ícone lupa à esquerda dentro do "input" */
-header.header .search-action button.button-unstyled .svg-wrapper {
-  display: inline-flex !important;
-  order: -1;
-  flex-shrink: 0;
-}
-
-header.header .search-action button.button-unstyled .svg-wrapper svg {
-  width: 18px;
-  height: 18px;
-  color: #888;
-}
-
-/* Mobile: search compacta */
-@media (max-width: 768px) {
-  header.header .search-action button.button-unstyled {
-    padding: 10px 16px !important;
-    font-size: 0.875rem !important;
-  }
-}
-
 /* ---------- Categorias row (.header__row--bottom) — fundo BRANCO + texto PRETO ----------
    Solução real: color_scheme_bottom mudado pra scheme-1 (branco) via JSON.
    Esses overrides agora só refinam hover/active. */
@@ -699,62 +616,6 @@ section.slideshow [aria-label*="Next"]:hover {
    "Todas as categorias" no início da nav row
    ============================================================ */
 
-/* ---------- Search: pill grande visível com lupa à direita ---------- */
-
-/* O search-action está no header__column--left ao lado do logo.
-   Garantir que ocupa espaço generoso e não colapsa. */
-
-header.header .header__column--left {
-  flex: 1 1 auto !important;
-  align-items: center;
-  gap: 24px;
-}
-
-header.header .header__column--left search-button.search-action {
-  flex: 1 1 0 !important;
-  min-width: 280px !important;
-  max-width: 560px !important;
-  width: 100%;
-  display: flex !important;
-}
-
-header.header .header__column--left search-button.search-action button.button-unstyled {
-  width: 100% !important;
-  justify-content: space-between !important;
-  background: #1a1a1a !important;
-  color: #9ca3af !important;
-  padding: 14px 24px !important;
-  font-size: 0.9375rem !important;
-}
-
-/* Reordenar: texto "Pesquisa" à esquerda, lupa à direita (estilo Fantasy) */
-header.header .header__column--left .search-action button.button-unstyled .svg-wrapper {
-  order: 2 !important;
-  margin-left: auto;
-}
-
-header.header .header__column--left .search-action button.button-unstyled > span:not(.svg-wrapper) {
-  order: 1 !important;
-  display: inline-block !important;
-  flex: 1;
-  text-align: left;
-}
-
-header.header .header__column--left .search-action button.button-unstyled .svg-wrapper svg {
-  width: 20px;
-  height: 20px;
-  color: #9ca3af;
-}
-
-/* Trocar texto "Pesquisa" por "Digite o que você procura" via CSS content */
-header.header .header__column--left .search-action button.button-unstyled span.mobile\:hidden {
-  font-size: 0 !important;
-}
-header.header .header__column--left .search-action button.button-unstyled span.mobile\:hidden::after {
-  content: "Digite o que você procura";
-  font-size: 0.9375rem;
-}
-
 /* ---------- Action area: account + cart com ícones grandes visíveis ---------- */
 
 /* Tornar os ícones SVG dos botões account/cart maiores e mais presentes */
@@ -1159,91 +1020,11 @@ product-card.product-card:hover,
 }
 
 /* ============================================================
-   SEARCH BAR — visibilidade forçada (override Tinker hidden CSS)
-   Tinker oculta .search-action--hidden-on-menu via [data-menu-style='menu'].
-   Como nosso menu é mode 'menu', a search fica display:none.
-   Forçar PRIMEIRA search visível como pill grande Fantasy.
-   ============================================================ */
-
-#header-component[data-menu-style='menu'] header.header .header__column--left search-button.search-action--hidden-on-menu {
-  display: flex !important;
-}
-
-/* Garantir só uma search visível (esconder a drawer-search no left column) */
-#header-component[data-menu-style='menu'] header.header .header__column--left search-button.search-action--hidden-on-drawer {
-  display: none !important;
-}
-
-/* Esconder o "Pesquisa" texto small e mostrar placeholder Fantasy */
-header.header .header__column--left search-button.search-action button.button-unstyled span.mobile\:hidden {
-  font-size: 0 !important;
-  position: relative;
-}
-header.header .header__column--left search-button.search-action button.button-unstyled span.mobile\:hidden::after {
-  content: "Digite o que você procura";
-  font-size: 0.9375rem;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-}
-
-/* Pill cinza-escuro grande visivel ocupando espaço */
-header.header .header__column--left {
-  flex: 1 1 auto !important;
-  gap: 24px !important;
-  align-items: center !important;
-}
-
-header.header .header__column--left search-button.search-action {
-  flex: 1 1 0 !important;
-  min-width: 320px !important;
-  max-width: 640px !important;
-  width: 100% !important;
-}
-
-header.header .header__column--left search-button.search-action button.button-unstyled {
-  width: 100% !important;
-  min-height: 48px !important;
-  background: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  border-radius: var(--dc-radius-pill) !important;
-  padding: 12px 24px !important;
-  color: #9ca3af !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  text-align: left !important;
-  cursor: pointer !important;
-}
-
-header.header .header__column--left search-button.search-action button.button-unstyled .svg-wrapper {
-  order: 2 !important;
-  margin-left: auto !important;
-  display: inline-flex !important;
-}
-
-header.header .header__column--left search-button.search-action button.button-unstyled .svg-wrapper svg {
-  width: 20px !important;
-  height: 20px !important;
-  color: #9ca3af !important;
-}
-
-/* ============================================================
    SEARCH BAR — Estratégia FINAL: section própria + Tinker search OFF
-   - Esconder TODAS as <search-action> nativas do Tinker (que renderizam
-     "esquis" cortado em 2 colunas)
-   - Renderizar nossa section dropchina-search-bar.liquid como faixa
-     entre top row (preto) e bottom row (branco) com pill grande
+   Renderizar nossa section dropchina-search-bar.liquid como faixa
+   entre top row (preto) e bottom row (branco) com pill grande
+   (regras de hide da search-action nativa estão no FINAL do arquivo)
    ============================================================ */
-
-/* Esconder TUDO que seja search-action original */
-header.header search-button,
-header.header search-button.search-action,
-header.header .search-action {
-  display: none !important;
-}
 
 /* Container #header-group precisa ser relative pro absolute funcionar */
 #header-group {
@@ -1576,25 +1357,23 @@ section[id*="testimonials"] [aria-label*="stars"] {
 }
 
 /* ============================================================
-   SEARCH NATIVA TINKER — Esconder COMPLETAMENTE (último override)
-   Sobrescreve qualquer regra anterior que forçava display:flex/inline-block
+   SEARCH NATIVA TINKER — Esconder COMPLETAMENTE
+   Substituída por sections/dropchina-search-bar.liquid (input real)
    ============================================================ */
 
-header.header search-button,
-header.header search-button *,
-header.header .search-action,
-header.header .search-action *,
-header.header .search-action button,
-header.header .search-action button span,
-header.header .search-action button .svg-wrapper,
-header.header .search-action button .mobile\:hidden,
-header.header .header__column search-button,
-header.header .header__row--top search-button {
+search-button,
+search-button *,
+.search-action,
+.search-action *,
+.search-modal,
+.search-action--hidden-on-menu,
+.search-action--hidden-on-drawer {
   display: none !important;
   visibility: hidden !important;
+  position: absolute !important;
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
-  position: absolute !important;
   pointer-events: none !important;
+  opacity: 0 !important;
 }
