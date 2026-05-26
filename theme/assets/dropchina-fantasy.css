@@ -288,13 +288,13 @@ header.header .header__navigation-bar-row {
    ============================================================ */
 
 /* Section root: zero radius/margin, full-bleed */
-#shopify-section-hero_main,
+[id*="hero_main"],
 section.slideshow {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-#shopify-section-hero_main .slideshow,
+[id*="hero_main"] .slideshow,
 section.slideshow .slideshow {
   border-radius: 0 !important;
   max-width: 100% !important;
@@ -302,8 +302,8 @@ section.slideshow .slideshow {
 }
 
 /* Slides altura COMPACTA — Fantasy-style hero não-gigante */
-#shopify-section-hero_main .slide,
-#shopify-section-hero_main slideshow-slide {
+[id*="hero_main"] .slide,
+[id*="hero_main"] slideshow-slide {
   min-height: 220px !important;
   max-height: 320px !important;
   border-radius: 0 !important;
@@ -316,26 +316,26 @@ section.slideshow .slideshow {
 }
 
 @media (min-width: 768px) {
-  #shopify-section-hero_main .slide,
-  #shopify-section-hero_main slideshow-slide {
+  [id*="hero_main"] .slide,
+  [id*="hero_main"] slideshow-slide {
     min-height: 280px !important;
     max-height: 360px !important;
   }
 }
 
 /* Reduzir tipografia do hero pra combinar com altura menor */
-#shopify-section-hero_main h1,
-#shopify-section-hero_main h2 {
+[id*="hero_main"] h1,
+[id*="hero_main"] h2 {
   font-size: clamp(1.5rem, 3.5vw, 2.75rem) !important;
 }
 
-#shopify-section-hero_main p {
+[id*="hero_main"] p {
   font-size: 0.9375rem !important;
 }
 
 /* Setas circulares brancas com backdrop blur */
-#shopify-section-hero_main [class*="slideshow-controls"] button,
-#shopify-section-hero_main [class*="arrow"] button,
+[id*="hero_main"] [class*="slideshow-controls"] button,
+[id*="hero_main"] [class*="arrow"] button,
 section.slideshow [aria-label*="Previous"],
 section.slideshow [aria-label*="Next"] {
   background: rgba(255, 255, 255, 0.15) !important;
@@ -349,31 +349,31 @@ section.slideshow [aria-label*="Next"] {
   transition: background var(--dc-duration) var(--dc-ease);
 }
 
-#shopify-section-hero_main [class*="slideshow-controls"] button:hover,
+[id*="hero_main"] [class*="slideshow-controls"] button:hover,
 section.slideshow [aria-label*="Previous"]:hover,
 section.slideshow [aria-label*="Next"]:hover {
   background: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Dots */
-#shopify-section-hero_main [class*="dot"],
-#shopify-section-hero_main [class*="pagination"] button {
+[id*="hero_main"] [class*="dot"],
+[id*="hero_main"] [class*="pagination"] button {
   background: rgba(255, 255, 255, 0.4) !important;
   width: 8px !important;
   height: 8px !important;
   border-radius: 50% !important;
 }
 
-#shopify-section-hero_main [aria-current="true"],
-#shopify-section-hero_main [class*="pagination"] [aria-current="true"] {
+[id*="hero_main"] [aria-current="true"],
+[id*="hero_main"] [class*="pagination"] [aria-current="true"] {
   background: var(--dc-white) !important;
   width: 24px !important;
   border-radius: 4px !important;
 }
 
 /* Tipografia do hero — H1 grande responsivo */
-#shopify-section-hero_main h1,
-#shopify-section-hero_main h2 {
+[id*="hero_main"] h1,
+[id*="hero_main"] h2 {
   font-size: clamp(2.25rem, 5vw, 4.5rem) !important;
   font-weight: 800 !important;
   line-height: 1.05 !important;
@@ -382,8 +382,8 @@ section.slideshow [aria-label*="Next"]:hover {
 }
 
 /* CTA primary forte estilo Fantasy */
-#shopify-section-hero_main .button--primary,
-#shopify-section-hero_main button.button {
+[id*="hero_main"] .button--primary,
+[id*="hero_main"] button.button {
   background: var(--dc-white) !important;
   color: var(--dc-text) !important;
   border-color: var(--dc-white) !important;
@@ -391,8 +391,8 @@ section.slideshow [aria-label*="Next"]:hover {
   padding: 14px 32px !important;
 }
 
-#shopify-section-hero_main .button--primary:hover,
-#shopify-section-hero_main button.button:hover {
+[id*="hero_main"] .button--primary:hover,
+[id*="hero_main"] button.button:hover {
   background: var(--dc-green) !important;
   color: var(--dc-text-on-dark) !important;
   border-color: var(--dc-green) !important;
@@ -934,8 +934,8 @@ product-card.product-card:hover,
    ============================================================ */
 
 /* Section root */
-#shopify-section-best_sellers,
-#shopify-section-second_collection,
+[id*="best_sellers"],
+[id*="second_collection"],
 .shopify-section[id*="best_sellers"],
 .shopify-section[id*="second_collection"] {
   background: var(--dc-white);
@@ -943,8 +943,8 @@ product-card.product-card:hover,
 }
 
 /* Heading centralizado */
-#shopify-section-best_sellers h2,
-#shopify-section-second_collection h2 {
+[id*="best_sellers"] h2,
+[id*="second_collection"] h2 {
   text-align: center !important;
   font-size: clamp(1.5rem, 3vw, 2rem) !important;
   font-weight: 700 !important;
@@ -953,20 +953,20 @@ product-card.product-card:hover,
 }
 
 /* Container do carrossel — espaçamento e gap entre cards */
-#shopify-section-best_sellers .product-list,
-#shopify-section-second_collection .product-list,
-#shopify-section-best_sellers slideshow-slides,
-#shopify-section-second_collection slideshow-slides {
+[id*="best_sellers"] .product-list,
+[id*="second_collection"] .product-list,
+[id*="best_sellers"] slideshow-slides,
+[id*="second_collection"] slideshow-slides {
   gap: 16px !important;
 }
 
 /* Setas do carrossel — circulares brancas com borda fina */
-#shopify-section-best_sellers slideshow-controls button,
-#shopify-section-second_collection slideshow-controls button,
-#shopify-section-best_sellers [aria-label*="Previous"],
-#shopify-section-best_sellers [aria-label*="Next"],
-#shopify-section-second_collection [aria-label*="Previous"],
-#shopify-section-second_collection [aria-label*="Next"] {
+[id*="best_sellers"] slideshow-controls button,
+[id*="second_collection"] slideshow-controls button,
+[id*="best_sellers"] [aria-label*="Previous"],
+[id*="best_sellers"] [aria-label*="Next"],
+[id*="second_collection"] [aria-label*="Previous"],
+[id*="second_collection"] [aria-label*="Next"] {
   background: var(--dc-white) !important;
   border: 1px solid var(--dc-border) !important;
   width: 44px !important;
@@ -978,34 +978,34 @@ product-card.product-card:hover,
               border-color var(--dc-duration) var(--dc-ease);
 }
 
-#shopify-section-best_sellers slideshow-controls button:hover,
-#shopify-section-second_collection slideshow-controls button:hover,
-#shopify-section-best_sellers [aria-label*="Previous"]:hover,
-#shopify-section-best_sellers [aria-label*="Next"]:hover,
-#shopify-section-second_collection [aria-label*="Previous"]:hover,
-#shopify-section-second_collection [aria-label*="Next"]:hover {
+[id*="best_sellers"] slideshow-controls button:hover,
+[id*="second_collection"] slideshow-controls button:hover,
+[id*="best_sellers"] [aria-label*="Previous"]:hover,
+[id*="best_sellers"] [aria-label*="Next"]:hover,
+[id*="second_collection"] [aria-label*="Previous"]:hover,
+[id*="second_collection"] [aria-label*="Next"]:hover {
   background: var(--dc-surface) !important;
   border-color: #d4d4d8 !important;
 }
 
-#shopify-section-best_sellers slideshow-controls svg,
-#shopify-section-second_collection slideshow-controls svg {
+[id*="best_sellers"] slideshow-controls svg,
+[id*="second_collection"] slideshow-controls svg {
   width: 18px;
   height: 18px;
   color: var(--dc-text);
 }
 
 /* Dots/pagination minimizar */
-#shopify-section-best_sellers [class*="pagination"] button,
-#shopify-section-second_collection [class*="pagination"] button {
+[id*="best_sellers"] [class*="pagination"] button,
+[id*="second_collection"] [class*="pagination"] button {
   background: var(--dc-border) !important;
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-#shopify-section-best_sellers [class*="pagination"] [aria-current="true"],
-#shopify-section-second_collection [class*="pagination"] [aria-current="true"] {
+[id*="best_sellers"] [class*="pagination"] [aria-current="true"],
+[id*="second_collection"] [class*="pagination"] [aria-current="true"] {
   background: var(--dc-blue) !important;
   width: 24px;
   border-radius: 4px;
@@ -1013,8 +1013,8 @@ product-card.product-card:hover,
 
 /* Mobile — padding menor */
 @media (max-width: 768px) {
-  #shopify-section-best_sellers,
-  #shopify-section-second_collection {
+  [id*="best_sellers"],
+  [id*="second_collection"] {
     padding-block: 32px;
   }
 }
@@ -1283,13 +1283,13 @@ section[class*="brand"] h2 {
    Aplica em testimonials_section existente
    ============================================================ */
 
-#shopify-section-testimonials_section,
+[id*="testimonials_section"],
 section[id*="testimonials"] {
   background: var(--dc-surface);
   padding-block: 64px !important;
 }
 
-#shopify-section-testimonials_section h2,
+[id*="testimonials_section"] h2,
 section[id*="testimonials"] h2 {
   text-align: center !important;
   font-size: 1.75rem !important;
@@ -1299,7 +1299,7 @@ section[id*="testimonials"] h2 {
 }
 
 /* Card individual de depoimento */
-#shopify-section-testimonials_section .testimonial-card,
+[id*="testimonials_section"] .testimonial-card,
 section[id*="testimonials"] [class*="testimonial-card"],
 section[id*="testimonials"] .group-block-content {
   background: var(--dc-white) !important;
@@ -1312,7 +1312,7 @@ section[id*="testimonials"] .group-block-content {
 }
 
 /* Aspas grandes ❝ ❞ tipográficas */
-#shopify-section-testimonials_section [class*="testimonial-card"]::before,
+[id*="testimonials_section"] [class*="testimonial-card"]::before,
 section[id*="testimonials"] .group-block-content::before {
   content: "❝";
   position: absolute;
@@ -1324,7 +1324,7 @@ section[id*="testimonials"] .group-block-content::before {
   line-height: 1;
 }
 
-#shopify-section-testimonials_section [class*="testimonial-card"]::after,
+[id*="testimonials_section"] [class*="testimonial-card"]::after,
 section[id*="testimonials"] .group-block-content::after {
   content: "❞";
   position: absolute;
