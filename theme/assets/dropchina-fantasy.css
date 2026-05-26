@@ -1245,19 +1245,56 @@ header.header .search-action {
   display: none !important;
 }
 
-/* Faixa da search customizada */
+/* Container #header-group precisa ser relative pro absolute funcionar */
+#header-group {
+  position: relative;
+}
+
+/* Search strip absolute posicionada sobre o header top row */
 .dc-search-strip {
-  background: var(--dc-black);
-  padding: 12px 24px 20px;
+  background: transparent;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 100%;
+  max-width: 640px;
+  /* Posicionar verticalmente: começa logo abaixo da announcement bar
+     e ocupa altura do top row (precisaríamos calcular dinamicamente,
+     mas a regra inline-style do Tinker injeta --header-group-height) */
+  top: 32px;  /* Ajustar conforme altura da announcement bar */
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  padding-inline: 16px;
 }
 
 .dc-search-strip__form {
-  max-width: 720px;
-  margin: 0 auto;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
   gap: 0;
+  pointer-events: auto;
+}
+
+/* Em desktop a search fica no top row entre logo e actions */
+@media (min-width: 768px) {
+  .dc-search-strip {
+    top: 36px;  /* Match com altura da announcement bar + offset top */
+  }
+}
+
+/* Em mobile a search vai abaixo do header (volta ao layout original 3ª linha) */
+@media (max-width: 767px) {
+  .dc-search-strip {
+    position: static;
+    transform: none;
+    background: var(--dc-black);
+    padding: 8px 16px 12px;
+    max-width: 100%;
+  }
 }
 
 .dc-search-strip__input {
@@ -1536,4 +1573,28 @@ section[id*="testimonials"] [aria-label*="stars"] {
   display: flex !important;
   justify-content: center;
   gap: 2px;
+}
+
+/* ============================================================
+   SEARCH NATIVA TINKER — Esconder COMPLETAMENTE (último override)
+   Sobrescreve qualquer regra anterior que forçava display:flex/inline-block
+   ============================================================ */
+
+header.header search-button,
+header.header search-button *,
+header.header .search-action,
+header.header .search-action *,
+header.header .search-action button,
+header.header .search-action button span,
+header.header .search-action button .svg-wrapper,
+header.header .search-action button .mobile\:hidden,
+header.header .header__column search-button,
+header.header .header__row--top search-button {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
 }
