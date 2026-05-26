@@ -1587,3 +1587,51 @@ search-button *,
     max-height: 60vh;
   }
 }
+
+/* ============================================================
+   HERO SLIDE CONTENT — transparente sobre banner
+   .slide__content tem class color-scheme-8 que pinta bg preto sobre o
+   .slide__image-container (onde está nosso banner). Forçar transparent
+   pra deixar o banner aparecer atrás do texto.
+   ============================================================ */
+
+[id*="hero_main"] .slide__content,
+[id*="hero_main"] .slide__content.color-scheme-8 {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* O image-container deve ficar atrás (z-index 0) e o content por cima (z-index 1)
+   pra texto aparecer sobre o banner */
+[id*="hero_main"] .slide__image-container {
+  z-index: 0;
+}
+
+[id*="hero_main"] .slide__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Garantir que slideshow-slide é o container relativo pros 2 filhos */
+[id*="hero_main"] slideshow-slide {
+  position: relative !important;
+}
+
+/* ============================================================
+   HERO SLIDE TEXT — esconder texto sobreposto (banners têm capa própria)
+   Como os 3 banners do user já têm título/branding embutidos, esconder
+   o eyebrow/heading/sub/button text-blocks sobrepostos pra evitar duplicação.
+   Se user quiser mostrar texto novamente, basta desabilitar essa regra.
+   ============================================================ */
+
+[id*="hero_main"] slideshow-slide .slide__content .text-block,
+[id*="hero_main"] slideshow-slide .slide__content rte-formatter {
+  display: none !important;
+}
+
+/* Manter botões CTA visíveis (opcional — caso slides queiram CTA) */
+[id*="hero_main"] slideshow-slide .slide__content .button-wrapper,
+[id*="hero_main"] slideshow-slide .slide__content a.button,
+[id*="hero_main"] slideshow-slide .slide__content button.button {
+  display: inline-flex !important;
+}
