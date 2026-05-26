@@ -287,8 +287,11 @@ header.header .header__navigation-bar-row {
    HERO SLIDESHOW FULL-BLEED (estilo Fantasy cinematográfico)
    ============================================================ */
 
-/* Section root: zero radius/margin, full-bleed */
+/* Section root hero: ZERO padding/margin (sem faixas pretas em cima/embaixo) */
 [id*="hero_main"],
+[id*="hero_main"] .slideshow-section,
+[id*="hero_main"] .section,
+[id*="hero_main"] > div,
 section.slideshow {
   margin: 0 !important;
   padding: 0 !important;
@@ -299,28 +302,14 @@ section.slideshow .slideshow {
   border-radius: 0 !important;
   max-width: 100% !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Slides altura COMPACTA — Fantasy-style hero não-gigante */
+/* Background dos slides — TRANSPARENTE (banner via .slide__image-container) */
 [id*="hero_main"] .slide,
 [id*="hero_main"] slideshow-slide {
-  min-height: 220px !important;
-  max-height: 320px !important;
   border-radius: 0 !important;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(15, 79, 168, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.10) 0%, transparent 50%),
-    linear-gradient(180deg, #0a0a0d 0%, #000000 100%);
-  background-size: cover;
-  background-position: center;
-}
-
-@media (min-width: 768px) {
-  [id*="hero_main"] .slide,
-  [id*="hero_main"] slideshow-slide {
-    min-height: 280px !important;
-    max-height: 360px !important;
-  }
+  background: transparent !important;
 }
 
 /* Reduzir tipografia do hero pra combinar com altura menor */
