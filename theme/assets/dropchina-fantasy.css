@@ -1413,3 +1413,44 @@ search-button *,
     max-height: 420px !important;
   }
 }
+
+/* ============================================================
+   HERO BACKGROUND IMAGES — Unsplash placeholders por slide
+   Até user subir imagens reais via theme editor (image setting do _slide),
+   usamos URLs Unsplash diretamente como background-image.
+   ============================================================ */
+
+/* Slide 1: Toners e Cartuchos — escritório/impressão */
+[id*="hero_main"] slideshow-slide:nth-of-type(1) {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&q=80&fit=crop");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Slide 2: Impressoras Multifuncionais — printer foco em close-up */
+[id*="hero_main"] slideshow-slide:nth-of-type(2) {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=1920&q=80&fit=crop");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Slide 3: Periféricos Premium — desk setup com mouse/teclado */
+[id*="hero_main"] slideshow-slide:nth-of-type(3) {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1920&q=80&fit=crop");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Garantir que o texto fica branco e legível sobre as imagens */
+[id*="hero_main"] slideshow-slide h1,
+[id*="hero_main"] slideshow-slide h2,
+[id*="hero_main"] slideshow-slide p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
