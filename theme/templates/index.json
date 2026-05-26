@@ -1506,6 +1506,16 @@
       "settings": {
         "heading": "Escolha pela marca"
       }
+    },
+    "youtube_main": {
+      "type": "youtube-embed",
+      "settings": {
+        "heading": "Por que escolher DropChina",
+        "icon_play": true,
+        "video_id": "",
+        "cta_label": "Assista no YouTube",
+        "cta_link": ""
+      }
     }
   },
   "order": [
@@ -1518,6 +1528,7 @@
     "promo_banner",
     "second_collection",
     "guarantees",
+    "youtube_main",
     "brand_carousel_main",
     "testimonials_section",
     "story_block"
