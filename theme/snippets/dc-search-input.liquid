@@ -4,78 +4,7 @@
   predictive-search.js JS do Tinker que tinha problemas de morph).
 {%- enddoc -%}
 
-<script>
-  (function() {
-    if (window.__dcSearchInit) return;
-    window.__dcSearchInit = true;
-    let dcSearchTimer = null;
-    let dcSearchAbort = null;
-
-    function initDcSearch() {
-      const input = document.querySelector('.dc-search-input__field');
-      const results = document.querySelector('.dc-search-input__results');
-      const wrapper = document.querySelector('.dc-search-input__results-wrapper');
-      if (!input || !results || !wrapper) return;
-
-      wrapper.hidden = true;
-
-      console.log('[DC Search] Initialized', { input, results, wrapper });
-
-      input.addEventListener('input', function(e) {
-        const q = input.value.trim();
-        console.log('[DC Search] Input event:', q);
-        if (dcSearchTimer) clearTimeout(dcSearchTimer);
-        if (dcSearchAbort) dcSearchAbort.abort();
-        if (!q) {
-          wrapper.hidden = true;
-          results.innerHTML = '';
-          return;
-        }
-        dcSearchTimer = setTimeout(function() {
-          dcSearchAbort = new AbortController();
-          const url = '/search/suggest?section_id=predictive-search&q=' + encodeURIComponent(q) + '&resources%5Blimit%5D=8&resources%5Btype%5D=product%2Ccollection';
-          console.log('[DC Search] Fetching:', url);
-          fetch(url, { signal: dcSearchAbort.signal })
-            .then(function(r) {
-              console.log('[DC Search] Response status:', r.status);
-              return r.text();
-            })
-            .then(function(html) {
-              console.log('[DC Search] HTML length:', html.length);
-              // Usar DOMParser oficial Shopify pattern
-              const doc = new DOMParser().parseFromString(html, 'text/html');
-              const section = doc.querySelector('#shopify-section-predictive-search');
-              console.log('[DC Search] Section found:', !!section);
-              if (section) {
-                results.innerHTML = section.innerHTML;
-                wrapper.hidden = false;
-                wrapper.style.display = 'block';
-                console.log('[DC Search] Injected. Wrapper hidden:', wrapper.hidden, 'display:', getComputedStyle(wrapper).display);
-              } else {
-                console.warn('[DC Search] #shopify-section-predictive-search not found. First 300 chars:', html.slice(0, 300));
-              }
-            })
-            .catch(function(err) {
-              if (err.name !== 'AbortError') console.error('[DC Search] Error:', err);
-            });
-        }, 200);
-      });
-
-      input.addEventListener('blur', function() {
-        setTimeout(function() { wrapper.hidden = true; }, 200);
-      });
-      input.addEventListener('focus', function() {
-        if (results.innerHTML.trim()) wrapper.hidden = false;
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initDcSearch);
-    } else {
-      initDcSearch();
-    }
-  })();
-</script>
+<script src="{{ 'dc-search.js' | asset_url }}" defer="defer"></script>
 
 <div
   class="dc-search-input predictive-search color-scheme-1"
