@@ -1384,45 +1384,39 @@ search-button *,
    do <slideshow-component>. Sobrescrever pra valores compactos Fantasy.
    ============================================================ */
 
-/* Banners 2172x724 (aspect 3:1). aspect-ratio puro no slide pra evitar
-   letterbox (faixas pretas). Remover min/max-height pra deixar o ratio
-   ditar a altura. */
+/* Banners 2172x724. Voltar pra alturas fixas confiáveis pra não quebrar
+   o layout flex do carrossel Tinker. Aspect-ratio causava problemas com
+   border-radius/transforms do tema. */
 [id*="hero_main"] slideshow-component,
 [id*="hero_main"] .slideshow {
-  --slide-min-height: 0 !important;
-  --slide-min-height-desktop: 0 !important;
-  width: 100%;
-  display: block;
+  --slide-min-height: 180px !important;
+  --slide-min-height-desktop: 380px !important;
 }
 
-[id*="hero_main"] slideshow-slides {
-  aspect-ratio: 3 / 1 !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  height: auto !important;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-}
-
+[id*="hero_main"] slideshow-slides,
 [id*="hero_main"] slideshow-slide {
-  aspect-ratio: 3 / 1 !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  height: auto !important;
-  width: 100%;
-  flex-shrink: 0;
+  min-height: 180px !important;
+  max-height: 380px !important;
+  height: 380px !important;
   position: relative !important;
-  background: transparent !important;
 }
 
-/* Em mobile, deixar slide um pouco mais alto (banner ainda visível, mas
-   menos drástico) */
 @media (max-width: 768px) {
   [id*="hero_main"] slideshow-slides,
   [id*="hero_main"] slideshow-slide {
-    aspect-ratio: 16 / 9 !important;
+    height: 180px !important;
   }
+}
+
+/* Remover border-radius/transforms que o Tinker possa estar aplicando */
+[id*="hero_main"] .slide__image-container,
+[id*="hero_main"] .slide__image-container--rounded {
+  border-radius: 0 !important;
+  transform: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
 }
 
 /* ============================================================
