@@ -2,7 +2,10 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "dc_cart_drawer": { "type": "dc-cart-drawer", "settings": {} },
+    "dc_cart_drawer": {
+      "type": "dc-cart-drawer",
+      "settings": {}
+    },
     "dc_header": {
       "type": "dc-header",
       "blocks": {
@@ -11,7 +14,9 @@
           "settings": {
             "name": "Cartuchos & Tintas",
             "icon": "cartridge",
-            "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais"
+            "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais",
+            "featured_collection": "cartuchos-de-tinta",
+            "link": "shopify://collections/cartuchos-de-tinta"
           }
         },
         "mega_2": {
@@ -19,7 +24,9 @@
           "settings": {
             "name": "Toners",
             "icon": "printer",
-            "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor"
+            "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor",
+            "featured_collection": "toners",
+            "link": "shopify://collections/toners"
           }
         },
         "mega_3": {
@@ -27,7 +34,9 @@
           "settings": {
             "name": "Placas de Vídeo",
             "icon": "gpu",
-            "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games"
+            "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games",
+            "featured_collection": "perifericos",
+            "link": "shopify://collections/perifericos"
           }
         },
         "mega_4": {
@@ -35,7 +44,9 @@
           "settings": {
             "name": "Computadores & Notebooks",
             "icon": "storage",
-            "items": "Mini PCs\nNotebooks\nAll-in-One\nPCs gamer\nWorkstations\nAcessórios"
+            "items": "Mini PCs\nNotebooks\nAll-in-One\nPCs gamer\nWorkstations\nAcessórios",
+            "featured_collection": "mini-pcs",
+            "link": "shopify://collections/mini-pcs"
           }
         },
         "mega_5": {
@@ -43,7 +54,9 @@
           "settings": {
             "name": "Periféricos & Cabos",
             "icon": "cable",
-            "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones"
+            "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones",
+            "featured_collection": "perifericos",
+            "link": "shopify://collections/perifericos"
           }
         }
       },
