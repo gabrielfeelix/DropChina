@@ -93,19 +93,29 @@
       <div class="testimonials-platforms">
         <div class="testimonials-platforms__list">
           {%- for block in platform_blocks -%}
-            <span class="testimonials-platforms__item" {{ block.shopify_attributes }}>
-              <b>{{ block.settings.name | escape }}</b>
+            {%- assign p_slug = block.settings.name | downcase | strip -%}
+            {%- assign p_class = 'generic' -%}
+            {%- if p_slug contains 'reclame' -%}{%- assign p_class = 'reclame' -%}
+            {%- elsif p_slug contains 'google' -%}{%- assign p_class = 'google' -%}
+            {%- elsif p_slug contains 'mercado' -%}{%- assign p_class = 'mercado' -%}
+            {%- endif -%}
+            <span class="testimonials-platforms__item testimonials-platforms__item--{{ p_class }}" {{ block.shopify_attributes }}>
+              <span class="testimonials-platforms__chip testimonials-platforms__chip--{{ p_class }}">
+                {%- case p_class -%}
+                  {%- when 'reclame' -%}Reclame<b>AQUI</b>
+                  {%- when 'google' -%}<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09Z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23Z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22 .81-.62Z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38Z"/></svg>
+                  {%- when 'mercado' -%}<span class="testimonials-platforms__chip-text">Mercado Livre</span>
+                  {%- else -%}<b>{{ block.settings.name | escape }}</b>
+                {%- endcase -%}
+              </span>
               {%- if block.settings.value != blank -%}
-                <span class="testimonials-platforms__dot">·</span>
-                {{ block.settings.value | escape }}
+                <span class="testimonials-platforms__value">
+                  <span class="testimonials-platforms__dot">·</span>
+                  {{ block.settings.value | escape }}
+                </span>
               {%- endif -%}
             </span>
           {%- endfor -%}
-          {%- if platform_blocks.size == 0 -%}
-            <span class="testimonials-platforms__item"><b>Reclame Aqui</b> <span class="testimonials-platforms__dot">·</span> Reputação ótima</span>
-            <span class="testimonials-platforms__item"><b>Google</b> <span class="testimonials-platforms__dot">·</span> 4,8 (3.214 avaliações)</span>
-            <span class="testimonials-platforms__item"><b>Mercado Livre</b> <span class="testimonials-platforms__dot">·</span> MercadoLíder Platinum</span>
-          {%- endif -%}
         </div>
         {%- if section.settings.cta_label != blank -%}
           <a href="{{ section.settings.cta_link | default: '#' }}" class="testimonials-platforms__cta">
@@ -323,23 +333,69 @@
     display: flex;
     gap: 28px;
     flex-wrap: wrap;
+    align-items: center;
     color: #6b7280;
     font-size: 14px;
   }
-  .testimonials-platforms__item b {
+  .testimonials-platforms__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .testimonials-platforms__value {
+    color: #6b7280;
+    font-size: 13.5px;
+  }
+  .testimonials-platforms__dot { color: #9ca3af; margin-right: 4px; }
+
+  /* Brand chips */
+  .testimonials-platforms__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .testimonials-platforms__chip--reclame {
+    background: #00a859;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    padding: 6px 12px;
+    font-weight: 500;
+  }
+  .testimonials-platforms__chip--reclame b { color: #ffffff; font-weight: 800; }
+  .testimonials-platforms__chip--google {
+    background: #ffffff;
+    border: 1px solid #ececef;
+    color: #5f6368;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    gap: 6px;
+    padding: 6px 12px;
+  }
+  .testimonials-platforms__chip--google::after {
+    content: "Google";
+    font-weight: 500;
+  }
+  .testimonials-platforms__chip--mercado {
+    background: #fff159;
     color: #0d1115;
-    font-weight: 700;
-    margin-right: 6px;
+    font-weight: 600;
+    padding: 6px 12px;
   }
-  .testimonials-platforms__dot {
-    color: #9ca3af;
-    margin: 0 4px;
+  .testimonials-platforms__chip--mercado .testimonials-platforms__chip-text {
+    font-weight: 600;
   }
+  .testimonials-platforms__chip--generic b { color: #0d1115; font-weight: 700; }
+
   .testimonials-platforms__cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 0 18px;
     height: 40px;
     border-radius: 999px;
     border: 1px solid #d9dade;
@@ -354,6 +410,11 @@
     background: #0d1115;
     color: #ffffff;
     border-color: #0d1115;
+  }
+
+  /* Cards com hover sutil + sombra */
+  .testimonial-card {
+    box-shadow: 0 1px 2px rgba(20, 22, 24, 0.04);
   }
 {% endstylesheet %}
 
