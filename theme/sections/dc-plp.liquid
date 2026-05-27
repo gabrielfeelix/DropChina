@@ -1,0 +1,689 @@
+{%- assign products_per_page = section.settings.products_per_page | default: 16 -%}
+
+<nav class="dc-breadcrumb" aria-label="Breadcrumb">
+  <div class="dc-breadcrumb__container">
+    <a href="{{ routes.root_url }}" class="dc-breadcrumb__home">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1V10"/></svg>
+      Home
+    </a>
+    <span class="dc-breadcrumb__sep">›</span>
+    <a href="{{ routes.collections_url }}" class="dc-breadcrumb__crumb">Categorias</a>
+    <span class="dc-breadcrumb__sep">›</span>
+    <span class="dc-breadcrumb__current">{{ collection.title }}</span>
+  </div>
+</nav>
+
+<section class="dc-plp-hero">
+  <div class="dc-plp-hero__container">
+    <p class="dc-plp-hero__eyebrow">{{ section.settings.eyebrow | default: 'Categoria' | escape }}</p>
+    <h1 class="dc-plp-hero__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="dc-plp-hero__desc">{{ collection.description | strip_html | truncate: 280 }}</div>
+    {%- endif -%}
+    <div class="dc-plp-hero__meta">
+      <span><b>{{ collection.products_count }}</b> produtos</span>
+      <span class="dc-plp-hero__dot"></span>
+      <span>Frete grátis acima de R$ 199</span>
+      <span class="dc-plp-hero__dot"></span>
+      <span>Em até 18x sem juros</span>
+    </div>
+  </div>
+</section>
+
+<main class="dc-plp">
+  <div class="dc-plp__container">
+    <div class="dc-plp__layout">
+
+      <aside class="dc-plp-sidebar">
+        <div class="dc-plp-sidebar__head">
+          <h3>Filtros</h3>
+          <a href="{{ collection.url }}" class="dc-plp-sidebar__clear">Limpar tudo</a>
+        </div>
+
+        {%- if collection.filters.size > 0 -%}
+          <form id="dc-plp-filter-form" class="dc-plp-sidebar__form">
+            {%- for filter in collection.filters -%}
+              <details class="dc-plp-filter-group" {% if forloop.first or forloop.index <= 3 %}open{% endif %}>
+                <summary>{{ filter.label }}</summary>
+                <div class="dc-plp-filter-group__body">
+                  {%- case filter.type -%}
+                    {%- when 'list' -%}
+                      {%- for value in filter.values -%}
+                        <label class="dc-plp-filter-check">
+                          <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %}>
+                          <span class="dc-plp-filter-check__box"></span>
+                          <span class="dc-plp-filter-check__lbl">{{ value.label }}</span>
+                          <span class="dc-plp-filter-check__count">{{ value.count }}</span>
+                        </label>
+                      {%- endfor -%}
+                    {%- when 'price_range' -%}
+                      <div class="dc-plp-filter-price">
+                        <div class="dc-plp-filter-price__row">
+                          <input
+                            type="number"
+                            name="{{ filter.min_value.param_name }}"
+                            value="{{ filter.min_value.value }}"
+                            placeholder="Min"
+                            min="0"
+                            aria-label="Preço mínimo"
+                          >
+                          <span>—</span>
+                          <input
+                            type="number"
+                            name="{{ filter.max_value.param_name }}"
+                            value="{{ filter.max_value.value }}"
+                            placeholder="Max"
+                            min="0"
+                            aria-label="Preço máximo"
+                          >
+                        </div>
+                      </div>
+                  {%- endcase -%}
+                </div>
+              </details>
+            {%- endfor -%}
+            <button type="submit" class="dc-plp-sidebar__apply">Aplicar filtros</button>
+          </form>
+        {%- else -%}
+          <p class="dc-plp-sidebar__empty">Nenhum filtro disponível para esta coleção.</p>
+        {%- endif -%}
+      </aside>
+
+      <div class="dc-plp-content">
+        <div class="dc-plp-toolbar">
+          <div class="dc-plp-toolbar__count">
+            <b>{{ collection.products_count }}</b> resultados em <b>{{ collection.title }}</b>
+          </div>
+          <div class="dc-plp-toolbar__right">
+            <label class="dc-plp-toolbar__sort">
+              <span>Ordenar por:</span>
+              <select onchange="window.location.href=this.value">
+                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                {%- assign sort_url_base = collection.url | append: '?sort_by=' -%}
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ sort_url_base }}{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+                {%- endfor -%}
+              </select>
+            </label>
+          </div>
+        </div>
+
+        {%- paginate collection.products by products_per_page -%}
+        {%- if collection.products.size > 0 -%}
+          <div class="dc-plp-grid">
+            {%- for p in collection.products -%}
+              {%- assign p_var = p.selected_or_first_available_variant -%}
+              {%- assign on_sale = false -%}
+              {%- if p_var.compare_at_price > p_var.price -%}
+                {%- assign on_sale = true -%}
+                {%- assign pct_off = p_var.compare_at_price | minus: p_var.price | times: 100 | divided_by: p_var.compare_at_price | round -%}
+              {%- endif -%}
+              <a href="{{ p.url }}" class="dc-plp-card">
+                <div class="dc-plp-card__media">
+                  {%- if p.featured_image -%}
+                    {{ p.featured_image | image_url: width: 480 | image_tag: loading: 'lazy', alt: p.title, class: 'dc-plp-card__img', widths: '240, 480' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'dc-plp-card__img' }}
+                  {%- endif -%}
+                  {%- if on_sale -%}
+                    <span class="dc-plp-card__badge dc-plp-card__badge--sale">−{{ pct_off }}%</span>
+                  {%- elsif p.tags contains 'mais-vendido' or p.tags contains 'best' -%}
+                    <span class="dc-plp-card__badge dc-plp-card__badge--best">MAIS VENDIDO</span>
+                  {%- elsif p.tags contains 'novo' or p.tags contains 'new' -%}
+                    <span class="dc-plp-card__badge dc-plp-card__badge--new">NOVO</span>
+                  {%- endif -%}
+                </div>
+                <div class="dc-plp-card__body">
+                  {%- if p.vendor != blank -%}
+                    <div class="dc-plp-card__brand">{{ p.vendor }}</div>
+                  {%- endif -%}
+                  <h4 class="dc-plp-card__title">{{ p.title }}</h4>
+                  <div class="dc-plp-card__price-stack">
+                    {%- if on_sale -%}
+                      <span class="dc-plp-card__price-old">{{ p_var.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <div class="dc-plp-card__price-row">
+                      <span class="dc-plp-card__price">{{ p_var.price | money }}</span>
+                      {%- if on_sale -%}<span class="dc-plp-card__price-off">{{ pct_off }}% OFF</span>{%- endif -%}
+                    </div>
+                  </div>
+                  <div class="dc-plp-card__installments">em <b>12x {{ p_var.price | divided_by: 12 | money }}</b> sem juros</div>
+                  <div class="dc-plp-card__shipping"><span class="dc-plp-card__pulse"></span> Frete grátis</div>
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <div class="dc-plp-pagination">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" class="dc-plp-pagination__nav">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
+                  Anterior
+                </a>
+              {%- endif -%}
+              <div class="dc-plp-pagination__pages">
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}">{{ part.title }}</a>
+                  {%- else -%}
+                    {%- if part.title == paginate.current_page -%}
+                      <span class="active">{{ part.title }}</span>
+                    {%- else -%}
+                      <span>{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" class="dc-plp-pagination__nav">
+                  Próximo
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="dc-plp-empty">
+            <h3>Nenhum produto encontrado</h3>
+            <p>Tente ajustar os filtros ou volte para todas as categorias.</p>
+            <a href="{{ routes.collections_url }}" class="dc-plp-empty__cta">Ver todas as categorias</a>
+          </div>
+        {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</main>
+
+{% stylesheet %}
+  .dc-plp-hero {
+    padding: 36px 0 28px;
+    border-bottom: 1px solid #ececef;
+    background: #ffffff;
+  }
+  .dc-plp-hero__container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-plp-hero__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .dc-plp-hero__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 48px;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0 0 12px;
+  }
+  .dc-plp-hero__desc {
+    font-size: 15.5px;
+    color: #6b7280;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .dc-plp-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+    font-size: 13.5px;
+    color: #2a3038;
+    flex-wrap: wrap;
+  }
+  .dc-plp-hero__meta b { color: #0d1115; }
+  .dc-plp-hero__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: #9ca3af;
+  }
+
+  .dc-plp { padding: 32px 0 56px; background: #ffffff; }
+  .dc-plp__container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-plp__layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  @media (max-width: 920px) {
+    .dc-plp__layout { grid-template-columns: 1fr; }
+  }
+
+  /* Sidebar */
+  .dc-plp-sidebar {
+    background: #ffffff;
+    border-radius: 22px;
+    border: 1px solid #ececef;
+    padding: 4px 0;
+    position: sticky;
+    top: 100px;
+  }
+  .dc-plp-sidebar__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #ececef;
+  }
+  .dc-plp-sidebar__head h3 {
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #0d1115;
+  }
+  .dc-plp-sidebar__clear {
+    font-size: 12px;
+    color: #d62828;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .dc-plp-sidebar__clear:hover { text-decoration: underline; }
+
+  .dc-plp-filter-group {
+    border-bottom: 1px solid #ececef;
+  }
+  .dc-plp-filter-group:last-of-type { border-bottom: 0; }
+  .dc-plp-filter-group summary {
+    padding: 14px 20px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #0d1115;
+  }
+  .dc-plp-filter-group summary::-webkit-details-marker { display: none; }
+  .dc-plp-filter-group summary::after {
+    content: '+';
+    font-size: 16px;
+    color: #6b7280;
+    transition: transform 0.2s;
+  }
+  .dc-plp-filter-group[open] summary::after { content: '−'; }
+  .dc-plp-filter-group__body {
+    padding: 0 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dc-plp-filter-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: #2a3038;
+    position: relative;
+  }
+  .dc-plp-filter-check input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .dc-plp-filter-check__box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #d9dade;
+    border-radius: 4px;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .dc-plp-filter-check input:checked ~ .dc-plp-filter-check__box {
+    background: #0d1115;
+    border-color: #0d1115;
+  }
+  .dc-plp-filter-check input:checked ~ .dc-plp-filter-check__box::after {
+    content: '';
+    width: 8px;
+    height: 4px;
+    border: 2px solid #ffffff;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .dc-plp-filter-check__lbl { flex: 1; }
+  .dc-plp-filter-check__count { color: #9ca3af; font-size: 12px; }
+  .dc-plp-filter-check:hover { color: #0d1115; }
+
+  .dc-plp-filter-price__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dc-plp-filter-price__row input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #d9dade;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 13px;
+    background: #ffffff;
+    color: #0d1115;
+    outline: none;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+  }
+  .dc-plp-filter-price__row input:focus { border-color: #0d1115; }
+
+  .dc-plp-sidebar__apply {
+    margin: 14px 20px 18px;
+    background: #0d1115;
+    color: #ffffff;
+    border: 0;
+    height: 40px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.18s;
+    display: block;
+    width: calc(100% - 40px);
+  }
+  .dc-plp-sidebar__apply:hover { background: #d62828; }
+  .dc-plp-sidebar__empty {
+    padding: 20px;
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  /* Toolbar */
+  .dc-plp-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ececef;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .dc-plp-toolbar__count {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  .dc-plp-toolbar__count b { color: #0d1115; font-weight: 700; }
+  .dc-plp-toolbar__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: #6b7280;
+  }
+  .dc-plp-toolbar__sort select {
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 8px 36px 8px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #0d1115;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230d1115' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .dc-plp-toolbar__sort select:focus { border-color: #0d1115; outline: none; }
+
+  /* Grid */
+  .dc-plp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 1180px) { .dc-plp-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 920px)  { .dc-plp-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .dc-plp-card {
+    background: #ffffff;
+    border-radius: 22px;
+    border: 1px solid #ececef;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative;
+  }
+  .dc-plp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -16px rgba(20, 22, 24, 0.18);
+    border-color: #d9dade;
+  }
+  .dc-plp-card__media {
+    position: relative;
+    background: #f4f5f7;
+    aspect-ratio: 1 / 1;
+  }
+  .dc-plp-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dc-plp-card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+  }
+  .dc-plp-card__badge--sale { background: #ff4d2e; }
+  .dc-plp-card__badge--best { background: #f5c518; color: #2a2410; }
+  .dc-plp-card__badge--new { background: #1f7a3a; }
+  .dc-plp-card__body {
+    padding: 16px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .dc-plp-card__brand {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .dc-plp-card__title {
+    font-family: "Manrope", sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #0d1115;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.7em;
+  }
+  .dc-plp-card__price-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+  }
+  .dc-plp-card__price-old {
+    font-size: 13px;
+    color: #9ca3af;
+    text-decoration: line-through;
+    line-height: 1;
+  }
+  .dc-plp-card__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .dc-plp-card__price {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d1115;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .dc-plp-card__price-off {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1f7a3a;
+  }
+  .dc-plp-card__installments {
+    font-size: 12.5px;
+    color: #6b7280;
+  }
+  .dc-plp-card__installments b { color: #0d1115; font-weight: 600; }
+  .dc-plp-card__shipping {
+    font-size: 12.5px;
+    color: #1f7a3a;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .dc-plp-card__pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #1f7a3a;
+  }
+
+  /* Pagination */
+  .dc-plp-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .dc-plp-pagination__nav {
+    height: 38px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #0d1115;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .dc-plp-pagination__nav:hover {
+    background: #0d1115;
+    color: #ffffff;
+    border-color: #0d1115;
+  }
+  .dc-plp-pagination__pages {
+    display: inline-flex;
+    gap: 4px;
+    margin: 0 8px;
+  }
+  .dc-plp-pagination__pages a,
+  .dc-plp-pagination__pages span {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #2a3038;
+    display: inline-grid;
+    place-items: center;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .dc-plp-pagination__pages a:hover { background: #f4f5f7; }
+  .dc-plp-pagination__pages .active {
+    background: #0d1115;
+    color: #ffffff;
+  }
+
+  /* Empty state */
+  .dc-plp-empty {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .dc-plp-empty h3 {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0 0 8px;
+  }
+  .dc-plp-empty p {
+    color: #6b7280;
+    margin: 0 0 24px;
+  }
+  .dc-plp-empty__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background: #0d1115;
+    color: #ffffff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.18s;
+  }
+  .dc-plp-empty__cta:hover { background: #d62828; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DropChina PLP",
+  "tag": "section",
+  "class": "section-dc-plp",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Categoria" },
+    { "type": "range", "id": "products_per_page", "label": "Produtos por página", "min": 8, "max": 48, "step": 4, "default": 16 }
+  ],
+  "presets": [
+    { "name": "DropChina PLP" }
+  ],
+  "enabled_on": {
+    "templates": ["collection"]
+  }
+}
+{% endschema %}
+
