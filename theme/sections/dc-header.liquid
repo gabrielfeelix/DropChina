@@ -431,9 +431,9 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
   }
   /* Quando scrolled: esconde announce + topbar + nav via display:none
      (instantâneo, sem flicker, sem transição complexa) */
@@ -457,19 +457,15 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* HEADER MAIN — fundo translúcido com blur ao scrollar */
+  /* HEADER MAIN — filhos transparentes pra não empilhar opacidade
+     com #header-group (causa fundo totalmente branco) */
   .dc-header {
-    background: rgba(255, 255, 255, 0.85);
-    border-bottom: 1px solid rgba(236, 236, 239, 0.7);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    background: transparent;
+    border-bottom: 1px solid rgba(236, 236, 239, 0.6);
   }
-  .dc-announce,
   .dc-topbar,
   .dc-nav {
-    background-color: rgba(255, 255, 255, 0.92);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    background-color: transparent;
   }
   .dc-announce {
     background-color: rgba(13, 17, 21, 0.95);
