@@ -1,0 +1,249 @@
+<section class="dc-footer-section section section--page-width" style="padding-block: {{ section.settings.padding_top | default: 64 }}px {{ section.settings.padding_bottom | default: 28 }}px;">
+  <div class="dc-footer-section__container">
+    <div class="dc-footer-grid">
+      <div class="dc-footer-brand">
+        {% if section.settings.logo %}
+          {{ section.settings.logo | image_url: width: 200 | image_tag:
+              alt: shop.name,
+              loading: 'lazy',
+              class: 'dc-footer-brand__logo',
+              widths: '120, 200' }}
+        {% else %}
+          <h3 class="dc-footer-brand__name">{{ shop.name | default: 'DropChina' }}</h3>
+        {% endif %}
+        <p class="dc-footer-brand__tagline">{{ section.settings.tagline | default: 'Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.' | escape }}</p>
+        <div class="dc-footer-socials">
+          {%- if section.settings.instagram != blank -%}
+            <a href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.facebook != blank -%}
+            <a href="{{ section.settings.facebook }}" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-4H13V7.5c0-1.2.4-2 2.1-2H17V2h-2.6c-3.2 0-4.4 2-4.4 4.5V10H7v4h3v8h3Z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.tiktok != blank -%}
+            <a href="{{ section.settings.tiktok }}" aria-label="TikTok" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.4 2 2 3.5 4 3.5V10c-1.6 0-3.1-.5-4-1v6.5A5.5 5.5 0 1 1 10.5 10v3.4a2.5 2.5 0 1 0 2.5 2.5V3h3Z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.youtube != blank -%}
+            <a href="{{ section.settings.youtube }}" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8a3 3 0 0 0-2.1-2.1C18 5.5 12 5.5 12 5.5s-6 0-7.9.4A3 3 0 0 0 2 8c-.4 1.6-.4 4-.4 4s0 2.4.4 4a3 3 0 0 0 2.1 2.1c1.9.4 7.9.4 7.9.4s6 0 7.9-.4A3 3 0 0 0 22 16c.4-1.6.4-4 .4-4s0-2.4-.4-4ZM10 15V9l5.2 3-5.2 3Z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.whatsapp != blank -%}
+            <a href="{{ section.settings.whatsapp }}" aria-label="WhatsApp" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.3A10 10 0 1 0 12 2Zm5 14.3c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-3.9-4.7-4.1-.1-.1-1-1.4-1-2.7 0-1.3.6-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1 0 .3 0 .5-.1.1-.2.3-.3.4l-.4.4c-.1.1-.2.2-.1.4.1.2.6 1 1.3 1.6.9.8 1.7 1.1 1.9 1.2.2.1.4.1.5-.1.1-.1.5-.6.7-.8.1-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3 0 .2 0 .8-.2 1.5Z"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu_col' -%}
+          <div class="dc-footer-col" {{ block.shopify_attributes }}>
+            <h5 class="dc-footer-col__title">{{ block.settings.title | escape }}</h5>
+            {%- if block.settings.menu != blank -%}
+              <ul class="dc-footer-col__list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- elsif block.settings.raw_links != blank -%}
+              <ul class="dc-footer-col__list">
+                {%- assign lines = block.settings.raw_links | newline_to_br | split: '<br />' -%}
+                {%- for line in lines -%}
+                  {%- assign clean = line | strip -%}
+                  {%- if clean != blank -%}
+                    <li><a href="#">{{ clean | escape }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            {%- if block.settings.extra != blank -%}
+              <p class="dc-footer-col__extra">{{ block.settings.extra }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="dc-footer-bottom">
+      <div class="dc-footer-bottom__copyright">{{ section.settings.copyright | default: '© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados.' | escape }}</div>
+      <div class="dc-footer-payments">
+        {%- assign methods = section.settings.payments | default: 'PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO' | split: ',' -%}
+        {%- for m in methods -%}
+          <span class="dc-footer-pay-chip">{{ m | strip | escape }}</span>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-footer-section {
+    background: #ffffff;
+    border-top: 1px solid #ececef;
+    color: #2a3038;
+  }
+  .dc-footer-section__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 920px) {
+    .dc-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  .dc-footer-brand__logo { height: 36px; width: auto; }
+  .dc-footer-brand__name {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: #0d1115;
+  }
+  .dc-footer-brand__tagline {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 16px 0 20px;
+    max-width: 32ch;
+  }
+  .dc-footer-socials {
+    display: flex;
+    gap: 8px;
+  }
+  .dc-footer-socials a {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #ececef;
+    display: grid;
+    place-items: center;
+    color: #2a3038;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+    text-decoration: none;
+  }
+  .dc-footer-socials a:hover {
+    background: #0d1115;
+    color: #ffffff;
+    border-color: #0d1115;
+  }
+  .dc-footer-col__title {
+    font-family: "Manrope", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #0d1115;
+    margin: 0 0 16px;
+  }
+  .dc-footer-col__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dc-footer-col__list a {
+    font-size: 14px;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .dc-footer-col__list a:hover { color: #0d1115; }
+  .dc-footer-col__extra {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+  .dc-footer-bottom {
+    border-top: 1px solid #ececef;
+    margin-top: 48px;
+    padding-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #6b7280;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .dc-footer-payments {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .dc-footer-pay-chip {
+    background: #ffffff;
+    border: 1px solid #ececef;
+    border-radius: 6px;
+    height: 26px;
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #2a3038;
+    display: inline-flex;
+    align-items: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DropChina Footer",
+  "tag": "footer",
+  "class": "section-dc-footer",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (PNG)" },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial." },
+    { "type": "header", "content": "Redes sociais" },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "facebook", "label": "Facebook URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "youtube", "label": "YouTube URL" },
+    { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" },
+    { "type": "header", "content": "Linha de baixo" },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados." },
+    { "type": "text", "id": "payments", "label": "Métodos de pagamento (separados por vírgula)", "default": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO" },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "menu_col",
+      "name": "Coluna",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Loja" },
+        { "type": "link_list", "id": "menu", "label": "Menu (opcional)" },
+        { "type": "textarea", "id": "raw_links", "label": "Links (um por linha, se não tiver menu)" },
+        { "type": "richtext", "id": "extra", "label": "Texto extra (ex: Atendimento)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DropChina Footer",
+      "blocks": [
+        { "type": "menu_col", "settings": { "title": "Loja", "raw_links": "Cartuchos & Tintas\nToners\nPlacas de Vídeo\nÁudio & Headsets\nPeriféricos\nImpressoras" } },
+        { "type": "menu_col", "settings": { "title": "Suporte", "raw_links": "Central de ajuda\nRastrear pedido\nTrocas & devoluções\nPolítica de garantia\nFrete & prazos" } },
+        { "type": "menu_col", "settings": { "title": "DropChina", "raw_links": "Sobre nós\nBlog\nPara empresas\nAtacado · CNPJ\nTrabalhe conosco" } },
+        { "type": "menu_col", "settings": { "title": "Contato", "raw_links": "Fale conosco\nWhatsApp comercial\nSuporte técnico\nFAQ", "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

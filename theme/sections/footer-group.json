@@ -2,301 +2,57 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "footer": {
-      "type": "footer",
+    "dc_footer": {
+      "type": "dc-footer",
       "blocks": {
-        "group_brand": {
-          "type": "group",
+        "col_loja": {
+          "type": "menu_col",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 16,
-            "width": "custom",
-            "custom_width": 30,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 16,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_brand_name": {
-              "type": "text",
-              "settings": {
-                "text": "<h3>DropChina</h3>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "1",
-                "letter_spacing": "-0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": ""
-              }
-            },
-            "text_brand_tagline": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "1.55",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": ""
-              }
-            },
-            "social_links_brand": {
-              "type": "social-links",
-              "name": "t:names.social_media_links",
-              "settings": {
-                "facebook_url": "https://facebook.com/dropchinaoficial",
-                "instagram_url": "https://instagram.com/dropchinaoficial",
-                "youtube_url": "",
-                "tiktok_url": "",
-                "twitter_url": "",
-                "threads_url": "",
-                "linkedin_url": "",
-                "bluesky_url": "",
-                "snapchat_url": "",
-                "pinterest_url": "",
-                "tumblr_url": "",
-                "vimeo_url": "",
-                "custom_url": "https://lista.mercadolivre.com.br/loja/dropchina-297222/"
-              }
-            },
-            "text_attendance": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "0.75rem",
-                "line_height": "1.45",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": ""
-              }
-            }
-          },
-          "block_order": [
-            "text_brand_name",
-            "text_brand_tagline",
-            "social_links_brand",
-            "text_attendance"
-          ]
-        },
-        "menu_shop": {
-          "type": "menu",
-          "settings": {
-            "menu": "footer-shop",
-            "heading": "Loja",
-            "menu_spacing": 10,
-            "show_as_accordion": false,
-            "accordion_icon": "caret",
-            "accordion_dividers": false,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "heading_preset": "custom",
-            "link_preset": "paragraph"
+            "title": "Loja",
+            "raw_links": "Cartuchos & Tintas\nToners\nPlacas de Vídeo\nÁudio & Headsets\nPeriféricos\nImpressoras"
           }
         },
-        "menu_support": {
-          "type": "menu",
+        "col_suporte": {
+          "type": "menu_col",
           "settings": {
-            "menu": "footer-help",
-            "heading": "Suporte",
-            "menu_spacing": 10,
-            "show_as_accordion": false,
-            "accordion_icon": "caret",
-            "accordion_dividers": false,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "heading_preset": "custom",
-            "link_preset": "paragraph"
+            "title": "Suporte",
+            "raw_links": "Central de ajuda\nRastrear pedido\nTrocas & devoluções\nPolítica de garantia\nFrete & prazos"
           }
         },
-        "menu_dropchina": {
-          "type": "menu",
+        "col_dropchina": {
+          "type": "menu_col",
           "settings": {
-            "menu": "main-menu",
-            "heading": "DropChina",
-            "menu_spacing": 10,
-            "show_as_accordion": false,
-            "accordion_icon": "caret",
-            "accordion_dividers": false,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "heading_preset": "custom",
-            "link_preset": "paragraph"
+            "title": "DropChina",
+            "raw_links": "Sobre nós\nBlog\nPara empresas\nAtacado · CNPJ\nTrabalhe conosco"
           }
         },
-        "group_contact": {
-          "type": "group",
+        "col_contato": {
+          "type": "menu_col",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 10,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "contact_heading": {
-              "type": "text",
-              "settings": {
-                "text": "<h5>Contato</h5>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.8125rem",
-                "line_height": "1.4",
-                "letter_spacing": "0.05em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": ""
-              }
-            },
-            "contact_lines": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Fale conosco<br>WhatsApp comercial<br>Suporte técnico<br>FAQ</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "1.9",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": ""
-              }
-            }
-          },
-          "block_order": [
-            "contact_heading",
-            "contact_lines"
-          ]
-        }
-      },
-      "block_order": [
-        "group_brand",
-        "menu_shop",
-        "menu_support",
-        "menu_dropchina",
-        "group_contact"
-      ],
-      "name": "Footer",
-      "settings": {
-        "section_width": "page-width",
-        "gap": 40,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 64,
-        "padding-block-end": 32
-      }
-    },
-    "utilities": {
-      "type": "footer-utilities",
-      "blocks": {
-        "copyright": {
-          "type": "footer-copyright",
-          "settings": {
-            "show_powered_by": false,
-            "font_size": "0.75rem",
-            "case": "none"
-          }
-        },
-        "footer_policy_list_rfGrqz": {
-          "type": "footer-policy-list",
-          "name": "t:names.policy_list",
-          "settings": {
-            "font_size": "0.75rem",
-            "case": "none"
+            "title": "Contato",
+            "raw_links": "Fale conosco\nWhatsApp comercial\nSuporte técnico\nFAQ",
+            "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>"
           }
         }
       },
       "block_order": [
-        "copyright",
-        "footer_policy_list_rfGrqz"
+        "col_loja",
+        "col_suporte",
+        "col_dropchina",
+        "col_contato"
       ],
       "settings": {
-        "section_width": "page-width",
-        "gap": 24,
-        "divider_thickness": 1,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "tagline": "Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.",
+        "instagram": "https://instagram.com/dropchinaoficial",
+        "facebook": "https://facebook.com/dropchinaoficial",
+        "copyright": "© 2026 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados.",
+        "payments": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO",
+        "padding_top": 64,
+        "padding_bottom": 28
       }
     }
   },
   "order": [
-    "footer",
-    "utilities"
+    "dc_footer"
   ]
 }

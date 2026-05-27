@@ -1,0 +1,193 @@
+<section class="dc-newsletter-section section section--page-width" style="padding-block: {{ section.settings.padding_top | default: 56 }}px {{ section.settings.padding_bottom | default: 56 }}px;">
+  <div class="dc-newsletter-section__container">
+    <div class="dc-newsletter">
+      <div class="dc-newsletter__copy">
+        <p class="dc-newsletter__eyebrow">{{ section.settings.eyebrow | default: 'Newsletter DropChina' | escape }}</p>
+        <h2 class="dc-newsletter__heading">{{ section.settings.heading | default: 'Ofertas direto no seu e-mail toda terça' | escape }}</h2>
+        <p class="dc-newsletter__lead">{{ section.settings.lead | default: 'Receba antes os cupons exclusivos, lançamentos e os melhores preços em tech.' | escape }}</p>
+        <div class="dc-newsletter__perks">
+          {% if section.settings.perk_1 != blank %}<span>✓ {{ section.settings.perk_1 | escape }}</span>{% endif %}
+          {% if section.settings.perk_2 != blank %}<span>✓ {{ section.settings.perk_2 | escape }}</span>{% endif %}
+          {% if section.settings.perk_3 != blank %}<span>✓ {{ section.settings.perk_3 | escape }}</span>{% endif %}
+        </div>
+      </div>
+      <div class="dc-newsletter__form-col">
+        {% form 'customer', class: 'dc-newsletter__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="visually-hidden" for="dc-newsletter-email">Email</label>
+          <input
+            id="dc-newsletter-email"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.placeholder | default: 'seu@email.com.br' | escape }}"
+            required
+            class="dc-newsletter__input"
+          >
+          <button type="submit" class="dc-newsletter__submit">
+            {{ section.settings.cta_label | default: 'Inscrever-me' | escape }}
+          </button>
+          {% if form.posted_successfully? %}
+            <p class="dc-newsletter__success">Obrigado! Você está inscrito.</p>
+          {% endif %}
+          {% if form.errors %}
+            <p class="dc-newsletter__error">{{ form.errors | default_errors }}</p>
+          {% endif %}
+        {% endform %}
+        <p class="dc-newsletter__legal">{{ section.settings.legal | default: 'Ao se inscrever você concorda com nossa Política de Privacidade.' | escape }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-newsletter-section { background: #ffffff; }
+  .dc-newsletter-section__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-newsletter {
+    background: #0d1115;
+    color: #ffffff;
+    border-radius: 28px;
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .dc-newsletter__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f5c518;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .dc-newsletter__heading {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    max-width: 14ch;
+  }
+  .dc-newsletter__lead {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 14px 0 0;
+    max-width: 40ch;
+  }
+  .dc-newsletter__perks {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .dc-newsletter__perks span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dc-newsletter__form {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+  }
+  .dc-newsletter__input {
+    flex: 1;
+    height: 56px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.18s;
+  }
+  .dc-newsletter__input::placeholder { color: rgba(255, 255, 255, 0.5); }
+  .dc-newsletter__input:focus { border-color: #f5c518; }
+  .dc-newsletter__submit {
+    height: 56px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background: #f5c518;
+    color: #2a2410;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+    white-space: nowrap;
+  }
+  .dc-newsletter__submit:hover { background: #fcd34d; }
+  .dc-newsletter__submit:active { transform: translateY(1px); }
+  .dc-newsletter__legal {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    margin: 14px 0 0;
+  }
+  .dc-newsletter__success {
+    color: #22c55e;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .dc-newsletter__error {
+    color: #ff4d2e;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  @media (max-width: 920px) {
+    .dc-newsletter {
+      grid-template-columns: 1fr;
+      padding: 36px 28px;
+      gap: 28px;
+    }
+    .dc-newsletter__heading { font-size: 28px; max-width: none; }
+    .dc-newsletter__form { flex-direction: column; gap: 10px; }
+    .dc-newsletter__submit { width: 100%; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter DropChina",
+  "tag": "section",
+  "class": "section-dc-newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Newsletter DropChina" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Ofertas direto no seu e-mail toda terça" },
+    { "type": "textarea", "id": "lead", "label": "Subtítulo", "default": "Receba antes os cupons exclusivos, lançamentos e os melhores preços em tech." },
+    { "type": "text", "id": "perk_1", "label": "Perk 1", "default": "Cupom de boas-vindas" },
+    { "type": "text", "id": "perk_2", "label": "Perk 2", "default": "Sem spam" },
+    { "type": "text", "id": "perk_3", "label": "Perk 3", "default": "Cancele quando quiser" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder do input", "default": "seu@email.com.br" },
+    { "type": "text", "id": "cta_label", "label": "Texto do botão", "default": "Inscrever-me" },
+    { "type": "text", "id": "legal", "label": "Aviso legal", "default": "Ao se inscrever você concorda com nossa Política de Privacidade." },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "presets": [
+    { "name": "Newsletter DropChina" }
+  ]
+}
+{% endschema %}

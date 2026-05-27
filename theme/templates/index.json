@@ -381,142 +381,6 @@
         "padding-block-end": 64
       }
     },
-    "promo_banner": {
-      "type": "media-with-content",
-      "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "static": true,
-          "settings": {
-            "media_type": "image",
-            "video_loop": true,
-            "video_autoplay": true,
-            "image_position": "cover",
-            "video_position": "cover"
-          },
-          "blocks": {}
-        },
-        "content": {
-          "type": "_content-without-appearance",
-          "static": true,
-          "settings": {
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20
-          },
-          "blocks": {
-            "text_promo_eyebrow": {
-              "type": "text",
-              "name": "Eyebrow",
-              "settings": {
-                "text": "<p>NEWSLETTER DROPCHINA</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.08em",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_promo_heading": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>Ofertas direto no seu e-mail toda terça</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "1.1",
-                "letter_spacing": "-0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_promo_body": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Receba antes os cupons exclusivos, lançamentos e os melhores preços em tech.</p>",
-                "width": "fit-content",
-                "max_width": "narrow",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "1.5",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_promo": {
-              "type": "button",
-              "settings": {
-                "label": "Inscrever-me",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button button--primary",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_promo_eyebrow",
-            "text_promo_heading",
-            "text_promo_body",
-            "button_promo"
-          ]
-        }
-      },
-      "name": "Promo banner",
-      "settings": {
-        "media_position": "right",
-        "media_width": "medium",
-        "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
-        "color_scheme": "scheme-3",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "second_collection": {
       "type": "product-list",
       "blocks": {
@@ -1022,6 +886,22 @@
       "settings": {
         "heading": "+50 marcas que você confia"
       }
+    },
+    "newsletter_main": {
+      "type": "dc-newsletter",
+      "settings": {
+        "eyebrow": "Newsletter DropChina",
+        "heading": "Ofertas direto no seu e-mail toda terça",
+        "lead": "Receba antes os cupons exclusivos, lançamentos e os melhores preços em tech.",
+        "perk_1": "Cupom de boas-vindas",
+        "perk_2": "Sem spam",
+        "perk_3": "Cancele quando quiser",
+        "placeholder": "seu@email.com.br",
+        "cta_label": "Inscrever-me",
+        "legal": "Ao se inscrever você concorda com nossa Política de Privacidade.",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -1034,6 +914,6 @@
     "story_block",
     "testimonials_section",
     "brand_carousel_main",
-    "promo_banner"
+    "newsletter_main"
   ]
 }
