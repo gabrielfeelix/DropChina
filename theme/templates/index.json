@@ -704,50 +704,6 @@
         "padding-block-end": 32
       }
     },
-    "story_block": {
-      "type": "atacado-banner",
-      "blocks": {
-        "perk_1": {
-          "type": "perk",
-          "settings": {
-            "number": "−15%",
-            "label": "<p>Desconto progressivo<br>a partir de 10 un.</p>"
-          }
-        },
-        "perk_2": {
-          "type": "perk",
-          "settings": {
-            "number": "24h",
-            "label": "<p>Envio para todo<br>o Brasil</p>"
-          }
-        },
-        "perk_3": {
-          "type": "perk",
-          "settings": {
-            "number": "NF",
-            "label": "<p>Nota fiscal<br>sempre</p>"
-          }
-        }
-      },
-      "block_order": [
-        "perk_1",
-        "perk_2",
-        "perk_3"
-      ],
-      "name": "Atacado CNPJ",
-      "settings": {
-        "eyebrow": "ATACADO · CNPJ",
-        "heading": "Compre como revendedor e pague menos",
-        "lead": "Tabela exclusiva para CNPJ a partir de 10 unidades, com nota fiscal, entrega em todo o Brasil e gerente de conta dedicado.",
-        "background_asset": "atacado-bg.png",
-        "primary_cta_label": "Cadastrar CNPJ",
-        "primary_cta_link": "shopify://collections/all",
-        "secondary_cta_label": "Falar no WhatsApp",
-        "secondary_cta_link": "https://wa.me/55",
-        "padding-block-start": 56,
-        "padding-block-end": 56
-      }
-    },
     "testimonials_section": {
       "type": "testimonials",
       "blocks": {
@@ -1089,7 +1045,6 @@
     "promo_banners_main",
     "second_collection",
     "featured_product_main",
-    "story_block",
     "testimonials_section",
     "brand_carousel_main",
     "newsletter_main"
