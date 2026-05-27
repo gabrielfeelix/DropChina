@@ -50,10 +50,10 @@
       {%- endif -%}
     </a>
 
-    <div class="dc-header__search dc-search-input predictive-search color-scheme-1" role="search" data-dc-search>
-      <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search-form dc-search-input__form" ref="form">
-        <div class="predictive-search-form__header dc-search-input__inner">
-          <div class="predictive-search-form__header-inner">
+    <div class="dc-header__search dc-search-input color-scheme-1" role="search" data-dc-search>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="dc-search-input__form" ref="form">
+        <div class="dc-search-input__inner">
+          <div class="dc-search-input__inner-row">
             <input
               class="search-input dc-search-input__field"
               id="dc-search-input"
@@ -77,8 +77,8 @@
             </button>
           </div>
         </div>
-        <div class="predictive-search-form__content-wrapper dc-search-input__results-wrapper" hidden>
-          <div id="predictive-search-results" class="predictive-search-form__content dc-search-input__results" ref="predictiveSearchResults" role="listbox" aria-label="Resultados da busca"></div>
+        <div class="dc-search-input__results-wrapper" hidden>
+          <div id="predictive-search-results" class="dc-search-input__results" ref="predictiveSearchResults" role="listbox" aria-label="Resultados da busca"></div>
         </div>
       </form>
     </div>
