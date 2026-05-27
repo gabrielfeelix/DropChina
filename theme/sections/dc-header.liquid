@@ -463,6 +463,23 @@
     border-color: transparent;
     pointer-events: none;
   }
+  /* Zera também children que têm min-height próprio */
+  #header-group.is-scrolled .dc-announce__marquee,
+  #header-group.is-scrolled .dc-announce__track,
+  #header-group.is-scrolled .dc-topbar__inner,
+  #header-group.is-scrolled .dc-nav__inner {
+    min-height: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* dc-mega (megamenu dropdown) também colapsa pra não ficar pendurado */
+  #header-group.is-scrolled .dc-mega {
+    display: none;
+  }
   #header-group.is-scrolled {
     box-shadow: 0 4px 18px -8px rgba(13, 17, 21, 0.12);
   }
