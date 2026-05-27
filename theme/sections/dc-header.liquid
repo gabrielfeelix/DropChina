@@ -45,8 +45,10 @@
     <a href="{{ routes.root_url }}" class="dc-header__logo" aria-label="{{ shop.name }}">
       {%- if section.settings.logo -%}
         {{ section.settings.logo | image_url: width: 240 | image_tag: alt: shop.name, class: 'dc-header__logo-img', loading: 'eager' }}
+      {%- elsif section.settings.logo_asset != blank -%}
+        <img src="{{ section.settings.logo_asset | asset_url }}" alt="{{ shop.name }}" width="180" height="44" class="dc-header__logo-img" loading="eager">
       {%- else -%}
-        <span class="dc-header__logo-text">{{ shop.name }}</span>
+        <img src="{{ 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="180" height="44" class="dc-header__logo-img" loading="eager">
       {%- endif -%}
     </a>
 
@@ -807,7 +809,8 @@
   "tag": "header",
   "settings": [
     { "type": "header", "content": "Logo" },
-    { "type": "image_picker", "id": "logo", "label": "Logo (PNG)" },
+    { "type": "image_picker", "id": "logo", "label": "Logo customizado (sobrepõe os abaixo)" },
+    { "type": "text", "id": "logo_asset", "label": "Logo asset filename", "info": "Ex: dropchina-logo-color.png — usado se não tiver logo acima. Default: dropchina-logo-color.png" },
     { "type": "header", "content": "Announcement marquee" },
     { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
     { "type": "header", "content": "Topbar (links utilitários)" },

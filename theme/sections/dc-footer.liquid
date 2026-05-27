@@ -9,7 +9,7 @@
               class: 'dc-footer-brand__logo',
               widths: '120, 200' }}
         {% else %}
-          <h3 class="dc-footer-brand__name">{{ shop.name | default: 'DropChina' }}</h3>
+          <img src="{{ 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="150" height="36" class="dc-footer-brand__logo" loading="lazy">
         {% endif %}
         <p class="dc-footer-brand__tagline">{{ section.settings.tagline | default: 'Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.' | escape }}</p>
         <div class="dc-footer-socials">
