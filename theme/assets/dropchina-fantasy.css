@@ -71,78 +71,7 @@ header.header .header-logo img {
   width: auto;
 }
 
-/* Search input (DropChina pill) — coluna center expande, wrapper fluido */
-header.header .header__columns {
-  --header-left: minmax(max-content, 0.5fr);
-  --header-center: minmax(360px, 640px);
-  --header-right: minmax(max-content, 0.5fr);
-}
-header.header .header__column--center {
-  width: 100%;
-  justify-self: stretch;
-}
-header.header .header__column--center > * {
-  width: 100%;
-}
-header.header .dc-search-input {
-  width: 100%;
-  max-width: 640px;
-  margin-inline: auto;
-}
-header.header .dc-search-input,
-header.header .dc-search-input__form,
-header.header .dc-search-input__inner,
-header.header .predictive-search-form__header-inner {
-  width: 100%;
-  position: relative;
-}
-header.header .dc-search-input__field,
-header.header .search-input {
-  width: 100%;
-  height: 50px;
-  border-radius: var(--r-pill);
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
-  padding: 0 56px 0 22px;
-  font-size: 15px;
-  color: var(--ink);
-  transition: border-color 0.18s, box-shadow 0.18s;
-  box-sizing: border-box;
-}
-header.header .dc-search-input__field:focus,
-header.header .search-input:focus {
-  border-color: var(--ink);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(13, 17, 21, 0.12);
-}
-header.header .dc-search-input__field::placeholder { color: var(--muted-2); }
-header.header .dc-search-input__submit {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: white;
-  display: grid;
-  place-items: center;
-  border: 0;
-}
-header.header .dc-search-input__submit svg { color: white; width: 18px; height: 18px; }
-header.header .dc-search-input__reset {
-  position: absolute;
-  right: 52px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: var(--muted);
-}
+/* Search: estilo agora é self-contained no snippet dc-search-input.liquid */
 
 /* Cart bubble */
 header.header cart-bubble-component {
