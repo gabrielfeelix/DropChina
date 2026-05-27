@@ -194,11 +194,14 @@
     cursor: pointer;
   }
 
-  /* Garante que o slot center do header tenha largura útil */
-  header.header .header__columns {
-    --header-left: minmax(max-content, 0.4fr);
-    --header-center: minmax(360px, 780px);
-    --header-right: minmax(max-content, 0.4fr);
+  /* Force a center column do header com 780px (vence a regra
+     :has(.header__column--center header-menu) nativa do Tinker) */
+  header.header .header__columns,
+  header.header .header__columns:has(.header__column--center) {
+    --header-left: minmax(max-content, 0.4fr) !important;
+    --header-center: minmax(420px, 780px) !important;
+    --header-right: minmax(max-content, 0.4fr) !important;
+    grid-template-columns: minmax(max-content, 0.4fr) minmax(420px, 780px) minmax(max-content, 0.4fr) !important;
   }
   header.header .header__column--center {
     width: 100%;
@@ -206,8 +209,10 @@
     min-width: 0;
   }
   @media (max-width: 920px) {
-    header.header .header__columns {
-      --header-center: minmax(160px, 1fr);
+    header.header .header__columns,
+    header.header .header__columns:has(.header__column--center) {
+      --header-center: minmax(180px, 1fr) !important;
+      grid-template-columns: auto minmax(180px, 1fr) auto !important;
     }
     .dc-search-input__field { height: 44px; font-size: 14px; }
   }
