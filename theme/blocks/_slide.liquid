@@ -33,7 +33,9 @@
     {%- if block_settings.toggle_overlay -%}
       {% render 'overlay', settings: block_settings %}
     {%- endif -%}
-    {%- if block_settings.background_asset == blank and preview_image -%}
+    {%- if block_settings.background_asset != blank -%}
+      {%- comment -%} Background é renderizado via inline style no container; nada aqui. {%- endcomment -%}
+    {%- elsif preview_image -%}
       {%- liquid
         assign height = preview_image.width | divided_by: preview_image.aspect_ratio | round
         assign media_width_desktop = '100vw'
