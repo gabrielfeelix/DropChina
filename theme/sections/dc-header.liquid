@@ -435,6 +435,16 @@
     backdrop-filter: saturate(180%) blur(16px);
     -webkit-backdrop-filter: saturate(180%) blur(16px);
   }
+  /* Wrapper intermediário do Tinker (cada section do header-group fica
+     dentro de <header class="shopify-section-group-header-group">).
+     Esse cara herda background branco do tema base — neutralizar. */
+  #header-group .shopify-section,
+  #header-group .shopify-section-group-header-group,
+  #header-group > header,
+  #header-group > div {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
   /* Quando scrolled: esconde announce + topbar + nav via display:none
      (instantâneo, sem flicker, sem transição complexa) */
   #header-group.is-scrolled .dc-announce,
