@@ -1,0 +1,519 @@
+{%- liquid
+  assign p = section.settings.product
+  if p == blank or p == nil
+    assign p_fallback = collections.all.products.first
+    assign p = p_fallback
+  endif
+  if p == blank or p == nil
+    assign render_section = false
+  else
+    assign render_section = true
+    assign p_var = p.selected_or_first_available_variant
+    assign on_sale = false
+    if p_var.compare_at_price > p_var.price
+      assign on_sale = true
+      assign pct_off = p_var.compare_at_price | minus: p_var.price | times: 100 | divided_by: p_var.compare_at_price | round
+    endif
+    assign rating_meta = p.metafields.reviews.rating.value
+    assign rating_avg = 0
+    if rating_meta != blank and rating_meta.rating != blank
+      assign rating_avg = rating_meta.rating | times: 1.0
+    endif
+    assign rating_count = p.metafields.reviews.rating_count | default: 0
+  endif
+-%}
+
+{%- if render_section -%}
+<section class="dc-fp-section" style="padding-block: {{ section.settings.padding_top | default: 56 }}px {{ section.settings.padding_bottom | default: 56 }}px;">
+  <div class="dc-fp__container">
+    <div class="dc-fp__eyebrow">— {{ section.settings.eyebrow | default: 'Produto destaque' | escape }} —</div>
+
+    <div class="dc-fp__grid">
+      <div class="dc-fp__thumbs">
+        {%- for media in p.media limit: 5 -%}
+          <button
+            type="button"
+            class="dc-fp__thumb {% if forloop.first %}active{% endif %}"
+            data-thumb-index="{{ forloop.index0 }}"
+            aria-label="Foto {{ forloop.index }}"
+          >
+            {{ media | image_url: width: 160 | image_tag: loading: 'lazy', alt: media.alt | default: p.title, width: 84, height: 84 }}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="dc-fp__main">
+        <div class="dc-fp__stage">
+          {%- if p.media.size > 0 -%}
+            {%- for media in p.media limit: 5 -%}
+              <img
+                src="{{ media | image_url: width: 720 }}"
+                alt="{{ media.alt | default: p.title }}"
+                width="720"
+                height="720"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                class="dc-fp__stage-img {% if forloop.first %}active{% endif %}"
+                data-slide-index="{{ forloop.index0 }}"
+              >
+            {%- endfor -%}
+          {%- elsif p.featured_image -%}
+            {{ p.featured_image | image_url: width: 720 | image_tag: alt: p.title, width: 720, height: 720, class: 'dc-fp__stage-img active' }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'dc-fp__stage-img active' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="dc-fp__info">
+        {%- if p.vendor != blank -%}
+          <div class="dc-fp__brand">{{ p.vendor }}</div>
+        {%- endif -%}
+        <h2 class="dc-fp__title">{{ p.title }}</h2>
+
+        <div class="dc-fp__rating">
+          {%- if rating_count > 0 -%}
+            <span class="dc-fp__stars" aria-hidden="true">
+              {%- assign rfull = rating_avg | round -%}
+              {%- for i in (1..5) -%}{%- if i <= rfull -%}★{%- else -%}<span style="opacity:.25">★</span>{%- endif -%}{%- endfor -%}
+            </span>
+            <b>{{ rating_avg | round: 1 | replace: '.', ',' }}</b>
+            <span class="dc-fp__sep">·</span>
+            <a href="{{ p.url }}#reviews">{{ rating_count }} avaliações</a>
+          {%- else -%}
+            <span class="dc-fp__stars dc-fp__stars--empty" aria-hidden="true">☆☆☆☆☆</span>
+            <span class="dc-fp__no-reviews">Sem avaliações</span>
+            <span class="dc-fp__sep">·</span>
+            <a href="{{ p.url }}#reviews">Seja o primeiro a avaliar</a>
+          {%- endif -%}
+        </div>
+
+        <div class="dc-fp__price-row">
+          {%- if on_sale -%}
+            <span class="dc-fp__price-old">{{ p_var.compare_at_price | money }}</span>
+          {%- endif -%}
+          <span class="dc-fp__price">{{ p_var.price | money }}</span>
+          {%- if on_sale -%}
+            <span class="dc-fp__off">−{{ pct_off }}%</span>
+          {%- endif -%}
+        </div>
+
+        {%- if p.description != blank -%}
+          <p class="dc-fp__desc">{{ p.description | strip_html | truncate: 200 }}</p>
+        {%- endif -%}
+
+        {%- assign first_option = p.options_with_values | first -%}
+        {%- if first_option and first_option.values.size > 1 -%}
+          <div class="dc-fp__field">
+            <span class="dc-fp__field-lbl">{{ first_option.name }}: <b>{{ first_option.selected_value }}</b></span>
+            <div class="dc-fp__swatches">
+              {%- for value in first_option.values -%}
+                <button
+                  type="button"
+                  class="dc-fp__swatch {% if value == first_option.selected_value %}active{% endif %}"
+                  aria-label="{{ value | escape }}"
+                  title="{{ value | escape }}"
+                  data-option-value="{{ value | escape }}"
+                >
+                  <span class="dc-fp__swatch-dot" style="background: {{ value | downcase | replace: ' ', '-' | prepend: '#' | truncate: 7, '' }};"></span>
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_stock_bar -%}
+          {%- assign stock_qty = section.settings.stock_qty | default: 6 -%}
+          {%- assign stock_pct = section.settings.stock_pct | default: 40 -%}
+          <div class="dc-fp__stock">
+            <span class="dc-fp__stock-bar"><span style="width: {{ stock_pct }}%;"></span></span>
+            <span class="dc-fp__stock-msg">Corre, restam apenas <b>{{ stock_qty }} unidades</b> em estoque!</span>
+          </div>
+        {%- endif -%}
+
+        <form action="{{ routes.cart_add_url }}" method="post" class="dc-fp__form" data-dc-fp-form>
+          <input type="hidden" name="id" value="{{ p_var.id }}">
+          <div class="dc-fp__actions">
+            <div class="dc-fp__qty">
+              <button type="button" class="dc-fp__qty-btn" data-qty-step="-1" aria-label="Diminuir">−</button>
+              <input type="number" name="quantity" value="1" min="1" class="dc-fp__qty-input" aria-label="Quantidade">
+              <button type="button" class="dc-fp__qty-btn" data-qty-step="1" aria-label="Aumentar">+</button>
+            </div>
+            <button type="submit" class="dc-fp__cta">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
+              {{ section.settings.cta_label | default: 'Adicionar ao carrinho' | escape }}
+            </button>
+          </div>
+        </form>
+
+        <a href="{{ p.url }}" class="dc-fp__view-pdp">Ver página completa do produto →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var section = document.querySelector('.dc-fp-section');
+    if (!section) return;
+
+    var slides = section.querySelectorAll('.dc-fp__stage-img');
+    var thumbs = section.querySelectorAll('.dc-fp__thumb');
+    function show(i) {
+      slides.forEach(function(s, n) { s.classList.toggle('active', n === i); });
+      thumbs.forEach(function(t, n) { t.classList.toggle('active', n === i); });
+    }
+    thumbs.forEach(function(t, n) { t.addEventListener('click', function() { show(n); }); });
+
+    var swatches = section.querySelectorAll('.dc-fp__swatch');
+    var lbl = section.querySelector('.dc-fp__field-lbl b');
+    swatches.forEach(function(s) {
+      s.addEventListener('click', function() {
+        swatches.forEach(function(o) { o.classList.remove('active'); });
+        s.classList.add('active');
+        if (lbl) lbl.textContent = s.getAttribute('data-option-value');
+      });
+    });
+
+    var qtyInput = section.querySelector('.dc-fp__qty-input');
+    section.querySelectorAll('.dc-fp__qty-btn').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var step = parseInt(b.getAttribute('data-qty-step'), 10);
+        var cur = parseInt(qtyInput.value, 10) || 1;
+        qtyInput.value = Math.max(1, cur + step);
+      });
+    });
+
+    var form = section.querySelector('[data-dc-fp-form]');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('.dc-fp__cta');
+        var original = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = 'Adicionando...';
+        try {
+          var fd = new FormData(form);
+          var res = await fetch('/cart/add.js', { method: 'POST', headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }, body: fd });
+          if (!res.ok) throw new Error('add failed');
+          var cartRes = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } });
+          var cart = await cartRes.json();
+          document.querySelectorAll('[data-dc-cart-count]').forEach(function(b) { b.textContent = cart.item_count; b.hidden = cart.item_count === 0; });
+          var drawer = document.querySelector('cart-drawer-component');
+          if (drawer && typeof drawer.open === 'function') drawer.open();
+          btn.innerHTML = '✓ Adicionado';
+          setTimeout(function() { btn.innerHTML = original; btn.disabled = false; }, 1200);
+        } catch (err) {
+          btn.innerHTML = 'Tente novamente';
+          setTimeout(function() { btn.innerHTML = original; btn.disabled = false; }, 1500);
+        }
+      });
+    }
+  });
+</script>
+
+{% stylesheet %}
+  .dc-fp-section { background: #ffffff; }
+  .dc-fp__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-fp__eyebrow {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .dc-fp__grid {
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr) minmax(360px, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 920px) {
+    .dc-fp__grid { grid-template-columns: 1fr; }
+  }
+
+  .dc-fp__thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dc-fp__thumb {
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
+    border: 1.5px solid transparent;
+    background: #ececef;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 8px;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.18s;
+  }
+  .dc-fp__thumb:hover { border-color: #d9dade; }
+  .dc-fp__thumb.active { border-color: #0d1115; }
+  .dc-fp__thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  @media (max-width: 920px) {
+    .dc-fp__thumbs { flex-direction: row; order: 2; }
+  }
+
+  .dc-fp__stage {
+    position: relative;
+    background: #ececef;
+    border-radius: 28px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    padding: 48px;
+  }
+  .dc-fp__stage-img {
+    position: absolute;
+    inset: 48px;
+    width: calc(100% - 96px);
+    height: calc(100% - 96px);
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .dc-fp__stage-img.active { opacity: 1; }
+
+  .dc-fp__info { padding-top: 8px; }
+  .dc-fp__brand {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .dc-fp__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #0d1115;
+    margin: 0 0 14px;
+  }
+  .dc-fp__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: #6b7280;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .dc-fp__rating b { color: #0d1115; }
+  .dc-fp__rating a { color: #2a3038; text-decoration: underline; text-underline-offset: 3px; }
+  .dc-fp__stars { color: #f1a900; font-size: 14px; letter-spacing: 1px; }
+  .dc-fp__stars--empty { color: #d9dade; }
+  .dc-fp__no-reviews { color: #9ca3af; }
+  .dc-fp__sep { color: #9ca3af; }
+
+  .dc-fp__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .dc-fp__price-old {
+    font-size: 16px;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+  .dc-fp__price {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #0d1115;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .dc-fp__off {
+    background: #1f7a3a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .dc-fp__desc {
+    font-size: 14.5px;
+    color: #2a3038;
+    line-height: 1.55;
+    margin: 14px 0 18px;
+  }
+
+  .dc-fp__field { margin: 12px 0 14px; }
+  .dc-fp__field-lbl {
+    font-size: 13px;
+    color: #2a3038;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .dc-fp__field-lbl b { color: #0d1115; font-weight: 700; }
+  .dc-fp__swatches {
+    display: flex;
+    gap: 8px;
+  }
+  .dc-fp__swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    outline: 1px solid #d9dade;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
+    transition: outline-color 0.15s, transform 0.15s;
+  }
+  .dc-fp__swatch.active {
+    outline: 2px solid #0d1115;
+    outline-offset: 2px;
+  }
+  .dc-fp__swatch:hover { transform: scale(1.1); }
+  .dc-fp__swatch-dot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .dc-fp__stock {
+    margin: 16px 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dc-fp__stock-bar {
+    display: block;
+    height: 6px;
+    background: #ececef;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .dc-fp__stock-bar > span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #d62828);
+    border-radius: 999px;
+  }
+  .dc-fp__stock-msg {
+    font-size: 13px;
+    color: #2a3038;
+  }
+  .dc-fp__stock-msg b { color: #d62828; }
+
+  .dc-fp__actions {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 12px;
+  }
+  .dc-fp__qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid #d9dade;
+    border-radius: 999px;
+    overflow: hidden;
+    height: 52px;
+  }
+  .dc-fp__qty-btn {
+    width: 36px;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    color: #0d1115;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .dc-fp__qty-btn:hover { background: #f4f5f7; }
+  .dc-fp__qty-input {
+    width: 42px;
+    border: 0;
+    background: transparent;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0d1115;
+    font-family: inherit;
+    outline: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  .dc-fp__qty-input::-webkit-outer-spin-button,
+  .dc-fp__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+  .dc-fp__cta {
+    flex: 1;
+    height: 52px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    border: 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.18s, transform 0.18s;
+  }
+  .dc-fp__cta:hover { background: #d62828; }
+  .dc-fp__cta:active { transform: translateY(1px); }
+  .dc-fp__cta[disabled] { background: #9ca3af; cursor: not-allowed; }
+
+  .dc-fp__view-pdp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b7280;
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color 0.15s;
+  }
+  .dc-fp__view-pdp:hover { color: #0d1115; }
+{% endstylesheet %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DC Featured Product",
+  "tag": "section",
+  "class": "section-dc-featured-product",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Produto destaque" },
+    { "type": "product", "id": "product", "label": "Produto destaque", "info": "Se vazio, usa o primeiro de 'all'" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Adicionar ao carrinho" },
+    { "type": "header", "content": "Barra de estoque" },
+    { "type": "checkbox", "id": "show_stock_bar", "label": "Exibir barra de urgência", "default": true },
+    { "type": "range", "id": "stock_qty", "label": "Qtd em estoque (display)", "min": 1, "max": 50, "step": 1, "default": 6 },
+    { "type": "range", "id": "stock_pct", "label": "Preenchimento da barra (%)", "min": 5, "max": 100, "step": 5, "default": 40 },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "presets": [
+    { "name": "Produto destaque" }
+  ]
+}
+{% endschema %}

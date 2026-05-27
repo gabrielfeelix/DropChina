@@ -85,7 +85,7 @@
           "type": "category",
           "settings": {
             "name": "Toners",
-            "count": "180+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/toners",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>"
           }
@@ -94,7 +94,7 @@
           "type": "category",
           "settings": {
             "name": "Impressoras",
-            "count": "64 produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/impressoras",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>"
           }
@@ -103,7 +103,7 @@
           "type": "category",
           "settings": {
             "name": "Placas de Vídeo",
-            "count": "42 produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/placas-de-video",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>"
           }
@@ -112,7 +112,7 @@
           "type": "category",
           "settings": {
             "name": "Áudio & Headsets",
-            "count": "150+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/><circle cx='39' cy='82' r='3' fill='#f59e0b'/></svg>"
           }
@@ -121,19 +121,79 @@
           "type": "category",
           "settings": {
             "name": "Periféricos",
-            "count": "210+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>"
+          }
+        },
+        "cat_7": {
+          "type": "category",
+          "settings": {
+            "name": "Redes & Internet",
+            "count": "88 produtos",
+            "link": "shopify://collections/all",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='36' y='50' width='88' height='48' rx='6' fill='#1a1d20'/><circle cx='56' cy='74' r='3' fill='#22c55e'/><circle cx='68' cy='74' r='3' fill='#22c55e'/><circle cx='80' cy='74' r='3' fill='#f59e0b'/><circle cx='92' cy='74' r='3' fill='#3a414a'/><path d='M50 38 L66 50 M80 32 L80 50 M110 38 L94 50' stroke='#0d1115' stroke-width='2' stroke-linecap='round'/></svg>"
+          }
+        },
+        "cat_8": {
+          "type": "category",
+          "settings": {
+            "name": "Armazenamento",
+            "count": "120+ produtos",
+            "link": "shopify://collections/all",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='46' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='44' y='38' width='72' height='78' rx='6' fill='#2a3038'/><rect x='50' y='46' width='60' height='34' rx='2' fill='#1a1d20'/><circle cx='80' cy='98' r='6' fill='#1a1d20'/><circle cx='80' cy='98' r='2' fill='#22c55e'/></svg>"
+          }
+        },
+        "cat_9": {
+          "type": "category",
+          "settings": {
+            "name": "Cabos & Adaptadores",
+            "count": "260+ produtos",
+            "link": "shopify://collections/perifericos",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='40' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='44' y='46' width='14' height='14' rx='2' fill='#3a414a'/><path d='M51 76 Q51 95 80 95 Q109 95 109 76' stroke='#1a1d20' stroke-width='4' fill='none'/><rect x='98' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='102' y='46' width='14' height='14' rx='2' fill='#3a414a'/></svg>"
+          }
+        },
+        "cat_10": {
+          "type": "category",
+          "settings": {
+            "name": "Papelaria & Mídia",
+            "count": "75 produtos",
+            "link": "shopify://collections/papeis",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>"
+          }
+        },
+        "cat_11": {
+          "type": "category",
+          "settings": {
+            "name": "Ofertas da Semana",
+            "count": "Até 40% OFF",
+            "link": "shopify://collections/all",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
+          }
+        },
+        "cat_12": {
+          "type": "category",
+          "settings": {
+            "name": "Novidades",
+            "count": "Recém-chegados",
+            "link": "shopify://collections/all",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
           }
         }
       },
       "block_order": [
-        "cat_0",
         "cat_1",
         "cat_2",
         "cat_3",
         "cat_4",
-        "cat_5"
+        "cat_5",
+        "cat_6",
+        "cat_7",
+        "cat_8",
+        "cat_9",
+        "cat_10",
+        "cat_11",
+        "cat_12"
       ],
       "name": "Categories",
       "settings": {
@@ -1007,6 +1067,18 @@
         "padding_top": 56,
         "padding_bottom": 56
       }
+    },
+    "featured_product_main": {
+      "type": "dc-featured-product",
+      "settings": {
+        "eyebrow": "Produto destaque",
+        "cta_label": "Adicionar ao carrinho",
+        "show_stock_bar": true,
+        "stock_qty": 6,
+        "stock_pct": 40,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -1016,6 +1088,7 @@
     "best_sellers",
     "promo_banners_main",
     "second_collection",
+    "featured_product_main",
     "story_block",
     "testimonials_section",
     "brand_carousel_main",
