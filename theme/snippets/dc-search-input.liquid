@@ -1,13 +1,13 @@
 {%- doc -%}
   Renders DropChina inline search input in header center column.
-  Self-contained: estilos próprios via {% stylesheet %} pra não depender
-  de overrides externos.
+  Self-contained com {% stylesheet %} próprio.
+  Classes .dc-search-input__* batem com dc-search.js.
 {%- enddoc -%}
 
 <script src="{{ 'dc-search.js' | asset_url }}" defer="defer"></script>
 
 <div
-  class="dc-search predictive-search color-scheme-1"
+  class="dc-search-input predictive-search color-scheme-1"
   role="search"
   aria-label="Buscar produtos"
 >
@@ -15,14 +15,14 @@
     action="{{ routes.search_url | default: '/search' }}"
     method="get"
     role="search"
-    class="predictive-search-form dc-search__form"
+    class="predictive-search-form dc-search-input__form"
     ref="form"
     on:keydown="/onSearchKeyDown"
   >
-    <div class="predictive-search-form__header dc-search__inner">
-      <div class="predictive-search-form__header-inner dc-search__row">
+    <div class="predictive-search-form__header dc-search-input__inner">
+      <div class="predictive-search-form__header-inner dc-search-input__row">
         <input
-          class="search-input dc-search__field"
+          class="search-input dc-search-input__field"
           id="dc-search-input"
           type="search"
           name="q"
@@ -44,7 +44,7 @@
 
         <button
           type="submit"
-          class="dc-search__submit"
+          class="dc-search-input__submit"
           aria-label="Buscar"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -55,19 +55,22 @@
       </div>
     </div>
 
-    <div class="predictive-search-form__content-wrapper dc-search__results-wrapper">
+    <div
+      class="predictive-search-form__content-wrapper dc-search-input__results-wrapper"
+      hidden
+    >
       <div
         id="predictive-search-results"
-        class="predictive-search-form__content dc-search__results"
+        class="predictive-search-form__content dc-search-input__results"
         ref="predictiveSearchResults"
         on:click="/handleModalClick"
         role="listbox"
         aria-label="Resultados da busca"
       ></div>
 
-      <div class="predictive-search-form__footer dc-search__footer" hidden>
+      <div class="predictive-search-form__footer dc-search-input__footer" hidden>
         <button
-          class="dc-search__view-all"
+          class="dc-search-input__view-all"
           ref="viewAllButton"
           type="submit"
         >
@@ -79,26 +82,27 @@
 </div>
 
 {% stylesheet %}
-  /* Search wrapper toma toda a largura disponível da center column */
-  .dc-search {
+  /* Wrapper toma toda largura disponível da center column, max 640px */
+  .dc-search-input {
     width: 100%;
     max-width: 640px;
     margin-inline: auto;
     position: relative;
     display: block;
   }
-  .dc-search__form {
+  .dc-search-input__form {
     width: 100%;
     position: relative;
+    margin: 0;
   }
-  .dc-search__inner,
-  .dc-search__row {
+  .dc-search-input__inner,
+  .dc-search-input__row {
     width: 100%;
     position: relative;
     display: block;
   }
   /* Input redondo grande */
-  .dc-search__field {
+  .dc-search-input__field {
     width: 100%;
     height: 50px;
     border-radius: 999px;
@@ -115,18 +119,18 @@
     -webkit-appearance: none;
     appearance: none;
   }
-  .dc-search__field::placeholder { color: #9ca3af; }
-  .dc-search__field::-webkit-search-cancel-button,
-  .dc-search__field::-webkit-search-decoration {
+  .dc-search-input__field::placeholder { color: #9ca3af; }
+  .dc-search-input__field::-webkit-search-cancel-button,
+  .dc-search-input__field::-webkit-search-decoration {
     -webkit-appearance: none;
     display: none;
   }
-  .dc-search__field:focus {
+  .dc-search-input__field:focus {
     border-color: #0d1115;
     box-shadow: 0 0 0 3px rgba(13, 17, 21, 0.12);
   }
   /* Lupa preta redonda no canto direito */
-  .dc-search__submit {
+  .dc-search-input__submit {
     position: absolute;
     right: 6px;
     top: 50%;
@@ -144,16 +148,16 @@
     padding: 0;
     transition: background 0.18s;
   }
-  .dc-search__submit:hover { background: #d62828; }
-  .dc-search__submit svg {
+  .dc-search-input__submit:hover { background: #d62828; }
+  .dc-search-input__submit svg {
     width: 18px;
     height: 18px;
     color: #ffffff;
     stroke: #ffffff;
   }
 
-  /* Results dropdown (predictive) */
-  .dc-search__results-wrapper {
+  /* Results dropdown — hidden por default. JS controla via .hidden attr */
+  .dc-search-input__results-wrapper {
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
@@ -163,19 +167,22 @@
     border-radius: 16px;
     box-shadow: 0 24px 60px -20px rgba(13, 17, 21, 0.28);
     z-index: 70;
-    display: none;
+    overflow: hidden;
   }
-  .dc-search[data-open="true"] .dc-search__results-wrapper { display: block; }
-  .dc-search__results {
+  .dc-search-input__results-wrapper[hidden] {
+    display: none !important;
+  }
+  .dc-search-input__results {
     padding: 18px;
     max-height: 480px;
     overflow-y: auto;
   }
-  .dc-search__footer {
+  .dc-search-input__footer {
     padding: 12px 18px;
     border-top: 1px solid #ececef;
   }
-  .dc-search__view-all {
+  .dc-search-input__footer[hidden] { display: none !important; }
+  .dc-search-input__view-all {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -187,20 +194,21 @@
     cursor: pointer;
   }
 
-  /* Garante que o slot center do header não trunca o search */
-  header.header .header__column--center {
-    width: 100%;
-    justify-self: stretch;
-  }
+  /* Garante que o slot center do header tenha largura útil */
   header.header .header__columns {
     --header-left: minmax(max-content, 0.5fr);
     --header-center: minmax(320px, 640px);
     --header-right: minmax(max-content, 0.5fr);
   }
+  header.header .header__column--center {
+    width: 100%;
+    justify-self: stretch;
+    min-width: 0;
+  }
   @media (max-width: 920px) {
     header.header .header__columns {
       --header-center: minmax(160px, 1fr);
     }
-    .dc-search__field { height: 44px; font-size: 14px; }
+    .dc-search-input__field { height: 44px; font-size: 14px; }
   }
 {% endstylesheet %}
