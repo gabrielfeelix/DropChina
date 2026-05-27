@@ -10,6 +10,14 @@
   endif
   assign pix_price = current_price | times: 0.9 | divided_by: 100.0
   assign installments = current_price | divided_by: 12 | divided_by: 100.0
+
+  assign rating_meta = product_obj.metafields.reviews.rating.value
+  assign rating_avg = 0
+  if rating_meta != blank and rating_meta.rating != blank
+    assign rating_avg = rating_meta.rating | times: 1.0
+  endif
+  assign rating_count = product_obj.metafields.reviews.rating_count | default: 0
+  assign rating_full = rating_avg | round
 -%}
 
 <nav class="dc-breadcrumb" aria-label="Breadcrumb">
@@ -80,10 +88,19 @@
         {%- endif -%}
 
         <div class="dc-pdp-info__rating">
-          <span class="dc-pdp-info__stars" aria-hidden="true">★★★★★</span>
-          <b>{{ section.settings.rating | default: '4,8' }}</b>
-          <span class="dc-pdp-info__dot">·</span>
-          <a href="#dc-pdp-reviews">{{ section.settings.reviews_count | default: '870' }} avaliações</a>
+          {%- if rating_count > 0 -%}
+            <span class="dc-pdp-info__stars" aria-hidden="true">
+              {%- for i in (1..5) -%}{%- if i <= rating_full -%}★{%- else -%}<span style="opacity:.25">★</span>{%- endif -%}{%- endfor -%}
+            </span>
+            <b>{{ rating_avg | round: 1 | replace: '.', ',' }}</b>
+            <span class="dc-pdp-info__dot">·</span>
+            <a href="#dc-pdp-reviews">{{ rating_count }} {% if rating_count == 1 %}avaliação{% else %}avaliações{% endif %}</a>
+          {%- else -%}
+            <span class="dc-pdp-info__stars dc-pdp-info__stars--empty" aria-hidden="true">☆☆☆☆☆</span>
+            <span class="dc-pdp-info__no-reviews">Sem avaliações</span>
+            <span class="dc-pdp-info__dot">·</span>
+            <a href="#dc-pdp-reviews">Seja o primeiro a avaliar</a>
+          {%- endif -%}
           {%- if current_variant.sku != blank -%}
             <span class="dc-pdp-info__dot">·</span>
             <span class="dc-pdp-info__sku">SKU {{ current_variant.sku }}</span>
@@ -193,6 +210,30 @@
   </div>
 </section>
 
+<div class="dc-sticky-buy" data-dc-sticky-buy hidden>
+  <button type="button" class="dc-sticky-buy__toggle" data-dc-sticky-toggle aria-label="Voltar ao topo">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 15-6-6-6 6"/></svg>
+  </button>
+  <div class="dc-sticky-buy__thumb">
+    {%- if product_obj.featured_image -%}
+      {{ product_obj.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: product_obj.title }}
+    {%- endif -%}
+  </div>
+  <div class="dc-sticky-buy__meta">
+    <div class="dc-sticky-buy__title">{{ product_obj.title }}</div>
+    <div class="dc-sticky-buy__price">
+      {%- if on_sale -%}
+        <span class="dc-sticky-buy__strike">{{ compare_price | money }}</span>
+      {%- endif -%}
+      <span class="dc-sticky-buy__now">{{ current_price | money }}</span>
+    </div>
+  </div>
+  <button type="button" class="dc-sticky-buy__add" data-dc-sticky-add>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
+    Adicionar
+  </button>
+</div>
+
 {% if product_obj.description != blank %}
 <section class="dc-pdp-desc section section--page-width">
   <div class="dc-pdp-desc__container">
@@ -253,6 +294,25 @@
         if (label) label.textContent = p.getAttribute('data-option-value');
       });
     });
+
+    // Sticky buy: aparece após scroll > 700, scroll-to-top no toggle
+    var sticky = document.querySelector('[data-dc-sticky-buy]');
+    var stickyToggle = document.querySelector('[data-dc-sticky-toggle]');
+    var stickyAdd = document.querySelector('[data-dc-sticky-add]');
+    var addBtn = container.querySelector('.dc-pdp-add');
+    function checkSticky() {
+      if (!sticky) return;
+      var shouldShow = window.scrollY > 700;
+      sticky.hidden = !shouldShow;
+    }
+    window.addEventListener('scroll', checkSticky, { passive: true });
+    checkSticky();
+    if (stickyToggle) stickyToggle.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    if (stickyAdd && addBtn) stickyAdd.addEventListener('click', function() {
+      addBtn.click();
+    });
   });
 </script>
 
@@ -305,55 +365,70 @@
   /* Gallery */
   .dc-pdp-gallery {
     display: grid;
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 84px 1fr;
     gap: 14px;
     align-items: start;
+    position: sticky;
+    top: 24px;
   }
   .dc-pdp-gallery__thumbs {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     max-height: 560px;
     overflow-y: auto;
   }
   .dc-pdp-gallery__thumb {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    border: 1.5px solid #ececef;
-    background: #ffffff;
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
+    border: 1.5px solid transparent;
+    background: #ececef;
     overflow: hidden;
     cursor: pointer;
-    padding: 0;
-    transition: border-color 0.18s, transform 0.18s;
+    padding: 10px;
+    transition: border-color 0.18s;
+    display: grid;
+    place-items: center;
   }
   .dc-pdp-gallery__thumb:hover { border-color: #d9dade; }
   .dc-pdp-gallery__thumb.active { border-color: #0d1115; }
   .dc-pdp-gallery__thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
   }
   .dc-pdp-gallery__stage {
     position: relative;
-    background: #f4f5f7;
-    border-radius: 22px;
+    background: #ececef;
+    border-radius: 28px;
     overflow: hidden;
     aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    padding: 48px;
   }
   .dc-pdp-gallery__slide {
     position: absolute;
     inset: 0;
     opacity: 0;
     transition: opacity 0.4s ease;
+    display: grid;
+    place-items: center;
+    padding: 48px;
   }
   .dc-pdp-gallery__slide.active { opacity: 1; }
   .dc-pdp-gallery__img {
-    width: 100%;
-    height: 100%;
+    max-width: 80%;
+    max-height: 80%;
+    width: auto;
+    height: auto;
     object-fit: contain;
-    padding: 24px;
+    mix-blend-mode: multiply;
+    transition: transform 0.5s ease;
   }
+  .dc-pdp-gallery__stage:hover .dc-pdp-gallery__img { transform: scale(1.04); }
   .dc-pdp-gallery__nav {
     position: absolute;
     top: 50%;
@@ -367,16 +442,21 @@
     display: grid;
     place-items: center;
     cursor: pointer;
-    box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 2;
-    transition: transform 0.18s;
+    opacity: 0;
+    transition: opacity 0.18s, transform 0.18s;
   }
-  .dc-pdp-gallery__nav:hover { transform: translateY(-50%) scale(1.06); }
-  .dc-pdp-gallery__nav--prev { left: 16px; }
-  .dc-pdp-gallery__nav--next { right: 16px; }
+  .dc-pdp-gallery__stage:hover .dc-pdp-gallery__nav { opacity: 1; }
+  .dc-pdp-gallery__nav:hover { transform: translateY(-50%) scale(1.08); }
+  .dc-pdp-gallery__nav--prev { left: 18px; }
+  .dc-pdp-gallery__nav--next { right: 18px; }
+  @media (max-width: 1180px) {
+    .dc-pdp-gallery { position: static; }
+  }
   @media (max-width: 920px) {
     .dc-pdp-gallery { grid-template-columns: 1fr; }
-    .dc-pdp-gallery__thumbs { flex-direction: row; max-height: none; order: 2; }
+    .dc-pdp-gallery__thumbs { flex-direction: row; max-height: none; overflow-x: auto; order: 2; }
   }
 
   /* Info */
@@ -433,6 +513,8 @@
   .dc-pdp-info__rating a { color: #6b7280; text-decoration: underline; }
   .dc-pdp-info__rating a:hover { color: #0d1115; }
   .dc-pdp-info__stars { color: #f1a900; font-size: 14px; letter-spacing: 1px; }
+  .dc-pdp-info__stars--empty { color: #d9dade; }
+  .dc-pdp-info__no-reviews { color: #9ca3af; font-size: 13px; }
   .dc-pdp-info__dot { color: #9ca3af; }
   .dc-pdp-info__sku { font-family: "JetBrains Mono", monospace; font-size: 12px; }
 
@@ -659,6 +741,114 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
+  }
+
+  /* Sticky buy floating card */
+  .dc-sticky-buy {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 24px 60px -20px rgba(13, 17, 21, 0.3), 0 4px 12px rgba(13, 17, 21, 0.08);
+    border: 1px solid #ececef;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+    width: 460px;
+    max-width: calc(100vw - 48px);
+    z-index: 80;
+    animation: dc-sticky-pop 0.4s cubic-bezier(.2,.9,.3,1.1);
+  }
+  .dc-sticky-buy[hidden] { display: none; }
+  @keyframes dc-sticky-pop {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .dc-sticky-buy__toggle {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #ececef;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .dc-sticky-buy__toggle:hover { color: #0d1115; transform: scale(1.08); }
+  .dc-sticky-buy__thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: #ececef;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 6px;
+  }
+  .dc-sticky-buy__thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .dc-sticky-buy__meta { min-width: 0; }
+  .dc-sticky-buy__title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #0d1115;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .dc-sticky-buy__price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .dc-sticky-buy__strike {
+    font-size: 12px;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+  .dc-sticky-buy__now {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: #0d1115;
+    letter-spacing: -0.02em;
+  }
+  .dc-sticky-buy__add {
+    background: #0d1115;
+    color: #ffffff;
+    border: 0;
+    border-radius: 999px;
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.18s, transform 0.18s;
+    white-space: nowrap;
+  }
+  .dc-sticky-buy__add:hover { background: #d62828; transform: translateY(-1px); }
+  @media (max-width: 920px) {
+    .dc-sticky-buy { width: auto; left: 12px; right: 12px; bottom: 12px; }
   }
 
   /* Description editorial */

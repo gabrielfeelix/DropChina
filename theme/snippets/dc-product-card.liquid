@@ -1,0 +1,80 @@
+{%- doc -%}
+  Renderiza um card de produto DropChina (novo padrão: painel cinza + imagem
+  contained pequena + info abaixo).
+  @param {object} product - Objeto produto Shopify
+  @example
+  {% render 'dc-product-card', product: product %}
+{%- enddoc -%}
+
+{%- liquid
+  assign p_var = product.selected_or_first_available_variant
+  assign on_sale = false
+  if p_var.compare_at_price > p_var.price
+    assign on_sale = true
+    assign pct_off = p_var.compare_at_price | minus: p_var.price | times: 100 | divided_by: p_var.compare_at_price | round
+  endif
+
+  assign rating_meta = product.metafields.reviews.rating.value
+  assign rating_avg = 0
+  if rating_meta != blank and rating_meta.rating != blank
+    assign rating_avg = rating_meta.rating | times: 1.0
+  endif
+  assign rating_count = product.metafields.reviews.rating_count | default: 0
+
+  assign badge_label = ''
+  assign badge_class = ''
+  if on_sale
+    assign badge_label = '−' | append: pct_off | append: '%'
+    assign badge_class = 'sale'
+  elsif product.tags contains 'mais-vendido' or product.tags contains 'best'
+    assign badge_label = 'MAIS VENDIDO'
+    assign badge_class = 'best'
+  elsif product.tags contains 'novo' or product.tags contains 'new'
+    assign badge_label = 'NOVO'
+    assign badge_class = 'new'
+  endif
+-%}
+
+<a href="{{ product.url }}" class="dc-card">
+  <div class="dc-card__media">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 480 | image_tag:
+          loading: 'lazy',
+          alt: product.title,
+          class: 'dc-card__img',
+          widths: '240, 480, 720' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'dc-card__img dc-card__img--placeholder' }}
+    {%- endif -%}
+    {%- if badge_label != blank -%}
+      <span class="dc-card__badge dc-card__badge--{{ badge_class }}">{{ badge_label }}</span>
+    {%- endif -%}
+  </div>
+  <div class="dc-card__body">
+    {%- if product.vendor != blank -%}
+      <div class="dc-card__brand">{{ product.vendor }}</div>
+    {%- endif -%}
+    <h4 class="dc-card__title">{{ product.title }}</h4>
+    {%- if rating_count > 0 -%}
+      <div class="dc-card__rating">
+        <span class="dc-card__stars" aria-hidden="true">
+          {%- assign full = rating_avg | round -%}
+          {%- for i in (1..5) -%}{%- if i <= full -%}★{%- else -%}<span style="opacity:.25">★</span>{%- endif -%}{%- endfor -%}
+        </span>
+        <span class="dc-card__rating-count">({{ rating_count }})</span>
+      </div>
+    {%- endif -%}
+    <div class="dc-card__price-stack">
+      {%- if on_sale -%}
+        <span class="dc-card__price-old">{{ p_var.compare_at_price | money }}</span>
+      {%- endif -%}
+      <div class="dc-card__price-row">
+        <span class="dc-card__price">{{ p_var.price | money }}</span>
+        {%- if on_sale -%}<span class="dc-card__price-off">{{ pct_off }}% OFF</span>{%- endif -%}
+      </div>
+    </div>
+    {%- assign installment = p_var.price | divided_by: 12 -%}
+    <div class="dc-card__installments">em <b>12x {{ installment | money }}</b> sem juros</div>
+    <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
+  </div>
+</a>
