@@ -1,0 +1,229 @@
+{%- liquid
+  assign tab_blocks = section.blocks | where: 'type', 'tab'
+  assign max_products = section.settings.max_products | default: 10
+-%}
+
+<section class="dc-pl-section" style="padding-block: {{ section.settings.padding_top | default: 56 }}px {{ section.settings.padding_bottom | default: 56 }}px;">
+  <div class="dc-pl__container">
+    <div class="dc-pl__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="dc-pl__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="dc-pl__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if tab_blocks.size > 1 -%}
+        <div class="dc-pl__tabs" role="tablist" data-dc-pl-tabs>
+          {%- for tab in tab_blocks -%}
+            <button
+              type="button"
+              role="tab"
+              class="dc-pl__tab {% if forloop.first %}active{% endif %}"
+              data-tab-index="{{ forloop.index0 }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            >{{ tab.settings.label | escape }}</button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- for tab in tab_blocks -%}
+      {%- assign tab_collection = tab.settings.collection -%}
+      <div
+        class="dc-pl__panel {% if forloop.first %}active{% endif %}"
+        data-tab-panel="{{ forloop.index0 }}"
+        {% unless forloop.first %}hidden{% endunless %}
+      >
+        {%- if tab_collection != blank and tab_collection.products.size > 0 -%}
+          <div class="dc-pl__grid">
+            {%- for p in tab_collection.products limit: max_products -%}
+              {% render 'dc-product-card', product: p %}
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.show_view_all -%}
+            <div class="dc-pl__cta-row">
+              <a href="{{ tab_collection.url }}" class="dc-pl__view-all">
+                {{ section.settings.view_all_label | default: 'Ver todos os produtos' | escape }}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="dc-pl__empty">
+            <p>Nenhum produto na coleção <b>{{ tab.settings.label | escape }}</b>.</p>
+            <a href="{{ routes.collections_url }}" class="dc-pl__view-all">Ver todas as categorias →</a>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+
+    {%- if tab_blocks.size == 0 -%}
+      <div class="dc-pl__empty">
+        <p>Nenhuma aba configurada. Adicione um bloco "Tab" no editor para começar.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-dc-pl-tabs]').forEach(function(tabsEl) {
+      var section = tabsEl.closest('.dc-pl-section');
+      if (!section) return;
+      var tabs = tabsEl.querySelectorAll('.dc-pl__tab');
+      var panels = section.querySelectorAll('[data-tab-panel]');
+      tabs.forEach(function(t) {
+        t.addEventListener('click', function() {
+          var idx = t.dataset.tabIndex;
+          tabs.forEach(function(o) {
+            o.classList.toggle('active', o.dataset.tabIndex === idx);
+            o.setAttribute('aria-selected', o.dataset.tabIndex === idx ? 'true' : 'false');
+          });
+          panels.forEach(function(p) {
+            var match = p.dataset.tabPanel === idx;
+            p.hidden = !match;
+            p.classList.toggle('active', match);
+          });
+        });
+      });
+    });
+  });
+</script>
+
+{% stylesheet %}
+  .dc-pl-section { background: #ffffff; }
+  .dc-pl__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-pl__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .dc-pl__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .dc-pl__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 44px;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-pl__tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .dc-pl__tab {
+    height: 38px;
+    padding: 0 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    color: #2a3038;
+    transition: all 0.18s;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .dc-pl__tab:hover { border-color: #0d1115; }
+  .dc-pl__tab.active {
+    background: #0d1115;
+    color: #ffffff;
+    border-color: #0d1115;
+  }
+  .dc-pl__panel[hidden] { display: none; }
+  .dc-pl__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 1180px) { .dc-pl__grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 920px)  { .dc-pl__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px)  { .dc-pl__grid { grid-template-columns: repeat(2, 1fr); } }
+  .dc-pl__cta-row {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+  }
+  .dc-pl__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    color: #0d1115;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    background: #ffffff;
+    transition: all 0.18s;
+  }
+  .dc-pl__view-all:hover {
+    background: #0d1115;
+    color: #ffffff;
+    border-color: #0d1115;
+  }
+  .dc-pl__empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+    font-size: 15px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DropChina Product List",
+  "tag": "section",
+  "class": "section-dc-product-list",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Top dessa semana" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Mais vendidos" },
+    { "type": "range", "id": "max_products", "label": "Máx. produtos por aba", "min": 4, "max": 24, "step": 1, "default": 10 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Exibir botão 'Ver todos'", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Texto botão 'Ver todos'", "default": "Ver todos os produtos" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Aba",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label da aba", "default": "Mais vendidos" },
+        { "type": "collection", "id": "collection", "label": "Coleção" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mais vendidos (com abas)",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Mais vendidos" } },
+        { "type": "tab", "settings": { "label": "Cartuchos" } },
+        { "type": "tab", "settings": { "label": "Toners" } },
+        { "type": "tab", "settings": { "label": "Placas de vídeo" } },
+        { "type": "tab", "settings": { "label": "Áudio" } },
+        { "type": "tab", "settings": { "label": "Ofertas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
