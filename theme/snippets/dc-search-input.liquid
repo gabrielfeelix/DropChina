@@ -194,24 +194,20 @@
     cursor: pointer;
   }
 
-  /* Force a center column do header com 780px (vence a regra
-     :has(.header__column--center header-menu) nativa do Tinker) */
-  header.header .header__columns,
-  header.header .header__columns:has(.header__column--center) {
+  /* Override pelo descendant da .header__row--top (mais específico que :has) */
+  .header__row--top .header__columns {
+    grid-template-columns: minmax(max-content, 0.4fr) minmax(420px, 780px) minmax(max-content, 0.4fr) !important;
     --header-left: minmax(max-content, 0.4fr) !important;
     --header-center: minmax(420px, 780px) !important;
     --header-right: minmax(max-content, 0.4fr) !important;
-    grid-template-columns: minmax(max-content, 0.4fr) minmax(420px, 780px) minmax(max-content, 0.4fr) !important;
   }
-  header.header .header__column--center {
+  .header__row--top .header__column--center {
     width: 100%;
-    justify-self: stretch;
     min-width: 0;
+    justify-self: stretch;
   }
   @media (max-width: 920px) {
-    header.header .header__columns,
-    header.header .header__columns:has(.header__column--center) {
-      --header-center: minmax(180px, 1fr) !important;
+    .header__row--top .header__columns {
       grid-template-columns: auto minmax(180px, 1fr) auto !important;
     }
     .dc-search-input__field { height: 44px; font-size: 14px; }
