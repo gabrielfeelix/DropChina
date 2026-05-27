@@ -178,200 +178,102 @@ body {
 }
 
 /* ============================================================
-   HEADER — fundo branco, logo · busca pill · ícones · 84px
-   Sobrepõe os schemes pretos do Tinker pra alinhar com referência
+   HEADER — apenas pintura (cores/fonts/spacing); NÃO mexer no
+   layout grid nativo do Tinker (.header__columns, .header__column)
    ============================================================ */
-header.header,
-.header,
-#header-component,
-header-component {
-  background: var(--bg) !important;
-  border-bottom: 1px solid var(--line) !important;
-  color: var(--ink) !important;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
-}
 
-/* Remove o overlay de scheme-8 preto que vinha do Tinker */
-header.header .section-background,
-header-component .section-background {
+/* Fundo branco apenas — não tocar position/sticky/grid */
+header.header .header__row--top,
+header.header .header__row--bottom,
+header.header .header__main-row {
+  background: var(--bg);
+}
+header.header .section-background {
   background: var(--bg) !important;
 }
 
-/* Linha principal do header */
-header.header .header__row,
-header.header .header__main-row,
-header.header .header__row--top {
-  background: var(--bg) !important;
-  color: var(--ink) !important;
-  min-height: 84px;
+/* Cor do texto/ícones do header */
+header.header .header__row--top,
+header.header .header__row--top a,
+header.header .header__row--top button,
+header.header .header__row--top span {
+  color: var(--ink);
+}
+header.header .header__row--top svg {
+  color: var(--ink);
 }
 
-/* Textos / ícones do header voltam pra preto */
-header.header,
-header.header *,
-header.header a,
-header.header button,
-header.header span,
-header.header svg {
-  color: var(--ink) !important;
-}
-header.header svg {
-  fill: currentColor;
-  stroke: currentColor;
-}
-/* logo color image: NÃO inverter (queremos o logo colorido) */
+/* Logo colorido (não inverter) */
 header.header .header-logo__image-container img,
 header.header .header-logo img {
   filter: none !important;
-  max-height: 44px !important;
-  width: auto !important;
+  max-height: 44px;
+  width: auto;
 }
 
-/* Hover sobre os links do top — sem verde */
-header.header .header__row a:hover,
-header.header .header__row button:hover {
-  color: var(--ink-2) !important;
-}
-
-/* ===== Search input (pill grande, ícone preto round dentro) ===== */
-header.header .dc-search,
-header.header [class*="search-bar"] form,
-header.header .search-modal__form,
-header.header .predictive-search-form {
-  position: relative;
-  max-width: 640px;
+/* ===== Search input estilo pill DropChina (não muda layout do search slot) ===== */
+header.header .dc-search-input,
+header.header .predictive-search {
   width: 100%;
-  margin-inline: auto;
 }
-header.header input[type="search"],
-header.header input[type="text"],
-header.header .dc-search input {
-  width: 100% !important;
-  height: 50px !important;
-  border-radius: var(--r-pill) !important;
-  border: 1px solid var(--line-strong) !important;
-  background: var(--surface) !important;
-  padding: 0 56px 0 22px !important;
-  font-size: 15px !important;
-  color: var(--ink) !important;
-  outline: none;
+header.header .dc-search-input__field,
+header.header input[type="search"].search-input {
+  height: 50px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  padding: 0 56px 0 22px;
+  font-size: 15px;
+  color: var(--ink);
   transition: border-color 0.18s, box-shadow 0.18s;
 }
-header.header input[type="search"]:focus,
-header.header input[type="text"]:focus {
-  border-color: var(--ink) !important;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 12%, transparent) !important;
+header.header .dc-search-input__field:focus,
+header.header input[type="search"].search-input:focus {
+  border-color: var(--ink);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 12%, transparent);
 }
-header.header input[type="search"]::placeholder,
-header.header input[type="text"]::placeholder {
-  color: var(--muted-2) !important;
+header.header .dc-search-input__field::placeholder {
+  color: var(--muted-2);
 }
-header.header .dc-search button,
-header.header .search-bar__submit {
-  position: absolute !important;
-  right: 6px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 38px !important;
-  height: 38px !important;
-  border-radius: 999px !important;
-  background: var(--ink) !important;
-  color: white !important;
-  border: none !important;
+header.header .dc-search-input__submit {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: white;
   display: grid;
   place-items: center;
+  border: 0;
 }
-header.header .dc-search button svg,
-header.header .search-bar__submit svg {
-  color: white !important;
-  fill: white !important;
-  stroke: white !important;
+header.header .dc-search-input__submit svg {
+  color: white;
   width: 18px;
   height: 18px;
 }
 
-/* Ícones do header (heart, user, cart) — pílulas redondas com hover sutil */
-header.header .header-actions__action,
-header.header .header-actions a,
-header.header .header-actions button {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  display: inline-grid;
-  place-items: center;
-  position: relative;
-  transition: background 0.18s;
-}
-header.header .header-actions__action:hover {
-  background: var(--surface-2) !important;
-}
-header.header .cart-bubble,
-header.header [class*="cart-count"],
-header.header [class*="badge"] {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background: var(--accent) !important;
-  color: white !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  display: grid;
-  place-items: center;
-  padding: 0 5px;
-  border: none !important;
+/* Cart bubble — vermelho redondo */
+header.header cart-bubble-component,
+header.header .cart-bubble {
+  background: var(--accent);
+  color: white;
 }
 
 /* ===== NAV (categories row) — fundo branco preto-em-cima ===== */
-header.header .header__row--bottom,
-header.header .header__navigation-bar-row {
-  background: var(--bg) !important;
-  border-bottom: 1px solid var(--line) !important;
-  min-height: 56px;
+header.header .header__row--bottom {
+  background: var(--bg);
 }
-header.header .header__row--bottom .menu-list,
-header.header .menu-list {
-  gap: 28px !important;
-}
-header.header .header__row--bottom .menu-list__link,
 header.header .header__row--bottom .menu-list__link-title,
-header.header .menu-list__link,
 header.header .menu-list__link-title {
-  font-size: 14.5px !important;
-  font-weight: 500 !important;
-  color: var(--ink-2) !important;
-  font-family: var(--font-sans) !important;
-}
-header.header .header__row--bottom .menu-list__link:hover,
-header.header .menu-list__link:hover {
-  color: var(--ink) !important;
-}
-
-/* "Todas as categorias" trigger pill preto */
-.dc-cat-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 40px;
-  padding: 0 18px 0 14px;
-  border-radius: var(--r-pill);
   font-size: 14.5px;
-  font-weight: 600;
-  background: var(--ink);
-  color: white !important;
-  border: 0;
-  cursor: pointer;
-  transition: background 0.18s;
+  font-weight: 500;
+  color: var(--ink-2);
   font-family: var(--font-sans);
 }
-.dc-cat-trigger svg { color: white !important; stroke: white !important; }
-.dc-cat-trigger:hover { background: var(--accent); }
+header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title,
+header.header .menu-list__link:hover .menu-list__link-title {
+  color: var(--ink);
+}
 
 /* Nav-tag (-40%) */
 .dc-nav-tag {
@@ -1344,12 +1246,9 @@ cart-drawer-component {
 }
 
 /* ============================================================
-   OVERRIDE FINAL — neutralizar verde Fantasy do scheme-8
-   no header (queremos branco + preto agora)
+   OVERRIDE FINAL — força fundo branco mesmo se scheme-8 vazar
    ============================================================ */
 header.header [class*="scheme-8"],
 header.header.color-scheme-8 {
   background: var(--bg) !important;
 }
-header.header * { color: inherit; }
-header.header .menu-list__link-title { color: var(--ink-2) !important; }
