@@ -82,8 +82,12 @@
     display: flex;
     gap: 64px;
     width: max-content;
-    animation: dc-brand-marquee 38s linear infinite;
+    animation: dc-brand-marquee 40s linear infinite;
     padding: 0 32px;
+    will-change: transform;
+  }
+  .brand-marquee:hover .brand-marquee__track {
+    animation-play-state: paused;
   }
   .brand-marquee__cell {
     font-family: "Bricolage Grotesque", "Manrope", sans-serif;

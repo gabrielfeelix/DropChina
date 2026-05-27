@@ -730,13 +730,37 @@
             "author": "Pedro L.",
             "date": "há 3 semanas"
           }
+        },
+        "plat_1": {
+          "type": "platform",
+          "settings": {
+            "name": "Reclame Aqui",
+            "value": "Reputação ótima"
+          }
+        },
+        "plat_2": {
+          "type": "platform",
+          "settings": {
+            "name": "Google",
+            "value": "4,8 (3.214 avaliações)"
+          }
+        },
+        "plat_3": {
+          "type": "platform",
+          "settings": {
+            "name": "Mercado Livre",
+            "value": "MercadoLíder Platinum"
+          }
         }
       },
       "block_order": [
         "t1",
         "t2",
         "t3",
-        "t4"
+        "t4",
+        "plat_1",
+        "plat_2",
+        "plat_3"
       ],
       "name": "Testimonials",
       "settings": {
@@ -746,7 +770,10 @@
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,
-        "padding_bottom": 80
+        "padding_bottom": 80,
+        "show_platforms": true,
+        "cta_label": "Ver todas as avaliações",
+        "cta_link": "shopify://pages/avaliacoes"
       }
     },
     "trust_badges_main": {
@@ -838,52 +865,130 @@
     "brand_carousel_main": {
       "type": "brand-carousel",
       "blocks": {
-        "br1": {
+        "br_00": {
           "type": "brand",
           "settings": {
             "alt": "HP"
           }
         },
-        "br2": {
-          "type": "brand",
-          "settings": {
-            "alt": "Brother"
-          }
-        },
-        "br3": {
-          "type": "brand",
-          "settings": {
-            "alt": "Epson"
-          }
-        },
-        "br4": {
+        "br_01": {
           "type": "brand",
           "settings": {
             "alt": "Canon"
           }
         },
-        "br5": {
+        "br_02": {
+          "type": "brand",
+          "settings": {
+            "alt": "Epson"
+          }
+        },
+        "br_03": {
+          "type": "brand",
+          "settings": {
+            "alt": "Samsung"
+          }
+        },
+        "br_04": {
+          "type": "brand",
+          "settings": {
+            "alt": "Brother"
+          }
+        },
+        "br_05": {
+          "type": "brand",
+          "settings": {
+            "alt": "Pantum"
+          }
+        },
+        "br_06": {
+          "type": "brand",
+          "settings": {
+            "alt": "Evolut"
+          }
+        },
+        "br_07": {
+          "type": "brand",
+          "settings": {
+            "alt": "JBL"
+          }
+        },
+        "br_08": {
+          "type": "brand",
+          "settings": {
+            "alt": "NVIDIA"
+          }
+        },
+        "br_09": {
           "type": "brand",
           "settings": {
             "alt": "Logitech"
           }
         },
-        "br6": {
+        "br_10": {
           "type": "brand",
           "settings": {
-            "alt": "Samsung"
+            "alt": "TP-Link"
+          }
+        },
+        "br_11": {
+          "type": "brand",
+          "settings": {
+            "alt": "Multilaser"
+          }
+        },
+        "br_12": {
+          "type": "brand",
+          "settings": {
+            "alt": "Kingston"
+          }
+        },
+        "br_13": {
+          "type": "brand",
+          "settings": {
+            "alt": "Intel"
+          }
+        },
+        "br_14": {
+          "type": "brand",
+          "settings": {
+            "alt": "AMD"
+          }
+        },
+        "br_15": {
+          "type": "brand",
+          "settings": {
+            "alt": "Razer"
+          }
+        },
+        "br_16": {
+          "type": "brand",
+          "settings": {
+            "alt": "WD"
           }
         }
       },
       "block_order": [
-        "br1",
-        "br2",
-        "br3",
-        "br4",
-        "br5",
-        "br6"
+        "br_00",
+        "br_01",
+        "br_02",
+        "br_03",
+        "br_04",
+        "br_05",
+        "br_06",
+        "br_07",
+        "br_08",
+        "br_09",
+        "br_10",
+        "br_11",
+        "br_12",
+        "br_13",
+        "br_14",
+        "br_15",
+        "br_16"
       ],
       "settings": {
+        "eyebrow": "Marcas oficiais",
         "heading": "+50 marcas que você confia"
       }
     },

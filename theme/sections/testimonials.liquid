@@ -36,7 +36,7 @@
     </div>
 
     <div class="testimonials-grid">
-      {% for block in section.blocks %}
+      {% for block in section.blocks %}{% if block.type == 'testimonial' %}
         {%- liquid
           assign accent_colors = '#1f7a3a,#7c3aed,#d62828,#0e8aa5,#f59e0b,#0f4fa8' | split: ','
           assign accent = accent_colors[forloop.index0] | default: '#1f7a3a'
@@ -85,8 +85,36 @@
             </button>
           </div>
         </article>
-      {% endfor %}
+      {% endif %}{% endfor %}
     </div>
+
+    {%- assign platform_blocks = section.blocks | where: 'type', 'platform' -%}
+    {%- if platform_blocks.size > 0 or section.settings.show_platforms -%}
+      <div class="testimonials-platforms">
+        <div class="testimonials-platforms__list">
+          {%- for block in platform_blocks -%}
+            <span class="testimonials-platforms__item" {{ block.shopify_attributes }}>
+              <b>{{ block.settings.name | escape }}</b>
+              {%- if block.settings.value != blank -%}
+                <span class="testimonials-platforms__dot">·</span>
+                {{ block.settings.value | escape }}
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+          {%- if platform_blocks.size == 0 -%}
+            <span class="testimonials-platforms__item"><b>Reclame Aqui</b> <span class="testimonials-platforms__dot">·</span> Reputação ótima</span>
+            <span class="testimonials-platforms__item"><b>Google</b> <span class="testimonials-platforms__dot">·</span> 4,8 (3.214 avaliações)</span>
+            <span class="testimonials-platforms__item"><b>Mercado Livre</b> <span class="testimonials-platforms__dot">·</span> MercadoLíder Platinum</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '#' }}" class="testimonials-platforms__cta">
+            {{ section.settings.cta_label | escape }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -277,6 +305,56 @@
     background: #f4f5f7;
     color: #0d1115;
   }
+
+  /* Reviews platforms strip (Reclame Aqui / Google / Mercado Livre) */
+  .testimonials-platforms {
+    margin-top: 24px;
+    background: #ffffff;
+    border: 1px solid #ececef;
+    border-radius: 22px;
+    padding: 22px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .testimonials-platforms__list {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    color: #6b7280;
+    font-size: 14px;
+  }
+  .testimonials-platforms__item b {
+    color: #0d1115;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .testimonials-platforms__dot {
+    color: #9ca3af;
+    margin: 0 4px;
+  }
+  .testimonials-platforms__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    color: #0d1115;
+    font-weight: 600;
+    font-size: 13.5px;
+    text-decoration: none;
+    background: #ffffff;
+    transition: all 0.18s;
+  }
+  .testimonials-platforms__cta:hover {
+    background: #0d1115;
+    color: #ffffff;
+    border-color: #0d1115;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -366,6 +444,27 @@
       "step": 4,
       "unit": "px",
       "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Plataformas de avaliação"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_platforms",
+      "label": "Exibir strip de plataformas",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA do strip",
+      "default": "Ver todas as avaliações"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
     }
   ],
   "blocks": [
@@ -406,6 +505,14 @@
           "label": "Data relativa (ex: há 3 dias)"
         }
       ]
+    },
+    {
+      "type": "platform",
+      "name": "Plataforma de avaliação",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "Reclame Aqui" },
+        { "type": "text", "id": "value", "label": "Valor / nota", "default": "Reputação ótima" }
+      ]
     }
   ],
   "presets": [
@@ -414,7 +521,10 @@
       "blocks": [
         { "type": "testimonial" },
         { "type": "testimonial" },
-        { "type": "testimonial" }
+        { "type": "testimonial" },
+        { "type": "platform", "settings": { "name": "Reclame Aqui", "value": "Reputação ótima" } },
+        { "type": "platform", "settings": { "name": "Google", "value": "4,8 (3.214 avaliações)" } },
+        { "type": "platform", "settings": { "name": "Mercado Livre", "value": "MercadoLíder Platinum" } }
       ]
     }
   ]
