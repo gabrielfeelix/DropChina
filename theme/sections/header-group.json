@@ -2,6 +2,7 @@
   "type": "header",
   "name": "Header",
   "sections": {
+    "dc_cart_drawer": { "type": "dc-cart-drawer", "settings": {} },
     "dc_header": {
       "type": "dc-header",
       "blocks": {
@@ -71,6 +72,7 @@
     }
   },
   "order": [
-    "dc_header"
+    "dc_header",
+    "dc_cart_drawer"
   ]
 }

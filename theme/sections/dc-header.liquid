@@ -89,10 +89,10 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
         </a>
       {%- endif -%}
-      <a href="{{ routes.cart_url }}" class="dc-header__icon-btn dc-header__cart-btn" aria-label="Carrinho" data-dc-cart-trigger>
+      <button type="button" class="dc-header__icon-btn dc-header__cart-btn" aria-label="Carrinho" data-dc-cart-trigger on:click="cart-drawer-component/open">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
         <span class="dc-header__cart-badge" data-dc-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
-      </a>
+      </button>
     </div>
   </div>
 </header>
@@ -333,7 +333,7 @@
     color: #6b7280;
   }
   .dc-topbar__inner {
-    max-width: 1480px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 28px;
     display: flex;
@@ -371,11 +371,11 @@
     background-color: rgba(255, 255, 255, 0.92);
   }
   .dc-header__inner {
-    max-width: 1480px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 28px;
     display: grid;
-    grid-template-columns: auto minmax(360px, 780px) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 36px;
     align-items: center;
     height: 84px;
@@ -399,9 +399,10 @@
   }
   .dc-header__search {
     width: 100%;
-    max-width: 780px;
+    max-width: 640px;
     margin-inline: auto;
     position: relative;
+    justify-self: center;
   }
   .dc-header__actions {
     display: flex;
@@ -455,7 +456,7 @@
     position: relative;
   }
   .dc-nav__inner {
-    max-width: 1480px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 28px;
     display: flex;
@@ -552,7 +553,7 @@
   }
   .dc-mega[hidden] { display: block; }
   .dc-mega__inner {
-    max-width: 1480px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 28px;
     display: grid;
