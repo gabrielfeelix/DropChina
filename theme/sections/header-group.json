@@ -2,165 +2,75 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "header_announcements_WbCTVz": {
-      "type": "header-announcements",
+    "dc_header": {
+      "type": "dc-header",
       "blocks": {
-        "announcement_frete": {
-          "type": "_announcement",
+        "mega_1": {
+          "type": "mega_cat",
           "settings": {
-            "text": "Frete GR\u00c1TIS em compras acima de R$ 199",
-            "link": "shopify://collections/all",
-            "font": "var(--font-primary--family)",
-            "font_size": "0.8125rem",
-            "weight": "400",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "name": "Cartuchos & Tintas",
+            "icon": "cartridge",
+            "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais"
+          }
         },
-        "announcement_juros": {
-          "type": "_announcement",
+        "mega_2": {
+          "type": "mega_cat",
           "settings": {
-            "text": "At\u00e9 18x sem juros no cart\u00e3o",
-            "link": "shopify://collections/all",
-            "font": "var(--font-primary--family)",
-            "font_size": "0.8125rem",
-            "weight": "400",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "name": "Toners",
+            "icon": "printer",
+            "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor"
+          }
         },
-        "announcement_pix": {
-          "type": "_announcement",
+        "mega_3": {
+          "type": "mega_cat",
           "settings": {
-            "text": "10% OFF no Pix em toda a loja",
-            "link": "shopify://collections/all",
-            "font": "var(--font-primary--family)",
-            "font_size": "0.8125rem",
-            "weight": "400",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "name": "Placas de Vídeo",
+            "icon": "gpu",
+            "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games"
+          }
         },
-        "announcement_garantia": {
-          "type": "_announcement",
+        "mega_4": {
+          "type": "mega_cat",
           "settings": {
-            "text": "Garantia oficial em todos os produtos",
-            "link": "shopify://collections/all",
-            "font": "var(--font-primary--family)",
-            "font_size": "0.8125rem",
-            "weight": "400",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "name": "Computadores & Notebooks",
+            "icon": "storage",
+            "items": "Mini PCs\nNotebooks\nAll-in-One\nPCs gamer\nWorkstations\nAcessórios"
+          }
         },
-        "announcement_envio": {
-          "type": "_announcement",
+        "mega_5": {
+          "type": "mega_cat",
           "settings": {
-            "text": "Envio em at\u00e9 24h para todo o Brasil",
-            "link": "shopify://collections/all",
-            "font": "var(--font-primary--family)",
-            "font_size": "0.8125rem",
-            "weight": "400",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "name": "Periféricos & Cabos",
+            "icon": "cable",
+            "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones"
+          }
         }
       },
       "block_order": [
-        "announcement_frete",
-        "announcement_juros",
-        "announcement_pix",
-        "announcement_garantia",
-        "announcement_envio"
+        "mega_1",
+        "mega_2",
+        "mega_3",
+        "mega_4",
+        "mega_5"
       ],
-      "name": "t:names.announcement_bar",
       "settings": {
-        "speed": 6,
-        "section_width": "full-width",
-        "color_scheme": "scheme-8",
-        "divider_width": 0,
-        "padding-block-start": 12,
-        "padding-block-end": 12
-      }
-    },
-    "header_section": {
-      "type": "header",
-      "blocks": {
-        "header-logo": {
-          "type": "_header-logo",
-          "static": true,
-          "settings": {
-            "hide_logo_on_home_page": false,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "header-menu": {
-          "type": "_header-menu",
-          "static": true,
-          "settings": {
-            "menu": "main-menu",
-            "color_scheme": "",
-            "type_font_primary_size": "var(--font-size--body-md)",
-            "menu_font_style": "inverse",
-            "type_font_primary_link": "primary",
-            "type_case_primary_link": "none",
-            "menu_style": "featured_products",
-            "featured_products_aspect_ratio": "4 / 5",
-            "featured_collections_aspect_ratio": "16 / 9",
-            "image_border_radius": 8,
-            "navigation_bar": false,
-            "color_scheme_navigation_bar": "",
-            "drawer_accordion": true,
-            "drawer_accordion_expand_first": false,
-            "drawer_dividers": true
-          },
-          "blocks": {}
-        }
-      },
-      "settings": {
-        "logo_position": "left",
-        "menu_position": "center",
-        "menu_row": "bottom",
-        "show_search": true,
-        "search_position": "center",
-        "search_row": "top",
-        "show_country": false,
-        "country_selector_style": false,
-        "show_language": false,
-        "localization_font": "body",
-        "localization_font_size": "0.875rem",
-        "localization_position": "right",
-        "localization_row": "top",
-        "section_width": "page-width",
-        "section_height": "standard",
-        "enable_sticky_header": "scroll-up",
-        "divider_width": 0,
-        "divider_size": "page-width",
-        "border_width": 0,
-        "color_scheme_top": "scheme-1",
-        "color_scheme_bottom": "scheme-1",
-        "color_scheme_transparent": "scheme-1",
-        "enable_transparent_header_home": false,
-        "home_color_scheme": "default",
-        "enable_transparent_header_product": false,
-        "product_color_scheme": "default",
-        "enable_transparent_header_collection": false,
-        "collection_color_scheme": "default",
-        "actions_display_style": "icon"
+        "announce_items": "Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
+        "topbar_link_1": "Sobre",
+        "topbar_link_2": "Blog",
+        "topbar_link_3": "Suporte",
+        "topbar_link_4": "Rastrear pedido",
+        "topbar_link_5": "Contato",
+        "phone": "(11) 99999-9999",
+        "hours": "Atendimento · Seg–Sáb 8h–20h",
+        "search_placeholder": "Buscar cartuchos, toners, placas de vídeo...",
+        "menu": "main-menu",
+        "secondary_link_1": "Blog",
+        "secondary_link_2": "Suporte",
+        "secondary_link_3": "F.A.Q."
       }
     }
   },
   "order": [
-    "header_announcements_WbCTVz",
-    "header_section"
+    "dc_header"
   ]
 }

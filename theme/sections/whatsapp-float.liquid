@@ -3,7 +3,8 @@
 {% endcomment %}
 
 {%- assign phone_digits = section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' -%}
-{% if phone_digits != blank %}
+{%- comment -%} Esconder na PDP pra não sobrepor o sticky-buy {%- endcomment -%}
+{% if phone_digits != blank and template.name != 'product' %}
   <a
     href="https://wa.me/{{ phone_digits }}{% if section.settings.message != blank %}?text={{ section.settings.message | url_encode }}{% endif %}"
     class="whatsapp-float"

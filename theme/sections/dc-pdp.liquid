@@ -313,6 +313,69 @@
     if (stickyAdd && addBtn) stickyAdd.addEventListener('click', function() {
       addBtn.click();
     });
+
+    // AJAX add-to-cart: posta em /cart/add.js, dispara cart:add event
+    // (cart-drawer-component com auto-open abre o drawer automaticamente)
+    var form = container.querySelector('.dc-pdp-info__form');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!addBtn || addBtn.disabled) return;
+
+        var originalText = addBtn.innerHTML;
+        addBtn.disabled = true;
+        addBtn.innerHTML = 'Adicionando...';
+
+        try {
+          var formData = new FormData(form);
+          formData.append('sections_url', window.location.pathname);
+
+          var addRes = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+            body: formData
+          });
+          if (!addRes.ok) throw new Error('Falha ao adicionar');
+
+          // Get updated cart (item_count + sections)
+          var cartRes = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } });
+          var cart = await cartRes.json();
+
+          // Update cart bubble badges
+          document.querySelectorAll('cart-bubble-component, [class*="cart-bubble"]').forEach(function(el) {
+            el.textContent = cart.item_count;
+            el.classList.toggle('cart-bubble--empty', cart.item_count === 0);
+            el.hidden = cart.item_count === 0;
+          });
+
+          // Dispatch event so cart-drawer (auto-open) opens itself
+          var evt = new CustomEvent('cart:add', {
+            bubbles: true,
+            detail: { resource: cart, sourceId: 'dc-pdp', data: { itemCount: cart.item_count } }
+          });
+          document.dispatchEvent(evt);
+
+          // Fallback: directly call open() on cart-drawer-component if present
+          var drawer = document.querySelector('cart-drawer-component');
+          if (drawer && typeof drawer.open === 'function') {
+            drawer.open();
+          }
+
+          addBtn.innerHTML = '✓ Adicionado';
+          setTimeout(function() {
+            addBtn.innerHTML = originalText;
+            addBtn.disabled = false;
+          }, 1200);
+        } catch (err) {
+          console.error('[DC PDP] add-to-cart error:', err);
+          addBtn.innerHTML = 'Tente novamente';
+          setTimeout(function() {
+            addBtn.innerHTML = originalText;
+            addBtn.disabled = false;
+          }, 1500);
+        }
+      });
+    }
   });
 </script>
 

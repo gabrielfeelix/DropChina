@@ -1,0 +1,869 @@
+<script src="{{ 'dc-search.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%} ============ ANNOUNCEMENT MARQUEE ============ {%- endcomment -%}
+{%- assign announce_items = section.settings.announce_items | default: 'Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil' | split: '|' -%}
+
+<div class="dc-announce">
+  <div class="dc-announce__marquee">
+    <div class="dc-announce__track">
+      {%- for i in (1..3) -%}
+        {%- for item in announce_items -%}
+          <span class="dc-announce__pill"><span class="dc-announce__dot"></span>{{ item | strip | escape }}</span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%} ============ TOPBAR (utility links) ============ {%- endcomment -%}
+<div class="dc-topbar">
+  <div class="dc-topbar__inner">
+    <div class="dc-topbar__links">
+      {%- if section.settings.topbar_link_1 != blank -%}<a href="{{ section.settings.topbar_link_1_url | default: '#' }}">{{ section.settings.topbar_link_1 }}</a>{%- endif -%}
+      {%- if section.settings.topbar_link_2 != blank -%}<a href="{{ section.settings.topbar_link_2_url | default: '#' }}">{{ section.settings.topbar_link_2 }}</a>{%- endif -%}
+      {%- if section.settings.topbar_link_3 != blank -%}<a href="{{ section.settings.topbar_link_3_url | default: '#' }}">{{ section.settings.topbar_link_3 }}</a>{%- endif -%}
+      {%- if section.settings.topbar_link_4 != blank -%}<a href="{{ section.settings.topbar_link_4_url | default: '#' }}">{{ section.settings.topbar_link_4 }}</a>{%- endif -%}
+      {%- if section.settings.topbar_link_5 != blank -%}<a href="{{ section.settings.topbar_link_5_url | default: '#' }}">{{ section.settings.topbar_link_5 }}</a>{%- endif -%}
+    </div>
+    <div class="dc-topbar__right">
+      {%- if section.settings.phone != blank -%}
+        <a href="https://wa.me/{{ section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:6px"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.3A10 10 0 1 0 12 2Z"/></svg>
+          {{ section.settings.phone }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.hours != blank -%}
+        <span>{{ section.settings.hours }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%} ============ MAIN HEADER (logo + search + actions) ============ {%- endcomment -%}
+<header class="dc-header" data-dc-header>
+  <div class="dc-header__inner">
+    <a href="{{ routes.root_url }}" class="dc-header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo -%}
+        {{ section.settings.logo | image_url: width: 240 | image_tag: alt: shop.name, class: 'dc-header__logo-img', loading: 'eager' }}
+      {%- else -%}
+        <span class="dc-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <div class="dc-header__search dc-search-input predictive-search color-scheme-1" role="search" data-dc-search>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="predictive-search-form dc-search-input__form" ref="form">
+        <div class="predictive-search-form__header dc-search-input__inner">
+          <div class="predictive-search-form__header-inner">
+            <input
+              class="search-input dc-search-input__field"
+              id="dc-search-input"
+              type="search"
+              name="q"
+              placeholder="{{ section.settings.search_placeholder | default: 'Buscar cartuchos, toners, placas de vídeo...' }}"
+              autocomplete="off"
+              spellcheck="false"
+              ref="searchInput"
+              on:input="/search"
+              on:keydown="/onSearchKeyDown"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="predictive-search-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+            >
+            <input type="hidden" name="options[prefix]" value="last">
+            <button type="submit" class="dc-search-input__submit" aria-label="Buscar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="predictive-search-form__content-wrapper dc-search-input__results-wrapper" hidden>
+          <div id="predictive-search-results" class="predictive-search-form__content dc-search-input__results" ref="predictiveSearchResults" role="listbox" aria-label="Resultados da busca"></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="dc-header__actions">
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="dc-header__icon-btn" aria-label="Minha conta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="dc-header__icon-btn dc-header__cart-btn" aria-label="Carrinho" data-dc-cart-trigger>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
+        <span class="dc-header__cart-badge" data-dc-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} ============ NAV BAR (categorias + megamenu) ============ {%- endcomment -%}
+<nav class="dc-nav" data-dc-nav>
+  <div class="dc-nav__inner">
+    <div class="dc-nav__primary">
+      <button type="button" class="dc-nav__cat-trigger" data-dc-mega-trigger aria-haspopup="true" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        Todas as categorias
+        <svg class="dc-nav__cat-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links limit: 5 -%}
+          <a href="{{ link.url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ forloop.index0 }}">
+            {{ link.title }}
+            {%- if link.title contains 'Ofertas' or link.title contains 'Sale' -%}
+              <span class="dc-nav__tag">−40%</span>
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    <div class="dc-nav__secondary">
+      {%- if section.settings.secondary_link_1 != blank -%}<a href="{{ section.settings.secondary_link_1_url | default: '#' }}">{{ section.settings.secondary_link_1 }}</a>{%- endif -%}
+      {%- if section.settings.secondary_link_2 != blank -%}<a href="{{ section.settings.secondary_link_2_url | default: '#' }}">{{ section.settings.secondary_link_2 }}</a>{%- endif -%}
+      {%- if section.settings.secondary_link_3 != blank -%}<a href="{{ section.settings.secondary_link_3_url | default: '#' }}">{{ section.settings.secondary_link_3 }}</a>{%- endif -%}
+    </div>
+  </div>
+
+  {%- assign mega_blocks = section.blocks | where: 'type', 'mega_cat' -%}
+  {%- if mega_blocks.size > 0 -%}
+    <div class="dc-mega" data-dc-mega hidden>
+      <div class="dc-mega__inner">
+        <div class="dc-mega__list">
+          {%- for block in mega_blocks -%}
+            <a
+              href="{{ block.settings.link | default: '#' }}"
+              class="dc-mega__item"
+              data-mega-cat="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="dc-mega__icon">
+                {%- case block.settings.icon -%}
+                  {%- when 'cartridge' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h12l2 4v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M8 7V5h6v2"/><path d="M5 13h10"/></svg>
+                  {%- when 'printer' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="9" rx="2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg>
+                  {%- when 'gpu' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="8" cy="12" r="2.4"/><circle cx="15" cy="12" r="2.4"/></svg>
+                  {%- when 'storage' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
+                  {%- when 'cable' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6a4 4 0 0 0 4 4h2v6"/><path d="M20 4v6a4 4 0 0 1-4 4h-2"/></svg>
+                  {%- when 'headset' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4"/><path d="M4 13v4a2 2 0 0 0 2 2h2v-6H4"/></svg>
+                  {%- else -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.5 9 21 10.5 13.5 12 12 19 10.5 12 3 10.5 10.5 9 12 2Z"/></svg>
+                {%- endcase -%}
+              </span>
+              <span class="dc-mega__name">{{ block.settings.name | escape }}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+            </a>
+          {%- endfor -%}
+          <a href="{{ routes.collections_url }}" class="dc-mega__all">
+            Ver todas as categorias
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        {%- for block in mega_blocks -%}
+          <div class="dc-mega__panel" data-mega-panel="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+            <div class="dc-mega__panel-head">
+              <span class="dc-mega__panel-eyebrow">{{ block.settings.name | escape }}</span>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}">Ver tudo →</a>
+              {%- endif -%}
+            </div>
+            <div class="dc-mega__cols">
+              <ul class="dc-mega__sub">
+                {%- assign sub_lines = block.settings.items | newline_to_br | split: '<br />' -%}
+                {%- for line in sub_lines -%}
+                  {%- assign clean = line | strip -%}
+                  {%- if clean != blank -%}
+                    <li><a href="{{ block.settings.link | default: '#' }}">{{ clean | escape }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+              {%- if block.settings.featured_collection != blank and block.settings.featured_collection.products.size > 0 -%}
+                <div class="dc-mega__products">
+                  {%- for p in block.settings.featured_collection.products limit: 3 -%}
+                    <a href="{{ p.url }}" class="dc-mega__product">
+                      <div class="dc-mega__product-art">
+                        {%- if p.featured_image -%}
+                          {{ p.featured_image | image_url: width: 180 | image_tag: alt: p.title, loading: 'lazy', class: 'dc-mega__product-img' }}
+                        {%- endif -%}
+                      </div>
+                      <div>
+                        <div class="dc-mega__product-brand">{{ p.vendor }}</div>
+                        <div class="dc-mega__product-title">{{ p.title }}</div>
+                        <div class="dc-mega__product-price">{{ p.price | money }}</div>
+                      </div>
+                    </a>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var nav = document.querySelector('[data-dc-nav]');
+    if (!nav) return;
+    var trigger = nav.querySelector('[data-dc-mega-trigger]');
+    var mega = nav.querySelector('[data-dc-mega]');
+    var links = nav.querySelectorAll('[data-dc-mega-link]');
+    var panels = mega ? mega.querySelectorAll('[data-mega-panel]') : [];
+    var items = mega ? mega.querySelectorAll('[data-mega-cat]') : [];
+    var closeTimer = null;
+
+    function showPanel(idx) {
+      panels.forEach(function(p) { p.hidden = parseInt(p.dataset.megaPanel, 10) !== idx; });
+      items.forEach(function(i) { i.classList.toggle('active', parseInt(i.dataset.megaCat, 10) === idx); });
+    }
+    function openMega(idx) {
+      if (!mega) return;
+      clearTimeout(closeTimer);
+      mega.hidden = false;
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      if (trigger) trigger.classList.add('open');
+      if (typeof idx === 'number') showPanel(idx);
+    }
+    function closeMega() {
+      closeTimer = setTimeout(function() {
+        if (mega) mega.hidden = true;
+        if (trigger) {
+          trigger.setAttribute('aria-expanded', 'false');
+          trigger.classList.remove('open');
+        }
+      }, 140);
+    }
+
+    if (trigger) {
+      trigger.addEventListener('mouseenter', function() { openMega(0); });
+      trigger.addEventListener('click', function() {
+        var isOpen = !mega.hidden;
+        if (isOpen) { mega.hidden = true; trigger.classList.remove('open'); }
+        else openMega(0);
+      });
+    }
+    if (mega) {
+      mega.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
+      mega.addEventListener('mouseleave', closeMega);
+      items.forEach(function(it) {
+        it.addEventListener('mouseenter', function() {
+          showPanel(parseInt(it.dataset.megaCat, 10));
+        });
+      });
+    }
+    nav.addEventListener('mouseleave', closeMega);
+
+    links.forEach(function(l) {
+      var i = parseInt(l.dataset.megaIdx, 10);
+      l.addEventListener('mouseenter', function() {
+        if (panels.length > i) openMega(i);
+        else closeMega();
+      });
+    });
+
+    // Cart trigger: abre cart-drawer-component se existir
+    var cartTrigger = document.querySelector('[data-dc-cart-trigger]');
+    if (cartTrigger) {
+      cartTrigger.addEventListener('click', function(e) {
+        var drawer = document.querySelector('cart-drawer-component');
+        if (drawer && typeof drawer.open === 'function') {
+          e.preventDefault();
+          drawer.open();
+        }
+      });
+    }
+
+    // Update cart count globally
+    document.addEventListener('cart:add', function(e) {
+      var count = e.detail && e.detail.resource ? e.detail.resource.item_count : null;
+      if (count !== null) {
+        document.querySelectorAll('[data-dc-cart-count]').forEach(function(b) {
+          b.textContent = count;
+          b.hidden = count === 0;
+        });
+      }
+    });
+  });
+</script>
+
+{% stylesheet %}
+  /* ANNOUNCE — marquee infinito */
+  .dc-announce {
+    background: #0d1115;
+    color: #f6efe2;
+    font-size: 13px;
+    overflow: hidden;
+  }
+  .dc-announce__marquee {
+    overflow: hidden;
+  }
+  .dc-announce__track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    padding: 10px 0;
+    animation: dc-announce-scroll 60s linear infinite;
+  }
+  .dc-announce__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .dc-announce__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: #f5c518;
+    display: inline-block;
+  }
+  @keyframes dc-announce-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-33.333%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dc-announce__track { animation: none; padding: 10px 32px; }
+  }
+
+  /* TOPBAR */
+  .dc-topbar {
+    border-bottom: 1px solid #ececef;
+    background: #ffffff;
+    font-size: 13px;
+    color: #6b7280;
+  }
+  .dc-topbar__inner {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 38px;
+  }
+  .dc-topbar__links { display: flex; gap: 22px; }
+  .dc-topbar__links a { color: #6b7280; text-decoration: none; transition: color 0.15s; }
+  .dc-topbar__links a:hover { color: #0d1115; }
+  .dc-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .dc-topbar__right a {
+    color: #0d1115;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .dc-topbar__right span { color: #6b7280; }
+  @media (max-width: 920px) {
+    .dc-topbar { display: none; }
+  }
+
+  /* HEADER MAIN */
+  .dc-header {
+    background: #ffffff;
+    border-bottom: 1px solid #ececef;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+  .dc-header__inner {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: auto minmax(360px, 780px) auto;
+    gap: 36px;
+    align-items: center;
+    height: 84px;
+  }
+  .dc-header__logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #0d1115;
+  }
+  .dc-header__logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .dc-header__logo-text {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .dc-header__search {
+    width: 100%;
+    max-width: 780px;
+    margin-inline: auto;
+    position: relative;
+  }
+  .dc-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dc-header__icon-btn {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: #0d1115;
+    text-decoration: none;
+    transition: background 0.18s;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .dc-header__icon-btn:hover { background: #f4f5f7; }
+  .dc-header__cart-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #d62828;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    padding: 0 5px;
+  }
+  .dc-header__cart-badge[hidden] { display: none; }
+  @media (max-width: 920px) {
+    .dc-header__inner {
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      height: 64px;
+    }
+    .dc-header__search { max-width: none; }
+  }
+
+  /* NAV (categorias) */
+  .dc-nav {
+    border-bottom: 1px solid #ececef;
+    background: #ffffff;
+    position: relative;
+  }
+  .dc-nav__inner {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: 24px;
+  }
+  .dc-nav__primary {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .dc-nav__primary a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #2a3038;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .dc-nav__primary a:hover { color: #0d1115; }
+  .dc-nav__cat-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 18px 0 14px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    font-weight: 600;
+    background: #0d1115;
+    color: #ffffff;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.18s;
+    font-family: inherit;
+    margin-right: 10px;
+  }
+  .dc-nav__cat-trigger:hover,
+  .dc-nav__cat-trigger.open { background: #d62828; }
+  .dc-nav__cat-chev { transition: transform 0.2s; }
+  .dc-nav__cat-trigger.open .dc-nav__cat-chev { transform: rotate(180deg); }
+  .dc-nav__tag {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    background: #fdecec;
+    color: #d62828;
+    text-transform: uppercase;
+    margin-left: 4px;
+  }
+  .dc-nav__secondary {
+    display: flex;
+    gap: 22px;
+    color: #6b7280;
+    font-size: 13.5px;
+  }
+  .dc-nav__secondary a {
+    color: #6b7280 !important;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .dc-nav__secondary a:hover { color: #0d1115 !important; }
+  @media (max-width: 920px) {
+    .dc-nav { display: none; }
+  }
+
+  /* MEGAMENU */
+  .dc-mega {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid #ececef;
+    box-shadow: 0 28px 60px -24px rgba(13, 17, 21, 0.25);
+    z-index: 49;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .dc-mega:not([hidden]) {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .dc-mega[hidden] { display: block; }
+  .dc-mega__inner {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    align-items: stretch;
+  }
+  .dc-mega__list {
+    border-right: 1px solid #ececef;
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dc-mega__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2a3038;
+    background: transparent;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+  }
+  .dc-mega__item:hover,
+  .dc-mega__item.active {
+    background: #f4f5f7;
+    color: #0d1115;
+  }
+  .dc-mega__item svg:last-child {
+    margin-left: auto;
+    color: #9ca3af;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.15s, transform 0.15s, color 0.15s;
+  }
+  .dc-mega__item.active svg:last-child {
+    opacity: 1;
+    transform: translateX(0);
+    color: #d62828;
+  }
+  .dc-mega__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid #ececef;
+    display: grid;
+    place-items: center;
+    color: #2a3038;
+  }
+  .dc-mega__name { font-weight: 600; }
+  .dc-mega__all {
+    margin-top: 12px;
+    padding: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1f7a3a, #14502a);
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 13.5px;
+    transition: transform 0.18s;
+    text-decoration: none;
+  }
+  .dc-mega__all:hover { transform: translateY(-1px); }
+
+  .dc-mega__panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .dc-mega__panel-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .dc-mega__panel-head a {
+    font-size: 13px;
+    font-weight: 600;
+    color: #d62828;
+    text-decoration: none;
+  }
+  .dc-mega__cols {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+  }
+  .dc-mega__sub {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dc-mega__sub li a {
+    font-size: 13.5px;
+    color: #2a3038;
+    padding: 4px 0;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s, padding 0.15s;
+    position: relative;
+    text-decoration: none;
+  }
+  .dc-mega__sub li a::before {
+    content: '';
+    width: 0;
+    height: 1px;
+    background: #d62828;
+    margin-right: 0;
+    transition: width 0.2s, margin-right 0.2s;
+  }
+  .dc-mega__sub li a:hover { color: #d62828; }
+  .dc-mega__sub li a:hover::before {
+    width: 18px;
+    margin-right: 8px;
+  }
+  .dc-mega__products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .dc-mega__product {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ececef;
+    background: #ffffff;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+    color: #0d1115;
+    text-decoration: none;
+  }
+  .dc-mega__product:hover {
+    transform: translateY(-2px);
+    border-color: #0d1115;
+    box-shadow: 0 10px 24px -10px rgba(13, 17, 21, 0.18);
+  }
+  .dc-mega__product-art {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ececef;
+    display: grid;
+    place-items: center;
+    padding: 8px;
+  }
+  .dc-mega__product-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  .dc-mega__product-brand {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .dc-mega__product-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0d1115;
+    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .dc-mega__product-price {
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+    color: #0d1115;
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+  }
+
+  /* SEARCH dropdown */
+  .dc-search-input__results-wrapper {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #ececef;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px -20px rgba(13, 17, 21, 0.28);
+    z-index: 70;
+    overflow: hidden;
+  }
+  .dc-search-input__results-wrapper[hidden] { display: none !important; }
+  .dc-search-input__results { padding: 18px; max-height: 480px; overflow-y: auto; }
+  .dc-search-input__field {
+    width: 100%;
+    height: 50px;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    padding: 0 56px 0 22px;
+    font-size: 15px;
+    line-height: 1;
+    color: #0d1115;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .dc-search-input__field::placeholder { color: #9ca3af; }
+  .dc-search-input__field:focus {
+    border-color: #0d1115;
+    box-shadow: 0 0 0 3px rgba(13, 17, 21, 0.12);
+  }
+  .dc-search-input__submit {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+  }
+  .dc-search-input__submit:hover { background: #d62828; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DropChina Header",
+  "tag": "header",
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (PNG)" },
+    { "type": "header", "content": "Announcement marquee" },
+    { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
+    { "type": "header", "content": "Topbar (links utilitários)" },
+    { "type": "text", "id": "topbar_link_1", "label": "Link 1", "default": "Sobre" },
+    { "type": "url", "id": "topbar_link_1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "topbar_link_2", "label": "Link 2", "default": "Blog" },
+    { "type": "url", "id": "topbar_link_2_url", "label": "Link 2 URL" },
+    { "type": "text", "id": "topbar_link_3", "label": "Link 3", "default": "Suporte" },
+    { "type": "url", "id": "topbar_link_3_url", "label": "Link 3 URL" },
+    { "type": "text", "id": "topbar_link_4", "label": "Link 4", "default": "Rastrear pedido" },
+    { "type": "url", "id": "topbar_link_4_url", "label": "Link 4 URL" },
+    { "type": "text", "id": "topbar_link_5", "label": "Link 5", "default": "Contato" },
+    { "type": "url", "id": "topbar_link_5_url", "label": "Link 5 URL" },
+    { "type": "text", "id": "phone", "label": "Telefone (WhatsApp)", "default": "(11) 99999-9999" },
+    { "type": "text", "id": "hours", "label": "Horário", "default": "Atendimento · Seg–Sáb 8h–20h" },
+    { "type": "header", "content": "Search" },
+    { "type": "text", "id": "search_placeholder", "label": "Placeholder do input", "default": "Buscar cartuchos, toners, placas de vídeo..." },
+    { "type": "header", "content": "Nav primária (categorias)" },
+    { "type": "link_list", "id": "menu", "label": "Menu (max 5 categorias)" },
+    { "type": "header", "content": "Nav secundária (à direita)" },
+    { "type": "text", "id": "secondary_link_1", "label": "Link 1", "default": "Blog" },
+    { "type": "url", "id": "secondary_link_1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "secondary_link_2", "label": "Link 2", "default": "Suporte" },
+    { "type": "url", "id": "secondary_link_2_url", "label": "Link 2 URL" },
+    { "type": "text", "id": "secondary_link_3", "label": "Link 3", "default": "F.A.Q." },
+    { "type": "url", "id": "secondary_link_3_url", "label": "Link 3 URL" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_cat",
+      "name": "Categoria do megamenu",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "Cartuchos & Tintas" },
+        { "type": "select", "id": "icon", "label": "Ícone", "options": [
+          { "value": "cartridge", "label": "Cartucho" },
+          { "value": "printer", "label": "Impressora" },
+          { "value": "gpu", "label": "GPU" },
+          { "value": "storage", "label": "Storage" },
+          { "value": "cable", "label": "Cabo" },
+          { "value": "headset", "label": "Headset" }
+        ], "default": "cartridge" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "textarea", "id": "items", "label": "Subitens (1 por linha)", "default": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais" },
+        { "type": "collection", "id": "featured_collection", "label": "Coleção destaque (3 produtos)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DropChina Header",
+      "blocks": [
+        { "type": "mega_cat", "settings": { "name": "Cartuchos & Tintas", "icon": "cartridge", "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais" } },
+        { "type": "mega_cat", "settings": { "name": "Toners", "icon": "printer", "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor" } },
+        { "type": "mega_cat", "settings": { "name": "Placas de Vídeo", "icon": "gpu", "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games" } },
+        { "type": "mega_cat", "settings": { "name": "Periféricos & Cabos", "icon": "cable", "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
