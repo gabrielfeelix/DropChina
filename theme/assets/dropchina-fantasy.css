@@ -71,11 +71,23 @@ header.header .header-logo img {
   width: auto;
 }
 
-/* Search input (DropChina pill) — wrapper precisa ser fluido */
-header.header .search-action {
+/* Search input (DropChina pill) — coluna center expande, wrapper fluido */
+header.header .header__columns {
+  --header-left: minmax(max-content, 0.5fr);
+  --header-center: minmax(360px, 640px);
+  --header-right: minmax(max-content, 0.5fr);
+}
+header.header .header__column--center {
+  width: 100%;
+  justify-self: stretch;
+}
+header.header .header__column--center > * {
+  width: 100%;
+}
+header.header .dc-search-input {
   width: 100%;
   max-width: 640px;
-  flex: 1;
+  margin-inline: auto;
 }
 header.header .dc-search-input,
 header.header .dc-search-input__form,
@@ -87,7 +99,6 @@ header.header .predictive-search-form__header-inner {
 header.header .dc-search-input__field,
 header.header .search-input {
   width: 100%;
-  min-width: 320px;
   height: 50px;
   border-radius: var(--r-pill);
   border: 1px solid var(--line-strong);
