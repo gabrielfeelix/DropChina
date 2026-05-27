@@ -301,8 +301,8 @@
     if (headerGroup) {
       var ticking = false;
       var isScrolled = false;
-      var ACTIVATE_AT = 80;
-      var DEACTIVATE_AT = 30;
+      var ACTIVATE_AT = 140;
+      var DEACTIVATE_AT = 40;
       function onScroll() {
         if (ticking) return;
         ticking = true;
@@ -431,61 +431,30 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: saturate(180%) blur(14px);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
-    transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  /* Linhas internas suaves */
-  #header-group .dc-announce,
-  #header-group .dc-topbar,
-  #header-group .dc-nav {
-    overflow: hidden;
-    max-height: 200px;
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 0.3s ease;
-  }
-  /* Quando scrolled: colapsa announce + topbar + nav suavemente */
+  /* Quando scrolled: esconde announce + topbar + nav via display:none
+     (instantâneo, sem flicker, sem transição complexa) */
   #header-group.is-scrolled .dc-announce,
   #header-group.is-scrolled .dc-topbar,
   #header-group.is-scrolled .dc-nav {
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-8px);
-    padding-top: 0;
-    padding-bottom: 0;
-    border-color: transparent;
-    pointer-events: none;
-  }
-  /* Zera também children que têm min-height próprio */
-  #header-group.is-scrolled .dc-announce__marquee,
-  #header-group.is-scrolled .dc-announce__track,
-  #header-group.is-scrolled .dc-topbar__inner,
-  #header-group.is-scrolled .dc-nav__inner {
-    min-height: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    overflow: hidden;
-    transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  /* dc-mega (megamenu dropdown) também colapsa pra não ficar pendurado */
-  #header-group.is-scrolled .dc-mega {
     display: none;
   }
   #header-group.is-scrolled {
     box-shadow: 0 4px 18px -8px rgba(13, 17, 21, 0.12);
   }
-  /* dc-header sem borda visível (a sombra do header-group já marca o fim) */
   #header-group.is-scrolled .dc-header {
     border-bottom-color: transparent;
+  }
+  /* Fade-in do dc-header quando entra no estado scrolled */
+  #header-group.is-scrolled .dc-header {
+    animation: dc-header-fadein 0.25s ease;
+  }
+  @keyframes dc-header-fadein {
+    from { opacity: 0.6; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* HEADER MAIN — fundo translúcido com blur ao scrollar */
