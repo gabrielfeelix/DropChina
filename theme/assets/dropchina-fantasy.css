@@ -119,21 +119,45 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
 }
 .slideshow-section .slide__image { object-fit: cover; }
 
-/* Setas APENAS dentro de slideshow-arrows (não pega dots/play) */
+/* Setas APENAS dentro de slideshow-arrows (não pega dots/play).
+   Importante: o tema nativo aplica mix-blend-mode: difference no
+   slideshow-arrows e opacity:0 no botão; precisamos zerar isso. */
+.slideshow-section slideshow-arrows {
+  mix-blend-mode: normal !important;
+  pointer-events: none;
+}
 .slideshow-section slideshow-arrows .slideshow-control {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  border-radius: 999px;
-  width: 52px;
-  height: 52px;
+  pointer-events: auto;
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: var(--ink) !important;
+  border-radius: 999px !important;
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  padding: 0 !important;
   box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s, background 0.2s;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  margin-inline: 24px;
 }
 .slideshow-section slideshow-arrows .slideshow-control:hover {
-  background: white;
+  background: white !important;
   transform: scale(1.06);
 }
-.slideshow-section slideshow-arrows .slideshow-control svg { color: var(--ink); }
+.slideshow-section slideshow-arrows .slideshow-control svg,
+.slideshow-section slideshow-arrows .slideshow-control .svg-wrapper {
+  color: var(--ink) !important;
+  stroke: var(--ink) !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+.slideshow-section slideshow-arrows .slideshow-control.flip-x svg {
+  transform: scaleX(-1);
+}
 
 /* Dots — pílulas finas brancas (dentro de .slideshow-controls__dots li button) */
 .slideshow-section .slideshow-controls__dots {
