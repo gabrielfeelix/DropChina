@@ -6,41 +6,83 @@
 <div class="section-background color-{{ color_scheme }}"></div>
 <section
   class="section section--testimonials section--{{ section_width }} color-{{ color_scheme }}"
-  style="padding-block-start: {{ section.settings.padding_top | default: 64 }}px; padding-block-end: {{ section.settings.padding_bottom | default: 64 }}px;"
+  style="padding-block-start: {{ section.settings.padding_top | default: 80 }}px; padding-block-end: {{ section.settings.padding_bottom | default: 80 }}px;"
 >
   <div class="testimonials-wrapper">
-    {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank %}
-      <header class="testimonials-header">
+    <div class="testimonials-head">
+      <div class="testimonials-head__copy">
         {% if section.settings.eyebrow != blank %}
           <p class="testimonials-eyebrow">{{ section.settings.eyebrow }}</p>
         {% endif %}
         {% if section.settings.heading != blank %}
           <h2 class="testimonials-heading">{{ section.settings.heading }}</h2>
         {% endif %}
-        {% if section.settings.subheading != blank %}
-          <p class="testimonials-subheading">{{ section.settings.subheading }}</p>
-        {% endif %}
-      </header>
-    {% endif %}
+      </div>
+      <div class="testimonials-stats">
+        <div class="testimonials-stat">
+          <span class="testimonials-stat__num">{{ section.settings.stat_rating | default: '4,9' }}</span>
+          <div class="testimonials-stat__stars" aria-hidden="true">★★★★★</div>
+          <span class="testimonials-stat__lbl">Nota média</span>
+        </div>
+        <div class="testimonials-stat">
+          <span class="testimonials-stat__num">{{ section.settings.stat_count | default: '12.480' }}</span>
+          <span class="testimonials-stat__lbl">Compras avaliadas</span>
+        </div>
+        <div class="testimonials-stat">
+          <span class="testimonials-stat__num">{{ section.settings.stat_recommend | default: '98%' }}</span>
+          <span class="testimonials-stat__lbl">Recomendam a loja</span>
+        </div>
+      </div>
+    </div>
 
     <div class="testimonials-grid">
       {% for block in section.blocks %}
+        {%- liquid
+          assign accent_colors = '#1f7a3a,#7c3aed,#d62828,#0e8aa5,#f59e0b,#0f4fa8' | split: ','
+          assign accent = accent_colors[forloop.index0] | default: '#1f7a3a'
+          assign name_parts = block.settings.author | split: ' '
+          assign first_initial = name_parts[0] | default: '?' | slice: 0, 1
+          assign last_initial = ''
+          if name_parts.size > 1
+            assign last_initial = name_parts.last | slice: 0, 1
+          endif
+        -%}
         <article class="testimonial-card" {{ block.shopify_attributes }}>
+          <header class="testimonial-card__head">
+            <div class="testimonial-card__avatar" style="background:{{ accent }};" aria-hidden="true">
+              {{ first_initial | upcase }}{{ last_initial | upcase }}
+            </div>
+            <div class="testimonial-card__author-info">
+              <div class="testimonial-card__name">
+                {{ block.settings.author }}
+                <span class="testimonial-card__verified" title="Compra verificada" aria-label="Compra verificada">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+                </span>
+              </div>
+              {% if block.settings.title != blank %}
+                <div class="testimonial-card__role">{{ block.settings.title }}</div>
+              {% endif %}
+            </div>
+          </header>
           <div class="testimonial-card__rating" aria-label="{{ block.settings.rating }} de 5 estrelas">
-            {% assign rating = block.settings.rating | default: 5 | times: 1 %}
-            {% for i in (1..5) %}{% if i <= rating %}★{% else %}☆{% endif %}{% endfor %}
-          </div>
-          {% if block.settings.title != blank %}
-            <h3 class="testimonial-card__title">{{ block.settings.title }}</h3>
-          {% endif %}
-          {% if block.settings.quote != blank %}
-            <p class="testimonial-card__quote">{{ block.settings.quote }}</p>
-          {% endif %}
-          <div class="testimonial-card__author">
-            <span class="testimonial-card__avatar" aria-hidden="true">
-              {{ block.settings.author | default: '?' | slice: 0, 1 }}
+            {%- assign rating = block.settings.rating | default: 5 | times: 1 -%}
+            <span class="testimonial-card__stars">
+              {%- for i in (1..5) -%}{%- if i <= rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
             </span>
-            <span class="testimonial-card__name">{{ block.settings.author }}</span>
+            {% if block.settings.date != blank %}
+              <span class="testimonial-card__date">· {{ block.settings.date }}</span>
+            {% endif %}
+          </div>
+          {% if block.settings.quote != blank %}
+            <p class="testimonial-card__quote">"{{ block.settings.quote }}"</p>
+          {% endif %}
+          <div class="testimonial-card__actions">
+            <button type="button" class="testimonial-card__action">
+              <span aria-hidden="true">👍</span> Útil
+            </button>
+            <button type="button" class="testimonial-card__action">
+              <span aria-hidden="true">💬</span> Comentar
+            </button>
           </div>
         </article>
       {% endfor %}
@@ -49,55 +91,191 @@
 </section>
 
 {% stylesheet %}
+  .section--testimonials {
+    background: #fafbfc;
+  }
   .section--testimonials .testimonials-wrapper {
-    max-width: var(--page-width, 1440px);
+    max-width: 1320px;
     margin-inline: auto;
-    padding-inline: clamp(16px, 4vw, 64px);
+    padding-inline: 28px;
   }
-
-  .testimonials-header {
+  .testimonials-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 32px;
     margin-bottom: 32px;
+    flex-wrap: wrap;
   }
-
   .testimonials-eyebrow {
-    font-size: 0.75rem;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #6b7280;
-    margin-bottom: 8px;
+    margin: 0 0 10px;
   }
-
   .testimonials-heading {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: clamp(2rem, 3vw, 2.75rem);
     font-weight: 700;
+    line-height: 1.04;
     letter-spacing: -0.025em;
-    color: var(--color-foreground-heading);
-    margin-bottom: 8px;
+    color: #0d1115;
+    margin: 0;
+    max-width: 22ch;
+  }
+  .testimonials-stats {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+  }
+  .testimonials-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .testimonials-stat__num {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0d1115;
+    line-height: 1;
+  }
+  .testimonials-stat__stars {
+    color: #f1a900;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .testimonials-stat__lbl {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
   }
 
-  .testimonials-subheading {
-    font-size: 1rem;
+  /* Grid 3-col com cards brancos */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 920px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonials-stats { gap: 18px; }
+    .testimonials-stat__num { font-size: 24px; }
+  }
+
+  .testimonial-card {
+    background: #ffffff;
+    border-radius: 22px;
+    border: 1px solid #ececef;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -16px rgba(20, 22, 24, 0.18);
+  }
+
+  .testimonial-card__head {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .testimonial-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: #1f7a3a;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    flex: none;
+  }
+  .testimonial-card__author-info { min-width: 0; flex: 1; }
+  .testimonial-card__name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0d1115;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .testimonial-card__verified {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: #22c55e;
+    color: white;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+  }
+  .testimonial-card__verified svg { width: 10px; height: 10px; }
+  .testimonial-card__role {
+    font-size: 12.5px;
     color: #6b7280;
+    margin-top: 2px;
+  }
+
+  .testimonial-card__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: #6b7280;
+  }
+  .testimonial-card__stars {
+    color: #f1a900;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .testimonial-card__date {
+    color: #9ca3af;
+    font-size: 12.5px;
+  }
+
+  .testimonial-card__quote {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #2a3038;
     margin: 0;
   }
 
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .testimonial-card__actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid #ececef;
   }
-
-  @media (min-width: 600px) {
-    .testimonials-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .testimonial-card__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 0;
+    padding: 4px 8px;
+    border-radius: 999px;
+    color: #6b7280;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
   }
-
-  @media (min-width: 1000px) {
-    .testimonials-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  .testimonial-card__action:hover {
+    background: #f4f5f7;
+    color: #0d1115;
   }
 {% endstylesheet %}
 
@@ -114,19 +292,40 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "AVALIAÇÕES"
+      "default": "AVALIAÇÕES VERIFICADAS"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Título",
-      "default": "O que nossos clientes dizem"
+      "default": "4,9 / 5 em mais de 12 mil compras"
     },
     {
       "type": "text",
       "id": "subheading",
-      "label": "Subtítulo",
-      "default": "Mais de 50 mil clientes já confiaram na DropChina."
+      "label": "Subtítulo (não usado no novo layout)"
+    },
+    {
+      "type": "header",
+      "content": "Stats agregados"
+    },
+    {
+      "type": "text",
+      "id": "stat_rating",
+      "label": "Nota média",
+      "default": "4,9"
+    },
+    {
+      "type": "text",
+      "id": "stat_count",
+      "label": "Compras avaliadas",
+      "default": "12.480"
+    },
+    {
+      "type": "text",
+      "id": "stat_recommend",
+      "label": "% Recomendam",
+      "default": "98%"
     },
     {
       "type": "header",
@@ -146,7 +345,7 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Esquema de cor",
-      "default": "scheme-2"
+      "default": "scheme-1"
     },
     {
       "type": "range",
@@ -186,8 +385,8 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Título do review",
-          "default": "Excelente atendimento"
+          "label": "Subtítulo (ex: Comprou Toner Evolut)",
+          "default": "Comprou produto"
         },
         {
           "type": "textarea",
@@ -200,6 +399,11 @@
           "id": "author",
           "label": "Nome do autor",
           "default": "Cliente DropChina"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Data relativa (ex: há 3 dias)"
         }
       ]
     }
@@ -208,42 +412,9 @@
     {
       "name": "Testimonials",
       "blocks": [
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Excelente",
-            "quote": "Recebi em 3 dias, embalagem perfeita.",
-            "author": "Maria S."
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Recomendo",
-            "quote": "Atendimento rápido pelo WhatsApp.",
-            "author": "João P."
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 4,
-            "title": "Ótimo custo",
-            "quote": "Toner compatível funcionou perfeitamente.",
-            "author": "Carlos M."
-          }
-        },
-        {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Confiável",
-            "quote": "Já é a quarta vez que compro aqui.",
-            "author": "Ana B."
-          }
-        }
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
       ]
     }
   ]
