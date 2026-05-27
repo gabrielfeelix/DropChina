@@ -35,9 +35,12 @@
   endif
 -%}
 
+{%- if product == blank or product.url == blank -%}
+  {%- comment -%} Sem produto válido — não renderiza nada {%- endcomment -%}
+{%- else -%}
 <a href="{{ product.url }}" class="dc-card">
   <div class="dc-card__media">
-    {%- if product.featured_image -%}
+    {%- if product.featured_image != blank and product.featured_image != nil -%}
       {{ product.featured_image | image_url: width: 480 | image_tag:
           loading: 'lazy',
           alt: product.title,
@@ -78,3 +81,4 @@
     <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
   </div>
 </a>
+{%- endif -%}
