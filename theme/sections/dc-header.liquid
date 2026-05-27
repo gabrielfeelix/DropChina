@@ -295,19 +295,28 @@
       });
     });
 
-    // Scroll-detection: ao rolar >40px, esconde announce/topbar/nav (mantém só main row)
+    // Scroll-detection com histerese: 80px pra ativar, 30px pra desativar
+    // (evita flicker quando volta ao topo perto do threshold)
     var headerGroup = document.getElementById('header-group');
     if (headerGroup) {
       var ticking = false;
+      var isScrolled = false;
+      var ACTIVATE_AT = 80;
+      var DEACTIVATE_AT = 30;
       function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            var scrolled = window.scrollY > 40;
-            headerGroup.classList.toggle('is-scrolled', scrolled);
-            ticking = false;
-          });
-          ticking = true;
-        }
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function() {
+          var y = window.scrollY;
+          if (!isScrolled && y > ACTIVATE_AT) {
+            isScrolled = true;
+            headerGroup.classList.add('is-scrolled');
+          } else if (isScrolled && y < DEACTIVATE_AT) {
+            isScrolled = false;
+            headerGroup.classList.remove('is-scrolled');
+          }
+          ticking = false;
+        });
       }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
@@ -422,29 +431,42 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: transparent;
-    transition: box-shadow 0.25s ease;
+    background: #ffffff;
+    transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  /* Quando scrolled: esconde announce + topbar + nav, mantém só main row */
+  /* Linhas internas suaves */
+  #header-group .dc-announce,
+  #header-group .dc-topbar,
+  #header-group .dc-nav {
+    overflow: hidden;
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s ease;
+  }
+  /* Quando scrolled: colapsa announce + topbar + nav suavemente */
   #header-group.is-scrolled .dc-announce,
   #header-group.is-scrolled .dc-topbar,
   #header-group.is-scrolled .dc-nav {
     max-height: 0;
-    overflow: hidden;
     opacity: 0;
-    border: 0;
+    transform: translateY(-8px);
+    padding-top: 0;
+    padding-bottom: 0;
+    border-color: transparent;
     pointer-events: none;
-    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
-  }
-  #header-group .dc-announce,
-  #header-group .dc-topbar,
-  #header-group .dc-nav {
-    max-height: 200px;
-    opacity: 1;
-    transition: max-height 0.3s ease, opacity 0.25s ease;
   }
   #header-group.is-scrolled {
-    box-shadow: 0 6px 20px -10px rgba(13, 17, 21, 0.18);
+    box-shadow: 0 4px 18px -8px rgba(13, 17, 21, 0.12);
+  }
+  /* dc-header sem borda visível (a sombra do header-group já marca o fim) */
+  #header-group.is-scrolled .dc-header {
+    border-bottom-color: transparent;
   }
 
   /* HEADER MAIN — fundo translúcido com blur ao scrollar */
