@@ -671,7 +671,8 @@
         "gap": 24,
         "color_scheme": "scheme-1",
         "padding-block-start": 64,
-        "padding-block-end": 32
+        "padding-block-end": 32,
+        "layout": "carousel"
       }
     },
     "testimonials_section": {
@@ -811,10 +812,10 @@
         "c1": {
           "type": "card",
           "settings": {
-            "title": "Toners e cartuchos premium",
-            "price": "",
-            "cta_label": "Comprar agora",
-            "eyebrow": "MÊS DA IMPRESSÃO",
+            "tone": "light",
+            "eyebrow": "CARTUCHOS & TONERS",
+            "title": "Impressão com qualidade premium.",
+            "cta_label": "Ver coleção",
             "link": "shopify://collections/toners",
             "background_asset": "banner-toner.png"
           }
@@ -822,10 +823,10 @@
         "c2": {
           "type": "card",
           "settings": {
-            "title": "Pacotes Panini World Cup 2026",
-            "price": "",
-            "cta_label": "Ver coleção",
+            "tone": "dark",
             "eyebrow": "EDIÇÃO LIMITADA",
+            "title": "Pacotes Panini World Cup 2026.",
+            "cta_label": "Ver coleção",
             "link": "shopify://collections/all",
             "background_asset": "banner-worldcup.png"
           }
@@ -833,11 +834,21 @@
         "c3": {
           "type": "card",
           "settings": {
-            "title": "Placas de vídeo a partir de R$ 293",
-            "price": "",
-            "cta_label": "Montar setup",
+            "tone": "yellow",
             "eyebrow": "SETUP GAMER",
-            "link": "shopify://collections/all",
+            "title": "Placas de vídeo a partir de R$ 293",
+            "cta_label": "Montar setup",
+            "link": "shopify://collections/perifericos"
+          }
+        },
+        "c4": {
+          "type": "card",
+          "settings": {
+            "tone": "dark",
+            "eyebrow": "BLACK WEEK",
+            "title": "GPUs com até 25% OFF",
+            "cta_label": "Ver ofertas",
+            "link": "shopify://collections/perifericos",
             "background_asset": "banner-gpu.png"
           }
         }
@@ -845,8 +856,17 @@
       "block_order": [
         "c1",
         "c2",
-        "c3"
-      ]
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "eyebrow": "EM DESTAQUE",
+        "heading": "Compre por linha",
+        "cta_label": "Ver todas",
+        "cta_link": "shopify://collections/all",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "brand_carousel_main": {
       "type": "brand-carousel",
