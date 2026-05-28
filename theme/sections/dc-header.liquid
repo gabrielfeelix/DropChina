@@ -110,16 +110,24 @@
         Todas as categorias
         <svg class="dc-nav__cat-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
       </button>
-      {%- if section.settings.menu != blank -%}
-        {%- for link in section.settings.menu.links limit: 5 -%}
-          <a href="{{ link.url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ forloop.index0 }}">
-            {{ link.title }}
-            {%- if link.title contains 'Ofertas' or link.title contains 'Sale' -%}
-              <span class="dc-nav__tag">−40%</span>
+      {%- comment -%} Nav primária via settings explícitos (5 slots).
+          Cada slot tem label/url/tag (badge opcional ex: "-40%"). {%- endcomment -%}
+      {%- for i in (1..5) -%}
+        {%- assign key_label = 'nav_link_' | append: i -%}
+        {%- assign key_url   = 'nav_link_' | append: i | append: '_url' -%}
+        {%- assign key_tag   = 'nav_link_' | append: i | append: '_tag' -%}
+        {%- assign nav_label = section.settings[key_label] -%}
+        {%- assign nav_url   = section.settings[key_url] | default: '#' -%}
+        {%- assign nav_tag   = section.settings[key_tag] -%}
+        {%- if nav_label != blank -%}
+          <a href="{{ nav_url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ forloop.index0 }}">
+            {{ nav_label }}
+            {%- if nav_tag != blank -%}
+              <span class="dc-nav__tag">{{ nav_tag }}</span>
             {%- endif -%}
           </a>
-        {%- endfor -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
     <div class="dc-nav__secondary">
       {%- if section.settings.secondary_link_1 != blank -%}<a href="{{ section.settings.secondary_link_1_url | default: '#' }}">{{ section.settings.secondary_link_1 }}</a>{%- endif -%}
@@ -295,25 +303,37 @@
       });
     });
 
-    // Scroll-detection com histerese: 80px pra ativar, 30px pra desativar
-    // (evita flicker quando volta ao topo perto do threshold)
+    // Scroll-detection sem flicker.
+    // Bug original: ao colapsar (display:none em announce+topbar+nav), a
+    // altura do #header-group sticky cai ~156px, o browser reajusta o
+    // scrollY automaticamente, e isso disparava o handler de novo num
+    // loop ping-pong entre ACTIVATE_AT/DEACTIVATE_AT.
+    // Fix: cooldown >= 1 frame após toggle de classe + histerese larga.
     var headerGroup = document.getElementById('header-group');
     if (headerGroup) {
       var ticking = false;
       var isScrolled = false;
-      var ACTIVATE_AT = 140;
-      var DEACTIVATE_AT = 40;
+      var cooldownUntil = 0;
+      var ACTIVATE_AT = 180;
+      var DEACTIVATE_AT = 20;
       function onScroll() {
         if (ticking) return;
         ticking = true;
         window.requestAnimationFrame(function() {
+          var now = performance.now();
+          if (now < cooldownUntil) {
+            ticking = false;
+            return;
+          }
           var y = window.scrollY;
           if (!isScrolled && y > ACTIVATE_AT) {
             isScrolled = true;
             headerGroup.classList.add('is-scrolled');
+            cooldownUntil = now + 250;
           } else if (isScrolled && y < DEACTIVATE_AT) {
             isScrolled = false;
             headerGroup.classList.remove('is-scrolled');
+            cooldownUntil = now + 250;
           }
           ticking = false;
         });
@@ -970,7 +990,21 @@
     { "type": "header", "content": "Search" },
     { "type": "text", "id": "search_placeholder", "label": "Placeholder do input", "default": "Buscar cartuchos, toners, placas de vídeo..." },
     { "type": "header", "content": "Nav primária (categorias)" },
-    { "type": "link_list", "id": "menu", "label": "Menu (max 5 categorias)" },
+    { "type": "text", "id": "nav_link_1", "label": "Link 1 — label", "default": "Cartuchos & Toners" },
+    { "type": "url",  "id": "nav_link_1_url", "label": "Link 1 — URL" },
+    { "type": "text", "id": "nav_link_1_tag", "label": "Link 1 — badge (ex: −40%)" },
+    { "type": "text", "id": "nav_link_2", "label": "Link 2 — label", "default": "Placas de Vídeo" },
+    { "type": "url",  "id": "nav_link_2_url", "label": "Link 2 — URL" },
+    { "type": "text", "id": "nav_link_2_tag", "label": "Link 2 — badge" },
+    { "type": "text", "id": "nav_link_3", "label": "Link 3 — label", "default": "Impressoras" },
+    { "type": "url",  "id": "nav_link_3_url", "label": "Link 3 — URL" },
+    { "type": "text", "id": "nav_link_3_tag", "label": "Link 3 — badge" },
+    { "type": "text", "id": "nav_link_4", "label": "Link 4 — label", "default": "Áudio" },
+    { "type": "url",  "id": "nav_link_4_url", "label": "Link 4 — URL" },
+    { "type": "text", "id": "nav_link_4_tag", "label": "Link 4 — badge" },
+    { "type": "text", "id": "nav_link_5", "label": "Link 5 — label", "default": "Ofertas" },
+    { "type": "url",  "id": "nav_link_5_url", "label": "Link 5 — URL" },
+    { "type": "text", "id": "nav_link_5_tag", "label": "Link 5 — badge", "default": "−40%" },
     { "type": "header", "content": "Nav secundária (à direita)" },
     { "type": "text", "id": "secondary_link_1", "label": "Link 1", "default": "Blog" },
     { "type": "url", "id": "secondary_link_1_url", "label": "Link 1 URL" },

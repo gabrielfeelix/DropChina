@@ -199,7 +199,8 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
    ============================================================ */
 .section-trust-badges {
   background: var(--surface-3);
-  padding-block: 28px;
+  padding-block: 44px;
+  margin-top: 24px;
 }
 .trust-badges__container {
   display: grid;
