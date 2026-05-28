@@ -1,0 +1,338 @@
+<section class="dc-contact-section" style="padding-block: {{ section.settings.padding_top | default: 80 }}px {{ section.settings.padding_bottom | default: 80 }}px;">
+  <div class="dc-contact__container">
+    <header class="dc-contact__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dc-contact__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="dc-contact__title">{{ section.settings.heading | default: page.title | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="dc-contact__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="dc-contact__grid">
+      <div class="dc-contact__formwrap">
+        {%- form 'contact', class: 'dc-contact__form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="dc-contact__success" role="status">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mensagem enviada! Vamos te responder em breve.
+            </div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="dc-contact__errors" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="dc-contact__row">
+            <label class="dc-contact__field">
+              <span>Nome</span>
+              <input type="text" name="contact[name]" autocomplete="name" required value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </label>
+            <label class="dc-contact__field">
+              <span>E-mail</span>
+              <input type="email" name="contact[email]" autocomplete="email" required value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+            </label>
+          </div>
+
+          <label class="dc-contact__field">
+            <span>Telefone <em>(opcional)</em></span>
+            <input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+          </label>
+
+          <label class="dc-contact__field">
+            <span>Assunto</span>
+            <select name="contact[subject]">
+              <option value="Dúvida sobre produto">Dúvida sobre produto</option>
+              <option value="Status do pedido">Status do pedido</option>
+              <option value="Troca / devolução">Troca / devolução</option>
+              <option value="Atacado / revenda">Atacado / revenda</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </label>
+
+          <label class="dc-contact__field">
+            <span>Mensagem</span>
+            <textarea name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+          </label>
+
+          <button type="submit" class="dc-contact__submit">
+            Enviar mensagem
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </button>
+        {%- endform -%}
+      </div>
+
+      <aside class="dc-contact__aside">
+        <div class="dc-contact__card">
+          <div class="dc-contact__card-eyebrow">Atendimento</div>
+          <ul class="dc-contact__list">
+            {%- if section.settings.email != blank -%}
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.phone != blank -%}
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+                {%- assign wa_num = section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' -%}
+                <a href="https://wa.me/{{ wa_num }}" target="_blank" rel="noopener">{{ section.settings.phone }}</a>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.hours != blank -%}
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>{{ section.settings.hours }}</span>
+              </li>
+            {%- endif -%}
+            {%- if section.settings.address != blank -%}
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>{{ section.settings.address }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        {%- if section.settings.note != blank -%}
+          <p class="dc-contact__note">{{ section.settings.note | escape }}</p>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-contact-section {
+    background: #ffffff;
+  }
+  .dc-contact__container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-contact__head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .dc-contact__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .dc-contact__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 56px;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-contact__sub {
+    font-size: 17px;
+    color: #6b7280;
+    margin: 16px auto 0;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+  .dc-contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+  .dc-contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .dc-contact__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .dc-contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dc-contact__field > span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2a3038;
+  }
+  .dc-contact__field em {
+    font-style: normal;
+    color: #9ca3af;
+    font-weight: 400;
+  }
+  .dc-contact__field input,
+  .dc-contact__field select,
+  .dc-contact__field textarea {
+    width: 100%;
+    height: 48px;
+    border-radius: 14px;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    padding: 0 16px;
+    font-size: 14.5px;
+    color: #0d1115;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+  .dc-contact__field textarea {
+    height: auto;
+    padding: 14px 16px;
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.5;
+  }
+  .dc-contact__field input:focus,
+  .dc-contact__field select:focus,
+  .dc-contact__field textarea:focus {
+    border-color: #0d1115;
+    box-shadow: 0 0 0 3px rgba(13, 17, 21, 0.08);
+  }
+  .dc-contact__submit {
+    align-self: flex-start;
+    margin-top: 12px;
+    height: 52px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    transition: background 0.18s, transform 0.18s;
+  }
+  .dc-contact__submit:hover {
+    background: #d62828;
+    transform: translateY(-1px);
+  }
+  .dc-contact__success {
+    background: #ecfdf5;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dc-contact__errors {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .dc-contact__aside {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .dc-contact__card {
+    background: #fafbfc;
+    border: 1px solid #ececef;
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .dc-contact__card-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .dc-contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dc-contact__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #2a3038;
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+  .dc-contact__list svg {
+    color: #6b7280;
+    flex: none;
+    margin-top: 2px;
+  }
+  .dc-contact__list a {
+    color: #0d1115;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .dc-contact__list a:hover { color: #d62828; }
+  .dc-contact__note {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+    padding-inline: 4px;
+  }
+  @media (max-width: 920px) {
+    .dc-contact__title { font-size: 40px; }
+    .dc-contact__grid { grid-template-columns: 1fr; gap: 32px; }
+    .dc-contact__row { grid-template-columns: 1fr; }
+    .dc-contact__aside { position: static; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Contact",
+  "tag": "section",
+  "class": "section-dc-contact",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fale com a gente" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Contato" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo", "default": "Dúvidas, suporte ou parcerias — respondemos em até 24h úteis." },
+    { "type": "header", "content": "Sidebar — Atendimento" },
+    { "type": "text", "id": "email", "label": "E-mail" },
+    { "type": "text", "id": "phone", "label": "Telefone / WhatsApp" },
+    { "type": "text", "id": "hours", "label": "Horário", "default": "Seg–Sáb · 8h às 20h" },
+    { "type": "text", "id": "address", "label": "Endereço" },
+    { "type": "text", "id": "note", "label": "Nota legal (rodapé)", "default": "Ao enviar, você concorda com a nossa política de privacidade." },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    {
+      "name": "DC Contact",
+      "settings": {
+        "email": "contato@dropchina.com.br",
+        "phone": "(11) 99999-9999"
+      }
+    }
+  ]
+}
+{% endschema %}

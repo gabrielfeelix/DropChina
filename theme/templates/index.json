@@ -182,7 +182,7 @@
           "type": "tab",
           "settings": {
             "label": "Mais vendidos",
-            "collection": "frontpage"
+            "collection": "all"
           }
         },
         "tab_2": {
@@ -232,7 +232,7 @@
       "settings": {
         "eyebrow": "TOP DESSA SEMANA",
         "heading": "Mais vendidos",
-        "max_products": 10,
+        "max_products": 24,
         "layout": "grid",
         "show_view_all": true,
         "view_all_label": "Ver todos os produtos",

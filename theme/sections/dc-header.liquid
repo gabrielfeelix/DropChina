@@ -89,7 +89,12 @@
 
     <div class="dc-header__actions">
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{{ routes.account_url }}" class="dc-header__icon-btn" aria-label="Minha conta">
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="dc-header__icon-btn"
+          aria-label="{%- if customer -%}Minha conta{%- else -%}Entrar{%- endif -%}"
+          rel="nofollow"
+        >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
         </a>
       {%- endif -%}
@@ -273,35 +278,8 @@
       });
     });
 
-    // Cart trigger: abre cart-drawer-component com múltiplas estratégias
-    document.querySelectorAll('[data-dc-cart-trigger]').forEach(function(trigger) {
-      trigger.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var drawer = document.querySelector('cart-drawer-component');
-        if (!drawer) {
-          console.warn('[DC Cart] cart-drawer-component não encontrado, abrindo /cart');
-          window.location.href = '/cart';
-          return;
-        }
-        // Estratégia 1: .open() method (api custom)
-        if (typeof drawer.open === 'function') {
-          try { drawer.open(); return; } catch(err) { console.warn('[DC Cart] .open() falhou', err); }
-        }
-        // Estratégia 2: .showDialog() (DialogComponent parent)
-        if (typeof drawer.showDialog === 'function') {
-          try { drawer.showDialog(); return; } catch(err) { console.warn('[DC Cart] .showDialog() falhou', err); }
-        }
-        // Estratégia 3: dialog element nativo
-        var dialog = drawer.querySelector('dialog[ref="dialog"], .cart-drawer__dialog');
-        if (dialog && typeof dialog.showModal === 'function') {
-          try { dialog.showModal(); return; } catch(err) { console.warn('[DC Cart] dialog.showModal() falhou', err); }
-        }
-        // Fallback final
-        console.warn('[DC Cart] Todas as estratégias falharam, redirecionando /cart');
-        window.location.href = '/cart';
-      });
-    });
+    // Cart trigger: o dc-cart-sidedrawer captura o click via [data-dc-cart-trigger]
+    // via delegação em document.click, então aqui não precisa fazer nada.
 
     // Scroll-detection sem flicker.
     // Bug original: ao colapsar (display:none em announce+topbar+nav), a
@@ -977,13 +955,13 @@
     { "type": "header", "content": "Topbar (links utilitários)" },
     { "type": "text", "id": "topbar_link_1", "label": "Link 1", "default": "Sobre" },
     { "type": "url", "id": "topbar_link_1_url", "label": "Link 1 URL" },
-    { "type": "text", "id": "topbar_link_2", "label": "Link 2", "default": "Blog" },
+    { "type": "text", "id": "topbar_link_2", "label": "Link 2", "default": "F.A.Q." },
     { "type": "url", "id": "topbar_link_2_url", "label": "Link 2 URL" },
-    { "type": "text", "id": "topbar_link_3", "label": "Link 3", "default": "Suporte" },
+    { "type": "text", "id": "topbar_link_3", "label": "Link 3", "default": "Contato" },
     { "type": "url", "id": "topbar_link_3_url", "label": "Link 3 URL" },
     { "type": "text", "id": "topbar_link_4", "label": "Link 4", "default": "Rastrear pedido" },
     { "type": "url", "id": "topbar_link_4_url", "label": "Link 4 URL" },
-    { "type": "text", "id": "topbar_link_5", "label": "Link 5", "default": "Contato" },
+    { "type": "text", "id": "topbar_link_5", "label": "Link 5" },
     { "type": "url", "id": "topbar_link_5_url", "label": "Link 5 URL" },
     { "type": "text", "id": "phone", "label": "Telefone (WhatsApp)", "default": "(11) 99999-9999" },
     { "type": "text", "id": "hours", "label": "Horário", "default": "Atendimento · Seg–Sáb 8h–20h" },
@@ -1006,11 +984,11 @@
     { "type": "url",  "id": "nav_link_5_url", "label": "Link 5 — URL" },
     { "type": "text", "id": "nav_link_5_tag", "label": "Link 5 — badge", "default": "−40%" },
     { "type": "header", "content": "Nav secundária (à direita)" },
-    { "type": "text", "id": "secondary_link_1", "label": "Link 1", "default": "Blog" },
+    { "type": "text", "id": "secondary_link_1", "label": "Link 1", "default": "Contato" },
     { "type": "url", "id": "secondary_link_1_url", "label": "Link 1 URL" },
-    { "type": "text", "id": "secondary_link_2", "label": "Link 2", "default": "Suporte" },
+    { "type": "text", "id": "secondary_link_2", "label": "Link 2", "default": "F.A.Q." },
     { "type": "url", "id": "secondary_link_2_url", "label": "Link 2 URL" },
-    { "type": "text", "id": "secondary_link_3", "label": "Link 3", "default": "F.A.Q." },
+    { "type": "text", "id": "secondary_link_3", "label": "Link 3" },
     { "type": "url", "id": "secondary_link_3_url", "label": "Link 3 URL" }
   ],
   "blocks": [

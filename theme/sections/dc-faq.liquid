@@ -1,0 +1,368 @@
+<section class="dc-faq-section" style="padding-block: {{ section.settings.padding_top | default: 80 }}px {{ section.settings.padding_bottom | default: 80 }}px;">
+  <div class="dc-faq__container">
+    <header class="dc-faq__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dc-faq__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="dc-faq__title">{{ section.settings.heading | default: 'Perguntas frequentes' | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="dc-faq__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- liquid
+      assign q_blocks = section.blocks | where: 'type', 'qa'
+      assign categories = '' | split: ''
+      for b in q_blocks
+        assign cat = b.settings.category | default: 'Geral'
+        unless categories contains cat
+          assign categories = categories | concat: cat | split: '|'
+        endunless
+      endfor
+    -%}
+
+    <div class="dc-faq__layout" data-dc-faq>
+      {%- if categories.size > 1 -%}
+        <aside class="dc-faq__nav">
+          <div class="dc-faq__nav-title">Categorias</div>
+          <ul class="dc-faq__nav-list">
+            {%- for cat in categories -%}
+              <li>
+                <button
+                  type="button"
+                  class="dc-faq__nav-btn{% if forloop.first %} active{% endif %}"
+                  data-dc-faq-cat="{{ cat | handle }}"
+                >{{ cat | escape }}</button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </aside>
+      {%- endif -%}
+
+      <div class="dc-faq__main">
+        {%- for cat in categories -%}
+          {%- assign cat_handle = cat | handle -%}
+          <div
+            class="dc-faq__group{% if forloop.first %} active{% endif %}"
+            data-dc-faq-group="{{ cat_handle }}"
+            {% unless forloop.first %}hidden{% endunless %}
+          >
+            <h2 class="dc-faq__group-title">{{ cat | escape }}</h2>
+            <ul class="dc-faq__items">
+              {%- for b in q_blocks -%}
+                {%- assign b_cat = b.settings.category | default: 'Geral' -%}
+                {%- if b_cat == cat -%}
+                  <li class="dc-faq__item" {{ b.shopify_attributes }}>
+                    <details class="dc-faq__details">
+                      <summary class="dc-faq__q">
+                        <span>{{ b.settings.question | escape }}</span>
+                        <svg class="dc-faq__chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+                      </summary>
+                      <div class="dc-faq__a">{{ b.settings.answer }}</div>
+                    </details>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <div class="dc-faq__cta">
+            <p>{{ section.settings.cta_text | default: 'Não encontrou o que procurava?' | escape }}</p>
+            <a href="{{ section.settings.cta_link | default: '/pages/contact' }}" class="dc-faq__cta-btn">
+              {{ section.settings.cta_label | escape }}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-dc-faq]').forEach(function(root) {
+      var btns = root.querySelectorAll('[data-dc-faq-cat]');
+      var groups = root.querySelectorAll('[data-dc-faq-group]');
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var target = btn.dataset.dcFaqCat;
+          btns.forEach(function(b) { b.classList.toggle('active', b.dataset.dcFaqCat === target); });
+          groups.forEach(function(g) {
+            var match = g.dataset.dcFaqGroup === target;
+            g.hidden = !match;
+            g.classList.toggle('active', match);
+          });
+        });
+      });
+    });
+  });
+</script>
+
+{% stylesheet %}
+  .dc-faq-section { background: #ffffff; }
+  .dc-faq__container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-faq__head {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .dc-faq__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .dc-faq__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 56px;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-faq__sub {
+    font-size: 17px;
+    color: #6b7280;
+    margin: 16px auto 0;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+  .dc-faq__layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+  .dc-faq__nav {
+    position: sticky;
+    top: 120px;
+  }
+  .dc-faq__nav-title {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-inline: 14px;
+  }
+  .dc-faq__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .dc-faq__nav-btn {
+    width: 100%;
+    text-align: left;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: transparent;
+    border: 0;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .dc-faq__nav-btn:hover {
+    background: #f4f5f7;
+    color: #0d1115;
+  }
+  .dc-faq__nav-btn.active {
+    background: #0d1115;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .dc-faq__main {
+    min-width: 0;
+  }
+  .dc-faq__group[hidden] { display: none; }
+  .dc-faq__group + .dc-faq__group { margin-top: 40px; }
+  .dc-faq__group-title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0 0 20px;
+    letter-spacing: -0.015em;
+  }
+  .dc-faq__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .dc-faq__item + .dc-faq__item {
+    border-top: 1px solid #ececef;
+  }
+  .dc-faq__details {
+    padding: 22px 0;
+  }
+  .dc-faq__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    list-style: none;
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0d1115;
+    letter-spacing: -0.01em;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .dc-faq__q::-webkit-details-marker { display: none; }
+  .dc-faq__q:hover { color: #d62828; }
+  .dc-faq__chev {
+    color: #6b7280;
+    transition: transform 0.22s ease, color 0.15s;
+    flex: none;
+  }
+  details[open] .dc-faq__chev {
+    transform: rotate(180deg);
+    color: #0d1115;
+  }
+  .dc-faq__a {
+    margin-top: 12px;
+    color: #4b5563;
+    font-size: 15.5px;
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  .dc-faq__a p { margin: 0 0 12px; }
+  .dc-faq__a p:last-child { margin-bottom: 0; }
+  .dc-faq__a a { color: #d62828; text-decoration: underline; }
+  .dc-faq__a ul, .dc-faq__a ol { padding-left: 22px; margin: 8px 0; }
+  .dc-faq__cta {
+    margin-top: 56px;
+    padding: 36px;
+    background: #fafbfc;
+    border: 1px solid #ececef;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .dc-faq__cta p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0d1115;
+  }
+  .dc-faq__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
+    transition: background 0.18s, transform 0.18s;
+  }
+  .dc-faq__cta-btn:hover {
+    background: #d62828;
+    transform: translateY(-1px);
+  }
+  @media (max-width: 920px) {
+    .dc-faq__title { font-size: 40px; }
+    .dc-faq__layout { grid-template-columns: 1fr; gap: 24px; }
+    .dc-faq__nav {
+      position: static;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .dc-faq__nav-list {
+      flex-direction: row;
+      gap: 8px;
+    }
+    .dc-faq__nav-btn {
+      width: auto;
+      white-space: nowrap;
+      border: 1px solid #d9dade;
+      border-radius: 999px;
+    }
+    .dc-faq__nav-btn.active { border-color: #0d1115; }
+    .dc-faq__nav-title { display: none; }
+    .dc-faq__q { font-size: 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC FAQ",
+  "tag": "section",
+  "class": "section-dc-faq",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Suporte" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Perguntas frequentes" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo", "default": "Tudo o que você precisa saber sobre pedidos, entrega, garantia e suporte." },
+    { "type": "header", "content": "CTA final" },
+    { "type": "text", "id": "cta_text", "label": "Texto do CTA", "default": "Não encontrou o que procurava?" },
+    { "type": "text", "id": "cta_label", "label": "Label do botão", "default": "Falar com atendimento" },
+    { "type": "url",  "id": "cta_link",  "label": "Link do botão" },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Pergunta",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Categoria", "default": "Pedidos" },
+        { "type": "text", "id": "question", "label": "Pergunta", "default": "Como funciona o frete?" },
+        { "type": "richtext", "id": "answer", "label": "Resposta", "default": "<p>O frete é calculado automaticamente no checkout com base no seu CEP.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DC FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "category": "Pedidos", "question": "Como acompanhar o status do meu pedido?", "answer": "<p>Acesse <strong>Minha conta → Pedidos</strong> ou clique no link de rastreio enviado por e-mail após o despacho. O status é atualizado automaticamente.</p>" } },
+        { "type": "qa", "settings": { "category": "Pedidos", "question": "Posso alterar ou cancelar um pedido após a confirmação?", "answer": "<p>Sim, desde que o pedido ainda não tenha sido despachado. Entre em contato com nosso atendimento o quanto antes para solicitar a alteração.</p>" } },
+        { "type": "qa", "settings": { "category": "Pedidos", "question": "Quais formas de pagamento vocês aceitam?", "answer": "<p>Aceitamos Pix (10% de desconto), cartão de crédito em até 18x sem juros e boleto bancário. Todas as transações são processadas em ambiente seguro.</p>" } },
+
+        { "type": "qa", "settings": { "category": "Entrega", "question": "Quanto tempo demora a entrega?", "answer": "<p>O prazo varia conforme a região: <strong>1–3 dias úteis</strong> para capitais e <strong>4–8 dias úteis</strong> para o interior. Você verá o prazo exato no checkout após preencher seu CEP.</p>" } },
+        { "type": "qa", "settings": { "category": "Entrega", "question": "Qual o valor do frete?", "answer": "<p>Oferecemos <strong>frete grátis</strong> para compras acima de R$ 199. Abaixo disso, o valor é calculado conforme o CEP de destino.</p>" } },
+        { "type": "qa", "settings": { "category": "Entrega", "question": "Vocês entregam em todo o Brasil?", "answer": "<p>Sim, entregamos em todo o território nacional. Para áreas remotas, prazos podem ser ligeiramente maiores — sempre consultados no momento da compra.</p>" } },
+
+        { "type": "qa", "settings": { "category": "Trocas e devoluções", "question": "Qual o prazo para troca ou devolução?", "answer": "<p>Você tem até <strong>7 dias corridos</strong> após o recebimento para solicitar troca ou devolução (CDC, art. 49). O produto deve estar lacrado e em perfeito estado.</p>" } },
+        { "type": "qa", "settings": { "category": "Trocas e devoluções", "question": "Como solicitar a troca de um produto?", "answer": "<p>Acesse <strong>Minha conta → Pedidos</strong>, selecione o pedido e clique em \"Solicitar troca\". Nossa equipe entra em contato em até 24h úteis com as instruções.</p>" } },
+        { "type": "qa", "settings": { "category": "Trocas e devoluções", "question": "Quem paga o frete da devolução?", "answer": "<p>Em casos de defeito de fábrica ou erro nosso, o frete é por nossa conta. Para arrependimento, o frete de retorno fica por conta do cliente.</p>" } },
+
+        { "type": "qa", "settings": { "category": "Garantia", "question": "Os produtos têm garantia?", "answer": "<p>Sim. Todos os produtos têm <strong>garantia de 12 meses</strong> do fabricante, salvo indicação diferente na descrição. A garantia cobre defeitos de fabricação.</p>" } },
+        { "type": "qa", "settings": { "category": "Garantia", "question": "Como acionar a garantia?", "answer": "<p>Entre em contato com nosso atendimento informando o número do pedido e descrevendo o problema. Em até 48h úteis, nossa equipe dá retorno com o procedimento.</p>" } },
+
+        { "type": "qa", "settings": { "category": "Conta e cadastro", "question": "Preciso criar conta para comprar?", "answer": "<p>Não é obrigatório, você pode finalizar como visitante. Mas criar conta facilita acompanhar pedidos, salvar endereços e participar de promoções exclusivas.</p>" } },
+        { "type": "qa", "settings": { "category": "Conta e cadastro", "question": "Esqueci minha senha. O que faço?", "answer": "<p>Clique em \"Esqueci minha senha\" na tela de login e siga as instruções enviadas para seu e-mail cadastrado.</p>" } }
+      ],
+      "settings": {
+        "cta_label": "Falar com atendimento",
+        "cta_link": "/pages/contact"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -3,8 +3,13 @@
   "name": "Header",
   "sections": {
     "dc_cart_drawer": {
-      "type": "dc-cart-drawer",
-      "settings": {}
+      "type": "dc-cart-sidedrawer",
+      "settings": {
+        "free_shipping_threshold": 19900,
+        "discount_code": "DROP10",
+        "discount_pct": 10,
+        "installments": 12
+      }
     },
     "dc_header": {
       "type": "dc-header",
@@ -70,10 +75,15 @@
       "settings": {
         "announce_items": "Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
         "topbar_link_1": "Sobre",
-        "topbar_link_2": "Blog",
-        "topbar_link_3": "Suporte",
+        "topbar_link_1_url": "/pages/sobre",
+        "topbar_link_2": "F.A.Q.",
+        "topbar_link_2_url": "/pages/faq",
+        "topbar_link_3": "Contato",
+        "topbar_link_3_url": "/pages/contact",
         "topbar_link_4": "Rastrear pedido",
-        "topbar_link_5": "Contato",
+        "topbar_link_4_url": "/pages/rastrear-pedido",
+        "topbar_link_5": "",
+        "topbar_link_5_url": "",
         "phone": "(11) 99999-9999",
         "hours": "Atendimento · Seg–Sáb 8h–20h",
         "search_placeholder": "Buscar cartuchos, toners, placas de vídeo...",
@@ -92,9 +102,12 @@
         "nav_link_5": "Ofertas",
         "nav_link_5_url": "shopify://collections/all",
         "nav_link_5_tag": "−40%",
-        "secondary_link_1": "Blog",
-        "secondary_link_2": "Suporte",
-        "secondary_link_3": "F.A.Q."
+        "secondary_link_1": "Contato",
+        "secondary_link_1_url": "/pages/contact",
+        "secondary_link_2": "F.A.Q.",
+        "secondary_link_2_url": "/pages/faq",
+        "secondary_link_3": "",
+        "secondary_link_3_url": ""
       }
     }
   },

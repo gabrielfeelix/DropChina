@@ -1,0 +1,177 @@
+{
+  "sections": {
+    "main_faq": {
+      "type": "dc-faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "category": "Pedidos",
+            "question": "Como acompanhar o status do meu pedido?",
+            "answer": "<p>Acesse <strong>Minha conta → Pedidos</strong> ou clique no link de rastreio enviado por e-mail após o despacho. O status é atualizado automaticamente conforme a transportadora.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "category": "Pedidos",
+            "question": "Posso alterar ou cancelar um pedido após a confirmação?",
+            "answer": "<p>Sim, desde que o pedido ainda não tenha sido despachado. Entre em contato com nosso atendimento o quanto antes — em até 1h após a confirmação garantimos a alteração sem custo.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "category": "Pedidos",
+            "question": "Quais formas de pagamento vocês aceitam?",
+            "answer": "<p>Aceitamos <strong>Pix com 10% de desconto</strong>, cartão de crédito em até 18x sem juros e boleto bancário. Todas as transações são processadas em ambiente seguro com criptografia SSL.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "category": "Pedidos",
+            "question": "Recebo nota fiscal?",
+            "answer": "<p>Sim. A nota fiscal eletrônica é emitida no momento do despacho e enviada automaticamente para o e-mail cadastrado no pedido.</p>"
+          }
+        },
+
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "category": "Entrega",
+            "question": "Quanto tempo demora a entrega?",
+            "answer": "<p>O prazo varia conforme a região:</p><ul><li><strong>Capitais SP/RJ/MG:</strong> 1–2 dias úteis</li><li><strong>Demais capitais:</strong> 2–4 dias úteis</li><li><strong>Interior:</strong> 4–8 dias úteis</li></ul><p>O prazo exato aparece no checkout após preencher seu CEP.</p>"
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "category": "Entrega",
+            "question": "Qual o valor do frete?",
+            "answer": "<p>Oferecemos <strong>frete grátis</strong> para compras acima de R$ 199 em todo o Brasil. Abaixo disso, o valor é calculado automaticamente conforme o CEP de destino e a transportadora escolhida.</p>"
+          }
+        },
+        "q7": {
+          "type": "qa",
+          "settings": {
+            "category": "Entrega",
+            "question": "Vocês entregam em todo o Brasil?",
+            "answer": "<p>Sim, entregamos em todo o território nacional. Para áreas remotas (zonas rurais e algumas regiões da Amazônia), prazos podem ser ligeiramente maiores e o frete recalculado — sempre consultado e confirmado antes da finalização.</p>"
+          }
+        },
+        "q8": {
+          "type": "qa",
+          "settings": {
+            "category": "Entrega",
+            "question": "Posso retirar o pedido na loja?",
+            "answer": "<p>Atualmente operamos 100% online, sem ponto físico de retirada. Todos os pedidos são despachados diretamente do nosso centro de distribuição em até 24h úteis.</p>"
+          }
+        },
+
+        "q9": {
+          "type": "qa",
+          "settings": {
+            "category": "Trocas e devoluções",
+            "question": "Qual o prazo para troca ou devolução?",
+            "answer": "<p>Você tem até <strong>7 dias corridos</strong> após o recebimento para solicitar troca ou devolução, conforme o Código de Defesa do Consumidor (CDC, art. 49). O produto deve estar lacrado, com etiquetas e em perfeito estado de conservação.</p>"
+          }
+        },
+        "q10": {
+          "type": "qa",
+          "settings": {
+            "category": "Trocas e devoluções",
+            "question": "Como solicitar a troca de um produto?",
+            "answer": "<p>Acesse <strong>Minha conta → Pedidos</strong>, selecione o pedido e clique em \"Solicitar troca\". Você também pode falar diretamente com nosso atendimento — em até 24h úteis enviamos as instruções e o código de postagem.</p>"
+          }
+        },
+        "q11": {
+          "type": "qa",
+          "settings": {
+            "category": "Trocas e devoluções",
+            "question": "Quem paga o frete da devolução?",
+            "answer": "<p>Em casos de <strong>defeito de fábrica ou erro nosso</strong> (produto trocado, danificado, etc.), o frete de retorno é por nossa conta. Para casos de <strong>arrependimento</strong>, o frete fica por conta do cliente.</p>"
+          }
+        },
+        "q12": {
+          "type": "qa",
+          "settings": {
+            "category": "Trocas e devoluções",
+            "question": "Quando recebo o estorno?",
+            "answer": "<p>Após receber e conferir o produto devolvido (em até 5 dias úteis), processamos o estorno:</p><ul><li><strong>Pix:</strong> em até 1 dia útil</li><li><strong>Cartão de crédito:</strong> em até 2 faturas, conforme regra do banco emissor</li><li><strong>Boleto:</strong> em até 5 dias úteis via transferência</li></ul>"
+          }
+        },
+
+        "q13": {
+          "type": "qa",
+          "settings": {
+            "category": "Garantia",
+            "question": "Os produtos têm garantia?",
+            "answer": "<p>Sim. Todos os produtos têm <strong>garantia de 12 meses</strong> do fabricante contra defeitos, salvo indicação diferente na descrição. A garantia cobre defeitos de fabricação e não cobre danos por mau uso, queda ou variações de tensão.</p>"
+          }
+        },
+        "q14": {
+          "type": "qa",
+          "settings": {
+            "category": "Garantia",
+            "question": "Como acionar a garantia?",
+            "answer": "<p>Entre em contato com nosso atendimento informando o número do pedido e descrevendo o problema, preferencialmente com fotos ou vídeo. Em até 48h úteis nossa equipe dá retorno com o procedimento de troca ou conserto.</p>"
+          }
+        },
+        "q15": {
+          "type": "qa",
+          "settings": {
+            "category": "Garantia",
+            "question": "Cartuchos e toners têm garantia?",
+            "answer": "<p>Sim, cartuchos e toners têm garantia de <strong>6 meses</strong> contra vazamentos e falhas de impressão (uso normal). Não cobrimos uso indevido em impressoras incompatíveis.</p>"
+          }
+        },
+
+        "q16": {
+          "type": "qa",
+          "settings": {
+            "category": "Conta e cadastro",
+            "question": "Preciso criar conta para comprar?",
+            "answer": "<p>Não é obrigatório — você pode finalizar como visitante. Mas criar conta facilita acompanhar pedidos, salvar endereços, ver histórico de compras e participar de promoções exclusivas.</p>"
+          }
+        },
+        "q17": {
+          "type": "qa",
+          "settings": {
+            "category": "Conta e cadastro",
+            "question": "Esqueci minha senha. Como recuperar?",
+            "answer": "<p>Clique em \"Esqueci minha senha\" na tela de login e informe seu e-mail. Você receberá um link para criar uma nova senha em até 5 minutos. Caso não receba, verifique a caixa de spam.</p>"
+          }
+        },
+        "q18": {
+          "type": "qa",
+          "settings": {
+            "category": "Conta e cadastro",
+            "question": "Como atualizar meus dados cadastrais?",
+            "answer": "<p>Acesse <strong>Minha conta → Endereços</strong> ou <strong>Minha conta → Configurações</strong> para alterar dados pessoais, endereços de entrega e preferências de comunicação.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1", "q2", "q3", "q4",
+        "q5", "q6", "q7", "q8",
+        "q9", "q10", "q11", "q12",
+        "q13", "q14", "q15",
+        "q16", "q17", "q18"
+      ],
+      "settings": {
+        "eyebrow": "Suporte",
+        "heading": "Perguntas frequentes",
+        "subheading": "Tudo o que você precisa saber sobre pedidos, entrega, garantia e suporte.",
+        "cta_text": "Não encontrou o que procurava?",
+        "cta_label": "Falar com atendimento",
+        "cta_link": "/pages/contact",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "main_faq"
+  ]
+}
