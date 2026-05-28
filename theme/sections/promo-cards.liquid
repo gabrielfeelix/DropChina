@@ -32,7 +32,7 @@
           class="dc-promo-card dc-promo-card--{{ tone }}{% if has_bg %} dc-promo-card--has-bg{% endif %}"
           data-idx="{{ idx }}"
           {{ block.shopify_attributes }}
-          {%- if block.settings.background_asset != blank %} style="background-image: url('{{ block.settings.background_asset | asset_url }}'); background-size: cover; background-position: center;"{% endif -%}
+          {%- if block.settings.background_asset != blank %} style="background-image: url('{{ block.settings.background_asset | asset_url }}'); background-size: 108%; background-position: center; background-repeat: no-repeat;"{% endif -%}
         >
           {%- if block.settings.background_asset == blank and block.settings.image != blank -%}
             {%- assign promo_alt = block.settings.title | default: shop.name | escape -%}

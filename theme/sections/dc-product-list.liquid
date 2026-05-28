@@ -39,6 +39,13 @@
 
     {%- for tab in tab_blocks -%}
       {%- assign tab_collection = tab.settings.collection -%}
+      {%- comment -%} Fallback: se collection_handle text setting preenchido, resolve por handle direto {%- endcomment -%}
+      {%- if tab.settings.collection_handle != blank -%}
+        {%- assign handle_collection = collections[tab.settings.collection_handle] -%}
+        {%- if handle_collection != blank and handle_collection.products.size > 0 -%}
+          {%- assign tab_collection = handle_collection -%}
+        {%- endif -%}
+      {%- endif -%}
       <div
         class="dc-pl__panel {% if forloop.first %}active{% endif %}"
         data-tab-panel="{{ forloop.index0 }}"
@@ -290,7 +297,8 @@
       "name": "Aba",
       "settings": [
         { "type": "text", "id": "label", "label": "Label da aba", "default": "Mais vendidos" },
-        { "type": "collection", "id": "collection", "label": "Coleção" }
+        { "type": "collection", "id": "collection", "label": "Coleção" },
+        { "type": "text", "id": "collection_handle", "label": "Handle da coleção (fallback)", "info": "Use só se o picker de coleção acima não estiver puxando os produtos. Ex: 'ofertas-relampago'" }
       ]
     }
   ],

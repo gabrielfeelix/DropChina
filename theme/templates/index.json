@@ -247,7 +247,8 @@
           "type": "tab",
           "settings": {
             "label": "Ofertas-relâmpago",
-            "collection": "ofertas-relampago"
+            "collection": "ofertas-relampago",
+            "collection_handle": "ofertas-relampago"
           }
         }
       },
