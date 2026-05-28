@@ -62,8 +62,18 @@
             </button>
           {%- endif -%}
           {%- for media in product_obj.media -%}
+            {%- if forloop.first -%}
+              {%- assign media_loading = 'eager' -%}
+            {%- else -%}
+              {%- assign media_loading = 'lazy' -%}
+            {%- endif -%}
+            {%- assign media_alt = media.alt | default: product_obj.title -%}
             <div class="dc-pdp-gallery__slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-              {{ media | image_url: width: 1200 | image_tag: loading: forloop.first | default: 'lazy', alt: media.alt | default: product_obj.title, class: 'dc-pdp-gallery__img' }}
+              {{ media | image_url: width: 1200 | image_tag:
+                  class: 'dc-pdp-gallery__img',
+                  loading: media_loading,
+                  alt: media_alt,
+                  widths: '352, 832, 1200' }}
             </div>
           {%- endfor -%}
           {%- if product_obj.media.size == 0 -%}
@@ -193,14 +203,6 @@
               {%- for m in methods -%}
                 <span class="dc-pdp-pay-chip">{{ m }}</span>
               {%- endfor -%}
-            </div>
-          </div>
-          <div class="dc-pdp-payment__row">
-            <span class="dc-pdp-payment__lbl">Segurança</span>
-            <div class="dc-pdp-payment__icons">
-              <span class="dc-pdp-secure-chip">🛡 SSL 256</span>
-              <span class="dc-pdp-secure-chip">LGPD</span>
-              <span class="dc-pdp-secure-chip">Cloudflare</span>
             </div>
           </div>
         </div>
@@ -456,7 +458,9 @@
     visibility: hidden;
   }
   .dc-pdp-gallery__slide.active { visibility: visible; }
-  .dc-pdp-gallery__img {
+  .dc-pdp-gallery__img,
+  .dc-pdp-gallery__slide img,
+  .dc-pdp-gallery__thumb img {
     max-width: 80%;
     max-height: 80%;
     width: auto;
@@ -465,6 +469,7 @@
     mix-blend-mode: multiply;
     transition: transform 0.5s ease;
   }
+  .dc-pdp-gallery__thumb img { max-width: 100%; max-height: 100%; }
   .dc-pdp-gallery__stage:hover .dc-pdp-gallery__img { transform: scale(1.04); }
   .dc-pdp-gallery__nav {
     position: absolute;

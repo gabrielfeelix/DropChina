@@ -232,7 +232,7 @@
       "settings": {
         "eyebrow": "TOP DESSA SEMANA",
         "heading": "Mais vendidos",
-        "max_products": 24,
+        "max_products": 10,
         "layout": "grid",
         "show_view_all": true,
         "view_all_label": "Ver todos os produtos",
@@ -395,42 +395,43 @@
           "settings": {
             "tone": "light",
             "eyebrow": "CARTUCHOS & TONERS",
-            "title": "Impressão com qualidade premium.",
-            "cta_label": "Ver coleção",
+            "title": "Toners com qualidade profissional.",
+            "cta_label": "Ver linha",
             "link": "shopify://collections/toners",
-            "background_asset": "banner-toner.png"
+            "background_asset": "banner-compre-esquerda.png"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
-            "tone": "dark",
-            "eyebrow": "EDIÇÃO LIMITADA",
-            "title": "Pacotes Panini World Cup 2026.",
-            "cta_label": "Ver coleção",
-            "link": "shopify://collections/all",
-            "background_asset": "banner-worldcup.png"
+            "tone": "light",
+            "eyebrow": "MINI COMPUTADORES",
+            "title": "Potência compacta. Grande desempenho.",
+            "cta_label": "Explorar",
+            "link": "shopify://collections/mini-pcs",
+            "background_asset": "banner-compre-sup-direita.png"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
-            "tone": "yellow",
-            "eyebrow": "SETUP GAMER",
-            "title": "Placas de vídeo a partir de R$ 293",
-            "cta_label": "Montar setup",
-            "link": "shopify://collections/perifericos"
+            "tone": "light",
+            "eyebrow": "LEITOR DE CARTÃO",
+            "title": "Leitura rápida para o seu dia a dia.",
+            "cta_label": "Ver opções",
+            "link": "shopify://collections/perifericos",
+            "background_asset": "banner-compre-centro.png"
           }
         },
         "c4": {
           "type": "card",
           "settings": {
-            "tone": "dark",
-            "eyebrow": "BLACK WEEK",
-            "title": "GPUs com até 25% OFF",
-            "cta_label": "Ver ofertas",
-            "link": "shopify://collections/perifericos",
-            "background_asset": "banner-gpu.png"
+            "tone": "light",
+            "eyebrow": "PAPEL FOTOGRÁFICO",
+            "title": "Imagens nítidas para cada detalhe.",
+            "cta_label": "Ver opções",
+            "link": "shopify://collections/all",
+            "background_asset": "banner-compre-inf-direita.png"
           }
         }
       },
