@@ -595,11 +595,12 @@
     "featured_product_main": {
       "type": "dc-featured-product",
       "settings": {
+        "product": "pc-mini-pcyes-b300-i3-8gb",
         "eyebrow": "Produto destaque",
         "cta_label": "Adicionar ao carrinho",
         "show_stock_bar": true,
-        "stock_qty": 6,
-        "stock_pct": 40,
+        "stock_qty": 4,
+        "stock_pct": 30,
         "padding_top": 56,
         "padding_bottom": 56
       }
