@@ -514,7 +514,7 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   transform: translateY(0);
   pointer-events: auto;
 }
-.dc-card__add:hover { background: #d62828; }
+.dc-card__add:hover { background: #16a34a; }
 .dc-card__add.is-loading {
   background: #6b7280;
   pointer-events: none;

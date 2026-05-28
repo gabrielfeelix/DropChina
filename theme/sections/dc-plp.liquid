@@ -214,16 +214,24 @@
 </main>
 
 {%- if section.settings.show_brands_strip -%}
+  {%- assign brands_list = section.settings.brands_list | default: 'Epson|Samsung|Brother|Pantum|Evolut|JBL|NVIDIA|Logitech|TP-Link|Multilaser|Kingston|WD|Intel|AMD' | split: '|' -%}
   <section class="dc-plp-brands">
     <div class="dc-plp-brands__container">
       <p class="dc-plp-brands__eyebrow">{{ section.settings.brands_eyebrow | default: 'Marcas oficiais' | escape }}</p>
       <h2 class="dc-plp-brands__title">{{ section.settings.brands_title | default: '+50 marcas que você confia' | escape }}</h2>
-      <div class="dc-plp-brands__row">
-        {%- assign brands_list = section.settings.brands_list | default: 'Epson|Samsung|Brother|Pantum|Evolut|JBL|NVIDIA|Logitech|TP-Link|Multilaser|Kingston|WD|Intel|AMD' | split: '|' -%}
+    </div>
+    <div class="dc-plp-brands__marquee">
+      <div class="dc-plp-brands__track">
         {%- for brand in brands_list -%}
           <span class="dc-plp-brands__name">{{ brand | strip | escape }}</span>
         {%- endfor -%}
+        {%- comment -%} Duplica pro loop infinito sem corte {%- endcomment -%}
+        {%- for brand in brands_list -%}
+          <span class="dc-plp-brands__name" aria-hidden="true">{{ brand | strip | escape }}</span>
+        {%- endfor -%}
       </div>
+      <div class="dc-plp-brands__fade dc-plp-brands__fade--left" aria-hidden="true"></div>
+      <div class="dc-plp-brands__fade dc-plp-brands__fade--right" aria-hidden="true"></div>
     </div>
   </section>
 {%- endif -%}
@@ -608,7 +616,7 @@
     color: #ffffff;
     font-weight: 600;
   }
-  /* Brands strip no rodapé do PLP */
+  /* Brands strip no rodapé do PLP — marquee infinito */
   .dc-plp-brands {
     border-top: 1px solid #ececef;
     background: #fafbfc;
@@ -617,7 +625,7 @@
   }
   .dc-plp-brands__container {
     max-width: 1320px;
-    margin: 0 auto;
+    margin: 0 auto 24px;
     padding-inline: 28px;
     text-align: left;
   }
@@ -636,19 +644,27 @@
     letter-spacing: -0.022em;
     font-weight: 700;
     color: #0d1115;
-    margin: 0 0 32px;
+    margin: 0;
   }
-  .dc-plp-brands__row {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 40px;
-    align-items: center;
+  .dc-plp-brands__marquee {
+    position: relative;
+    overflow: hidden;
+    padding: 18px 0;
     border-top: 1px solid #ececef;
-    padding-top: 24px;
-    scrollbar-width: none;
+    border-bottom: 1px solid #ececef;
+    background: #fafbfc;
   }
-  .dc-plp-brands__row::-webkit-scrollbar { display: none; }
+  .dc-plp-brands__track {
+    display: flex;
+    gap: 56px;
+    width: max-content;
+    animation: dc-plp-brand-marquee 45s linear infinite;
+    padding: 0 32px;
+    will-change: transform;
+  }
+  .dc-plp-brands__marquee:hover .dc-plp-brands__track {
+    animation-play-state: paused;
+  }
   .dc-plp-brands__name {
     font-family: "Bricolage Grotesque", "Manrope", sans-serif;
     font-size: 22px;
@@ -657,8 +673,34 @@
     white-space: nowrap;
     letter-spacing: -0.01em;
     transition: color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
   }
   .dc-plp-brands__name:hover { color: #0d1115; }
+  .dc-plp-brands__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .dc-plp-brands__fade--left {
+    left: 0;
+    background: linear-gradient(90deg, #fafbfc 0%, transparent 100%);
+  }
+  .dc-plp-brands__fade--right {
+    right: 0;
+    background: linear-gradient(270deg, #fafbfc 0%, transparent 100%);
+  }
+  @keyframes dc-plp-brand-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dc-plp-brands__track { animation: none; }
+  }
   @media (max-width: 720px) {
     .dc-plp-brands__title { font-size: 28px; }
     .dc-plp-brands__name { font-size: 18px; }

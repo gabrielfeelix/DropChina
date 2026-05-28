@@ -447,13 +447,15 @@
   .dc-pdp-gallery__slide {
     position: absolute;
     inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
     display: grid;
     place-items: center;
     padding: 48px;
+    /* SEM opacity transition pq opacity < 1 cria stacking context e
+       quebra mix-blend-mode da imagem (fica isolado do bg cinza).
+       Usamos visibility + display none nos inativos. */
+    visibility: hidden;
   }
-  .dc-pdp-gallery__slide.active { opacity: 1; }
+  .dc-pdp-gallery__slide.active { visibility: visible; }
   .dc-pdp-gallery__img {
     max-width: 80%;
     max-height: 80%;
@@ -701,7 +703,7 @@
     gap: 10px;
     transition: background 0.18s, transform 0.18s;
   }
-  .dc-pdp-add:hover { background: #d62828; }
+  .dc-pdp-add:hover { background: #16a34a; }
   .dc-pdp-add:active { transform: translateY(1px); }
   .dc-pdp-add[disabled] { background: #9ca3af; cursor: not-allowed; }
 

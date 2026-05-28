@@ -301,21 +301,24 @@
           "type": "platform",
           "settings": {
             "name": "Reclame Aqui",
-            "value": "Reputação ótima"
+            "value": "Reputação ótima",
+            "subtitle": "8.2 / 10"
           }
         },
         "plat_2": {
           "type": "platform",
           "settings": {
             "name": "Google",
-            "value": "4,8 (3.214 avaliações)"
+            "value": "4,8 ★",
+            "subtitle": "3.214 avaliações"
           }
         },
         "plat_3": {
           "type": "platform",
           "settings": {
             "name": "Mercado Livre",
-            "value": "MercadoLíder Platinum"
+            "value": "MercadoLíder Platinum",
+            "subtitle": "+10 mil vendas"
           }
         }
       },
