@@ -48,7 +48,15 @@
               aria-label="Foto {{ forloop.index }}"
               type="button"
             >
-              {{ media | image_url: width: 120 | image_tag: loading: 'lazy', alt: media.alt | default: product_obj.title }}
+              {%- assign thumb_src = nil -%}
+              {%- if media.media_type == 'image' or media.media_type == nil -%}
+                {%- assign thumb_src = media | image_url: width: 120 -%}
+              {%- elsif media.preview_image -%}
+                {%- assign thumb_src = media.preview_image | image_url: width: 120 -%}
+              {%- endif -%}
+              {%- if thumb_src -%}
+                <img src="{{ thumb_src }}" width="60" height="60" loading="lazy" alt="{{ media.alt | default: product_obj.title | escape }}">
+              {%- endif -%}
             </button>
           {%- endfor -%}
         </div>
@@ -62,18 +70,28 @@
             </button>
           {%- endif -%}
           {%- for media in product_obj.media -%}
-            {%- if forloop.first -%}
-              {%- assign media_loading = 'eager' -%}
-            {%- else -%}
-              {%- assign media_loading = 'lazy' -%}
-            {%- endif -%}
             {%- assign media_alt = media.alt | default: product_obj.title -%}
             <div class="dc-pdp-gallery__slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-              {{ media | image_url: width: 1200 | image_tag:
-                  class: 'dc-pdp-gallery__img',
-                  loading: media_loading,
-                  alt: media_alt,
-                  widths: '352, 832, 1200' }}
+              {%- if media.media_type == 'image' or media.media_type == nil -%}
+                <img
+                  src="{{ media | image_url: width: 1200 }}"
+                  srcset="{{ media | image_url: width: 352 }} 352w, {{ media | image_url: width: 832 }} 832w, {{ media | image_url: width: 1200 }} 1200w"
+                  width="1200"
+                  height="{{ media.height | default: 1200 }}"
+                  alt="{{ media_alt | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  class="dc-pdp-gallery__img"
+                >
+              {%- elsif media.preview_image -%}
+                <img
+                  src="{{ media.preview_image | image_url: width: 1200 }}"
+                  width="1200"
+                  height="{{ media.preview_image.height | default: 1200 }}"
+                  alt="{{ media_alt | escape }}"
+                  loading="lazy"
+                  class="dc-pdp-gallery__img"
+                >
+              {%- endif -%}
             </div>
           {%- endfor -%}
           {%- if product_obj.media.size == 0 -%}

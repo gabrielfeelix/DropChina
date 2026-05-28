@@ -161,13 +161,7 @@
     background: #f4f5f7;
   }
   .dc-promo-card:hover { transform: translateY(-3px); }
-  .dc-promo-card--has-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
+  /* SEM degrade — textos pretos precisam contrastar com imagem clara */
 
   /* TONS */
   .dc-promo-card--light { background: #f4f5f7; color: #0d1115; }
@@ -177,14 +171,15 @@
     background: linear-gradient(135deg, #f5c518 0%, #e85d04 100%);
     color: #ffffff;
   }
-  .dc-promo-card--has-bg { color: #ffffff; }
+  /* has-bg agora mantém texto preto (não white) — fundo já é a imagem */
+  .dc-promo-card--has-bg { color: #0d1115; }
 
   /* Imagem (quando block tem image_picker) */
   .dc-promo-card__image {
     flex: 1;
     display: grid;
     place-items: center;
-    padding: 24px;
+    padding: 8px;
     overflow: hidden;
   }
   .dc-promo-card__image img {
@@ -193,9 +188,9 @@
     object-fit: contain;
     mix-blend-mode: multiply;
   }
-  /* Quando o card é dark/yellow/has-bg, não aplica multiply (perde contraste) */
+  /* Quando o card é dark/yellow, não aplica multiply (perde contraste) */
   .dc-promo-card--dark .dc-promo-card__image img,
-  .dc-promo-card--has-bg .dc-promo-card__image img {
+  .dc-promo-card--yellow .dc-promo-card__image img {
     mix-blend-mode: normal;
   }
 

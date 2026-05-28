@@ -8,6 +8,16 @@
         "padding_top": 24
       }
     },
+    "pdp_reviews": {
+      "type": "dc-pdp-reviews",
+      "settings": {
+        "eyebrow": "O que dizem os clientes",
+        "heading": "Avaliações verificadas",
+        "initial_show": 4,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
     "related_products": {
       "type": "dc-related-products",
       "settings": {
@@ -21,6 +31,7 @@
   },
   "order": [
     "dc_pdp",
+    "pdp_reviews",
     "related_products"
   ]
 }
