@@ -330,8 +330,19 @@
     if (stickyToggle) stickyToggle.addEventListener('click', function() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    if (stickyAdd && addBtn) stickyAdd.addEventListener('click', function() {
-      addBtn.click();
+    if (stickyAdd) stickyAdd.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Submete o form da PDP (mesmo handler do addBtn principal faz AJAX)
+      var pdpForm = container.querySelector('.dc-pdp-info__form');
+      if (pdpForm && typeof pdpForm.requestSubmit === 'function') {
+        pdpForm.requestSubmit();
+      } else if (pdpForm) {
+        // Fallback navegadores sem requestSubmit
+        var ev = new Event('submit', { cancelable: true, bubbles: true });
+        pdpForm.dispatchEvent(ev);
+      } else if (addBtn) {
+        addBtn.click();
+      }
     });
 
     // AJAX add-to-cart: posta em /cart/add.js, dispara cart:add event
@@ -906,7 +917,7 @@
     transition: background 0.18s, transform 0.18s;
     white-space: nowrap;
   }
-  .dc-sticky-buy__add:hover { background: #d62828; transform: translateY(-1px); }
+  .dc-sticky-buy__add:hover { background: #16a34a; transform: translateY(-1px); }
   @media (max-width: 920px) {
     .dc-sticky-buy { width: auto; left: 12px; right: 12px; bottom: 12px; }
   }
