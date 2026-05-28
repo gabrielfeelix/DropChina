@@ -870,6 +870,24 @@
   }
   .dc-search-input__results-wrapper[hidden] { display: none !important; }
   .dc-search-input__results { padding: 18px; max-height: 480px; overflow-y: auto; }
+  /* Neutralizar wrappers do base.css (predictive-search-form__header
+     e __header-inner) que desenham retângulo próprio com background
+     + border atrás do nosso input arredondado */
+  .dc-header__search .predictive-search-form__header,
+  .dc-header__search .predictive-search-form__header-inner,
+  .dc-search-input .predictive-search-form__header,
+  .dc-search-input .predictive-search-form__header-inner,
+  .dc-search-input .dc-search-input__inner,
+  .dc-search-input .dc-search-input__inner-row {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
   /* Especificidade alta pra vencer input.search-input do tema base
      que tem border-radius: var(--style-border-radius-inputs) */
   input.dc-search-input__field,
