@@ -12,13 +12,18 @@
 
     {%- liquid
       assign q_blocks = section.blocks | where: 'type', 'qa'
-      assign categories = '' | split: ''
+      assign cat_sep = '~~|~~'
+      assign cat_str = ''
       for b in q_blocks
         assign cat = b.settings.category | default: 'Geral'
-        unless categories contains cat
-          assign categories = categories | concat: cat | split: '|'
-        endunless
+        if cat_str == ''
+          assign cat_str = cat
+        else
+          assign cat_str = cat_str | append: cat_sep | append: cat
+        endif
       endfor
+      assign categories_raw = cat_str | split: cat_sep
+      assign categories = categories_raw | uniq
     -%}
 
     <div class="dc-faq__layout" data-dc-faq>
