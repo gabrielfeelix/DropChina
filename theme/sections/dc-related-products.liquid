@@ -1,0 +1,187 @@
+{%- liquid
+  assign heading = section.settings.heading | default: 'Talvez você goste'
+  assign eyebrow = section.settings.eyebrow | default: 'Recomendados pra você'
+  assign limit = section.settings.limit | default: 8
+  if recommendations.performed and recommendations.products_count > 0
+    assign rec_products = recommendations.products
+  else
+    assign rec_products = ''
+  endif
+-%}
+
+<section
+  class="dc-rel-section"
+  style="padding-block: {{ section.settings.padding_top | default: 64 }}px {{ section.settings.padding_bottom | default: 80 }}px;"
+  data-dc-related
+  data-product-id="{{ product.id }}"
+  data-limit="{{ limit }}"
+>
+  <div class="dc-rel__container">
+    <header class="dc-rel__head">
+      <div>
+        {%- if eyebrow != blank -%}<p class="dc-rel__eyebrow">{{ eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="dc-rel__title">{{ heading | escape }}</h2>
+      </div>
+      <div class="dc-rel__nav">
+        <button type="button" class="dc-rel__nav-btn" data-dir="-1" aria-label="Anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="dc-rel__nav-btn" data-dir="1" aria-label="Próximo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    {%- if rec_products.size > 0 -%}
+      <div class="dc-rel__track" data-dc-rel-track>
+        {%- for p in rec_products limit: limit -%}
+          {% render 'dc-product-card', product: p %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- comment -%} Fallback: usa product_recommendations API via fetch JS {%- endcomment -%}
+      <div class="dc-rel__track" data-dc-rel-track>
+        <div class="dc-rel__skeleton"></div>
+        <div class="dc-rel__skeleton"></div>
+        <div class="dc-rel__skeleton"></div>
+        <div class="dc-rel__skeleton"></div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function() {
+  var root = document.querySelector('[data-dc-related][data-product-id="{{ product.id }}"]');
+  if (!root) return;
+  var track = root.querySelector('[data-dc-rel-track]');
+  var navBtns = root.querySelectorAll('.dc-rel__nav-btn');
+
+  // Lazy-load related via Recommendations API se o liquid não conseguiu (StorefrontView)
+  if (track && track.querySelector('.dc-rel__skeleton')) {
+    var pid = root.dataset.productId;
+    var limit = root.dataset.limit || 8;
+    fetch('/recommendations/products?section_id={{ section.id }}&product_id=' + pid + '&limit=' + limit + '&intent=related', {
+      headers: { 'Accept': 'text/html' }
+    })
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        var freshTrack = temp.querySelector('[data-dc-rel-track]');
+        if (freshTrack && freshTrack.children.length) {
+          track.innerHTML = freshTrack.innerHTML;
+        } else {
+          root.style.display = 'none';
+        }
+      })
+      .catch(function() { root.style.display = 'none'; });
+  }
+
+  navBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var dir = parseInt(btn.dataset.dir, 10) || 1;
+      var step = Math.max(280, track.clientWidth * 0.82);
+      track.scrollBy({ left: dir * step, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+{% stylesheet %}
+  .dc-rel-section { background: #ffffff; }
+  .dc-rel__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-rel__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .dc-rel__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .dc-rel__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-rel__nav { display: inline-flex; gap: 8px; }
+  .dc-rel__nav-btn {
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #d9dade;
+    color: #0d1115;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.18s;
+    padding: 0;
+  }
+  .dc-rel__nav-btn:hover { background: #0d1115; color: #ffffff; border-color: #0d1115; }
+
+  .dc-rel__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 3 * 18px) / 4);
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  .dc-rel__track::-webkit-scrollbar { display: none; }
+  .dc-rel__track > * { scroll-snap-align: start; min-width: 0; }
+
+  @media (max-width: 1100px) { .dc-rel__track { grid-auto-columns: calc((100% - 2 * 18px) / 3); } }
+  @media (max-width: 760px)  { .dc-rel__track { grid-auto-columns: calc((100% - 18px) / 2); } }
+
+  .dc-rel__skeleton {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--r-lg, 18px);
+    background: linear-gradient(90deg, #ececef 0%, #f4f5f7 50%, #ececef 100%);
+    background-size: 200% 100%;
+    animation: dc-rel-shimmer 1.4s infinite;
+  }
+  @keyframes dc-rel-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Related Products",
+  "tag": "section",
+  "class": "section-dc-related",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recomendados pra você" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Talvez você goste" },
+    { "type": "range", "id": "limit", "label": "Máx. produtos", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    {
+      "name": "DC Related Products"
+    }
+  ]
+}
+{% endschema %}

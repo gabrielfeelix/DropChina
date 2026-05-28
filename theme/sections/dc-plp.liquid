@@ -63,7 +63,7 @@
                             type="number"
                             name="{{ filter.min_value.param_name }}"
                             value="{{ filter.min_value.value }}"
-                            placeholder="Min"
+                            placeholder="R$ 0"
                             min="0"
                             aria-label="Preço mínimo"
                           >
@@ -72,10 +72,18 @@
                             type="number"
                             name="{{ filter.max_value.param_name }}"
                             value="{{ filter.max_value.value }}"
-                            placeholder="Max"
+                            placeholder="R$ 2000"
                             min="0"
                             aria-label="Preço máximo"
                           >
+                        </div>
+                        <div class="dc-plp-filter-price__chips">
+                          {%- assign cur_min = filter.min_value.value -%}
+                          {%- assign cur_max = filter.max_value.value -%}
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == nil and cur_max == 50 %} active{% endif %}" data-min="" data-max="50">Até R$ 50</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 50 and cur_max == 150 %} active{% endif %}" data-min="50" data-max="150">R$ 50 a 150</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 150 and cur_max == 500 %} active{% endif %}" data-min="150" data-max="500">R$ 150 a 500</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 500 and cur_max == nil %} active{% endif %}" data-min="500" data-max="">Acima R$ 500</button>
                         </div>
                       </div>
                   {%- endcase -%}
@@ -157,6 +165,38 @@
     </div>
   </div>
 </main>
+
+{%- if section.settings.show_brands_strip -%}
+  <section class="dc-plp-brands">
+    <div class="dc-plp-brands__container">
+      <p class="dc-plp-brands__eyebrow">{{ section.settings.brands_eyebrow | default: 'Marcas oficiais' | escape }}</p>
+      <h2 class="dc-plp-brands__title">{{ section.settings.brands_title | default: '+50 marcas que você confia' | escape }}</h2>
+      <div class="dc-plp-brands__row">
+        {%- assign brands_list = section.settings.brands_list | default: 'Epson|Samsung|Brother|Pantum|Evolut|JBL|NVIDIA|Logitech|TP-Link|Multilaser|Kingston|WD|Intel|AMD' | split: '|' -%}
+        {%- for brand in brands_list -%}
+          <span class="dc-plp-brands__name">{{ brand | strip | escape }}</span>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<script>
+(function() {
+  // Price chips: aplica min/max e auto-submit
+  document.querySelectorAll('.dc-plp-price-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var form = chip.closest('form');
+      if (!form) return;
+      var minEl = form.querySelector('input[name*="price.gte"], input[name*="price_min"], input[name*="filter.v.price.gte"]');
+      var maxEl = form.querySelector('input[name*="price.lte"], input[name*="price_max"], input[name*="filter.v.price.lte"]');
+      if (minEl) minEl.value = chip.dataset.min || '';
+      if (maxEl) maxEl.value = chip.dataset.max || '';
+      form.submit();
+    });
+  });
+})();
+</script>
 
 {% stylesheet %}
   .dc-plp-hero {
@@ -350,6 +390,85 @@
     text-align: center;
   }
   .dc-plp-filter-price__row input:focus { border-color: #0d1115; }
+  .dc-plp-filter-price__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .dc-plp-price-chip {
+    background: #f4f5f7;
+    border: 0;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2a3038;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .dc-plp-price-chip:hover { background: #e3e5e9; color: #0d1115; }
+  .dc-plp-price-chip.active {
+    background: #0d1115;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  /* Brands strip no rodapé do PLP */
+  .dc-plp-brands {
+    border-top: 1px solid #ececef;
+    background: #fafbfc;
+    padding-block: 56px 64px;
+    margin-top: 56px;
+  }
+  .dc-plp-brands__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 28px;
+    text-align: left;
+  }
+  .dc-plp-brands__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .dc-plp-brands__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0 0 32px;
+  }
+  .dc-plp-brands__row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 40px;
+    align-items: center;
+    border-top: 1px solid #ececef;
+    padding-top: 24px;
+    scrollbar-width: none;
+  }
+  .dc-plp-brands__row::-webkit-scrollbar { display: none; }
+  .dc-plp-brands__name {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #6b7280;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    transition: color 0.15s;
+  }
+  .dc-plp-brands__name:hover { color: #0d1115; }
+  @media (max-width: 720px) {
+    .dc-plp-brands__title { font-size: 28px; }
+    .dc-plp-brands__name { font-size: 18px; }
+  }
 
   .dc-plp-sidebar__apply {
     margin: 14px 20px 18px;
@@ -516,7 +635,12 @@
   "class": "section-dc-plp",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Categoria" },
-    { "type": "range", "id": "products_per_page", "label": "Produtos por página", "min": 8, "max": 48, "step": 4, "default": 16 }
+    { "type": "range", "id": "products_per_page", "label": "Produtos por página", "min": 8, "max": 48, "step": 4, "default": 16 },
+    { "type": "header", "content": "Marcas oficiais (rodapé)" },
+    { "type": "checkbox", "id": "show_brands_strip", "label": "Exibir faixa de marcas", "default": true },
+    { "type": "text", "id": "brands_eyebrow", "label": "Eyebrow das marcas", "default": "Marcas oficiais" },
+    { "type": "text", "id": "brands_title", "label": "Título das marcas", "default": "+50 marcas que você confia" },
+    { "type": "text", "id": "brands_list", "label": "Marcas (separadas por |)", "default": "Epson|Samsung|Brother|Pantum|Evolut|JBL|NVIDIA|Logitech|TP-Link|Multilaser|Kingston|WD|Intel|AMD" }
   ],
   "presets": [
     { "name": "DropChina PLP" }

@@ -73,10 +73,28 @@
     <div class="dc-footer-bottom">
       <div class="dc-footer-bottom__copyright">{{ section.settings.copyright | default: '© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados.' | escape }}</div>
       <div class="dc-footer-payments">
-        {%- assign methods = section.settings.payments | default: 'PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO' | split: ',' -%}
-        {%- for m in methods -%}
-          <span class="dc-footer-pay-chip">{{ m | strip | escape }}</span>
-        {%- endfor -%}
+        {%- if section.settings.payments_image != blank -%}
+          {{ section.settings.payments_image | image_url: width: 600 | image_tag:
+              alt: 'Formas de pagamento aceitas',
+              class: 'dc-footer-payments__img',
+              loading: 'lazy' }}
+        {%- else -%}
+          <img
+            src="{{ 'formas-pagamento.png' | asset_url }}"
+            alt="Formas de pagamento aceitas"
+            class="dc-footer-payments__img"
+            loading="lazy"
+            width="600"
+            height="64"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex';"
+          >
+          <span class="dc-footer-payments__fallback" style="display:none;">
+            {%- assign methods = section.settings.payments | default: 'PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO' | split: ',' -%}
+            {%- for m in methods -%}
+              <span class="dc-footer-pay-chip">{{ m | strip | escape }}</span>
+            {%- endfor -%}
+          </span>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -186,6 +204,16 @@
     align-items: center;
     flex-wrap: wrap;
   }
+  .dc-footer-payments__img {
+    max-height: 32px;
+    width: auto;
+    display: block;
+  }
+  .dc-footer-payments__fallback {
+    display: inline-flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
   .dc-footer-pay-chip {
     background: #ffffff;
     border: 1px solid #ececef;
@@ -217,7 +245,8 @@
     { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" },
     { "type": "header", "content": "Linha de baixo" },
     { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados." },
-    { "type": "text", "id": "payments", "label": "Métodos de pagamento (separados por vírgula)", "default": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO" },
+    { "type": "image_picker", "id": "payments_image", "label": "Imagem de formas de pagamento", "info": "PNG com bandeiras (PIX, VISA, MASTER, etc). Default: asset 'formas-pagamento.png'." },
+    { "type": "text", "id": "payments", "label": "Fallback texto (se sem imagem)", "default": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO" },
     { "type": "header", "content": "Espaçamento" },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 28 }

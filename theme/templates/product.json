@@ -9,8 +9,14 @@
       }
     },
     "related_products": {
-      "type": "product-recommendations",
-      "settings": {}
+      "type": "dc-related-products",
+      "settings": {
+        "eyebrow": "Recomendados pra você",
+        "heading": "Talvez você goste",
+        "limit": 8,
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [

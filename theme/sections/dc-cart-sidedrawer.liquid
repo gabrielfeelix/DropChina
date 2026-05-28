@@ -17,8 +17,8 @@
       endif
       assign discount_code = section.settings.discount_code | default: 'DROP10'
       assign discount_pct  = section.settings.discount_pct  | default: 10
-      assign pix_total = cart_total | times: 100 | minus: cart_total | times: discount_pct | divided_by: 100
-      assign pix_total = cart_total | minus: pix_total
+      assign discount_amount = cart_total | times: discount_pct | divided_by: 100
+      assign pix_total = cart_total | minus: discount_amount
       assign installments_n = section.settings.installments | default: 12
       assign installment_val = 0
       if installments_n > 0
@@ -158,6 +158,11 @@
 (function() {
   var cart = document.querySelector('[data-dc-cart]');
   if (!cart) return;
+  // Move o cart pra <body> pra escapar do stacking context do #header-group
+  // (que tem backdrop-filter e prende position:fixed dentro).
+  if (cart.parentElement !== document.body) {
+    document.body.appendChild(cart);
+  }
   var panel = cart.querySelector('.dc-cart__panel');
   var body = document.body;
   var lastFocus = null;
