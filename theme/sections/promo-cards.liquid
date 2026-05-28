@@ -161,7 +161,7 @@
     background: #f4f5f7;
   }
   .dc-promo-card:hover { transform: translateY(-3px); }
-  /* SEM degrade — textos pretos precisam contrastar com imagem clara */
+  /* SEM degrade nos cards com imagem de fundo */
 
   /* TONS */
   .dc-promo-card--light { background: #f4f5f7; color: #0d1115; }
@@ -171,26 +171,24 @@
     background: linear-gradient(135deg, #f5c518 0%, #e85d04 100%);
     color: #ffffff;
   }
-  /* has-bg agora mantém texto preto (não white) — fundo já é a imagem */
+  /* has-bg = imagem como fundo do card (cover). Texto preto por default,
+     mas tones específicos (dark) podem inverter. */
   .dc-promo-card--has-bg { color: #0d1115; }
+  .dc-promo-card--has-bg.dc-promo-card--dark { color: #ffffff; }
 
-  /* Imagem (quando block tem image_picker) */
+  /* Imagem dentro do card (image_picker como CONTENT, não bg).
+     Quando is "has-bg", a imagem vira background-image do card. */
   .dc-promo-card__image {
     flex: 1;
     display: grid;
     place-items: center;
-    padding: 8px;
+    padding: 0;
     overflow: hidden;
   }
   .dc-promo-card__image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-  }
-  /* Quando o card é dark/yellow, não aplica multiply (perde contraste) */
-  .dc-promo-card--dark .dc-promo-card__image img,
-  .dc-promo-card--yellow .dc-promo-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     mix-blend-mode: normal;
   }
 
@@ -203,18 +201,42 @@
     flex-direction: column;
     gap: 4px;
   }
-  /* 1º card (hero): copy CENTRADA no topo + imagem no fundo
-     (igual referência "Impressão com qualidade premium") */
-  .dc-promo__grid > .dc-promo-card:nth-child(1) {
-    justify-content: space-between;
+  /* TODOS os cards: texto no topo-esquerda; imagem cobre fundo.
+     Card 1 (hero, vertical alto) tem texto centralizado no topo. */
+  .dc-promo-card {
+    justify-content: flex-start;
   }
+  .dc-promo-card__body {
+    order: -1;
+    padding: 28px 32px 0;
+    max-width: 55%;
+  }
+  /* 1º card (hero): texto centralizado, ocupa mais largura */
   .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__body {
     text-align: center;
     padding: 40px 32px 0;
-    order: -1;
+    max-width: 100%;
   }
+  /* Imagem ocupa o card todo como background */
+  .dc-promo-card__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .dc-promo-card__body {
+    position: relative;
+    z-index: 2;
+  }
+  /* No card 1 (hero), imagem fica embaixo do texto (não cobre) */
   .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__image {
+    position: relative;
+    inset: auto;
     align-self: end;
+    width: 100%;
+    height: 65%;
+  }
+  .dc-promo__grid > .dc-promo-card:nth-child(1) {
+    justify-content: space-between;
   }
 
   .dc-promo-card__eyebrow {
@@ -257,14 +279,16 @@
     margin-top: 14px;
     color: inherit;
     font-weight: 600;
-    font-size: 14px;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    font-size: 13.5px;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    align-self: flex-start;
+    transition: gap 0.2s;
   }
-  .dc-promo-card--light .dc-promo-card__cta,
-  .dc-promo-card--white .dc-promo-card__cta { color: #d62828; text-decoration: none; }
+  .dc-promo-card:hover .dc-promo-card__cta { gap: 10px; }
   .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__cta {
-    justify-content: center;
+    align-self: center;
   }
 
   /* Responsive */
