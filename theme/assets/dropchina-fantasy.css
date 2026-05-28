@@ -404,11 +404,6 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   overflow: hidden;
   margin-bottom: 14px;
   transition: background 0.2s ease;
-  /* isolation: isolate cria um novo stacking context LOCAL.
-     Sem isso, mix-blend-mode pode subir pra ancestrais com
-     transform/filter/backdrop-filter (típicos da Tinker) e
-     o blend não vê o bg cinza do .dc-card__media. */
-  isolation: isolate;
 }
 .dc-card:hover .dc-card__media { background: #e3e5e9 !important; }
 .dc-card__media-link {
@@ -417,7 +412,9 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   display: grid;
   place-items: center;
   padding: 18px;
-  z-index: 1;
+  /* SEM z-index: z-index num elemento posicionado cria stacking
+     context, e isso impede o mix-blend-mode da imagem de enxergar
+     o bg cinza do .dc-card__media. Removido pra fix do bg branco. */
 }
 .dc-card .dc-card__img,
 .dc-card__img {
@@ -426,9 +423,6 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   width: auto;
   height: auto;
   object-fit: contain;
-  /* multiply: mesmo blend que o megamenu (que funciona certo).
-     Combinado com bg cinza #ececef abaixo, o branco/creme da foto
-     vira cinza e some no fundo. */
   mix-blend-mode: multiply !important;
   transition: transform 0.4s ease;
 }
