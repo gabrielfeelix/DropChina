@@ -297,16 +297,6 @@
             "date": "há 2 semanas"
           }
         },
-        "t4": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Comprou Kit Cartucho HP 667",
-            "quote": "Frete grátis cumprido no prazo, produto original e ainda economizei 18% no Pix. Vou voltar com certeza.",
-            "author": "Pedro L.",
-            "date": "há 3 semanas"
-          }
-        },
         "plat_1": {
           "type": "platform",
           "settings": {
@@ -333,7 +323,6 @@
         "t1",
         "t2",
         "t3",
-        "t4",
         "plat_1",
         "plat_2",
         "plat_3"
@@ -348,8 +337,8 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "show_platforms": true,
-        "cta_label": "Ver todas as avaliações",
-        "cta_link": "shopify://pages/avaliacoes"
+        "cta_label": "",
+        "cta_link": ""
       }
     },
     "trust_badges_main": {
