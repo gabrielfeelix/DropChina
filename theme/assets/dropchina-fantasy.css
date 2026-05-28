@@ -406,7 +406,6 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   background: #ececef !important;
   aspect-ratio: 1 / 1;
   border-radius: var(--r-lg);
-  border: 1px solid rgba(13, 17, 21, 0.06);
   overflow: hidden;
   margin-bottom: 14px;
   transition: background 0.2s ease;
