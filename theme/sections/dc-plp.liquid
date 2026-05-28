@@ -43,21 +43,66 @@
         {%- if collection.filters.size > 0 -%}
           <form id="dc-plp-filter-form" class="dc-plp-sidebar__form">
             {%- for filter in collection.filters -%}
+              {%- assign show_more = false -%}
+              {%- if filter.type == 'list' and filter.values.size > 7 -%}
+                {%- assign show_more = true -%}
+              {%- endif -%}
               <details class="dc-plp-filter-group" {% if forloop.first or forloop.index <= 3 %}open{% endif %}>
-                <summary>{{ filter.label }}</summary>
+                <summary>
+                  <span>{{ filter.label }}</span>
+                  <span class="dc-plp-filter-group__chev">
+                    <svg class="dc-plp-filter-group__plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    <svg class="dc-plp-filter-group__minus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>
+                  </span>
+                </summary>
                 <div class="dc-plp-filter-group__body">
                   {%- case filter.type -%}
                     {%- when 'list' -%}
-                      {%- for value in filter.values -%}
-                        <label class="dc-plp-filter-check">
-                          <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %}>
-                          <span class="dc-plp-filter-check__box"></span>
-                          <span class="dc-plp-filter-check__lbl">{{ value.label }}</span>
-                          <span class="dc-plp-filter-check__count">{{ value.count }}</span>
-                        </label>
-                      {%- endfor -%}
+                      <ul class="dc-plp-filter-list{% if show_more %} dc-plp-filter-list--collapsible{% endif %}" data-dc-list>
+                        {%- for value in filter.values -%}
+                          <li class="dc-plp-filter-list__item{% if forloop.index > 7 and show_more %} is-hidden{% endif %}">
+                            <label class="dc-plp-filter-check{% if value.count == 0 and value.active == false %} is-disabled{% endif %}">
+                              <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                              <span class="dc-plp-filter-check__box"></span>
+                              <span class="dc-plp-filter-check__lbl">{{ value.label }}</span>
+                              <span class="dc-plp-filter-check__count">{{ value.count }}</span>
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      {%- if show_more -%}
+                        <button type="button" class="dc-plp-filter-more" data-dc-toggle-list>
+                          <span class="dc-plp-filter-more__show">+ Ver mais {{ filter.label | downcase }}</span>
+                          <span class="dc-plp-filter-more__hide">− Ver menos</span>
+                        </button>
+                      {%- endif -%}
                     {%- when 'price_range' -%}
-                      <div class="dc-plp-filter-price">
+                      {%- assign price_max = filter.range_max | default: 2000 | divided_by: 100 -%}
+                      {%- assign cur_min_val = filter.min_value.value | divided_by: 100 | default: 0 -%}
+                      {%- assign cur_max_val = filter.max_value.value | divided_by: 100 | default: price_max -%}
+                      <div class="dc-plp-filter-price" data-dc-price-filter data-max="{{ price_max }}">
+                        <div class="dc-plp-filter-price__slider">
+                          <div class="dc-plp-filter-price__track"></div>
+                          <div class="dc-plp-filter-price__fill" data-dc-price-fill></div>
+                          <input
+                            type="range"
+                            class="dc-plp-filter-price__range dc-plp-filter-price__range--min"
+                            min="0"
+                            max="{{ price_max }}"
+                            value="{{ cur_min_val }}"
+                            data-dc-price-min-range
+                            aria-label="Preço mínimo (slider)"
+                          >
+                          <input
+                            type="range"
+                            class="dc-plp-filter-price__range dc-plp-filter-price__range--max"
+                            min="0"
+                            max="{{ price_max }}"
+                            value="{{ cur_max_val }}"
+                            data-dc-price-max-range
+                            aria-label="Preço máximo (slider)"
+                          >
+                        </div>
                         <div class="dc-plp-filter-price__row">
                           <input
                             type="number"
@@ -65,6 +110,7 @@
                             value="{{ filter.min_value.value }}"
                             placeholder="R$ 0"
                             min="0"
+                            data-dc-price-min
                             aria-label="Preço mínimo"
                           >
                           <span>—</span>
@@ -72,18 +118,19 @@
                             type="number"
                             name="{{ filter.max_value.param_name }}"
                             value="{{ filter.max_value.value }}"
-                            placeholder="R$ 2000"
+                            placeholder="R$ {{ price_max }}"
                             min="0"
+                            data-dc-price-max
                             aria-label="Preço máximo"
                           >
                         </div>
                         <div class="dc-plp-filter-price__chips">
                           {%- assign cur_min = filter.min_value.value -%}
                           {%- assign cur_max = filter.max_value.value -%}
-                          <button type="button" class="dc-plp-price-chip{% if cur_min == nil and cur_max == 50 %} active{% endif %}" data-min="" data-max="50">Até R$ 50</button>
-                          <button type="button" class="dc-plp-price-chip{% if cur_min == 50 and cur_max == 150 %} active{% endif %}" data-min="50" data-max="150">R$ 50 a 150</button>
-                          <button type="button" class="dc-plp-price-chip{% if cur_min == 150 and cur_max == 500 %} active{% endif %}" data-min="150" data-max="500">R$ 150 a 500</button>
-                          <button type="button" class="dc-plp-price-chip{% if cur_min == 500 and cur_max == nil %} active{% endif %}" data-min="500" data-max="">Acima R$ 500</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == nil and cur_max == 5000 %} active{% endif %}" data-min="" data-max="5000">Até R$ 50</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 5000 and cur_max == 15000 %} active{% endif %}" data-min="5000" data-max="15000">R$ 50 a 150</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 15000 and cur_max == 50000 %} active{% endif %}" data-min="15000" data-max="50000">R$ 150 a 500</button>
+                          <button type="button" class="dc-plp-price-chip{% if cur_min == 50000 %} active{% endif %}" data-min="50000" data-max="">Acima R$ 500</button>
                         </div>
                       </div>
                   {%- endcase -%}
@@ -188,11 +235,60 @@
     chip.addEventListener('click', function() {
       var form = chip.closest('form');
       if (!form) return;
-      var minEl = form.querySelector('input[name*="price.gte"], input[name*="price_min"], input[name*="filter.v.price.gte"]');
-      var maxEl = form.querySelector('input[name*="price.lte"], input[name*="price_max"], input[name*="filter.v.price.lte"]');
+      var minEl = form.querySelector('[data-dc-price-min]');
+      var maxEl = form.querySelector('[data-dc-price-max]');
       if (minEl) minEl.value = chip.dataset.min || '';
       if (maxEl) maxEl.value = chip.dataset.max || '';
       form.submit();
+    });
+  });
+
+  // Dual range price slider
+  document.querySelectorAll('[data-dc-price-filter]').forEach(function(filter) {
+    var max = parseInt(filter.dataset.max, 10) || 2000;
+    var rMin = filter.querySelector('[data-dc-price-min-range]');
+    var rMax = filter.querySelector('[data-dc-price-max-range]');
+    var iMin = filter.querySelector('[data-dc-price-min]');
+    var iMax = filter.querySelector('[data-dc-price-max]');
+    var fill = filter.querySelector('[data-dc-price-fill]');
+    if (!rMin || !rMax || !fill) return;
+
+    function paint() {
+      var vMin = parseInt(rMin.value, 10);
+      var vMax = parseInt(rMax.value, 10);
+      if (vMin > vMax - 1) {
+        if (this === rMin) rMin.value = vMax - 1;
+        else rMax.value = vMin + 1;
+        vMin = parseInt(rMin.value, 10);
+        vMax = parseInt(rMax.value, 10);
+      }
+      var pctMin = (vMin / max) * 100;
+      var pctMax = (vMax / max) * 100;
+      fill.style.left = pctMin + '%';
+      fill.style.right = (100 - pctMax) + '%';
+    }
+
+    function syncToInputs() {
+      // Inputs em centavos (Shopify usa centavos pro filtro de preço)
+      iMin.value = parseInt(rMin.value, 10) * 100;
+      iMax.value = parseInt(rMax.value, 10) * 100;
+    }
+
+    rMin.addEventListener('input', function() { paint.call(rMin); syncToInputs(); });
+    rMax.addEventListener('input', function() { paint.call(rMax); syncToInputs(); });
+    rMin.addEventListener('change', function() { filter.closest('form').submit(); });
+    rMax.addEventListener('change', function() { filter.closest('form').submit(); });
+
+    paint();
+  });
+
+  // "+ Ver mais marcas" toggle
+  document.querySelectorAll('[data-dc-toggle-list]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var list = btn.previousElementSibling;
+      if (!list) return;
+      list.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded');
     });
   });
 })();
@@ -314,19 +410,52 @@
     color: #0d1115;
   }
   .dc-plp-filter-group summary::-webkit-details-marker { display: none; }
-  .dc-plp-filter-group summary::after {
-    content: '+';
-    font-size: 16px;
+  .dc-plp-filter-group__chev {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
     color: #6b7280;
-    transition: transform 0.2s;
+    transition: color 0.15s;
   }
-  .dc-plp-filter-group[open] summary::after { content: '−'; }
+  .dc-plp-filter-group summary:hover .dc-plp-filter-group__chev { color: #0d1115; }
+  .dc-plp-filter-group__minus { display: none; }
+  .dc-plp-filter-group[open] .dc-plp-filter-group__plus { display: none; }
+  .dc-plp-filter-group[open] .dc-plp-filter-group__minus { display: block; }
   .dc-plp-filter-group__body {
-    padding: 0 20px 16px;
+    padding: 0 20px 18px;
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
+  /* Lista de filtros (Marca/Categoria/etc) */
+  .dc-plp-filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .dc-plp-filter-list__item.is-hidden { display: none; }
+  .dc-plp-filter-list.is-expanded .dc-plp-filter-list__item.is-hidden { display: list-item; }
+  .dc-plp-filter-more {
+    background: transparent;
+    border: 0;
+    color: #d62828;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 8px 0 2px;
+    text-align: left;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .dc-plp-filter-more:hover { color: #0d1115; }
+  .dc-plp-filter-more__hide { display: none; }
+  .dc-plp-filter-more.is-expanded .dc-plp-filter-more__show { display: none; }
+  .dc-plp-filter-more.is-expanded .dc-plp-filter-more__hide { display: inline; }
+  .dc-plp-filter-check.is-disabled { opacity: 0.4; cursor: not-allowed; }
 
   .dc-plp-filter-check {
     display: flex;
@@ -369,6 +498,71 @@
   .dc-plp-filter-check__lbl { flex: 1; }
   .dc-plp-filter-check__count { color: #9ca3af; font-size: 12px; }
   .dc-plp-filter-check:hover { color: #0d1115; }
+
+  /* Slider duplo de preço */
+  .dc-plp-filter-price__slider {
+    position: relative;
+    height: 26px;
+    margin: 8px 4px 14px;
+  }
+  .dc-plp-filter-price__track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    transform: translateY(-50%);
+  }
+  .dc-plp-filter-price__fill {
+    position: absolute;
+    top: 50%;
+    height: 4px;
+    background: #0d1115;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  .dc-plp-filter-price__range {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 26px;
+    margin: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .dc-plp-filter-price__range::-webkit-slider-thumb {
+    pointer-events: all;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #0d1115;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(13, 17, 21, 0.3);
+    cursor: pointer;
+    transition: transform 0.12s;
+  }
+  .dc-plp-filter-price__range::-webkit-slider-thumb:hover { transform: scale(1.12); }
+  .dc-plp-filter-price__range::-moz-range-thumb {
+    pointer-events: all;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #0d1115;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(13, 17, 21, 0.3);
+    cursor: pointer;
+  }
+  .dc-plp-filter-price__range::-webkit-slider-runnable-track { background: transparent; }
+  .dc-plp-filter-price__range::-moz-range-track { background: transparent; }
 
   .dc-plp-filter-price__row {
     display: flex;
