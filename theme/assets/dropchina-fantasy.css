@@ -398,14 +398,19 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
 .dc-card .dc-card__media,
 .dc-card__media {
   position: relative;
-  background: #e8eaee !important;
+  background: #ececef !important;
   aspect-ratio: 1 / 1;
   border-radius: var(--r-lg);
   overflow: hidden;
   margin-bottom: 14px;
   transition: background 0.2s ease;
+  /* isolation: isolate cria um novo stacking context LOCAL.
+     Sem isso, mix-blend-mode pode subir pra ancestrais com
+     transform/filter/backdrop-filter (típicos da Tinker) e
+     o blend não vê o bg cinza do .dc-card__media. */
+  isolation: isolate;
 }
-.dc-card:hover .dc-card__media { background: #dee0e4 !important; }
+.dc-card:hover .dc-card__media { background: #e3e5e9 !important; }
 .dc-card__media-link {
   position: absolute;
   inset: 0;
@@ -421,9 +426,10 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   width: auto;
   height: auto;
   object-fit: contain;
-  /* darken: combinado com bg cinza, "come" o branco/quase-branco da foto
-     sem afetar as cores reais do produto. Mais robusto que multiply. */
-  mix-blend-mode: darken !important;
+  /* multiply: mesmo blend que o megamenu (que funciona certo).
+     Combinado com bg cinza #ececef abaixo, o branco/creme da foto
+     vira cinza e some no fundo. */
+  mix-blend-mode: multiply !important;
   transition: transform 0.4s ease;
 }
 .dc-card:hover .dc-card__img { transform: scale(1.04); }
