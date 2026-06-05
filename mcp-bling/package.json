@@ -14,6 +14,7 @@
     "seed:campos": "tsx src/scripts/seed-campos.ts",
     "seed:categorias-loja": "tsx src/scripts/seed-categorias-loja.ts",
     "load:meli": "tsx src/scripts/load-from-meli.ts",
+    "fill:campos": "tsx src/scripts/fill-campos.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },

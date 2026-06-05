@@ -46,6 +46,8 @@ export interface ProdutoInput {
   ncm?: string
   origem?: number
   cest?: string
+  /** Campos customizados: valor=texto/número, ou valor=<id da opção> p/ Lista. */
+  camposCustomizados?: { idCampoCustomizado: number; valor: string }[]
 }
 
 /** Monta o body do Bling a partir do input achatado. Só inclui o que veio. */
@@ -92,6 +94,8 @@ function montarBody(input: ProdutoInput): Record<string, unknown> {
   if (input.origem != null) trib.origem = input.origem
   if (input.cest != null) trib.cest = input.cest
   if (Object.keys(trib).length) body.tributacao = trib
+
+  if (input.camposCustomizados?.length) body.camposCustomizados = input.camposCustomizados
 
   return body
 }
