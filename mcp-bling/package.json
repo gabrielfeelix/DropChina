@@ -10,6 +10,7 @@
     "build": "tsc",
     "authorize": "tsx src/scripts/authorize.ts",
     "seed:categorias": "tsx src/scripts/seed-categorias.ts",
+    "probe": "tsx src/scripts/probe.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },
