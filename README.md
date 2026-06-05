@@ -7,6 +7,8 @@ A loja Shopify é **apenas uma das superfícies**. A fonte de verdade de catálo
 ## Arquitetura
 
 ```
+  Mercado Livre  ──(read-only)──►  mcp-meli/  ──catálogo/auditoria──┐
+   (anúncios)                                                       ▼
 Bling (ERP)  ──fonte de verdade──►  mcp-bling/  ──tools──►  IA / automações
    │                                                              │
    └── catálogo, estoque, fiscal                                  ▼
@@ -18,10 +20,16 @@ Bling (ERP)  ──fonte de verdade──►  mcp-bling/  ──tools──►  
 ```
 .
 ├── mcp-bling/        # MCP server (API v3 do Bling) — FONTE DE VERDADE
-│   ├── src/api/      # client, categorias, rate-limiter
+│   ├── src/api/      # client, categorias, produtos, nfe, campos customizados
 │   ├── src/auth/     # OAuth 2.0 + token store
 │   ├── src/mcp/      # server stdio (tools)
-│   └── src/scripts/  # authorize, seed-categorias
+│   └── src/scripts/  # authorize, seed-categorias, seed-campos, probe
+│
+├── mcp-meli/         # Cliente READ-ONLY da API do Mercado Livre
+│   ├── src/api/      # client (GET), items (scan/multiget), categories
+│   ├── src/auth/     # OAuth 2.0 (refresh rotativo)
+│   ├── src/mcp/      # server stdio (read-only)
+│   └── src/scripts/  # authorize (colar code), pull-catalogo (auditoria)
 │
 ├── theme/            # Tema Shopify (Tinker customizado) — look Fantasy
 │   ├── assets/       # CSS, JS, imagens (dropchina-fantasy.css, dc-*.js)
