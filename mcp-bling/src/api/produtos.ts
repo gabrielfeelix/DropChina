@@ -76,9 +76,15 @@ function montarBody(input: ProdutoInput): Record<string, unknown> {
     }
   }
 
-  // imagens externas (Bling referencia a URL)
+  // imagens externas (Bling referencia a URL). Exige https; máx ~6.
+  // OBS: só persiste se a conta estiver em "URL de Imagens Externas" (config painel).
   if (input.imagens?.length) {
-    body.midia = { imagens: { externas: input.imagens.map((link) => ({ link })) } }
+    const externas = input.imagens
+      .map((u) => u.replace(/^http:/, 'https:'))
+      .filter((u) => /^https:\/\//.test(u))
+      .slice(0, 6)
+      .map((link) => ({ link }))
+    if (externas.length) body.midia = { video: { url: '' }, imagens: { externas } }
   }
 
   const trib: Record<string, unknown> = {}
