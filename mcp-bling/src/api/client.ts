@@ -26,12 +26,28 @@ export async function getBling(): Promise<BlingClient> {
   return new BlingCtor(accessToken)
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
 /**
- * Executa uma operação contra a API respeitando o rate limit.
+ * Executa uma operação contra a API respeitando o rate limit, com retry em 429
+ * (limite de requisições) usando backoff exponencial.
  * `fn` recebe o cliente Bling já autenticado.
  */
 export async function withBling<T>(fn: (bling: BlingClient) => Promise<T>): Promise<T> {
-  await blingRateLimiter.acquire()
-  const bling = await getBling()
-  return fn(bling)
+  const maxAttempts = 5
+  for (let attempt = 1; ; attempt++) {
+    await blingRateLimiter.acquire()
+    const bling = await getBling()
+    try {
+      return await fn(bling)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err)
+      const is429 = /limite de requisi|too many requests|429/i.test(msg)
+      if (is429 && attempt < maxAttempts) {
+        await sleep(Math.min(2 ** attempt * 400, 6000))
+        continue
+      }
+      throw err
+    }
+  }
 }
