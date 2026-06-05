@@ -8,9 +8,9 @@ import { withBling } from '../api/client.js'
 
 const out: Record<string, unknown> = {}
 
-async function safe(label: string, fn: () => Promise<unknown>) {
+async function safe(label: string, fn: (b: any) => Promise<unknown>) {
   try {
-    out[label] = await withBling(fn as any)
+    out[label] = await withBling(fn)
   } catch (err) {
     out[label] = { ERRO: err instanceof Error ? err.message : String(err) }
   }

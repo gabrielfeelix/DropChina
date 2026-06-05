@@ -41,7 +41,11 @@
 
 **Plano atual provável: Cobalto (R$ 55).** Evidência: a tela de consent mostrou que o plano tem Marketplaces/NF-e/CT-e mas **não** tem Controle de Lotes, Ordens de Produção nem módulo de Vendedor — perfil exato do plano de entrada. **Confirmar** em *Minha Conta → Plano*.
 
-**Recomendação: subir para Titânio Faixa 1 (a partir de R$ 120, teto 500 pedidos).** Justificativa: operação ML Platinum + ViaVarejo + Shopify nova; o teto de 200 do Cobalto vira gargalo cedo (Shopify não conta, mas ML+ViaVarejo sim). Titânio F1 dá folga, inclui SPED e até 3 CNPJs. Tecnicamente o Cobalto **já funciona** (API + NF-e liberados) — então dá pra configurar tudo no Cobalto e subir quando o volume pedir; mas para entregar com folga, F1 é o alvo.
+**Recomendação: subir para Titânio Faixa 1 (a partir de R$ 120, teto 500 pedidos)** — **no go-live, não agora.**
+
+> ✅ **DECISÃO (jun/2026):** **NÃO subir plano durante a configuração.** Configurar não exige upgrade — o Cobalto já tem API + NF-e + integrações ilimitadas. O Titânio só importa por **volume de pedidos no go-live**. Subir apenas se/quando o volume de ML+ViaVarejo passar de 200/mês de forma sustentada.
+
+Justificativa do upgrade futuro: operação ML Platinum + ViaVarejo + Shopify nova; o teto de 200 do Cobalto vira gargalo (Shopify não conta, mas ML+ViaVarejo sim). Titânio F1 dá folga, inclui SPED e até 3 CNPJs.
 
 **Pegadinha:** se o app/integração começar a **lançar pedidos via API**, isso consome cota e pode forçar upgrade automático. Nosso MCP lê/cadastra catálogo — não deve lançar pedidos (pedido nasce no canal).
 
@@ -52,9 +56,7 @@
 Cenário: **100% NF-e modelo 55** (venda online com entrega). **NFC-e não se aplica** (só venda presencial/balcão) → **não precisa configurar CSC/token**.
 
 ### 2.1 Bloqueios atuais (resolver primeiro)
-1. 🔴 **Regime tributário** — confirmar com contador. Define tudo:
-   - **Simples Nacional/MEI** → usa **CSOSN** + CRT 1 (ou 4 MEI). Bling identifica e **não envia IBS/CBS** (Reforma Tributária). CSOSN em emissor não-Simples → **Rejeição 591**.
-   - **Lucro Presumido/Normal** → usa **CST** ICMS + CRT 3.
+1. ✅ **Regime tributário = Simples Nacional** (decidido jun/2026). Usa **CSOSN** + **CRT 1**. Bling identifica e **não envia IBS/CBS** (Reforma Tributária). Cuidado: CSOSN só vale p/ Simples — naturezas devem usar CSOSN, não CST. (Confirmar CSOSN específico por operação com o contador — ex.: 102 sem crédito, 500 com ST já recolhida.)
 2. 🔴 **Certificado A1** instalado (`.pfx`/`.p12`). **A1, não A3** — A3 (token físico) inviabiliza emissão automática em servidor. Bling não aceita certificado em nuvem/RemoteID.
 3. 🔴 **NCM + Origem em 100% dos produtos** — hoje ausentes → **impedem salvar/emitir nota** (NCM ausente trava; origem ausente = Rejeição 966). Importados = origem 1 ou 2 (não "0 Nacional").
    - **Atalho de carga:** importar **XML das notas de entrada** dos fornecedores → Bling **preenche NCM automaticamente** no produto. Zera o backlog sem digitar item a item.

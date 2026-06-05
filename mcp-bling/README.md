@@ -70,10 +70,20 @@ Comunica via **stdio**. Para usar no Claude Code, registre em `.mcp.json` / conf
 
 ### Tools disponíveis
 
-| Tool | Faz |
-|---|---|
-| `bling_list_categories` | Lista todas as categorias de produto (paginação automática). |
-| `bling_create_category` | Cria categoria (`descricao`, `categoriaPaiId` opcional). |
+| Tool | Faz | Escrita? |
+|---|---|---|
+| `bling_list_categories` | Lista categorias de produto (paginação automática). | — |
+| `bling_create_category` | Cria categoria (`descricao`, `categoriaPaiId` opcional). | sim |
+| `bling_list_products` | Lista produtos (filtros: codigo, nome, idCategoria). | — |
+| `bling_get_product` | Detalhe completo de um produto por id. | — |
+| `bling_find_product_by_codigo` | Busca exata por SKU — checa duplicidade antes de criar. | — |
+| `bling_create_product` | Cria produto **novo** (sem vínculo → não toca ML). Requer `confirm=true`. | sim |
+| `bling_update_product` | Atualiza produto por id. ⚠️ reflete no canal se vinculado+sync. Requer `confirm=true`. | sim |
+| `bling_upsert_product` | Cria-ou-atualiza idempotente por SKU. Base da carga em massa. Requer `confirm=true`. | sim |
+| `bling_list_nfe` | Lista NF-e (filtros: situacao, tipo, datas). | — |
+| `bling_get_nfe` | Detalhe de uma NF-e por id. | — |
+
+> **Segurança:** toda escrita exige `confirm=true` (trava explícita). Criar produto novo no Bling **não repercute no Mercado Livre** — só toca canal produto vinculado a anúncio com sync ligada (config de painel, feita no go-live). Escrita de **estoque** (que pode despublicar anúncio Platinum) **não é exposta** nesta fase, de propósito.
 
 ## Estrutura
 
