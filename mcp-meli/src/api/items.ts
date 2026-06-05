@@ -38,7 +38,7 @@ export interface MlItemRaw {
   category_id?: string
   permalink?: string
   seller_custom_field?: string | null
-  attributes?: { id: string; value_name?: string | null }[]
+  attributes?: { id: string; name?: string; value_name?: string | null }[]
   variations?: {
     id: number
     seller_custom_field?: string | null

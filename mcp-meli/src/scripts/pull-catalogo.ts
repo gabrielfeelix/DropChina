@@ -42,7 +42,21 @@ interface ItemNormalizado {
   cor?: string | null
   rendimento?: number | null
   descricao?: string
+  /** Ficha técnica completa do ML (nome amigável + valor). */
+  atributos?: { nome: string; valor: string }[]
   permalink?: string
+}
+
+// atributos técnicos/redundantes que NÃO entram na ficha (já usados ou internos)
+const ATTR_SKIP = new Set([
+  'SELLER_SKU','GTIN','EMPTY_GTIN','PACKAGE_WEIGHT','PACKAGE_HEIGHT','PACKAGE_WIDTH','PACKAGE_LENGTH',
+  'SELLER_PACKAGE_WEIGHT','SELLER_PACKAGE_HEIGHT','SELLER_PACKAGE_WIDTH','SELLER_PACKAGE_LENGTH',
+  'PACKAGE_DATA_SOURCE','SYI_PYMES_ID','SHIPMENT_PACKING','TOTAL_CONTENT_WEIGHT','BRAND',
+])
+function fichaTecnica(i: MlItemRaw): { nome: string; valor: string }[] {
+  return (i.attributes ?? [])
+    .filter((a) => a.value_name && a.name && !ATTR_SKIP.has(a.id))
+    .map((a) => ({ nome: a.name as string, valor: a.value_name as string }))
 }
 
 const attr = attrValue
@@ -115,6 +129,7 @@ async function main() {
       cor: attr(i, 'INK_COLOR') ?? attr(i, 'COLOR'),
       rendimento: num(attr(i, 'PAGE_YIELD')) ?? null,
       descricao: desc.get(i.id) || undefined,
+      atributos: fichaTecnica(i),
       permalink: i.permalink,
     }
   })
