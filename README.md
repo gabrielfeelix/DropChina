@@ -1,42 +1,65 @@
-# DropChina — Shopify
+# DropChina
 
-E-commerce da [DropChina](https://lista.mercadolivre.com.br/loja/dropchina-297222/) na Shopify, baseado no tema **Tinker** customizado.
+Monorepo da [DropChina](https://lista.mercadolivre.com.br/loja/dropchina-297222/) — vendedor Platinum no Mercado Livre (+50 mil vendas) montando operação própria.
 
-Vendedor Platinum no Mercado Livre com +50 mil vendas — agora com loja própria.
+A loja Shopify é **apenas uma das superfícies**. A fonte de verdade de catálogo, estoque e fiscal é o **Bling** (ERP), exposto via MCP. Este repositório reúne todas as peças do negócio: ERP, tema da loja, scripts de catálogo, design e documentação.
 
-## Estrutura do projeto
+## Arquitetura
+
+```
+Bling (ERP)  ──fonte de verdade──►  mcp-bling/  ──tools──►  IA / automações
+   │                                                              │
+   └── catálogo, estoque, fiscal                                  ▼
+                                                          theme/ (Shopify)  ──►  loja
+```
+
+## Estrutura do repositório
 
 ```
 .
-├── theme/                  # Tema Shopify Tinker customizado
-│   ├── assets/             # CSS, JS, fontes, ícones
-│   ├── blocks/             # Blocks reutilizáveis (cards, galerias, etc.)
-│   ├── config/             # settings_data.json (paleta, fontes), settings_schema.json
-│   ├── layout/             # theme.liquid, password.liquid
-│   ├── locales/            # Traduções (pt-PT, pt, en, etc.)
-│   ├── sections/           # Sections de página (hero, header, footer, etc.)
-│   ├── snippets/           # Snippets compartilhados
-│   ├── templates/          # Templates JSON (index, product, collection, etc.)
-│   └── .shopifyignore      # Filtra ruído do watcher
+├── mcp-bling/        # MCP server (API v3 do Bling) — FONTE DE VERDADE
+│   ├── src/api/      # client, categorias, rate-limiter
+│   ├── src/auth/     # OAuth 2.0 + token store
+│   ├── src/mcp/      # server stdio (tools)
+│   └── src/scripts/  # authorize, seed-categorias
 │
-├── catalogo/               # Scripts de setup do catálogo via Admin API
-│   ├── setup-loja.mjs      # Cria 7 coleções + 28 produtos
-│   └── setup-menus.mjs     # Cria menu principal + 3 menus do footer
+├── theme/            # Tema Shopify (Tinker customizado) — look Fantasy
+│   ├── assets/       # CSS, JS, imagens (dropchina-fantasy.css, dc-*.js)
+│   ├── blocks/       # blocks reutilizáveis
+│   ├── config/       # settings_data.json, settings_schema.json
+│   ├── layout/       # theme.liquid
+│   ├── sections/     # dc-header, dc-hero-slideshow, dc-pdp, dc-plp, etc.
+│   ├── snippets/     # dc-product-card, dc-search-input
+│   └── templates/    # index, product, collection, page.* (JSON)
 │
-├── pesquisa-ux-ui-ecommerce.md   # Pesquisa de boas práticas UX/UI usada como base
-└── README.md
+├── catalogo/         # Scripts de setup do catálogo via Shopify Admin API
+├── design-oficial/   # Referência de design (HTML/CSS/JSX + screenshots)
+├── docs/             # Planos e prompts (ex.: plano do redesign Fantasy)
+├── audit/            # UI review
+├── banners/          # Banners de origem (compre-por-linha, etc.)
+├── extension/        # (arquivado) extensão auxiliar
+└── scripts/          # Utilitários (import-images.py)
 ```
 
-## Identidade visual
+## mcp-bling — fonte de verdade
 
-- **Primária:** `#0F4FA8` (azul DropChina) com hover `#0A3D80`
-- **Acento:** `#E85D04` (laranja queimado, urgência/promo)
-- **Cards:** cinza Apple `#F5F5F7`
-- **Texto:** `#1A1A1A`
-- **Botão primário:** preto (`#1A1A1A`) com hover azul — estilo Apple/VISION
-- **Fonte:** Inter (body, subheading, heading, accent)
+MCP server local pra API v3 do Bling. Catálogo, estoque e fiscal saem daqui; a loja é consumidora.
 
-## Trabalhar no tema localmente
+Estado atual (v0.1): OAuth 2.0 com refresh automático, rate limiter (≤3 req/s), tools `bling_list_categories` / `bling_create_category`, seed idempotente das 12 categorias. Produtos, estoque e NF-e nas próximas levas.
+
+Detalhes, setup e runbook: [mcp-bling/README.md](mcp-bling/README.md). Arquitetura: [mcp-bling/01_DropChina_Projeto_e_Arquitetura.md](mcp-bling/01_DropChina_Projeto_e_Arquitetura.md).
+
+```bash
+cd mcp-bling
+npm install
+cp .env.example .env   # preencher credenciais do Bling
+npm run authorize      # OAuth (abre browser)
+npm run seed:categorias
+```
+
+## theme — loja Shopify
+
+Tema Tinker customizado, look **Fantasy Gaming** (header preto, hero full-bleed, cards gaming, predictive search, PDP/PLP redesenhadas).
 
 Pré-requisitos: [Node.js 24+](https://nodejs.org), [Shopify CLI](https://shopify.dev/docs/themes/tools/cli/install).
 
@@ -49,41 +72,26 @@ shopify theme dev \
   --store-password=<senha-storefront>
 ```
 
-O servidor sobe em `http://127.0.0.1:9292` com hot-reload.
+Sobe em `http://127.0.0.1:9292` com hot-reload.
 
-## Recriar/atualizar o catálogo
+### Catálogo (setup via Admin API)
 
-Os scripts em `catalogo/` usam `shopify store auth` + `shopify store execute` (sem precisar de Custom App ou token manual).
+Scripts em `catalogo/` usam `shopify store auth` + `shopify store execute` (sem Custom App nem token manual).
 
 ```bash
-# Autenticar uma vez (abre browser pra autorizar):
 shopify store auth \
   --store=akfd19-1c.myshopify.com \
   --scopes=write_products,read_products,write_publications,read_publications,write_files,write_online_store_navigation,write_online_store_pages
 
-# Criar/atualizar 7 coleções + 28 produtos:
-node catalogo/setup-loja.mjs
-
-# Criar/atualizar menus (header + 3 do footer):
-node catalogo/setup-menus.mjs
+node catalogo/setup-loja.mjs    # coleções + produtos
+node catalogo/setup-menus.mjs   # menus header + footer
 ```
 
-## Catálogo
+> Médio prazo: o catálogo da loja passa a ser sincronizado a partir do Bling (via `mcp-bling/`), não mais por scripts manuais.
 
-7 coleções smart (auto-preenchidas via tags):
+## Roadmap
 
-- Cartuchos de Tinta
-- Toners
-- Papéis e Suprimentos
-- Impressoras
-- Periféricos e Acessórios
-- Monitores
-- Mini PCs e Computadores
-
-28 produtos criados a partir do catálogo do Mercado Livre, com descrições estruturadas (overview, características, especificações, compatibilidade).
-
-## Customizações principais
-
-- **Templates JSON reescritos:** [theme/templates/index.json](theme/templates/index.json), [theme/templates/product.json](theme/templates/product.json), [theme/templates/collection.json](theme/templates/collection.json)
-- **Header & Footer:** [theme/sections/header-group.json](theme/sections/header-group.json), [theme/sections/footer-group.json](theme/sections/footer-group.json) — em PT-BR, com selo ML Platinum
-- **Color schemes:** [theme/config/settings_data.json](theme/config/settings_data.json) — 8 schemes mapeados pra paleta DropChina
+- [x] Tema Shopify Fantasy (header, hero, PDP, PLP, footer, side-cart)
+- [x] MCP Bling v0.1 — OAuth + categorias
+- [ ] MCP Bling — produtos, estoque, NF-e
+- [ ] Sincronização Bling → Shopify (catálogo + estoque)
