@@ -43,3 +43,6 @@ index.html
 
 # Banners staging (banners originais do user, antes de copiar pra theme/assets)
 banner*.png
+
+# MCP local (cwd absoluto, específico da máquina)
+.mcp.json
