@@ -44,6 +44,16 @@ const CATEGORIAS = [
   'Conectividade e Redes',
   'Saúde e Suplementos',
   'Outros',
+  // linhas do Fujioka (cliente sourcing — vende/pode vender)
+  'Ar Condicionado e Climatização',
+  'Smartwatches',
+  'TV e Vídeo',
+  'Câmeras e Drones',
+  'Notebooks',
+  'Nobreak e Estabilizador',
+  'Armazenamento',
+  'Projetores',
+  'Games e Linha Gamer',
 ]
 
 async function main() {
