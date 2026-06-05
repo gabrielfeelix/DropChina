@@ -8,8 +8,8 @@
 
 ## Passo a passo
 
-1. Acesse **https://developers.mercadolivre.com.br** → faça login → menu **"Suas aplicações" / "Minhas aplicações"** (DevCenter).
-2. Clique em **"Criar nova aplicação"**.
+1. Acesse o painel de aplicações direto (logado): **https://developers.mercadolivre.com.br/devcenter** (a home não tem link óbvio — o card "Gestão de aplicações" é só documentação; o painel real é o `/devcenter`).
+2. Clique em **"Criar aplicação"** (ou atalho direto: **https://developers.mercadolivre.com.br/devcenter/create-app**).
 3. Preencha:
    | Campo | O que pôr |
    |---|---|
