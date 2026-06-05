@@ -144,10 +144,15 @@ Essenciais pra escalar/canais/frete: `codigo` (SKU), `gtin`, `preco`, `fornecedo
 
 ### 4.2 Marca vs Compatibilidade (não bagunçar)
 - `marca` (nativo) = **fabricante real** (Evolut, Byqualy, Premium).
-- Compatibilidade → **Campos Customizados** (criar uma vez no painel, reusar `idCampoCustomizado` na API):
-  - "Marca Compatível" (Lista): HP / Brother / Canon…
-  - "Modelos Compatíveis" (Texto Longo): "HP 105A; W1105A; Laser 107a…"
-  - "Tipo de Suprimento" (Lista), "Rendimento" (Inteiro), "Cor" (Lista).
+- Compatibilidade → **Campos Customizados** ✅ **criados** (jun/2026, via `npm run seed:campos`). Reusar os `idCampoCustomizado` na carga de produtos:
+
+| Campo customizado | Tipo | idCampoCustomizado |
+|---|---|---|
+| Marca Compatível | Lista | **8613218** |
+| Modelos Compatíveis | Texto Longo | **8612935** |
+| Tipo de Suprimento | Lista | **8613217** |
+| Rendimento (páginas) | Inteiro | **8613219** |
+| Cor | Lista | **8613220** |
 - **Bônus:** os atributos obrigatórios do ML (Marca/Modelo/Cor) também são Campos Customizados — o Bling gera por categoria ML. Mesmo mecanismo serve taxonomia interna + ficha técnica do ML.
 
 ### 4.3 Padrão de SKU
