@@ -12,6 +12,7 @@
     "seed:categorias": "tsx src/scripts/seed-categorias.ts",
     "probe": "tsx src/scripts/probe.ts",
     "seed:campos": "tsx src/scripts/seed-campos.ts",
+    "seed:categorias-loja": "tsx src/scripts/seed-categorias-loja.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },
