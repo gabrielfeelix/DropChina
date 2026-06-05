@@ -10,7 +10,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { getMyUserId, listAllItemIds, getItems, extractSku, type MlItemRaw } from '../api/items.js'
+import { getMyUserId, listAllItemIds, getItems, extractSku, attrValue, getItemDescription, type MlItemRaw } from '../api/items.js'
 import { getCategory } from '../api/categories.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -32,14 +32,29 @@ interface ItemNormalizado {
   temVariacoes: boolean
   qtdFotos: number
   imagens: string[]
+  // peso (kg) e dimensões (cm) — da embalagem do ML
+  pesoBrutoKg?: number
+  alturaCm?: number
+  larguraCm?: number
+  profundidadeCm?: number
+  // atributos úteis p/ campos customizados
+  modeloCompat?: string | null
+  cor?: string | null
+  rendimento?: number | null
+  descricao?: string
   permalink?: string
 }
 
-function attr(item: MlItemRaw, id: string): string | null {
-  return item.attributes?.find((x) => x.id === id)?.value_name ?? null
-}
+const attr = attrValue
 function gtinDe(item: MlItemRaw): string | null {
   return attr(item, 'GTIN')
+}
+/** "2830 g" → 2.83 (kg); "18.1 cm" → 18.1. Pega o 1º número. */
+function num(s: string | null): number | undefined {
+  if (!s) return undefined
+  const m = s.match(/[\d.,]+/)
+  if (!m) return undefined
+  return parseFloat(m[0].replace(',', '.'))
 }
 
 async function main() {
@@ -67,8 +82,15 @@ async function main() {
     }
   }
 
+  // descrições (endpoint separado, 1 GET por item)
+  console.log('📝 Puxando descrições...')
+  const desc = new Map<string, string>()
+  for (const i of raw) desc.set(i.id, await getItemDescription(i.id))
+
+  const pesoG = (i: MlItemRaw) => num(attr(i, 'PACKAGE_WEIGHT') ?? attr(i, 'SELLER_PACKAGE_WEIGHT'))
   const itens: ItemNormalizado[] = raw.map((i) => {
     const sku = extractSku(i)
+    const pg = pesoG(i)
     return {
       mlb: i.id,
       titulo: i.title,
@@ -85,6 +107,14 @@ async function main() {
       temVariacoes: (i.variations?.length ?? 0) > 0,
       qtdFotos: i.pictures?.length ?? 0,
       imagens: (i.pictures ?? []).map((p) => p.url).filter(Boolean),
+      pesoBrutoKg: pg != null ? +(pg / 1000).toFixed(3) : undefined,
+      alturaCm: num(attr(i, 'PACKAGE_HEIGHT') ?? attr(i, 'SELLER_PACKAGE_HEIGHT')),
+      larguraCm: num(attr(i, 'PACKAGE_WIDTH') ?? attr(i, 'SELLER_PACKAGE_WIDTH')),
+      profundidadeCm: num(attr(i, 'PACKAGE_LENGTH') ?? attr(i, 'SELLER_PACKAGE_LENGTH')),
+      modeloCompat: attr(i, 'DETAILED_MODEL') ?? attr(i, 'MODEL'),
+      cor: attr(i, 'INK_COLOR') ?? attr(i, 'COLOR'),
+      rendimento: num(attr(i, 'PAGE_YIELD')) ?? null,
+      descricao: desc.get(i.id) || undefined,
       permalink: i.permalink,
     }
   })

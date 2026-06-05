@@ -62,6 +62,21 @@ export async function getItems(ids: string[]): Promise<MlItemRaw[]> {
   return out
 }
 
+/** Valor de um atributo do item por id (ex.: PACKAGE_WEIGHT). */
+export function attrValue(item: MlItemRaw, id: string): string | null {
+  return item.attributes?.find((a) => a.id === id)?.value_name ?? null
+}
+
+/** Descrição em texto do anúncio (endpoint separado). Vazio se não houver. */
+export async function getItemDescription(id: string): Promise<string> {
+  try {
+    const d = await mlGet<{ plain_text?: string; text?: string }>(`/items/${id}/description`)
+    return (d.plain_text || d.text || '').trim()
+  } catch {
+    return ''
+  }
+}
+
 /** Extrai o SKU do vendedor na ordem de prioridade recomendada pela doc do ML. */
 export function extractSku(item: MlItemRaw): string | null {
   const fromAttrs = (attrs?: { id: string; value_name?: string | null }[]) =>

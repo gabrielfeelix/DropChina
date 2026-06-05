@@ -35,6 +35,13 @@ export interface ProdutoInput {
   pesoBruto?: number
   pesoLiquido?: number
   descricaoCurta?: string
+  descricaoComplementar?: string
+  /** Dimensões da embalagem (cm). */
+  largura?: number
+  altura?: number
+  profundidade?: number
+  /** URLs públicas de imagem. */
+  imagens?: string[]
   /** Fiscais — agrupados em `tributacao`. */
   ncm?: string
   origem?: number
@@ -57,6 +64,22 @@ function montarBody(input: ProdutoInput): Record<string, unknown> {
   if (input.pesoBruto != null) body.pesoBruto = input.pesoBruto
   if (input.pesoLiquido != null) body.pesoLiquido = input.pesoLiquido
   if (input.descricaoCurta != null) body.descricaoCurta = input.descricaoCurta
+  if (input.descricaoComplementar != null) body.descricaoComplementar = input.descricaoComplementar
+
+  // dimensões (cm = unidadeMedida 2)
+  if (input.largura != null || input.altura != null || input.profundidade != null) {
+    body.dimensoes = {
+      largura: input.largura,
+      altura: input.altura,
+      profundidade: input.profundidade,
+      unidadeMedida: 2,
+    }
+  }
+
+  // imagens externas (Bling referencia a URL)
+  if (input.imagens?.length) {
+    body.midia = { imagens: { externas: input.imagens.map((link) => ({ link })) } }
+  }
 
   const trib: Record<string, unknown> = {}
   if (input.ncm != null) trib.ncm = input.ncm

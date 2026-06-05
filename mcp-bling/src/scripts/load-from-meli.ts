@@ -28,6 +28,12 @@ interface ItemMeli {
   gtin: string | null
   preco?: number
   categoriaNome?: string
+  imagens?: string[]
+  pesoBrutoKg?: number
+  alturaCm?: number
+  larguraCm?: number
+  profundidadeCm?: number
+  descricao?: string
 }
 
 // Mapeia o path de categoria do ML → NOME de categoria no Bling (1ª regra que casa).
@@ -112,6 +118,12 @@ async function main() {
         marca: i.marca ?? undefined,
         gtin: sanitizeGtin(i.gtin),
         categoriaId,
+        pesoBruto: i.pesoBrutoKg,
+        altura: i.alturaCm,
+        largura: i.larguraCm,
+        profundidade: i.profundidadeCm,
+        descricaoComplementar: i.descricao,
+        imagens: i.imagens,
       }
       try {
         const r = await upsertProduto(input)
