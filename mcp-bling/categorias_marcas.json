@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "fonte": "categorias_marcas_creative_copias.xlsx",
+    "descricao": "Taxonomia oficial do catálogo DropChina. Cada item = uma categoria (tipo de produto) com as marcas associadas (fabricante real OU compatibilidade). Usar para semear as categorias no Bling e, por reflexo, coleções na Shopify e categorias no Mercado Livre.",
+    "versao": "1.0",
+    "total_categorias": 12
+  },
+  "categorias": [
+    { "categoria": "Impressoras",         "marcas": ["Epson", "HP", "Brother", "Canon", "Ricoh", "Kyocera", "Lexmark", "Pantum", "Xerox"] },
+    { "categoria": "Cartuchos de Toner",   "marcas": ["HP", "Brother", "Ricoh", "Lexmark"] },
+    { "categoria": "Cartuchos de Tinta",   "marcas": ["HP", "Epson", "Canon", "Brother"] },
+    { "categoria": "Refil de Toner",       "marcas": ["HP", "Brother", "Canon", "Ricoh", "Kyocera", "Samsung", "Xerox"] },
+    { "categoria": "Refil de Tinta",       "marcas": ["Epson", "Brother"] },
+    { "categoria": "Peças e Componentes",  "marcas": ["HP", "Brother", "Ricoh", "Samsung", "Canon"] },
+    { "categoria": "Cilindros",            "marcas": ["Brother", "HP", "Ricoh", "Samsung"] },
+    { "categoria": "Papel Fotográfico",    "marcas": ["Diversas Marcas"] },
+    { "categoria": "Etiquetas e Bobinas",  "marcas": ["Zebra", "Argox", "Elgin"] },
+    { "categoria": "Ribbon",               "marcas": ["Zebra", "Argox", "Elgin"] },
+    { "categoria": "Scanner",              "marcas": ["HP", "Ricoh", "Brother", "Epson"] },
+    { "categoria": "Informática",          "marcas": ["Logitech", "Multilaser"] }
+  ]
+}

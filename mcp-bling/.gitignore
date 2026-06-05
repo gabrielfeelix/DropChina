@@ -1,0 +1,10 @@
+# Segredos e tokens — NUNCA commitar
+.env
+.env.*
+!.env.example
+tokens.json
+
+# Build / deps
+node_modules/
+dist/
+*.tsbuildinfo
