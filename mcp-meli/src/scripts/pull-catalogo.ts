@@ -21,6 +21,8 @@ interface ItemNormalizado {
   titulo: string
   sku: string | null
   skuEhMlb: boolean
+  marca: string | null
+  gtin: string | null
   preco?: number
   estoqueRef?: number
   status?: string
@@ -29,12 +31,15 @@ interface ItemNormalizado {
   categoriaNome?: string
   temVariacoes: boolean
   qtdFotos: number
+  imagens: string[]
   permalink?: string
 }
 
+function attr(item: MlItemRaw, id: string): string | null {
+  return item.attributes?.find((x) => x.id === id)?.value_name ?? null
+}
 function gtinDe(item: MlItemRaw): string | null {
-  const a = item.attributes?.find((x) => x.id === 'GTIN')
-  return a?.value_name ?? null
+  return attr(item, 'GTIN')
 }
 
 async function main() {
@@ -69,6 +74,8 @@ async function main() {
       titulo: i.title,
       sku,
       skuEhMlb: !sku || sku === i.id || /^MLB\d+$/.test(sku ?? ''),
+      marca: attr(i, 'BRAND'),
+      gtin: gtinDe(i),
       preco: i.price ?? i.base_price,
       estoqueRef: i.available_quantity,
       status: i.status,
@@ -77,6 +84,7 @@ async function main() {
       categoriaNome: i.category_id ? catNome.get(i.category_id) : undefined,
       temVariacoes: (i.variations?.length ?? 0) > 0,
       qtdFotos: i.pictures?.length ?? 0,
+      imagens: (i.pictures ?? []).map((p) => p.url).filter(Boolean),
       permalink: i.permalink,
     }
   })

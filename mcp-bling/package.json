@@ -13,6 +13,7 @@
     "probe": "tsx src/scripts/probe.ts",
     "seed:campos": "tsx src/scripts/seed-campos.ts",
     "seed:categorias-loja": "tsx src/scripts/seed-categorias-loja.ts",
+    "load:meli": "tsx src/scripts/load-from-meli.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },
