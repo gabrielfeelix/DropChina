@@ -32,8 +32,19 @@
           class="dc-promo-card dc-promo-card--{{ tone }}{% if has_bg %} dc-promo-card--has-bg{% endif %}"
           data-idx="{{ idx }}"
           {{ block.shopify_attributes }}
-          {%- if block.settings.background_asset != blank %} style="background-image: url('{{ block.settings.background_asset | asset_url }}'); background-size: 108%; background-position: center; background-repeat: no-repeat;"{% endif -%}
         >
+          {%- if block.settings.background_asset != blank -%}
+            <img
+              src="{{ block.settings.background_asset | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="1400"
+              height="1000"
+              class="dc-promo-card__bg"
+              draggable="false"
+            >
+          {%- endif -%}
           {%- if block.settings.background_asset == blank and block.settings.image != blank -%}
             {%- assign promo_alt = block.settings.title | default: shop.name | escape -%}
             <div class="dc-promo-card__image">
@@ -165,6 +176,18 @@
   .dc-promo-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 18px 40px -18px rgba(13, 17, 21, 0.18);
+  }
+  /* Imagem de fundo como <img> lazy (perf) — replica o antigo background-size: 108% */
+  .dc-promo-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
   }
   /* SEM degrade nos cards com imagem de fundo */
 

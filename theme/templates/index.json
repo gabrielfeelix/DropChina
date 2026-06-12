@@ -6,25 +6,28 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image_asset": "banner-worldcup.png",
-            "alt": "Slide 1",
-            "link": "shopify://collections/all"
+            "image_asset": "banner-worldcup.webp",
+            "alt": "Pacotes Panini World Cup 2026 — pré-venda na DropChina",
+            "link": "shopify://collections/all",
+            "image_asset_mobile": "banner-worldcup-mobile.webp"
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
-            "image_asset": "banner-toner.png",
-            "alt": "Slide 2",
-            "link": "shopify://collections/all"
+            "image_asset": "banner-toner.webp",
+            "alt": "Toner Evolut compatível — impressão profissional por menos",
+            "link": "shopify://collections/all",
+            "image_asset_mobile": "banner-toner-mobile.webp"
           }
         },
         "slide_3": {
           "type": "slide",
           "settings": {
-            "image_asset": "banner-gpu.png",
-            "alt": "Slide 3",
-            "link": "shopify://collections/all"
+            "image_asset": "banner-gpu.webp",
+            "alt": "Placa de vídeo NVIDIA GT 730 em oferta",
+            "link": "shopify://collections/all",
+            "image_asset_mobile": "banner-gpu-mobile.webp"
           }
         }
       },
@@ -46,9 +49,10 @@
           "type": "category",
           "settings": {
             "name": "Cartuchos & Tintas",
-            "count": "320+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/cartuchos-de-tinta",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='34' y='36' width='92' height='14' rx='6' fill='#3a414a'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='34' y='36' width='92' height='14' rx='6' fill='#3a414a'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>",
+            "collection": "cartuchos-de-tinta"
           }
         },
         "cat_1": {
@@ -57,7 +61,8 @@
             "name": "Toners",
             "count": "Ver coleção",
             "link": "shopify://collections/toners",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>",
+            "collection": "toners"
           }
         },
         "cat_2": {
@@ -66,7 +71,8 @@
             "name": "Impressoras",
             "count": "Ver coleção",
             "link": "shopify://collections/impressoras",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>",
+            "collection": "impressoras"
           }
         },
         "cat_3": {
@@ -75,7 +81,8 @@
             "name": "Placas de Vídeo",
             "count": "Ver coleção",
             "link": "shopify://collections/placas-de-video",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>",
+            "collection": "placas-de-video"
           }
         },
         "cat_4": {
@@ -93,14 +100,15 @@
             "name": "Periféricos",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>",
+            "collection": "perifericos"
           }
         },
         "cat_7": {
           "type": "category",
           "settings": {
             "name": "Redes & Internet",
-            "count": "88 produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/all",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='36' y='50' width='88' height='48' rx='6' fill='#1a1d20'/><circle cx='56' cy='74' r='3' fill='#22c55e'/><circle cx='68' cy='74' r='3' fill='#22c55e'/><circle cx='80' cy='74' r='3' fill='#f59e0b'/><circle cx='92' cy='74' r='3' fill='#3a414a'/><path d='M50 38 L66 50 M80 32 L80 50 M110 38 L94 50' stroke='#0d1115' stroke-width='2' stroke-linecap='round'/></svg>"
           }
@@ -109,7 +117,7 @@
           "type": "category",
           "settings": {
             "name": "Armazenamento",
-            "count": "120+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/all",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='46' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='44' y='38' width='72' height='78' rx='6' fill='#2a3038'/><rect x='50' y='46' width='60' height='34' rx='2' fill='#1a1d20'/><circle cx='80' cy='98' r='6' fill='#1a1d20'/><circle cx='80' cy='98' r='2' fill='#22c55e'/></svg>"
           }
@@ -118,7 +126,7 @@
           "type": "category",
           "settings": {
             "name": "Cabos & Adaptadores",
-            "count": "260+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='40' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='44' y='46' width='14' height='14' rx='2' fill='#3a414a'/><path d='M51 76 Q51 95 80 95 Q109 95 109 76' stroke='#1a1d20' stroke-width='4' fill='none'/><rect x='98' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='102' y='46' width='14' height='14' rx='2' fill='#3a414a'/></svg>"
           }
@@ -127,9 +135,10 @@
           "type": "category",
           "settings": {
             "name": "Papelaria & Mídia",
-            "count": "75 produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/papeis",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>",
+            "collection": "papeis"
           }
         },
         "cat_11": {
@@ -138,7 +147,7 @@
             "name": "Ofertas da Semana",
             "count": "Até 40% OFF",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M82 30 L120 38 L128 76 L94 110 Q88 116 82 110 L48 76 Q42 70 48 64 Z' fill='#d62828'/><circle cx='106' cy='52' r='7' fill='#ffffff'/><path d='M70 92 L98 64' stroke='#ffffff' stroke-width='5' stroke-linecap='round'/><circle cx='72' cy='68' r='5' fill='#ffffff'/><circle cx='96' cy='90' r='5' fill='#ffffff'/></svg>"
           }
         },
         "cat_12": {
@@ -147,17 +156,17 @@
             "name": "Novidades",
             "count": "Recém-chegados",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M80 28 L88 60 L120 68 L88 76 L80 108 L72 76 L40 68 L72 60 Z' fill='#f5c518'/><path d='M116 32 L120 44 L132 48 L120 52 L116 64 L112 52 L100 48 L112 44 Z' fill='#2a3038'/><path d='M48 90 L51 99 L60 102 L51 105 L48 114 L45 105 L36 102 L45 99 Z' fill='#2a3038'/></svg>"
           }
         }
       },
       "block_order": [
+        "cat_0",
         "cat_1",
         "cat_2",
         "cat_3",
         "cat_4",
         "cat_5",
-        "cat_6",
         "cat_7",
         "cat_8",
         "cat_9",
@@ -203,21 +212,22 @@
           "type": "tab",
           "settings": {
             "label": "Placas de vídeo",
-            "collection": "perifericos"
+            "collection": "placas-de-video"
           }
         },
         "tab_5": {
           "type": "tab",
           "settings": {
-            "label": "Áudio",
-            "collection": "perifericos"
+            "label": "Mini PCs",
+            "collection": "mini-pcs"
           }
         },
         "tab_6": {
           "type": "tab",
           "settings": {
             "label": "Ofertas",
-            "collection": "frontpage"
+            "collection": "ofertas-relampago",
+            "collection_handle": "ofertas-relampago"
           }
         }
       },
@@ -301,25 +311,25 @@
         "plat_1": {
           "type": "platform",
           "settings": {
-            "name": "Reclame Aqui",
-            "value": "Reputação ótima",
-            "subtitle": "8.2 / 10"
+            "name": "Mercado Livre",
+            "value": "MercadoLíder",
+            "subtitle": "+10 mil vendas"
           }
         },
         "plat_2": {
           "type": "platform",
           "settings": {
-            "name": "Google",
-            "value": "4,8 ★",
-            "subtitle": "3.214 avaliações"
+            "name": "Garantia",
+            "value": "12 meses oficial",
+            "subtitle": "Em todos os produtos"
           }
         },
         "plat_3": {
           "type": "platform",
           "settings": {
-            "name": "Mercado Livre",
-            "value": "MercadoLíder Platinum",
-            "subtitle": "+10 mil vendas"
+            "name": "Atendimento",
+            "value": "WhatsApp humano",
+            "subtitle": "Seg–Sáb · 8h às 20h"
           }
         }
       },
@@ -334,8 +344,8 @@
       "name": "Testimonials",
       "settings": {
         "eyebrow": "AVALIAÇÕES VERIFICADAS",
-        "heading": "4,9 / 5 em mais de 12 mil compras",
-        "subheading": "Compras avaliadas por clientes reais. Notas verificadas e sem edição.",
+        "heading": "Quem compra, volta",
+        "subheading": "Avaliações de clientes reais, verificadas a cada compra.",
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,
@@ -399,7 +409,7 @@
             "title": "Toners com qualidade profissional.",
             "cta_label": "Ver linha",
             "link": "shopify://collections/toners",
-            "background_asset": "banner-compre-esquerda.png"
+            "background_asset": "banner-compre-esquerda.webp"
           }
         },
         "c2": {
@@ -410,7 +420,7 @@
             "title": "Potência compacta. Grande desempenho.",
             "cta_label": "Explorar",
             "link": "shopify://collections/mini-pcs",
-            "background_asset": "banner-compre-sup-direita.png"
+            "background_asset": "banner-compre-sup-direita.webp"
           }
         },
         "c3": {
@@ -421,7 +431,7 @@
             "title": "Leitura rápida para o seu dia a dia.",
             "cta_label": "Ver opções",
             "link": "shopify://collections/perifericos",
-            "background_asset": "banner-compre-centro.png"
+            "background_asset": "banner-compre-centro.webp"
           }
         },
         "c4": {
@@ -432,7 +442,7 @@
             "title": "Imagens nítidas para cada detalhe.",
             "cta_label": "Ver opções",
             "link": "shopify://collections/all",
-            "background_asset": "banner-compre-inf-direita.png"
+            "background_asset": "banner-compre-inf-direita.webp"
           }
         }
       },
