@@ -8,8 +8,8 @@
     assign on_sale = true
     assign savings_pct = compare_price | minus: current_price | times: 100 | divided_by: compare_price | round
   endif
-  assign pix_price = current_price | times: 0.9 | divided_by: 100.0
-  assign installments = current_price | divided_by: 12 | divided_by: 100.0
+  assign pix_price_cents = current_price | times: 0.9 | round
+  assign installment_cents = current_price | divided_by: 12
 
   assign rating_meta = product_obj.metafields.reviews.rating.value
   assign rating_avg = 0
@@ -135,18 +135,14 @@
           {%- endif -%}
         </div>
 
-        <div class="dc-pdp-info__price">
-          {%- if on_sale -%}
-            <span class="dc-pdp-info__price-old">{{ compare_price | money }}</span>
-          {%- endif -%}
-          <span class="dc-pdp-info__price-new">{{ current_price | money }}</span>
-          {%- if on_sale -%}
-            <span class="dc-pdp-info__price-off">−{{ savings_pct }}%</span>
-          {%- endif -%}
+        <div class="dc-pdp-info__price" data-dc-price-box>
+          <span class="dc-pdp-info__price-old" data-dc-price-old {% unless on_sale %}hidden{% endunless %}>{%- if on_sale -%}{{ compare_price | money }}{%- endif -%}</span>
+          <span class="dc-pdp-info__price-new" data-dc-price>{{ current_price | money }}</span>
+          <span class="dc-pdp-info__price-off" data-dc-price-off {% unless on_sale %}hidden{% endunless %}>{%- if on_sale -%}−{{ savings_pct }}%{%- endif -%}</span>
         </div>
         <div class="dc-pdp-info__installments">
-          em <b>12x R$ {{ installments | round: 2 }}</b> sem juros
-          <span class="dc-pdp-info__pix-pill">ou <b>R$ {{ pix_price | round: 2 }}</b> no Pix · <b>10% OFF</b></span>
+          em <b data-dc-installments>12x {{ installment_cents | money }}</b> sem juros
+          <span class="dc-pdp-info__pix-pill">ou <b data-dc-pix>{{ pix_price_cents | money }}</b> no Pix · <b>10% OFF</b></span>
         </div>
 
         {%- if product_obj.description != blank -%}
@@ -174,7 +170,7 @@
             {%- endfor -%}
           {%- endif -%}
 
-          <input type="hidden" name="id" value="{{ current_variant.id }}" class="dc-pdp-variant-input">
+          <input type="hidden" name="id" value="{{ current_variant.id }}" class="dc-pdp-variant-input" data-dc-variant-input>
 
           <div class="dc-pdp-actions">
             <div class="dc-pdp-qty">
@@ -187,7 +183,41 @@
               {% if current_variant.available %}Adicionar ao carrinho{% else %}Esgotado{% endif %}
             </button>
           </div>
+          <button type="button" class="dc-pdp-buy-now" data-dc-buy-now {% if current_variant.available == false %}disabled{% endif %}>
+            Comprar agora
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </button>
         </form>
+
+        {%- if section.settings.show_cep -%}
+          <div
+            class="dc-pdp-cep"
+            data-dc-cep
+            data-zone1="{{ section.settings.ship_zone_1 | escape }}"
+            data-zone2="{{ section.settings.ship_zone_2 | escape }}"
+            data-zone3="{{ section.settings.ship_zone_3 | escape }}"
+            data-free-label="{{ section.settings.ship_free_label | escape }}"
+          >
+            <div class="dc-pdp-cep__head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+              <span>Calcule o frete e o prazo</span>
+            </div>
+            <div class="dc-pdp-cep__row">
+              <input
+                type="text"
+                inputmode="numeric"
+                placeholder="00000-000"
+                maxlength="9"
+                class="dc-pdp-cep__input"
+                data-dc-cep-input
+                aria-label="CEP"
+              >
+              <button type="button" class="dc-pdp-cep__btn" data-dc-cep-btn>Calcular</button>
+            </div>
+            <div class="dc-pdp-cep__result" data-dc-cep-result hidden></div>
+            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener" class="dc-pdp-cep__forgot">Não sei meu CEP</a>
+          </div>
+        {%- endif -%}
 
         <div class="dc-pdp-trust">
           <div class="dc-pdp-trust__item">
@@ -254,12 +284,44 @@
   </button>
 </div>
 
+{%- if product_obj.media.size > 0 -%}
+<dialog class="dc-pdp-lightbox" data-dc-lightbox>
+  <button type="button" class="dc-pdp-lightbox__close" data-dc-lightbox-close aria-label="Fechar zoom">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <button type="button" class="dc-pdp-lightbox__nav dc-pdp-lightbox__nav--prev" data-dc-lightbox-prev aria-label="Anterior">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
+  </button>
+  <img
+    src="{{ product_obj.featured_image | image_url: width: 1200 }}"
+    alt="{{ product_obj.title | escape }}"
+    class="dc-pdp-lightbox__img"
+    data-dc-lightbox-img
+    width="1200"
+    height="1200"
+    loading="lazy"
+  >
+  <button type="button" class="dc-pdp-lightbox__nav dc-pdp-lightbox__nav--next" data-dc-lightbox-next aria-label="Próxima">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+  </button>
+</dialog>
+{%- endif -%}
+
+<script type="application/json" data-dc-product-data>
+  {
+    "variants": {{ product_obj.variants | json }},
+    "moneyFormat": {{ shop.money_format | json }},
+    "mediaPositions": [{% for media in product_obj.media %}{{ media.position | default: forloop.index }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+    "mediaSrcs": [{% for media in product_obj.media %}{% if media.media_type == 'image' or media.media_type == nil %}{{ media | image_url: width: 1200 | json }}{% elsif media.preview_image %}{{ media.preview_image | image_url: width: 1200 | json }}{% else %}""{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}]
+  }
+</script>
+
 {% if product_obj.description != blank %}
 <section class="dc-pdp-desc section section--page-width">
   <div class="dc-pdp-desc__container">
     <div class="dc-pdp-desc__head">
       <span class="dc-pdp-desc__eyebrow">— {% if collection %}{{ collection.title }}{% else %}Descrição{% endif %} —</span>
-      <h2 class="dc-pdp-desc__title">{{ product_obj.title | truncate: 32, '' }}</h2>
+      <h2 class="dc-pdp-desc__title">{{ product_obj.title | truncate: 42 }}</h2>
       {%- if section.settings.desc_subtitle != blank -%}
         <p class="dc-pdp-desc__subtitle">{{ section.settings.desc_subtitle }}</p>
       {%- endif -%}
@@ -300,20 +362,242 @@
       });
     });
 
-    // Variant pills (uses Shopify product json if available)
-    var variantInput = container.querySelector('.dc-pdp-variant-input');
+    // ===== Dados do produto (variants + money format) =====
+    var dataEl = document.querySelector('[data-dc-product-data]');
+    var productData = { variants: [], moneyFormat: 'R$ {{ '{{' }}amount_with_comma_separator{{ '}}' }}', mediaPositions: [], mediaSrcs: [] };
+    try { productData = JSON.parse(dataEl.textContent); } catch (e) {}
+
+    function formatMoney(cents, format) {
+      var value = cents / 100;
+      function num(n, thousands, decimal) {
+        var parts = n.toFixed(2).split('.');
+        return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands) + decimal + parts[1];
+      }
+      var out;
+      if (/\{\{\s*amount_with_comma_separator\s*\}\}/.test(format)) {
+        out = format.replace(/\{\{\s*amount_with_comma_separator\s*\}\}/, num(value, '.', ','));
+      } else if (/\{\{\s*amount_no_decimals\s*\}\}/.test(format)) {
+        out = format.replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'));
+      } else {
+        out = format.replace(/\{\{\s*amount\s*\}\}/, num(value, ',', '.'));
+      }
+      return out.replace(/<[^>]*>/g, '');
+    }
+    var money = function(cents) { return formatMoney(cents, productData.moneyFormat); };
+
+    // ===== Variantes: seleção REAL (atualiza id, preço, estoque, galeria, URL) =====
+    var variantInput = container.querySelector('[data-dc-variant-input]');
     var pills = container.querySelectorAll('.dc-pdp-pill');
+    var addBtn2 = container.querySelector('.dc-pdp-add');
+    var buyNowBtn = container.querySelector('[data-dc-buy-now]');
+    var addIcon = addBtn2 ? (addBtn2.querySelector('svg') ? addBtn2.querySelector('svg').outerHTML : '') : '';
+
+    function selectedOptions() {
+      var opts = [];
+      container.querySelectorAll('.dc-pdp-pills').forEach(function(group) {
+        var pos = parseInt(group.dataset.optionPosition, 10);
+        var active = group.querySelector('.dc-pdp-pill.active');
+        if (active) opts[pos - 1] = active.dataset.optionValue;
+      });
+      return opts;
+    }
+    function findVariant(opts) {
+      return productData.variants.find(function(v) {
+        return v.options.every(function(o, i) { return o === opts[i]; });
+      });
+    }
+    function markAvailability(opts) {
+      pills.forEach(function(p) {
+        var pos = parseInt(p.dataset.optionPosition, 10);
+        var test = opts.slice();
+        test[pos - 1] = p.dataset.optionValue;
+        var match = productData.variants.find(function(v) {
+          return v.options.every(function(o, i) { return o === test[i]; });
+        });
+        p.classList.toggle('is-unavailable', !match || !match.available);
+      });
+    }
+    function applyVariant(v) {
+      if (!v) return;
+      if (variantInput) variantInput.value = v.id;
+
+      var priceEl = container.querySelector('[data-dc-price]');
+      var oldEl = container.querySelector('[data-dc-price-old]');
+      var offEl = container.querySelector('[data-dc-price-off]');
+      var instEl = container.querySelector('[data-dc-installments]');
+      var pixEl = container.querySelector('[data-dc-pix]');
+      if (priceEl) priceEl.textContent = money(v.price);
+      var onSaleNow = v.compare_at_price && v.compare_at_price > v.price;
+      if (oldEl) { oldEl.hidden = !onSaleNow; if (onSaleNow) oldEl.textContent = money(v.compare_at_price); }
+      if (offEl) {
+        offEl.hidden = !onSaleNow;
+        if (onSaleNow) offEl.textContent = '−' + Math.round((v.compare_at_price - v.price) * 100 / v.compare_at_price) + '%';
+      }
+      if (instEl) instEl.textContent = '12x ' + money(Math.floor(v.price / 12));
+      if (pixEl) pixEl.textContent = money(Math.round(v.price * 0.9));
+
+      if (addBtn2) {
+        addBtn2.disabled = !v.available;
+        addBtn2.innerHTML = addIcon + (v.available ? 'Adicionar ao carrinho' : 'Esgotado');
+      }
+      if (buyNowBtn) buyNowBtn.disabled = !v.available;
+
+      var stickyNow = document.querySelector('.dc-sticky-buy__now');
+      var stickyStrike = document.querySelector('.dc-sticky-buy__strike');
+      if (stickyNow) stickyNow.textContent = money(v.price);
+      if (stickyStrike) {
+        stickyStrike.hidden = !onSaleNow;
+        if (onSaleNow) stickyStrike.textContent = money(v.compare_at_price);
+      }
+
+      // Galeria: pula pra foto da variante, se tiver
+      if (v.featured_image && v.featured_image.position) {
+        var mIdx = productData.mediaPositions.indexOf(v.featured_image.position);
+        if (mIdx >= 0 && slides.length > mIdx) show(mIdx);
+      }
+
+      // URL ?variant= (deep-link compartilhável)
+      try {
+        var u = new URL(window.location.href);
+        u.searchParams.set('variant', v.id);
+        window.history.replaceState({}, '', u);
+      } catch (e) {}
+    }
     pills.forEach(function(p) {
       p.addEventListener('click', function() {
+        if (p.classList.contains('is-unavailable')) return;
         var pos = p.getAttribute('data-option-position');
         container.querySelectorAll('.dc-pdp-pill[data-option-position="' + pos + '"]').forEach(function(other) {
           other.classList.remove('active');
         });
         p.classList.add('active');
-        var label = container.querySelector('.dc-pdp-field__active[data-option-index="' + (parseInt(pos,10) - 1) + '"]');
+        var label = container.querySelector('.dc-pdp-field__active[data-option-index="' + (parseInt(pos, 10) - 1) + '"]');
         if (label) label.textContent = p.getAttribute('data-option-value');
+        var opts = selectedOptions();
+        markAvailability(opts);
+        applyVariant(findVariant(opts));
       });
     });
+    if (pills.length) markAvailability(selectedOptions());
+
+    // ===== Comprar agora: adiciona e vai direto pro checkout =====
+    if (buyNowBtn) {
+      buyNowBtn.addEventListener('click', async function() {
+        if (buyNowBtn.disabled) return;
+        var original = buyNowBtn.innerHTML;
+        buyNowBtn.disabled = true;
+        buyNowBtn.innerHTML = 'Indo pro checkout...';
+        try {
+          var qty = parseInt(container.querySelector('.dc-pdp-qty__input').value, 10) || 1;
+          var res = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ items: [{ id: parseInt(variantInput.value, 10), quantity: qty }] })
+          });
+          if (!res.ok) throw new Error('add failed');
+          window.location.href = '/checkout';
+        } catch (err) {
+          buyNowBtn.innerHTML = original;
+          buyNowBtn.disabled = false;
+        }
+      });
+    }
+
+    // ===== CEP: estimativa de frete por região (valor final no checkout) =====
+    var cepBox = document.querySelector('[data-dc-cep]');
+    if (cepBox) {
+      var cepInput = cepBox.querySelector('[data-dc-cep-input]');
+      var cepBtn = cepBox.querySelector('[data-dc-cep-btn]');
+      var cepResult = cepBox.querySelector('[data-dc-cep-result]');
+      var zones = [cepBox.dataset.zone1 || '', cepBox.dataset.zone2 || '', cepBox.dataset.zone3 || ''];
+      var freeLabel = cepBox.dataset.freeLabel || '';
+
+      cepInput.addEventListener('input', function() {
+        var d = cepInput.value.replace(/\D/g, '').slice(0, 8);
+        cepInput.value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      });
+      function calcCep() {
+        var digits = cepInput.value.replace(/\D/g, '');
+        if (digits.length !== 8) {
+          cepResult.hidden = false;
+          cepResult.innerHTML = '<span class="dc-pdp-cep__err">Digite um CEP válido (8 dígitos).</span>';
+          return;
+        }
+        var first = parseInt(digits[0], 10);
+        var zoneIdx = (first <= 3 || first >= 8) ? 0 : (first === 6 ? 2 : 1);
+        var parts = (zones[zoneIdx] || 'Sua região||').split('|');
+        var name = parts[0] || 'Sua região';
+        var price = parts[1] || '';
+        var days = parts[2] || '';
+        var html = '<div class="dc-pdp-cep__zone"><b>' + name + '</b>';
+        if (days) html += ' · ' + days;
+        html += '</div>';
+        if (price) html += '<div class="dc-pdp-cep__price">' + price + '</div>';
+        if (freeLabel) html += '<div class="dc-pdp-cep__free">' + freeLabel + '</div>';
+        html += '<div class="dc-pdp-cep__note">Estimativa — o valor exato aparece no checkout.</div>';
+        cepResult.innerHTML = html;
+        cepResult.hidden = false;
+        try { localStorage.setItem('dc:cep', digits); } catch (e) {}
+      }
+      cepBtn.addEventListener('click', calcCep);
+      cepInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') { e.preventDefault(); calcCep(); }
+      });
+      try {
+        var saved = localStorage.getItem('dc:cep');
+        if (saved && saved.length === 8) {
+          cepInput.value = saved.slice(0, 5) + '-' + saved.slice(5);
+          calcCep();
+        }
+      } catch (e) {}
+    }
+
+    // ===== Galeria: swipe no touch =====
+    var stage = container.querySelector('.dc-pdp-gallery__stage');
+    var suppressClick = false;
+    if (stage && slides.length > 1) {
+      var gTouchX = null;
+      stage.addEventListener('touchstart', function(e) { gTouchX = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', function(e) {
+        if (gTouchX === null) return;
+        var dx = e.changedTouches[0].clientX - gTouchX;
+        gTouchX = null;
+        if (Math.abs(dx) > 40) {
+          show(dx < 0 ? idx + 1 : idx - 1);
+          suppressClick = true;
+          setTimeout(function() { suppressClick = false; }, 350);
+        }
+      }, { passive: true });
+    }
+
+    // ===== Lightbox (zoom) =====
+    var lightbox = document.querySelector('[data-dc-lightbox]');
+    if (lightbox && stage && productData.mediaSrcs.length) {
+      var lbImg = lightbox.querySelector('[data-dc-lightbox-img]');
+      function openLightbox() {
+        lbImg.src = productData.mediaSrcs[idx] || '';
+        lbImg.classList.remove('is-zoomed');
+        if (typeof lightbox.showModal === 'function') lightbox.showModal();
+      }
+      function lbShow(i) {
+        idx = ((i % slides.length) + slides.length) % slides.length;
+        show(idx);
+        lbImg.src = productData.mediaSrcs[idx] || '';
+        lbImg.classList.remove('is-zoomed');
+      }
+      stage.addEventListener('click', function(e) {
+        if (suppressClick) return;
+        if (e.target.closest('.dc-pdp-gallery__nav')) return;
+        openLightbox();
+      });
+      lightbox.querySelector('[data-dc-lightbox-close]').addEventListener('click', function() { lightbox.close(); });
+      lightbox.querySelector('[data-dc-lightbox-prev]').addEventListener('click', function() { lbShow(idx - 1); });
+      lightbox.querySelector('[data-dc-lightbox-next]').addEventListener('click', function() { lbShow(idx + 1); });
+      lbImg.addEventListener('click', function() { lbImg.classList.toggle('is-zoomed'); });
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) lightbox.close();
+      });
+    }
 
     // Sticky buy: aparece após scroll > 700, scroll-to-top no toggle
     var sticky = document.querySelector('[data-dc-sticky-buy]');
@@ -519,6 +803,10 @@
     transition: opacity 0.18s, transform 0.18s;
   }
   .dc-pdp-gallery__stage:hover .dc-pdp-gallery__nav { opacity: 1; }
+  @media (hover: none) {
+    .dc-pdp-gallery__nav { opacity: 1; }
+  }
+  .dc-pdp-gallery__stage { cursor: zoom-in; }
   .dc-pdp-gallery__nav:hover { transform: translateY(-50%) scale(1.08); }
   .dc-pdp-gallery__nav--prev { left: 18px; }
   .dc-pdp-gallery__nav--next { right: 18px; }
@@ -740,6 +1028,176 @@
   .dc-pdp-add:hover { background: #16a34a; }
   .dc-pdp-add:active { transform: translateY(1px); }
   .dc-pdp-add[disabled] { background: #9ca3af; cursor: not-allowed; }
+
+  /* Comprar agora — checkout direto */
+  .dc-pdp-buy-now {
+    width: 100%;
+    height: 52px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #16a34a;
+    border: 1.5px solid #16a34a;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    transition: background 0.18s, color 0.18s, transform 0.18s;
+  }
+  .dc-pdp-buy-now:hover { background: #16a34a; color: #ffffff; }
+  .dc-pdp-buy-now:active { transform: translateY(1px); }
+  .dc-pdp-buy-now[disabled] { border-color: #d9dade; color: #9ca3af; cursor: not-allowed; background: #ffffff; }
+
+  /* Pill de variante indisponível */
+  .dc-pdp-pill.is-unavailable {
+    opacity: 0.45;
+    border-style: dashed;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  /* CEP / frete */
+  .dc-pdp-cep {
+    border: 1px solid #ececef;
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    background: #fafbfc;
+  }
+  .dc-pdp-cep__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0d1115;
+    margin-bottom: 10px;
+  }
+  .dc-pdp-cep__row {
+    display: flex;
+    gap: 8px;
+  }
+  .dc-pdp-cep__input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    border: 1px solid #d9dade;
+    border-radius: 999px;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0d1115;
+    font-family: "JetBrains Mono", monospace;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .dc-pdp-cep__input:focus { border-color: #0d1115; }
+  .dc-pdp-cep__btn {
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    border: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .dc-pdp-cep__btn:hover { background: #2a3038; }
+  .dc-pdp-cep__result {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed #ececef;
+    font-size: 13.5px;
+    color: #2a3038;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dc-pdp-cep__result[hidden] { display: none; }
+  .dc-pdp-cep__zone b { color: #0d1115; }
+  .dc-pdp-cep__price { font-weight: 600; color: #0d1115; }
+  .dc-pdp-cep__free { color: #1f7a3a; font-weight: 600; }
+  .dc-pdp-cep__note { font-size: 12px; color: #6b7280; }
+  .dc-pdp-cep__err { color: #d62828; font-weight: 600; }
+  .dc-pdp-cep__forgot {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #6b7280;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .dc-pdp-cep__forgot:hover { color: #0d1115; }
+
+  /* Lightbox (zoom) */
+  .dc-pdp-lightbox {
+    border: 0;
+    padding: 0;
+    background: rgba(13, 17, 21, 0.92);
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: none;
+    place-items: center;
+  }
+  .dc-pdp-lightbox[open] { display: grid; }
+  .dc-pdp-lightbox::backdrop { background: transparent; }
+  .dc-pdp-lightbox__img {
+    max-width: 92vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform 0.25s ease;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+  .dc-pdp-lightbox__img.is-zoomed {
+    transform: scale(1.8);
+    cursor: zoom-out;
+  }
+  .dc-pdp-lightbox__close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0d1115;
+    border: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .dc-pdp-lightbox__nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0d1115;
+    border: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .dc-pdp-lightbox__nav--prev { left: 18px; }
+  .dc-pdp-lightbox__nav--next { right: 18px; }
 
   /* Trust */
   .dc-pdp-trust {
@@ -983,9 +1441,13 @@
   "class": "section-dc-pdp",
   "settings": [
     { "type": "text", "id": "subtitle", "label": "Subtítulo (linha abaixo do título)" },
-    { "type": "text", "id": "rating", "label": "Nota média (display)", "default": "4,8" },
-    { "type": "text", "id": "reviews_count", "label": "Qtd avaliações (display)", "default": "870" },
     { "type": "text", "id": "desc_subtitle", "label": "Subtítulo bloco descrição" },
+    { "type": "header", "content": "Frete por CEP (estimativa)" },
+    { "type": "checkbox", "id": "show_cep", "label": "Exibir calculadora de frete", "default": true },
+    { "type": "text", "id": "ship_zone_1", "label": "Zona 1 — Sudeste/Sul (Nome|Frete|Prazo)", "default": "Sudeste e Sul|A partir de R$ 19,90|2 a 5 dias úteis" },
+    { "type": "text", "id": "ship_zone_2", "label": "Zona 2 — Centro-Oeste/Nordeste", "default": "Centro-Oeste e Nordeste|A partir de R$ 24,90|4 a 8 dias úteis" },
+    { "type": "text", "id": "ship_zone_3", "label": "Zona 3 — Norte", "default": "Norte|A partir de R$ 29,90|6 a 12 dias úteis" },
+    { "type": "text", "id": "ship_free_label", "label": "Linha de frete grátis", "default": "Frete grátis em compras acima de R$ 199" },
     { "type": "range", "id": "padding_top", "label": "Padding top breadcrumb→pdp", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 24 }
   ],
   "presets": [
