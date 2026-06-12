@@ -364,7 +364,8 @@
 
     // ===== Dados do produto (variants + money format) =====
     var dataEl = document.querySelector('[data-dc-product-data]');
-    var productData = { variants: [], moneyFormat: 'R$ {{ '{{' }}amount_with_comma_separator{{ '}}' }}', mediaPositions: [], mediaSrcs: [] };
+    var DC_FMT_FALLBACK = 'R$ ' + '{' + '{amount_with_comma_separator}' + '}';
+    var productData = { variants: [], moneyFormat: DC_FMT_FALLBACK, mediaPositions: [], mediaSrcs: [] };
     try { productData = JSON.parse(dataEl.textContent); } catch (e) {}
 
     function formatMoney(cents, format) {
