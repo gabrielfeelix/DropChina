@@ -27,7 +27,7 @@
     </div>
     <div class="dc-topbar__right">
       {%- if section.settings.phone != blank -%}
-        <a href="https://wa.me/{{ section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" target="_blank" rel="noopener" class="dc-topbar__wpp">
+        <a href="https://wa.me/{{ section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | prepend: '55' | replace: '5555', '55' }}" target="_blank" rel="noopener" class="dc-topbar__wpp">
           <span class="dc-topbar__wpp-icon" aria-hidden="true">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
           </span>
@@ -44,6 +44,9 @@
 {%- comment -%} ============ MAIN HEADER (logo + search + actions) ============ {%- endcomment -%}
 <header class="dc-header" data-dc-header>
   <div class="dc-header__inner">
+    <button type="button" class="dc-header__burger" data-dc-menu-open aria-label="Abrir menu" aria-haspopup="dialog" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
     <a href="{{ routes.root_url }}" class="dc-header__logo" aria-label="{{ shop.name }}">
       {%- if section.settings.logo -%}
         {{ section.settings.logo | image_url: width: 240 | image_tag: alt: shop.name, class: 'dc-header__logo-img', loading: 'eager' }}
@@ -218,6 +221,100 @@
   {%- endif -%}
 </nav>
 
+{%- comment -%} ============ MENU MOBILE (drawer) ============ {%- endcomment -%}
+<div class="dc-mmenu" data-dc-mmenu hidden>
+  <div class="dc-mmenu__backdrop" data-dc-menu-close></div>
+  <aside class="dc-mmenu__panel" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <div class="dc-mmenu__head">
+      {%- if section.settings.logo -%}
+        {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name, class: 'dc-mmenu__logo', loading: 'lazy' }}
+      {%- else -%}
+        <img src="{{ section.settings.logo_asset | default: 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="135" height="33" class="dc-mmenu__logo" loading="lazy">
+      {%- endif -%}
+      <button type="button" class="dc-mmenu__close" data-dc-menu-close aria-label="Fechar menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="dc-mmenu__body">
+      {%- assign mm_blocks = section.blocks | where: 'type', 'mega_cat' -%}
+      {%- if mm_blocks.size > 0 -%}
+        <p class="dc-mmenu__group-title">Categorias</p>
+        <nav class="dc-mmenu__cats" aria-label="Categorias">
+          {%- for block in mm_blocks -%}
+            <details class="dc-mmenu__cat">
+              <summary>
+                <span class="dc-mmenu__cat-name">{{ block.settings.name | escape }}</span>
+                <svg class="dc-mmenu__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <ul class="dc-mmenu__sub">
+                {%- assign mm_lines = block.settings.items | newline_to_br | split: '<br />' -%}
+                {%- for line in mm_lines -%}
+                  {%- assign mm_clean = line | strip -%}
+                  {%- if mm_clean != blank -%}
+                    <li><a href="{{ block.settings.link | default: '#' }}">{{ mm_clean | escape }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if block.settings.link != blank -%}
+                  <li><a href="{{ block.settings.link }}" class="dc-mmenu__sub-all">Ver tudo em {{ block.settings.name | escape }} →</a></li>
+                {%- endif -%}
+              </ul>
+            </details>
+          {%- endfor -%}
+          <a href="{{ routes.collections_url }}" class="dc-mmenu__all-cats">
+            Ver todas as categorias
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+          </a>
+        </nav>
+      {%- endif -%}
+
+      <p class="dc-mmenu__group-title">Destaques</p>
+      <nav class="dc-mmenu__links" aria-label="Links principais">
+        {%- for i in (1..5) -%}
+          {%- assign mm_key_label = 'nav_link_' | append: i -%}
+          {%- assign mm_key_url   = 'nav_link_' | append: i | append: '_url' -%}
+          {%- assign mm_key_tag   = 'nav_link_' | append: i | append: '_tag' -%}
+          {%- assign mm_label = section.settings[mm_key_label] -%}
+          {%- if mm_label != blank -%}
+            <a href="{{ section.settings[mm_key_url] | default: '#' }}">
+              {{ mm_label }}
+              {%- assign mm_tag = section.settings[mm_key_tag] -%}
+              {%- if mm_tag != blank -%}<span class="dc-nav__tag">{{ mm_tag }}</span>{%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <p class="dc-mmenu__group-title">Ajuda</p>
+      <nav class="dc-mmenu__links dc-mmenu__links--muted" aria-label="Institucional">
+        {%- if section.settings.topbar_link_1 != blank -%}<a href="{{ section.settings.topbar_link_1_url | default: '#' }}">{{ section.settings.topbar_link_1 }}</a>{%- endif -%}
+        {%- if section.settings.topbar_link_2 != blank -%}<a href="{{ section.settings.topbar_link_2_url | default: '#' }}">{{ section.settings.topbar_link_2 }}</a>{%- endif -%}
+        {%- if section.settings.topbar_link_3 != blank -%}<a href="{{ section.settings.topbar_link_3_url | default: '#' }}">{{ section.settings.topbar_link_3 }}</a>{%- endif -%}
+        {%- if section.settings.topbar_link_4 != blank -%}<a href="{{ section.settings.topbar_link_4_url | default: '#' }}">{{ section.settings.topbar_link_4 }}</a>{%- endif -%}
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" rel="nofollow">
+            {%- if customer -%}Minha conta{%- else -%}Entrar / Criar conta{%- endif -%}
+          </a>
+        {%- endif -%}
+      </nav>
+    </div>
+
+    <div class="dc-mmenu__foot">
+      {%- if section.settings.phone != blank -%}
+        <a href="https://wa.me/{{ section.settings.phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | prepend: '55' | replace: '5555', '55' }}" target="_blank" rel="noopener" class="dc-mmenu__wpp">
+          <span class="dc-topbar__wpp-icon" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          </span>
+          Falar no WhatsApp
+        </a>
+      {%- endif -%}
+      {%- if section.settings.hours != blank -%}
+        <span class="dc-mmenu__hours">{{ section.settings.hours }}</span>
+      {%- endif -%}
+    </div>
+  </aside>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var nav = document.querySelector('[data-dc-nav]');
@@ -280,6 +377,44 @@
 
     // Cart trigger: o dc-cart-sidedrawer captura o click via [data-dc-cart-trigger]
     // via delegação em document.click, então aqui não precisa fazer nada.
+
+    // ===== Menu mobile (drawer) =====
+    var mmenu = document.querySelector('[data-dc-mmenu]');
+    var mmOpen = document.querySelector('[data-dc-menu-open]');
+    if (mmenu && mmOpen) {
+      // Move pro <body>: #header-group tem backdrop-filter, que vira
+      // containing block e prende position:fixed (mesmo fix do cart drawer)
+      if (mmenu.parentElement !== document.body) {
+        document.body.appendChild(mmenu);
+      }
+      var mmPanel = mmenu.querySelector('.dc-mmenu__panel');
+      function openMenu() {
+        mmenu.hidden = false;
+        document.body.style.overflow = 'hidden';
+        mmOpen.setAttribute('aria-expanded', 'true');
+        requestAnimationFrame(function() { mmenu.classList.add('is-open'); });
+        var firstLink = mmPanel.querySelector('a, button, summary');
+        if (firstLink) firstLink.focus({ preventScroll: true });
+      }
+      function closeMenu() {
+        mmenu.classList.remove('is-open');
+        document.body.style.overflow = '';
+        mmOpen.setAttribute('aria-expanded', 'false');
+        setTimeout(function() { mmenu.hidden = true; }, 280);
+        mmOpen.focus({ preventScroll: true });
+      }
+      mmOpen.addEventListener('click', openMenu);
+      mmenu.querySelectorAll('[data-dc-menu-close]').forEach(function(el) {
+        el.addEventListener('click', closeMenu);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !mmenu.hidden) closeMenu();
+      });
+      // Fecha ao navegar (clique em link)
+      mmenu.querySelectorAll('a[href]').forEach(function(a) {
+        a.addEventListener('click', function() { closeMenu(); });
+      });
+    }
 
     // Scroll-detection sem flicker.
     // Bug original: ao colapsar (display:none em announce+topbar+nav), a
@@ -552,13 +687,185 @@
     padding: 0 5px;
   }
   .dc-header__cart-badge[hidden] { display: none; }
+  /* Burger — só mobile */
+  .dc-header__burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: transparent;
+    border: 0;
+    color: #0d1115;
+    cursor: pointer;
+    place-items: center;
+    padding: 0;
+    transition: background 0.18s;
+  }
+  .dc-header__burger:hover { background: #f4f5f7; }
   @media (max-width: 920px) {
     .dc-header__inner {
-      grid-template-columns: auto 1fr auto;
-      gap: 16px;
+      grid-template-columns: auto auto 1fr auto;
+      gap: 10px;
       height: 64px;
     }
+    .dc-header__burger { display: grid; }
     .dc-header__search { max-width: none; }
+    .dc-header__logo-img { height: 36px; }
+  }
+
+  /* ===== MENU MOBILE (drawer) ===== */
+  .dc-mmenu { position: fixed; inset: 0; z-index: 100; }
+  .dc-mmenu[hidden] { display: none; }
+  .dc-mmenu__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 17, 21, 0.45);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .dc-mmenu.is-open .dc-mmenu__backdrop { opacity: 1; }
+  .dc-mmenu__panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(86vw, 360px);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 24px 0 60px -30px rgba(13, 17, 21, 0.3);
+  }
+  .dc-mmenu.is-open .dc-mmenu__panel { transform: translateX(0); }
+  .dc-mmenu__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid #ececef;
+    flex: none;
+  }
+  .dc-mmenu__logo { height: 32px; width: auto; }
+  .dc-mmenu__close {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: #f4f5f7;
+    border: 0;
+    color: #0d1115;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+  }
+  .dc-mmenu__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 18px 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .dc-mmenu__group-title {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 700;
+    margin: 18px 0 8px;
+  }
+  .dc-mmenu__cats { display: flex; flex-direction: column; }
+  .dc-mmenu__cat { border-bottom: 1px solid #f4f5f7; }
+  .dc-mmenu__cat summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0d1115;
+    cursor: pointer;
+    list-style: none;
+  }
+  .dc-mmenu__cat summary::-webkit-details-marker { display: none; }
+  .dc-mmenu__chev { color: #9ca3af; transition: transform 0.2s; flex: none; }
+  .dc-mmenu__cat[open] .dc-mmenu__chev { transform: rotate(180deg); }
+  .dc-mmenu__sub {
+    list-style: none;
+    padding: 0 0 12px 8px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .dc-mmenu__sub a {
+    display: block;
+    padding: 8px 6px;
+    font-size: 14px;
+    color: #2a3038;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  .dc-mmenu__sub a:active { background: #f4f5f7; }
+  .dc-mmenu__sub-all { color: #1f7a3a !important; font-weight: 600; }
+  .dc-mmenu__all-cats {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    height: 46px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .dc-mmenu__links { display: flex; flex-direction: column; }
+  .dc-mmenu__links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0d1115;
+    text-decoration: none;
+    border-bottom: 1px solid #f4f5f7;
+  }
+  .dc-mmenu__links--muted a {
+    font-weight: 500;
+    font-size: 14px;
+    color: #2a3038;
+  }
+  .dc-mmenu__foot {
+    flex: none;
+    padding: 14px 18px calc(14px + env(safe-area-inset-bottom));
+    border-top: 1px solid #ececef;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dc-mmenu__wpp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    border-radius: 999px;
+    background: #1f7a3a;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+  }
+  .dc-mmenu__hours {
+    text-align: center;
+    font-size: 12.5px;
+    color: #6b7280;
+  }
+  @media (min-width: 921px) {
+    .dc-mmenu { display: none; }
   }
 
   /* NAV (categorias) */
@@ -613,7 +920,7 @@
     margin-right: 10px;
   }
   .dc-nav__cat-trigger:hover,
-  .dc-nav__cat-trigger.open { background: #d62828; }
+  .dc-nav__cat-trigger.open { background: #2a3038; }
   .dc-nav__cat-chev { transition: transform 0.2s; }
   .dc-nav__cat-trigger.open .dc-nav__cat-chev { transform: rotate(180deg); }
   .dc-nav__tag {
@@ -657,12 +964,16 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(-12px);
-    transition: opacity 0.22s ease, transform 0.22s ease;
+    /* visibility tira os links invisíveis da ordem de Tab (a11y) */
+    visibility: hidden;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.25s;
   }
   .dc-mega:not([hidden]) {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+    visibility: visible;
+    transition: opacity 0.22s ease, transform 0.22s ease;
   }
   .dc-mega[hidden] { display: block; }
   .dc-mega__inner {
@@ -730,7 +1041,7 @@
     align-items: center;
     gap: 8px;
     border-radius: 12px;
-    background: linear-gradient(135deg, #1f7a3a, #14502a);
+    background: #0d1115;
     color: #ffffff !important;
     font-weight: 600;
     font-size: 13.5px;
@@ -979,7 +1290,7 @@
     display: block;
     text-align: center;
     padding: 14px 16px;
-    color: #d62828;
+    color: #0d1115;
     font-weight: 600;
     font-size: 13px;
     text-decoration: none;
@@ -1070,7 +1381,7 @@
     cursor: pointer;
     padding: 0;
   }
-  .dc-search-input__submit:hover { background: #d62828; }
+  .dc-search-input__submit:hover { background: #2a3038; }
 {% endstylesheet %}
 
 {% schema %}
@@ -1094,7 +1405,7 @@
     { "type": "url", "id": "topbar_link_4_url", "label": "Link 4 URL" },
     { "type": "text", "id": "topbar_link_5", "label": "Link 5" },
     { "type": "url", "id": "topbar_link_5_url", "label": "Link 5 URL" },
-    { "type": "text", "id": "phone", "label": "Telefone (WhatsApp)", "default": "(11) 99999-9999" },
+    { "type": "text", "id": "phone", "label": "Telefone (WhatsApp)", "default": "(11) 93806-6545" },
     { "type": "text", "id": "hours", "label": "Horário", "default": "Atendimento · Seg–Sáb 8h–20h" },
     { "type": "header", "content": "Search" },
     { "type": "text", "id": "search_placeholder", "label": "Placeholder do input", "default": "Buscar cartuchos, toners, placas de vídeo..." },
