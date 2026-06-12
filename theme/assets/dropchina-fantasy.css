@@ -588,7 +588,7 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
 }
 .dc-card__rating-avg { font-weight: 700; color: var(--ink); }
 .dc-card__rating-sep { color: var(--muted-2); opacity: 0.6; }
-.dc-card__rating-count { color: var(--muted-2); }
+.dc-card__rating-count { color: var(--muted); }
 .dc-card__price-stack {
   display: flex;
   flex-direction: column;

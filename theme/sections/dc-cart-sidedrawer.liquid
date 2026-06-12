@@ -107,12 +107,13 @@
 
     {%- if cart.item_count > 0 -%}
       <footer class="dc-cart__footer">
-        <div class="dc-cart__coupon">
-          <span class="dc-cart__coupon-label">Cupom</span>
-          <span class="dc-cart__coupon-code">{{ discount_code | escape }}</span>
-          {%- assign coupon_off = cart_total | times: discount_pct | divided_by: 100 -%}
-          <span class="dc-cart__coupon-off">−{{ coupon_off | money }}</span>
-        </div>
+        {%- if discount_code != blank -%}
+          <div class="dc-cart__coupon">
+            <span class="dc-cart__coupon-label">Cupom</span>
+            <span class="dc-cart__coupon-code">{{ discount_code | escape }}</span>
+            <span class="dc-cart__coupon-off">aplicado no checkout ✓</span>
+          </div>
+        {%- endif -%}
 
         <dl class="dc-cart__totals">
           <div class="dc-cart__totals-row">
@@ -129,7 +130,13 @@
           </div>
         </dl>
 
-        <a href="/checkout" class="dc-cart__checkout">
+        {%- comment -%} /discount/CODE aplica o cupom de verdade na sessão antes do checkout {%- endcomment -%}
+        {%- if discount_code != blank -%}
+          {%- assign checkout_url = '/discount/' | append: discount_code | append: '?redirect=/checkout' -%}
+        {%- else -%}
+          {%- assign checkout_url = '/checkout' -%}
+        {%- endif -%}
+        <a href="{{ checkout_url }}" class="dc-cart__checkout">
           Finalizar compra
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
         </a>

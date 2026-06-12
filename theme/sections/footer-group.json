@@ -9,28 +9,28 @@
           "type": "menu_col",
           "settings": {
             "title": "Loja",
-            "raw_links": "Cartuchos & Tintas\nToners\nPlacas de Vídeo\nÁudio & Headsets\nPeriféricos\nImpressoras"
+            "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs"
           }
         },
         "col_suporte": {
           "type": "menu_col",
           "settings": {
             "title": "Suporte",
-            "raw_links": "Central de ajuda\nRastrear pedido\nTrocas & devoluções\nPolítica de garantia\nFrete & prazos"
+            "raw_links": "Central de ajuda|/pages/faq\nRastrear pedido|/pages/rastrear-pedido\nTrocas & devoluções|/policies/refund-policy\nPolítica de privacidade|/policies/privacy-policy\nFrete & prazos|/policies/shipping-policy"
           }
         },
         "col_dropchina": {
           "type": "menu_col",
           "settings": {
             "title": "DropChina",
-            "raw_links": "Sobre nós\nBlog\nPara empresas\nAtacado · CNPJ\nTrabalhe conosco"
+            "raw_links": "Sobre nós|/pages/sobre\nContato|/pages/contact\nTermos de serviço|/policies/terms-of-service"
           }
         },
         "col_contato": {
           "type": "menu_col",
           "settings": {
             "title": "Contato",
-            "raw_links": "Fale conosco\nWhatsApp comercial\nSuporte técnico\nFAQ",
+            "raw_links": "Fale conosco|/pages/contact\nWhatsApp comercial|https://wa.me/5511938066545\nFAQ|/pages/faq",
             "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>"
           }
         }
@@ -45,7 +45,7 @@
         "tagline": "Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.",
         "instagram": "https://instagram.com/dropchinaoficial",
         "facebook": "https://facebook.com/dropchinaoficial",
-        "copyright": "© 2026 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados.",
+        "copyright": "© 2026 DropChina — Todos os direitos reservados.",
         "payments": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO",
         "padding_top": 64,
         "padding_bottom": 28
