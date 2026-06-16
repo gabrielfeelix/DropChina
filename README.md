@@ -31,6 +31,10 @@ Bling (ERP)  ──fonte de verdade──►  mcp-bling/  ──tools──►  
 │   ├── src/mcp/      # server stdio (read-only)
 │   └── src/scripts/  # authorize (colar code), pull-catalogo (auditoria)
 │
+├── mcp-shopee/       # (scaffold) Cliente READ-ONLY Shopee Open API v2 — auditoria
+├── mcp-amazon/       # (scaffold) Cliente READ-ONLY Amazon SP-API — auditoria
+│                     #   ↳ ativar só com conta+credencial; sync real é Bling nativo
+│
 ├── theme/            # Tema Shopify (Tinker customizado) — look Fantasy
 │   ├── assets/       # CSS, JS, imagens (dropchina-fantasy.css, dc-*.js)
 │   ├── blocks/       # blocks reutilizáveis
