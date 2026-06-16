@@ -20,16 +20,17 @@ Legenda: ✅ pronto · 🟡 em andamento · ❌ falta/bloqueia · 👤 ação no
 | Item | Status | Quem |
 |---|---|---|
 | **NCM por produto** | ❌ **0% — bloqueia NF-e** | 🤖 posso aplicar / 👤 contador valida |
-| Certificado e-CNPJ A1 instalado no Bling | ❓ verificar | 👤 Augusto |
-| Regime tributário (Simples/etc), CSOSN/CST, CFOP | ❓ | 👤 contador/Augusto |
-| Natureza de operação (venda) | ❓ | 👤 |
-| Série/numeração NF-e + ambiente produção | ❓ | 👤 |
-| CEST (se houver Substituição Tributária) | ❌ | 🤖 aplico / 👤 valida |
+| Certificado e-CNPJ A1 instalado no Bling | 🟡 existe (Augusto já emite nota no ML) — instalar no Bling | 👤 Augusto/contador |
+| Regime tributário, CSOSN/CST, CFOP | 🟡 definido (empresa LTDA, contador cuida) — replicar no Bling | 👤 contador |
+| Natureza de operação (venda) | 🟡 contador define | 👤 contador |
+| Série/numeração NF-e + ambiente produção | 🟡 já emite no ML; configurar série no Bling | 👤 Augusto/contador |
+| CEST (se houver Substituição Tributária) | ❌ | 🤖 aplico / 👤 contador valida |
 | Regra de emissão automática (emitir quando ML libera etiqueta) | ❌ | 👤 config Bling |
 
-> Sem NCM **não emite nota** — e sem nota não vende legalmente nem despacha no ML/Full. É o
-> primeiro bloqueador a resolver. NCM pode vir: da **nota de entrada** do fornecedor (Bling preenche
-> sozinho), do **contador**, ou de um **draft por categoria** (Claude propõe, contador valida).
+> ✅ **Fiscal já existe:** Augusto confirmou empresa **LTDA, tem contador, emite NF-e de tudo** hoje no ML.
+> Logo, **não criamos fiscal do zero — só replicamos no Bling.** Gabriel vai falar com o contador (contato recebido).
+> Falta só: instalar certificado no Bling + validar NCM + ligar emissão. NCM pode vir do **contador**, da
+> **nota de entrada** do fornecedor (Bling preenche sozinho), ou do **draft** (`ncm-por-categoria-draft.md`).
 
 ## 3. Estoque / Depósito
 | Item | Status | Quem |
