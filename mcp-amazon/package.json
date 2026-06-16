@@ -1,0 +1,26 @@
+{
+  "name": "dropchina-amazon",
+  "version": "0.1.0",
+  "description": "Cliente READ-ONLY da Amazon Selling Partner API (SP-API) — audita catálogo/listings do vendedor (DropChina). NÃO escreve nada na Amazon. Scaffold — exige conta de vendedor BR + registro de developer aprovado.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "authorize": "tsx src/scripts/authorize.ts",
+    "pull": "tsx src/scripts/pull-catalogo.ts",
+    "mcp": "tsx src/mcp/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "amazon-sp-api": "^0.8.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

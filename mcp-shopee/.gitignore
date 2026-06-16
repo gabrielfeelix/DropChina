@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+# Segredos e tokens — NUNCA commitar
+.env
+.env.*
+!.env.example
+tokens.json
+
+# Saída de dados (catálogo puxado pode ter dados do negócio)
+out/
+*.local.json

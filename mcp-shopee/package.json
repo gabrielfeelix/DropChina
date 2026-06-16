@@ -1,0 +1,25 @@
+{
+  "name": "dropchina-shopee",
+  "version": "0.1.0",
+  "description": "Cliente READ-ONLY da Shopee Open Platform API v2 — scaffold para auditar catálogo de anúncios do vendedor (DropChina). NÃO escreve nada na Shopee. Preencher credenciais ao abrir conta no Open Platform.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "authorize": "tsx src/scripts/authorize.ts",
+    "pull": "tsx src/scripts/pull-catalogo.ts",
+    "mcp": "tsx src/mcp/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
