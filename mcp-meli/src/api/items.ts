@@ -38,6 +38,8 @@ export interface MlItemRaw {
   category_id?: string
   permalink?: string
   seller_custom_field?: string | null
+  /** Logística do anúncio. logistic_type='fulfillment' = Mercado Livre FULL. */
+  shipping?: { logistic_type?: string; mode?: string }
   attributes?: { id: string; name?: string; value_name?: string | null }[]
   variations?: {
     id: number

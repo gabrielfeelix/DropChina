@@ -27,6 +27,10 @@ interface ItemNormalizado {
   estoqueRef?: number
   status?: string
   tipoAnuncio?: string
+  /** logistic_type do ML; 'fulfillment' = FULL (estoque no galpão do ML). */
+  logisticType?: string
+  /** true se o anúncio é Mercado Livre FULL — ML controla o estoque, Bling NÃO deve sobrescrever. */
+  full?: boolean
   categoriaId?: string
   categoriaNome?: string
   temVariacoes: boolean
@@ -116,6 +120,8 @@ async function main() {
       estoqueRef: i.available_quantity,
       status: i.status,
       tipoAnuncio: i.listing_type_id,
+      logisticType: i.shipping?.logistic_type,
+      full: i.shipping?.logistic_type === 'fulfillment',
       categoriaId: i.category_id,
       categoriaNome: i.category_id ? catNome.get(i.category_id) : undefined,
       temVariacoes: (i.variations?.length ?? 0) > 0,
@@ -158,6 +164,7 @@ async function main() {
     `- Sem GTIN: **${semGtin.length}**`,
     `- Sem categoria: **${semCategoria.length}**`,
     `- Sem foto: **${semFoto.length}**`,
+    `- Anúncios FULL (ML controla estoque — Bling NÃO deve sobrescrever): **${itens.filter((i) => i.full).length}**`,
     '',
     '## Anúncios por categoria',
     ...[...porCategoria.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => `- ${k}: ${n}`),
