@@ -75,6 +75,14 @@ Catálogo e estoque já dentro do Bling; falta vínculo dos canais, fiscal no Bl
 - Limpeza de demos Shopify (você dispara o --confirm)
 - Auditorias e ajustes de catálogo
 
+## Frentes paralelas — negócio digital (além do operacional Bling/sync)
+O serviço inclui montar a presença digital completa. Pastas + planos criados (pesquisa jun/2026):
+- **`marketing/`** — Google (GTM, GA4, Merchant Center, Ads, Search Console), Meta Pixel/CAPI, consentimento LGPD. Liga ao gargalo do GTIN (Merchant Center exige).
+- **`social/`** — redes sociais: Instagram/Facebook + WhatsApp Business + TikTok Shop; catálogo via Meta Commerce Manager; cadência de conteúdo.
+- **`brand/`** — identidade visual + manual da marca + logo; aplica no tema Shopify e nas redes.
+
+Dependências entre frentes: domínio apontado → verificação Meta; export Bling→Shopify → catálogo nas redes; `brand/` → avatares/templates de `social/`; GTIN → Merchant Center.
+
 ## Riscos ativos (lembrar)
 - Não ligar sync de estoque com Bling desatualizado → zera anúncio Platinum.
 - 16 anúncios FULL: ML controla estoque, Bling não sobrescreve.
