@@ -13,11 +13,14 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { listCategorias } from '../api/categorias.js'
-import { upsertProduto, type ProdutoInput } from '../api/produtos.js'
+import { upsertProduto, findProdutoByCodigo, type ProdutoInput } from '../api/produtos.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const CATALOGO = join(__dirname, '..', '..', '..', 'mcp-meli', 'out', 'catalogo.json')
 const dry = process.argv.includes('--dry')
+// --create-only: só cria produtos NOVOS (pula quem já existe por SKU).
+// Evita re-PUT nos existentes, que zeraria tributacao.origem/campos não enviados.
+const createOnly = process.argv.includes('--create-only')
 
 interface ItemMeli {
   mlb: string
@@ -104,10 +107,17 @@ async function main() {
   let atualizados = 0
   let erros = 0
   let gtinDropados = 0
+  let pulados = 0
+
+  if (createOnly) console.log('\n🆕 --create-only: só cria SKU novo; existente é pulado (não re-escreve).')
 
   if (!dry) {
     console.log('\n⏳ Carregando (upsert por SKU)...')
     for (const i of comSku) {
+      if (createOnly && (await findProdutoByCodigo(i.sku!))) {
+        pulados++
+        continue
+      }
       const nomeCat = categoriaBling(i.categoriaNome)
       const categoriaId = idPorNome.get(nomeCat.toLowerCase())
       const input: ProdutoInput = {
@@ -144,7 +154,7 @@ async function main() {
         console.error(`   ❌ ${i.sku} (${i.titulo.slice(0, 40)}): ${err instanceof Error ? err.message : err}`)
       }
     }
-    console.log(`\n✅ Carga: ${criados} criados, ${atualizados} atualizados, ${erros} erros, ${gtinDropados} GTIN inválido dropado.`)
+    console.log(`\n✅ Carga: ${criados} criados, ${atualizados} atualizados, ${pulados} pulados (já existiam), ${erros} erros, ${gtinDropados} GTIN inválido dropado.`)
   }
 
   console.log(`\n📝 ${semSku.length} itens SEM SKU (puladas — definir SKU antes):`)

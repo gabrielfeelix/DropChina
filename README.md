@@ -23,7 +23,8 @@ Bling (ERP)  ──fonte de verdade──►  mcp-bling/  ──tools──►  
 │   ├── src/api/      # client, categorias, produtos, nfe, campos customizados
 │   ├── src/auth/     # OAuth 2.0 + token store
 │   ├── src/mcp/      # server stdio (tools)
-│   └── src/scripts/  # authorize, seed-categorias, seed-campos, probe
+│   └── src/scripts/  # authorize, seed-*, load:meli, fill:estoque, fill:campos,
+│                     #   discover:kits, enrich:descricao, set:short-desc, set:gtin
 │
 ├── mcp-meli/         # Cliente READ-ONLY da API do Mercado Livre
 │   ├── src/api/      # client (GET), items (scan/multiget), categories
@@ -68,6 +69,22 @@ cp .env.example .env   # preencher credenciais do Bling
 npm run authorize      # OAuth (abre browser)
 npm run seed:categorias
 ```
+
+### Catálogo — progresso e o que falta (18/jun/2026)
+
+195 produtos no Bling (com SKU). Pull ML fresco (207 anúncios, 12 sem SKU pulados).
+
+**GTIN — onde paramos (`set:gtin` lê `src/scripts/gtin-map.json`):**
+- ✅ **14 GTIN gravados** (HIGH): 5 recuperados de campo errado da ficha ML (Pantum, Evolut 1105, GA.MA, Pcyes RTX, Snapmaker) + 9 pesquisados/confirmados (JBL 520BT preto×2 e branco, HP DHH-1601, HP DHE-8009, Ugreen 80191 ×2, Monitor Skul, Starlink Mini).
+- 🟡 **MED — conferir na caixa antes** (no map, não gravados): Midea MDWTF08S1 (EAN varia por tensão 110/220V), Pcyes One B300 (varia por SO Linux/Windows).
+- ⏳ **Pesquisa pendente** (2 lotes não rodados): cluster HP 667 (cartuchos preto/color/kit) e Patriot SSD 240/480 + Bambu A1 Combo.
+- ⛔ **Sem EAN público** (NOT_FOUND, deixar vazio): Epson WF-C5890, ISD-12, Gabinete CLANM Grodd.
+- ⛔ **Compatíveis/remanufaturados** (~35: Masterprint, Premium, Evolut, Genérica, Compatível…) e SKUs compartilhados ambíguos (BOMBA.DAGUA, CABO.HDMI.VGA): geralmente sem GTIN real — não inventar.
+- Restam ~57 sem GTIN. **Regra:** GTIN errado é pior que vazio. Só grava HIGH com fonte; MED/dúvida → conferir caixa.
+
+**Descrição curta:** `set:short-desc` gravou os 5 itens novos (Bambu, 2× SSD Patriot, Snapmaker, Vinik).
+
+Scripts seguros: `load:meli --create-only` (não re-PUTa existentes), `set:gtin`/`set:short-desc` testam `tributacao.origem` antes/depois e abortam se o PUT zerar campo.
 
 ## theme — loja Shopify
 

@@ -25,6 +25,9 @@ npm-debug.log*
 # Theme exports brutos (zips)
 *.zip
 
+# Exports de produtos ML/Bling (gerados, não versionar)
+produtos_*.csv
+
 # Editor / IDE
 .vscode/
 .idea/

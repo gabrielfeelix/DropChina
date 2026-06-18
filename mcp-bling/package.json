@@ -18,6 +18,8 @@
     "fill:estoque": "tsx src/scripts/fill-estoque-from-meli.ts",
     "discover:kits": "tsx src/scripts/discover-kits.ts",
     "enrich:descricao": "tsx src/scripts/enrich-descricao.ts",
+    "set:short-desc": "tsx src/scripts/set-short-desc.ts",
+    "set:gtin": "tsx src/scripts/set-gtin.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },

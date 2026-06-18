@@ -1,0 +1,20 @@
+{
+  "Pantum 2509":            { "gtin": "6936358017817", "confidence": "HIGH", "source": "recuperado do campo modelo do próprio anúncio ML (checksum válido, 693=GS1 China, marca Pantum chinesa)" },
+  "1105 Parda":             { "gtin": "7899692636023", "confidence": "HIGH", "source": "recuperado da ficha ML (checksum válido, 789=GS1 Brasil, marca Evolut BR)" },
+  "Escova Gama 3D":         { "gtin": "7898496358254", "confidence": "HIGH", "source": "recuperado da ficha ML (checksum válido, 789=GS1 Brasil, GA.MA)" },
+  "PLACA RTX 3060":         { "gtin": "7908445442047", "confidence": "HIGH", "source": "recuperado da ficha ML (checksum válido, 790=GS1 Brasil, Pcyes)" },
+  "Impressora Snapmaker":   { "gtin": "6971573442709", "confidence": "HIGH", "source": "recuperado da ficha ML (checksum válido, 697=GS1 China, Snapmaker)" },
+
+  "JBL 520BT Preto":        { "gtin": "6925281963650", "confidence": "HIGH", "source": "Fujioka Distribuidor + Fastshop (JBLT520BTBLK preto)" },
+  "520 bt Preto":           { "gtin": "6925281963650", "confidence": "HIGH", "source": "mesmo produto JBL Tune 520BT preto (SKU duplicado) — mesmo EAN do 'JBL 520BT Preto'" },
+  "JBL 520BT BRANCO":       { "gtin": "6925281963667", "confidence": "HIGH", "source": "Fujioka + Fastshop (JBLT520BTWHT branco; EAN distinto do preto)" },
+  "fone DHH-1601":          { "gtin": "6972431713474", "confidence": "HIGH", "source": "Spiral (schema gtin13) + Kalunga; headset HP DHH-1601" },
+  "fone hp DHE-8009":       { "gtin": "6972431710602", "confidence": "HIGH", "source": "Kalunga (schema JSON-LD); HP DHE-8009 part 194R3AA preto" },
+  "Adaptador 2em 1":        { "gtin": "6957303881918", "confidence": "HIGH", "source": "Ugreen Brasil oficial; leitor 80191/CM304" },
+  "ADAPT.UGREEN":           { "gtin": "6957303881918", "confidence": "HIGH", "source": "mesmo produto Ugreen 80191/CM304 (CM304=modelo, 80191=part) — mesmo EAN" },
+  "Monitor 19,5":           { "gtin": "7908445442252", "confidence": "HIGH", "source": "Oderco ficha técnica; Skul SM1955MS75Y 19,5 75Hz" },
+  "StarLink":               { "gtin": "850049670302",  "confidence": "HIGH", "source": "KaBuM + FastShop; Kit Starlink Mini branco 2535008BR (850=GS1 US/SpaceX)" },
+
+  "Lava louça":             { "gtin": "7908198023111", "confidence": "MED",  "source": "Fast Shop — EAN varia por tensão (110V=7908198023111 / 220V=7908198023128); MDWTF08S1 não é bivolt, conferir lote antes" },
+  "PC ONE B300 DUAL CORE I3": { "gtin": "7908445441019", "confidence": "MED", "source": "Supera/SystemTec — variante i3-3220 8GB 256GB Linux; existe variante Windows com EAN diferente (7908445441088), SKU não especifica SO" }
+}

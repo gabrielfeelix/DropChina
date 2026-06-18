@@ -1,7 +1,7 @@
 # STATUS do projeto — DropChina (sync multicanal Bling)
 
-> Foto do estado atual e próximas etapas. Atualizado 16/jun/2026. Branch de trabalho:
-> `feat/sync-estoque-bling`. Leia junto: `go-live-bling-checklist.md` (mestre).
+> Foto do estado atual e próximas etapas. Atualizado 17/jun/2026. Branch: `main`.
+> Leia junto: `go-live-bling-checklist.md` (mestre) e `plano-geral.md` (3 trilhos).
 
 ## Onde estamos
 Montando a operação com **Bling como hub** (fonte de verdade de catálogo/estoque/fiscal),
