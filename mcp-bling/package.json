@@ -20,6 +20,7 @@
     "enrich:descricao": "tsx src/scripts/enrich-descricao.ts",
     "set:short-desc": "tsx src/scripts/set-short-desc.ts",
     "set:gtin": "tsx src/scripts/set-gtin.ts",
+    "set:ncm": "tsx src/scripts/set-ncm.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },

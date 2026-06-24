@@ -84,6 +84,12 @@ npm run seed:categorias
 
 **Descrição curta:** `set:short-desc` gravou os 5 itens novos (Bambu, 2× SSD Patriot, Snapmaker, Vinik).
 
+**NCM (`set:ncm` lê `src/scripts/ncm-map.json`) — fiscal confirmado pelo contador (24/jun):**
+- ✅ **62 NCM gravados** (HIGH): núcleo do catálogo (toner 84439933, papel foto 4811xx, fone 85183000, cartucho tinta 84439923, impressoras, lava-louça, mini PC, Starlink, leitor). CSOSN 102, sem ST.
+- 🟡 **26 MED** não gravados (matcher de nome incerto/errado — conferir).
+- ⛔ **52 FLAG**: 33 gaps de nicho (SSD, monitor, filamento, carregador, placa, suporte…) → `docs/ncm-gaps-contador.md` pro contador validar; 19 fora do nicho (Augusto poda).
+- Config fiscal completa: `docs/fiscal-config-confirmado.md`. Certificado A1 instalado (vence 29/09/2026).
+
 Scripts seguros: `load:meli --create-only` (não re-PUTa existentes), `set:gtin`/`set:short-desc` testam `tributacao.origem` antes/depois e abortam se o PUT zerar campo.
 
 ## theme — loja Shopify
