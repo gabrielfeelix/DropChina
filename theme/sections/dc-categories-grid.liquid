@@ -28,7 +28,11 @@
             {%- endif -%}
           </div>
           <div class="dc-cat__name">{{ block.settings.name | escape }}</div>
-          <div class="dc-cat__count">{{ block.settings.count | escape }}</div>
+          {%- if block.settings.collection != blank -%}
+            <div class="dc-cat__count">{{ block.settings.collection.products_count }} {% if block.settings.collection.products_count == 1 %}produto{% else %}produtos{% endif %}</div>
+          {%- elsif block.settings.count != blank -%}
+            <div class="dc-cat__count">{{ block.settings.count | escape }}</div>
+          {%- endif -%}
         </a>
       {%- endif -%}
     {%- endfor -%}
@@ -149,7 +153,8 @@
       "name": "Categoria",
       "settings": [
         { "type": "text", "id": "name", "label": "Nome", "default": "Cartuchos & Tintas" },
-        { "type": "text", "id": "count", "label": "Contagem (label)", "default": "320+ produtos" },
+        { "type": "collection", "id": "collection", "label": "Coleção (contagem real)", "info": "Se setada, mostra a contagem real de produtos no lugar do label abaixo" },
+        { "type": "text", "id": "count", "label": "Contagem (label manual)", "default": "Ver coleção" },
         { "type": "url", "id": "link", "label": "Link" },
         { "type": "html", "id": "icon_svg", "label": "SVG do ícone (opcional)" }
       ]

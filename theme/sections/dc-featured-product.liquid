@@ -121,12 +121,25 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.show_stock_bar -%}
-          {%- assign stock_qty = section.settings.stock_qty | default: 6 -%}
-          {%- assign stock_pct = section.settings.stock_pct | default: 40 -%}
+        {%- liquid
+          comment
+            Barra de urgência só com estoque REAL do Shopify (inventário rastreado
+            e baixo). Nada de número inventado — credibilidade > pressão.
+          endcomment
+          assign show_stock = false
+          if section.settings.show_stock_bar and p_var.inventory_management == 'shopify' and p_var.inventory_quantity > 0
+            assign stock_limit = section.settings.stock_low_threshold | default: 10
+            if p_var.inventory_quantity <= stock_limit
+              assign show_stock = true
+              assign stock_qty = p_var.inventory_quantity
+              assign stock_pct = stock_qty | times: 100 | divided_by: stock_limit
+            endif
+          endif
+        -%}
+        {%- if show_stock -%}
           <div class="dc-fp__stock">
             <span class="dc-fp__stock-bar"><span style="width: {{ stock_pct }}%;"></span></span>
-            <span class="dc-fp__stock-msg">Corre, restam apenas <b>{{ stock_qty }} unidades</b> em estoque!</span>
+            <span class="dc-fp__stock-msg">Restam apenas <b>{{ stock_qty }} {% if stock_qty == 1 %}unidade{% else %}unidades{% endif %}</b> em estoque</span>
           </div>
         {%- endif -%}
 
@@ -504,10 +517,9 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Produto destaque" },
     { "type": "product", "id": "product", "label": "Produto destaque", "info": "Se vazio, usa o primeiro de 'all'" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Adicionar ao carrinho" },
-    { "type": "header", "content": "Barra de estoque" },
-    { "type": "checkbox", "id": "show_stock_bar", "label": "Exibir barra de urgência", "default": true },
-    { "type": "range", "id": "stock_qty", "label": "Qtd em estoque (display)", "min": 1, "max": 50, "step": 1, "default": 6 },
-    { "type": "range", "id": "stock_pct", "label": "Preenchimento da barra (%)", "min": 5, "max": 100, "step": 5, "default": 40 },
+    { "type": "header", "content": "Barra de estoque (usa inventário REAL)" },
+    { "type": "checkbox", "id": "show_stock_bar", "label": "Exibir urgência quando estoque baixo", "default": true, "info": "Só aparece se o inventário rastreado da variante estiver abaixo do limite" },
+    { "type": "range", "id": "stock_low_threshold", "label": "Limite de 'estoque baixo' (un)", "min": 3, "max": 30, "step": 1, "default": 10 },
     { "type": "header", "content": "Espaçamento" },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }

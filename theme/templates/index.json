@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_main": {
@@ -6,32 +15,25 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image_asset": "banner-worldcup.png",
-            "alt": "Slide 1",
+            "image_asset": "banner-1-oficial-desktop.jpeg",
+            "image_asset_mobile": "banner-1-oficial-mobile.jpeg",
+            "alt": "DropChina — ofertas oficiais em tecnologia e impressão",
             "link": "shopify://collections/all"
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
-            "image_asset": "banner-toner.png",
-            "alt": "Slide 2",
-            "link": "shopify://collections/all"
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image_asset": "banner-gpu.png",
-            "alt": "Slide 3",
+            "image_asset": "banner-2-oficial-desktop.jpeg",
+            "image_asset_mobile": "banner-2-oficial-mobile.jpeg",
+            "alt": "DropChina — destaques e promoções da loja",
             "link": "shopify://collections/all"
           }
         }
       },
       "block_order": [
         "slide_1",
-        "slide_2",
-        "slide_3"
+        "slide_2"
       ],
       "settings": {
         "autoplay_ms": 6500,
@@ -46,7 +48,8 @@
           "type": "category",
           "settings": {
             "name": "Cartuchos & Tintas",
-            "count": "320+ produtos",
+            "collection": "cartuchos-de-tinta",
+            "count": "Ver coleção",
             "link": "shopify://collections/cartuchos-de-tinta",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='34' y='36' width='92' height='14' rx='6' fill='#3a414a'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>"
           }
@@ -55,6 +58,7 @@
           "type": "category",
           "settings": {
             "name": "Toners",
+            "collection": "toners",
             "count": "Ver coleção",
             "link": "shopify://collections/toners",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>"
@@ -64,6 +68,7 @@
           "type": "category",
           "settings": {
             "name": "Impressoras",
+            "collection": "impressoras",
             "count": "Ver coleção",
             "link": "shopify://collections/impressoras",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>"
@@ -73,6 +78,7 @@
           "type": "category",
           "settings": {
             "name": "Placas de Vídeo",
+            "collection": "placas-de-video",
             "count": "Ver coleção",
             "link": "shopify://collections/placas-de-video",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>"
@@ -91,6 +97,7 @@
           "type": "category",
           "settings": {
             "name": "Periféricos",
+            "collection": "perifericos",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>"
@@ -100,7 +107,7 @@
           "type": "category",
           "settings": {
             "name": "Redes & Internet",
-            "count": "88 produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/all",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='36' y='50' width='88' height='48' rx='6' fill='#1a1d20'/><circle cx='56' cy='74' r='3' fill='#22c55e'/><circle cx='68' cy='74' r='3' fill='#22c55e'/><circle cx='80' cy='74' r='3' fill='#f59e0b'/><circle cx='92' cy='74' r='3' fill='#3a414a'/><path d='M50 38 L66 50 M80 32 L80 50 M110 38 L94 50' stroke='#0d1115' stroke-width='2' stroke-linecap='round'/></svg>"
           }
@@ -109,7 +116,7 @@
           "type": "category",
           "settings": {
             "name": "Armazenamento",
-            "count": "120+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/all",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='46' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='44' y='38' width='72' height='78' rx='6' fill='#2a3038'/><rect x='50' y='46' width='60' height='34' rx='2' fill='#1a1d20'/><circle cx='80' cy='98' r='6' fill='#1a1d20'/><circle cx='80' cy='98' r='2' fill='#22c55e'/></svg>"
           }
@@ -118,7 +125,7 @@
           "type": "category",
           "settings": {
             "name": "Cabos & Adaptadores",
-            "count": "260+ produtos",
+            "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='40' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='44' y='46' width='14' height='14' rx='2' fill='#3a414a'/><path d='M51 76 Q51 95 80 95 Q109 95 109 76' stroke='#1a1d20' stroke-width='4' fill='none'/><rect x='98' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='102' y='46' width='14' height='14' rx='2' fill='#3a414a'/></svg>"
           }
@@ -127,7 +134,8 @@
           "type": "category",
           "settings": {
             "name": "Papelaria & Mídia",
-            "count": "75 produtos",
+            "collection": "papeis",
+            "count": "Ver coleção",
             "link": "shopify://collections/papeis",
             "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>"
           }
@@ -138,7 +146,7 @@
             "name": "Ofertas da Semana",
             "count": "Até 40% OFF",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M82 30 L120 38 L128 76 L94 110 Q88 116 82 110 L48 76 Q42 70 48 64 Z' fill='#d62828'/><circle cx='106' cy='52' r='7' fill='#ffffff'/><path d='M70 92 L98 64' stroke='#ffffff' stroke-width='5' stroke-linecap='round'/><circle cx='72' cy='68' r='5' fill='#ffffff'/><circle cx='96' cy='90' r='5' fill='#ffffff'/></svg>"
           }
         },
         "cat_12": {
@@ -147,17 +155,28 @@
             "name": "Novidades",
             "count": "Recém-chegados",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><circle cx='80' cy='68' r='36' fill='#fef3c7'/><path d='M80 38 L85 60 L107 65 L88 78 L94 100 L80 86 L66 100 L72 78 L53 65 L75 60 Z' fill='#f59e0b'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M80 28 L88 60 L120 68 L88 76 L80 108 L72 76 L40 68 L72 60 Z' fill='#f5c518'/><path d='M116 32 L120 44 L132 48 L120 52 L116 64 L112 52 L100 48 L112 44 Z' fill='#2a3038'/><path d='M48 90 L51 99 L60 102 L51 105 L48 114 L45 105 L36 102 L45 99 Z' fill='#2a3038'/></svg>"
+          }
+        },
+        "cat_3d": {
+          "type": "category",
+          "settings": {
+            "name": "Impressão 3D",
+            "collection": "impressao-3d",
+            "count": "Novidade",
+            "link": "shopify://collections/impressao-3d",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='52' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='26' width='100' height='86' rx='6' fill='none' stroke='#2a3038' stroke-width='5'/><rect x='44' y='40' width='72' height='6' rx='3' fill='#3a414a'/><rect x='66' y='40' width='10' height='30' rx='2' fill='#0e8aa5'/><rect x='56' y='66' width='48' height='8' rx='2' fill='#2a3038'/><rect x='62' y='86' width='36' height='18' rx='2' fill='#f5c518'/><rect x='66' y='92' width='28' height='4' rx='2' fill='#d68a00'/></svg>"
           }
         }
       },
       "block_order": [
+        "cat_3d",
+        "cat_0",
         "cat_1",
         "cat_2",
         "cat_3",
         "cat_4",
         "cat_5",
-        "cat_6",
         "cat_7",
         "cat_8",
         "cat_9",
@@ -168,7 +187,7 @@
       "name": "Categories",
       "settings": {
         "eyebrow": "NOSSA LOJA",
-        "heading": "Confira tudo o que temos pra você",
+        "heading": "Comece pela Impressão 3D",
         "cta_label": "Ver todas",
         "cta_link": "shopify://collections/all",
         "padding-block-start": 56,
@@ -203,21 +222,22 @@
           "type": "tab",
           "settings": {
             "label": "Placas de vídeo",
-            "collection": "perifericos"
+            "collection": "placas-de-video"
           }
         },
         "tab_5": {
           "type": "tab",
           "settings": {
-            "label": "Áudio",
-            "collection": "perifericos"
+            "label": "Mini PCs",
+            "collection": "mini-pcs"
           }
         },
         "tab_6": {
           "type": "tab",
           "settings": {
             "label": "Ofertas",
-            "collection": "frontpage"
+            "collection": "ofertas-relampago",
+            "collection_handle": "ofertas-relampago"
           }
         }
       },
@@ -301,25 +321,25 @@
         "plat_1": {
           "type": "platform",
           "settings": {
-            "name": "Reclame Aqui",
-            "value": "Reputação ótima",
-            "subtitle": "8.2 / 10"
+            "name": "Mercado Livre",
+            "value": "MercadoLíder",
+            "subtitle": "+10 mil vendas"
           }
         },
         "plat_2": {
           "type": "platform",
           "settings": {
-            "name": "Google",
-            "value": "4,8 ★",
-            "subtitle": "3.214 avaliações"
+            "name": "Garantia",
+            "value": "12 meses oficial",
+            "subtitle": "Em todos os produtos"
           }
         },
         "plat_3": {
           "type": "platform",
           "settings": {
-            "name": "Mercado Livre",
-            "value": "MercadoLíder Platinum",
-            "subtitle": "+10 mil vendas"
+            "name": "Atendimento",
+            "value": "WhatsApp humano",
+            "subtitle": "Seg–Sáb · 8h às 20h"
           }
         }
       },
@@ -334,8 +354,8 @@
       "name": "Testimonials",
       "settings": {
         "eyebrow": "AVALIAÇÕES VERIFICADAS",
-        "heading": "4,9 / 5 em mais de 12 mil compras",
-        "subheading": "Compras avaliadas por clientes reais. Notas verificadas e sem edição.",
+        "heading": "Quem compra, volta",
+        "subheading": "Avaliações de clientes reais, verificadas a cada compra.",
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,
@@ -351,33 +371,33 @@
         "b1": {
           "type": "badge",
           "settings": {
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 7h11v9H3z'/><path d='M14 10h4l3 3v3h-7z'/><circle cx='7' cy='18' r='1.6'/><circle cx='17' cy='18' r='1.6'/></svg>",
             "title": "Frete grátis",
-            "sub": "Em compras a partir de R$ 199",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 7h11v9H3z'/><path d='M14 10h4l3 3v3h-7z'/><circle cx='7' cy='18' r='1.6'/><circle cx='17' cy='18' r='1.6'/></svg>"
+            "sub": "Em compras a partir de R$ 199"
           }
         },
         "b2": {
           "type": "badge",
           "settings": {
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z'/><path d='m9 12 2 2 4-4'/></svg>",
             "title": "Garantia oficial",
-            "sub": "12 meses em todos os produtos",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z'/><path d='m9 12 2 2 4-4'/></svg>"
+            "sub": "12 meses em todos os produtos"
           }
         },
         "b3": {
           "type": "badge",
           "settings": {
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 12a9 9 0 0 1 15.5-6.3L21 8'/><path d='M21 4v4h-4'/><path d='M21 12a9 9 0 0 1-15.5 6.3L3 16'/><path d='M3 20v-4h4'/></svg>",
             "title": "Troca fácil",
-            "sub": "7 dias para trocar ou devolver",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 12a9 9 0 0 1 15.5-6.3L21 8'/><path d='M21 4v4h-4'/><path d='M21 12a9 9 0 0 1-15.5 6.3L3 16'/><path d='M3 20v-4h4'/></svg>"
+            "sub": "7 dias para trocar ou devolver"
           }
         },
         "b4": {
           "type": "badge",
           "settings": {
+            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4'/><path d='M4 13v4a2 2 0 0 0 2 2h2v-6H4'/></svg>",
             "title": "Atendimento humano",
-            "sub": "Seg a sáb, das 8h às 20h",
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4'/><path d='M4 13v4a2 2 0 0 0 2 2h2v-6H4'/></svg>"
+            "sub": "Seg a sáb, das 8h às 20h"
           }
         }
       },
@@ -386,7 +406,8 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {}
     },
     "promo_banners_main": {
       "type": "promo-cards",
@@ -395,44 +416,44 @@
           "type": "card",
           "settings": {
             "tone": "light",
+            "background_asset": "banner-compre-esquerda.webp",
             "eyebrow": "CARTUCHOS & TONERS",
             "title": "Toners com qualidade profissional.",
             "cta_label": "Ver linha",
-            "link": "shopify://collections/toners",
-            "background_asset": "banner-compre-esquerda.png"
+            "link": "shopify://collections/toners"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
             "tone": "light",
+            "background_asset": "banner-compre-sup-direita.webp",
             "eyebrow": "MINI COMPUTADORES",
             "title": "Potência compacta. Grande desempenho.",
             "cta_label": "Explorar",
-            "link": "shopify://collections/mini-pcs",
-            "background_asset": "banner-compre-sup-direita.png"
+            "link": "shopify://collections/mini-pcs"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
             "tone": "light",
+            "background_asset": "banner-compre-centro.webp",
             "eyebrow": "LEITOR DE CARTÃO",
             "title": "Leitura rápida para o seu dia a dia.",
             "cta_label": "Ver opções",
-            "link": "shopify://collections/perifericos",
-            "background_asset": "banner-compre-centro.png"
+            "link": "shopify://collections/perifericos"
           }
         },
         "c4": {
           "type": "card",
           "settings": {
             "tone": "dark",
+            "background_asset": "banner-compre-inf-direita.webp",
             "eyebrow": "PAPEL FOTOGRÁFICO",
             "title": "Imagens nítidas para cada detalhe.",
             "cta_label": "Ver opções",
-            "link": "shopify://collections/all",
-            "background_asset": "banner-compre-inf-direita.png"
+            "link": "shopify://collections/all"
           }
         }
       },
@@ -600,20 +621,32 @@
     "featured_product_main": {
       "type": "dc-featured-product",
       "settings": {
-        "product": "pc-mini-pcyes-b300-i3-8gb",
         "eyebrow": "Produto destaque",
+        "product": "pc-mini-pcyes-b300-i3-8gb",
         "cta_label": "Adicionar ao carrinho",
         "show_stock_bar": true,
-        "stock_qty": 4,
-        "stock_pct": 30,
         "padding_top": 56,
         "padding_bottom": 56
+      }
+    },
+    "spotlight_3d": {
+      "type": "dc-category-spotlight",
+      "settings": {
+        "collection": "impressao-3d",
+        "eyebrow": "O FUTURO IMPRIME AQUI",
+        "heading": "Impressão 3D",
+        "subheading": "Impressoras 3D, filamentos PLA/ABS/PETG, resinas e acessórios — do primeiro projeto à produção em série.",
+        "cta_label": "Explorar Impressão 3D",
+        "max_products": 6,
+        "show_when_empty": false,
+        "padding_top": 56,
+        "padding_bottom": 24
       }
     }
   },
   "order": [
     "hero_main",
-    "trust_badges_main",
+    "spotlight_3d",
     "categories_grid",
     "best_sellers",
     "promo_banners_main",
@@ -621,6 +654,7 @@
     "featured_product_main",
     "testimonials_section",
     "brand_carousel_main",
-    "newsletter_main"
+    "newsletter_main",
+    "trust_badges_main"
   ]
 }

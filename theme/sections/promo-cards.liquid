@@ -32,8 +32,19 @@
           class="dc-promo-card dc-promo-card--{{ tone }}{% if has_bg %} dc-promo-card--has-bg{% endif %}"
           data-idx="{{ idx }}"
           {{ block.shopify_attributes }}
-          {%- if block.settings.background_asset != blank %} style="background-image: url('{{ block.settings.background_asset | asset_url }}'); background-size: 108%; background-position: center; background-repeat: no-repeat;"{% endif -%}
         >
+          {%- if block.settings.background_asset != blank -%}
+            <img
+              src="{{ block.settings.background_asset | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="1400"
+              height="1000"
+              class="dc-promo-card__bg"
+              draggable="false"
+            >
+          {%- endif -%}
           {%- if block.settings.background_asset == blank and block.settings.image != blank -%}
             {%- assign promo_alt = block.settings.title | default: shop.name | escape -%}
             <div class="dc-promo-card__image">
@@ -165,6 +176,18 @@
   .dc-promo-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 18px 40px -18px rgba(13, 17, 21, 0.18);
+  }
+  /* Imagem de fundo como <img> lazy (perf) — replica o antigo background-size: 108% */
+  .dc-promo-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
   }
   /* SEM degrade nos cards com imagem de fundo */
 
@@ -302,6 +325,7 @@
       grid-template-columns: 1fr;
       grid-template-rows: auto;
       min-height: auto;
+      gap: 14px;
     }
     .dc-promo__grid > .dc-promo-card:nth-child(1),
     .dc-promo__grid > .dc-promo-card:nth-child(2),
@@ -309,10 +333,62 @@
     .dc-promo__grid > .dc-promo-card:nth-child(4) {
       grid-column: auto;
       grid-row: auto;
-      min-height: 240px;
+      min-height: 0;
     }
-    .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__title { font-size: 28px; }
-    .dc-promo__title { font-size: 30px; }
+
+    /* No mobile o card vira pilha vertical: imagem em cima, texto num
+       painel sólido embaixo. Acaba com o texto sobreposto à imagem e
+       com a quebra de palavra no meio. */
+    .dc-promo-card,
+    .dc-promo__grid > .dc-promo-card:nth-child(1) {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Imagem (bg ou content) deixa de cobrir o card: vira banner no topo */
+    .dc-promo-card__bg,
+    .dc-promo-card__image,
+    .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__image {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      transform: none;
+      align-self: stretch;
+    }
+
+    /* Texto: painel full-width abaixo da imagem */
+    .dc-promo-card__body,
+    .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__body {
+      order: 0;
+      max-width: 100%;
+      text-align: left;
+      padding: 16px 20px 20px;
+    }
+    .dc-promo-card--light,
+    .dc-promo-card--white { background: #ffffff; color: #0d1115; }
+    .dc-promo-card--dark { background: #0d1115; color: #ffffff; }
+    .dc-promo-card--has-bg { color: #0d1115; }
+    .dc-promo-card--has-bg.dc-promo-card--dark { color: #ffffff; }
+
+    .dc-promo-card__title,
+    .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__title,
+    .dc-promo__grid > .dc-promo-card:nth-child(2) .dc-promo-card__title {
+      font-size: 22px;
+      line-height: 1.12;
+      max-width: 100%;
+      margin: 0;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+    }
+    .dc-promo-card__cta,
+    .dc-promo__grid > .dc-promo-card:nth-child(1) .dc-promo-card__cta {
+      align-self: flex-start;
+    }
+    .dc-promo__title { font-size: 28px; }
   }
 {% endstylesheet %}
 

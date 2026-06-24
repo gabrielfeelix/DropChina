@@ -2,14 +2,21 @@
   <div class="dc-hero__container">
     <div class="dc-hero-slideshow" data-dc-slideshow data-autoplay="{{ section.settings.autoplay_ms | default: 6500 }}">
       {%- for block in section.blocks -%}
-        {%- assign slide_url = block.settings.link | default: '#' -%}
-        {%- if block.settings.image -%}
-          {%- assign img_src = block.settings.image | image_url: width: 1920 -%}
-        {%- elsif block.settings.image_asset != blank -%}
-          {%- assign img_src = block.settings.image_asset | asset_url -%}
-        {%- else -%}
-          {%- assign img_src = '' -%}
-        {%- endif -%}
+        {%- liquid
+          assign slide_url = block.settings.link | default: '#'
+          assign img_src = ''
+          assign img_mobile_src = ''
+          if block.settings.image
+            assign img_src = block.settings.image | image_url: width: 1920
+          elsif block.settings.image_asset != blank
+            assign img_src = block.settings.image_asset | asset_url
+          endif
+          if block.settings.image_mobile
+            assign img_mobile_src = block.settings.image_mobile | image_url: width: 1080
+          elsif block.settings.image_asset_mobile != blank
+            assign img_mobile_src = block.settings.image_asset_mobile | asset_url
+          endif
+        -%}
         <a
           href="{{ slide_url }}"
           class="dc-hero-slide {% if forloop.first %}active{% endif %}"
@@ -18,7 +25,20 @@
           {{ block.shopify_attributes }}
         >
           {%- if img_src != blank -%}
-            <img src="{{ img_src }}" alt="{{ block.settings.alt | default: shop.name | escape }}" width="1920" height="671" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" draggable="false">
+            <picture>
+              {%- if img_mobile_src != blank -%}
+                <source media="(max-width: 767px)" srcset="{{ img_mobile_src }}">
+              {%- endif -%}
+              <img
+                src="{{ img_src }}"
+                alt="{{ block.settings.alt | default: shop.name | escape }}"
+                width="1920"
+                height="640"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {% if forloop.first %}fetchpriority="high"{% endif %}
+                draggable="false"
+              >
+            </picture>
           {%- else -%}
             <div class="dc-hero-slide__placeholder"></div>
           {%- endif -%}
@@ -82,6 +102,21 @@
       });
       slideshow.addEventListener('mouseenter', stop);
       slideshow.addEventListener('mouseleave', start);
+
+      // Swipe em touch
+      var touchX = null;
+      slideshow.addEventListener('touchstart', function(e) {
+        touchX = e.touches[0].clientX;
+        stop();
+      }, { passive: true });
+      slideshow.addEventListener('touchend', function(e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 40) show(dx < 0 ? idx + 1 : idx - 1);
+        start();
+      }, { passive: true });
+
       start();
     });
   });
@@ -104,7 +139,8 @@
     box-shadow: 0 12px 36px -16px rgba(13, 17, 21, 0.18);
   }
   @media (max-width: 920px) {
-    .dc-hero-slideshow { aspect-ratio: 16 / 10; }
+    /* Banner bem mais alto no mobile (retrato) */
+    .dc-hero-slideshow { aspect-ratio: 4 / 5; border-radius: 20px; }
   }
   .dc-hero-slide {
     position: absolute;
@@ -118,6 +154,7 @@
     opacity: 1;
     pointer-events: auto;
   }
+  .dc-hero-slide picture,
   .dc-hero-slide img {
     width: 100%;
     height: 100%;
@@ -163,19 +200,23 @@
     gap: 8px;
     z-index: 3;
   }
+  /* Alvo de toque 20px alto (visual 4px via background-clip) */
   .dc-hero-slideshow__dot {
     width: 28px;
-    height: 4px;
+    height: 20px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.35);
+    background-clip: content-box;
     transition: width 0.3s, background 0.3s;
     border: 0;
     cursor: pointer;
-    padding: 0;
+    padding: 8px 0;
+    box-sizing: border-box;
   }
   .dc-hero-slideshow__dot.active {
     width: 56px;
     background: #ffffff;
+    background-clip: content-box;
   }
   .dc-hero-slideshow__count {
     position: absolute;
@@ -218,9 +259,11 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagem (1920x671 recomendado)" },
-        { "type": "text", "id": "image_asset", "label": "Asset fallback (nome do arquivo em theme/assets)", "info": "Ex: banner-toner.png — usado quando 'Imagem' acima não está setada" },
-        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "image_picker", "id": "image", "label": "Imagem desktop (1920x640 recomendado)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Imagem mobile (1080x1350 — retrato 4:5)", "info": "Arte dedicada pra telas pequenas no formato retrato 4:5 — evita corte de texto do banner" },
+        { "type": "text", "id": "image_asset", "label": "Asset fallback desktop (arquivo em theme/assets)", "info": "Ex: banner-toner.webp — usado quando 'Imagem' acima não está setada" },
+        { "type": "text", "id": "image_asset_mobile", "label": "Asset fallback mobile", "info": "Ex: banner-toner-mobile.webp" },
+        { "type": "text", "id": "alt", "label": "Alt text (descreva a oferta do banner)" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -229,9 +272,9 @@
     {
       "name": "Hero DropChina",
       "blocks": [
-        { "type": "slide", "settings": { "image_asset": "banner-worldcup.png", "alt": "Pacotes Panini World Cup 2026" } },
-        { "type": "slide", "settings": { "image_asset": "banner-toner.png", "alt": "Toner Evolut" } },
-        { "type": "slide", "settings": { "image_asset": "banner-gpu.png", "alt": "Placa de Vídeo GT 730" } }
+        { "type": "slide", "settings": { "image_asset": "banner-worldcup.webp", "image_asset_mobile": "banner-worldcup-mobile.webp", "alt": "Pacotes Panini World Cup 2026" } },
+        { "type": "slide", "settings": { "image_asset": "banner-toner.webp", "image_asset_mobile": "banner-toner-mobile.webp", "alt": "Toner Evolut" } },
+        { "type": "slide", "settings": { "image_asset": "banner-gpu.webp", "image_asset_mobile": "banner-gpu-mobile.webp", "alt": "Placa de Vídeo GT 730" } }
       ]
     }
   ]

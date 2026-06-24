@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -40,8 +49,8 @@
             "name": "Placas de Vídeo",
             "icon": "gpu",
             "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games",
-            "featured_collection": "perifericos",
-            "link": "shopify://collections/perifericos"
+            "featured_collection": "placas-de-video",
+            "link": "shopify://collections/placas-de-video"
           }
         },
         "mega_4": {
@@ -63,9 +72,20 @@
             "featured_collection": "perifericos",
             "link": "shopify://collections/perifericos"
           }
+        },
+        "mega_3d": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Impressão 3D",
+            "icon": "printer",
+            "items": "Impressoras 3D\nFilamento PLA\nFilamento ABS\nFilamento PETG\nResinas\nAcessórios & peças",
+            "featured_collection": "impressao-3d",
+            "link": "shopify://collections/impressao-3d"
+          }
         }
       },
       "block_order": [
+        "mega_3d",
         "mega_1",
         "mega_2",
         "mega_3",
@@ -84,24 +104,24 @@
         "topbar_link_4_url": "/pages/rastrear-pedido",
         "topbar_link_5": "",
         "topbar_link_5_url": "",
-        "phone": "(11) 99999-9999",
+        "phone": "(11) 93806-6545",
         "hours": "Atendimento · Seg–Sáb 8h–20h",
-        "search_placeholder": "Buscar cartuchos, toners, placas de vídeo...",
-        "nav_link_1": "Cartuchos & Toners",
-        "nav_link_1_url": "shopify://collections/cartuchos-de-tinta",
-        "nav_link_1_tag": "",
-        "nav_link_2": "Placas de Vídeo",
-        "nav_link_2_url": "shopify://collections/perifericos",
+        "search_placeholder": "Buscar impressora 3D, filamento, toner, cartucho...",
+        "nav_link_1": "Impressão 3D",
+        "nav_link_1_url": "shopify://collections/impressao-3d",
+        "nav_link_1_tag": "NOVO",
+        "nav_link_2": "Cartuchos & Toners",
+        "nav_link_2_url": "shopify://collections/toners",
         "nav_link_2_tag": "",
-        "nav_link_3": "Impressoras",
-        "nav_link_3_url": "shopify://collections/toners",
+        "nav_link_3": "Placas de Vídeo",
+        "nav_link_3_url": "shopify://collections/placas-de-video",
         "nav_link_3_tag": "",
-        "nav_link_4": "Áudio",
-        "nav_link_4_url": "shopify://collections/all",
+        "nav_link_4": "Impressoras",
+        "nav_link_4_url": "shopify://collections/impressoras",
         "nav_link_4_tag": "",
         "nav_link_5": "Ofertas",
-        "nav_link_5_url": "shopify://collections/all",
-        "nav_link_5_tag": "−40%",
+        "nav_link_5_url": "shopify://collections/ofertas-relampago",
+        "nav_link_5_tag": "-40%",
         "secondary_link_1": "Contato",
         "secondary_link_1_url": "/pages/contact",
         "secondary_link_2": "F.A.Q.",

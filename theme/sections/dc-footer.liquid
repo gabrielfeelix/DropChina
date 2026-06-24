@@ -57,7 +57,10 @@
                 {%- for line in lines -%}
                   {%- assign clean = line | strip -%}
                   {%- if clean != blank -%}
-                    <li><a href="#">{{ clean | escape }}</a></li>
+                    {%- assign link_parts = clean | split: '|' -%}
+                    {%- assign link_label = link_parts[0] | strip -%}
+                    {%- assign link_url = link_parts[1] | strip | default: '#' -%}
+                    <li><a href="{{ link_url }}">{{ link_label | escape }}</a></li>
                   {%- endif -%}
                 {%- endfor -%}
               </ul>
@@ -71,7 +74,7 @@
     </div>
 
     <div class="dc-footer-bottom">
-      <div class="dc-footer-bottom__copyright">{{ section.settings.copyright | default: '© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados.' | escape }}</div>
+      <div class="dc-footer-bottom__copyright">{{ section.settings.copyright | default: '© 2026 DropChina — Todos os direitos reservados.' | escape }}</div>
       <div class="dc-footer-payments">
         {%- if section.settings.payments_image != blank -%}
           {{ section.settings.payments_image | image_url: width: 600 | image_tag:
@@ -244,7 +247,7 @@
     { "type": "url", "id": "youtube", "label": "YouTube URL" },
     { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" },
     { "type": "header", "content": "Linha de baixo" },
-    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2025 DropChina · CNPJ 00.000.000/0001-00 — Todos os direitos reservados." },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026 DropChina — Todos os direitos reservados." },
     { "type": "image_picker", "id": "payments_image", "label": "Imagem de formas de pagamento", "info": "PNG com bandeiras (PIX, VISA, MASTER, etc). Default: asset 'formas-pagamento.png'." },
     { "type": "text", "id": "payments", "label": "Fallback texto (se sem imagem)", "default": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO" },
     { "type": "header", "content": "Espaçamento" },
@@ -258,7 +261,7 @@
       "settings": [
         { "type": "text", "id": "title", "label": "Título", "default": "Loja" },
         { "type": "link_list", "id": "menu", "label": "Menu (opcional)" },
-        { "type": "textarea", "id": "raw_links", "label": "Links (um por linha, se não tiver menu)" },
+        { "type": "textarea", "id": "raw_links", "label": "Links (um por linha: Texto|/url)", "info": "Ex: Toners|/collections/toners — sem a URL o link fica morto (#)" },
         { "type": "richtext", "id": "extra", "label": "Texto extra (ex: Atendimento)" }
       ]
     }
@@ -267,10 +270,10 @@
     {
       "name": "DropChina Footer",
       "blocks": [
-        { "type": "menu_col", "settings": { "title": "Loja", "raw_links": "Cartuchos & Tintas\nToners\nPlacas de Vídeo\nÁudio & Headsets\nPeriféricos\nImpressoras" } },
-        { "type": "menu_col", "settings": { "title": "Suporte", "raw_links": "Central de ajuda\nRastrear pedido\nTrocas & devoluções\nPolítica de garantia\nFrete & prazos" } },
-        { "type": "menu_col", "settings": { "title": "DropChina", "raw_links": "Sobre nós\nBlog\nPara empresas\nAtacado · CNPJ\nTrabalhe conosco" } },
-        { "type": "menu_col", "settings": { "title": "Contato", "raw_links": "Fale conosco\nWhatsApp comercial\nSuporte técnico\nFAQ", "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>" } }
+        { "type": "menu_col", "settings": { "title": "Loja", "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs" } },
+        { "type": "menu_col", "settings": { "title": "Suporte", "raw_links": "Central de ajuda|/pages/faq\nRastrear pedido|/pages/rastrear-pedido\nTrocas & devoluções|/policies/refund-policy\nPolítica de privacidade|/policies/privacy-policy\nFrete & prazos|/policies/shipping-policy" } },
+        { "type": "menu_col", "settings": { "title": "DropChina", "raw_links": "Sobre nós|/pages/sobre\nAtacado · CNPJ|/pages/atacado\nTermos de serviço|/policies/terms-of-service" } },
+        { "type": "menu_col", "settings": { "title": "Contato", "raw_links": "Fale conosco|/pages/contact\nWhatsApp comercial|https://wa.me/5511938066545\nFAQ|/pages/faq", "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>" } }
       ]
     }
   ]

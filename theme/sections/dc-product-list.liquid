@@ -11,7 +11,15 @@
         {%- if section.settings.eyebrow != blank -%}
           <p class="dc-pl__eyebrow">{{ section.settings.eyebrow | escape }}</p>
         {%- endif -%}
-        <h2 class="dc-pl__title">{{ section.settings.heading | escape }}</h2>
+        <h2 class="dc-pl__title">
+          {{ section.settings.heading | escape }}
+          {%- if section.settings.countdown_end != blank -%}
+            <span class="dc-pl__countdown" data-dc-countdown="{{ section.settings.countdown_end | escape }}" hidden>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              <span data-dc-countdown-label>Termina em --</span>
+            </span>
+          {%- endif -%}
+        </h2>
       </div>
       {%- if tab_blocks.size > 1 -%}
         <div class="dc-pl__tabs" role="tablist" data-dc-pl-tabs>
@@ -105,6 +113,26 @@
       });
     });
 
+    // Countdown real (merchant define data/hora fim no editor; some quando expira)
+    document.querySelectorAll('[data-dc-countdown]').forEach(function(chip) {
+      var end = new Date(chip.dataset.dcCountdown).getTime();
+      if (isNaN(end)) return;
+      var label = chip.querySelector('[data-dc-countdown-label]');
+      function tick() {
+        var diff = end - Date.now();
+        if (diff <= 0) { chip.hidden = true; clearInterval(t); return; }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor(diff % 86400000 / 3600000);
+        var m = Math.floor(diff % 3600000 / 60000);
+        var s = Math.floor(diff % 60000 / 1000);
+        label.textContent = 'Termina em ' + (d > 0 ? d + 'd ' : '') +
+          String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        chip.hidden = false;
+      }
+      var t = setInterval(tick, 1000);
+      tick();
+    });
+
     // Carousel nav (setas) — scroll horizontal no .dc-pl__carousel
     document.querySelectorAll('[data-dc-pl-carousel-nav]').forEach(function(nav) {
       var section = nav.closest('.dc-pl-section');
@@ -154,6 +182,23 @@
     color: #0d1115;
     margin: 0;
   }
+  .dc-pl__countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 14px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #fdecec;
+    color: #d62828;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .dc-pl__countdown[hidden] { display: none; }
   .dc-pl__tabs {
     display: flex;
     gap: 8px;
@@ -288,6 +333,7 @@
     ], "default": "grid" },
     { "type": "checkbox", "id": "show_view_all", "label": "Exibir botão 'Ver todos'", "default": true },
     { "type": "text", "id": "view_all_label", "label": "Texto botão 'Ver todos'", "default": "Ver todos os produtos" },
+    { "type": "text", "id": "countdown_end", "label": "Countdown — data/hora fim (opcional)", "info": "Formato: 2026-06-30T23:59 — exibe contagem regressiva REAL ao lado do título e some quando expira. Deixe vazio pra ocultar." },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
   ],

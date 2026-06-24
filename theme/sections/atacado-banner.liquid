@@ -1,5 +1,5 @@
 {%- liquid
-  assign bg_asset = section.settings.background_asset | default: 'atacado-bg.png'
+  assign bg_asset = section.settings.background_asset | default: 'atacado-bg.webp'
 -%}
 
 <section class="atacado-banner-section section section--page-width spacing-style" style="{% render 'spacing-padding', settings: section.settings %}">
@@ -169,7 +169,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ATACADO · CNPJ" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Compre como revendedor e pague menos" },
     { "type": "textarea", "id": "lead", "label": "Subtítulo", "default": "Tabela exclusiva para CNPJ a partir de 10 unidades, com nota fiscal, entrega em todo o Brasil e gerente de conta dedicado." },
-    { "type": "text", "id": "background_asset", "label": "Background asset", "default": "atacado-bg.png", "info": "Nome do arquivo em theme/assets" },
+    { "type": "text", "id": "background_asset", "label": "Background asset", "default": "atacado-bg.webp", "info": "Nome do arquivo em theme/assets" },
     { "type": "text", "id": "primary_cta_label", "label": "CTA principal", "default": "Cadastrar CNPJ" },
     { "type": "url", "id": "primary_cta_link", "label": "Link CTA principal" },
     { "type": "text", "id": "secondary_cta_label", "label": "CTA secundário", "default": "Falar no WhatsApp" },

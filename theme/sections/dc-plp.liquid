@@ -1,4 +1,20 @@
-{%- assign products_per_page = section.settings.products_per_page | default: 16 -%}
+{%- liquid
+  assign products_per_page = section.settings.products_per_page | default: 16
+
+  comment
+    Conta filtros ativos (pra badge do botão "Filtrar" e chips)
+  endcomment
+  assign active_filter_count = 0
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign active_filter_count = active_filter_count | plus: 1
+      endif
+    else
+      assign active_filter_count = active_filter_count | plus: filter.active_values.size
+    endif
+  endfor
+-%}
 
 <nav class="dc-breadcrumb" aria-label="Breadcrumb">
   <div class="dc-breadcrumb__container">
@@ -13,35 +29,71 @@
   </div>
 </nav>
 
-<section class="dc-plp-hero">
-  <div class="dc-plp-hero__container">
-    <p class="dc-plp-hero__eyebrow">{{ section.settings.eyebrow | default: 'Categoria' | escape }}</p>
-    <h1 class="dc-plp-hero__title">{{ collection.title }}</h1>
-    {%- if collection.description != blank -%}
-      <div class="dc-plp-hero__desc">{{ collection.description | strip_html | truncate: 280 }}</div>
-    {%- endif -%}
-    <div class="dc-plp-hero__meta">
-      <span><b>{{ collection.products_count }}</b> produtos</span>
-      <span class="dc-plp-hero__dot"></span>
-      <span>Frete grátis acima de R$ 199</span>
-      <span class="dc-plp-hero__dot"></span>
-      <span>Em até 18x sem juros</span>
+{%- if collection.image != blank -%}
+  {%- comment -%} Capa da categoria: banner full-width com a imagem da coleção {%- endcomment -%}
+  <section class="dc-plp-cover">
+    {{ collection.image | image_url: width: 2000 | image_tag:
+        loading: 'eager',
+        fetchpriority: 'high',
+        class: 'dc-plp-cover__img',
+        alt: collection.title,
+        widths: '750, 1100, 1500, 2000',
+        sizes: '100vw' }}
+    <div class="dc-plp-cover__overlay"></div>
+    <div class="dc-plp-cover__content">
+      <p class="dc-plp-cover__eyebrow">{{ section.settings.eyebrow | default: 'Categoria' | escape }}</p>
+      <h1 class="dc-plp-cover__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="dc-plp-cover__desc">{{ collection.description | strip_html | truncate: 200 }}</div>
+      {%- endif -%}
+      <div class="dc-plp-cover__meta">
+        <span><b>{{ collection.products_count }}</b> {% if collection.products_count == 1 %}produto{% else %}produtos{% endif %}</span>
+        <span class="dc-plp-cover__dot"></span>
+        <span>Frete grátis acima de R$ 199</span>
+        <span class="dc-plp-cover__dot"></span>
+        <span>Em até 18x sem juros</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+{%- else -%}
+  <section class="dc-plp-hero">
+    <div class="dc-plp-hero__container">
+      <p class="dc-plp-hero__eyebrow">{{ section.settings.eyebrow | default: 'Categoria' | escape }}</p>
+      <h1 class="dc-plp-hero__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="dc-plp-hero__desc">{{ collection.description | strip_html | truncate: 280 }}</div>
+      {%- endif -%}
+      <div class="dc-plp-hero__meta">
+        <span><b>{{ collection.products_count }}</b> {% if collection.products_count == 1 %}produto{% else %}produtos{% endif %}</span>
+        <span class="dc-plp-hero__dot"></span>
+        <span>Frete grátis acima de R$ 199</span>
+        <span class="dc-plp-hero__dot"></span>
+        <span>Em até 18x sem juros</span>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
 
 <main class="dc-plp">
   <div class="dc-plp__container">
     <div class="dc-plp__layout">
 
-      <aside class="dc-plp-sidebar">
+      <div class="dc-plp-filters-backdrop" data-dc-close-filters hidden></div>
+      <aside class="dc-plp-sidebar" data-dc-filters-panel>
         <div class="dc-plp-sidebar__head">
           <h3>Filtros</h3>
-          <a href="{{ collection.url }}" class="dc-plp-sidebar__clear">Limpar tudo</a>
+          <div class="dc-plp-sidebar__head-actions">
+            <a href="{{ collection.url }}" class="dc-plp-sidebar__clear">Limpar tudo</a>
+            <button type="button" class="dc-plp-sidebar__close" data-dc-close-filters aria-label="Fechar filtros">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
         </div>
 
         {%- if collection.filters.size > 0 -%}
           <form id="dc-plp-filter-form" class="dc-plp-sidebar__form">
+            {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+            <input type="hidden" name="sort_by" value="{{ current_sort | escape }}">
             {%- for filter in collection.filters -%}
               {%- assign show_more = false -%}
               {%- if filter.type == 'list' and filter.values.size > 7 -%}
@@ -146,22 +198,52 @@
 
       <div class="dc-plp-content">
         <div class="dc-plp-toolbar">
-          <div class="dc-plp-toolbar__count">
-            <b>{{ collection.products_count }}</b> resultados em <b>{{ collection.title }}</b>
+          <div class="dc-plp-toolbar__left">
+            <button type="button" class="dc-plp-toolbar__filters" data-dc-open-filters>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              Filtrar{% if active_filter_count > 0 %} <span class="dc-plp-toolbar__filters-count">{{ active_filter_count }}</span>{% endif %}
+            </button>
+            <div class="dc-plp-toolbar__count">
+              <b>{{ collection.products_count }}</b> resultados em <b>{{ collection.title }}</b>
+            </div>
           </div>
           <div class="dc-plp-toolbar__right">
             <label class="dc-plp-toolbar__sort">
               <span>Ordenar por:</span>
-              <select onchange="window.location.href=this.value">
-                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                {%- assign sort_url_base = collection.url | append: '?sort_by=' -%}
+              {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+              <select data-dc-sort>
                 {%- for option in collection.sort_options -%}
-                  <option value="{{ sort_url_base }}{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+                  <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
                 {%- endfor -%}
               </select>
             </label>
           </div>
         </div>
+
+        {%- if active_filter_count > 0 -%}
+          <div class="dc-plp-active" aria-label="Filtros ativos">
+            {%- for filter in collection.filters -%}
+              {%- if filter.type == 'price_range' -%}
+                {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                  <a href="{{ filter.url_to_remove }}" class="dc-plp-active__chip">
+                    {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}R$ 0{%- endif -%}
+                    –
+                    {%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}∞{%- endif %}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  </a>
+                {%- endif -%}
+              {%- else -%}
+                {%- for value in filter.active_values -%}
+                  <a href="{{ value.url_to_remove }}" class="dc-plp-active__chip">
+                    {{ value.label | escape }}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  </a>
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <a href="{{ collection.url }}" class="dc-plp-active__clear">Limpar tudo</a>
+          </div>
+        {%- endif -%}
 
         {%- paginate collection.products by products_per_page -%}
         {%- if collection.products.size > 0 -%}
@@ -238,6 +320,49 @@
 
 <script>
 (function() {
+  // ===== Sort: preserva filtros ativos na URL =====
+  document.querySelectorAll('[data-dc-sort]').forEach(function(sel) {
+    sel.addEventListener('change', function() {
+      var u = new URL(window.location.href);
+      u.searchParams.set('sort_by', sel.value);
+      u.searchParams.delete('page');
+      window.location.href = u.toString();
+    });
+  });
+
+  // ===== Bottom-sheet de filtros (mobile) =====
+  var panel = document.querySelector('[data-dc-filters-panel]');
+  var backdrop = document.querySelector('.dc-plp-filters-backdrop');
+  var openBtn = document.querySelector('[data-dc-open-filters]');
+  function isMobile() { return window.matchMedia('(max-width: 920px)').matches; }
+  function openFilters() {
+    if (!panel) return;
+    panel.classList.add('is-open');
+    if (backdrop) { backdrop.hidden = false; requestAnimationFrame(function() { backdrop.classList.add('is-open'); }); }
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFilters() {
+    if (!panel) return;
+    panel.classList.remove('is-open');
+    if (backdrop) { backdrop.classList.remove('is-open'); setTimeout(function() { backdrop.hidden = true; }, 250); }
+    document.body.style.overflow = '';
+  }
+  if (openBtn) openBtn.addEventListener('click', openFilters);
+  document.querySelectorAll('[data-dc-close-filters]').forEach(function(el) {
+    el.addEventListener('click', closeFilters);
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeFilters();
+  });
+
+  // ===== Auto-apply: checkbox aplica na hora no desktop;
+  // no mobile o usuário marca vários e confirma em "Aplicar" =====
+  document.querySelectorAll('#dc-plp-filter-form input[type="checkbox"]').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      if (!isMobile()) cb.closest('form').submit();
+    });
+  });
+
   // Price chips: aplica min/max e auto-submit
   document.querySelectorAll('.dc-plp-price-chip').forEach(function(chip) {
     chip.addEventListener('click', function() {
@@ -303,6 +428,84 @@
 </script>
 
 {% stylesheet %}
+  /* Capa da categoria (cover com imagem) */
+  .dc-plp-cover {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0d1115;
+  }
+  .dc-plp-cover__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .dc-plp-cover__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(13,17,21,0.82) 0%, rgba(13,17,21,0.55) 45%, rgba(13,17,21,0.15) 100%);
+  }
+  .dc-plp-cover__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 28px;
+    color: #ffffff;
+  }
+  .dc-plp-cover__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f5c518;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  .dc-plp-cover__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 52px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  }
+  .dc-plp-cover__desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.88);
+    max-width: 56ch;
+    margin: 0 0 16px;
+    line-height: 1.5;
+  }
+  .dc-plp-cover__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.9);
+    flex-wrap: wrap;
+  }
+  .dc-plp-cover__meta b { color: #ffffff; }
+  .dc-plp-cover__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.5);
+  }
+  @media (max-width: 720px) {
+    .dc-plp-cover { min-height: 220px; }
+    .dc-plp-cover__title { font-size: 34px; }
+    .dc-plp-cover__desc { font-size: 14px; }
+  }
+
   .dc-plp-hero {
     padding: 36px 0 28px;
     border-bottom: 1px solid #ececef;
@@ -384,6 +587,62 @@
     justify-content: space-between;
     padding: 16px 20px;
     border-bottom: 1px solid #ececef;
+  }
+  .dc-plp-sidebar__head-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .dc-plp-sidebar__close {
+    display: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: #f4f5f7;
+    border: 0;
+    color: #0d1115;
+    cursor: pointer;
+    place-items: center;
+    padding: 0;
+  }
+
+  /* ===== Mobile: sidebar vira bottom-sheet; grid vem primeiro ===== */
+  .dc-plp-filters-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 17, 21, 0.45);
+    z-index: 98;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .dc-plp-filters-backdrop.is-open { opacity: 1; }
+  .dc-plp-filters-backdrop[hidden] { display: none; }
+  @media (max-width: 920px) {
+    .dc-plp-sidebar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      z-index: 99;
+      max-height: 82vh;
+      overflow-y: auto;
+      border-radius: 22px 22px 0 0;
+      border: 0;
+      box-shadow: 0 -24px 60px -24px rgba(13, 17, 21, 0.35);
+      transform: translateY(105%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .dc-plp-sidebar.is-open { transform: translateY(0); }
+    .dc-plp-sidebar__close { display: grid; }
+    .dc-plp-sidebar__head {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      z-index: 2;
+    }
   }
   .dc-plp-sidebar__head h3 {
     font-family: "Manrope", sans-serif;
@@ -504,7 +763,7 @@
     transform: rotate(-45deg) translate(1px, -1px);
   }
   .dc-plp-filter-check__lbl { flex: 1; }
-  .dc-plp-filter-check__count { color: #9ca3af; font-size: 12px; }
+  .dc-plp-filter-check__count { color: #6b7280; font-size: 12px; }
   .dc-plp-filter-check:hover { color: #0d1115; }
 
   /* Slider duplo de preço */
@@ -721,7 +980,7 @@
     display: block;
     width: calc(100% - 40px);
   }
-  .dc-plp-sidebar__apply:hover { background: #d62828; }
+  .dc-plp-sidebar__apply:hover { background: #2a3038; }
   .dc-plp-sidebar__empty {
     padding: 20px;
     font-size: 13px;
@@ -740,10 +999,81 @@
     gap: 18px;
     flex-wrap: wrap;
   }
+  .dc-plp-toolbar__left {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .dc-plp-toolbar__filters {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    color: #0d1115;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .dc-plp-toolbar__filters-count {
+    background: #0d1115;
+    color: #ffffff;
+    min-width: 19px;
+    height: 19px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-grid;
+    place-items: center;
+    padding: 0 5px;
+  }
+  @media (max-width: 920px) {
+    .dc-plp-toolbar__filters { display: inline-flex; }
+  }
   .dc-plp-toolbar__count {
     font-size: 14px;
     color: #6b7280;
   }
+  @media (max-width: 560px) {
+    .dc-plp-toolbar__count { display: none; }
+  }
+
+  /* Chips de filtros ativos */
+  .dc-plp-active {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .dc-plp-active__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: #0d1115;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .dc-plp-active__chip:hover { background: #2a3038; }
+  .dc-plp-active__chip svg { opacity: 0.7; }
+  .dc-plp-active__clear {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #d62828;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .dc-plp-active__clear:hover { text-decoration: underline; }
   .dc-plp-toolbar__count b { color: #0d1115; font-weight: 700; }
   .dc-plp-toolbar__sort {
     display: inline-flex;
@@ -861,7 +1191,7 @@
     font-weight: 600;
     transition: background 0.18s;
   }
-  .dc-plp-empty__cta:hover { background: #d62828; }
+  .dc-plp-empty__cta:hover { background: #2a3038; }
 {% endstylesheet %}
 
 {% schema %}
