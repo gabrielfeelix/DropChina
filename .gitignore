@@ -4,6 +4,12 @@
 !.env.example
 *.pem
 *.key
+# Certificados digitais (e-CNPJ A1 — chave privada que assina NF-e)
+*.pfx
+*.p12
+# Planilhas com dados fiscais/cadastrais sensíveis
+DROPCHINA.xlsx
+*senha*
 
 # Tokens e auth da Shopify CLI
 .shopify/
