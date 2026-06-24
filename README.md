@@ -94,20 +94,27 @@ Scripts seguros: `load:meli --create-only` (não re-PUTa existentes), `set:gtin`
 
 ## theme — loja Shopify
 
-Tema Tinker customizado, look **Fantasy Gaming** (header preto, hero full-bleed, cards gaming, predictive search, PDP/PLP redesenhadas).
+Tema custom **DropChina** (base Tinker, look Fantasy Gaming) — é o tema **publicado** na loja viva. A pasta `theme/` é a **fonte da verdade** e bate 1:1 com produção.
 
-Pré-requisitos: [Node.js 24+](https://nodejs.org), [Shopify CLI](https://shopify.dev/docs/themes/tools/cli/install).
+- Loja: **`dropchina-9753.myshopify.com`** · domínio: **dropchinaoficial.com.br**
+- Tema vivo: **DropChina** `#161970290907`
 
+Pré-requisitos: [Node.js 24+](https://nodejs.org) + [Shopify CLI](https://shopify.dev/docs/themes/tools/cli/install) (`npm i -g @shopify/cli@latest`).
+
+### Fluxo: local → Shopify → GitHub
 ```bash
-npm install -g @shopify/cli@latest
-
 cd theme
-shopify theme dev \
-  --store=akfd19-1c.myshopify.com \
-  --store-password=<senha-storefront>
+# 1. preview ao vivo (hot-reload, NÃO toca na loja):
+shopify theme dev --store=dropchina-9753.myshopify.com
+
+# 2. subir pra loja (o site atualiza):
+shopify theme push --store=dropchina-9753.myshopify.com --theme=161970290907
+
+# 3. salvar no GitHub:
+git add theme/ && git commit -m "..." && git push
 ```
 
-Sobe em `http://127.0.0.1:9292` com hot-reload.
+> ⚠️ **Antes de `push`, faça `pull`.** Se alguém editar pelo painel da Shopify (editor de tema), rode `shopify theme pull` primeiro — senão o push do repo apaga o que mudou no painel. Vale principalmente pro `config/settings_data.json` (config do customizador).
 
 ### Catálogo (setup via Admin API)
 
@@ -115,7 +122,7 @@ Scripts em `catalogo/` usam `shopify store auth` + `shopify store execute` (sem 
 
 ```bash
 shopify store auth \
-  --store=akfd19-1c.myshopify.com \
+  --store=dropchina-9753.myshopify.com \
   --scopes=write_products,read_products,write_publications,read_publications,write_files,write_online_store_navigation,write_online_store_pages
 
 node catalogo/setup-loja.mjs    # coleções + produtos
