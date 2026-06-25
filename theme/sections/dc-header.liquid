@@ -1064,6 +1064,7 @@
     transition: opacity 0.15s, transform 0.15s, color 0.15s;
   }
   .dc-mega__go svg { width: 16px; height: 16px; }
+  .dc-mega__item:hover .dc-mega__go,
   .dc-mega__item.active .dc-mega__go {
     opacity: 1;
     transform: translateX(0);
@@ -1078,6 +1079,12 @@
     display: grid;
     place-items: center;
     color: #2a3038;
+  }
+  .dc-mega__item:hover .dc-mega__icon,
+  .dc-mega__item.active .dc-mega__icon {
+    color: #d62828;
+    background: #fdecec;
+    border-color: rgba(214, 40, 40, 0.28);
   }
   .dc-mega__name { font-weight: 600; }
   .dc-mega__all {
