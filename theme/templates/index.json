@@ -187,7 +187,7 @@
       "name": "Categories",
       "settings": {
         "eyebrow": "NOSSA LOJA",
-        "heading": "Comece pela Impressão 3D",
+        "heading": "Navegue pelas categorias",
         "cta_label": "Ver todas",
         "cta_link": "shopify://collections/all",
         "padding-block-start": 56,
@@ -629,28 +629,24 @@
         "padding_bottom": 56
       }
     },
-    "spotlight_3d": {
-      "type": "dc-category-spotlight",
+    "recently_viewed": {
+      "type": "dc-recently-viewed",
       "settings": {
-        "collection": "impressao-3d",
-        "eyebrow": "O FUTURO IMPRIME AQUI",
-        "heading": "Impressão 3D",
-        "subheading": "Impressoras 3D, filamentos PLA/ABS/PETG, resinas e acessórios — do primeiro projeto à produção em série.",
-        "cta_label": "Explorar Impressão 3D",
-        "max_products": 6,
-        "show_when_empty": false,
-        "padding_top": 56,
-        "padding_bottom": 24
+        "eyebrow": "VOCÊ VIU",
+        "heading": "Vistos recentemente",
+        "max_items": 5,
+        "padding_top": 24,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
     "hero_main",
-    "spotlight_3d",
     "categories_grid",
     "best_sellers",
     "promo_banners_main",
     "second_collection",
+    "recently_viewed",
     "featured_product_main",
     "testimonials_section",
     "brand_carousel_main",

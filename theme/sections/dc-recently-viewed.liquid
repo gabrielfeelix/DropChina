@@ -1,0 +1,124 @@
+{%- comment -%}
+  DC Vistos recentemente — mostra os últimos produtos que o cliente abriu.
+  Os handles são gravados no localStorage ('dc:recentlyViewed') pelo dc-pdp.liquid.
+  Cada card é buscado via Section Rendering API (dc-card-fragment). A seção fica
+  oculta até renderizar ao menos 1 card (nada quebra se o cliente nunca viu nada).
+{%- endcomment -%}
+
+<section
+  id="dc-rv-{{ section.id }}"
+  class="dc-rv"
+  data-dc-rv
+  hidden
+  style="padding-block: {{ section.settings.padding_top | default: 24 }}px {{ section.settings.padding_bottom | default: 56 }}px;"
+>
+  <div class="dc-rv__container">
+    <header class="dc-rv__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dc-rv__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="dc-rv__title">{{ section.settings.heading | default: 'Vistos recentemente' | escape }}</h2>
+    </header>
+    <div class="dc-rv__grid" data-dc-rv-grid></div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var KEY = 'dc:recentlyViewed';
+    var FRAGMENT = 'dc-card-fragment';
+    var section = document.getElementById('dc-rv-{{ section.id }}');
+    if (!section) return;
+    var grid = section.querySelector('[data-dc-rv-grid]');
+    var limit = {{ section.settings.max_items | default: 5 }};
+
+    var handles = [];
+    try { handles = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { handles = []; }
+    handles = handles.slice(0, limit);
+    if (!handles.length) return;
+
+    function firstElement(host) {
+      var kids = host.children;
+      for (var i = 0; i < kids.length; i++) {
+        if (!/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(kids[i].tagName)) return kids[i];
+      }
+      return null;
+    }
+
+    Promise.all(handles.map(function (h) {
+      return fetch('/products/' + encodeURIComponent(h) + '?section_id=' + FRAGMENT)
+        .then(function (r) { return r.ok ? r.text() : ''; })
+        .then(function (html) {
+          if (!html || !html.trim()) return null;
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var host = doc.getElementById('shopify-section-' + FRAGMENT) || doc.body;
+          return firstElement(host);
+        })
+        .catch(function () { return null; });
+    })).then(function (cards) {
+      var any = false;
+      cards.forEach(function (card) {
+        if (!card) return;
+        var cell = document.createElement('div');
+        cell.className = 'dc-rv__cell';
+        cell.appendChild(card);
+        grid.appendChild(cell);
+        any = true;
+      });
+      if (any) section.hidden = false;
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .dc-rv { background: #ffffff; }
+  .dc-rv[hidden] { display: none; }
+  .dc-rv__container { max-width: 1280px; margin: 0 auto; padding-inline: 28px; }
+  .dc-rv__head { margin-bottom: 24px; }
+  .dc-rv__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .dc-rv__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-rv__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .dc-rv__cell { min-width: 0; }
+  @media (max-width: 1180px) { .dc-rv__grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 920px)  { .dc-rv__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px)  { .dc-rv__grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Vistos recentemente",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "VOCÊ VIU" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Vistos recentemente" },
+    { "type": "range", "id": "max_items", "label": "Máx. de produtos", "min": 3, "max": 8, "step": 1, "default": 5 },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding topo", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding base", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "presets": [
+    { "name": "DC Vistos recentemente" }
+  ]
+}
+{% endschema %}

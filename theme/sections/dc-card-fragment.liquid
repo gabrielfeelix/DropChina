@@ -1,0 +1,27 @@
+{%- comment -%}
+  Fragmento de card de produto para o Section Rendering API.
+  Usado pelo "Vistos recentemente" (dc-recently-viewed): o JS busca
+  /products/{handle}?section_id=dc-card-fragment e injeta o card completo.
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  if p == blank
+    assign p = closest.product
+  endif
+  if p == blank
+    assign p = section.settings.product
+  endif
+-%}
+{%- if p != blank -%}
+  {% render 'dc-product-card', product: p %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DC Card Fragment",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produto" }
+  ]
+}
+{% endschema %}

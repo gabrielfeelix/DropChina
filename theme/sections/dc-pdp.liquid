@@ -297,6 +297,20 @@
   }
 </script>
 
+<script>
+  /* DropChina — registra o produto visto para o "Vistos recentemente" */
+  (function () {
+    try {
+      var h = {{ product_obj.handle | json }};
+      if (!h) return;
+      var k = 'dc:recentlyViewed';
+      var list = JSON.parse(localStorage.getItem(k) || '[]').filter(function (x) { return x !== h; });
+      list.unshift(h);
+      localStorage.setItem(k, JSON.stringify(list.slice(0, 8)));
+    } catch (e) {}
+  })();
+</script>
+
 {% if product_obj.description != blank %}
 <section class="dc-pdp-desc section section--page-width">
   <div class="dc-pdp-desc__container">
