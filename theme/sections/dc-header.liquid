@@ -168,7 +168,7 @@
                 {%- endcase -%}
               </span>
               <span class="dc-mega__name">{{ block.settings.name | escape }}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+              <span class="dc-mega__go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></span>
             </a>
           {%- endfor -%}
           <a href="{{ routes.collections_url }}" class="dc-mega__all">
@@ -1051,17 +1051,20 @@
     background: #f4f5f7;
     color: #0d1115;
   }
-  .dc-mega__item svg:last-child {
+  .dc-mega__go {
     margin-left: auto;
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
     color: #9ca3af;
     opacity: 0;
     transform: translateX(-4px);
     transition: opacity 0.15s, transform 0.15s, color 0.15s;
   }
-  .dc-mega__item.active svg:last-child {
+  .dc-mega__go svg { width: 16px; height: 16px; }
+  .dc-mega__item.active .dc-mega__go {
     opacity: 1;
     transform: translateX(0);
     color: #d62828;
