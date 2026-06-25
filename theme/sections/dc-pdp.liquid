@@ -259,9 +259,9 @@
       <span class="dc-sticky-buy__now">{{ current_price | money }}</span>
     </div>
   </div>
-  <button type="button" class="dc-sticky-buy__add" data-dc-sticky-add>
+  <button type="button" class="dc-sticky-buy__add" data-dc-sticky-add {% if current_variant.available == false %}disabled{% endif %}>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
-    Adicionar
+    <span data-dc-sticky-add-label>{% if current_variant.available %}Adicionar{% else %}Esgotado{% endif %}</span>
   </button>
 </div>
 
@@ -430,6 +430,11 @@
         stickyStrike.hidden = !onSaleNow;
         if (onSaleNow) stickyStrike.textContent = money(v.compare_at_price);
       }
+
+      var stickyAddBtn2 = document.querySelector('[data-dc-sticky-add]');
+      var stickyAddLabel = document.querySelector('[data-dc-sticky-add-label]');
+      if (stickyAddBtn2) stickyAddBtn2.disabled = !v.available;
+      if (stickyAddLabel) stickyAddLabel.textContent = v.available ? 'Adicionar' : 'Esgotado';
 
       // Galeria: pula pra foto da variante, se tiver
       if (v.featured_image && v.featured_image.position) {
@@ -1357,6 +1362,7 @@
     white-space: nowrap;
   }
   .dc-sticky-buy__add:hover { background: #16a34a; transform: translateY(-1px); }
+  .dc-sticky-buy__add:disabled { background: #d1d5db; color: #6b7280; cursor: not-allowed; transform: none; box-shadow: none; }
   @media (max-width: 920px) {
     .dc-sticky-buy { width: auto; left: 12px; right: 12px; bottom: 12px; }
   }
