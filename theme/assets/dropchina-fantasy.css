@@ -415,20 +415,22 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
 .dc-card__media-link {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  display: block;
   /* SEM z-index: z-index num elemento posicionado cria stacking
      context, e isso impede o mix-blend-mode da imagem de enxergar
      o bg cinza do .dc-card__media. Removido pra fix do bg branco. */
 }
 .dc-card .dc-card__img,
 .dc-card__img {
-  max-width: 88%;
-  max-height: 88%;
-  width: auto;
-  height: auto;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain + padding: qualquer orientação (retrato/paisagem) cabe inteira,
+     sem cortar. Fix dos produtos altos (fones, papel fotográfico). */
   object-fit: contain;
+  object-position: center;
+  padding: 16px;
   mix-blend-mode: multiply !important;
   transition: transform 0.4s ease;
 }
