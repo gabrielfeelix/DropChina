@@ -42,7 +42,11 @@
     <div class="dc-pdp__layout">
 
       <div class="dc-pdp-gallery">
-        <div class="dc-pdp-gallery__thumbs">
+        <div class="dc-pdp-gallery__thumbsWrap">
+          <button class="dc-pdp-gallery__thumbnav dc-pdp-gallery__thumbnav--up" data-dc-thumbs-up type="button" aria-label="Fotos acima" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+          </button>
+          <div class="dc-pdp-gallery__thumbs" data-dc-thumbs>
           {%- for media in product_obj.media -%}
             <button
               class="dc-pdp-gallery__thumb {% if forloop.first %}active{% endif %}"
@@ -61,6 +65,10 @@
               {%- endif -%}
             </button>
           {%- endfor -%}
+          </div>
+          <button class="dc-pdp-gallery__thumbnav dc-pdp-gallery__thumbnav--down" data-dc-thumbs-down type="button" aria-label="Mais fotos" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
         </div>
         <div class="dc-pdp-gallery__stage">
           {%- if product_obj.media.size > 1 -%}
@@ -332,10 +340,33 @@
       idx = (i + slides.length) % slides.length;
       slides.forEach(function(s, n) { s.classList.toggle('active', n === idx); });
       thumbs.forEach(function(t, n) { t.classList.toggle('active', n === idx); });
+      if (thumbs[idx]) thumbs[idx].scrollIntoView({ block: 'nearest' });
+      if (typeof updateThumbNav === 'function') updateThumbNav();
     }
     thumbs.forEach(function(t, n) { t.addEventListener('click', function() { show(n); }); });
     if (prevBtn) prevBtn.addEventListener('click', function() { show(idx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { show(idx + 1); });
+
+    // Setas de rolagem da coluna de thumbnails (aparecem só quando passa do card)
+    var thumbsEl = container.querySelector('[data-dc-thumbs]');
+    var thUp = container.querySelector('[data-dc-thumbs-up]');
+    var thDown = container.querySelector('[data-dc-thumbs-down]');
+    function updateThumbNav() {
+      if (!thumbsEl) return;
+      var overflow = thumbsEl.scrollHeight - thumbsEl.clientHeight > 4;
+      var atTop = thumbsEl.scrollTop <= 2;
+      var atBottom = thumbsEl.scrollTop >= thumbsEl.scrollHeight - thumbsEl.clientHeight - 2;
+      if (thUp) thUp.hidden = !overflow || atTop;
+      if (thDown) thDown.hidden = !overflow || atBottom;
+    }
+    if (thumbsEl) {
+      thumbsEl.addEventListener('scroll', updateThumbNav, { passive: true });
+      window.addEventListener('resize', updateThumbNav);
+      window.addEventListener('load', updateThumbNav);
+      if (thUp) thUp.addEventListener('click', function() { thumbsEl.scrollBy({ top: -188, behavior: 'smooth' }); });
+      if (thDown) thDown.addEventListener('click', function() { thumbsEl.scrollBy({ top: 188, behavior: 'smooth' }); });
+      updateThumbNav();
+    }
 
     var qtyInput = container.querySelector('.dc-pdp-qty__input');
     container.querySelectorAll('.dc-pdp-qty__btn').forEach(function(b) {
@@ -711,13 +742,39 @@
     position: sticky;
     top: 24px;
   }
+  .dc-pdp-gallery__thumbsWrap { position: relative; }
   .dc-pdp-gallery__thumbs {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-height: 560px;
     overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
   }
+  .dc-pdp-gallery__thumbs::-webkit-scrollbar { display: none; }
+  .dc-pdp-gallery__thumbnav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid #e4e6ea;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 3;
+    color: #0d1115;
+    padding: 0;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .dc-pdp-gallery__thumbnav--up { top: -4px; }
+  .dc-pdp-gallery__thumbnav--down { bottom: -4px; }
+  .dc-pdp-gallery__thumbnav[hidden] { display: none; }
+  .dc-pdp-gallery__thumbnav:hover { background: #ffffff; transform: translateX(-50%) scale(1.08); }
   .dc-pdp-gallery__thumb {
     width: 84px;
     height: 84px;
