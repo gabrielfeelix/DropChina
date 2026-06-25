@@ -1,0 +1,240 @@
+{%- comment -%}
+  DC Página institucional — seção premium reutilizável para páginas de conteúdo
+  (Sobre nós, Atacado, Rastreio, e qualquer página /pages/*).
+  Renderiza o corpo da página (page.content, editável no Admin) numa coluna de
+  leitura confortável, com hero (eyebrow + título + subtítulo) no mesmo design
+  do dc-faq / dc-contact. Casa com o look claro das demais páginas institucionais.
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading | default: page.title
+  assign body = page.content
+  if body == blank
+    assign body = section.settings.fallback_body
+  endif
+  assign align = section.settings.content_align | default: 'center'
+-%}
+
+<section
+  class="dc-page-section"
+  style="padding-block: {{ section.settings.padding_top | default: 72 }}px {{ section.settings.padding_bottom | default: 96 }}px;"
+>
+  <div class="dc-page__container" style="--dc-page-maxw: {{ section.settings.max_width | default: 760 }}px;">
+    <header class="dc-page__head dc-page__head--{{ align }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dc-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="dc-page__title">{{ heading | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <p class="dc-page__sub">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.show_updated and section.settings.updated_date != blank -%}
+        <p class="dc-page__updated">{{ section.settings.updated_label | default: 'Atualizado em' | escape }} {{ section.settings.updated_date | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- if body != blank -%}
+      <article class="dc-page__body rte">
+        <rte-formatter>{{ body }}</rte-formatter>
+      </article>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+      <div class="dc-page__cta-wrap">
+        <a
+          class="dc-page__cta dc-page__cta--{{ section.settings.cta_style | default: 'primary' }}"
+          href="{{ section.settings.cta_link }}"
+        >
+          {{ section.settings.cta_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-page-section { background: #ffffff; }
+
+  .dc-page__container {
+    max-width: var(--dc-page-maxw, 760px);
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
+
+  /* ---------- Hero ---------- */
+  .dc-page__head { margin-bottom: 48px; }
+  .dc-page__head--center { text-align: center; }
+  .dc-page__head--left { text-align: left; }
+
+  .dc-page__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .dc-page__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: clamp(34px, 6vw, 56px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-page__sub {
+    font-size: 17px;
+    color: #6b7280;
+    margin: 16px 0 0;
+    line-height: 1.55;
+    max-width: 60ch;
+  }
+  .dc-page__head--center .dc-page__sub { margin-inline: auto; }
+  .dc-page__updated {
+    margin: 18px 0 0;
+    font-size: 13px;
+    color: #9ca3af;
+  }
+
+  /* ---------- Corpo de leitura (RTE) ---------- */
+  .dc-page__body {
+    color: #374151;
+    font-size: 16.5px;
+    line-height: 1.78;
+  }
+  .dc-page__body > rte-formatter { display: block; }
+
+  .dc-page__body :is(h2, h3, h4) {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    color: #0d1115;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .dc-page__body h2 { font-size: 26px; margin: 2.2em 0 0.6em; }
+  .dc-page__body h3 { font-size: 20px; margin: 1.8em 0 0.5em; }
+  .dc-page__body h4 { font-size: 17px; margin: 1.6em 0 0.4em; }
+  .dc-page__body :is(h2, h3, h4):first-child { margin-top: 0; }
+
+  .dc-page__body p { margin: 0 0 1.15em; }
+  .dc-page__body a {
+    color: #d62828;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .dc-page__body a:hover { color: #b51f1f; }
+
+  .dc-page__body :is(ul, ol) { margin: 0 0 1.15em; padding-inline-start: 1.4em; }
+  .dc-page__body li { margin: 0 0 0.5em; }
+  .dc-page__body li::marker { color: #d62828; }
+
+  .dc-page__body blockquote {
+    margin: 1.6em 0;
+    padding: 4px 0 4px 18px;
+    border-inline-start: 3px solid #d62828;
+    color: #0d1115;
+    font-style: italic;
+  }
+
+  .dc-page__body hr {
+    border: 0;
+    border-top: 1px solid #ececef;
+    margin: 2.4em 0;
+  }
+
+  .dc-page__body :is(img, video) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 1.4em 0;
+  }
+
+  .dc-page__body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: 15px;
+  }
+  .dc-page__body :is(th, td) {
+    text-align: start;
+    padding: 10px 12px;
+    border-bottom: 1px solid #ececef;
+  }
+  .dc-page__body thead th {
+    background: #f6f6f7;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: #0d1115;
+  }
+
+  /* ---------- CTA ---------- */
+  .dc-page__cta-wrap { margin-top: 40px; text-align: center; }
+  .dc-page__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+    padding-inline: 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .dc-page__cta--primary {
+    background: #0d1115;
+    color: #ffffff;
+  }
+  .dc-page__cta--primary:hover { background: #d62828; }
+  .dc-page__cta--ghost {
+    background: transparent;
+    color: #0d1115;
+    border: 1px solid #d9dade;
+  }
+  .dc-page__cta--ghost:hover { border-color: #0d1115; }
+
+  @media (max-width: 600px) {
+    .dc-page__head { margin-bottom: 36px; }
+    .dc-page__body { font-size: 16px; }
+    .dc-page__container { padding-inline: 20px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Página institucional",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (sobretítulo)", "default": "DropChina" },
+    { "type": "text", "id": "heading", "label": "Título", "info": "Vazio = usa o título da página." },
+    { "type": "textarea", "id": "subheading", "label": "Subtítulo" },
+    { "type": "select", "id": "content_align", "label": "Alinhamento do hero", "options": [
+      { "value": "center", "label": "Centralizado" },
+      { "value": "left", "label": "Esquerda" }
+    ], "default": "center" },
+    { "type": "header", "content": "Data de atualização (bom para páginas legais)" },
+    { "type": "checkbox", "id": "show_updated", "label": "Mostrar data de atualização", "default": false },
+    { "type": "text", "id": "updated_label", "label": "Rótulo", "default": "Atualizado em" },
+    { "type": "text", "id": "updated_date", "label": "Data", "info": "Ex.: junho de 2026" },
+    { "type": "header", "content": "Corpo" },
+    { "type": "range", "id": "max_width", "label": "Largura de leitura", "min": 560, "max": 900, "step": 20, "unit": "px", "default": 760 },
+    { "type": "richtext", "id": "fallback_body", "label": "Conteúdo (fallback)", "info": "Usado só se a página estiver sem corpo. Normalmente edite o conteúdo no corpo da página." },
+    { "type": "header", "content": "Botão (opcional)" },
+    { "type": "text", "id": "cta_label", "label": "Texto do botão" },
+    { "type": "url", "id": "cta_link", "label": "Link do botão" },
+    { "type": "select", "id": "cta_style", "label": "Estilo do botão", "options": [
+      { "value": "primary", "label": "Sólido" },
+      { "value": "ghost", "label": "Contorno" }
+    ], "default": "primary" },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding topo", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding base", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "presets": [
+    { "name": "DC Página institucional" }
+  ]
+}
+{% endschema %}

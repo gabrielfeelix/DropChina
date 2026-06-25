@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "dc-page",
+      "settings": {
+        "eyebrow": "Nossa história",
+        "heading": "Sobre a DropChina",
+        "subheading": "Tecnologia de verdade, preço justo e atendimento humano — do importador direto pra sua casa ou empresa.",
+        "content_align": "center",
+        "show_updated": false,
+        "max_width": 760,
+        "fallback_body": "<p>A DropChina nasceu pra resolver um problema simples: comprar tecnologia no Brasil costuma ser caro, confuso e cheio de pegadinha. A gente encurta o caminho entre o fabricante e você — com curadoria, preço justo e atendimento que responde como gente.</p><h2>O que a gente faz</h2><p>Selecionamos cartuchos, toners, placas de vídeo, periféricos, impressoras e mini PCs que valem o que custam. Cada item passa por conferência antes de sair daqui, com nota fiscal e garantia.</p><h2>Por que comprar com a DropChina</h2><ul><li><strong>Curadoria de verdade:</strong> nada de catálogo infinito sem critério — só o que a gente recomendaria pra um amigo.</li><li><strong>Nota fiscal sempre:</strong> compra segura, com garantia e procedência.</li><li><strong>Atendimento humano:</strong> fala com gente de verdade no WhatsApp, antes e depois da compra.</li><li><strong>Atacado CNPJ:</strong> condições especiais para revenda e empresas.</li></ul><h2>Nosso compromisso</h2><p>Somos a DROPCHINA LTDA e entregamos para todo o Brasil. Transparência no preço, no prazo e no pós-venda — é assim que a gente constrói confiança a cada pedido.</p>",
+        "cta_label": "Falar no WhatsApp",
+        "cta_link": "https://wa.me/5541995342751",
+        "cta_style": "primary",
+        "padding_top": 72,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": ["main"]
+}

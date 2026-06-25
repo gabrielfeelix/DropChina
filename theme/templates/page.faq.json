@@ -99,7 +99,7 @@
           "settings": {
             "category": "Trocas e devoluções",
             "question": "Quem paga o frete da devolução?",
-            "answer": "<p>Em casos de <strong>defeito de fábrica ou erro nosso</strong> (produto trocado, danificado, etc.), o frete de retorno é por nossa conta. Para casos de <strong>arrependimento</strong>, o frete fica por conta do cliente.</p>"
+            "answer": "<p>Em casos de <strong>defeito de fábrica ou erro nosso</strong> (produto trocado, danificado, etc.), o frete de retorno é por nossa conta. No <strong>direito de arrependimento</strong> (7 dias corridos após o recebimento), também arcamos com o frete da devolução, conforme o Código de Defesa do Consumidor. Em trocas por preferência fora desse prazo, o frete fica por conta do cliente.</p>"
           }
         },
         "q12": {
