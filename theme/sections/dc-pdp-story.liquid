@@ -1,0 +1,205 @@
+{%- comment -%}
+  DC PDP Story — descrição editorial REPLICÁVEL para QUALQUER produto.
+  Monta automaticamente a partir dos dados do próprio produto:
+    • Hero: categoria + título + intro (1º parágrafo da descrição) + imagem principal
+    • Galeria: imagens extras do produto em cards premium
+    • Especificações: extrai o <ul> de "Especificações" que o Bling já gera
+  NÃO escreve nada no produto → NÃO afeta o Bling (só consome product.images / description).
+{%- endcomment -%}
+
+{%- liquid
+  assign desc = product.description
+  assign intro = desc | split: '<h3' | first
+  assign intro_text = intro | strip_html | strip
+
+  assign has_specs = false
+  assign specs_inner = ''
+  assign ul_parts = desc | split: '<ul>'
+  if ul_parts.size > 1
+    assign specs_inner = ul_parts[1] | split: '</ul>' | first
+    if specs_inner contains '<li'
+      assign has_specs = true
+    endif
+  endif
+
+  assign cat = product.type
+  if cat == blank
+    if product.collections.size > 0
+      assign cat = product.collections.first.title
+    else
+      assign cat = 'DropChina'
+    endif
+  endif
+  assign img_count = product.images.size
+-%}
+
+<section
+  class="dc-story"
+  style="padding-block: {{ section.settings.padding_top | default: 8 }}px {{ section.settings.padding_bottom | default: 8 }}px;"
+>
+  <div class="dc-story__wrap">
+    <div class="dc-story__shell">
+
+      <section class="dc-story__sec dc-story__hero">
+        <div class="dc-story__heroTop">
+          <p class="dc-story__kicker">{{ cat | escape }}</p>
+          <h2 class="dc-story__title">{{ product.title | escape }}</h2>
+          {%- if intro_text != blank -%}
+            <p class="dc-story__sub">{{ intro_text | truncate: 320 }}</p>
+          {%- endif -%}
+        </div>
+        {%- if product.featured_image != blank -%}
+          <div class="dc-story__heroCard">
+            <img src="{{ product.featured_image | image_url: width: 1100 }}" alt="{{ product.title | escape }}" loading="lazy" width="1100" height="1100">
+          </div>
+        {%- endif -%}
+      </section>
+
+      {%- if img_count > 1 -%}
+        <section class="dc-story__sec">
+          <h3 class="dc-story__h">Por dentro do produto</h3>
+          <div class="dc-story__gallery">
+            {%- for img in product.images offset: 1 limit: 6 -%}
+              <figure class="dc-story__gcard">
+                <img src="{{ img | image_url: width: 1000 }}" alt="{{ product.title | escape }} — imagem {{ forloop.index | plus: 1 }}" loading="lazy">
+              </figure>
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- if has_specs -%}
+        <section class="dc-story__sec dc-story__specsSec">
+          <div class="dc-story__specsGrid {% unless img_count > 1 %}dc-story__specsGrid--solo{% endunless %}">
+            <div class="dc-story__specsText">
+              <p class="dc-story__kicker">Raio-X do produto</p>
+              <h3 class="dc-story__h">Especificações</h3>
+              <ul class="dc-story__specs">{{ specs_inner }}</ul>
+            </div>
+            {%- if img_count > 1 -%}
+              <div class="dc-story__specsMedia">
+                <img src="{{ product.images.last | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="lazy">
+              </div>
+            {%- endif -%}
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- if has_specs == false and intro_text == blank and product.description != blank -%}
+        <section class="dc-story__sec">
+          <div class="dc-story__rte rte">{{ product.description }}</div>
+        </section>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-story {
+    background: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
+    color: #101114;
+  }
+  .dc-story__wrap { max-width: 1120px; margin: 0 auto; padding-inline: 18px; }
+  .dc-story__shell {
+    background: linear-gradient(180deg, rgba(255,255,255,.94) 0%, rgba(250,251,253,.99) 100%);
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: 32px;
+    box-shadow: 0 18px 50px rgba(16,17,20,.08);
+    overflow: hidden;
+  }
+  .dc-story__sec { padding: 40px 38px; }
+  .dc-story__sec + .dc-story__sec { border-top: 1px solid #dfe4ea; }
+
+  .dc-story__kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    color: #5f6673; font-weight: 700; margin: 0 0 14px;
+  }
+  .dc-story__kicker::before {
+    content: ""; width: 30px; height: 2px; border-radius: 999px;
+    background: linear-gradient(90deg, #0f4fa8, #e5e9ef);
+  }
+
+  /* hero */
+  .dc-story__heroTop { max-width: 780px; margin: 0 auto 30px; text-align: center; }
+  .dc-story__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    margin: 0 0 14px; font-size: clamp(28px, 5vw, 52px);
+    line-height: 1.02; letter-spacing: -.035em; font-weight: 800; color: #0f1115;
+  }
+  .dc-story__sub { margin: 0 auto; max-width: 760px; color: #5f6673; font-size: 18px; line-height: 1.55; }
+  .dc-story__heroCard {
+    min-height: 360px; background: #eef2f7; border: 1px solid #dfe4ea;
+    border-radius: 26px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; padding: 28px;
+  }
+  .dc-story__heroCard img {
+    width: auto; height: auto; max-width: 72%; max-height: 320px;
+    object-fit: contain; filter: drop-shadow(0 20px 26px rgba(0,0,0,.08));
+  }
+
+  /* headings de seção */
+  .dc-story__h {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    margin: 0 0 22px; font-size: clamp(22px, 3vw, 32px);
+    letter-spacing: -.03em; font-weight: 800; color: #0f1115;
+  }
+
+  /* galeria */
+  .dc-story__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .dc-story__gcard {
+    margin: 0; aspect-ratio: 16 / 11; background: #eef2f7;
+    border: 1px solid #dfe4ea; border-radius: 22px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; padding: 22px;
+  }
+  .dc-story__gcard img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* specs */
+  .dc-story__specsGrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 30px; align-items: center; }
+  .dc-story__specsGrid--solo { grid-template-columns: 1fr; }
+  .dc-story__specs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .dc-story__specs li {
+    display: grid; grid-template-columns: 180px 1fr; gap: 14px;
+    padding: 11px 0; border-bottom: 1px solid #e6eaef; align-items: baseline;
+  }
+  .dc-story__specs li strong {
+    font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #7a808c;
+  }
+  .dc-story__specsMedia {
+    aspect-ratio: 1 / 1; background: #eef2f7; border: 1px solid #dfe4ea;
+    border-radius: 24px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; padding: 26px;
+  }
+  .dc-story__specsMedia img { width: auto; height: auto; max-width: 80%; max-height: 80%; object-fit: contain; }
+
+  .dc-story__rte { color: #3a414b; font-size: 16.5px; line-height: 1.75; }
+
+  @media (max-width: 860px) {
+    .dc-story__sec { padding: 30px 22px; }
+    .dc-story__gallery { grid-template-columns: 1fr; }
+    .dc-story__specsGrid { grid-template-columns: 1fr; }
+    .dc-story__specsMedia { order: -1; aspect-ratio: 16/11; }
+    .dc-story__specs li { grid-template-columns: 130px 1fr; gap: 10px; }
+  }
+  @media (max-width: 560px) {
+    .dc-story__wrap { padding-inline: 10px; }
+    .dc-story__shell { border-radius: 20px; }
+    .dc-story__heroCard { min-height: 0; aspect-ratio: 3/2; padding: 20px; }
+    .dc-story__heroCard img { max-width: 82%; max-height: 200px; }
+    .dc-story__specs li { grid-template-columns: 1fr; gap: 2px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC PDP Story",
+  "tag": "section",
+  "class": "section-dc-story",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Padding topo", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 8 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding base", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 8 }
+  ],
+  "presets": [ { "name": "DC PDP Story" } ]
+}
+{% endschema %}

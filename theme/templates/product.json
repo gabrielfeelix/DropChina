@@ -34,10 +34,18 @@
         "padding_top": 64,
         "padding_bottom": 80
       }
+    },
+    "pdp_story": {
+      "type": "dc-pdp-story",
+      "settings": {
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
     }
   },
   "order": [
     "dc_pdp",
+    "pdp_story",
     "pdp_reviews",
     "related_products"
   ]

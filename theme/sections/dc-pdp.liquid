@@ -311,22 +311,7 @@
   })();
 </script>
 
-{% if product_obj.description != blank %}
-<section class="dc-pdp-desc section section--page-width">
-  <div class="dc-pdp-desc__container">
-    <div class="dc-pdp-desc__head">
-      <span class="dc-pdp-desc__eyebrow">— {% if collection %}{{ collection.title }}{% else %}Descrição{% endif %} —</span>
-      <h2 class="dc-pdp-desc__title">{{ product_obj.title | truncate: 42 }}</h2>
-      {%- if section.settings.desc_subtitle != blank -%}
-        <p class="dc-pdp-desc__subtitle">{{ section.settings.desc_subtitle }}</p>
-      {%- endif -%}
-    </div>
-    <div class="dc-pdp-desc__body">
-      {{ product_obj.description }}
-    </div>
-  </div>
-</section>
-{% endif %}
+{%- comment -%} Descrição movida para a seção editorial replicável dc-pdp-story (no product.json). {%- endcomment -%}
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

@@ -2,15 +2,25 @@
   assign heading = section.settings.heading | default: 'Talvez você goste'
   assign eyebrow = section.settings.eyebrow | default: 'Recomendados pra você'
   assign limit = section.settings.limit | default: 8
+
+  # 1) recomendações nativas (quando a loja já tiver dados); 2) fallback: mesma coleção.
+  assign rel_list = empty
   if recommendations.performed and recommendations.products_count > 0
-    assign rec_products = recommendations.products
-  else
-    assign rec_products = ''
+    assign rel_list = recommendations.products
+  endif
+  if rel_list == empty or rel_list.size == 0
+    for col in product.collections
+      if col.products.size > 1
+        assign rel_list = col.products
+        break
+      endif
+    endfor
   endif
 -%}
 
 <section
   class="dc-rel-section"
+  {%- if rel_list.size == 0 %} hidden{% endif %}
   style="padding-block: {{ section.settings.padding_top | default: 64 }}px {{ section.settings.padding_bottom | default: 80 }}px;"
   data-dc-related
   data-product-id="{{ product.id }}"
@@ -32,19 +42,15 @@
       </div>
     </header>
 
-    {%- if rec_products.size > 0 -%}
+    {%- if rel_list.size > 0 -%}
       <div class="dc-rel__track" data-dc-rel-track>
-        {%- for p in rec_products limit: limit -%}
-          {% render 'dc-product-card', product: p %}
+        {%- assign shown = 0 -%}
+        {%- for p in rel_list -%}
+          {%- if p.id != product.id and shown < limit -%}
+            {% render 'dc-product-card', product: p %}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
         {%- endfor -%}
-      </div>
-    {%- else -%}
-      {%- comment -%} Fallback: usa product_recommendations API via fetch JS {%- endcomment -%}
-      <div class="dc-rel__track" data-dc-rel-track>
-        <div class="dc-rel__skeleton"></div>
-        <div class="dc-rel__skeleton"></div>
-        <div class="dc-rel__skeleton"></div>
-        <div class="dc-rel__skeleton"></div>
       </div>
     {%- endif -%}
   </div>
@@ -56,27 +62,6 @@
   if (!root) return;
   var track = root.querySelector('[data-dc-rel-track]');
   var navBtns = root.querySelectorAll('.dc-rel__nav-btn');
-
-  // Lazy-load related via Recommendations API se o liquid não conseguiu (StorefrontView)
-  if (track && track.querySelector('.dc-rel__skeleton')) {
-    var pid = root.dataset.productId;
-    var limit = root.dataset.limit || 8;
-    fetch('/recommendations/products?section_id={{ section.id }}&product_id=' + pid + '&limit=' + limit + '&intent=related', {
-      headers: { 'Accept': 'text/html' }
-    })
-      .then(function(r) { return r.text(); })
-      .then(function(html) {
-        var temp = document.createElement('div');
-        temp.innerHTML = html;
-        var freshTrack = temp.querySelector('[data-dc-rel-track]');
-        if (freshTrack && freshTrack.children.length) {
-          track.innerHTML = freshTrack.innerHTML;
-        } else {
-          root.style.display = 'none';
-        }
-      })
-      .catch(function() { root.style.display = 'none'; });
-  }
 
   navBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
