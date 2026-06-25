@@ -9,6 +9,8 @@
 :root {
   --dc-green: #1f7a3a;
   --dc-yellow: #f5c518;
+  --dc-blue: #0f4fa8;
+  --dc-blue-light: #6ea8e6;
   --dc-red: #d62828;
   --bg: #ffffff;
   --surface: #ffffff;
@@ -462,7 +464,7 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   line-height: 1;
 }
 .dc-card__badge--sale { background: var(--success, #16a34a); color: #ffffff; }
-.dc-card__badge--best { background: #f5c518; color: #2a2410; }
+.dc-card__badge--best { background: #0f4fa8; color: #ffffff; }
 .dc-card__badge--new { background: var(--dc-green, #16a34a); color: white; }
 
 /* Wishlist heart — sempre visível, top-right */
