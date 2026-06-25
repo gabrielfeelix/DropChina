@@ -35,6 +35,8 @@
   </div>
 </nav>
 
+<script src="{{ 'dc-image-fit.js' | asset_url }}" defer></script>
+
 <section class="dc-pdp section section--page-width" style="padding-block: {{ section.settings.padding_top | default: 24 }}px 0;">
   <div class="dc-pdp__container">
     <div class="dc-pdp__layout">
@@ -71,7 +73,7 @@
           {%- endif -%}
           {%- for media in product_obj.media -%}
             {%- assign media_alt = media.alt | default: product_obj.title -%}
-            <div class="dc-pdp-gallery__slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
+            <div class="dc-pdp-gallery__slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}" data-dc-fit-host>
               {%- if media.media_type == 'image' or media.media_type == nil -%}
                 <img
                   src="{{ media | image_url: width: 1200 }}"
@@ -81,6 +83,7 @@
                   alt="{{ media_alt | escape }}"
                   loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   class="dc-pdp-gallery__img"
+                  data-dc-fit
                 >
               {%- elsif media.preview_image -%}
                 <img
@@ -90,6 +93,7 @@
                   alt="{{ media_alt | escape }}"
                   loading="lazy"
                   class="dc-pdp-gallery__img"
+                  data-dc-fit
                 >
               {%- endif -%}
             </div>
@@ -770,6 +774,13 @@
   }
   .dc-pdp-gallery__thumb img { max-width: 100%; max-height: 100%; }
   .dc-pdp-gallery__stage:hover .dc-pdp-gallery__img { transform: scale(1.04); }
+  /* Foto contextual (detectada por dc-image-fit.js): preenche o card edge-to-edge */
+  .dc-pdp-gallery__img.dc-fill {
+    width: 100%; height: 100%; max-width: none; max-height: none;
+    object-fit: cover; mix-blend-mode: normal;
+  }
+  .dc-pdp-gallery__slide.dc-has-fill { padding: 0; }
+  .dc-pdp-gallery__stage:has(.dc-pdp-gallery__slide.active.dc-has-fill) { padding: 0; background: #fff; }
   .dc-pdp-gallery__nav {
     position: absolute;
     top: 50%;
