@@ -38,17 +38,29 @@ export async function createCategoria(
 }
 
 /**
- * Idempotente: retorna a categoria existente (match por descrição, case-insensitive)
- * ou cria uma nova. Recebe a lista já carregada para evitar relistar a cada item.
+ * Idempotente: retorna a categoria existente (match por descrição + categoria-pai,
+ * case-insensitive) ou cria uma nova. Recebe a lista já carregada para evitar relistar
+ * a cada item. `categoriaPaiId` distingue subcategorias homônimas em pais diferentes
+ * (ex.: departamento "Variedades" vs subcategoria "Variedades").
  */
 export async function ensureCategoria(
   descricao: string,
   existentes: Categoria[],
+  categoriaPaiId?: number,
 ): Promise<{ id: number; created: boolean }> {
   const alvo = descricao.trim().toLowerCase()
-  const found = existentes.find((c) => c.descricao.trim().toLowerCase() === alvo)
+  const found = existentes.find(
+    (c) =>
+      c.descricao.trim().toLowerCase() === alvo &&
+      (c.categoriaPai?.id ?? undefined) === (categoriaPaiId ?? undefined),
+  )
   if (found) return { id: found.id, created: false }
 
-  const { id } = await createCategoria(descricao)
+  const { id } = await createCategoria(descricao, categoriaPaiId)
+  existentes.push(
+    categoriaPaiId != null
+      ? { id, descricao, categoriaPai: { id: categoriaPaiId } }
+      : { id, descricao },
+  )
   return { id, created: true }
 }

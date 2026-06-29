@@ -164,6 +164,8 @@
                   {%- when 'storage' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
                   {%- when 'cable' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6a4 4 0 0 0 4 4h2v6"/><path d="M20 4v6a4 4 0 0 1-4 4h-2"/></svg>
                   {%- when 'headset' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4"/><path d="M4 13v4a2 2 0 0 0 2 2h2v-6H4"/></svg>
+                  {%- when 'paper' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>
+                  {%- when 'beauty' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5z"/></svg>
                   {%- else -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.5 9 21 10.5 13.5 12 12 19 10.5 12 3 10.5 10.5 9 12 2Z"/></svg>
                 {%- endcase -%}
               </span>
@@ -191,7 +193,10 @@
                 {%- for line in sub_lines -%}
                   {%- assign clean = line | strip -%}
                   {%- if clean != blank -%}
-                    <li><a href="{{ block.settings.link | default: '#' }}">{{ clean | escape }}</a></li>
+                    {%- assign parts = clean | split: '|' -%}
+                    {%- assign sub_label = parts[0] | strip -%}
+                    {%- assign sub_href = parts[1] | strip | default: block.settings.link | default: '#' -%}
+                    <li><a href="{{ sub_href }}">{{ sub_label | escape }}</a></li>
                   {%- endif -%}
                 {%- endfor -%}
               </ul>
@@ -252,7 +257,10 @@
                 {%- for line in mm_lines -%}
                   {%- assign mm_clean = line | strip -%}
                   {%- if mm_clean != blank -%}
-                    <li><a href="{{ block.settings.link | default: '#' }}">{{ mm_clean | escape }}</a></li>
+                    {%- assign mm_parts = mm_clean | split: '|' -%}
+                    {%- assign mm_label = mm_parts[0] | strip -%}
+                    {%- assign mm_href = mm_parts[1] | strip | default: block.settings.link | default: '#' -%}
+                    <li><a href="{{ mm_href }}">{{ mm_label | escape }}</a></li>
                   {%- endif -%}
                 {%- endfor -%}
                 {%- if block.settings.link != blank -%}
@@ -1498,10 +1506,12 @@
           { "value": "gpu", "label": "GPU" },
           { "value": "storage", "label": "Storage" },
           { "value": "cable", "label": "Cabo" },
-          { "value": "headset", "label": "Headset" }
+          { "value": "headset", "label": "Headset" },
+          { "value": "paper", "label": "Papel" },
+          { "value": "beauty", "label": "Beleza" }
         ], "default": "cartridge" },
-        { "type": "url", "id": "link", "label": "Link" },
-        { "type": "textarea", "id": "items", "label": "Subitens (1 por linha)", "default": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais" },
+        { "type": "url", "id": "link", "label": "Link (ver tudo do departamento)" },
+        { "type": "textarea", "id": "items", "label": "Subitens (1 por linha)", "info": "Cada linha: 'Rótulo' ou 'Rótulo|/collections/handle' para link próprio. Sem link = usa o link do departamento.", "default": "Teclados|/collections/teclados\nMouses|/collections/mouses\nMonitores|/collections/monitores" },
         { "type": "collection", "id": "featured_collection", "label": "Coleção destaque (3 produtos)" }
       ]
     }
@@ -1510,10 +1520,10 @@
     {
       "name": "DropChina Header",
       "blocks": [
-        { "type": "mega_cat", "settings": { "name": "Cartuchos & Tintas", "icon": "cartridge", "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais" } },
-        { "type": "mega_cat", "settings": { "name": "Toners", "icon": "printer", "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor" } },
-        { "type": "mega_cat", "settings": { "name": "Placas de Vídeo", "icon": "gpu", "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games" } },
-        { "type": "mega_cat", "settings": { "name": "Periféricos & Cabos", "icon": "cable", "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones" } }
+        { "type": "mega_cat", "settings": { "name": "Impressão & Suprimentos", "icon": "printer", "link": "/collections/all", "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nCartuchos de Tinta|/collections/cartuchos-de-tinta\nRefis|/collections/refis\nCilindros & Peças|/collections/cilindros-pecas\nScanners|/collections/scanners\nImpressão 3D|/collections/impressao-3d" } },
+        { "type": "mega_cat", "settings": { "name": "Informática", "icon": "gpu", "link": "/collections/all", "items": "Placas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nTeclados|/collections/teclados\nMouses|/collections/mouses\nMonitores|/collections/monitores\nMini PCs & Computadores|/collections/mini-pcs\nCabos|/collections/cabos" } },
+        { "type": "mega_cat", "settings": { "name": "Papelaria", "icon": "paper", "link": "/collections/papeis", "items": "Papéis|/collections/papeis\nEtiquetas & Bobinas|/collections/etiquetas-bobinas\nRibbons|/collections/ribbons" } },
+        { "type": "mega_cat", "settings": { "name": "Beleza", "icon": "beauty", "link": "/collections/beleza", "items": "Ver tudo em Beleza|/collections/beleza" } }
       ]
     }
   ]

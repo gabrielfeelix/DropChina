@@ -23,74 +23,61 @@
     "dc_header": {
       "type": "dc-header",
       "blocks": {
-        "mega_1": {
+        "dep_impressao": {
           "type": "mega_cat",
           "settings": {
-            "name": "Cartuchos & Tintas",
-            "icon": "cartridge",
-            "items": "HP 667 Original\nHP 664XL\nCanon PG-145\nEpson 664\nBrother LC3019\nRecargas universais",
-            "featured_collection": "cartuchos-de-tinta",
-            "link": "shopify://collections/cartuchos-de-tinta"
-          }
-        },
-        "mega_2": {
-          "type": "mega_cat",
-          "settings": {
-            "name": "Toners",
+            "name": "Impressão & Suprimentos",
             "icon": "printer",
-            "items": "Compatível Samsung\nHP CF283A\nBrother TN-1060\nPantum PD-219\nEvolut Premium\nKit revendedor",
+            "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nCartuchos de Tinta|/collections/cartuchos-de-tinta\nImpressão 3D|/collections/impressao-3d",
             "featured_collection": "toners",
-            "link": "shopify://collections/toners"
+            "link": "shopify://collections/impressao"
           }
         },
-        "mega_3": {
+        "dep_informatica": {
           "type": "mega_cat",
           "settings": {
-            "name": "Placas de Vídeo",
+            "name": "Informática",
             "icon": "gpu",
-            "items": "NVIDIA GT 730\nGeForce GTX 1650\nRX 550 4GB\nGT 1030\nPara escritório\nPara games",
-            "featured_collection": "placas-de-video",
-            "link": "shopify://collections/placas-de-video"
+            "items": "Áudio & Headsets|/collections/audio\nTeclados & Mouses|/collections/teclados\nPlacas de Vídeo|/collections/placas-de-video\nMonitores|/collections/monitores\nPeriféricos|/collections/perifericos\nRedes & Streaming|/collections/redes\nMini PCs & Computadores|/collections/mini-pcs",
+            "featured_collection": "audio",
+            "link": "shopify://collections/informatica"
           }
         },
-        "mega_4": {
+        "dep_papelaria": {
           "type": "mega_cat",
           "settings": {
-            "name": "Computadores & Notebooks",
+            "name": "Papelaria",
+            "icon": "paper",
+            "items": "Papéis|/collections/papeis",
+            "featured_collection": "papeis",
+            "link": "shopify://collections/papelaria"
+          }
+        },
+        "dep_beleza": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Beleza",
+            "icon": "beauty",
+            "items": "Cuidados pessoais|/collections/beleza",
+            "link": "shopify://collections/beleza"
+          }
+        },
+        "dep_variedades": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Variedades",
             "icon": "storage",
-            "items": "Mini PCs\nNotebooks\nAll-in-One\nPCs gamer\nWorkstations\nAcessórios",
-            "featured_collection": "mini-pcs",
-            "link": "shopify://collections/mini-pcs"
-          }
-        },
-        "mega_5": {
-          "type": "mega_cat",
-          "settings": {
-            "name": "Periféricos & Cabos",
-            "icon": "cable",
-            "items": "Adaptadores HDMI / VGA\nLeitores USB\nCabos USB-C\nHubs USB\nWebcams Full HD\nMicrofones",
-            "featured_collection": "perifericos",
-            "link": "shopify://collections/perifericos"
-          }
-        },
-        "mega_3d": {
-          "type": "mega_cat",
-          "settings": {
-            "name": "Impressão 3D",
-            "icon": "printer",
-            "items": "Impressoras 3D\nFilamento PLA\nFilamento ABS\nFilamento PETG\nResinas\nAcessórios & peças",
-            "featured_collection": "impressao-3d",
-            "link": "shopify://collections/impressao-3d"
+            "items": "Ver tudo em Variedades|/collections/variedades",
+            "link": "shopify://collections/variedades"
           }
         }
       },
       "block_order": [
-        "mega_3d",
-        "mega_1",
-        "mega_2",
-        "mega_3",
-        "mega_4",
-        "mega_5"
+        "dep_impressao",
+        "dep_informatica",
+        "dep_papelaria",
+        "dep_beleza",
+        "dep_variedades"
       ],
       "settings": {
         "announce_items": "Frete GRÁTIS em compras acima de R$ 199|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
@@ -106,19 +93,19 @@
         "topbar_link_5_url": "",
         "phone": "(41) 99534-2751",
         "hours": "Atendimento · Seg–Sáb 8h–20h",
-        "search_placeholder": "Buscar impressora 3D, filamento, toner, cartucho...",
-        "nav_link_1": "Impressão 3D",
-        "nav_link_1_url": "shopify://collections/impressao-3d",
-        "nav_link_1_tag": "NOVO",
-        "nav_link_2": "Cartuchos & Toners",
-        "nav_link_2_url": "shopify://collections/toners",
+        "search_placeholder": "Buscar toner, cartucho, teclado, placa de vídeo...",
+        "nav_link_1": "Impressão & Suprimentos",
+        "nav_link_1_url": "shopify://collections/impressao",
+        "nav_link_1_tag": "",
+        "nav_link_2": "Informática",
+        "nav_link_2_url": "shopify://collections/informatica",
         "nav_link_2_tag": "",
-        "nav_link_3": "Placas de Vídeo",
-        "nav_link_3_url": "shopify://collections/placas-de-video",
+        "nav_link_3": "Papelaria",
+        "nav_link_3_url": "shopify://collections/papelaria",
         "nav_link_3_tag": "",
-        "nav_link_4": "Impressoras",
-        "nav_link_4_url": "shopify://collections/impressoras",
-        "nav_link_4_tag": "",
+        "nav_link_4": "Beleza",
+        "nav_link_4_url": "shopify://collections/beleza",
+        "nav_link_4_tag": "NOVO",
         "nav_link_5": "Ofertas",
         "nav_link_5_url": "shopify://collections/ofertas-relampago",
         "nav_link_5_tag": "-40%",
