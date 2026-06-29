@@ -1,21 +1,141 @@
 {
   "sections": {
     "main": {
-      "type": "dc-page",
+      "type": "dc-about",
       "settings": {
         "eyebrow": "Nossa história",
-        "heading": "Sobre a DropChina",
-        "subheading": "Tecnologia de verdade, preço justo e atendimento humano — do importador direto pra sua casa ou empresa.",
-        "content_align": "center",
-        "show_updated": false,
-        "max_width": 760,
-        "fallback_body": "<p>A DropChina nasceu pra resolver um problema simples: comprar tecnologia no Brasil costuma ser caro, confuso e cheio de pegadinha. A gente encurta o caminho entre o fabricante e você — com curadoria, preço justo e atendimento que responde como gente.</p><h2>O que a gente faz</h2><p>Selecionamos cartuchos, toners, placas de vídeo, periféricos, impressoras e mini PCs que valem o que custam. Cada item passa por conferência antes de sair daqui, com nota fiscal e garantia.</p><h2>Por que comprar com a DropChina</h2><ul><li><strong>Curadoria de verdade:</strong> nada de catálogo infinito sem critério — só o que a gente recomendaria pra um amigo.</li><li><strong>Nota fiscal sempre:</strong> compra segura, com garantia e procedência.</li><li><strong>Atendimento humano:</strong> fala com gente de verdade no WhatsApp, antes e depois da compra.</li><li><strong>Atacado CNPJ:</strong> condições especiais para revenda e empresas.</li></ul><h2>Nosso compromisso</h2><p>Somos a DROPCHINA LTDA e entregamos para todo o Brasil. Transparência no preço, no prazo e no pós-venda — é assim que a gente constrói confiança a cada pedido.</p>",
-        "cta_label": "Falar no WhatsApp",
-        "cta_link": "https://wa.me/5541995342751",
-        "cta_style": "primary",
-        "padding_top": 72,
+        "headline": "Recomeçar não é voltar à estaca zero. É começar mais forte.",
+        "lede": "A DropChina nasceu de uma reconstrução. Por trás de cada pedido tem um recomeço, a decisão de não desistir e o compromisso de entregar tecnologia de verdade, com preço justo e atendimento que responde como gente.",
+        "hero_align": "left",
+        "hero_image_alt": "Augusto, fundador da DropChina",
+        "hero_badge": "MercadoLíder Platinum",
+        "cta1_label": "Ver produtos",
+        "cta1_link": "/collections/all",
+        "cta2_label": "Falar no WhatsApp",
+        "cta2_link": "https://wa.me/5541995342751",
+        "padding_top": 0,
         "padding_bottom": 96
-      }
+      },
+      "blocks": {
+        "cap1": {
+          "type": "chapter",
+          "settings": {
+            "kicker": "O recomeço",
+            "accent": "red",
+            "heading": "Quando tudo recomeçou do zero",
+            "body": "<p>[RASCUNHO — confirmar com o Augusto] Há quatro anos, um AVC mudou tudo. Da noite pro dia, foi preciso reaprender o básico e encarar a vida de outro jeito. Muita coisa se perdeu pelo caminho. A vontade de recomeçar, não.</p><p>Foi do fundo que nasceu a decisão que daria origem à DropChina.</p>",
+            "image_side": "right"
+          }
+        },
+        "cap2": {
+          "type": "chapter",
+          "settings": {
+            "kicker": "A reconstrução",
+            "accent": "blue",
+            "heading": "Tijolo por tijolo, dentro do Mercado Livre",
+            "body": "<p>[RASCUNHO] A volta começou pequena, uma venda de cada vez. Com consistência, atendimento honesto e produto que chega como prometido, veio a reputação que poucos alcançam: <strong>MercadoLíder Platinum</strong>, o nível máximo do Mercado Livre.</p><p>Não foi sorte. Foi recomeço transformado em rotina.</p>",
+            "image_side": "left"
+          }
+        },
+        "frase": {
+          "type": "pullquote",
+          "settings": {
+            "quote": "[Frase do Augusto entra aqui] Recomeçar foi a coisa mais difícil que já fiz. E a que mais valeu a pena.",
+            "author": "Augusto",
+            "role": "Fundador da DropChina"
+          }
+        },
+        "numeros": {
+          "type": "stats",
+          "settings": {
+            "num_1": "10000",
+            "suffix_1": "+",
+            "label_1": "Vendas no Mercado Livre",
+            "value_2": "Platinum",
+            "label_2": "Reputação MercadoLíder",
+            "num_3": "12",
+            "suffix_3": " meses",
+            "label_3": "Garantia oficial",
+            "num_4": "20",
+            "suffix_4": "+",
+            "label_4": "Marcas atendidas"
+          }
+        },
+        "cap3": {
+          "type": "chapter",
+          "settings": {
+            "kicker": "Hoje",
+            "accent": "red",
+            "heading": "Uma loja própria, do importador direto pra você",
+            "body": "<p>[RASCUNHO] Hoje a DropChina vai além do marketplace. Trabalhamos com produtos importados das maiores marcas do mercado, parceria com grandes fabricantes e players, estrutura própria e nota fiscal em tudo.</p><p>O mesmo cuidado de sempre, agora na casa que é nossa.</p>",
+            "image_side": "right"
+          }
+        },
+        "linha": {
+          "type": "timeline",
+          "settings": {
+            "heading": "A nossa linha do tempo",
+            "year_1": "2022",
+            "title_1": "O recomeço",
+            "text_1": "[ano a confirmar] O ponto de virada. A decisão de reconstruir.",
+            "year_2": "2023",
+            "title_2": "Primeiras vendas no ML",
+            "text_2": "Do zero, uma venda de cada vez, construindo reputação.",
+            "year_3": "2024",
+            "title_3": "MercadoLíder Platinum",
+            "text_3": "O nível máximo de reputação do Mercado Livre.",
+            "year_4": "2026",
+            "title_4": "Loja própria DropChina",
+            "text_4": "A casa que é nossa, do importador direto pra você.",
+            "year_5": "O futuro",
+            "title_5": "Expansão multicanal",
+            "text_5": "Mais canais, mais marcas, o mesmo cuidado de sempre."
+          }
+        },
+        "marcas": {
+          "type": "brands",
+          "settings": {
+            "heading": "Marcas que confiam na gente",
+            "subtitle": "Trabalhamos com as maiores marcas do mercado.",
+            "name_1": "HP",
+            "name_2": "Epson",
+            "name_3": "Brother",
+            "name_4": "Canon",
+            "name_5": "Logitech",
+            "name_6": "Multilaser",
+            "name_7": "Zebra",
+            "name_8": "Ricoh",
+            "name_9": "Kyocera",
+            "name_10": "Lexmark"
+          }
+        },
+        "valores": {
+          "type": "values",
+          "settings": {
+            "heading": "Por que comprar com a DropChina",
+            "title_1": "Curadoria de verdade",
+            "text_1": "Nada de catálogo infinito sem critério. Só o que a gente recomendaria pra um amigo.",
+            "title_2": "Nota fiscal sempre",
+            "text_2": "Compra segura, com garantia e procedência em todos os pedidos.",
+            "title_3": "Atendimento humano",
+            "text_3": "Você fala com gente de verdade no WhatsApp, antes e depois da compra.",
+            "title_4": "Atacado CNPJ",
+            "text_4": "Condições especiais para revenda e empresas."
+          }
+        },
+        "cta": {
+          "type": "cta_band",
+          "settings": {
+            "heading": "Bora fazer parte dessa história?",
+            "text": "Tecnologia de verdade, preço justo e atendimento que te trata como gente.",
+            "btn1_label": "Ver produtos",
+            "btn1_link": "/collections/all",
+            "btn2_label": "Falar no WhatsApp",
+            "btn2_link": "https://wa.me/5541995342751"
+          }
+        }
+      },
+      "block_order": ["cap1", "cap2", "frase", "numeros", "cap3", "linha", "marcas", "valores", "cta"]
     }
   },
   "order": ["main"]

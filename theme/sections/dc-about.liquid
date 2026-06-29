@@ -1,0 +1,693 @@
+{%- comment -%}
+  DC Sobre nós — seção institucional premium de storytelling.
+  Block-driven: hero (settings da seção) + blocos compostos em ordem:
+  chapter (imagem + texto alternado), pullquote, stats (contadores),
+  timeline, brands (faixa de marcas), values (grid), cta_band.
+
+  Asset-resiliente: funciona sem foto (hero tipográfico) e sem logos
+  (wordmarks de texto). Scroll-reveal + contadores respeitam
+  prefers-reduced-motion. Texto é RASCUNHO até o Augusto validar.
+{%- endcomment -%}
+
+{%- liquid
+  assign uid = section.id | replace: '_', '' | downcase
+  assign hero_align = section.settings.hero_align | default: 'left'
+-%}
+
+<section
+  id="dc-about-{{ uid }}"
+  class="dc-about"
+  data-dc-about
+  style="--dc-about-pt: {{ section.settings.padding_top | default: 0 }}px; --dc-about-pb: {{ section.settings.padding_bottom | default: 96 }}px;"
+>
+  {%- comment -%} ---------------- HERO ---------------- {%- endcomment -%}
+  <header class="dc-about__hero dc-about__hero--{{ hero_align }}{% if section.settings.hero_image == blank %} dc-about__hero--noimg{% endif %}">
+    <div class="dc-about__hero-inner">
+      <div class="dc-about__hero-copy" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="dc-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.headline != blank -%}
+          <h1 class="dc-about__headline">{{ section.settings.headline | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.lede != blank -%}
+          <p class="dc-about__lede">{{ section.settings.lede | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+          <div class="dc-about__hero-cta">
+            {%- if section.settings.cta1_label != blank -%}
+              <a class="dc-btn dc-btn--solid" href="{{ section.settings.cta1_link | default: '#' }}">{{ section.settings.cta1_label | escape }}</a>
+            {%- endif -%}
+            {%- if section.settings.cta2_label != blank -%}
+              <a class="dc-btn dc-btn--ghost" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.hero_image != blank -%}
+        {%- assign him = section.settings.hero_image -%}
+        <div class="dc-about__hero-media" data-reveal data-dc-fit-host>
+          <img
+            class="dc-about__hero-img"
+            data-dc-fit
+            src="{{ him | image_url: width: 960 }}"
+            srcset="{{ him | image_url: width: 480 }} 480w, {{ him | image_url: width: 720 }} 720w, {{ him | image_url: width: 960 }} 960w, {{ him | image_url: width: 1200 }} 1200w, {{ him | image_url: width: 1400 }} 1400w"
+            sizes="(max-width: 900px) 92vw, 46vw"
+            width="{{ him.width }}"
+            height="{{ him.height }}"
+            alt="{{ section.settings.hero_image_alt | default: 'DropChina' | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+          {%- if section.settings.hero_badge != blank -%}
+            <span class="dc-about__hero-badge">{{ section.settings.hero_badge | escape }}</span>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="dc-about__hero-mark" aria-hidden="true" data-reveal>
+          <span>Drop</span><span>China</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- comment -%} ---------------- BLOCOS ---------------- {%- endcomment -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+
+    {%- when 'chapter' -%}
+      <div class="dc-about__chapter dc-about__chapter--img-{{ block.settings.image_side | default: 'right' }}" {{ block.shopify_attributes }}>
+        <div class="dc-about__chapter-inner">
+          <div class="dc-about__chapter-copy" data-reveal>
+            {%- if block.settings.kicker != blank -%}
+              <p class="dc-about__kicker dc-about__kicker--{{ block.settings.accent | default: 'red' }}">{{ block.settings.kicker | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h2 class="dc-about__h2">{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <div class="dc-about__rte rte">{{ block.settings.body }}</div>
+            {%- endif -%}
+          </div>
+          <div class="dc-about__chapter-media" data-reveal data-dc-fit-host>
+            {%- if block.settings.image != blank -%}
+              {%- assign cim = block.settings.image -%}
+              <img
+                class="dc-about__chapter-img"
+                data-dc-fit
+                src="{{ cim | image_url: width: 880 }}"
+                srcset="{{ cim | image_url: width: 440 }} 440w, {{ cim | image_url: width: 660 }} 660w, {{ cim | image_url: width: 880 }} 880w, {{ cim | image_url: width: 1100 }} 1100w"
+                sizes="(max-width: 900px) 92vw, 46vw"
+                width="{{ cim.width }}"
+                height="{{ cim.height }}"
+                alt="{{ block.settings.heading | default: 'DropChina' | escape }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'dc-about__ph' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+    {%- when 'pullquote' -%}
+      <figure class="dc-about__quote" data-reveal {{ block.shopify_attributes }}>
+        <span class="dc-about__quote-mark" aria-hidden="true">&ldquo;</span>
+        {%- if block.settings.quote != blank -%}
+          <blockquote class="dc-about__quote-text">{{ block.settings.quote | escape }}</blockquote>
+        {%- endif -%}
+        <figcaption class="dc-about__quote-cap">
+          {%- if block.settings.portrait != blank -%}
+            {%- assign portrait_alt = block.settings.author | default: 'Augusto' -%}
+            <span class="dc-about__quote-portrait">
+              {{ block.settings.portrait | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80,120,160', sizes: '56px', alt: portrait_alt }}
+            </span>
+          {%- endif -%}
+          <span class="dc-about__quote-meta">
+            {%- if block.settings.author != blank -%}<b>{{ block.settings.author | escape }}</b>{%- endif -%}
+            {%- if block.settings.role != blank -%}<small>{{ block.settings.role | escape }}</small>{%- endif -%}
+          </span>
+        </figcaption>
+      </figure>
+
+    {%- when 'stats' -%}
+      <div class="dc-about__stats" data-reveal {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h2 class="dc-about__stats-heading">{{ block.settings.heading | escape }}</h2>
+        {%- endif -%}
+        <div class="dc-about__stats-grid">
+          {%- for i in (1..4) -%}
+            {%- liquid
+              assign vkey = 'value_' | append: i
+              assign lkey = 'label_' | append: i
+              assign nkey = 'num_' | append: i
+              assign skey = 'suffix_' | append: i
+              assign v = block.settings[vkey]
+              assign l = block.settings[lkey]
+              assign n = block.settings[nkey]
+              assign suf = block.settings[skey]
+            -%}
+            {%- if v != blank or n != blank -%}
+              <div class="dc-about__stat">
+                <span class="dc-about__stat-value">
+                  {%- if n != blank -%}
+                    <span class="dc-about__stat-num" data-count="{{ n }}">0</span>{{ suf | escape }}
+                  {%- else -%}
+                    {{ v | escape }}
+                  {%- endif -%}
+                </span>
+                {%- if l != blank -%}<span class="dc-about__stat-label">{{ l | escape }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- when 'timeline' -%}
+      <div class="dc-about__timeline" data-reveal {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h2 class="dc-about__h2 dc-about__timeline-heading">{{ block.settings.heading | escape }}</h2>
+        {%- endif -%}
+        <ol class="dc-about__tl-list">
+          {%- for i in (1..6) -%}
+            {%- liquid
+              assign ykey = 'year_' | append: i
+              assign tkey = 'title_' | append: i
+              assign dkey = 'text_' | append: i
+              assign y = block.settings[ykey]
+              assign t = block.settings[tkey]
+              assign d = block.settings[dkey]
+            -%}
+            {%- if t != blank or y != blank -%}
+              <li class="dc-about__tl-item" style="--i: {{ forloop.index0 }}">
+                <span class="dc-about__tl-dot" aria-hidden="true"></span>
+                {%- if y != blank -%}<span class="dc-about__tl-year">{{ y | escape }}</span>{%- endif -%}
+                {%- if t != blank -%}<h3 class="dc-about__tl-title">{{ t | escape }}</h3>{%- endif -%}
+                {%- if d != blank -%}<p class="dc-about__tl-text">{{ d | escape }}</p>{%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      </div>
+
+    {%- when 'brands' -%}
+      <div class="dc-about__brands" data-reveal {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}<h2 class="dc-about__brands-heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+        {%- if block.settings.subtitle != blank -%}<p class="dc-about__brands-sub">{{ block.settings.subtitle | escape }}</p>{%- endif -%}
+        <div class="dc-about__brands-grid">
+          {%- for i in (1..12) -%}
+            {%- liquid
+              assign ikey = 'logo_' | append: i
+              assign nkey = 'name_' | append: i
+              assign img = block.settings[ikey]
+              assign nm = block.settings[nkey]
+            -%}
+            {%- if img != blank -%}
+              {%- assign brand_alt = nm | default: 'Marca' -%}
+              <span class="dc-about__brand">
+                {{ img | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120,200,320', sizes: '120px', class: 'dc-about__brand-logo', alt: brand_alt }}
+              </span>
+            {%- elsif nm != blank -%}
+              <span class="dc-about__brand dc-about__brand--text">{{ nm | escape }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- when 'values' -%}
+      <div class="dc-about__values" data-reveal {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}<h2 class="dc-about__h2 dc-about__values-heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+        <div class="dc-about__values-grid">
+          {%- for i in (1..4) -%}
+            {%- liquid
+              assign tkey = 'title_' | append: i
+              assign dkey = 'text_' | append: i
+              assign t = block.settings[tkey]
+              assign d = block.settings[dkey]
+            -%}
+            {%- if t != blank -%}
+              <div class="dc-about__value" style="--i: {{ forloop.index0 }}">
+                <span class="dc-about__value-mark" aria-hidden="true"></span>
+                <h3 class="dc-about__value-title">{{ t | escape }}</h3>
+                {%- if d != blank -%}<p class="dc-about__value-text">{{ d | escape }}</p>{%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- when 'cta_band' -%}
+      <div class="dc-about__band" data-reveal {{ block.shopify_attributes }}>
+        <div class="dc-about__band-inner">
+          {%- if block.settings.heading != blank -%}<h2 class="dc-about__band-heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p class="dc-about__band-text">{{ block.settings.text | escape }}</p>{%- endif -%}
+          {%- if block.settings.btn1_label != blank or block.settings.btn2_label != blank -%}
+            <div class="dc-about__band-cta">
+              {%- if block.settings.btn1_label != blank -%}<a class="dc-btn dc-btn--solid dc-btn--invert" href="{{ block.settings.btn1_link | default: '#' }}">{{ block.settings.btn1_label | escape }}</a>{%- endif -%}
+              {%- if block.settings.btn2_label != blank -%}<a class="dc-btn dc-btn--ghost dc-btn--ghost-invert" href="{{ block.settings.btn2_link | default: '#' }}">{{ block.settings.btn2_label | escape }}</a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('dc-about-{{ uid }}');
+    if (!root || root.dataset.dcBound) return;
+    root.dataset.dcBound = '1';
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reveals = root.querySelectorAll('[data-reveal]');
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('is-in'); });
+      root.querySelectorAll('[data-count]').forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.classList.add('is-in');
+        el.querySelectorAll('[data-count]').forEach(runCount);
+        obs.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+    reveals.forEach(function (el) { io.observe(el); });
+
+    function runCount(el) {
+      if (el.dataset.done) return;
+      el.dataset.done = '1';
+      var target = parseFloat(el.getAttribute('data-count')) || 0;
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('pt-BR');
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString('pt-BR');
+      }
+      requestAnimationFrame(step);
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  .dc-about {
+    background: #ffffff;
+    color: #374151;
+    padding-block: var(--dc-about-pt, 0) var(--dc-about-pb, 96px);
+    overflow: clip;
+  }
+  .dc-about__h2 {
+    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(26px, 3.4vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0 0 18px;
+  }
+  .dc-about__kicker {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+  .dc-about__kicker--red { color: var(--dc-red, #d62828); }
+  .dc-about__kicker--blue { color: var(--dc-blue, #0f4fa8); }
+  .dc-about__kicker--none { color: #9ca3af; }
+  .dc-about__rte { font-size: 16.5px; line-height: 1.78; color: #4b5563; }
+  .dc-about__rte p { margin: 0 0 1.1em; }
+  .dc-about__rte p:last-child { margin-bottom: 0; }
+  .dc-about__rte strong { color: #0d1115; }
+
+  /* ---------- Botões ---------- */
+  .dc-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 52px; padding-inline: 28px; border-radius: 999px;
+    font-family: var(--font-sans, "Manrope", sans-serif);
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .dc-btn:hover { transform: translateY(-1px); }
+  .dc-btn--solid { background: #0d1115; color: #fff; }
+  .dc-btn--solid:hover { background: var(--dc-red, #d62828); }
+  .dc-btn--ghost { background: transparent; color: #0d1115; border: 1px solid #d9dade; }
+  .dc-btn--ghost:hover { border-color: #0d1115; }
+  .dc-btn--invert { background: #fff; color: #0d1115; }
+  .dc-btn--invert:hover { background: var(--dc-red, #d62828); color: #fff; }
+  .dc-btn--ghost-invert { color: #fff; border-color: rgba(255,255,255,.4); }
+  .dc-btn--ghost-invert:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+  /* ---------- Reveal ---------- */
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+
+  /* ---------- Hero ---------- */
+  .dc-about__hero {
+    background: radial-gradient(120% 120% at 100% 0, #fbecec 0, #fff7f7 26%, #ffffff 60%);
+    padding: clamp(56px, 9vw, 120px) 0 clamp(48px, 7vw, 96px);
+    border-bottom: 1px solid #f1eef0;
+  }
+  .dc-about__hero-inner {
+    max-width: 1160px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 56px);
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 72px); align-items: center;
+  }
+  .dc-about__hero--noimg .dc-about__hero-inner { grid-template-columns: 1fr; max-width: 920px; text-align: center; }
+  .dc-about__hero--noimg .dc-about__hero-cta { justify-content: center; }
+  .dc-about__eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dc-red, #d62828); font-weight: 700; margin: 0 0 18px;
+  }
+  .dc-about__headline {
+    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(34px, 6vw, 60px); line-height: 1.02; letter-spacing: -0.03em;
+    font-weight: 700; color: #0d1115; margin: 0;
+  }
+  .dc-about__lede { font-size: clamp(16px, 2vw, 19px); line-height: 1.6; color: #4b5563; margin: 22px 0 0; max-width: 56ch; }
+  .dc-about__hero--noimg .dc-about__lede { margin-inline: auto; }
+  .dc-about__hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+  .dc-about__hero-media { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4 / 5; background: #f4f4f6; box-shadow: 0 30px 60px -28px rgba(13,17,21,.4); }
+  .dc-about__hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dc-about__hero-media[data-dc-fit-host] .dc-about__hero-img.dc-contain { object-fit: contain; }
+  .dc-about__hero-badge {
+    position: absolute; left: 16px; bottom: 16px; z-index: 2;
+    background: rgba(13,17,21,.86); color: #fff; backdrop-filter: blur(6px);
+    font-size: 12.5px; font-weight: 700; letter-spacing: .02em;
+    padding: 8px 14px; border-radius: 999px;
+  }
+  .dc-about__hero-mark {
+    display: flex; flex-direction: column; line-height: .9;
+    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(64px, 12vw, 150px); font-weight: 700; letter-spacing: -0.04em;
+  }
+  .dc-about__hero-mark span:first-child { color: #0d1115; }
+  .dc-about__hero-mark span:last-child { color: var(--dc-red, #d62828); }
+
+  /* ---------- Chapter (imagem + texto) ---------- */
+  .dc-about__chapter { padding: clamp(48px, 7vw, 88px) 0; }
+  .dc-about__chapter-inner {
+    max-width: 1160px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 56px);
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center;
+  }
+  .dc-about__chapter--img-left .dc-about__chapter-copy { order: 2; }
+  .dc-about__chapter--img-left .dc-about__chapter-media { order: 1; }
+  .dc-about__chapter-media { border-radius: 20px; overflow: hidden; aspect-ratio: 5 / 4; background: #f4f4f6; box-shadow: 0 24px 48px -30px rgba(13,17,21,.35); }
+  .dc-about__chapter-img, .dc-about__chapter-media svg, .dc-about__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dc-about__chapter-media[data-dc-fit-host] .dc-about__chapter-img.dc-contain { object-fit: contain; }
+  .dc-about__ph { background: #eef0f2; color: #c7ccd2; }
+
+  /* ---------- Pullquote ---------- */
+  .dc-about__quote {
+    max-width: 940px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px);
+    text-align: center; position: relative;
+  }
+  .dc-about__quote-mark {
+    display: block; font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: 96px; line-height: .6; color: var(--dc-red, #d62828); margin-bottom: 8px;
+  }
+  .dc-about__quote-text {
+    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(22px, 3.4vw, 36px); line-height: 1.28; letter-spacing: -0.02em;
+    font-weight: 600; color: #0d1115; margin: 0; border: 0; font-style: normal;
+  }
+  .dc-about__quote-cap { display: inline-flex; align-items: center; gap: 14px; margin-top: 28px; }
+  .dc-about__quote-portrait img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; display: block; }
+  .dc-about__quote-meta { text-align: left; display: flex; flex-direction: column; }
+  .dc-about__quote-meta b { color: #0d1115; font-size: 15px; }
+  .dc-about__quote-meta small { color: #6b7280; font-size: 13px; }
+
+  /* ---------- Stats ---------- */
+  .dc-about__stats { max-width: 1160px; margin: 0 auto; padding: clamp(16px, 3vw, 36px) clamp(20px, 5vw, 56px); }
+  .dc-about__stats-heading { font-family: var(--font-display); font-size: 22px; text-align: center; color: #0d1115; margin: 0 0 28px; }
+  .dc-about__stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .dc-about__stat {
+    background: #faf9fb; border: 1px solid #f0eef1; border-radius: 18px;
+    padding: 28px 20px; text-align: center;
+  }
+  .dc-about__stat-value {
+    display: block; font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(30px, 4vw, 46px); font-weight: 700; letter-spacing: -0.02em; color: #0d1115; line-height: 1;
+  }
+  .dc-about__stat-num { font-variant-numeric: tabular-nums; }
+  .dc-about__stat-label { display: block; margin-top: 10px; font-size: 13.5px; color: #6b7280; font-weight: 500; }
+
+  /* ---------- Timeline ---------- */
+  .dc-about__timeline { max-width: 920px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px); }
+  .dc-about__timeline-heading { text-align: center; margin-bottom: 44px; }
+  .dc-about__tl-list { list-style: none; margin: 0; padding: 0; position: relative; }
+  .dc-about__tl-list::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(#f0d3d3, #e6e6ea); }
+  .dc-about__tl-item { position: relative; padding: 0 0 34px 38px; }
+  .dc-about__tl-item:last-child { padding-bottom: 0; }
+  .dc-about__tl-dot {
+    position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 999px;
+    background: #fff; border: 3px solid var(--dc-red, #d62828); box-shadow: 0 0 0 4px #fff;
+  }
+  .dc-about__tl-year { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dc-red, #d62828); }
+  .dc-about__tl-title { font-family: var(--font-display); font-size: 19px; color: #0d1115; margin: 4px 0 6px; line-height: 1.2; }
+  .dc-about__tl-text { font-size: 15px; line-height: 1.6; color: #6b7280; margin: 0; }
+
+  /* ---------- Brands ---------- */
+  .dc-about__brands { max-width: 1160px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 56px); text-align: center; border-block: 1px solid #f1eef0; }
+  .dc-about__brands-heading { font-family: var(--font-display); font-size: 22px; color: #0d1115; margin: 0 0 6px; }
+  .dc-about__brands-sub { font-size: 14px; color: #6b7280; margin: 0 0 32px; }
+  .dc-about__brands-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px 24px; align-items: center; }
+  .dc-about__brand { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 8px; }
+  .dc-about__brand-logo { max-height: 40px; width: auto; object-fit: contain; filter: grayscale(1); opacity: .62; transition: filter .25s ease, opacity .25s ease, transform .25s ease; }
+  .dc-about__brand:hover .dc-about__brand-logo { filter: none; opacity: 1; transform: scale(1.04); }
+  .dc-about__brand--text {
+    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+    font-size: clamp(15px, 1.8vw, 20px); font-weight: 700; letter-spacing: -0.01em;
+    color: #aab0b8; transition: color .25s ease;
+  }
+  .dc-about__brand--text:hover { color: #0d1115; }
+
+  /* ---------- Values ---------- */
+  .dc-about__values { max-width: 1160px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px); }
+  .dc-about__values-heading { text-align: center; margin-bottom: 40px; }
+  .dc-about__values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .dc-about__value { background: #faf9fb; border: 1px solid #f0eef1; border-radius: 18px; padding: 28px 22px; }
+  .dc-about__value-mark { display: block; width: 32px; height: 4px; border-radius: 999px; background: var(--dc-red, #d62828); margin-bottom: 18px; }
+  .dc-about__value:nth-child(2n) .dc-about__value-mark { background: var(--dc-blue, #0f4fa8); }
+  .dc-about__value-title { font-family: var(--font-display); font-size: 17px; color: #0d1115; margin: 0 0 8px; }
+  .dc-about__value-text { font-size: 14.5px; line-height: 1.6; color: #6b7280; margin: 0; }
+
+  /* ---------- CTA band ---------- */
+  .dc-about__band { max-width: 1160px; margin: clamp(40px, 6vw, 72px) auto 0; padding-inline: clamp(20px, 5vw, 56px); }
+  .dc-about__band-inner {
+    background: linear-gradient(135deg, #0d1115 0%, #1b1f25 100%);
+    border-radius: 28px; padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 64px); text-align: center; color: #fff;
+    position: relative; overflow: hidden;
+  }
+  .dc-about__band-inner::after { content: ""; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(214,40,40,.5), transparent 70%); }
+  .dc-about__band-heading { font-family: var(--font-display); font-size: clamp(24px, 3.4vw, 38px); letter-spacing: -0.02em; margin: 0; position: relative; }
+  .dc-about__band-text { font-size: 16px; color: rgba(255,255,255,.75); margin: 14px auto 0; max-width: 52ch; position: relative; }
+  .dc-about__band-cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 30px; position: relative; }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 900px) {
+    .dc-about__hero-inner,
+    .dc-about__chapter-inner { grid-template-columns: 1fr; }
+    .dc-about__hero-media { aspect-ratio: 16 / 11; max-height: 60vh; }
+    .dc-about__chapter--img-left .dc-about__chapter-copy,
+    .dc-about__chapter--img-left .dc-about__chapter-media { order: initial; }
+    .dc-about__chapter-media { order: -1; }
+    .dc-about__stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dc-about__values-grid { grid-template-columns: repeat(2, 1fr); }
+    .dc-about__brands-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .dc-about__stats-grid { grid-template-columns: 1fr 1fr; }
+    .dc-about__values-grid { grid-template-columns: 1fr; }
+    .dc-about__brands-grid { grid-template-columns: repeat(2, 1fr); }
+    .dc-about__hero-cta .dc-btn,
+    .dc-about__band-cta .dc-btn { width: 100%; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Sobre nós",
+  "tag": "section",
+  "class": "section-wrapper",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Nossa história" },
+    { "type": "text", "id": "headline", "label": "Título principal", "default": "Recomeçar não é voltar à estaca zero. É começar mais forte." },
+    { "type": "textarea", "id": "lede", "label": "Texto de abertura", "default": "A DropChina nasceu de uma reconstrução. Por trás de cada pedido tem um recomeço, a decisão de não desistir e o compromisso de entregar tecnologia de verdade, com preço justo e atendimento que responde como gente." },
+    { "type": "select", "id": "hero_align", "label": "Alinhamento (sem foto)", "options": [ { "value": "left", "label": "Esquerda" }, { "value": "center", "label": "Centralizado" } ], "default": "left" },
+    { "type": "image_picker", "id": "hero_image", "label": "Foto do hero", "info": "Vazio = hero tipográfico (sem foto)." },
+    { "type": "text", "id": "hero_image_alt", "label": "Texto alternativo da foto" },
+    { "type": "text", "id": "hero_badge", "label": "Selo sobre a foto", "default": "MercadoLíder Platinum" },
+    { "type": "text", "id": "cta1_label", "label": "Botão 1 — texto", "default": "Ver produtos" },
+    { "type": "url", "id": "cta1_link", "label": "Botão 1 — link" },
+    { "type": "text", "id": "cta2_label", "label": "Botão 2 — texto", "default": "Falar no WhatsApp" },
+    { "type": "url", "id": "cta2_link", "label": "Botão 2 — link" },
+    { "type": "header", "content": "Espaçamento" },
+    { "type": "range", "id": "padding_top", "label": "Padding topo", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding base", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Capítulo (imagem + texto)",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker" },
+        { "type": "select", "id": "accent", "label": "Cor do kicker", "options": [ { "value": "red", "label": "Vermelho" }, { "value": "blue", "label": "Azul" }, { "value": "none", "label": "Neutro" } ], "default": "red" },
+        { "type": "text", "id": "heading", "label": "Título" },
+        { "type": "richtext", "id": "body", "label": "Texto" },
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "select", "id": "image_side", "label": "Lado da imagem", "options": [ { "value": "right", "label": "Direita" }, { "value": "left", "label": "Esquerda" } ], "default": "right" }
+      ]
+    },
+    {
+      "type": "pullquote",
+      "name": "Citação (frase)",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Frase" },
+        { "type": "text", "id": "author", "label": "Autor", "default": "Augusto" },
+        { "type": "text", "id": "role", "label": "Cargo", "default": "Fundador da DropChina" },
+        { "type": "image_picker", "id": "portrait", "label": "Retrato (opcional)" }
+      ]
+    },
+    {
+      "type": "stats",
+      "name": "Números",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título (opcional)" },
+        { "type": "header", "content": "Número 1 (use 'Valor numérico' para animar o contador)" },
+        { "type": "text", "id": "num_1", "label": "Valor numérico", "info": "Ex.: 10000 (anima de 0 até o número)." },
+        { "type": "text", "id": "suffix_1", "label": "Sufixo", "info": "Ex.: + ou mil" },
+        { "type": "text", "id": "value_1", "label": "Ou valor em texto", "info": "Use quando não for número (ex.: Platinum)." },
+        { "type": "text", "id": "label_1", "label": "Legenda" },
+        { "type": "header", "content": "Número 2" },
+        { "type": "text", "id": "num_2", "label": "Valor numérico" },
+        { "type": "text", "id": "suffix_2", "label": "Sufixo" },
+        { "type": "text", "id": "value_2", "label": "Ou valor em texto" },
+        { "type": "text", "id": "label_2", "label": "Legenda" },
+        { "type": "header", "content": "Número 3" },
+        { "type": "text", "id": "num_3", "label": "Valor numérico" },
+        { "type": "text", "id": "suffix_3", "label": "Sufixo" },
+        { "type": "text", "id": "value_3", "label": "Ou valor em texto" },
+        { "type": "text", "id": "label_3", "label": "Legenda" },
+        { "type": "header", "content": "Número 4" },
+        { "type": "text", "id": "num_4", "label": "Valor numérico" },
+        { "type": "text", "id": "suffix_4", "label": "Sufixo" },
+        { "type": "text", "id": "value_4", "label": "Ou valor em texto" },
+        { "type": "text", "id": "label_4", "label": "Legenda" }
+      ]
+    },
+    {
+      "type": "timeline",
+      "name": "Linha do tempo",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "A nossa linha do tempo" },
+        { "type": "header", "content": "Marco 1" },
+        { "type": "text", "id": "year_1", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_1", "label": "Título" },
+        { "type": "textarea", "id": "text_1", "label": "Texto" },
+        { "type": "header", "content": "Marco 2" },
+        { "type": "text", "id": "year_2", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_2", "label": "Título" },
+        { "type": "textarea", "id": "text_2", "label": "Texto" },
+        { "type": "header", "content": "Marco 3" },
+        { "type": "text", "id": "year_3", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_3", "label": "Título" },
+        { "type": "textarea", "id": "text_3", "label": "Texto" },
+        { "type": "header", "content": "Marco 4" },
+        { "type": "text", "id": "year_4", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_4", "label": "Título" },
+        { "type": "textarea", "id": "text_4", "label": "Texto" },
+        { "type": "header", "content": "Marco 5" },
+        { "type": "text", "id": "year_5", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_5", "label": "Título" },
+        { "type": "textarea", "id": "text_5", "label": "Texto" },
+        { "type": "header", "content": "Marco 6" },
+        { "type": "text", "id": "year_6", "label": "Ano/rótulo" },
+        { "type": "text", "id": "title_6", "label": "Título" },
+        { "type": "textarea", "id": "text_6", "label": "Texto" }
+      ]
+    },
+    {
+      "type": "brands",
+      "name": "Marcas",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Marcas que confiam na gente" },
+        { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Trabalhamos com as maiores marcas do mercado." },
+        { "type": "paragraph", "content": "Para cada marca, suba um logo OU deixe só o nome (vira wordmark de texto)." },
+        { "type": "image_picker", "id": "logo_1", "label": "Logo 1" }, { "type": "text", "id": "name_1", "label": "Nome 1" },
+        { "type": "image_picker", "id": "logo_2", "label": "Logo 2" }, { "type": "text", "id": "name_2", "label": "Nome 2" },
+        { "type": "image_picker", "id": "logo_3", "label": "Logo 3" }, { "type": "text", "id": "name_3", "label": "Nome 3" },
+        { "type": "image_picker", "id": "logo_4", "label": "Logo 4" }, { "type": "text", "id": "name_4", "label": "Nome 4" },
+        { "type": "image_picker", "id": "logo_5", "label": "Logo 5" }, { "type": "text", "id": "name_5", "label": "Nome 5" },
+        { "type": "image_picker", "id": "logo_6", "label": "Logo 6" }, { "type": "text", "id": "name_6", "label": "Nome 6" },
+        { "type": "image_picker", "id": "logo_7", "label": "Logo 7" }, { "type": "text", "id": "name_7", "label": "Nome 7" },
+        { "type": "image_picker", "id": "logo_8", "label": "Logo 8" }, { "type": "text", "id": "name_8", "label": "Nome 8" },
+        { "type": "image_picker", "id": "logo_9", "label": "Logo 9" }, { "type": "text", "id": "name_9", "label": "Nome 9" },
+        { "type": "image_picker", "id": "logo_10", "label": "Logo 10" }, { "type": "text", "id": "name_10", "label": "Nome 10" },
+        { "type": "image_picker", "id": "logo_11", "label": "Logo 11" }, { "type": "text", "id": "name_11", "label": "Nome 11" },
+        { "type": "image_picker", "id": "logo_12", "label": "Logo 12" }, { "type": "text", "id": "name_12", "label": "Nome 12" }
+      ]
+    },
+    {
+      "type": "values",
+      "name": "Valores",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Por que comprar com a DropChina" },
+        { "type": "header", "content": "Valor 1" },
+        { "type": "text", "id": "title_1", "label": "Título" },
+        { "type": "textarea", "id": "text_1", "label": "Texto" },
+        { "type": "header", "content": "Valor 2" },
+        { "type": "text", "id": "title_2", "label": "Título" },
+        { "type": "textarea", "id": "text_2", "label": "Texto" },
+        { "type": "header", "content": "Valor 3" },
+        { "type": "text", "id": "title_3", "label": "Título" },
+        { "type": "textarea", "id": "text_3", "label": "Texto" },
+        { "type": "header", "content": "Valor 4" },
+        { "type": "text", "id": "title_4", "label": "Título" },
+        { "type": "textarea", "id": "text_4", "label": "Texto" }
+      ]
+    },
+    {
+      "type": "cta_band",
+      "name": "Faixa de CTA",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Bora fazer parte dessa história?" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Tecnologia de verdade, preço justo e atendimento que te trata como gente." },
+        { "type": "text", "id": "btn1_label", "label": "Botão 1 — texto", "default": "Ver produtos" },
+        { "type": "url", "id": "btn1_link", "label": "Botão 1 — link" },
+        { "type": "text", "id": "btn2_label", "label": "Botão 2 — texto", "default": "Falar no WhatsApp" },
+        { "type": "url", "id": "btn2_link", "label": "Botão 2 — link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DC Sobre nós",
+      "blocks": [
+        { "type": "chapter", "settings": { "kicker": "O recomeço", "accent": "red", "heading": "Quando tudo recomeçou do zero", "body": "<p>[RASCUNHO — confirmar com o Augusto] Há quatro anos, um AVC mudou tudo. Da noite pro dia, foi preciso reaprender o básico e encarar a vida de outro jeito. Muita coisa se perdeu pelo caminho. A vontade de recomeçar, não.</p><p>Foi do fundo que nasceu a decisão que daria origem à DropChina.</p>", "image_side": "right" } },
+        { "type": "chapter", "settings": { "kicker": "A reconstrução", "accent": "blue", "heading": "Tijolo por tijolo, dentro do Mercado Livre", "body": "<p>[RASCUNHO] A volta começou pequena, uma venda de cada vez. Com consistência, atendimento honesto e produto que chega como prometido, veio a reputação que poucos alcançam: <strong>MercadoLíder Platinum</strong>, o nível máximo do Mercado Livre.</p><p>Não foi sorte. Foi recomeço transformado em rotina.</p>", "image_side": "left" } },
+        { "type": "pullquote", "settings": { "quote": "[Frase do Augusto entra aqui] Recomeçar foi a coisa mais difícil que já fiz. E a que mais valeu a pena.", "author": "Augusto", "role": "Fundador da DropChina" } },
+        { "type": "stats", "settings": { "heading": "", "num_1": "10000", "suffix_1": "+", "label_1": "Vendas no Mercado Livre", "value_2": "Platinum", "label_2": "Reputação MercadoLíder", "num_3": "12", "suffix_3": " meses", "label_3": "Garantia oficial", "num_4": "20", "suffix_4": "+", "label_4": "Marcas atendidas" } },
+        { "type": "chapter", "settings": { "kicker": "Hoje", "accent": "red", "heading": "Uma loja própria, do importador direto pra você", "body": "<p>[RASCUNHO] Hoje a DropChina vai além do marketplace. Trabalhamos com produtos importados das maiores marcas do mercado, parceria com grandes fabricantes e players, estrutura própria e nota fiscal em tudo.</p><p>O mesmo cuidado de sempre, agora na casa que é nossa.</p>", "image_side": "right" } },
+        { "type": "timeline", "settings": { "heading": "A nossa linha do tempo", "year_1": "2022", "title_1": "O recomeço", "text_1": "[ano a confirmar] O ponto de virada. A decisão de reconstruir.", "year_2": "2023", "title_2": "Primeiras vendas no ML", "text_2": "Do zero, uma venda de cada vez, construindo reputação.", "year_3": "2024", "title_3": "MercadoLíder Platinum", "text_3": "O nível máximo de reputação do Mercado Livre.", "year_4": "2026", "title_4": "Loja própria DropChina", "text_4": "A casa que é nossa, do importador direto pra você.", "year_5": "O futuro", "title_5": "Expansão multicanal", "text_5": "Mais canais, mais marcas, o mesmo cuidado de sempre." } },
+        { "type": "brands", "settings": { "heading": "Marcas que confiam na gente", "subtitle": "Trabalhamos com as maiores marcas do mercado.", "name_1": "HP", "name_2": "Epson", "name_3": "Brother", "name_4": "Canon", "name_5": "Logitech", "name_6": "Multilaser", "name_7": "Zebra", "name_8": "Ricoh", "name_9": "Kyocera", "name_10": "Lexmark" } },
+        { "type": "values", "settings": { "heading": "Por que comprar com a DropChina", "title_1": "Curadoria de verdade", "text_1": "Nada de catálogo infinito sem critério. Só o que a gente recomendaria pra um amigo.", "title_2": "Nota fiscal sempre", "text_2": "Compra segura, com garantia e procedência em todos os pedidos.", "title_3": "Atendimento humano", "text_3": "Você fala com gente de verdade no WhatsApp, antes e depois da compra.", "title_4": "Atacado CNPJ", "text_4": "Condições especiais para revenda e empresas." } },
+        { "type": "cta_band", "settings": { "heading": "Bora fazer parte dessa história?", "text": "Tecnologia de verdade, preço justo e atendimento que te trata como gente.", "btn1_label": "Ver produtos", "btn2_label": "Falar no WhatsApp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
