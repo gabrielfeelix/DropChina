@@ -28,9 +28,19 @@
           "settings": {
             "name": "Impressão & Suprimentos",
             "icon": "printer",
-            "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nToners HP|/collections/toners-hp\nToners Brother|/collections/toners-brother\nToners Samsung|/collections/toners-samsung\nCartuchos de Tinta|/collections/cartuchos-de-tinta\nImpressão 3D|/collections/impressao-3d",
+            "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nToners HP|/collections/toners-hp\nToners Brother|/collections/toners-brother\nToners Samsung|/collections/toners-samsung\nCartuchos de Tinta|/collections/cartuchos-de-tinta",
             "featured_collection": "toners",
             "link": "shopify://collections/impressao"
+          }
+        },
+        "dep_3d": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Impressão 3D",
+            "icon": "cube",
+            "items": "Impressoras 3D|/collections/impressao-3d\nFilamentos & Resinas|/collections/impressao-3d\nPeças & Acessórios 3D|/collections/impressao-3d",
+            "featured_collection": "impressao-3d",
+            "link": "shopify://collections/impressao-3d"
           }
         },
         "dep_informatica": {
@@ -74,6 +84,7 @@
       },
       "block_order": [
         "dep_impressao",
+        "dep_3d",
         "dep_informatica",
         "dep_papelaria",
         "dep_beleza",

@@ -4,7 +4,7 @@
     "descricao": "Taxonomia oficial do catálogo DropChina em 2 níveis (departamento > subcategoria). Cada subcategoria tem uma tag canônica `categoria-<slug>` usada nas smart collections da Shopify (handle = slug) e que deve refletir a categoria no Bling e no Mercado Livre. Departamentos = abas do mega-menu; no Shopify a hierarquia mora só no menu (collections são flat).",
     "versao": "2.0",
     "tag_scheme": "categoria-<slug> (uma por produto)",
-    "total_departamentos": 5,
+    "total_departamentos": 6,
     "nota_offniche": "Itens fora do nicho de tecnologia (cozinha, mobilidade, fitness, suplementos, eletrodomésticos) caem no departamento Variedades (categoria-variedades) como catch-all."
   },
   "departamentos": [
@@ -15,8 +15,16 @@
         { "nome": "Impressoras",        "tag": "categoria-impressoras",     "marcas": ["Epson", "HP", "Brother", "Canon", "Ricoh", "Kyocera", "Lexmark", "Pantum", "Xerox", "ISD"] },
         { "nome": "Toners",             "tag": "categoria-toners",          "marcas": ["HP", "Brother", "Ricoh", "Lexmark", "Kyocera", "Samsung", "Xerox", "Evolut", "Byqualy", "Premium", "Strom"] },
         { "nome": "Cartuchos de Tinta", "tag": "categoria-cartuchos-tinta", "marcas": ["HP", "Epson", "Canon", "Brother"] },
-        { "nome": "Impressão 3D",       "tag": "categoria-impressao-3d",    "marcas": ["Diversas Marcas"] },
         { "nome": "Cilindros & Peças",  "tag": "categoria-cilindros-pecas", "marcas": ["Brother", "HP", "Ricoh", "Samsung", "Canon"] }
+      ]
+    },
+    {
+      "departamento": "Impressão 3D",
+      "handle": "impressao-3d",
+      "subcategorias": [
+        { "nome": "Impressoras 3D",       "tag": "categoria-impressao-3d", "marcas": ["Creality", "Bambu Lab", "Snapmaker", "Diversas Marcas"] },
+        { "nome": "Filamentos & Resinas", "tag": "categoria-impressao-3d", "marcas": ["Diversas Marcas"] },
+        { "nome": "Peças & Acessórios 3D","tag": "categoria-impressao-3d", "marcas": ["Diversas Marcas"] }
       ]
     },
     {

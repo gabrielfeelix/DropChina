@@ -96,18 +96,21 @@
           "type": "brands",
           "settings": {
             "heading": "Marcas que confiam na gente",
-            "subtitle": "Trabalhamos com as maiores marcas do mercado — e somos distribuidor oficial da ISD Tech no Brasil.",
-            "name_1": "ISD Tech",
-            "name_2": "HP",
-            "name_3": "Epson",
-            "name_4": "Brother",
-            "name_5": "Canon",
-            "name_6": "Logitech",
-            "name_7": "Multilaser",
-            "name_8": "Zebra",
-            "name_9": "Ricoh",
-            "name_10": "Kyocera",
-            "name_11": "Lexmark"
+            "subtitle": "Trabalhamos com as maiores marcas do mercado.",
+            "official_label": "Distribuidor oficial",
+            "official_logo": "isd-tech-logo.png",
+            "official_note": "Distribuidor oficial da ISD Tech no Brasil — soluções de autoatendimento, câmeras e impressão profissional.",
+            "official_url": "https://isdtech.com.br",
+            "name_1": "HP",
+            "name_2": "Epson",
+            "name_3": "Brother",
+            "name_4": "Canon",
+            "name_5": "Logitech",
+            "name_6": "Multilaser",
+            "name_7": "Zebra",
+            "name_8": "Ricoh",
+            "name_9": "Kyocera",
+            "name_10": "Lexmark"
           }
         },
         "valores": {

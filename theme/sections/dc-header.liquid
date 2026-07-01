@@ -166,6 +166,7 @@
                   {%- when 'headset' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4"/><path d="M4 13v4a2 2 0 0 0 2 2h2v-6H4"/></svg>
                   {%- when 'paper' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>
                   {%- when 'beauty' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5z"/></svg>
+                  {%- when 'cube' -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
                   {%- else -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 13.5 9 21 10.5 13.5 12 12 19 10.5 12 3 10.5 10.5 9 12 2Z"/></svg>
                 {%- endcase -%}
               </span>
@@ -1508,7 +1509,8 @@
           { "value": "cable", "label": "Cabo" },
           { "value": "headset", "label": "Headset" },
           { "value": "paper", "label": "Papel" },
-          { "value": "beauty", "label": "Beleza" }
+          { "value": "beauty", "label": "Beleza" },
+          { "value": "cube", "label": "Impressão 3D" }
         ], "default": "cartridge" },
         { "type": "url", "id": "link", "label": "Link (ver tudo do departamento)" },
         { "type": "textarea", "id": "items", "label": "Subitens (1 por linha)", "info": "Cada linha: 'Rótulo' ou 'Rótulo|/collections/handle' para link próprio. Sem link = usa o link do departamento.", "default": "Teclados|/collections/teclados\nMouses|/collections/mouses\nMonitores|/collections/monitores" },

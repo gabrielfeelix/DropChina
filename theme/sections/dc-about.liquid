@@ -195,6 +195,21 @@
       <div class="dc-about__brands" data-reveal {{ block.shopify_attributes }}>
         {%- if block.settings.heading != blank -%}<h2 class="dc-about__brands-heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
         {%- if block.settings.subtitle != blank -%}<p class="dc-about__brands-sub">{{ block.settings.subtitle | escape }}</p>{%- endif -%}
+        {%- if block.settings.official_logo != blank -%}
+          <div class="dc-about__official">
+            {%- if block.settings.official_label != blank -%}<span class="dc-about__official-tag">{{ block.settings.official_label | escape }}</span>{%- endif -%}
+            {%- if block.settings.official_url != blank -%}
+              <a href="{{ block.settings.official_url }}" target="_blank" rel="noopener" class="dc-about__official-logo-wrap">
+                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" loading="lazy">
+              </a>
+            {%- else -%}
+              <span class="dc-about__official-logo-wrap">
+                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" loading="lazy">
+              </span>
+            {%- endif -%}
+            {%- if block.settings.official_note != blank -%}<p class="dc-about__official-note">{{ block.settings.official_note | escape }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
         <div class="dc-about__brands-grid">
           {%- for i in (1..12) -%}
             {%- liquid
@@ -473,6 +488,19 @@
   }
   .dc-about__brand--text:hover { color: #0d1115; }
 
+  /* ---------- Parceiro oficial (ISD) ---------- */
+  .dc-about__official {
+    max-width: 520px; margin: 0 auto 36px; padding: 26px 28px;
+    background: #faf9fb; border: 1px solid #f0eef1; border-radius: 20px; text-align: center;
+  }
+  .dc-about__official-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #fff; background: var(--dc-red, #d62828); padding: 5px 12px; border-radius: 999px; margin-bottom: 16px;
+  }
+  .dc-about__official-logo-wrap { display: block; }
+  .dc-about__official-logo { max-height: 54px; width: auto; max-width: 80%; object-fit: contain; margin: 0 auto; display: block; }
+  .dc-about__official-note { font-size: 13.5px; color: #6b7280; margin: 14px 0 0; }
+
   /* ---------- Values ---------- */
   .dc-about__values { max-width: 1160px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 56px); }
   .dc-about__values-heading { text-align: center; margin-bottom: 40px; }
@@ -626,6 +654,11 @@
       "settings": [
         { "type": "text", "id": "heading", "label": "Título", "default": "Marcas que confiam na gente" },
         { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Trabalhamos com as maiores marcas do mercado." },
+        { "type": "header", "content": "Parceiro oficial (destaque)" },
+        { "type": "text", "id": "official_label", "label": "Rótulo", "default": "Distribuidor oficial" },
+        { "type": "text", "id": "official_logo", "label": "Logo (arquivo em assets)", "info": "Ex.: isd-tech-logo.png" },
+        { "type": "text", "id": "official_note", "label": "Texto" },
+        { "type": "url", "id": "official_url", "label": "Link" },
         { "type": "paragraph", "content": "Para cada marca, suba um logo OU deixe só o nome (vira wordmark de texto)." },
         { "type": "image_picker", "id": "logo_1", "label": "Logo 1" }, { "type": "text", "id": "name_1", "label": "Nome 1" },
         { "type": "image_picker", "id": "logo_2", "label": "Logo 2" }, { "type": "text", "id": "name_2", "label": "Nome 2" },
