@@ -120,6 +120,15 @@
       </button>
       {%- comment -%} Nav primária via settings explícitos (5 slots).
           Cada slot tem label/url/tag (badge opcional ex: "-40%"). {%- endcomment -%}
+      {%- liquid
+        assign novo_until = section.settings.novo_until | default: '2026-10-01'
+        assign now_ts = 'now' | date: '%s' | plus: 0
+        assign novo_ts = novo_until | date: '%s' | plus: 0
+        assign novo_active = true
+        if now_ts >= novo_ts
+          assign novo_active = false
+        endif
+      -%}
       {%- for i in (1..5) -%}
         {%- assign key_label = 'nav_link_' | append: i -%}
         {%- assign key_url   = 'nav_link_' | append: i | append: '_url' -%}
@@ -131,7 +140,9 @@
           <a href="{{ nav_url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ forloop.index0 }}">
             {{ nav_label }}
             {%- if nav_tag != blank -%}
-              <span class="dc-nav__tag">{{ nav_tag }}</span>
+              {%- unless nav_tag == 'NOVO' and novo_active == false -%}
+                <span class="dc-nav__tag">{{ nav_tag }}</span>
+              {%- endunless -%}
             {%- endif -%}
           </a>
         {%- endif -%}
@@ -171,6 +182,11 @@
                 {%- endcase -%}
               </span>
               <span class="dc-mega__name">{{ block.settings.name | escape }}</span>
+              {%- if block.settings.badge != blank -%}
+                {%- unless block.settings.badge == 'NOVO' and novo_active == false -%}
+                  <span class="dc-nav__tag dc-mega__badge">{{ block.settings.badge }}</span>
+                {%- endunless -%}
+              {%- endif -%}
               <span class="dc-mega__go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></span>
             </a>
           {%- endfor -%}
@@ -250,7 +266,7 @@
           {%- for block in mm_blocks -%}
             <details class="dc-mmenu__cat">
               <summary>
-                <span class="dc-mmenu__cat-name">{{ block.settings.name | escape }}</span>
+                <span class="dc-mmenu__cat-name">{{ block.settings.name | escape }}{%- if block.settings.badge != blank -%}{%- unless block.settings.badge == 'NOVO' and novo_active == false -%} <span class="dc-nav__tag dc-mega__badge">{{ block.settings.badge }}</span>{%- endunless -%}{%- endif -%}</span>
                 <svg class="dc-mmenu__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <ul class="dc-mmenu__sub">
@@ -288,7 +304,7 @@
             <a href="{{ section.settings[mm_key_url] | default: '#' }}">
               {{ mm_label }}
               {%- assign mm_tag = section.settings[mm_key_tag] -%}
-              {%- if mm_tag != blank -%}<span class="dc-nav__tag">{{ mm_tag }}</span>{%- endif -%}
+              {%- if mm_tag != blank -%}{%- unless mm_tag == 'NOVO' and novo_active == false -%}<span class="dc-nav__tag">{{ mm_tag }}</span>{%- endunless -%}{%- endif -%}
             </a>
           {%- endif -%}
         {%- endfor -%}
@@ -984,6 +1000,7 @@
     text-transform: uppercase;
     margin-left: 4px;
   }
+  .dc-mega__badge { margin-left: 8px; padding: 1px 6px; font-size: 9px; flex: none; }
   .dc-nav__secondary {
     display: flex;
     gap: 22px;
@@ -1471,6 +1488,8 @@
     { "type": "text", "id": "hours", "label": "Horário", "default": "Atendimento · Seg–Sáb 8h–20h" },
     { "type": "header", "content": "Search" },
     { "type": "text", "id": "search_placeholder", "label": "Placeholder do input", "default": "Buscar cartuchos, toners, placas de vídeo..." },
+    { "type": "header", "content": "Timer NOVO" },
+    { "type": "text", "id": "novo_until", "label": "NOVO some após (AAAA-MM-DD)", "default": "2026-10-01", "info": "Badges 'NOVO' (nav e mega-menu) desaparecem automaticamente depois desta data." },
     { "type": "header", "content": "Nav primária (categorias)" },
     { "type": "text", "id": "nav_link_1", "label": "Link 1 — label", "default": "Cartuchos & Toners" },
     { "type": "url",  "id": "nav_link_1_url", "label": "Link 1 — URL" },
@@ -1501,6 +1520,7 @@
       "name": "Categoria do megamenu",
       "settings": [
         { "type": "text", "id": "name", "label": "Nome", "default": "Cartuchos & Tintas" },
+        { "type": "text", "id": "badge", "label": "Badge (ex: NOVO)", "info": "'NOVO' some sozinho após a data do Timer NOVO (config da seção)." },
         { "type": "select", "id": "icon", "label": "Ícone", "options": [
           { "value": "cartridge", "label": "Cartucho" },
           { "value": "printer", "label": "Impressora" },
