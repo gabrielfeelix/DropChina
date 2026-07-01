@@ -1,0 +1,36 @@
+{% doc %}
+  JSON-LD Organization da DropChina — identidade da entidade pro Google
+  (painel de conhecimento) e E-E-A-T. Renderizado no <head> via theme.liquid,
+  independente de qual seção de header está ativa (dc-header não emite schema).
+{% enddoc %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "legalName": "DROPCHINA LTDA",
+  "url": {{ request.origin | json }},
+  {% if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    "image": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+  {% endif %}
+  "telephone": "+5541995342751",
+  "taxID": "57.306.430/0001-53",
+  "vatID": "57.306.430/0001-53",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Osvaldo Cruz, 263, sala 606",
+    "addressLocality": "Maringá",
+    "addressRegion": "PR",
+    "postalCode": "87020-200",
+    "addressCountry": "BR"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+5541995342751",
+    "contactType": "customer service",
+    "areaServed": "BR",
+    "availableLanguage": "Portuguese"
+  }
+}
+</script>
