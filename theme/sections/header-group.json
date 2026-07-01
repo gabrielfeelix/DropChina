@@ -28,7 +28,7 @@
           "settings": {
             "name": "Impressão & Suprimentos",
             "icon": "printer",
-            "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nCartuchos de Tinta|/collections/cartuchos-de-tinta\nImpressão 3D|/collections/impressao-3d",
+            "items": "Impressoras|/collections/impressoras\nToners|/collections/toners\nToners HP|/collections/toners-hp\nToners Brother|/collections/toners-brother\nToners Samsung|/collections/toners-samsung\nCartuchos de Tinta|/collections/cartuchos-de-tinta\nImpressão 3D|/collections/impressao-3d",
             "featured_collection": "toners",
             "link": "shopify://collections/impressao"
           }
