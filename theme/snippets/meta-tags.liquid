@@ -36,10 +36,10 @@
     assign og_url = request.origin
   endif
 
-  # SEO da home: sem "Homepage title/description" no Admin, page_title fica vazio.
-  # Definimos aqui título e descrição ricos em keyword.
-  if request.page_type == 'index'
-    if page_title == blank
+  # SEO da home: page_title vem como o nome da loja ("DropChina"), fraco pra busca.
+  # Usamos template.name (check canônico de home) e sobrescrevemos com título/descrição ricos.
+  if template.name == 'index'
+    if page_title == blank or page_title == shop.name
       assign og_title = 'DropChina — Cartuchos, Toners, Impressoras e Periféricos'
     endif
     if page_description == blank
@@ -135,7 +135,7 @@
     name="description"
     content="{{ page_description | escape }}"
   >
-{% elsif request.page_type == 'index' %}
+{% elsif template.name == 'index' %}
   <meta
     name="description"
     content="{{ og_description | escape }}"
