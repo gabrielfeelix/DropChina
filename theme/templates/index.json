@@ -540,7 +540,7 @@
       "settings": {
         "eyebrow": "Destaque · Impressão 3D",
         "product": "",
-        "collection": "impressao-3d",
+        "collection_handle": "impressao-3d",
         "cta_label": "Adicionar ao carrinho",
         "show_stock_bar": true,
         "padding_top": 56,
