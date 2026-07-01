@@ -29,9 +29,19 @@
             "alt": "DropChina — destaques e promoções da loja",
             "link": "shopify://collections/all"
           }
+        },
+        "slide_impressoras": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-impressoras-desktop.jpeg",
+            "image_asset_mobile": "banner-impressoras-mobile.jpeg",
+            "alt": "Impressoras & Suprimentos — do importador direto pra sua empresa",
+            "link": "shopify://collections/impressao"
+          }
         }
       },
       "block_order": [
+        "slide_impressoras",
         "slide_1",
         "slide_2"
       ],
@@ -475,108 +485,19 @@
     "brand_carousel_main": {
       "type": "brand-carousel",
       "blocks": {
-        "br_00": {
-          "type": "brand",
-          "settings": {
-            "alt": "HP"
-          }
-        },
-        "br_01": {
-          "type": "brand",
-          "settings": {
-            "alt": "Canon"
-          }
-        },
-        "br_02": {
-          "type": "brand",
-          "settings": {
-            "alt": "Epson"
-          }
-        },
-        "br_03": {
-          "type": "brand",
-          "settings": {
-            "alt": "Samsung"
-          }
-        },
-        "br_04": {
-          "type": "brand",
-          "settings": {
-            "alt": "Brother"
-          }
-        },
-        "br_05": {
-          "type": "brand",
-          "settings": {
-            "alt": "Pantum"
-          }
-        },
-        "br_06": {
-          "type": "brand",
-          "settings": {
-            "alt": "Evolut"
-          }
-        },
-        "br_07": {
-          "type": "brand",
-          "settings": {
-            "alt": "JBL"
-          }
-        },
-        "br_08": {
-          "type": "brand",
-          "settings": {
-            "alt": "NVIDIA"
-          }
-        },
-        "br_09": {
-          "type": "brand",
-          "settings": {
-            "alt": "Logitech"
-          }
-        },
-        "br_10": {
-          "type": "brand",
-          "settings": {
-            "alt": "TP-Link"
-          }
-        },
-        "br_11": {
-          "type": "brand",
-          "settings": {
-            "alt": "Multilaser"
-          }
-        },
-        "br_12": {
-          "type": "brand",
-          "settings": {
-            "alt": "Kingston"
-          }
-        },
-        "br_13": {
-          "type": "brand",
-          "settings": {
-            "alt": "Intel"
-          }
-        },
-        "br_14": {
-          "type": "brand",
-          "settings": {
-            "alt": "AMD"
-          }
-        },
-        "br_15": {
-          "type": "brand",
-          "settings": {
-            "alt": "Razer"
-          }
-        },
-        "br_16": {
-          "type": "brand",
-          "settings": {
-            "alt": "WD"
-          }
-        }
+        "br_00": { "type": "brand", "settings": { "alt": "ISD Tech" } },
+        "br_01": { "type": "brand", "settings": { "alt": "HP" } },
+        "br_02": { "type": "brand", "settings": { "alt": "Epson" } },
+        "br_03": { "type": "brand", "settings": { "alt": "Brother" } },
+        "br_04": { "type": "brand", "settings": { "alt": "Samsung" } },
+        "br_05": { "type": "brand", "settings": { "alt": "Pantum" } },
+        "br_06": { "type": "brand", "settings": { "alt": "JBL" } },
+        "br_07": { "type": "brand", "settings": { "alt": "Pcyes" } },
+        "br_08": { "type": "brand", "settings": { "alt": "Clanm" } },
+        "br_09": { "type": "brand", "settings": { "alt": "Ugreen" } },
+        "br_10": { "type": "brand", "settings": { "alt": "Pineng" } },
+        "br_11": { "type": "brand", "settings": { "alt": "Evolut" } },
+        "br_12": { "type": "brand", "settings": { "alt": "Masterprint" } }
       },
       "block_order": [
         "br_00",
@@ -591,15 +512,11 @@
         "br_09",
         "br_10",
         "br_11",
-        "br_12",
-        "br_13",
-        "br_14",
-        "br_15",
-        "br_16"
+        "br_12"
       ],
       "settings": {
-        "eyebrow": "Marcas oficiais",
-        "heading": "+50 marcas que você confia"
+        "eyebrow": "Marcas que trabalhamos",
+        "heading": "As marcas que você encontra na DropChina"
       }
     },
     "newsletter_main": {
