@@ -538,8 +538,9 @@
     "featured_product_main": {
       "type": "dc-featured-product",
       "settings": {
-        "eyebrow": "Produto destaque",
-        "product": "pc-mini-pcyes-b300-i3-8gb",
+        "eyebrow": "Destaque · Impressão 3D",
+        "product": "",
+        "collection": "impressao-3d",
         "cta_label": "Adicionar ao carrinho",
         "show_stock_bar": true,
         "padding_top": 56,

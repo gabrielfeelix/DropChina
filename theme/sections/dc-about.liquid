@@ -200,11 +200,11 @@
             {%- if block.settings.official_label != blank -%}<span class="dc-about__official-tag">{{ block.settings.official_label | escape }}</span>{%- endif -%}
             {%- if block.settings.official_url != blank -%}
               <a href="{{ block.settings.official_url }}" target="_blank" rel="noopener" class="dc-about__official-logo-wrap">
-                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" loading="lazy">
+                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" width="490" height="231" loading="lazy">
               </a>
             {%- else -%}
               <span class="dc-about__official-logo-wrap">
-                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" loading="lazy">
+                <img src="{{ block.settings.official_logo | asset_url }}" alt="{{ block.settings.official_note | default: 'Parceiro oficial' | escape }}" class="dc-about__official-logo" width="490" height="231" loading="lazy">
               </span>
             {%- endif -%}
             {%- if block.settings.official_note != blank -%}<p class="dc-about__official-note">{{ block.settings.official_note | escape }}</p>{%- endif -%}

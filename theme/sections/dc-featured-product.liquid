@@ -1,8 +1,14 @@
 {%- liquid
   assign p = section.settings.product
   if p == blank or p == nil
-    assign p_fallback = collections.all.products.first
-    assign p = p_fallback
+    assign fp_col = section.settings.collection
+    if fp_col != blank and fp_col.products_count > 0
+      assign fp_idx = 'now' | date: '%j' | plus: 0 | modulo: fp_col.products_count
+      assign p = fp_col.products[fp_idx]
+    endif
+  endif
+  if p == blank or p == nil
+    assign p = collections.all.products.first
   endif
   if p == blank or p == nil
     assign render_section = false
@@ -515,7 +521,8 @@
   "class": "section-dc-featured-product",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Produto destaque" },
-    { "type": "product", "id": "product", "label": "Produto destaque", "info": "Se vazio, usa o primeiro de 'all'" },
+    { "type": "collection", "id": "collection", "label": "Coleção de origem", "info": "Puxa um produto desta coleção (rotaciona por dia). Ex.: Impressão 3D." },
+    { "type": "product", "id": "product", "label": "Produto fixo (opcional)", "info": "Se preenchido, sobrepõe a coleção. Vazio = usa a coleção acima." },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Adicionar ao carrinho" },
     { "type": "header", "content": "Barra de estoque (usa inventário REAL)" },
     { "type": "checkbox", "id": "show_stock_bar", "label": "Exibir urgência quando estoque baixo", "default": true, "info": "Só aparece se o inventário rastreado da variante estiver abaixo do limite" },
