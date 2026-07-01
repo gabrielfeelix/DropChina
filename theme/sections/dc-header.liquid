@@ -161,6 +161,19 @@
       <div class="dc-mega__inner">
         <div class="dc-mega__list">
           {%- for block in mega_blocks -%}
+            {%- liquid
+              assign badge_txt = block.settings.badge
+              if badge_txt == blank and block.settings.link contains 'impressao-3d'
+                assign badge_txt = 'NOVO'
+              endif
+              assign show_badge = false
+              if badge_txt != blank
+                assign show_badge = true
+                if badge_txt == 'NOVO' and novo_active == false
+                  assign show_badge = false
+                endif
+              endif
+            -%}
             <a
               href="{{ block.settings.link | default: '#' }}"
               class="dc-mega__item"
@@ -182,11 +195,7 @@
                 {%- endcase -%}
               </span>
               <span class="dc-mega__name">{{ block.settings.name | escape }}</span>
-              {%- if block.settings.badge != blank -%}
-                {%- unless block.settings.badge == 'NOVO' and novo_active == false -%}
-                  <span class="dc-nav__tag dc-mega__badge">{{ block.settings.badge }}</span>
-                {%- endunless -%}
-              {%- endif -%}
+              {%- if show_badge -%}<span class="dc-nav__tag dc-mega__badge">{{ badge_txt }}</span>{%- endif -%}
               <span class="dc-mega__go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></span>
             </a>
           {%- endfor -%}
@@ -266,7 +275,9 @@
           {%- for block in mm_blocks -%}
             <details class="dc-mmenu__cat">
               <summary>
-                <span class="dc-mmenu__cat-name">{{ block.settings.name | escape }}{%- if block.settings.badge != blank -%}{%- unless block.settings.badge == 'NOVO' and novo_active == false -%} <span class="dc-nav__tag dc-mega__badge">{{ block.settings.badge }}</span>{%- endunless -%}{%- endif -%}</span>
+                {%- assign mb = block.settings.badge -%}
+                {%- if mb == blank and block.settings.link contains 'impressao-3d' -%}{%- assign mb = 'NOVO' -%}{%- endif -%}
+                <span class="dc-mmenu__cat-name">{{ block.settings.name | escape }}{%- if mb != blank -%}{%- unless mb == 'NOVO' and novo_active == false -%} <span class="dc-nav__tag dc-mega__badge">{{ mb }}</span>{%- endunless -%}{%- endif -%}</span>
                 <svg class="dc-mmenu__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <ul class="dc-mmenu__sub">
