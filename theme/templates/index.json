@@ -523,9 +523,9 @@
       "type": "dc-newsletter",
       "settings": {
         "eyebrow": "Newsletter DropChina",
-        "heading": "Ofertas direto no seu e-mail toda terça",
-        "lead": "Receba antes os cupons exclusivos, lançamentos e os melhores preços em tech.",
-        "perk_1": "Cupom de boas-vindas",
+        "heading": "Ganhe 10% OFF na primeira compra",
+        "lead": "Cadastre seu e-mail e receba o cupom de 10% OFF na hora — além de ofertas exclusivas e lançamentos em tech toda semana.",
+        "perk_1": "10% OFF na 1ª compra",
         "perk_2": "Sem spam",
         "perk_3": "Cancele quando quiser",
         "placeholder": "seu@email.com.br",

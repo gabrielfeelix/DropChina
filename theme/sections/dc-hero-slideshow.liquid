@@ -1,4 +1,5 @@
 <section class="dc-hero-section" style="padding-block: {{ section.settings.padding_top | default: 18 }}px {{ section.settings.padding_bottom | default: 0 }}px;">
+  <h1 class="dc-hero__seo-h1">{{ section.settings.seo_h1 | default: 'DropChina — Cartuchos, Toners, Impressoras e Periféricos com Garantia Oficial' | escape }}</h1>
   <div class="dc-hero__container">
     <div class="dc-hero-slideshow" data-dc-slideshow data-autoplay="{{ section.settings.autoplay_ms | default: 6500 }}">
       {%- for block in section.blocks -%}
@@ -124,6 +125,18 @@
 
 {% stylesheet %}
   .dc-hero-section { background: #ffffff; }
+  /* H1 SEO invisível — sinal semântico pro Google sem alterar o layout */
+  .dc-hero__seo-h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   .dc-hero__container {
     max-width: 1320px;
     margin: 0 auto;
@@ -250,6 +263,7 @@
   "tag": "section",
   "class": "section-dc-hero",
   "settings": [
+    { "type": "text", "id": "seo_h1", "label": "H1 SEO (oculto)", "info": "Título H1 da home lido por buscadores. Invisível no layout — não altera o visual.", "default": "DropChina — Cartuchos, Toners, Impressoras e Periféricos com Garantia Oficial" },
     { "type": "range", "id": "autoplay_ms", "label": "Autoplay (ms, 0 = desligado)", "min": 0, "max": 9500, "step": 500, "default": 6500 },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 18 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 0 }

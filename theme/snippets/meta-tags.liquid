@@ -35,6 +35,17 @@
   elsif request.page_type == 'password'
     assign og_url = request.origin
   endif
+
+  # SEO da home: sem "Homepage title/description" no Admin, page_title fica vazio.
+  # Definimos aqui título e descrição ricos em keyword.
+  if request.page_type == 'index'
+    if page_title == blank
+      assign og_title = 'DropChina — Cartuchos, Toners, Impressoras e Periféricos'
+    endif
+    if page_description == blank
+      assign og_description = 'Loja oficial DropChina: cartuchos, toners, impressoras, placas de vídeo e periféricos com garantia de 12 meses, frete grátis acima de R$ 199 e 10% no Pix. MercadoLíder Platinum com +10 mil vendas.'
+    endif
+  endif
 %}
 
 <meta
@@ -108,10 +119,10 @@
 >
 
 <title>
-  {{ page_title }}
+  {{ og_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless og_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
@@ -119,9 +130,14 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if page_description != blank %}
   <meta
     name="description"
     content="{{ page_description | escape }}"
+  >
+{% elsif request.page_type == 'index' %}
+  <meta
+    name="description"
+    content="{{ og_description | escape }}"
   >
 {% endif %}
