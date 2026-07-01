@@ -2,8 +2,9 @@
   assign p = section.settings.product
   if p == blank or p == nil
     assign fp_col = section.settings.collection
-    if fp_col != blank and fp_col.products_count > 0
-      assign fp_idx = 'now' | date: '%j' | plus: 0 | modulo: fp_col.products_count
+    assign fp_size = fp_col.products.size
+    if fp_size > 0
+      assign fp_idx = 'now' | date: '%j' | plus: 0 | modulo: fp_size
       assign p = fp_col.products[fp_idx]
     endif
   endif
