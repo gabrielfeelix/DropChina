@@ -58,7 +58,7 @@
           "settings": {
             "category": "Entrega",
             "question": "Qual o valor do frete?",
-            "answer": "<p>Oferecemos <strong>frete grátis</strong> para compras acima de R$ 199 em todo o Brasil. Abaixo disso, o valor é calculado automaticamente conforme o CEP de destino e a transportadora escolhida.</p>"
+            "answer": "<p>Oferecemos <strong>frete grátis por região</strong>, conforme o peso e o destino: a partir de R$ 400 no Sul, R$ 600 no Sudeste e Centro-Oeste, e R$ 1.000 no Norte e Nordeste. Abaixo desses valores, o frete é calculado automaticamente pelo CEP de destino no checkout.</p>"
           }
         },
         "q7": {
