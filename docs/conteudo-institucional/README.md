@@ -39,7 +39,7 @@ Tudo preenchido — **zero `[CONFIRMAR]`**. Pronto pra colar.
 - **Razão social:** DROPCHINA LTDA · **CNPJ:** 57.306.430/0001-53 · Ativa · Simples Nacional
 - **Endereço (Receita, via CNPJ):** Rua Mandirituba, 216, Fundos — Afonso Pena, São José dos Pinhais/PR, CEP 83.045-030
 - **E-mail (SAC + Encarregado LGPD):** comercial@dropchinaoficial.com.br
-- **WhatsApp/Tel:** (41) 99534-2751
+- **WhatsApp/Tel:** (41) 99534-2451
 - **Prazos/regras** (alinhados ao FAQ da loja): frete grátis acima de R$ 199; prazos por região (capitais SP/RJ/MG 1–2, demais 2–4, interior 4–8 dias úteis); estorno Pix 1 dia útil / cartão 2 faturas / boleto 5 dias úteis; garantia 12m (6m cartucho/toner).
 
 > ⚠️ **Correção legal aplicada:** o FAQ dizia "arrependimento = cliente paga o frete". Pela norma de
