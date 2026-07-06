@@ -1,5 +1,25 @@
 # NCM faltante — produtos pro contador validar
 
+> ## ✅ STATUS 06/jul/2026 — QUASE FECHADO (137/146 = 94%)
+> NCM pesquisado em fonte oficial (TIPI/Receita, Soluções de Consulta COSIT, Cosmos/Systax) e
+> **aplicado no Bling** via `mcp-bling/src/scripts/ncm-map.json` + `npm run set:ncm`. Códigos-chave:
+> impressora 3D FDM **8485.20.00** (novo cap. 2022, era 8477.80.90) · filamento PETG 1,75mm
+> **3916.90.10** (monofilamento >1mm) · SSD **8471.70.40** · **placa de vídeo/GPU = 8542.31.90**
+> (8473.30.43 foi EXTINTO pelo Dec 10.923/21 — NÃO usar 8473.30.99) · monitor 8528.52.20 ·
+> impressora multifunc laser 8443.31.99 / função única 8443.32.33 / multifunc jato 8443.31.11 ·
+> gabinete PC **8473.30.19** vs suporte notebook **8473.30.99** · cabo HDMI-VGA 8544.42.00 ·
+> TV stick 4K 8517.62.99 · power bank 8507.60.00 · carregador parede 8504.40.90 · seladora vácuo
+> **8422.40.90** · air fryer 8516.60.00 · secador 8516.31.00 · escova rotativa 8516.32.00 · máq.
+> cortar cabelo 8510.20.00 · afiador facas 8205.51.00 · balança cozinha 8423.10.00 · hand grip
+> 9506.91.00 · moedor manual 8210.00.10 · creatina 2106.90.30. Papel = cap. 4811 (já correto).
+>
+> **Faltam 9 (casos-limite p/ a contadora Paula bater o martelo — NÃO aplicados):** figurinhas Copa
+> (`4911.99.00?`), leitor de cartão Ugreen (`8471.60.90?`), kit gamer combo ×2 (`8471.60.52?`),
+> pulverizador de azeite (`8424.89.90?`), moedor de café ELÉTRICO (`8509.40.90?`), kit utensílios
+> cozinha silicone (`3924.10.00?`), bomba d'água p/ galão (`8413.81.00?`). Quando confirmar, aplicar
+> pelo `ncm-map.json` (HIGH) + `npm run set:ncm`. O texto abaixo é o draft original (histórico).
+
+
 > A planilha de NCM cobriu o núcleo (toner, cartucho, papel, impressora, fone). Estes produtos
 > de **eletrônico/informática** ficaram **sem NCM** porque a categoria não estava na planilha.
 > Abaixo, agrupados com uma **sugestão de NCM** (pesquisa nossa) pra o contador **confirmar ou corrigir**.

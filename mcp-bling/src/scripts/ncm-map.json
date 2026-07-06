@@ -1,4 +1,29 @@
 {
+ "38": {
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Carregador Portátil Android Ios 4 Cargas Powe"
+ },
+ "98": {
+  "ncm": "84439990",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — cabeça de impressão",
+  "_t": "Cabeça Impressão Canon Maxify Mb5410/mb5110/m"
+ },
+ "99": {
+  "ncm": "84439990",
+  "confidence": "HIGH",
+  "basis": "Balde A — peça de impressora (mesma família já validada)",
+  "_t": "Chip Do Fusor 50g4135/41x1115/41x2250 225k"
+ },
+ "3510": {
+  "ncm": "84439933",
+  "confidence": "HIGH",
+  "basis": "nome↔planilha (score 2.8)",
+  "_t": "Toner Compatível Ricoh Premium Sp3500 Sp3510 Sp3",
+  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+ },
  "BOMBA.DAGUA": {
   "ncm": null,
   "confidence": "FLAG",
@@ -7,60 +32,52 @@
   "_cat": "Casa, Móveis e Decoração > Cozinha > Bomba para Garrafão"
  },
  "DC0023": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Tablets e Acessórios > Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Carregador Portátil Android Ios 4 Cargas Power B",
-  "_cat": "Informática > Tablets e Acessórios > Acessórios > Carregadores"
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Carregador Portátil Android Ios 4 Cargas Powe"
  },
  "DC0006": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Tablets e Acessórios > Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Carregador Portátil De Celular Power Bank Pineng",
-  "_cat": "Informática > Tablets e Acessórios > Acessórios > Carregadores"
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Carregador Portátil De Celular Power Bank Pin"
  },
  "DC0008": {
-  "ncm": "84433111",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.7) — conferir",
-  "_t": "Máquina Maquininha Marca Rezzet De Barbear Corta",
-  "_cat": "Beleza e Cuidado Pessoal > Artefatos para Cabelo > Máquinas de Cortar Cabelo"
+  "ncm": "85102000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — máquina cortar cabelo",
+  "_t": "Máquina Maquininha Marca Rezzet De Barbear Co"
  },
  "MAQ.CABELO.PRETA": {
-  "ncm": "84433299",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.7) — conferir",
-  "_t": "Máquina Maquininha Acabamento Cabelo Barba Barbe",
-  "_cat": "Beleza e Cuidado Pessoal > Artefatos para Cabelo > Máquinas de Cortar Cabelo"
+  "ncm": "85102000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — máquina cortar cabelo",
+  "_t": "Máquina De Cortar Cabelo Profissional Acabame"
  },
  "DC0014": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Celulares e Telefones > Acessórios para Celulares > Carregadores e Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Portátil Power Bank Chaveiro Ka-9595-yt Tipo C 2",
-  "_cat": "Celulares e Telefones > Acessórios para Celulares > Carregadores e Acessórios > Carregadores"
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Portátil Power Bank Chaveiro Ka-9595-yt Tipo "
  },
  "DC0011": {
   "ncm": "85183000",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.9) — conferir",
-  "_t": "Fone De Ouvido Bluetooth Anatel Preto Le-2403 Pr",
-  "_cat": "Eletrônicos, Áudio e Vídeo > Áudio > Fones de Ouvido"
+  "confidence": "HIGH",
+  "basis": "Balde A — fone/headset (mesma família já validada)",
+  "_t": "Fone De Ouvido Bluetooth Anatel Preto Le-2403"
  },
  "DC0024": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Tablets e Acessórios > Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Carregador Portátil Celular 10000mah Bateria Ext",
-  "_cat": "Informática > Tablets e Acessórios > Acessórios > Carregadores"
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Carregador Portátil Celular 10000mah Bateria "
  },
  "DC0010": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Tablets e Acessórios > Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Carregador Para Ios 7 Ate 14 30w 6a Usb Ligtinin",
-  "_cat": "Informática > Tablets e Acessórios > Acessórios > Carregadores"
+  "ncm": "85044090",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — carregador de parede",
+  "_t": "Carregador Para Ios 7 Ate 14 30w 6a Usb Ligti"
  },
  "tn660 DropChina": {
   "ncm": "84439933",
@@ -69,40 +86,23 @@
   "_t": "Toner Para Impressora Laser Modelo Brother Para ",
   "_cat": "Indústria e Comércio > Equipamento para Escritórios > Fotocopiadoras e Acessórios > Insumos e Acessórios > Toners"
  },
- "38": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Tablets e Acessórios > Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Kit 34 Peças Carregador Portátil Ios/c  Power Ba",
-  "_cat": "Informática > Tablets e Acessórios > Acessórios > Carregadores"
- },
  "POWERBANK.CHAV.2KMA": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Celulares e Telefones > Acessórios para Celulares > Carregadores e Acessórios > Carregadores' fora da planilha — contador define",
-  "_t": "Power Bank Portátil Chaveiro Ka-9595-yt Tipo Ios",
-  "_cat": "Celulares e Telefones > Acessórios para Celulares > Carregadores e Acessórios > Carregadores"
+  "ncm": "85076000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — power bank",
+  "_t": "Power Bank Portátil Chaveiro Ka-9595-yt Tipo "
  },
  "CORREIA.EPSON.525790": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Peças > Correias' fora da planilha — contador define",
-  "_t": "Correia Dentada Compatível  Epson C5210 C5710 C5",
-  "_cat": "Informática > Impressão > Peças > Correias"
+  "ncm": "84439990",
+  "confidence": "HIGH",
+  "basis": "Balde A — peça de impressora (mesma família já validada)",
+  "_t": "Correia Dentada Compatível  Epson C5210 C5710"
  },
  "CABO.HDMI.VGA": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrônicos, Áudio e Vídeo > Acessórios para Áudio e Vídeo > Adaptadores' fora da planilha — contador define",
-  "_t": "Cabo Conversor Hdmi Para Vga Full Hd 1080p Alta ",
-  "_cat": "Eletrônicos, Áudio e Vídeo > Acessórios para Áudio e Vídeo > Adaptadores"
- },
- "99": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Peças > Para Toners > Chips para Toner' fora da planilha — contador define",
-  "_t": "Chip Do Fusor 50g4135/41x1115/41x2250 225k",
-  "_cat": "Informática > Impressão > Peças > Para Toners > Chips para Toner"
+  "ncm": "85444200",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — cabo HDMI-VGA",
+  "_t": "Conversor Adaptador De Vídeo Hdmi Macho Para "
  },
  "KIT.COZINHA.12PC": {
   "ncm": null,
@@ -112,67 +112,52 @@
   "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Escorredores e Varais > Escumadeiras"
  },
  "SUPORTE.NOTEBOOK.P": {
-  "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.9) — conferir",
-  "_t": "Suporte Para  Notebook Dropchina Preto",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Suporte De Notebook Modelo Plástico Dropmaxi "
  },
  "Suporte Notebook": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas' fora da planilha — contador define",
-  "_t": "Base Suporte Ergonômico P/ Notebook,netbook, Tab",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
- },
- "98": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Peças > Cabeça de Impressão' fora da planilha — contador define",
-  "_t": "Cabeça Impressão Canon Maxify Mb5410/mb5110/mb27",
-  "_cat": "Informática > Impressão > Peças > Cabeça de Impressão"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Suporte Ajustável Kaprot Universal Vertical S"
  },
  "Suporte de Notebook": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas' fora da planilha — contador define",
-  "_t": "Suporte Notebook 4you Preto Ergonômico Dobrável ",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Suporte De Notebook,netbook, Tablet Dobravel "
  },
  "IMPR.ETIQ.MAXTOP": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Indústria e Comércio > Equipamento para Comércios > Rotulagem de Mercadoria > Impressoras' fora da planilha — contador define",
-  "_t": "Impressora De Etiqueta Térmica Portátil 110/220",
-  "_cat": "Indústria e Comércio > Equipamento para Comércios > Rotulagem de Mercadoria > Impressoras"
+  "ncm": "84433299",
+  "confidence": "HIGH",
+  "basis": "Balde A — impressora térmica/etiqueta (mesma família já validada)",
+  "_t": "Impressora De Etiqueta Térmica Portátil 110/2"
  },
  "kit 50 peças hdmi vga": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Celulares e Telefones > Acessórios para Celulares > Cabos de Áudio e Vídeo' fora da planilha — contador define",
-  "_t": "Kit 50 Peças Cabo Conversor De Hdmi Para Vga",
-  "_cat": "Celulares e Telefones > Acessórios para Celulares > Cabos de Áudio e Vídeo"
+  "ncm": "85444200",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — cabo HDMI-VGA",
+  "_t": "Kit 50 Peças Cabo Conversor De Hdmi Para Vga"
  },
  "suporte": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas' fora da planilha — contador define",
-  "_t": "Suporte Base Para Notebook Tablet Dobravel Ergon",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Suporte Notebook 4you Preto Ergonômico Dobráv"
  },
  "LK 8120": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Máquinas Manuais > Moedores de Grãos Manuais' fora da planilha — contador define",
-  "_t": "Moedor De Café Manual Preto Preto",
-  "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Máquinas Manuais > Moedores de Grãos Manuais"
+  "ncm": "82100010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — moedor manual",
+  "_t": "Moedor De Café Manual Preto Preto"
  },
  "cabo hdmi": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrônicos, Áudio e Vídeo > Acessórios para Áudio e Vídeo > Adaptadores' fora da planilha — contador define",
-  "_t": "Cabo Adaptador Hdmi Para Vga Para Tv Pc Xbox360 ",
-  "_cat": "Eletrônicos, Áudio e Vídeo > Acessórios para Áudio e Vídeo > Adaptadores"
+  "ncm": "85444200",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — cabo HDMI-VGA",
+  "_t": "Cabo Adaptador Hdmi Para Vga Para Tv Pc Xbox3"
  },
  "moedor de café": {
   "ncm": null,
@@ -182,32 +167,28 @@
   "_cat": "Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Moedores de Café Elétricos"
  },
  "maquina de barbear": {
-  "ncm": "84433299",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.8) — conferir",
-  "_t": "Máquina De Cortar Cabelo E Barba Cabeleireiro Pr",
-  "_cat": "Beleza e Cuidado Pessoal > Artefatos para Cabelo > Máquinas de Cortar Cabelo"
+  "ncm": "85102000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — máquina cortar cabelo",
+  "_t": "Máquina De Cortar Cabelo E Barba Cabeleireiro"
  },
  "balança": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha' fora da planilha — contador define",
-  "_t": "Davely Cook Balança Digital De Precisão Capacida",
-  "_cat": "Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha"
+  "ncm": "84231000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — balança de cozinha",
+  "_t": "Davely Cook Balança Digital De Precisão Capac"
  },
  "hend 60kg": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Esportes e Fitness > Fitness e Musculação > Halteres, Discos e Anilhas > Hand Grips' fora da planilha — contador define",
-  "_t": "Hand Grip Regulável Com Mola 5kg A 60kg Preto  E",
-  "_cat": "Esportes e Fitness > Fitness e Musculação > Halteres, Discos e Anilhas > Hand Grips"
+  "ncm": "95069100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — hand grip",
+  "_t": "Hand Grip Regulável Com Mola 5kg A 60kg Preto"
  },
  "vaco": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Indústria e Comércio > Embalagem e Logística > Seladoras > Seladoras de Sacos' fora da planilha — contador define",
-  "_t": "Maquina Seladora De Embalagem De Plastico A Vacu",
-  "_cat": "Indústria e Comércio > Embalagem e Logística > Seladoras > Seladoras de Sacos"
+  "ncm": "84224090",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — seladora a vácuo",
+  "_t": "Maquina Seladora De Embalagem De Plastico A V"
  },
  "kit tn660 5pc DropChina": {
   "ncm": "84439933",
@@ -218,38 +199,33 @@
  },
  "Toner P1102w universal 435/36/85 EVO": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "Toner P1102w M1132 M1212 Compatível Para Hp Evol",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner P1102w M1132 M1212 Compatível Para Hp E"
  },
  "hand 2 60kg": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Esportes e Fitness > Fitness e Musculação > Halteres, Discos e Anilhas > Hand Grips' fora da planilha — contador define",
-  "_t": "Hand Grip Ante Braço Punho Ajuste Peso Até 60 Kg",
-  "_cat": "Esportes e Fitness > Fitness e Musculação > Halteres, Discos e Anilhas > Hand Grips"
+  "ncm": "95069100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — hand grip",
+  "_t": "Hand Grip Regulável Com Mola Exercício Fortal"
  },
  "tv 4k": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrônicos, Áudio e Vídeo > Media Streaming' fora da planilha — contador define",
-  "_t": "Tv Stick 4k Hdmi Wi-fi 16gb Android Tv Full Hd S",
-  "_cat": "Eletrônicos, Áudio e Vídeo > Media Streaming"
+  "ncm": "85176299",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — TV stick 4K",
+  "_t": "Tv Stick 4k Hdmi Wi-fi 16gb Android Tv Full H"
  },
  "vaco 2": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Indústria e Comércio > Embalagem e Logística > Seladoras > Seladoras de Sacos' fora da planilha — contador define",
-  "_t": "Maquina Seladora De Embalagem De Plastico A Vacu",
-  "_cat": "Indústria e Comércio > Embalagem e Logística > Seladoras > Seladoras de Sacos"
+  "ncm": "84224090",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — seladora a vácuo",
+  "_t": "Maquina Seladora De Embalagem De Plastico A V"
  },
  "hp 435/36 univ EVL": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "2x Cartuchos Toner Compatível Com Hp P1102w P110",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "2x Cartuchos Toner Compatível Com Hp P1102w P"
  },
  "hp 1105": {
   "ncm": "84439933",
@@ -259,18 +235,16 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
  },
  "hdmi vga": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrônicos, Áudio e Vídeo > Cabos > Cabos de Áudio e Vídeo' fora da planilha — contador define",
-  "_t": "Adaptador Hdmi Macho Para Vga Fêmea Full Hd 1080",
-  "_cat": "Eletrônicos, Áudio e Vídeo > Cabos > Cabos de Áudio e Vídeo"
+  "ncm": "85444200",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — cabo HDMI-VGA",
+  "_t": "Cabo Conversor De Hdmi Para Vga Adaptador Com"
  },
  "toner 285 EVO": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.2) — conferir",
-  "_t": "Toner Compatível Premium 285a Preto Para Impress",
-  "_cat": "Indústria e Comércio > Equipamento para Escritórios > Fotocopiadoras e Acessórios > Insumos e Acessórios > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner Compatível Premium 285a Preto Para Impr"
  },
  "Teclado Walker v2": {
   "ncm": "84716052",
@@ -280,11 +254,10 @@
   "_cat": "Informática > Periféricos para PC > Mouses e Teclados > Teclados > Teclados Físicos"
  },
  "balanca 10k": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha' fora da planilha — contador define",
-  "_t": "Balança De Cozinha Digital Balança Digital Hardl",
-  "_cat": "Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha"
+  "ncm": "84231000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — balança de cozinha",
+  "_t": "Balança De Cozinha Digital Balança Digital Ha"
  },
  "papel foto 230g 50 folhas": {
   "ncm": "48115929",
@@ -294,11 +267,10 @@
   "_cat": "Arte, Papelaria e Armarinho > Materiais Escolares > Comercial e Organização > Papéis para Impressão"
  },
  "sup note": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas' fora da planilha — contador define",
-  "_t": "Base Suporte Para Pc Notebook Alumínio Portátil ",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Base Suporte Para Pc Notebook Alumínio Portát"
  },
  "kit com 2": {
   "ncm": null,
@@ -309,10 +281,9 @@
  },
  "d111": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.1) — conferir",
-  "_t": "Toner Compativel Com Samsung D111 D111s M2020 M2",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner Compativel Com Samsung D111 D111s M2020"
  },
  "Teclado Shadow valley clanm": {
   "ncm": "84716052",
@@ -322,11 +293,10 @@
   "_cat": "Informática > Periféricos para PC > Mouses e Teclados > Teclados > Teclados Físicos"
  },
  "balança 10kg": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha' fora da planilha — contador define",
-  "_t": "Davely Cook Balança Digital De Precisão Capacida",
-  "_cat": "Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha"
+  "ncm": "84231000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — balança de cozinha",
+  "_t": "Davely Cook Balança Digital De Precisão Capac"
  },
  "ISD12": {
   "ncm": "84433299",
@@ -336,18 +306,16 @@
   "_cat": "Informática > Impressão > Impressoras"
  },
  "amolador": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais' fora da planilha — contador define",
-  "_t": "Amolador Afiador De Facas E Tesouras Em Aço Inox",
-  "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais"
+  "ncm": "82055100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — afiador de facas",
+  "_t": "Amolador Afiador De Facas E Tesouras Em Aço I"
  },
  "balança 10.kg": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha' fora da planilha — contador define",
-  "_t": "Balança De Cozinha Digital Clink Digital Ck1253 ",
-  "_cat": "Eletrodomésticos > Pequenos Eletrodomésticos > Para a Cozinha > Balanças de Cozinha"
+  "ncm": "84231000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — balança de cozinha",
+  "_t": "Balança De Cozinha Digital Clink Digital Ck12"
  },
  "papel 230g 100 folha": {
   "ncm": "48115129",
@@ -364,11 +332,10 @@
   "_cat": "Indústria e Comércio > Equipamento para Escritórios > Fotocopiadoras e Acessórios > Insumos e Acessórios > Toners"
  },
  "Suport de Not": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas' fora da planilha — contador define",
-  "_t": "Suporte De Notebook Para Mesa De Aluminio, Dobrá",
-  "_cat": "Informática > Portáteis e Acessórios > Acessórios para Notebook > Suportes e Mesas"
+  "ncm": "84733099",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — suporte notebook",
+  "_t": "Suporte De Notebook Para Mesa De Aluminio, Do"
  },
  "ISD Full": {
   "ncm": "84433223",
@@ -386,17 +353,9 @@
  },
  "d111 EVOLUT": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "Toner Mlt-d111 Para Xpress M2020 M2020fw M2070w ",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
- },
- "3510": {
-  "ncm": "84439933",
   "confidence": "HIGH",
-  "basis": "nome↔planilha (score 2.8)",
-  "_t": "Toner Compatível Ricoh Premium Sp3500 Sp3510 Sp3",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner Mlt-d111 Para Xpress M2020 M2020fw M207"
  },
  "kit 100 folhas 180gr": {
   "ncm": "48115929",
@@ -421,17 +380,15 @@
  },
  "d101s": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "Toner Compatível Flatshop D101s Preto Para Samsu",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner Compatível Flatshop D101s Preto Para Sa"
  },
  "creatina": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Saúde > Suplementos Alimentares' fora da planilha — contador define",
-  "_t": "Suplemento En Pó Universal Nutrition Suplemento ",
-  "_cat": "Saúde > Suplementos Alimentares"
+  "ncm": "21069030",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — creatina",
+  "_t": "Suplemento Em Pó Creatina Universal Nutrition"
  },
  "kit gamer eg-54": {
   "ncm": "84716052",
@@ -441,11 +398,10 @@
   "_cat": "Informática > Periféricos para PC > Mouses e Teclados > Kits de Teclado e Mouse"
  },
  "afiador 3": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais' fora da planilha — contador define",
-  "_t": "Afiador Amolador De Facas 3 Opções De Afiar Prof",
-  "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais"
+  "ncm": "82055100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — afiador de facas",
+  "_t": "Afiador Amolador De Facas 3 Opções De Afiar P"
  },
  "230gr M": {
   "ncm": "48115129",
@@ -462,11 +418,10 @@
   "_cat": "Arte, Papelaria e Armarinho > Materiais Escolares > Comercial e Organização > Papéis para Impressão"
  },
  "afiador": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais' fora da planilha — contador define",
-  "_t": "Afiador Amolador De Facas 3 Opções De Afiar Prof",
-  "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais"
+  "ncm": "82055100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — afiador de facas",
+  "_t": "Afiador De Facas 3 Em 1 M&m Imports Com Base "
  },
  "1105 kit 3": {
   "ncm": "84439933",
@@ -497,11 +452,10 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
  },
  "afiador 2": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais' fora da planilha — contador define",
-  "_t": "Afiador Amolador De Facas Elaf 3 Em 1 Sistema Ro",
-  "_cat": "Casa, Móveis e Decoração > Cozinha > Utensílios de Preparação > Afiadores > Afiadores de Facas Manuais"
+  "ncm": "82055100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — afiador de facas",
+  "_t": "Afiador Amolador De Facas 3 Opções De Afiar P"
  },
  "180gr pacote 50": {
   "ncm": "48115123",
@@ -568,10 +522,9 @@
  },
  "Impressora L3250": {
   "ncm": "84433111",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.7) — conferir",
-  "_t": "Impressora 3x1 Multifuncional Epson Ecotank L325",
-  "_cat": "Informática > Impressão > Impressoras"
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — impressora multifunc jato",
+  "_t": "Impressora 3x1 Multifuncional Epson Ecotank L"
  },
  "1105 Premiun": {
   "ncm": "84439933",
@@ -582,10 +535,9 @@
  },
  "hp 667 color 2ml": {
   "ncm": "84439923",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.1) — conferir",
-  "_t": "Cartucho Hp 667 Colorido 3ym78ab",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Cartuchos de Tinta"
+  "confidence": "HIGH",
+  "basis": "Balde A — cartucho de tinta HP (mesma família já validada)",
+  "_t": "Cartucho Hp 667 Colorido 3ym78ab"
  },
  "tn660 kit com 10": {
   "ncm": "84439933",
@@ -610,17 +562,15 @@
  },
  "720bt preto": {
   "ncm": "85183000",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.2) — conferir",
-  "_t": "Jbl Fone De Ouvido On Ear Tune 720bt Preto Preto",
-  "_cat": "Celulares e Telefones > Acessórios para Celulares > Fones e Kits Viva Voz"
+  "confidence": "HIGH",
+  "basis": "Balde A — fone/headset (mesma família já validada)",
+  "_t": "Jbl Fone De Ouvido On Ear Tune 720bt Preto"
  },
  "FILAMENTO 3D 1.75 PRETO": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos' fora da planilha — contador define",
-  "_t": "Filamento 3d Petg Preto 1.75mm 1kg Masterprint I",
-  "_cat": "Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos"
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento De Impressora 3d Petg 1,75mm 1kg Ma"
  },
  "papel 180g 20 saco de 50": {
   "ncm": "48115929",
@@ -630,11 +580,10 @@
   "_cat": "Arte, Papelaria e Armarinho > Materiais Escolares > Comercial e Organização > Papéis para Impressão"
  },
  "Pantum 2509": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Impressoras' fora da planilha — contador define",
-  "_t": "Impressora Função Única Monocromática Pantum P25",
-  "_cat": "Informática > Impressão > Impressoras"
+  "ncm": "84433233",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — impressora laser mono",
+  "_t": "Impressora Função Única Monocromática Pantum "
  },
  "1105 Premiun X": {
   "ncm": "84439933",
@@ -644,18 +593,16 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
  },
  "filamento 3d preto": {
-  "ncm": "84433223",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.6) — conferir",
-  "_t": "Filamento Impressora 3d Masterprint Petg 1.75mm ",
-  "_cat": "Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos"
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento Impressora 3d Masterprint Petg 1.75"
  },
  "filamento 3d 1,75mm BK": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos' fora da planilha — contador define",
-  "_t": "Filamento De Impressora 3d Petg 1,75mm 1kg Maste",
-  "_cat": "Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos"
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento De Impressora 3d Petg 1,75mm 1kg Ma"
  },
  "hp 667 preto": {
   "ncm": "84439923",
@@ -665,11 +612,10 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Cartuchos de Tinta"
  },
  "3d Branco 1.75mm": {
-  "ncm": "48115123",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.6) — conferir",
-  "_t": "Filamento Pet-g Masterprint De 1,75 Mm Branco Pa",
-  "_cat": "Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos"
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento Pet-g Masterprint De 1,75 Mm Branco"
  },
  "520 bt Preto": {
   "ncm": "85183000",
@@ -686,11 +632,10 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
  },
  "filamento 3d 1,75mm Branco": {
-  "ncm": "48115123",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.8) — conferir",
-  "_t": "Filamento Impressão 3d 1,75mm 1kg Masterprint Pe",
-  "_cat": "Informática > Impressão > Impressão 3D > Componentes de Impressoras 3D > Filamentos"
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento Impressão 3d 1,75mm 1kg Masterprint"
  },
  "1105 EVO/X": {
   "ncm": "84439933",
@@ -778,17 +723,15 @@
  },
  "TN1060": {
   "ncm": "84439933",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "Toner Compatível Brother Tn1060 Preto Hl1202 Dcp",
-  "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
+  "confidence": "HIGH",
+  "basis": "Balde A — toner compatível (mesma família já validada)",
+  "_t": "Toner Compatível Brother Tn1060 Preto Hl1202 "
  },
  "DR3440/820/850": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Peças > Para Toners > Cilindros para Toner' fora da planilha — contador define",
-  "_t": "Cilindro Dr3470 Drum Dr820 Dr3440  Dr3472 Fotoco",
-  "_cat": "Informática > Impressão > Peças > Para Toners > Cilindros para Toner"
+  "ncm": "84439990",
+  "confidence": "HIGH",
+  "basis": "Balde A — peça de impressora (mesma família já validada)",
+  "_t": "Cilindro Dr3470 Drum Dr820 Dr3440  Dr3472 Fot"
  },
  "tn1060 X": {
   "ncm": "84439933",
@@ -812,25 +755,22 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Toners"
  },
  "Gabinete Clanm Grodd Night": {
-  "ncm": "84716052",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.8) — conferir",
-  "_t": "Gabinete Gamer Aquario Clanm Grodd Night Lateral",
-  "_cat": "Informática > Componentes para PC > Gabinetes de PC e Suportes > Gabinetes"
+  "ncm": "84733019",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — gabinete PC",
+  "_t": "Gabinete Gamer Aquario Clanm Grodd Night Late"
  },
  "W1332": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Impressão > Peças > De Arrasto e Tração > Cilindros para Toner' fora da planilha — contador define",
-  "_t": "Cartucho Cilindro Compatível W1332 Para Hp M432f",
-  "_cat": "Informática > Impressão > Peças > De Arrasto e Tração > Cilindros para Toner"
+  "ncm": "84439990",
+  "confidence": "HIGH",
+  "basis": "Balde A — peça de impressora (mesma família já validada)",
+  "_t": "Cartucho Cilindro Compatível W1332 Para Hp M4"
  },
  "Escova Gama 3D": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Beleza e Cuidado Pessoal > Artefatos para Cabelo > Escovas Elétricas' fora da planilha — contador define",
-  "_t": "Escova Rotativa Marula Bivolt Marrom 127/220v",
-  "_cat": "Beleza e Cuidado Pessoal > Artefatos para Cabelo > Escovas Elétricas"
+  "ncm": "85163200",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — escova rotativa",
+  "_t": "Escova Rotativa Marula Bivolt Marrom 127/220v"
  },
  "50 pacote de Figurinha": {
   "ncm": null,
@@ -840,11 +780,10 @@
   "_cat": "Livros, Revistas e Comics > Livros Físicos"
  },
  "Pantum 7105DW": {
-  "ncm": "84433111",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.7) — conferir",
-  "_t": "Multifuncional Laser Monocromática Pantum M7105d",
-  "_cat": "Informática > Impressão > Impressoras"
+  "ncm": "84433199",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — impressora multifunc laser",
+  "_t": "Impressora Laser Pantum Multifuncional M7105d"
  },
  "kit 1 667 preto - 1 667 color": {
   "ncm": "84439923",
@@ -854,11 +793,10 @@
   "_cat": "Informática > Impressão > Suprimentos de Impressão > Cartuchos de Tinta"
  },
  "Monitor 19,5": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Monitores e Acessórios > Monitores' fora da planilha — contador define",
-  "_t": "Monitor Skul 19,5 Office Led 5ms Hd 75hz Hdmi/vg",
-  "_cat": "Informática > Monitores e Acessórios > Monitores"
+  "ncm": "85285220",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — monitor",
+  "_t": "Monitor Skul 19,5 Office Led 5ms Hd 75hz Hdmi"
  },
  "PC ONE B300 DUAL CORE I3": {
   "ncm": "84715010",
@@ -897,10 +835,9 @@
  },
  "fone DHH-1601": {
   "ncm": "85183000",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.9) — conferir",
-  "_t": "Headset Hp Dhh-1601, Drivers 40mm, Conector P2 3",
-  "_cat": "Informática > Acessórios para PC Gaming > Fones"
+  "confidence": "HIGH",
+  "basis": "Balde A — fone/headset (mesma família já validada)",
+  "_t": "Headset Hp Dhh-1601, Drivers 40mm, Conector P"
  },
  "kit com 10 pacote": {
   "ncm": null,
@@ -910,11 +847,10 @@
   "_cat": "Brinquedos e Hobbies > Álbuns e Figurinhas > Figurinhas"
  },
  "PLACA RTX 3060": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Componentes para PC > Placas > Placas de Vídeo' fora da planilha — contador define",
-  "_t": "Gpu Nvidia Geforce Rtx3060 12gb Gddr6 192 Bit Gr",
-  "_cat": "Informática > Componentes para PC > Placas > Placas de Vídeo"
+  "ncm": "85423190",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — placa de vídeo",
+  "_t": "Gpu Nvidia Geforce Rtx3060 12gb Gddr6 192 Bit"
  },
  "Placa GT730": {
   "ncm": "85423190",
@@ -945,38 +881,69 @@
   "_cat": "Informática > Impressão > Impressão 3D > Impressoras 3D"
  },
  "Sata 240GB": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Armazenamento > Discos e Acessórios > HDs e SSDs' fora da planilha — contador define",
-  "_t": "Ssd Patriot Burst Pbu240gs25ssdr Pe000542 240gb ",
-  "_cat": "Informática > Armazenamento > Discos e Acessórios > HDs e SSDs"
+  "ncm": "84717040",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — SSD SATA",
+  "_t": "Ssd Patriot Burst Pbu240gs25ssdr Pe000542 240"
  },
  "Monitor 49": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Monitores e Acessórios > Monitores' fora da planilha — contador define",
-  "_t": "Monitor Gamer Pcyes Z-max Z49c 49 Curvo Dqhd 120",
-  "_cat": "Informática > Monitores e Acessórios > Monitores"
+  "ncm": "85285220",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — monitor",
+  "_t": "Monitor Gamer Pcyes Z-max Z49c 49 Curvo Dqhd "
  },
  "Impressora Snapmaker": {
-  "ncm": "84433111",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 0.9) — conferir",
-  "_t": "Snapmaker U1 127/220v Branco",
-  "_cat": "Informática > Impressão > Impressão 3D > Impressoras 3D"
+  "ncm": "84852000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — impressora 3D FDM",
+  "_t": "Snapmaker U1 127/220v Branco"
  },
  "Sata 480GB": {
-  "ncm": null,
-  "confidence": "FLAG",
-  "basis": "categoria 'Informática > Armazenamento > Discos e Acessórios > HDs e SSDs' fora da planilha — contador define",
-  "_t": "Ssd Patriot Burst Elite Sata 480gb - Pbe480gs25s",
-  "_cat": "Informática > Armazenamento > Discos e Acessórios > HDs e SSDs"
+  "ncm": "84717040",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — SSD SATA",
+  "_t": "Ssd Patriot Burst Elite Sata 480gb - Pbe480gs"
  },
  "Impressora Vinik": {
   "ncm": "84433299",
-  "confidence": "MED",
-  "basis": "nome↔planilha fraco (score 1.0) — conferir",
-  "_t": "Impressora De Etiqueta Bluetooth Portátil Usb Té",
-  "_cat": "Indústria e Comércio > Equipamento para Comércios > Rotulagem de Mercadoria > Impressoras"
+  "confidence": "HIGH",
+  "basis": "Balde A — impressora térmica/etiqueta (mesma família já validada)",
+  "_t": "Impressora De Etiqueta Bluetooth Portátil Usb"
+ },
+ "Teclado Clanm Branco": {
+  "ncm": "84716052",
+  "confidence": "HIGH",
+  "basis": "Balde A — teclado (mesma família já validada)",
+  "_t": "Teclado Gamer Mecânico Clanm Snow Walker Bran"
+ },
+ "MLB5010184890": {
+  "ncm": "85183000",
+  "confidence": "HIGH",
+  "basis": "Balde A — fone/headset (mesma família já validada)",
+  "_t": "Fone De Ouvido Le-2403 Preto"
+ },
+ "bambu lab": {
+  "ncm": "84852000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — impressora 3D FDM",
+  "_t": "Impressora 3d Bambu Lab A1 Mini Combo C Ams L"
+ },
+ "Fritadeira": {
+  "ncm": "85166000",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — air fryer",
+  "_t": "Gaabor Air Fryer 4.2lduo Touch Af-45t02a Cor "
+ },
+ "Secador Tiff 2000W": {
+  "ncm": "85163100",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — secador de cabelo",
+  "_t": "Secador De Cabelos Mondial 127 Voltz Potencia"
+ },
+ "PETG 1,75 Branco": {
+  "ncm": "39169010",
+  "confidence": "HIGH",
+  "basis": "pesquisa NCM — filamento 3D PETG",
+  "_t": "Filamento Impressão 3d 1,75mm 1kg Masterprint"
  }
 }

@@ -21,6 +21,7 @@
     "set:short-desc": "tsx src/scripts/set-short-desc.ts",
     "set:gtin": "tsx src/scripts/set-gtin.ts",
     "set:ncm": "tsx src/scripts/set-ncm.ts",
+    "set:precos": "tsx src/scripts/set-precos.ts",
     "mcp": "tsx src/mcp/server.ts",
     "typecheck": "tsc --noEmit"
   },
