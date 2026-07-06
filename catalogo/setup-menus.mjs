@@ -70,7 +70,7 @@ const FOOTER_HELP_ITEMS = [
 
 const FOOTER_ABOUT_ITEMS = [
   httpItem("Vendedor Platinum no Mercado Livre", "https://lista.mercadolivre.com.br/loja/dropchina-297222/"),
-  httpItem("WhatsApp", "https://wa.me/5541995342451"),
+  httpItem("WhatsApp", "https://wa.me/5511000000000"),
 ];
 
 const MENU_UPDATE = `mutation menuUpdate($id: ID!, $title: String!, $handle: String!, $items: [MenuItemUpdateInput!]!) { menuUpdate(id: $id, title: $title, handle: $handle, items: $items) { menu { id handle title } userErrors { field message } } }`;
