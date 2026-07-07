@@ -51,7 +51,7 @@
             "collection": "cartuchos-de-tinta",
             "count": "Ver coleção",
             "link": "shopify://collections/cartuchos-de-tinta",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='34' y='36' width='92' height='14' rx='6' fill='#3a414a'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='40' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='58' y='30' width='44' height='84' rx='6' fill='#2a3038'/><rect x='58' y='30' width='44' height='20' rx='6' fill='#3a414a'/><rect x='66' y='40' width='28' height='8' rx='2' fill='#1a1d20'/><rect x='58' y='92' width='44' height='22' rx='6' fill='#0e8aa5'/><rect x='72' y='114' width='16' height='6' rx='2' fill='#1a1d20'/></svg>"
           }
         },
         "cat_1": {
@@ -61,7 +61,7 @@
             "collection": "toners",
             "count": "Ver coleção",
             "link": "shopify://collections/toners",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='30' y='38' width='100' height='62' rx='6' fill='#1a1d20'/><rect x='40' y='48' width='80' height='10' rx='2' fill='#3a414a'/><rect x='40' y='66' width='60' height='6' rx='2' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='52' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='28' y='52' width='104' height='40' rx='12' fill='#2a3038'/><rect x='28' y='52' width='104' height='14' rx='12' fill='#3a414a'/><rect x='118' y='58' width='16' height='28' rx='6' fill='#0e8aa5'/><rect x='40' y='72' width='60' height='6' rx='3' fill='#1a1d20'/></svg>"
           }
         },
         "cat_2": {
@@ -71,7 +71,7 @@
             "collection": "impressoras",
             "count": "Ver coleção",
             "link": "shopify://collections/impressoras",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/><circle cx='115' cy='78' r='3' fill='#22c55e'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='50' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='46' y='24' width='68' height='24' rx='4' fill='#eef1f5'/><rect x='34' y='46' width='92' height='44' rx='8' fill='#2a3038'/><rect x='34' y='46' width='92' height='14' rx='8' fill='#3a414a'/><rect x='46' y='90' width='68' height='24' rx='4' fill='#eef1f5'/><rect x='52' y='96' width='56' height='4' rx='2' fill='#ccd3db'/><circle cx='114' cy='68' r='4' fill='#22c55e'/></svg>"
           }
         },
         "cat_3": {
@@ -81,16 +81,17 @@
             "collection": "placas-de-video",
             "count": "Ver coleção",
             "link": "shopify://collections/placas-de-video",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='58' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='20' y='46' width='120' height='48' rx='6' fill='#2a3038'/><rect x='20' y='46' width='120' height='14' rx='6' fill='#3a414a'/><circle cx='50' cy='74' r='13' fill='#1a1d20'/><circle cx='95' cy='74' r='13' fill='#1a1d20'/><circle cx='50' cy='74' r='5' fill='#0e8aa5'/><circle cx='95' cy='74' r='5' fill='#0e8aa5'/><rect x='24' y='94' width='30' height='10' rx='2' fill='#3a414a'/></svg>"
           }
         },
         "cat_4": {
           "type": "category",
           "settings": {
             "name": "Áudio & Headsets",
+            "collection": "audio",
             "count": "Ver coleção",
-            "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/><circle cx='39' cy='82' r='3' fill='#f59e0b'/></svg>"
+            "link": "shopify://collections/audio",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M42 78 Q42 34 80 34 Q118 34 118 78' fill='none' stroke='#2a3038' stroke-width='10' stroke-linecap='round'/><rect x='30' y='72' width='22' height='38' rx='9' fill='#2a3038'/><rect x='108' y='72' width='22' height='38' rx='9' fill='#2a3038'/><rect x='34' y='76' width='14' height='30' rx='7' fill='#0e8aa5'/></svg>"
           }
         },
         "cat_5": {
@@ -100,25 +101,27 @@
             "collection": "perifericos",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='26' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='46' y='68' width='6' height='6' rx='1' fill='#3a414a'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='34' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='56' y='28' width='48' height='90' rx='24' fill='#2a3038'/><rect x='56' y='28' width='48' height='42' rx='24' fill='#3a414a'/><rect x='77' y='38' width='6' height='20' rx='3' fill='#0e8aa5'/></svg>"
           }
         },
         "cat_7": {
           "type": "category",
           "settings": {
             "name": "Redes & Internet",
+            "collection": "redes",
             "count": "Ver coleção",
-            "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='36' y='50' width='88' height='48' rx='6' fill='#1a1d20'/><circle cx='56' cy='74' r='3' fill='#22c55e'/><circle cx='68' cy='74' r='3' fill='#22c55e'/><circle cx='80' cy='74' r='3' fill='#f59e0b'/><circle cx='92' cy='74' r='3' fill='#3a414a'/><path d='M50 38 L66 50 M80 32 L80 50 M110 38 L94 50' stroke='#0d1115' stroke-width='2' stroke-linecap='round'/></svg>"
+            "link": "shopify://collections/redes",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='122' rx='48' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='38' y='78' width='84' height='30' rx='8' fill='#2a3038'/><rect x='38' y='78' width='84' height='10' rx='8' fill='#3a414a'/><circle cx='54' cy='96' r='3.5' fill='#22c55e'/><circle cx='68' cy='96' r='3.5' fill='#22c55e'/><circle cx='82' cy='96' r='3.5' fill='#0e8aa5'/><path d='M60 74 L60 58 M100 74 L100 58' stroke='#1a1d20' stroke-width='4' stroke-linecap='round'/><path d='M74 66 Q80 56 86 66' fill='none' stroke='#0e8aa5' stroke-width='3.5' stroke-linecap='round'/><path d='M68 62 Q80 46 92 62' fill='none' stroke='#3a414a' stroke-width='3.5' stroke-linecap='round'/></svg>"
           }
         },
         "cat_8": {
           "type": "category",
           "settings": {
             "name": "Armazenamento",
+            "collection": "informatica",
             "count": "Ver coleção",
-            "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='46' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='44' y='38' width='72' height='78' rx='6' fill='#2a3038'/><rect x='50' y='46' width='60' height='34' rx='2' fill='#1a1d20'/><circle cx='80' cy='98' r='6' fill='#1a1d20'/><circle cx='80' cy='98' r='2' fill='#22c55e'/></svg>"
+            "link": "shopify://collections/informatica",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='42' y='44' width='76' height='24' rx='5' fill='#2a3038'/><rect x='42' y='44' width='76' height='9' rx='5' fill='#3a414a'/><circle cx='106' cy='56' r='3' fill='#22c55e'/><rect x='42' y='74' width='76' height='24' rx='5' fill='#2a3038'/><rect x='42' y='74' width='76' height='9' rx='5' fill='#3a414a'/><circle cx='106' cy='86' r='3' fill='#0e8aa5'/></svg>"
           }
         },
         "cat_9": {
@@ -127,26 +130,27 @@
             "name": "Cabos & Adaptadores",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='50' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='40' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='44' y='46' width='14' height='14' rx='2' fill='#3a414a'/><path d='M51 76 Q51 95 80 95 Q109 95 109 76' stroke='#1a1d20' stroke-width='4' fill='none'/><rect x='98' y='42' width='22' height='34' rx='3' fill='#1a1d20'/><rect x='102' y='46' width='14' height='14' rx='2' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='66' y='30' width='28' height='40' rx='4' fill='#3a414a'/><rect x='72' y='24' width='16' height='10' rx='2' fill='#0e8aa5'/><rect x='74' y='38' width='12' height='16' rx='2' fill='#1a1d20'/><path d='M80 70 Q80 92 60 96 Q40 100 40 116' fill='none' stroke='#2a3038' stroke-width='6' stroke-linecap='round'/><rect x='34' y='112' width='14' height='10' rx='2' fill='#2a3038'/></svg>"
           }
         },
         "cat_10": {
           "type": "category",
           "settings": {
             "name": "Papelaria & Mídia",
-            "collection": "papeis",
+            "collection": "papelaria",
             "count": "Ver coleção",
-            "link": "shopify://collections/papeis",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='40' y='34' width='80' height='22' rx='2' fill='#fafbfc'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>"
+            "link": "shopify://collections/papelaria",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='56' y='32' width='56' height='76' rx='6' fill='#dfe4ea'/><rect x='44' y='40' width='56' height='76' rx='6' fill='#ffffff' stroke='#ccd3db' stroke-width='2'/><rect x='54' y='54' width='36' height='5' rx='2' fill='#cdd3db'/><rect x='54' y='66' width='36' height='5' rx='2' fill='#cdd3db'/><rect x='54' y='78' width='24' height='5' rx='2' fill='#0e8aa5'/></svg>"
           }
         },
         "cat_11": {
           "type": "category",
           "settings": {
             "name": "Ofertas da Semana",
+            "collection": "ofertas-relampago",
             "count": "Até 40% OFF",
-            "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M82 30 L120 38 L128 76 L94 110 Q88 116 82 110 L48 76 Q42 70 48 64 Z' fill='#d62828'/><circle cx='106' cy='52' r='7' fill='#ffffff'/><path d='M70 92 L98 64' stroke='#ffffff' stroke-width='5' stroke-linecap='round'/><circle cx='72' cy='68' r='5' fill='#ffffff'/><circle cx='96' cy='90' r='5' fill='#ffffff'/></svg>"
+            "link": "shopify://collections/ofertas-relampago",
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M52 34 L96 34 L120 74 L88 106 Q82 112 76 106 L52 82 Z' fill='#f5c518'/><circle cx='72' cy='54' r='7' fill='#1a1d20'/><path d='M74 90 L102 62' stroke='#1a1d20' stroke-width='5' stroke-linecap='round'/><circle cx='78' cy='68' r='4.5' fill='#1a1d20'/><circle cx='98' cy='86' r='4.5' fill='#1a1d20'/></svg>"
           }
         },
         "cat_12": {
@@ -155,7 +159,7 @@
             "name": "Novidades",
             "count": "Recém-chegados",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='4' fill='rgba(13,17,21,0.10)'/><path d='M80 28 L88 60 L120 68 L88 76 L80 108 L72 76 L40 68 L72 60 Z' fill='#f5c518'/><path d='M116 32 L120 44 L132 48 L120 52 L116 64 L112 52 L100 48 L112 44 Z' fill='#2a3038'/><path d='M48 90 L51 99 L60 102 L51 105 L48 114 L45 105 L36 102 L45 99 Z' fill='#2a3038'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='40' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M80 28 L90 62 L124 72 L90 82 L80 116 L70 82 L36 72 L70 62 Z' fill='#f5c518'/><path d='M116 34 L120 46 L132 50 L120 54 L116 66 L112 54 L100 50 L112 46 Z' fill='#2a3038'/><path d='M46 92 L49 101 L58 104 L49 107 L46 116 L43 107 L34 104 L43 101 Z' fill='#0e8aa5'/></svg>"
           }
         },
         "cat_3d": {
@@ -165,7 +169,7 @@
             "collection": "impressao-3d",
             "count": "Novidade",
             "link": "shopify://collections/impressao-3d",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='52' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='26' width='100' height='86' rx='6' fill='none' stroke='#2a3038' stroke-width='5'/><rect x='44' y='40' width='72' height='6' rx='3' fill='#3a414a'/><rect x='66' y='40' width='10' height='30' rx='2' fill='#0e8aa5'/><rect x='56' y='66' width='48' height='8' rx='2' fill='#2a3038'/><rect x='62' y='86' width='36' height='18' rx='2' fill='#f5c518'/><rect x='66' y='92' width='28' height='4' rx='2' fill='#d68a00'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='48' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='34' y='26' width='92' height='88' rx='8' fill='none' stroke='#2a3038' stroke-width='6'/><rect x='46' y='40' width='68' height='6' rx='3' fill='#3a414a'/><rect x='72' y='40' width='12' height='30' rx='2' fill='#0e8aa5'/><rect x='56' y='66' width='48' height='8' rx='2' fill='#3a414a'/><rect x='64' y='84' width='32' height='22' rx='3' fill='#f5c518'/><rect x='64' y='84' width='32' height='8' rx='3' fill='#ffd23f'/></svg>"
           }
         }
       },
