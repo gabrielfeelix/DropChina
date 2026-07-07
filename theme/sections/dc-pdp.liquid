@@ -285,6 +285,38 @@
           </div>
         </div>
 
+        {%- assign dc_compat = product_obj.metafields.custom.compatibilidade -%}
+        {%- if dc_compat != blank and dc_compat.value != blank -%}
+          <div class="dc-pdp-compat">
+            <div class="dc-pdp-compat__head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M4 9h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1"/><path d="M6 14h12v8H6z"/></svg>
+              <span>Compatível com</span>
+            </div>
+            <div class="dc-pdp-compat__models">
+              {%- if dc_compat.type contains 'list' -%}
+                {%- for m in dc_compat.value -%}
+                  <span class="dc-pdp-compat__chip">{{ m | escape }}</span>
+                {%- endfor -%}
+              {%- else -%}
+                {%- assign dc_items = dc_compat.value | split: ',' -%}
+                {%- for m in dc_items -%}
+                  {%- assign mt = m | strip -%}
+                  {%- if mt != blank -%}<span class="dc-pdp-compat__chip">{{ mt | escape }}</span>{%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+            <p class="dc-pdp-compat__note">Não achou seu modelo? Chame no WhatsApp que confirmamos a compatibilidade antes de você comprar.</p>
+          </div>
+          {% style %}
+            .dc-pdp-compat { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ececef; }
+            .dc-pdp-compat__head { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #0d1115; font-size: 14.5px; margin-bottom: 12px; }
+            .dc-pdp-compat__head svg { color: #0f4fa8; flex: none; }
+            .dc-pdp-compat__models { display: flex; flex-wrap: wrap; gap: 8px; }
+            .dc-pdp-compat__chip { display: inline-block; font-size: 13px; font-weight: 600; color: #2a3038; background: #f4f5f7; border: 1px solid #e7e9ee; border-radius: 8px; padding: 6px 12px; font-family: "JetBrains Mono", monospace; letter-spacing: 0.02em; }
+            .dc-pdp-compat__note { font-size: 12.5px; color: #6b7280; margin: 12px 0 0; line-height: 1.45; }
+          {% endstyle %}
+        {%- endif -%}
+
       </div>
 
     </div>
