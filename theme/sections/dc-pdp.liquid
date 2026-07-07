@@ -100,6 +100,9 @@
               {%- endif -%}
               {%- if thumb_src -%}
                 <img src="{{ thumb_src }}" width="60" height="60" loading="lazy" alt="{{ media.alt | default: product_obj.title | escape }}" data-dc-fit>
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  <span class="dc-pdp-gallery__thumb-play" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                {%- endif -%}
               {%- endif -%}
             </button>
           {%- endfor -%}
@@ -131,6 +134,10 @@
                   class="dc-pdp-gallery__img"
                   data-dc-fit
                 >
+              {%- elsif media.media_type == 'video' -%}
+                {{ media | video_tag: image_size: '1200x', controls: true, preload: 'metadata', class: 'dc-pdp-gallery__img dc-pdp-gallery__video' }}
+              {%- elsif media.media_type == 'external_video' -%}
+                <div class="dc-pdp-gallery__video-embed">{{ media | external_video_tag }}</div>
               {%- elsif media.preview_image -%}
                 <img
                   src="{{ media.preview_image | image_url: width: 1200 }}"
@@ -828,12 +835,28 @@
   }
   .dc-pdp-gallery__thumb:hover { border-color: #d9dade; }
   .dc-pdp-gallery__thumb.active { border-color: #0d1115; }
+  .dc-pdp-gallery__thumb { position: relative; }
   .dc-pdp-gallery__thumb img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     mix-blend-mode: multiply;
   }
+  .dc-pdp-gallery__thumb-play {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; color: #fff;
+  }
+  .dc-pdp-gallery__thumb-play svg {
+    width: 24px; height: 24px; padding: 5px;
+    background: rgba(13,17,21,0.6); border-radius: 50%;
+  }
+  .dc-pdp-gallery__video {
+    width: 100%; height: 100%; max-height: 100%;
+    object-fit: contain; background: #000; border-radius: 10px;
+  }
+  .dc-pdp-gallery__video-embed { width: 100%; height: 100%; display: grid; place-items: center; }
+  .dc-pdp-gallery__video-embed iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; }
   .dc-pdp-gallery__stage {
     position: relative;
     background: #ececef;

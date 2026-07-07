@@ -73,6 +73,17 @@
             "link": "shopify://collections/beleza"
           }
         },
+        "dep_automacao": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Automação",
+            "badge": "NOVO",
+            "icon": "gpu",
+            "items": "Câmeras de Videoconferência|/collections/automacao\nVer tudo em Automação|/pages/automacao",
+            "featured_collection": "automacao",
+            "link": "shopify://pages/automacao"
+          }
+        },
         "dep_variedades": {
           "type": "mega_cat",
           "settings": {
@@ -89,6 +100,7 @@
         "dep_informatica",
         "dep_papelaria",
         "dep_beleza",
+        "dep_automacao",
         "dep_variedades"
       ],
       "settings": {
@@ -122,6 +134,9 @@
         "nav_link_5": "Ofertas",
         "nav_link_5_url": "shopify://collections/ofertas-relampago",
         "nav_link_5_tag": "-40%",
+        "nav_link_6": "Automação",
+        "nav_link_6_url": "shopify://pages/automacao",
+        "nav_link_6_tag": "NOVO",
         "secondary_link_1": "Contato",
         "secondary_link_1_url": "/pages/contact",
         "secondary_link_2": "F.A.Q.",

@@ -129,7 +129,7 @@
           assign novo_active = false
         endif
       -%}
-      {%- for i in (1..5) -%}
+      {%- for i in (1..6) -%}
         {%- assign key_label = 'nav_link_' | append: i -%}
         {%- assign key_url   = 'nav_link_' | append: i | append: '_url' -%}
         {%- assign key_tag   = 'nav_link_' | append: i | append: '_tag' -%}
@@ -306,7 +306,7 @@
 
       <p class="dc-mmenu__group-title">Destaques</p>
       <nav class="dc-mmenu__links" aria-label="Links principais">
-        {%- for i in (1..5) -%}
+        {%- for i in (1..6) -%}
           {%- assign mm_key_label = 'nav_link_' | append: i -%}
           {%- assign mm_key_url   = 'nav_link_' | append: i | append: '_url' -%}
           {%- assign mm_key_tag   = 'nav_link_' | append: i | append: '_tag' -%}
@@ -1517,6 +1517,9 @@
     { "type": "text", "id": "nav_link_5", "label": "Link 5 — label", "default": "Ofertas" },
     { "type": "url",  "id": "nav_link_5_url", "label": "Link 5 — URL" },
     { "type": "text", "id": "nav_link_5_tag", "label": "Link 5 — badge", "default": "−40%" },
+    { "type": "text", "id": "nav_link_6", "label": "Link 6 — label" },
+    { "type": "url",  "id": "nav_link_6_url", "label": "Link 6 — URL" },
+    { "type": "text", "id": "nav_link_6_tag", "label": "Link 6 — badge" },
     { "type": "header", "content": "Nav secundária (à direita)" },
     { "type": "text", "id": "secondary_link_1", "label": "Link 1", "default": "Contato" },
     { "type": "url", "id": "secondary_link_1_url", "label": "Link 1 URL" },

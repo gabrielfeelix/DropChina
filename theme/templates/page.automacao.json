@@ -1,0 +1,152 @@
+{
+  "sections": {
+    "hero": {
+      "type": "dc-isd-hero",
+      "settings": {
+        "show_logo": true,
+        "brand_note": "Distribuidor oficial no Brasil",
+        "eyebrow": "",
+        "heading": "Automação que trabalha por você.",
+        "subheading": "Câmeras de videoconferência 4K, totens de autoatendimento, telas interativas e digital signage. Equipamentos profissionais plug-and-play, com garantia oficial.",
+        "cta1_label": "Ver equipamentos",
+        "cta1_link": "#isd-produtos",
+        "cta2_label": "Falar com especialista",
+        "cta2_link": "https://wa.me/5541995342751",
+        "anchor_id": "isd-topo",
+        "padding_top": 104,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "4K UHD", "label": "Qualidade de imagem" } },
+        "s2": { "type": "stat", "settings": { "value": "Plug & Play", "label": "Instalação simples" } },
+        "s3": { "type": "stat", "settings": { "value": "12 meses", "label": "Garantia oficial" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "cameras": {
+      "type": "dc-isd-showcase",
+      "settings": {
+        "eyebrow": "Câmeras para videoconferência",
+        "heading": "A câmera ideal para cada sala.",
+        "subheading": "Da huddle room ao auditório — captação 4K profissional, plug-and-play, compatível com Zoom, Teams, Meet e Webex.",
+        "columns": "3",
+        "cta_label": "Adicionar ao carrinho",
+        "collection_handle": "automacao",
+        "max_products": 6,
+        "foot_cta_label": "",
+        "foot_cta_link": "",
+        "anchor_id": "isd-produtos",
+        "padding_top": 88,
+        "padding_bottom": 84
+      },
+      "blocks": {
+        "bar": {
+          "type": "produto",
+          "settings": {
+            "product": "camera-panorama-bar-videoconferencia-4k-uhd-compacta",
+            "eyebrow": "Compacta 4K",
+            "title": "Panorama Bar",
+            "spec1": "4K UHD · 110°",
+            "spec2": "Zoom digital 3x",
+            "spec3": "Até 4 microfones sem fio",
+            "badge": ""
+          }
+        },
+        "tower": {
+          "type": "produto",
+          "settings": {
+            "product": "camera-panorama-tower-360-videoconferencia-panoramica-360",
+            "eyebrow": "Panorâmica 360°",
+            "title": "Panorama Tower 360",
+            "spec1": "Full HD 360°",
+            "spec2": "Voice Tracking",
+            "spec3": "8 microfones · 5 m",
+            "badge": ""
+          }
+        },
+        "voice": {
+          "type": "produto",
+          "settings": {
+            "product": "camera-panorama-voice-tracker-ptz-4k-profissional-30x",
+            "eyebrow": "PTZ 4K Profissional",
+            "title": "Panorama Voice Tracker",
+            "spec1": "4K UHD @30fps",
+            "spec2": "Zoom óptico até 30x",
+            "spec3": "AI Auto Frame",
+            "badge": "Topo de linha"
+          }
+        }
+      },
+      "block_order": ["bar", "tower", "voice"]
+    },
+    "totens": {
+      "type": "dc-isd-showcase",
+      "settings": {
+        "eyebrow": "Totens de autoatendimento",
+        "heading": "Um totem para cada operação.",
+        "subheading": "De balcão ao piso premium — pedidos, consultas e checkout sem fila, com estrutura em aço para uso 24/7.",
+        "columns": "4",
+        "cta_label": "Adicionar ao carrinho",
+        "collection_handle": "totens-de-autoatendimento",
+        "max_products": 8,
+        "foot_cta_label": "",
+        "foot_cta_link": "",
+        "anchor_id": "isd-totens",
+        "padding_top": 84,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "t_kiosk": {
+          "type": "produto",
+          "settings": {
+            "product": "totem-de-autoatendimento-kiosk-21-5-balcao",
+            "eyebrow": "Balcão 21,5\"",
+            "title": "Kiosk 21,5\"",
+            "spec1": "Tela touch 21,5\"",
+            "spec2": "Leitor + impressora",
+            "spec3": "Windows ou Android",
+            "badge": ""
+          }
+        },
+        "t_movel": {
+          "type": "produto",
+          "settings": {
+            "product": "totem-de-autoatendimento-movel-24-portatil",
+            "eyebrow": "Portátil 24\"",
+            "title": "Totem Móvel",
+            "spec1": "Tela 24\" giratória",
+            "spec2": "Android · 128GB",
+            "spec3": "Bateria de longa duração",
+            "badge": ""
+          }
+        },
+        "t_stand5": {
+          "type": "produto",
+          "settings": {
+            "product": "totem-de-autoatendimento-stand-5-premium-32",
+            "eyebrow": "Premium 32\"",
+            "title": "Stand 5",
+            "spec1": "Tela touch 32\"",
+            "spec2": "Windows i5 · 8GB",
+            "spec3": "Pronto para pinpad",
+            "badge": "Top de linha"
+          }
+        },
+        "t_facial": {
+          "type": "produto",
+          "settings": {
+            "product": "totem-de-autoatendimento-facial-32-reconhecimento-facial",
+            "eyebrow": "Facial 32\"",
+            "title": "Totem Facial",
+            "spec1": "Full HD 32\"",
+            "spec2": "Reconhecimento facial",
+            "spec3": "Pinpad integrado",
+            "badge": ""
+          }
+        }
+      },
+      "block_order": ["t_kiosk", "t_movel", "t_stand5", "t_facial"]
+    }
+  },
+  "order": ["hero", "cameras", "totens"]
+}

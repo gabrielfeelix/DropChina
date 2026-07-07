@@ -18,7 +18,7 @@
           "type": "menu_col",
           "settings": {
             "title": "Loja",
-            "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs"
+            "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs\nAutomação ISD|/pages/automacao"
           }
         },
         "col_suporte": {

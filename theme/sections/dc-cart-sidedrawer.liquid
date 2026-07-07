@@ -199,6 +199,7 @@
     if (trigger) {
       e.preventDefault();
       open();
+      refreshPanel();
       return;
     }
     var closer = e.target.closest('[data-dc-cart-close]');
@@ -213,8 +214,25 @@
     if (e.key === 'Escape' && !cart.hidden) close();
   });
 
-  // Abre depois de adicionar ao carrinho (eventos custom + listener AJAX)
-  document.addEventListener('cart:add', function() { open(); });
+  // Recarrega o conteúdo do painel a partir do server (reflete itens recém-adicionados)
+  function refreshPanel() {
+    return fetch(window.location.pathname + '?section_id={{ section.id }}', { headers: { 'Accept': 'text/html' } })
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        var fresh = temp.querySelector('[data-dc-cart]');
+        if (fresh) {
+          var freshPanel = fresh.querySelector('.dc-cart__panel');
+          var curPanel = cart.querySelector('.dc-cart__panel');
+          if (freshPanel && curPanel) curPanel.innerHTML = freshPanel.innerHTML;
+        }
+      })
+      .catch(function() {});
+  }
+
+  // Abre depois de adicionar ao carrinho — abre já e atualiza o painel com o item novo
+  document.addEventListener('cart:add', function() { open(); refreshPanel(); });
   document.addEventListener('dc:cart:open', function() { open(); });
 
   // Quantity controls
