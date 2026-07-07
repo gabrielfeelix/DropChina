@@ -29,9 +29,19 @@
             "alt": "DropChina — destaques e promoções da loja",
             "link": "shopify://collections/all"
           }
+        },
+        "slide_impressoras": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-impressoras-desktop.jpeg",
+            "image_asset_mobile": "banner-impressoras-mobile.jpeg",
+            "alt": "Impressoras & Suprimentos — do importador direto pra sua empresa",
+            "link": "shopify://collections/impressao"
+          }
         }
       },
       "block_order": [
+        "slide_impressoras",
         "slide_1",
         "slide_2"
       ],
