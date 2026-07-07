@@ -41,19 +41,6 @@
         "padding_bottom": 0
       }
     },
-    "coupon_strip_main": {
-      "type": "dc-coupon-strip",
-      "settings": {
-        "icon": "🎟️",
-        "heading": "Primeira compra?",
-        "code": "DROP10",
-        "detail": "e ganhe 10% OFF. Frete grátis por região.",
-        "cta_label": "Comprar com 10% OFF",
-        "cta_link": "shopify://collections/all",
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
     "categories_grid": {
       "type": "dc-categories-grid",
       "blocks": {
@@ -517,6 +504,18 @@
         "padding_bottom": 56
       }
     },
+    "signup_popup": {
+      "type": "dc-signup-popup",
+      "settings": {
+        "heading": "10% OFF na primeira compra",
+        "subheading": "Cadastre seu e-mail e receba o cupom na hora — mais ofertas exclusivas em tech.",
+        "coupon_code": "DROP10",
+        "cta_label": "Quero meu cupom",
+        "cta_link": "shopify://collections/all",
+        "delay_seconds": 8,
+        "scroll_pct": 40
+      }
+    },
     "recently_viewed": {
       "type": "dc-recently-viewed",
       "settings": {
@@ -530,7 +529,6 @@
   },
   "order": [
     "hero_main",
-    "coupon_strip_main",
     "categories_grid",
     "best_sellers",
     "promo_banners_main",
@@ -540,6 +538,7 @@
     "testimonials_section",
     "brand_carousel_main",
     "newsletter_main",
-    "trust_badges_main"
+    "trust_badges_main",
+    "signup_popup"
   ]
 }

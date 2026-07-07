@@ -1,0 +1,323 @@
+{%- comment -%}
+  DropChina — pop-up de captura de e-mail que entrega o cupom da 1ª compra.
+  Fluxo: e-mail (form 'customer' nativo) -> reload -> revela o código (via localStorage).
+  Gatilho: delay OU scroll %, o que vier primeiro. Mostra 1x por visitante.
+{%- endcomment -%}
+{%- assign code = section.settings.coupon_code | default: 'DROP10' -%}
+<div
+  class="dc-signup"
+  id="dc-signup"
+  data-dc-signup
+  data-delay="{{ section.settings.delay_seconds | default: 8 }}"
+  data-scroll="{{ section.settings.scroll_pct | default: 40 }}"
+  hidden
+>
+  <div class="dc-signup__overlay" data-dc-signup-close></div>
+  <div class="dc-signup__card" role="dialog" aria-modal="true" aria-labelledby="dc-signup-title">
+    <button class="dc-signup__x" type="button" aria-label="Fechar" data-dc-signup-close>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <div class="dc-signup__capture" data-dc-signup-capture>
+      <span class="dc-signup__badge">Cupom de boas-vindas</span>
+      <h2 class="dc-signup__title" id="dc-signup-title">{{ section.settings.heading | default: '10% OFF na primeira compra' | escape }}</h2>
+      <p class="dc-signup__sub">{{ section.settings.subheading | default: 'Cadastre seu e-mail e receba o cupom na hora — mais ofertas exclusivas em tech.' | escape }}</p>
+      {%- form 'customer', class: 'dc-signup__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter, popup-1a-compra">
+        <label class="visually-hidden" for="dc-signup-email">E-mail</label>
+        <input id="dc-signup-email" class="dc-signup__input" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder | default: 'seu@email.com.br' | escape }}" required autocomplete="email">
+        <button type="submit" class="dc-signup__submit">{{ section.settings.cta_label | default: 'Quero meu cupom' | escape }}</button>
+      {%- endform -%}
+      <p class="dc-signup__legal">{{ section.settings.legal | default: 'Sem spam. Cancele quando quiser.' | escape }}</p>
+    </div>
+
+    <div class="dc-signup__success" data-dc-signup-success hidden>
+      <span class="dc-signup__emoji" aria-hidden="true">🎉</span>
+      <h2 class="dc-signup__title">Seu cupom está pronto!</h2>
+      <p class="dc-signup__sub">Use no carrinho e ganhe <b>10% OFF</b> na primeira compra. Frete grátis por região.</p>
+      <div class="dc-signup__coderow">
+        <code class="dc-signup__code" data-dc-signup-code>{{ code | escape }}</code>
+        <button class="dc-signup__copy" type="button" data-dc-signup-copy>Copiar</button>
+      </div>
+      <a class="dc-signup__cta" href="{{ section.settings.cta_link | default: '/collections/all' }}">Começar a comprar →</a>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .dc-signup {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .dc-signup[hidden] { display: none; }
+  .dc-signup__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 17, 21, 0.62);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    animation: dc-signup-fade 0.2s ease;
+  }
+  .dc-signup__card {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px 36px 34px;
+    box-shadow: 0 30px 80px -20px rgba(13, 17, 21, 0.5);
+    text-align: center;
+    animation: dc-signup-pop 0.24s cubic-bezier(0.2, 0.8, 0.3, 1.1);
+  }
+  @keyframes dc-signup-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes dc-signup-pop {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  .dc-signup__x {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 999px;
+    background: #f4f5f7;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .dc-signup__x:hover { background: #e7e9ee; color: #0d1115; }
+  .dc-signup__badge {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0f4fa8;
+    background: #eaf1fb;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .dc-signup__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  .dc-signup__sub {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: #4a5158;
+    margin: 12px 0 22px;
+  }
+  .dc-signup__form { display: flex; flex-direction: column; gap: 10px; margin: 0; }
+  .dc-signup__input {
+    height: 52px;
+    padding: 0 20px;
+    border-radius: 14px;
+    border: 1px solid #d9dade;
+    background: #ffffff;
+    color: #0d1115;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.16s, box-shadow 0.16s;
+  }
+  .dc-signup__input::placeholder { color: #9ca3af; }
+  .dc-signup__input:focus {
+    border-color: #0f4fa8;
+    box-shadow: 0 0 0 3px rgba(15, 79, 168, 0.15);
+  }
+  .dc-signup__submit {
+    height: 52px;
+    border: 0;
+    border-radius: 14px;
+    background: #0d1115;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.16s, transform 0.16s;
+  }
+  .dc-signup__submit:hover { background: #0f4fa8; }
+  .dc-signup__submit:active { transform: translateY(1px); }
+  .dc-signup__legal { font-size: 12px; color: #9ca3af; margin: 14px 0 0; }
+
+  .dc-signup__emoji { font-size: 40px; display: block; margin-bottom: 6px; }
+  .dc-signup__coderow {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin: 6px 0 18px;
+  }
+  .dc-signup__code {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #0d1115;
+    background: #f4f5f7;
+    border: 1px dashed #c8cdd4;
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+  .dc-signup__copy {
+    border: 0;
+    border-radius: 12px;
+    background: #0d1115;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 0 18px;
+    cursor: pointer;
+    transition: background 0.16s;
+  }
+  .dc-signup__copy:hover { background: #0f4fa8; }
+  .dc-signup__cta {
+    display: inline-block;
+    color: #0f4fa8;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+  }
+  .dc-signup__cta:hover { text-decoration: underline; }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  @media (max-width: 520px) {
+    .dc-signup__card { padding: 34px 22px 28px; border-radius: 20px; }
+    .dc-signup__title { font-size: 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dc-signup__overlay, .dc-signup__card { animation: none; }
+  }
+{% endstylesheet %}
+
+<script>
+(function () {
+  var root = document.getElementById('dc-signup');
+  if (!root) return;
+  var SEEN = 'dc_signup_seen';
+  var PENDING = 'dc_drop10_pending';
+  var htmlEl = document.documentElement;
+
+  function ls(get, key, val) {
+    try { return get ? localStorage.getItem(key) : localStorage.setItem(key, val); }
+    catch (e) { return null; }
+  }
+  function remove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+
+  function open(success) {
+    root.hidden = false;
+    htmlEl.style.overflow = 'hidden';
+    if (success) {
+      root.querySelector('[data-dc-signup-capture]').hidden = true;
+      root.querySelector('[data-dc-signup-success]').hidden = false;
+    } else {
+      var inp = root.querySelector('#dc-signup-email');
+      if (inp) setTimeout(function () { inp.focus(); }, 60);
+    }
+  }
+  function close() {
+    root.hidden = true;
+    htmlEl.style.overflow = '';
+    ls(false, SEEN, '1');
+  }
+
+  // 1) Voltou do submit -> revela o cupom
+  if (ls(true, PENDING) === '1') {
+    remove(PENDING);
+    ls(false, SEEN, '1');
+    open(true);
+  } else if (ls(true, SEEN) !== '1') {
+    // 2) Arma o gatilho (delay OU scroll)
+    var shown = false;
+    var delay = (parseInt(root.getAttribute('data-delay'), 10) || 8) * 1000;
+    var pct = (parseInt(root.getAttribute('data-scroll'), 10) || 40) / 100;
+    function cleanup() { clearTimeout(t); window.removeEventListener('scroll', onScroll); }
+    function trigger() {
+      if (shown) return;
+      shown = true;
+      cleanup();
+      ls(false, SEEN, '1');
+      open(false);
+    }
+    var t = setTimeout(trigger, delay);
+    function onScroll() {
+      var h = htmlEl.scrollHeight - window.innerHeight;
+      if (h > 0 && (window.scrollY / h) >= pct) trigger();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Marca pending antes do reload nativo do form
+  var form = root.querySelector('.dc-signup__form');
+  if (form) form.addEventListener('submit', function () { ls(false, PENDING, '1'); });
+
+  // Fechar (X, overlay, Esc)
+  var closers = root.querySelectorAll('[data-dc-signup-close]');
+  for (var i = 0; i < closers.length; i++) closers[i].addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Escape' || e.keyCode === 27) && !root.hidden) close();
+  });
+
+  // Copiar código
+  var copyBtn = root.querySelector('[data-dc-signup-copy]');
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var el = root.querySelector('[data-dc-signup-code]');
+    var val = el ? el.textContent.trim() : '';
+    if (navigator.clipboard && val) {
+      navigator.clipboard.writeText(val).then(function () {
+        copyBtn.textContent = 'Copiado!';
+        setTimeout(function () { copyBtn.textContent = 'Copiar'; }, 1800);
+      });
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "DropChina Signup Popup",
+  "tag": "section",
+  "class": "section-dc-signup-popup",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "10% OFF na primeira compra" },
+    { "type": "textarea", "id": "subheading", "label": "Subtítulo", "default": "Cadastre seu e-mail e receba o cupom na hora — mais ofertas exclusivas em tech." },
+    { "type": "text", "id": "coupon_code", "label": "Código do cupom", "default": "DROP10" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder do e-mail", "default": "seu@email.com.br" },
+    { "type": "text", "id": "cta_label", "label": "Texto do botão", "default": "Quero meu cupom" },
+    { "type": "url", "id": "cta_link", "label": "Link do 'Começar a comprar'" },
+    { "type": "text", "id": "legal", "label": "Aviso legal", "default": "Sem spam. Cancele quando quiser." },
+    { "type": "range", "id": "delay_seconds", "label": "Aparecer após (segundos)", "min": 0, "max": 30, "step": 1, "unit": "s", "default": 8 },
+    { "type": "range", "id": "scroll_pct", "label": "Ou após rolar (%)", "min": 10, "max": 90, "step": 5, "unit": "%", "default": 40 }
+  ],
+  "presets": [
+    { "name": "DropChina Signup Popup" }
+  ]
+}
+{% endschema %}
