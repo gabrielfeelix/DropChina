@@ -14,8 +14,10 @@
       <span class="dc-article__eyebrow">{{ article.tags.first }}</span>
     {%- endif -%}
     <h1 class="dc-article__title">{{ article.title }}</h1>
+    {%- assign dc_months = 'janeiro,fevereiro,março,abril,maio,junho,julho,agosto,setembro,outubro,novembro,dezembro' | split: ',' -%}
+    {%- assign dc_mo = article.published_at | date: '%m' | plus: 0 | minus: 1 -%}
     <div class="dc-article__meta">
-      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%d de %B de %Y' }}</time>
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%d' }} de {{ dc_months[dc_mo] }} de {{ article.published_at | date: '%Y' }}</time>
       <span class="dc-article__dot" aria-hidden="true">•</span>
       <span>{{ read_min }} min de leitura</span>
       {%- if article.author != blank -%}
