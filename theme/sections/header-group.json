@@ -14,7 +14,7 @@
     "dc_cart_drawer": {
       "type": "dc-cart-sidedrawer",
       "settings": {
-        "free_shipping_threshold": 19900,
+        "free_shipping_threshold": 100000,
         "discount_code": "DROP10",
         "discount_pct": 10,
         "installments": 12

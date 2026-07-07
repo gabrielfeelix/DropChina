@@ -107,7 +107,7 @@
     </div>
     {%- assign installment = p_var.price | divided_by: 12 -%}
     <div class="dc-card__installments">em <b>12x {{ installment | money }}</b> sem juros</div>
-    {%- if p_var.price >= 19900 -%}
+    {%- if p_var.price >= 100000 -%}
       <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
     {%- endif -%}
 

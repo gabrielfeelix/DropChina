@@ -2,7 +2,7 @@
   <div class="dc-cart__backdrop" data-dc-cart-close></div>
   <aside class="dc-cart__panel" role="dialog" aria-modal="true" aria-labelledby="dc-cart-title">
     {%- liquid
-      assign free_threshold = section.settings.free_shipping_threshold | default: 19900
+      assign free_threshold = section.settings.free_shipping_threshold | default: 100000
       assign cart_total = cart.total_price
       assign missing = free_threshold | minus: cart_total
       if missing < 0
@@ -703,7 +703,7 @@
   "name": "DC Cart Sidedrawer",
   "tag": "div",
   "settings": [
-    { "type": "number", "id": "free_shipping_threshold", "label": "Limite frete grátis (em centavos)", "default": 19900, "info": "Ex: 19900 = R$ 199,00" },
+    { "type": "number", "id": "free_shipping_threshold", "label": "Limite frete grátis (em centavos)", "default": 100000, "info": "Ex: 100000 = R$ 1.000,00 — frete grátis universal (N/NE é o teto regional)" },
     { "type": "text", "id": "discount_code", "label": "Cupom (código)", "default": "DROP10" },
     { "type": "range", "id": "discount_pct", "label": "Desconto Pix (%)", "min": 0, "max": 50, "step": 1, "default": 10 },
     { "type": "range", "id": "installments", "label": "Parcelas (sem juros)", "min": 1, "max": 18, "step": 1, "default": 12 }
