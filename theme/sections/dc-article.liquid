@@ -2,7 +2,22 @@
 {%- assign words = article.content | strip_html | split: ' ' | size -%}
 {%- assign read_min = words | divided_by: 200 | at_least: 1 -%}
 
-{{ article | structured_data }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ request.origin | append: article.url | json }} },
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncatewords: 40 | json }},
+  {%- if article.image %}
+  "image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+  {%- endif %}
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "author": { "@type": "Organization", "name": {{ article.author | default: shop.name | json }} },
+  "publisher": { "@type": "Organization", "name": {{ shop.name | json }} }
+}
+</script>
 
 <article class="dc-article">
   <header class="dc-article__wrap dc-article__head">

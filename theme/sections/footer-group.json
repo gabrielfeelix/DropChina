@@ -32,7 +32,7 @@
           "type": "menu_col",
           "settings": {
             "title": "DropChina",
-            "raw_links": "Sobre nós|/pages/sobre\nContato|/pages/contact\nTermos de serviço|/policies/terms-of-service"
+            "raw_links": "Sobre nós|/pages/sobre\nGuias e Dicas|/blogs/noticias\nAtacado (CNPJ)|/pages/atacado\nContato|/pages/contact\nTermos de serviço|/policies/terms-of-service"
           }
         },
         "col_contato": {
