@@ -1,0 +1,100 @@
+{%- comment -%} DropChina — listagem do blog (grade de cards editorial). {%- endcomment -%}
+<section class="dc-blog">
+  <div class="dc-blog__wrap">
+    <header class="dc-blog__head">
+      <span class="dc-blog__eyebrow">Blog DropChina</span>
+      <h1 class="dc-blog__title">{{ blog.title | default: 'Guias e dicas de impressão e tech' }}</h1>
+      <p class="dc-blog__sub">{{ section.settings.subtitle | default: 'Conteúdo direto ao ponto pra você escolher toner, cartucho e periféricos sem erro e economizar de verdade.' }}</p>
+    </header>
+
+    {%- paginate blog.articles by 12 -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="dc-blog__grid">
+          {%- for a in blog.articles -%}
+            {%- assign w = a.content | strip_html | split: ' ' | size -%}
+            {%- assign rm = w | divided_by: 200 | at_least: 1 -%}
+            <a href="{{ a.url }}" class="dc-post-card">
+              <div class="dc-post-card__img">
+                {%- if a.image -%}
+                  <img src="{{ a.image | image_url: width: 640 }}" alt="{{ a.title | escape }}" loading="lazy" width="640" height="400">
+                {%- else -%}
+                  <div class="dc-post-card__ph"></div>
+                {%- endif -%}
+              </div>
+              <div class="dc-post-card__body">
+                {%- if a.tags.size > 0 -%}<span class="dc-post-card__tag">{{ a.tags.first }}</span>{%- endif -%}
+                <h2 class="dc-post-card__title">{{ a.title }}</h2>
+                {%- if a.excerpt != blank -%}
+                  <p class="dc-post-card__excerpt">{{ a.excerpt | strip_html | truncatewords: 22 }}</p>
+                {%- else -%}
+                  <p class="dc-post-card__excerpt">{{ a.content | strip_html | truncatewords: 22 }}</p>
+                {%- endif -%}
+                <span class="dc-post-card__meta">{{ a.published_at | date: '%d/%m/%Y' }} • {{ rm }} min</span>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="dc-blog__pager">
+            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Anteriores</a>{%- endif -%}
+            {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Próximos →</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="dc-blog__empty">Em breve, os primeiros guias por aqui.</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-blog { padding: 48px 0 72px; }
+  .dc-blog__wrap { max-width: 1140px; margin-inline: auto; padding-inline: 24px; }
+  .dc-blog__head { max-width: 640px; margin-bottom: 40px; }
+  .dc-blog__eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #0f4fa8; }
+  .dc-blog__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.7rem); line-height: 1.08; letter-spacing: -0.025em;
+    font-weight: 700; color: #0d1115; margin: 12px 0 12px;
+  }
+  .dc-blog__sub { font-size: 16.5px; line-height: 1.55; color: #4a5158; margin: 0; }
+
+  .dc-blog__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .dc-post-card {
+    display: flex; flex-direction: column; background: #fff; border: 1px solid #ececef;
+    border-radius: 18px; overflow: hidden; text-decoration: none; transition: transform 0.16s, box-shadow 0.16s;
+  }
+  .dc-post-card:hover { transform: translateY(-3px); box-shadow: 0 22px 46px -20px rgba(20,22,24,0.24); }
+  .dc-post-card__img { aspect-ratio: 16/10; background: #f4f5f7; overflow: hidden; }
+  .dc-post-card__img img { width: 100%; height: 100%; object-fit: cover; }
+  .dc-post-card__ph { width: 100%; height: 100%; background: linear-gradient(135deg,#eef1f5,#dfe4ea); }
+  .dc-post-card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .dc-post-card__tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0f4fa8; }
+  .dc-post-card__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 19px; line-height: 1.22; letter-spacing: -0.01em; font-weight: 700; color: #0d1115; margin: 0;
+  }
+  .dc-post-card__excerpt { font-size: 14.5px; line-height: 1.5; color: #4a5158; margin: 0; flex: 1; }
+  .dc-post-card__meta { font-size: 12.5px; color: #9ca3af; margin-top: 4px; }
+
+  .dc-blog__pager { display: flex; justify-content: center; gap: 14px; margin-top: 44px; }
+  .dc-blog__pager a { padding: 10px 20px; border: 1px solid #d9dade; border-radius: 999px; color: #0d1115; font-weight: 600; font-size: 14px; text-decoration: none; }
+  .dc-blog__pager a:hover { background: #f4f5f7; }
+  .dc-blog__empty { color: #6b7280; font-size: 16px; }
+
+  @media (max-width: 900px) { .dc-blog__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .dc-blog__grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DropChina Blog",
+  "tag": "section",
+  "class": "section-dc-blog",
+  "settings": [
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Conteúdo direto ao ponto pra você escolher toner, cartucho e periféricos sem erro e economizar de verdade." }
+  ],
+  "presets": [{ "name": "DropChina Blog" }]
+}
+{% endschema %}
