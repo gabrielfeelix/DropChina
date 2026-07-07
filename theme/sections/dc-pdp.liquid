@@ -20,6 +20,43 @@
   assign rating_full = rating_avg | round
 -%}
 
+{%- assign pdp_url = request.origin | append: product_obj.url -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product_obj.title | json }},
+  "image": [
+    {%- for image in product_obj.images limit: 5 -%}
+      {{ image | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "description": {{ product_obj.description | strip_html | truncatewords: 60 | json }},
+  {%- if current_variant.sku != blank %}
+  "sku": {{ current_variant.sku | json }},
+  {%- endif %}
+  {%- if product_obj.vendor != blank %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product_obj.vendor | json }}
+  },
+  {%- endif %}
+  "offers": {
+    "@type": "Offer",
+    "url": {{ pdp_url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": "{{ current_price | divided_by: 100.0 }}",
+    "availability": "https://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition"
+  }{%- if rating_count > 0 and rating_avg > 0 %},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ rating_avg | round: 1 }}",
+    "reviewCount": "{{ rating_count }}"
+  }{%- endif %}
+}
+</script>
+
 <nav class="dc-breadcrumb" aria-label="Breadcrumb">
   <div class="dc-breadcrumb__container">
     <a href="{{ routes.root_url }}" class="dc-breadcrumb__home">

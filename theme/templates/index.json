@@ -41,6 +41,19 @@
         "padding_bottom": 0
       }
     },
+    "coupon_strip_main": {
+      "type": "dc-coupon-strip",
+      "settings": {
+        "icon": "🎟️",
+        "heading": "Primeira compra?",
+        "code": "DROP10",
+        "detail": "e ganhe 10% OFF. Frete grátis por região.",
+        "cta_label": "Comprar com 10% OFF",
+        "cta_link": "shopify://collections/all",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
     "categories_grid": {
       "type": "dc-categories-grid",
       "blocks": {
@@ -288,36 +301,6 @@
     "testimonials_section": {
       "type": "testimonials",
       "blocks": {
-        "t1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Comprou Toner Evolut 105a",
-            "quote": "Chegou em 2 dias úteis, embalagem impecável e a impressão ficou idêntica à do toner original. Já é minha 3ª compra na DropChina.",
-            "author": "Mariana A.",
-            "date": "há 3 dias"
-          }
-        },
-        "t2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Comprou Placa de Vídeo GT 730",
-            "quote": "Atendimento via WhatsApp foi rápido pra tirar dúvidas sobre compatibilidade. A placa veio lacrada, em perfeito estado e funcionou de primeira.",
-            "author": "Rafael S.",
-            "date": "há 1 semana"
-          }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "title": "Comprou Headset JBL Quantum 100",
-            "quote": "Som muito bom, confortável pra usar o dia todo. Comprei pra empresa em quantidade e ganhei desconto de revendedor. Recomendo.",
-            "author": "Carla B.",
-            "date": "há 2 semanas"
-          }
-        },
         "plat_1": {
           "type": "platform",
           "settings": {
@@ -344,25 +327,22 @@
         }
       },
       "block_order": [
-        "t1",
-        "t2",
-        "t3",
         "plat_1",
         "plat_2",
         "plat_3"
       ],
       "name": "Testimonials",
       "settings": {
-        "eyebrow": "AVALIAÇÕES VERIFICADAS",
-        "heading": "Quem compra, volta",
-        "subheading": "Avaliações de clientes reais, verificadas a cada compra.",
+        "eyebrow": "REPUTAÇÃO NO MERCADO LIVRE",
+        "heading": "Vendedor Platinum, avaliado por quem compra",
+        "subheading": "Nossa reputação é pública e verificável no Mercado Livre.",
         "section_width": "page-width",
         "color_scheme": "scheme-2",
         "padding_top": 80,
         "padding_bottom": 80,
         "show_platforms": true,
-        "cta_label": "",
-        "cta_link": ""
+        "cta_label": "Ver avaliações no Mercado Livre",
+        "cta_link": "https://lista.mercadolivre.com.br/loja/dropchina-297222/"
       }
     },
     "trust_badges_main": {
@@ -550,6 +530,7 @@
   },
   "order": [
     "hero_main",
+    "coupon_strip_main",
     "categories_grid",
     "best_sellers",
     "promo_banners_main",
