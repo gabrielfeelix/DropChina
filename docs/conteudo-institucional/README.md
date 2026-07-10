@@ -22,6 +22,17 @@ A **UI** dessas páginas já foi estilizada no tema (`theme/assets/base.css`, bl
 `.shopify-policy__*` — coluna de leitura 760px, título hero, tipografia premium). O texto colado
 herda esse visual automaticamente.
 
+> 🔒 **MCP também não edita política.** `shopPolicyUpdate` via MCP Shopify retorna
+> `Access denied ... Required access: write_legal_policies access scope` — o connector não tem esse
+> escopo. Editar as 4 políticas **só pelo Admin** (passo a passo acima). As **páginas** (Sobre,
+> Rastrear, Atacado) essas sim o MCP edita via `pageUpdate`.
+
+> ⚠️ **Estado do telefone (10/jul/2026).** As políticas e páginas vivas na Shopify estavam com um
+> número errado — **(11) 93806-6545**. O correto é **(41) 99534-2751** (`wa.me/5541995342751`), o
+> mesmo do header. Já corrigido via MCP nas **páginas** Sobre, Rastrear pedido e Atacado. As **3
+> políticas** (Termos §7, Reembolso, Frete) continuam com o número errado na loja viva — **corrigir
+> no Admin** (os `.html` deste diretório já estão certos). Privacidade não citava telefone errado.
+
 ## Páginas institucionais (no tema, não nativas)
 
 - **Sobre nós** (`/pages/sobre`): template `theme/templates/page.sobre.json` → seção `dc-page`.
