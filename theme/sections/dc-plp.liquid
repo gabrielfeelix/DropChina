@@ -90,10 +90,31 @@
           </div>
         </div>
 
-        {%- if collection.filters.size > 0 -%}
+        {%- assign is_toner_col = false -%}
+        {%- if collection.handle == 'toners' or collection.handle contains 'toners-' -%}{%- assign is_toner_col = true -%}{%- endif -%}
+        {%- if collection.filters.size > 0 or is_toner_col -%}
           <form id="dc-plp-filter-form" class="dc-plp-sidebar__form">
             {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
             <input type="hidden" name="sort_by" value="{{ current_sort | escape }}">
+            {%- if is_toner_col -%}
+              <details class="dc-plp-filter-group" open>
+                <summary>
+                  <span>Marca</span>
+                  <span class="dc-plp-filter-group__chev">
+                    <svg class="dc-plp-filter-group__plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    <svg class="dc-plp-filter-group__minus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>
+                  </span>
+                </summary>
+                <div class="dc-plp-filter-group__body">
+                  <ul class="dc-plp-filter-list dc-plp-brand-list">
+                    <li class="dc-plp-filter-list__item"><a class="dc-plp-brand-link{% if collection.handle == 'toners' %} is-active{% endif %}" href="{{ routes.collections_url }}/toners">Todas as marcas</a></li>
+                    <li class="dc-plp-filter-list__item"><a class="dc-plp-brand-link{% if collection.handle == 'toners-hp' %} is-active{% endif %}" href="{{ routes.collections_url }}/toners-hp">HP</a></li>
+                    <li class="dc-plp-filter-list__item"><a class="dc-plp-brand-link{% if collection.handle == 'toners-brother' %} is-active{% endif %}" href="{{ routes.collections_url }}/toners-brother">Brother</a></li>
+                    <li class="dc-plp-filter-list__item"><a class="dc-plp-brand-link{% if collection.handle == 'toners-samsung' %} is-active{% endif %}" href="{{ routes.collections_url }}/toners-samsung">Samsung</a></li>
+                  </ul>
+                </div>
+              </details>
+            {%- endif -%}
             {%- for filter in collection.filters -%}
               {%- assign show_more = false -%}
               {%- if filter.type == 'list' and filter.values.size > 7 -%}
@@ -765,6 +786,9 @@
   .dc-plp-filter-check__lbl { flex: 1; }
   .dc-plp-filter-check__count { color: #6b7280; font-size: 12px; }
   .dc-plp-filter-check:hover { color: #0d1115; }
+  .dc-plp-brand-link { display: block; padding: 7px 0; color: #4b5563; text-decoration: none; font-size: 14px; transition: color .15s ease; }
+  .dc-plp-brand-link:hover { color: #0d1115; }
+  .dc-plp-brand-link.is-active { color: var(--dc-red, #d62828); font-weight: 700; }
 
   /* Slider duplo de preço */
   .dc-plp-filter-price__slider {

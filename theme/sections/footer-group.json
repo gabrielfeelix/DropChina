@@ -18,7 +18,7 @@
           "type": "menu_col",
           "settings": {
             "title": "Loja",
-            "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs\nAutomação ISD|/pages/automacao"
+            "raw_links": "Cartuchos & Tintas|/collections/cartuchos-de-tinta\nToners|/collections/toners\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nImpressoras|/collections/impressoras\nMini PCs|/collections/mini-pcs\nAutomação|/collections/automacao"
           }
         },
         "col_suporte": {
@@ -51,7 +51,7 @@
         "col_contato"
       ],
       "settings": {
-        "tagline": "Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.",
+        "tagline": "Tecnologia que impulsiona seu negócio.",
         "instagram": "https://instagram.com/dropchinaoficial",
         "facebook": "https://facebook.com/dropchinaoficial",
         "copyright": "© 2026 DropChina — Todos os direitos reservados.",

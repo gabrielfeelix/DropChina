@@ -11,7 +11,7 @@
         {% else %}
           <img src="{{ 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="150" height="36" class="dc-footer-brand__logo" loading="lazy">
         {% endif %}
-        <p class="dc-footer-brand__tagline">{{ section.settings.tagline | default: 'Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial.' | escape }}</p>
+        <p class="dc-footer-brand__tagline">{{ section.settings.tagline | default: 'Tecnologia que impulsiona seu negócio.' | escape }}</p>
         <div class="dc-footer-socials">
           {%- if section.settings.instagram != blank -%}
             <a href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">
@@ -239,7 +239,7 @@
   "class": "section-dc-footer",
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo (PNG)" },
-    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Tech direto de quem importa. Cartuchos, toners, placas de vídeo e periféricos com garantia oficial." },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Tecnologia que impulsiona seu negócio." },
     { "type": "header", "content": "Redes sociais" },
     { "type": "url", "id": "instagram", "label": "Instagram URL" },
     { "type": "url", "id": "facebook", "label": "Facebook URL" },

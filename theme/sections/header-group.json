@@ -79,9 +79,9 @@
             "name": "Automação",
             "badge": "NOVO",
             "icon": "gpu",
-            "items": "Câmeras de Videoconferência|/collections/automacao\nVer tudo em Automação|/pages/automacao",
+            "items": "Câmeras de Videoconferência|/collections/automacao\nTotens de Autoatendimento|/collections/totens-de-autoatendimento\nVer tudo em Automação|/collections/automacao",
             "featured_collection": "automacao",
-            "link": "shopify://pages/automacao"
+            "link": "shopify://collections/automacao"
           }
         },
         "dep_variedades": {
@@ -135,7 +135,7 @@
         "nav_link_5_url": "shopify://collections/ofertas-relampago",
         "nav_link_5_tag": "-40%",
         "nav_link_6": "Automação",
-        "nav_link_6_url": "shopify://pages/automacao",
+        "nav_link_6_url": "shopify://collections/automacao",
         "nav_link_6_tag": "NOVO",
         "secondary_link_1": "Contato",
         "secondary_link_1_url": "/pages/contact",

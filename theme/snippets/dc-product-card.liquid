@@ -97,35 +97,44 @@
         <span class="dc-card__rating-count">{{ rating_count }}</span>
       </div>
     {%- endif -%}
-    <div class="dc-card__price-stack">
-      {%- if on_sale -%}
-        <span class="dc-card__price-old">{{ p_var.compare_at_price | money }}</span>
-      {%- endif -%}
-      <div class="dc-card__price-row">
-        <span class="dc-card__price{% if on_sale %} dc-card__price--sale{% endif %}">{{ p_var.price | money }}</span>
+    {%- if product.tags contains 'em-breve' -%}
+      <div class="dc-card__price-stack">
+        <div class="dc-card__price-row">
+          <span class="dc-card__price dc-card__price--soon">Em breve</span>
+        </div>
       </div>
-    </div>
-    {%- assign installment = p_var.price | divided_by: 12 -%}
-    <div class="dc-card__installments">em <b>12x {{ installment | money }}</b> sem juros</div>
-    {%- if p_var.price >= 100000 -%}
-      <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
-    {%- endif -%}
-
-    {%- if p_var.available -%}
-      <button
-        type="button"
-        class="dc-card__add"
-        data-dc-add
-        data-variant-id="{{ p_var.id }}"
-        aria-label="Adicionar {{ product.title | escape }} ao carrinho"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
-        <span>Adicionar ao carrinho</span>
-      </button>
+      <button type="button" class="dc-card__add dc-card__add--soldout" disabled>Em breve</button>
     {%- else -%}
-      <button type="button" class="dc-card__add dc-card__add--soldout" disabled>
-        Esgotado
-      </button>
+      <div class="dc-card__price-stack">
+        {%- if on_sale -%}
+          <span class="dc-card__price-old">{{ p_var.compare_at_price | money }}</span>
+        {%- endif -%}
+        <div class="dc-card__price-row">
+          <span class="dc-card__price{% if on_sale %} dc-card__price--sale{% endif %}">{{ p_var.price | money }}</span>
+        </div>
+      </div>
+      {%- assign installment = p_var.price | divided_by: 12 -%}
+      <div class="dc-card__installments">em <b>12x {{ installment | money }}</b> sem juros</div>
+      {%- if p_var.price >= 100000 -%}
+        <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
+      {%- endif -%}
+
+      {%- if p_var.available -%}
+        <button
+          type="button"
+          class="dc-card__add"
+          data-dc-add
+          data-variant-id="{{ p_var.id }}"
+          aria-label="Adicionar {{ product.title | escape }} ao carrinho"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
+          <span>Adicionar ao carrinho</span>
+        </button>
+      {%- else -%}
+        <button type="button" class="dc-card__add dc-card__add--soldout" disabled>
+          Esgotado
+        </button>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </article>

@@ -65,8 +65,8 @@
           {%- endif -%}
         </div>
       {%- else -%}
-        <div class="dc-about__hero-mark" aria-hidden="true" data-reveal>
-          <span>Drop</span><span>China</span>
+        <div class="dc-about__hero-mark" data-reveal>
+          <img src="{{ 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name | default: 'DropChina' }}" class="dc-about__hero-logo" width="360" height="88" loading="eager">
         </div>
       {%- endif -%}
     </div>
@@ -77,7 +77,7 @@
     {%- case block.type -%}
 
     {%- when 'chapter' -%}
-      <div class="dc-about__chapter dc-about__chapter--img-{{ block.settings.image_side | default: 'right' }}" {{ block.shopify_attributes }}>
+      <div class="dc-about__chapter dc-about__chapter--img-{{ block.settings.image_side | default: 'right' }}{% if block.settings.image == blank %} dc-about__chapter--noimg{% endif %}" {{ block.shopify_attributes }}>
         <div class="dc-about__chapter-inner">
           <div class="dc-about__chapter-copy" data-reveal>
             {%- if block.settings.kicker != blank -%}
@@ -90,9 +90,9 @@
               <div class="dc-about__rte rte">{{ block.settings.body }}</div>
             {%- endif -%}
           </div>
-          <div class="dc-about__chapter-media" data-reveal data-dc-fit-host>
-            {%- if block.settings.image != blank -%}
-              {%- assign cim = block.settings.image -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign cim = block.settings.image -%}
+            <div class="dc-about__chapter-media" data-reveal data-dc-fit-host>
               <img
                 class="dc-about__chapter-img"
                 data-dc-fit
@@ -104,10 +104,8 @@
                 alt="{{ block.settings.heading | default: 'DropChina' | escape }}"
                 loading="lazy"
               >
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'dc-about__ph' }}
-            {%- endif -%}
-          </div>
+            </div>
+          {%- endif -%}
         </div>
       </div>
 
@@ -402,13 +400,8 @@
     font-size: 12.5px; font-weight: 700; letter-spacing: .02em;
     padding: 8px 14px; border-radius: 999px;
   }
-  .dc-about__hero-mark {
-    display: flex; flex-direction: column; line-height: .9;
-    font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
-    font-size: clamp(64px, 12vw, 150px); font-weight: 700; letter-spacing: -0.04em;
-  }
-  .dc-about__hero-mark span:first-child { color: #0d1115; }
-  .dc-about__hero-mark span:last-child { color: var(--dc-red, #d62828); }
+  .dc-about__hero-mark { display: flex; justify-content: center; align-items: center; }
+  .dc-about__hero-logo { width: min(360px, 72%); height: auto; display: block; }
 
   /* ---------- Chapter (imagem + texto) ---------- */
   .dc-about__chapter { padding: clamp(48px, 7vw, 88px) 0; }
@@ -418,6 +411,7 @@
   }
   .dc-about__chapter--img-left .dc-about__chapter-copy { order: 2; }
   .dc-about__chapter--img-left .dc-about__chapter-media { order: 1; }
+  .dc-about__chapter--noimg .dc-about__chapter-inner { grid-template-columns: 1fr; max-width: 780px; }
   .dc-about__chapter-media { border-radius: 20px; overflow: hidden; aspect-ratio: 5 / 4; background: #f4f4f6; box-shadow: 0 24px 48px -30px rgba(13,17,21,.35); }
   .dc-about__chapter-img, .dc-about__chapter-media svg, .dc-about__ph { width: 100%; height: 100%; object-fit: cover; display: block; }
   .dc-about__chapter-media[data-dc-fit-host] .dc-about__chapter-img.dc-contain { object-fit: contain; }
