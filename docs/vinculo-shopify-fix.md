@@ -38,12 +38,32 @@ local no Bling e 0 na Shopify. Bate com os reviews do app Bling ("diz que enviou
 não recebe"). A integração do Bling é por **Token colado** (campo editável + "Testar"),
 NÃO OAuth — não existe "reautorizar".
 
-## FIX IMPLEMENTADO — ponte própria Bling→Shopify (o token do Bling é INFIXÁVEL)
+## ✅ RESOLVIDO NO NATIVO — atualizar o app "Bling" na Shopify
 
-Descoberta que fechou o caminho nativo: **o campo Token da integração Shopify do Bling é
-READ-ONLY** (preenchido pelo app próprio do Bling, não dá pra colar token). Logo não dá pra
-injetar um token com `write_inventory` no Bling. O push nativo continua quebrado — é bug do
-lado do Bling (abrir ticket). **Solução adotada: ponte própria**, contornando o leg quebrado.
+**Causa raiz real:** o app "Bling" instalado na Shopify estava com **escopo antigo, sem
+`write_inventory`** (foi instalado antes do Bling adicionar a permissão de inventário no app
+deles). Por isso o Bling reportava "sync concluída com sucesso" (local) mas a escrita na
+Shopify era negada silenciosamente → estoque 0.
+
+**Fix (1 clique, sem reinstalar):** Shopify Admin → **Apps e canais de venda** → busca/abre o
+app **"Bling"** → aparece a tela de permissões com um botão **"Atualizar"** → clicar. Isso
+re-concede os escopos atuais do app (incluindo estoque). Não precisou desinstalar.
+
+**Testado e confirmado (13/jul):** zeramos 1105 EVOLUT na Shopify (via MCP), forçamos o sync
+manual no Bling, e o **Bling empurrou 0→50 sozinho** = push nativo funcionando. Cloud do Bling,
+sem servidor, sem manutenção.
+
+**Falta pra cobrir tudo:** só o 1105 EVOLUT estava vinculado. Importar os **61 vínculos**
+restantes (`catalogo/bling-vinculo-import.csv`) pela planilha do Bling → depois um sync geral →
+Bling passa a dirigir o estoque de todos os 62.
+
+---
+
+## (BACKUP) Ponte própria Bling→Shopify — feita antes de achar o "Atualizar app"
+
+> Mantida no repo como rede de segurança. NÃO é necessária na operação agora que o nativo
+> funciona. Contexto: o campo Token da integração Shopify do Bling é READ-ONLY (OAuth, app
+> próprio deles) — não dá pra colar token. A ponte contornava o leg quebrado escrevendo direto.
 
 ### Ponte: `mcp-bling/src/scripts/sync-estoque-shopify.ts`
 - Lê saldo do Bling (`estoques.getBalances`, `saldoVirtualTotal`) e escreve na Shopify via
