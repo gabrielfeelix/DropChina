@@ -38,29 +38,40 @@ local no Bling e 0 na Shopify. Bate com os reviews do app Bling ("diz que enviou
 não recebe"). A integração do Bling é por **Token colado** (campo editável + "Testar"),
 NÃO OAuth — não existe "reautorizar".
 
-## FIX EM ANDAMENTO — token novo com write_inventory
+## FIX IMPLEMENTADO — ponte própria Bling→Shopify (o token do Bling é INFIXÁVEL)
 
-Gerar token Shopify com `write_inventory` e colar no Bling (Autenticação → campo Token).
-- App criado no **Shopify Dev Dashboard**: **"Bling Estoque"** (app id 397135216641,
-  dashboard/org 218254417), versão **`bling-estoque-2` (Ativa)**, api 2026-07, embedded.
-  Escopos: `write_inventory,read_inventory,read_locations,read_orders,write_orders,read_products,write_products`.
-  "Usar fluxo de instalação legado" = **false**.
-- **PENDENTE:** obter um token **não-expirável** desse app e colar no Bling.
-  - Dev Dashboard `client_credentials` → token `shpat_` expira **24h** (ruim p/ campo estático do Bling).
-  - Não-expirável: habilitar **"fluxo de instalação legado"** no app e instalar na loja
-    (token offline não expira), OU usar o caminho **Admin → "Desenvolver apps"** (custom app
-    clássico) que dá `shpat_` permanente direto. Alternativa: OAuth authorization_code com
-    `expiring:0` (merchant apps são isentos de expiração).
-- Depois de colar o token: Testar → Salvar → forçar sync num produto **ainda em 0**
-  (ex.: StarLink, NÃO o 1105 que já subi manual) e conferir na Shopify via MCP se 0→N.
-  - **Chegou** → token era a causa, sync nativo consertado → importar os 61 vínculos
-    (`catalogo/bling-vinculo-import.csv`) + sync geral.
-  - **Continuou 0** → escalar ticket Bling com a evidência acima.
+Descoberta que fechou o caminho nativo: **o campo Token da integração Shopify do Bling é
+READ-ONLY** (preenchido pelo app próprio do Bling, não dá pra colar token). Logo não dá pra
+injetar um token com `write_inventory` no Bling. O push nativo continua quebrado — é bug do
+lado do Bling (abrir ticket). **Solução adotada: ponte própria**, contornando o leg quebrado.
 
-**Band-aid disponível** (se precisar vender antes do token): escrever os 62 saldos direto
-na Shopify via MCP (`inventorySetQuantities`, `ignoreCompareQuantity:true` — o argumento
-`compareQuantity`/`ignoreCompareQuantity` AINDA é exigido na API 2026-07, ao contrário do
-que dizia o `diagnostico-sync-bling-shopify.md`). Já testado no 1105 EVOLUT (=50 agora).
+### Ponte: `mcp-bling/src/scripts/sync-estoque-shopify.ts`
+- Lê saldo do Bling (`estoques.getBalances`, `saldoVirtualTotal`) e escreve na Shopify via
+  Admin API. Casa por SKU==codigo; só mexe em variação `tracked`; só escreve se difere.
+- **Token Shopify gerado na hora** por `client_credentials` (app **"Bling Estoque"** do Dev
+  Dashboard — app id 397135216641). Expira 24h, então cada run minta um novo → ideal p/ cron.
+  Credenciais em `mcp-bling/.env` (gitignored): `SHOPIFY_STORE`, `SHOPIFY_CLIENT_ID`,
+  `SHOPIFY_CLIENT_SECRET`, `SHOPIFY_LOCATION_ID`. **Pré-requisito:** o app precisa estar
+  INSTALADO na loja (via OAuth authorize uma vez) senão `client_credentials` dá `app_not_installed`.
+- Rodar: `npx tsx src/scripts/sync-estoque-shopify.ts --dry` (mostra) / sem `--dry` (escreve).
+- **Executado 13/jul: 44 produtos 0→saldo real.** Loja parou de mostrar esgotado.
+
+### Gotchas da Admin API 2026-07 (mutation inventorySetQuantities) — IMPORTANTE
+Ao contrário do que dizia o `diagnostico-sync-bling-shopify.md`, na API DIRETA 2026-07:
+- **NÃO** aceita `ignoreCompareQuantity` nem `compareQuantity`.
+- `InventoryQuantityInput` **exige `changeFromQuantity`** (= saldo atual "de onde").
+- **Exige a diretiva `@idempotent(key: <uuid>)` no CAMPO** `inventorySetQuantities` (não na
+  operação `mutation`). Sem ela: `BAD_REQUEST @idempotent directive is required`.
+- (Obs: o **Shopify MCP** usa uma versão mais antiga que AINDA exige `ignoreCompareQuantity` —
+  os dois endpoints divergem de schema.)
+
+### Pendências
+- **Agendar a ponte (cron)** ex. a cada 30 min, pra manter Shopify sincronizada com o Bling.
+- **Importar os 61 vínculos** no Bling (`catalogo/bling-vinculo-import.csv`) — bom pra pedidos/
+  preço, mas o ESTOQUE já vai pela ponte (não depende do vínculo nativo).
+- **Ticket Bling:** push nativo reporta "sucesso" e não escreve (token do app deles sem
+  write_inventory ou integração quebrada). Evidência: vínculo real + estoque 50 + "sucesso" + 0
+  na Shopify; nossa escrita direta entra. Não bloqueia — a ponte resolve.
 
 ## Validado via API (parte da IA — feito)
 - ✅ **SKU bate 1:1 Bling↔Shopify** (ex.: `1105 EVOLUT`, `tn660 DropChina`, `StarLink`).
