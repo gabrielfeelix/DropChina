@@ -205,7 +205,7 @@
           "type": "tab",
           "settings": {
             "label": "Mais vendidos",
-            "collection": "all"
+            "collection": "mais-vendidos"
           }
         },
         "tab_2": {
