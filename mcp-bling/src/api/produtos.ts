@@ -79,14 +79,16 @@ function montarBody(input: ProdutoInput): Record<string, unknown> {
   }
 
   // imagens externas (Bling referencia a URL). Exige https; máx ~6.
-  // OBS: só persiste se a conta estiver em "URL de Imagens Externas" (config painel).
+  // ATENÇÃO à assimetria da API v3: a ESCRITA é no campo `imagensURL`, mas a
+  // LEITURA volta em `imagens.externas`. Mandar em `externas` é aceito com HTTP
+  // 200 e descartado silenciosamente — foi o que mascarou o bug por um tempo.
   if (input.imagens?.length) {
-    const externas = input.imagens
+    const imagensURL = input.imagens
       .map((u) => u.replace(/^http:/, 'https:'))
       .filter((u) => /^https:\/\//.test(u))
       .slice(0, 6)
       .map((link) => ({ link }))
-    if (externas.length) body.midia = { video: { url: '' }, imagens: { externas } }
+    if (imagensURL.length) body.midia = { video: { url: '' }, imagens: { imagensURL } }
   }
 
   const trib: Record<string, unknown> = {}
