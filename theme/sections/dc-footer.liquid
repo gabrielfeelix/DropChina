@@ -74,7 +74,12 @@
     </div>
 
     <div class="dc-footer-bottom">
-      <div class="dc-footer-bottom__copyright">{{ section.settings.copyright | default: '© 2026 DropChina — Todos os direitos reservados.' | escape }}</div>
+      <div class="dc-footer-bottom__copyright">
+        {{ section.settings.copyright | default: '© 2026 DropChina — Todos os direitos reservados.' | escape }}
+        {%- if section.settings.legal_info != blank -%}
+          <span class="dc-footer-bottom__legal">{{ section.settings.legal_info | escape }}</span>
+        {%- endif -%}
+      </div>
       <div class="dc-footer-payments">
         {%- if section.settings.payments_image != blank -%}
           {{ section.settings.payments_image | image_url: width: 600 | image_tag:
@@ -201,6 +206,14 @@
     flex-wrap: wrap;
     gap: 16px;
   }
+  .dc-footer-bottom__copyright {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    align-items: baseline;
+  }
+  .dc-footer-bottom__legal { color: #9aa1ab; }
+  .dc-footer-bottom__legal::before { content: "·"; margin-right: 10px; color: #d8dbe0; }
   .dc-footer-payments {
     display: flex;
     gap: 6px;
@@ -248,6 +261,7 @@
     { "type": "url", "id": "whatsapp", "label": "WhatsApp URL" },
     { "type": "header", "content": "Linha de baixo" },
     { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026 DropChina — Todos os direitos reservados." },
+    { "type": "text", "id": "legal_info", "label": "Dados legais (CNPJ)", "info": "Exibido ao lado do copyright — exigido pelo CDC para lojas virtuais.", "default": "DropChina Ltda · CNPJ 57.306.430/0001-53" },
     { "type": "image_picker", "id": "payments_image", "label": "Imagem de formas de pagamento", "info": "PNG com bandeiras (PIX, VISA, MASTER, etc). Default: asset 'formas-pagamento.png'." },
     { "type": "text", "id": "payments", "label": "Fallback texto (se sem imagem)", "default": "PIX,VISA,MASTER,ELO,AMEX,HIPER,BOLETO" },
     { "type": "header", "content": "Espaçamento" },
