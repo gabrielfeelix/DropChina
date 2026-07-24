@@ -1,0 +1,1219 @@
+<title>DropChina — Seções propostas para a home</title>
+
+<style>
+  :root {
+    --paper:      #eef1f6;
+    --surface:    #ffffff;
+    --surface-2:  #f7f9fc;
+    --ink:        #14171d;
+    --ink-2:      #59616f;
+    --ink-3:      #878f9e;
+    --line:       #dde2ea;
+    --line-2:     #eaeef4;
+    --blue:       #0f4fa8;
+    --blue-soft:  #e6eef9;
+    --orange:     #e85d04;
+    --orange-soft:#fdeee2;
+    --green:      #16724a;
+    --green-soft: #e2f2ea;
+    --red:        #b8301c;
+    --red-soft:   #fbe9e6;
+
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+    --maxw: 1080px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:      #0d1015;
+      --surface:    #161a21;
+      --surface-2:  #1c212a;
+      --ink:        #eef1f6;
+      --ink-2:      #9aa4b4;
+      --ink-3:      #6e7787;
+      --line:       #262d38;
+      --line-2:     #1f242d;
+      --blue:       #6ba5f2;
+      --blue-soft:  #152439;
+      --orange:     #ff8438;
+      --orange-soft:#33200f;
+      --green:      #4cc98a;
+      --green-soft: #10281d;
+      --red:        #f4776a;
+      --red-soft:   #2e1512;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0d1015;
+    --surface:    #161a21;
+    --surface-2:  #1c212a;
+    --ink:        #eef1f6;
+    --ink-2:      #9aa4b4;
+    --ink-3:      #6e7787;
+    --line:       #262d38;
+    --line-2:     #1f242d;
+    --blue:       #6ba5f2;
+    --blue-soft:  #152439;
+    --orange:     #ff8438;
+    --orange-soft:#33200f;
+    --green:      #4cc98a;
+    --green-soft: #10281d;
+    --red:        #f4776a;
+    --red-soft:   #2e1512;
+  }
+
+  :root[data-theme="light"] {
+    --paper:      #eef1f6;
+    --surface:    #ffffff;
+    --surface-2:  #f7f9fc;
+    --ink:        #14171d;
+    --ink-2:      #59616f;
+    --ink-3:      #878f9e;
+    --line:       #dde2ea;
+    --line-2:     #eaeef4;
+    --blue:       #0f4fa8;
+    --blue-soft:  #e6eef9;
+    --orange:     #e85d04;
+    --orange-soft:#fdeee2;
+    --green:      #16724a;
+    --green-soft: #e2f2ea;
+    --red:        #b8301c;
+    --red-soft:   #fbe9e6;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    padding: 72px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 20px;
+  }
+  h1 {
+    font-size: clamp(34px, 5.2vw, 52px);
+    line-height: 1.04;
+    letter-spacing: -0.033em;
+    font-weight: 800;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 1.62;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .statline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 12px 16px;
+    min-width: 128px;
+  }
+  .stat b {
+    display: block;
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span {
+    font-size: 12px;
+    color: var(--ink-2);
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- generic blocks ---------- */
+
+  section.band { padding: 56px 0; }
+  section.band + section.band { border-top: 1px solid var(--line); }
+
+  h2 {
+    font-size: 15px;
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0 0 28px;
+  }
+
+  p { margin: 0 0 16px; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--orange);
+    border-radius: 3px;
+    padding: 18px 20px;
+    margin: 0 0 20px;
+  }
+  .note--data { border-left-color: var(--blue); }
+  .note h4 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .note p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+
+  /* ---------- proposal cards ---------- */
+
+  .proposal {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .proposal__head {
+    padding: 24px 26px 22px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 2px;
+    background: var(--surface-2);
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+  }
+  .tag--new   { background: var(--blue-soft);   color: var(--blue);   border-color: transparent; font-weight: 600; }
+  .tag--ready { background: var(--green-soft);  color: var(--green);  border-color: transparent; font-weight: 600; }
+  .tag--alert { background: var(--red-soft);    color: var(--red);    border-color: transparent; font-weight: 600; }
+
+  .proposal__head h3 {
+    font-size: 24px;
+    letter-spacing: -0.024em;
+    font-weight: 750;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .proposal__head p {
+    font-size: 15px;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .mock {
+    padding: 26px;
+    background: var(--surface-2);
+    border-top: 1px solid var(--line-2);
+  }
+  .mock__label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+
+  /* ---------- mock: compat finder ---------- */
+
+  .finder {
+    background: #10141b;
+    border-radius: 4px;
+    padding: 30px 26px;
+    color: #f0f3f8;
+  }
+  .finder h4 {
+    font-size: clamp(21px, 3vw, 27px);
+    letter-spacing: -0.026em;
+    margin: 0 0 6px;
+    font-weight: 750;
+    color: #fff;
+  }
+  .finder > p {
+    margin: 0 0 22px;
+    color: #97a2b4;
+    font-size: 14.5px;
+  }
+  .finder__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .field { flex: 1 1 190px; min-width: 0; }
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7d8798;
+    margin-bottom: 7px;
+  }
+  .field select {
+    width: 100%;
+    appearance: none;
+    background: #1c222c url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238b95a6' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+    border: 1px solid #2c3542;
+    color: #f0f3f8;
+    border-radius: 3px;
+    padding: 13px 34px 13px 14px;
+    font-size: 15px;
+    font-family: var(--mono);
+    cursor: pointer;
+  }
+  .field select:focus-visible { outline: 2px solid var(--orange); outline-offset: 1px; }
+
+  .finder__btn {
+    flex: 0 0 auto;
+    background: var(--orange);
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    padding: 14px 26px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--sans);
+    cursor: pointer;
+    letter-spacing: -0.01em;
+  }
+  .finder__btn:hover { background: #cf5104; }
+  .finder__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  .finder__out {
+    margin-top: 22px;
+    border-top: 1px solid #242c37;
+    padding-top: 20px;
+  }
+  .finder__count {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #8f9aac;
+    margin: 0 0 14px;
+  }
+  .finder__count b { color: var(--orange); font-weight: 600; }
+
+  .hits { display: grid; gap: 8px; }
+  .hit {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    background: #171d26;
+    border: 1px solid #242c37;
+    border-radius: 3px;
+    padding: 12px 15px;
+  }
+  .hit__name { font-size: 14px; color: #dde3ec; min-width: 0; }
+  .hit__vendor {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #7d8798;
+    display: block;
+    margin-top: 3px;
+    letter-spacing: 0.03em;
+  }
+  .hit__price {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .hit__cpp {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    display: block;
+    text-align: right;
+    margin-top: 3px;
+  }
+  .hit--best { border-color: #2f6b4c; }
+
+  /* ---------- mock: cost per page table ---------- */
+
+  .tablewrap { overflow-x: auto; }
+  table.cpp {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 500px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  table.cpp th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.cpp td {
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--line-2);
+    vertical-align: middle;
+  }
+  table.cpp tr:last-child td { border-bottom: 0; }
+  table.cpp .num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  table.cpp .win { color: var(--green); font-weight: 700; }
+  table.cpp .bad { color: var(--red); }
+  .bar {
+    display: block;
+    height: 5px;
+    border-radius: 2px;
+    background: var(--blue);
+    margin-top: 5px;
+  }
+
+  /* ---------- mock: kit ladder ---------- */
+
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .rung {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .rung__qty {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  .rung__unit {
+    font-family: var(--mono);
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+  .rung__per { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+  .rung__total {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-top: 9px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rung__save {
+    display: inline-block;
+    margin-top: 11px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--green-soft);
+    color: var(--green);
+  }
+  .rung__save--bad { background: var(--red-soft); color: var(--red); }
+  .rung--best { border-color: var(--green); border-width: 2px; }
+  .rung--broken { border-color: var(--red); border-width: 2px; }
+
+  /* ---------- mock: category grid ---------- */
+
+  .catgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .cat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 15px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .cat__name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+  .cat__n {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .cat--lead { background: var(--blue); border-color: var(--blue); }
+  .cat--lead .cat__name { color: #fff; }
+  .cat--lead .cat__n { color: #bcd5f5; }
+  .cat--thin .cat__n { color: var(--ink-3); }
+
+  /* ---------- mock: printer + supply ---------- */
+
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+  @media (max-width: 620px) {
+    .pair { grid-template-columns: 1fr; }
+    .pair__op { justify-self: start; }
+  }
+  .pcard {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px;
+  }
+  .pcard__kind {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+  .pcard__name { font-size: 15px; font-weight: 650; letter-spacing: -0.012em; margin-bottom: 8px; }
+  .pcard__price {
+    font-family: var(--mono);
+    font-size: 19px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .pair__op {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .pair__cta {
+    margin-top: 14px;
+    background: var(--blue);
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    padding: 13px 20px;
+    font-size: 14.5px;
+    font-weight: 650;
+    font-family: var(--sans);
+    cursor: pointer;
+    width: 100%;
+  }
+  .pair__cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+  /* ---------- mock: flash strip ---------- */
+
+  .flash {
+    background: var(--orange);
+    border-radius: 4px;
+    padding: 22px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    color: #fff;
+  }
+  .flash__t { font-size: 17px; font-weight: 750; letter-spacing: -0.018em; }
+  .flash__sub { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+  .clock {
+    display: flex;
+    gap: 6px;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .clock span {
+    background: rgba(0,0,0,0.28);
+    border-radius: 3px;
+    padding: 8px 10px;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .flash__code {
+    background: #fff;
+    color: var(--orange);
+    border-radius: 3px;
+    padding: 11px 18px;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- mock: 3d hero ---------- */
+
+  .hero3d {
+    background: linear-gradient(105deg, #10141b 0%, #1b2740 100%);
+    border-radius: 4px;
+    padding: 40px 32px;
+    color: #fff;
+  }
+  .hero3d__eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+  .hero3d h4 {
+    font-size: clamp(26px, 4.4vw, 40px);
+    letter-spacing: -0.032em;
+    line-height: 1.06;
+    font-weight: 800;
+    margin: 0 0 14px;
+    max-width: 17ch;
+  }
+  .hero3d p { color: #98a4b8; font-size: 15px; max-width: 46ch; margin: 0 0 22px; }
+  .hero3d__price {
+    font-family: var(--mono);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.028em;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero3d__inst { font-family: var(--mono); font-size: 13.5px; color: #98a4b8; margin-top: 5px; }
+
+  /* ---------- closing list ---------- */
+
+  ol.plan { padding-left: 0; list-style: none; counter-reset: p; margin: 0; }
+  ol.plan li {
+    counter-increment: p;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  ol.plan li:last-child { border-bottom: 0; }
+  ol.plan li::before {
+    content: counter(p);
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-3);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+  }
+  ol.plan b { display: block; font-size: 16px; letter-spacing: -0.015em; margin-bottom: 3px; }
+  ol.plan span { font-size: 14.5px; color: var(--ink-2); }
+
+  footer.foot {
+    padding: 40px 0 72px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-3);
+    font-size: 13.5px;
+    font-family: var(--mono);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">DropChina · proposta de home · 24 jul 2026</p>
+    <h1>A home não vende impressão.</h1>
+    <p class="lede">
+      Ela tem 12 seções, mas só quatro vendem — e duas delas são o mesmo carrossel repetido.
+      Nenhuma sabe que esta é uma loja de suprimentos de impressão. Abaixo, nove seções
+      montadas sobre o catálogo real, com os preços e as compatibilidades que já estão no Shopify.
+    </p>
+
+    <div class="statline">
+      <div class="stat"><b>39</b><span>Impressão &amp; Suprimentos</span></div>
+      <div class="stat"><b>26</b><span>Toners</span></div>
+      <div class="stat"><b>32</b><span>com dados de compatibilidade</span></div>
+      <div class="stat"><b>0</b><span>seções que usam esse dado</span></div>
+    </div>
+  </header>
+
+  <section class="band">
+    <h2>O ativo que a loja já tem e não usa</h2>
+    <div class="note note--data">
+      <h4>32 dos 38 produtos de impressão já carregam a lista de impressoras compatíveis</h4>
+      <p>
+        O metafield <code>custom.compatibilidade</code> guarda um array de modelos —
+        <code>["105A","W1105A","HP Laser 107A","MFP 135A","MFP 137FNW", …]</code> — e as tags
+        <code>compat-hp</code>, <code>compat-brother</code>, <code>compat-samsung</code> e
+        <code>compat-ricoh</code> agrupam por fabricante. É o dado mais valioso da loja e nenhuma
+        seção o exibe. Tudo abaixo é construível sem nenhum trabalho de dado novo.
+      </p>
+    </div>
+    <p>
+      Os clusters reais: <b>HP 105A/W1105A</b> com 11 produtos, <b>Brother TN2340/2370/660</b> com 7,
+      <b>Brother TN1060</b> com 4 e <b>HP 667</b> com 4. Quatro famílias cobrem 26 dos 32 produtos —
+      o suficiente para um buscador funcionar bem desde o primeiro dia.
+    </p>
+  </section>
+
+  <section class="band">
+    <h2>Tier 1 — só existem porque é loja de impressão</h2>
+
+    <!-- 1. FINDER -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--new">seção nova</span>
+          <span class="tag tag--ready">dado pronto</span>
+          <span class="tag">maior impacto</span>
+        </div>
+        <h3>Buscador de compatibilidade</h3>
+        <p>
+          Hoje o cliente digita “toner 105a” na busca e torce. Aqui ele escolhe a impressora
+          que tem em casa e vê o que serve. É a pergunta que traz essa pessoa ao site — a home
+          deveria respondê-la no primeiro scroll, não escondê-la atrás da busca.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Mockup funcional — dados reais do catálogo, experimente</p>
+        <div class="finder">
+          <h4>Encontre o toner da sua impressora</h4>
+          <p>Selecione marca e modelo. Mostramos só o que serve.</p>
+          <div class="finder__row">
+            <div class="field">
+              <label for="mk">Marca</label>
+              <select id="mk"></select>
+            </div>
+            <div class="field">
+              <label for="md">Modelo</label>
+              <select id="md"></select>
+            </div>
+            <button class="finder__btn" id="go">Ver compatíveis</button>
+          </div>
+          <div class="finder__out" id="out"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2. CUSTO POR PAGINA -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--new">seção nova</span>
+          <span class="tag tag--alert">3,2× de diferença invisível</span>
+        </div>
+        <h3>Custo por página</h3>
+        <p>
+          Quem compra toner para empresa decide por planilha, não por foto. Dentro da mesma
+          família HP 105A o custo por página varia <b>3,2 vezes</b> — e nada na loja mostra isso.
+          Expor a métrica favorece justamente os produtos de maior rendimento, que são os de
+          maior ticket.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Família HP 105A / W1105A — preços reais da loja</p>
+        <div class="tablewrap">
+          <table class="cpp">
+            <thead>
+              <tr>
+                <th>Produto</th><th>Marca</th><th>Rendimento</th><th>Preço</th><th>Custo/página</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cartucho de Toner 5.000 impressões</td>
+                <td>Flatshop</td>
+                <td class="num">5.000 pág</td>
+                <td class="num">R$ 56,80</td>
+                <td class="num win">R$ 0,011<span class="bar" style="width:12%"></span></td>
+              </tr>
+              <tr>
+                <td>Toner Compatível 105A com chip</td>
+                <td>Premium&nbsp;Profit</td>
+                <td class="num">1.000 pág</td>
+                <td class="num">R$ 35,90</td>
+                <td class="num bad">R$ 0,036<span class="bar" style="width:39%;background:var(--red)"></span></td>
+              </tr>
+              <tr>
+                <td>Toner W1105 105A 1k com chip</td>
+                <td>Evolut&nbsp;Supreme</td>
+                <td class="num">1.000 pág</td>
+                <td class="num">R$ 36,00</td>
+                <td class="num bad">R$ 0,036<span class="bar" style="width:39%;background:var(--red)"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. ESCADA DE KITS -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--new">seção nova</span>
+          <span class="tag tag--alert">revela erro de precificação</span>
+        </div>
+        <h3>Escada de kits</h3>
+        <p>
+          Vocês já vendem 1 un, Kit 2x, Kit 5x e Kit 10x do mesmo toner — só que em páginas
+          separadas, sem o cliente ver que existe escada. Montar a escada numa seção sobe o
+          ticket sozinha. <b>Mas ela precisa ser corrigida antes de ir ao ar:</b> hoje o Kit 5x
+          sai mais caro por unidade que a compra avulsa.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">HP 105A Evolut — preços reais, hoje na loja</p>
+        <div class="ladder">
+          <div class="rung">
+            <div class="rung__qty">1 unidade</div>
+            <div class="rung__unit">R$&nbsp;36,00</div>
+            <div class="rung__per">por unidade</div>
+            <div class="rung__total">total R$ 36,00</div>
+          </div>
+          <div class="rung rung--best">
+            <div class="rung__qty">Kit 2×</div>
+            <div class="rung__unit">R$&nbsp;30,75</div>
+            <div class="rung__per">por unidade</div>
+            <div class="rung__total">total R$ 61,50</div>
+            <div class="rung__save">−15%</div>
+          </div>
+          <div class="rung rung--broken">
+            <div class="rung__qty">Kit 5×</div>
+            <div class="rung__unit">R$&nbsp;37,18</div>
+            <div class="rung__per">por unidade</div>
+            <div class="rung__total">total R$ 185,90</div>
+            <div class="rung__save rung__save--bad">+3% mais caro</div>
+          </div>
+          <div class="rung">
+            <div class="rung__qty">Kit 10×</div>
+            <div class="rung__unit">R$&nbsp;32,30</div>
+            <div class="rung__per">por unidade</div>
+            <div class="rung__total">total R$ 323,00</div>
+            <div class="rung__save">−10%</div>
+          </div>
+        </div>
+        <div class="note" style="margin-top:18px;margin-bottom:0;">
+          <h4>O Kit 5× quebra a promessa da escada</h4>
+          <p>
+            R$ 37,18 por unidade contra R$ 36,00 na compra avulsa. Quem comparar percebe, e a
+            seção existe justamente para provocar a comparação. Ajustar o preço do Kit 5× é
+            pré-requisito para publicar esta seção.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. IMPRESSORA + SUPRIMENTO -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--new">seção nova</span>
+          <span class="tag">sobe ticket</span>
+          <span class="tag">gera recompra</span>
+        </div>
+        <h3>Impressora + suprimento</h3>
+        <p>
+          Vocês vendem a impressora <em>e</em> o consumível dela. Ninguém compra impressora sem
+          precisar de toner em três meses — amarrar os dois na venda inicial sobe o ticket e,
+          mais importante, define quem volta para recomprar.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Produtos e preços reais da loja</p>
+        <div class="pair">
+          <div class="pcard">
+            <div class="pcard__kind">Impressora</div>
+            <div class="pcard__name">Pantum P2509W — Wi-Fi Compacta (Mono)</div>
+            <div class="pcard__price">R$ 712,50</div>
+          </div>
+          <div class="pair__op">+</div>
+          <div class="pcard">
+            <div class="pcard__kind">Suprimento sugerido</div>
+            <div class="pcard__name">Toner compatível — 2 unidades</div>
+            <div class="pcard__price">R$ 61,50</div>
+            <button class="pair__cta">Levar o conjunto — R$ 774,00</button>
+          </div>
+        </div>
+        <div class="note" style="margin-top:18px;margin-bottom:0;">
+          <h4>Um vínculo precisa de conferência antes</h4>
+          <p>
+            A lista de compatibilidade do cartucho HP 667 cobre as DeskJet 2374 a 2874, mas
+            <b>não inclui a 2975</b>, que vocês vendem. Ou o dado está incompleto, ou o cartucho
+            realmente não serve. O buscador vai expor isso publicamente — melhor resolver antes.
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="band">
+    <h2>Tier 2 — o que a Nexvo faz, com cara de vocês</h2>
+
+    <!-- 5. GRID CATEGORIAS -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag">ajuste em seção existente</span>
+          <span class="tag tag--ready">dc-categories-grid</span>
+        </div>
+        <h3>Categorias com volume e hierarquia</h3>
+        <p>
+          O grid atual trata todas as categorias como iguais. Não são: impressão é 39 produtos,
+          Mini PCs é 1. Mostrar a contagem orienta o cliente e, de quebra, escancara internamente
+          onde o catálogo está raso.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Contagens reais das coleções</p>
+        <div class="catgrid">
+          <div class="cat cat--lead"><span class="cat__name">Impressão &amp; Suprimentos</span><span class="cat__n">39</span></div>
+          <div class="cat"><span class="cat__name">Toners</span><span class="cat__n">26</span></div>
+          <div class="cat"><span class="cat__name">Informática</span><span class="cat__n">20</span></div>
+          <div class="cat"><span class="cat__name">Papéis</span><span class="cat__n">13</span></div>
+          <div class="cat"><span class="cat__name">Papelaria</span><span class="cat__n">13</span></div>
+          <div class="cat"><span class="cat__name">Impressoras</span><span class="cat__n">9</span></div>
+          <div class="cat"><span class="cat__name">Automação</span><span class="cat__n">8</span></div>
+          <div class="cat"><span class="cat__name">Placas de Vídeo</span><span class="cat__n">6</span></div>
+          <div class="cat cat--thin"><span class="cat__name">Cartuchos</span><span class="cat__n">4</span></div>
+          <div class="cat cat--thin"><span class="cat__name">Totens</span><span class="cat__n">4</span></div>
+          <div class="cat cat--thin"><span class="cat__name">Mini PCs</span><span class="cat__n">1</span></div>
+          <div class="cat cat--thin"><span class="cat__name">Monitores</span><span class="cat__n">0</span></div>
+        </div>
+        <div class="note" style="margin-top:18px;margin-bottom:0;">
+          <h4>Duas coleções não deveriam aparecer</h4>
+          <p>
+            <b>Monitores</b> está com 0 produtos e <b>Mini PCs</b> com 1. Ou preenche, ou tira do
+            grid — categoria vazia no menu é rota morta e o cliente que clica não volta.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6. FLASH -->
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--ready">já existe no tema</span>
+          <span class="tag">dc-coupon-strip</span>
+        </div>
+        <h3>Ofertas relâmpago com contador</h3>
+        <p>
+          A coleção <code>ofertas-relampago</code> existe com 8 produtos e não tem seção na home.
+          A <code>dc-coupon-strip</code> já está no tema, também fora da home. É a entrega mais
+          rápida da lista: ligar duas coisas que já existem.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Coleção real: 8 produtos em Ofertas Relâmpago</p>
+        <div class="flash">
+          <div>
+            <div class="flash__t">Ofertas Relâmpago</div>
+            <div class="flash__sub">8 produtos · enquanto durar o estoque</div>
+          </div>
+          <div class="clock"><span>07</span><span>15</span><span>05</span></div>
+          <div class="flash__code">BEMVINDO10</div>
+        </div>
+        <div class="note" style="margin-top:18px;margin-bottom:0;">
+          <h4>O cupom BEMVINDO10 ainda não existe</h4>
+          <p>
+            A newsletter já promete 10% OFF na primeira compra, mas o desconto nunca foi criado
+            no Shopify. Precisa existir antes de qualquer seção divulgar o código.
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="band">
+    <h2>Tier 3 — destaque dedicado</h2>
+
+    <article class="proposal">
+      <div class="proposal__head">
+        <div class="tags">
+          <span class="tag tag--new">seção nova</span>
+          <span class="tag">maior ticket do catálogo</span>
+        </div>
+        <h3>Impressão 3D</h3>
+        <p>
+          O produto mais caro da loja não pode ser um card de 200×200 dentro de um carrossel.
+          Ele carrega margem e prestígio; merece uma faixa própria, imagem grande e o parcelamento
+          visível — porque nesse ticket o parcelamento <em>é</em> a oferta.
+        </p>
+      </div>
+      <div class="mock">
+        <p class="mock__label">Produto e preço reais</p>
+        <div class="hero3d">
+          <div class="hero3d__eyebrow">Impressão 3D</div>
+          <h4>Bambu Lab A1 Combo com AMS</h4>
+          <p>Sistema multicor automático, quatro filamentos, calibração sem intervenção.</p>
+          <div class="hero3d__price">R$ 5.280,00</div>
+          <div class="hero3d__inst">12× de R$ 440,00 sem juros</div>
+        </div>
+        <div class="note" style="margin-top:18px;margin-bottom:0;">
+          <h4>O ticket de R$ 29k não apareceu no catálogo</h4>
+          <p>
+            Você citou produtos de impressão 3D em torno de R$ 29 mil parcelados em 12×. O maior
+            que encontrei é este, a R$ 5.280 — o segundo é a Epson WF-C5890 a R$ 3.876. Se o
+            produto de R$ 29k ainda não está cadastrado, tudo bem; mas ele é a premissa da
+            negociação de taxa com a Pagar.me, então vale confirmar antes daquela conversa.
+          </p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="band">
+    <h2>Ordem que eu seguiria</h2>
+    <ol class="plan">
+      <li>
+        <div>
+          <b>Ligar o que já existe</b>
+          <span>
+            <code>dc-coupon-strip</code>, <code>dc-category-spotlight</code> e
+            <code>atacado-banner</code> estão no tema e fora da home. Minutos de trabalho,
+            resultado visível.
+          </span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Corrigir o preço do Kit 5×</b>
+          <span>Pré-requisito da escada de kits, e um erro que já está no ar hoje.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Buscador de compatibilidade</b>
+          <span>
+            A seção de maior retorno, sobre dado que já existe. É a que muda a cara da loja de
+            “catálogo genérico” para “quem entende de impressão”.
+          </span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Custo por página e escada de kits</b>
+          <span>As duas que falam com o comprador de empresa, que é quem recompra.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Impressora + suprimento, e a faixa de 3D</b>
+          <span>Depois de conferir a compatibilidade da DeskJet 2975.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="foot">
+    Dados extraídos do Shopify Admin API em 24/jul/2026 — 25 coleções, 38 produtos de impressão
+    amostrados. Preços e estoques como estavam no momento da consulta.
+  </footer>
+
+</div>
+
+<script>
+  // Índice real de compatibilidade, extraído de custom.compatibilidade no Shopify.
+  var FAMILIES = [
+    {
+      brand: "HP",
+      models: ["105A","W1105A","HP Laser 107A","HP Laser 107W","HP Laser 108A","HP Laser 108W",
+               "MFP 131A","MFP 133PN","MFP 135A","MFP 135W","MFP 136A","MFP 137FNW","MFP 138FNW"],
+      products: [
+        { name: "Toner Compatível HP 105A W1105 Preto", vendor: "Compatível",       price: 33.90 },
+        { name: "Toner Compatível Preto Premium W1105", vendor: "Premium",          price: 34.90 },
+        { name: "Toner Compatível Profit 105A 1.000 pág", vendor: "Premium-Profit", price: 35.90 },
+        { name: "Toner HP 105A W1105A com chip",        vendor: "Evolut",           price: 36.00 },
+        { name: "Cartucho de Toner 5.000 impressões",   vendor: "Flatshop",         price: 56.80, cpp: "R$ 0,011/pág", best: true },
+        { name: "Kit 2× Toner W1105 com chip",          vendor: "Evolut",           price: 61.50 },
+        { name: "Kit 5 Toner 1105 com chip",            vendor: "Evolut",           price: 185.90 },
+        { name: "Kit 10 Toner 105A",                    vendor: "Evolut",           price: 323.00 }
+      ]
+    },
+    {
+      brand: "Brother",
+      models: ["TN2340","TN2370","TN660","HL-L2300D","HL-L2320D","HL-L2340DW","HL-L2360DW",
+               "HL-L2380DW","DCP-L2500D","DCP-L2520DW","DCP-L2540DW","DCP-L2560DW",
+               "MFC-L2700DW","MFC-L2720DW","MFC-L2740DW"],
+      products: [
+        { name: "Toner Compatível Premium TN2340 2.600 pág", vendor: "Premium",   price: 21.00, cpp: "R$ 0,008/pág", best: true },
+        { name: "Kit 5 Toner TN2340 TN2370 TN660",           vendor: "DropChina", price: 99.00 },
+        { name: "Kit 5 Toner TN-2370 TN2340 L2540",          vendor: "Drop",      price: 100.00 },
+        { name: "Toner TN660 DCP-L2540DW",                   vendor: "Evolut",    price: 38.00 },
+        { name: "Kit 10 Toner TN660 TN2340 TN2370",          vendor: "Chinamate", price: 196.00 }
+      ]
+    },
+    {
+      brand: "Brother",
+      models: ["TN1060","TN1000","TN1030","HL-1110","HL-1112","HL-1202","HL-1210W","HL-1212W",
+               "DCP-1510","DCP-1512","DCP-1602","DCP-1617NW","MFC-1810","MFC-1815","MFC-1818"],
+      products: [
+        { name: "Toner Evolut TN1060 Preto 370g",        vendor: "Evolut",         price: 32.00 },
+        { name: "2× Toner Brother HL-1212W TN1060",      vendor: "Evolut",         price: 58.00 },
+        { name: "Kit 3 Toners TN1060 1.000 pág",         vendor: "Evolut Supreme", price: 84.00 },
+        { name: "Kit 5× Toner DCP-1617NW TN-1060",       vendor: "Byqualy",        price: 139.00 }
+      ]
+    },
+    {
+      brand: "HP",
+      models: ["HP 667","DeskJet Ink Advantage 2374","2375","2376","2774","2775","2776","2874","6476","1275"],
+      products: [
+        { name: "Cartucho de Tinta HP 667 Preto 2 ml",  vendor: "HP", price: 62.00 },
+        { name: "Kit Cartucho HP 667 Preto + Colorido", vendor: "HP", price: 118.00 },
+        { name: "Cartucho HP 667 Kit Preto e Colorido", vendor: "HP", price: 121.00 }
+      ]
+    },
+    {
+      brand: "Samsung",
+      models: ["MLT-D111S","M2020","M2020W","M2021W","M2022W","M2070","M2070W","M2070F","M2070FW"],
+      products: [
+        { name: "Toner MLT-D111S Alta Capacidade", vendor: "Byqualy", price: 37.96 }
+      ]
+    },
+    {
+      brand: "Ricoh",
+      models: ["SP 3400SF","SP 3410SF","SP 3500","SP 3500SF","SP 3510DN","SP 3510SF"],
+      products: [
+        { name: "Toner Compatível Ricoh Premium SP3500", vendor: "Premium", price: 48.20 }
+      ]
+    },
+    {
+      brand: "Brother",
+      models: ["TN3472","TN3512","HL-L5102DW","HL-L5202DW","HL-L6202DW","HL-L6402DW",
+               "DCP-L5502DN","DCP-L5652DN","MFC-L5702DW","MFC-L6702DW","MFC-L6902DW"],
+      products: [
+        { name: "Cartucho Toner TN3472 DCP-L5652DN", vendor: "Byqualy", price: 189.00 }
+      ]
+    },
+    {
+      brand: "HP",
+      models: ["330X","W1330X","W1332A","HP Laser 408DN","HP Laser MFP 432FDN"],
+      products: [
+        { name: "Kit Toner + Cilindro HP M432 M408 W1330", vendor: "Cp Compatível", price: 214.00 }
+      ]
+    }
+  ];
+
+  var mk  = document.getElementById("mk");
+  var md  = document.getElementById("md");
+  var out = document.getElementById("out");
+
+  var brands = [];
+  FAMILIES.forEach(function (f) {
+    if (brands.indexOf(f.brand) === -1) brands.push(f.brand);
+  });
+
+  function brl(v) {
+    return "R$ " + v.toFixed(2).replace(".", ",");
+  }
+
+  function fillBrands() {
+    mk.innerHTML = "";
+    brands.forEach(function (b) {
+      var o = document.createElement("option");
+      o.value = b;
+      o.textContent = b;
+      mk.appendChild(o);
+    });
+  }
+
+  function fillModels() {
+    md.innerHTML = "";
+    FAMILIES.forEach(function (f, i) {
+      if (f.brand !== mk.value) return;
+      f.models.forEach(function (m) {
+        var o = document.createElement("option");
+        o.value = i + "|" + m;
+        o.textContent = m;
+        md.appendChild(o);
+      });
+    });
+  }
+
+  function render() {
+    var pick = md.value.split("|");
+    var fam  = FAMILIES[Number(pick[0])];
+    var model = pick[1];
+    if (!fam) return;
+
+    var html = '<p class="finder__count"><b>' + fam.products.length +
+               "</b> produto" + (fam.products.length > 1 ? "s" : "") +
+               " compatíve" + (fam.products.length > 1 ? "is" : "l") +
+               " com <b>" + model + "</b></p><div class='hits'>";
+
+    fam.products.forEach(function (p) {
+      html += '<div class="hit' + (p.best ? " hit--best" : "") + '">' +
+                '<div class="hit__name">' + p.name +
+                  '<span class="hit__vendor">' + p.vendor + "</span>" +
+                "</div>" +
+                '<div><span class="hit__price">' + brl(p.price) + "</span>" +
+                  (p.cpp ? '<span class="hit__cpp">' + p.cpp + " · melhor</span>" : "") +
+                "</div>" +
+              "</div>";
+    });
+
+    out.innerHTML = html + "</div>";
+  }
+
+  fillBrands();
+  fillModels();
+  render();
+
+  mk.addEventListener("change", function () { fillModels(); render(); });
+  md.addEventListener("change", render);
+  document.getElementById("go").addEventListener("click", render);
+</script>
