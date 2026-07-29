@@ -53,6 +53,12 @@
           class="dc-hero-slide {% if forloop.first %}active{% endif %}"
           data-slide-index="{{ forloop.index0 }}"
           aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          {%- comment -%}
+            Já sai inerte do servidor. Deixar isso só para o JS abria uma
+            janela em que o slide escondido era um <a href> focável dentro de
+            aria-hidden — e é exatamente esse instante que o auditor captura.
+          {%- endcomment -%}
+          {% unless forloop.first %}inert tabindex="-1"{% endunless %}
           {{ block.shopify_attributes }}
         >
           {%- if img_src != blank -%}
@@ -142,17 +148,23 @@
           var on = n === idx;
           s.classList.toggle('active', on);
           s.setAttribute('aria-hidden', on ? 'false' : 'true');
-          // sem isto o slide escondido continua alcançável por Tab —
-          // é foco dentro de aria-hidden, uma armadilha de teclado
-          if (on) s.removeAttribute('tabindex');
-          else s.setAttribute('tabindex', '-1');
+          // `inert`, não `tabindex="-1"`: o slide é um <a href>, e com
+          // tabindex -1 ele sai da tabulação mas continua focável por código
+          // — o que ainda conta como conteúdo focável dentro de aria-hidden.
+          // inert remove de vez do foco, do clique e da árvore de
+          // acessibilidade, que é o que os leitores de tela e os agentes de
+          // IA consultam.
+          if (on) { s.removeAttribute('inert'); s.removeAttribute('tabindex'); }
+          else { s.setAttribute('inert', ''); s.setAttribute('tabindex', '-1'); }
         });
         dots.forEach(function(d, n) { d.classList.toggle('active', n === idx); });
         if (currentLabel) currentLabel.textContent = String(idx + 1).padStart(2, '0');
       }
 
-      // estado inicial: slide 1 visível, demais fora da ordem de tabulação
-      slides.forEach(function(s, n) { if (n !== 0) s.setAttribute('tabindex', '-1'); });
+      // estado inicial: slide 1 visível, demais inertes
+      slides.forEach(function(s, n) {
+        if (n !== 0) { s.setAttribute('inert', ''); s.setAttribute('tabindex', '-1'); }
+      });
       function start() {
         if (!interval || slides.length < 2) return;
         stop();

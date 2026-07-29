@@ -1009,7 +1009,9 @@
     letter-spacing: 0.04em;
     border-radius: 999px;
     background: #fdecec;
-    color: #d62828;
+    /* #d62828 sobre #fdecec dava 4,38:1 — a 0,12 do mínimo AA de 4,5 para
+       texto pequeno em negrito. #c02222 dá 5,26:1 e mantém o vermelho. */
+    color: #c02222;
     text-transform: uppercase;
     margin-left: 4px;
   }
