@@ -162,16 +162,13 @@ class CatGrid {
       ? window.requestIdleCallback.bind(window)
       : (fn) => setTimeout(() => fn({ timeRemaining: () => 0 }), 32);
     let i = 0;
-    const step = (deadline) => {
-      const started = i;
-      do {
-        this._buildOne(this.cards[i]);
-        i += 1;
-      } while (i < this.cards.length && deadline.timeRemaining && deadline.timeRemaining() > 12);
-      if (i > started) {
-        this.layout();
-        this.renderAll();
-      }
+    const step = () => {
+      // exatamente um por fatia: dois seguidos já passavam de 500 ms de
+      // tarefa longa em desktop medido
+      this._buildOne(this.cards[i]);
+      i += 1;
+      this.layout();
+      this.renderAll();
       if (i < this.cards.length) {
         idle(step, { timeout: 1500 });
       } else {
