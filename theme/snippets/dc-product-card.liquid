@@ -44,11 +44,18 @@
   <div class="dc-card__media">
     <a href="{{ product.url }}" class="dc-card__media-link" aria-label="{{ product.title | escape }}">
       {%- if product.featured_image != blank -%}
+        {%- comment -%}
+          `sizes` é obrigatório junto com `widths`. Sem ele o navegador assume
+          100vw e escolhe a maior imagem que caiba na viewport: medido em
+          29/07/2026, baixava 411px no mobile e 1350px no desktop para exibir
+          169px e 238px. Os valores abaixo seguem a grade real do card.
+        {%- endcomment -%}
         {{ product.featured_image | image_url: width: 480 | image_tag:
             loading: 'lazy',
             alt: product.title,
             class: 'dc-card__img',
-            widths: '240, 480, 720' }}
+            widths: '180, 240, 360, 480, 720',
+            sizes: '(min-width: 1100px) 260px, (min-width: 700px) 30vw, 45vw' }}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'dc-card__img dc-card__img--placeholder' }}
       {%- endif -%}

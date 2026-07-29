@@ -5,8 +5,14 @@
     viewTransitionRenderBlocker?.remove();
   } else {
     // If the browser didn't manage to parse the main content quickly, at least let the user see something.
-    // We're aiming for the FCP to be under 1.8 seconds since the navigation started.
-    const RENDER_BLOCKER_TIMEOUT_MS = Math.max(0, 1800 - performance.now());
+    // DropChina: teto reduzido de 1800 para 800 ms. O bloqueio existe para a
+    // transição entre páginas não piscar, mas ele atrasa o primeiro paint —
+    // e o FCP mobile desta loja estava em 4,1 s (PageSpeed, 29/07/2026), onde
+    // segurar a tela por mais 1,8 s custa caro. As transições continuam
+    // ligadas; só o teto de espera encurtou.
+    // Para desligar o efeito por completo: Personalizar → Configurações do
+    // tema → Animações → transições de página.
+    const RENDER_BLOCKER_TIMEOUT_MS = Math.max(0, 800 - performance.now());
 
     setTimeout(() => {
       viewTransitionRenderBlocker?.remove();

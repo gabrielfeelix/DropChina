@@ -206,6 +206,8 @@ As três levas do plano foram executadas e estão no ar. Commits: `51ab108` (fas
 | SEO | 100 | 100 |
 | Práticas recomendadas | 73 | **77** |
 | Performance | 37 | 42 |
+
+> Estes números são do ambiente local. **Os oficiais, medidos pelo PageSpeed do Google, são bem melhores: 62 no mobile e 97 no desktop, com TBT de 120 ms.** Ver 6.1 — o ambiente local inflava o TBT em mais de 20x.
 | FCP | 3.043 ms | **2.307 ms** |
 | LCP | 9.183 ms | **6.513 ms** |
 | Peso da home | 2.213 KiB | **1.928 KiB** |
@@ -252,17 +254,32 @@ Dois guias de compatibilidade publicados no blog, escritos a partir dos títulos
 
 ## 6. O que ficou e por quê
 
-### 6.1 Dois itens não são acionáveis pelo tema
+### 6.1 Correção importante: o ambiente local inflava o TBT em mais de 20x
 
-**`shopify-perf-kit`** (4.459–6.985 ms de execução para 22 KiB) foi rastreado por CDP: `initiator.type = "parser"`, injetado direto no `<head>` do HTML da Shopify. `grep -r perf-kit theme/` dá zero ocorrências. Não é app nem `scriptTag`.
+**Este documento afirmava, com base em medição local, que o TBT ficaria entre 2 e 7 segundos e que a performance mobile teria teto na casa dos 40. Ambas as afirmações estavam erradas.**
 
-**658 KiB de assets de checkout na home**, com **zero botões de pagamento no DOM** — prefetch do Shop Pay pela plataforma.
+O PageSpeed oficial do Google, rodado pelo lojista em 29/07/2026 às 13:32, deu:
 
-Juntos explicam a maior parte do TBT restante e cerca de um terço do peso. Enquanto estiverem lá, a performance mobile tem teto na casa dos 40 mesmo com o tema impecável. A única alavanca é chamado no suporte Shopify.
+| | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | **62** | **97** |
+| **TBT** | **120 ms** | — |
+| Acessibilidade | 100 | 88 → corrigido |
+| Práticas recomendadas | 96 | 92 |
+| SEO | 100 | 100 |
+| CLS | 0 | — |
 
-### 6.2 O TBT desta loja não é medível em uma execução
+TBT real de **120 ms** contra os 2.000–7.000 ms que eu media localmente. A diferença vem da máquina de teste (carga alta somada à rasterização por software), não do site.
 
-Mesma página, sem alterar nada, três execuções seguidas: **2.448 / 4.877 / 7.155 ms**. LCP variou de 7,5 a 10,5 s. Antes de declarar ganho ou regressão de TBT, rode 3x e use a mediana — ou compare por métricas determinísticas (bytes, número de requisições, quais recursos carregam). Para isolar a causa de uma regressão, rode duas vezes com `blockedUrlPatterns` bloqueando o suspeito e compare o delta. Foi assim que o custo do bundle 3D foi atribuído.
+**How to apply:** para esta loja, **não use medição local de tempo para nada** — nem para comparar, nem para concluir regressão. Use o PageSpeed oficial. O ambiente local continua útil para o que é determinístico: bytes por recurso, número de requisições, quais arquivos carregam, e custo de CPU isolado com `Emulation.setCPUThrottlingRate`.
+
+### 6.2 Dois itens da plataforma, com peso menor do que eu estimei
+
+**`shopify-perf-kit`** foi rastreado por CDP: `initiator.type = "parser"`, injetado direto no `<head>` do HTML da Shopify. `grep -r perf-kit theme/` dá zero ocorrências — não é app nem `scriptTag`, e não sai pelo tema.
+
+**658 KiB de assets de checkout na home**, com zero botões de pagamento no DOM — prefetch do Shop Pay pela plataforma.
+
+Os dois continuam sendo os maiores itens fora do controle do tema. Mas, à luz do TBT real de 120 ms, o impacto deles é **muito menor do que este documento afirmava**. Não são urgência; são o que resta depois de tudo mais.
 
 ### 6.3 Lighthouse e PSI rodam sem GPU
 
