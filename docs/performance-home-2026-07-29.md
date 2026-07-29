@@ -143,6 +143,8 @@ O `aria-hidden-focus` merece atenção: um elemento escondido de leitores de tel
 
 ## 4. Plano priorizado
 
+> **Executado em 29/07/2026.** Todos os itens abaixo foram aplicados no mesmo dia — o resultado medido e o que sobrou estão nas seções 5 e 6. Mantido aqui como registro do raciocínio de priorização.
+
 Ordenado por retorno sobre esforço. Os ganhos são estimativas do Lighthouse ou minhas, sinalizadas como tal — só viram fato depois de medir.
 
 ### 4.1 Hero: carregar só o primeiro slide · impacto ALTO · esforço BAIXO
@@ -192,21 +194,95 @@ Imagens distorcidas. Corrigir com `aspect-ratio` + `object-fit: cover` nos cont�
 
 ---
 
-## 5. Ordem sugerida de execução
+## 5. O que foi executado (mesmo dia)
 
-**Primeira leva** (impacto alto, mexe só no tema, uma tarde): 4.1 + 4.2 + 4.4. Expectativa: LCP mobile abaixo de 5 s, score mobile na casa dos 55-65.
+As três levas do plano foram executadas e estão no ar. Commits: `51ab108` (fase 1), `cfbfc37` (fase 2), `3bf92f7` e `738637b` (fase 3).
 
-**Segunda leva** (depende de decisão de negócio): 4.3 e 4.7 — exigem olhar a lista de apps e decidir o que sai.
+### Resultado medido
 
-**Terceira leva** (qualidade): 4.5 + 4.6 + 4.8.
+| Métrica | Antes | Depois |
+| --- | --- | --- |
+| **Acessibilidade** | 88 | **100** |
+| SEO | 100 | 100 |
+| Práticas recomendadas | 73 | **77** |
+| Performance | 37 | 42 |
+| FCP | 3.043 ms | **2.307 ms** |
+| LCP | 9.183 ms | **6.513 ms** |
+| Peso da home | 2.213 KiB | **1.928 KiB** |
+| Banners no carregamento | 3 arquivos / 347 KiB | **2 / 182 KiB** |
 
-Medir de novo depois de cada leva, com o mesmo método deste documento, para que os números sejam comparáveis. O harness está em `scripts/cat-3d/` (o `deep.js` usado aqui está no scratchpad da sessão e pode ser versionado se for virar rotina).
+Acessibilidade é o número mais confiável da tabela — auditoria de a11y é determinística. Os tempos carregam o ruído descrito em 6.2.
+
+### Fase 1 — hero, imagens, fontes, SEO, geometria
+
+- **Hero.** `loading="lazy"` não adiava nada: os slides se sobrepõem com `position:absolute`, então todos contam como "na viewport". Só o slide 1 tem `src` no HTML, com `<link rel=preload>` por media query; os demais usam `data-src` e são hidratados depois do `load`.
+- **Imagens.** Banners reamostrados para 900 px de largura no mobile e recomprimidos a 78: 1.168 → 606 KiB.
+- **Fontes.** Pesos auditados com `document.fonts` em home, coleção, produto e página. Só Bricolage 500/600 e JetBrains 500 não eram baixados em lugar nenhum. **A PDP usa Bricolage 800, JetBrains 700 e Manrope 800** — uma auditoria só da home teria cortado esses por engano e causado *faux bold*. O CSS do Google Fonts deixou de bloquear a renderização.
+- **SEO.** `lang` normalizado para `pt-BR`; `og:image` criado (não existia em nenhuma página — `page_image` só é preenchido em produto e artigo).
+- **3D.** Geometria de 427.732 → 79.720 triângulos; construção de 2.454 → 647 ms em CPU 4x.
+
+### Fase 2 — 3D de volta ao mobile, dados estruturados, medição
+
+O 3D voltou a rodar em touch. Bloqueio de thread de 4.695 → 1.429 ms no ambiente de teste, com quatro mudanças:
+
+1. geometria enxuta da fase 1;
+2. construção sob demanda por viewport (a grid tem cinco linhas no mobile — a maioria dos cards nem aparece no carregamento);
+3. render por card em vez da grid inteira a cada passo — eram 169 desenhos durante a construção, passaram a 13;
+4. sem animação onde não há hover: a revelação de entrada gastava rAF nos 13 cards sem ninguém para ver.
+
+Também: `ItemList` na grid de categorias (a home só tinha `Organization` e `WebSite`; a PDP já emitia `Product` e `BreadcrumbList`), popup de cupom de 8 s → 25 s, e campos de GA4/Search Console no tema.
+
+### Fase 3 — acessibilidade e conteúdo
+
+27 achados corrigidos, cada um com causa localizada:
+
+| Achado | Causa | Correção |
+| --- | --- | --- |
+| `label-content-name-mismatch` (12) | botão mostrava "Adicionar ao carrinho" e o `aria-label` era "Adicionar *{título}* ao carrinho" — texto visível fora do nome acessível (WCAG 2.5.3) | `aria-label="Adicionar ao carrinho: {título}"` |
+| `color-contrast` (9) | `#9ca3af` e `#9aa1ab` sobre branco: 2,53:1 e 2,6:1 | `#6b7280` (4,83:1) |
+| `heading-order` (3) | card de produto era `h4` abaixo de `h2`; coluna do rodapé era `h5` | ambos `h3` |
+| `target-size` (3) | pontos do slideshow com alvo 28×20 | 24×24 via padding; ponto visual segue com 4 px |
+| `aria-hidden-focus` (2) | slide inativo com `aria-hidden` continuava alcançável por Tab | `tabindex="-1"` gerenciado no JS |
+| `image-aspect-ratio` (1) | logo do menu declarado 135×33 (4,09:1) com arquivo 480×192 (2,5:1) | 80×32 |
+
+Dois guias de compatibilidade publicados no blog, escritos a partir dos títulos reais do catálogo:
+`/blogs/noticias/toner-hp-105a-w1105a-compatibilidade` e `/blogs/noticias/toner-brother-tn2340-tn2370-tn660-tn1060-compatibilidade`.
 
 ---
 
-## 6. Ressalvas
+## 6. O que ficou e por quê
 
-- **Sem dados de campo.** O CrUX não tem amostra para este domínio. Laboratório com CPU 4x mais lenta é conservador de propósito; o usuário real com celular decente vê números melhores. A ordem de prioridade não muda.
-- **Não usei a skill `/web-ai-agent`.** Ela é orientada a busca na web; para performance, medição direta do site é evidência mais forte. Se quiser a leitura de conversão/GEO que ela cobre, é um trabalho separado e complementar.
-- **Não olhei páginas de produto nem coleção.** Esta auditoria é só da home. A PDP costuma ter perfil diferente (mais imagens, mais scripts de variante) e merece rodada própria.
-- **Nada do plano da seção 4 foi implementado.** Só o conserto do 3D (seção 2) está no ar.
+### 6.1 Dois itens não são acionáveis pelo tema
+
+**`shopify-perf-kit`** (4.459–6.985 ms de execução para 22 KiB) foi rastreado por CDP: `initiator.type = "parser"`, injetado direto no `<head>` do HTML da Shopify. `grep -r perf-kit theme/` dá zero ocorrências. Não é app nem `scriptTag`.
+
+**658 KiB de assets de checkout na home**, com **zero botões de pagamento no DOM** — prefetch do Shop Pay pela plataforma.
+
+Juntos explicam a maior parte do TBT restante e cerca de um terço do peso. Enquanto estiverem lá, a performance mobile tem teto na casa dos 40 mesmo com o tema impecável. A única alavanca é chamado no suporte Shopify.
+
+### 6.2 O TBT desta loja não é medível em uma execução
+
+Mesma página, sem alterar nada, três execuções seguidas: **2.448 / 4.877 / 7.155 ms**. LCP variou de 7,5 a 10,5 s. Antes de declarar ganho ou regressão de TBT, rode 3x e use a mediana — ou compare por métricas determinísticas (bytes, número de requisições, quais recursos carregam). Para isolar a causa de uma regressão, rode duas vezes com `blockedUrlPatterns` bloqueando o suspeito e compare o delta. Foi assim que o custo do bundle 3D foi atribuído.
+
+### 6.3 Lighthouse e PSI rodam sem GPU
+
+Ambos usam SwiftShader (rasterização por software), o que penaliza WebGL de forma desproporcional. Parte do custo medido do 3D é artefato do ambiente; o usuário real com GPU paga menos. Não há como medir o custo com GPU real nem localmente nem pelo PSI — então os números do 3D neste documento são o pior caso, não o caso típico.
+
+### 6.4 Sem preview local
+
+`shopify theme list` e `theme dev` falham com 401 nesta loja, embora `theme push` autentique normalmente. Some-se a isso o fato de a loja ter um único tema, que é o publicado: **toda validação de mudança acontece depois do deploy, no ar**. Planeje o rollback antes de subir. Detalhes em `docs/deploy-shopify.md`.
+
+### 6.5 Pendências que dependem do lojista
+
+| Item | Onde |
+| --- | --- |
+| GA4 e Search Console (nenhum instalado, nem pixel) | Personalizar → Configurações do tema → Medição e verificação |
+| Idioma primário está como Português de Portugal | Configurações → Idiomas. A Admin API **não** troca: `ShopLocaleInput` só tem `published` e `marketWebPresenceIds`, sem campo `primary` |
+| `perf-kit` e prefetch de checkout | chamado no suporte Shopify |
+| Revisão técnica dos guias de compatibilidade | conteúdo publicado a partir dos títulos do catálogo; compatibilidade errada gera devolução |
+
+Sem GA4 e Search Console, nada disso vira dado de campo — o CrUX segue sem amostra para o domínio e toda decisão continua baseada em laboratório.
+
+### 6.6 Não coberto
+
+Esta auditoria é da home. PDP e coleção têm perfil diferente (mais imagens, mais scripts de variante) e merecem rodada própria. O harness está versionado em `scripts/cat-3d/audit.js`.
