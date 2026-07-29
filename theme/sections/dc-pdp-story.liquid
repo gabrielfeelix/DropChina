@@ -58,12 +58,20 @@
       {%- if img_count > 1 -%}
         <section class="dc-story__sec">
           <h3 class="dc-story__h">Por dentro do produto</h3>
-          <div class="dc-story__gallery">
-            {%- for img in product.images offset: 1 limit: 6 -%}
-              <figure class="dc-story__gcard" data-dc-fit-host>
-                <img src="{{ img | image_url: width: 1000 }}" alt="{{ product.title | escape }} — imagem {{ forloop.index | plus: 1 }}" loading="lazy" data-dc-fit>
-              </figure>
-            {%- endfor -%}
+          <div class="dc-story__galWrap" data-dc-story-gal>
+            <button type="button" class="dc-story__galNav dc-story__galNav--prev" data-dc-story-prev aria-label="Fotos anteriores" hidden>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+            <div class="dc-story__gallery" data-dc-story-track>
+              {%- for img in product.images offset: 1 limit: 8 -%}
+                <figure class="dc-story__gcard" data-dc-fit-host>
+                  <img src="{{ img | image_url: width: 1000 }}" alt="{{ img.alt | default: product.title | escape }}" loading="lazy" width="1000" height="750" data-dc-fit>
+                </figure>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="dc-story__galNav dc-story__galNav--next" data-dc-story-next aria-label="Mais fotos" hidden>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
           </div>
         </section>
       {%- endif -%}
@@ -78,7 +86,7 @@
             </div>
             {%- if img_count > 1 -%}
               <div class="dc-story__specsMedia" data-dc-fit-host>
-                <img src="{{ product.images.last | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="lazy" data-dc-fit>
+                <img src="{{ product.images.last | image_url: width: 900 }}" alt="{{ product.images.last.alt | default: product.title | escape }}" loading="lazy" width="900" height="619" data-dc-fit>
               </div>
             {%- endif -%}
           </div>
@@ -94,6 +102,39 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-dc-story-gal]').forEach(function (gal) {
+      var track = gal.querySelector('[data-dc-story-track]');
+      var prev = gal.querySelector('[data-dc-story-prev]');
+      var next = gal.querySelector('[data-dc-story-next]');
+      if (!track) return;
+
+      // Passo = largura de um card + gap, lido do layout real (muda entre desktop e mobile).
+      function step() {
+        var card = track.querySelector('.dc-story__gcard');
+        if (!card) return track.clientWidth;
+        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function update() {
+        var overflow = track.scrollWidth - track.clientWidth > 4;
+        var atStart = track.scrollLeft <= 2;
+        var atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        if (prev) prev.hidden = !overflow || atStart;
+        if (next) next.hidden = !overflow || atEnd;
+      }
+
+      if (prev) prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      if (next) next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+  });
+</script>
 
 {% stylesheet %}
   .dc-story {
@@ -147,13 +188,40 @@
   }
 
   /* galeria */
-  .dc-story__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  /* Carrossel: 2 cards por vez, o resto fica oculto e se alcança pelas setas. */
+  .dc-story__galWrap { position: relative; }
+  .dc-story__gallery {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(50% - 11px);
+    gap: 22px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .dc-story__gallery::-webkit-scrollbar { display: none; }
   .dc-story__gcard {
-    margin: 0; aspect-ratio: 16 / 11; background: #eef2f7;
+    margin: 0; aspect-ratio: 4 / 3; background: #eef2f7;
     border: 1px solid #dfe4ea; border-radius: 22px; overflow: hidden;
     display: flex; align-items: center; justify-content: center; padding: 22px;
+    scroll-snap-align: start;
   }
   .dc-story__gcard img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+  .dc-story__galNav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.97); border: 1px solid #e4e6ea;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+    display: grid; place-items: center; cursor: pointer;
+    z-index: 3; color: #0d1115; padding: 0;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .dc-story__galNav--prev { left: -14px; }
+  .dc-story__galNav--next { right: -14px; }
+  .dc-story__galNav[hidden] { display: none; }
+  .dc-story__galNav:hover { background: #ffffff; transform: translateY(-50%) scale(1.08); }
 
   /* specs */
   .dc-story__specsGrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 30px; align-items: center; }
@@ -188,7 +256,11 @@
 
   @media (max-width: 860px) {
     .dc-story__sec { padding: 30px 22px; }
-    .dc-story__gallery { grid-template-columns: 1fr; }
+    /* 1 card por vez, mais alto — em tela estreita a foto precisa de altura. */
+    .dc-story__gallery { grid-auto-columns: 100%; }
+    .dc-story__gcard { aspect-ratio: 1 / 1; }
+    .dc-story__galNav--prev { left: 8px; }
+    .dc-story__galNav--next { right: 8px; }
     .dc-story__specsGrid { grid-template-columns: 1fr; }
     .dc-story__specsMedia { order: -1; aspect-ratio: 16/11; }
     .dc-story__specs li { grid-template-columns: 130px 1fr; gap: 10px; }
