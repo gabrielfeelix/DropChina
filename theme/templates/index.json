@@ -12,6 +12,15 @@
     "hero_main": {
       "type": "dc-hero-slideshow",
       "blocks": {
+        "slide_snapmaker": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-snapmaker-u1-desktop.jpeg",
+            "image_asset_mobile": "banner-snapmaker-u1-mobile.jpeg",
+            "alt": "Snapmaker U1 — impressora 3D multicolor com 4 cabeçotes independentes, R$ 16.900,00 em até 10x sem juros",
+            "link": "shopify://collections/impressao-3d"
+          }
+        },
         "slide_1": {
           "type": "slide",
           "settings": {
@@ -32,6 +41,7 @@
         }
       },
       "block_order": [
+        "slide_snapmaker",
         "slide_1",
         "slide_2"
       ],
