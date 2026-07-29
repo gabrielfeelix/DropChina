@@ -44,7 +44,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'menu_col' -%}
           <div class="dc-footer-col" {{ block.shopify_attributes }}>
-            <h5 class="dc-footer-col__title">{{ block.settings.title | escape }}</h5>
+            <h3 class="dc-footer-col__title">{{ block.settings.title | escape }}</h3>
             {%- if block.settings.menu != blank -%}
               <ul class="dc-footer-col__list">
                 {%- for link in block.settings.menu.links -%}

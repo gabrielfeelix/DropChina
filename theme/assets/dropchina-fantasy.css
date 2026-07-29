@@ -19,7 +19,10 @@
   --ink: #0d1115;
   --ink-2: #2a3038;
   --muted: #6b7280;
-  --muted-2: #9ca3af;
+  /* era #9ca3af: 2,53:1 sobre branco, abaixo do mínimo AA de 4,5:1.
+     #6b7280 dá 4,83:1. Usada só em texto sobre fundo claro (preço antigo e
+     separador do rating), então a troca é segura em todos os pontos. */
+  --muted-2: #6b7280;
   --line: #ececef;
   --line-strong: #d9dade;
   --accent: var(--dc-red);

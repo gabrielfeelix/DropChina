@@ -84,7 +84,8 @@
       <div class="dc-card__brand">{{ product.vendor }}</div>
     {%- endif -%}
     <a href="{{ product.url }}" class="dc-card__title-link">
-      <h4 class="dc-card__title">{{ product.title }}</h4>
+      {%- comment -%} h3: o título da seção acima é h2, e pular para h4 quebra a ordem {%- endcomment -%}
+      <h3 class="dc-card__title">{{ product.title }}</h3>
     </a>
     {%- if rating_count > 0 -%}
       <div class="dc-card__rating">
@@ -125,7 +126,9 @@
           class="dc-card__add"
           data-dc-add
           data-variant-id="{{ p_var.id }}"
-          aria-label="Adicionar {{ product.title | escape }} ao carrinho"
+          {%- comment -%} WCAG 2.5.3: o nome acessível precisa conter o texto visível do botão,
+              senão comando de voz ("clicar em adicionar ao carrinho") não encontra o alvo {%- endcomment -%}
+          aria-label="Adicionar ao carrinho: {{ product.title | escape }}"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="21" r="1.4"/><circle cx="17" cy="21" r="1.4"/></svg>
           <span>Adicionar ao carrinho</span>

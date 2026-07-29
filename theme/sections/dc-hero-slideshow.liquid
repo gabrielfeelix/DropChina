@@ -286,17 +286,18 @@
     gap: 8px;
     z-index: 3;
   }
-  /* Alvo de toque 20px alto (visual 4px via background-clip) */
+  /* Alvo de toque 24x24 (mínimo WCAG 2.5.8); o ponto visual continua com 4px
+     de altura via background-clip: content-box */
   .dc-hero-slideshow__dot {
     width: 28px;
-    height: 20px;
+    height: 24px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.35);
     background-clip: content-box;
     transition: width 0.3s, background 0.3s;
     border: 0;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 10px 0;
     box-sizing: border-box;
   }
   .dc-hero-slideshow__dot.active {
