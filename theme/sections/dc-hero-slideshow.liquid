@@ -1,3 +1,33 @@
+{%- comment -%}
+  O primeiro slide é o elemento LCP da home. Ele é pré-carregado aqui, com
+  media query para não baixar as duas versões. Os demais slides saem do HTML
+  sem `src` (só `data-src`) e são hidratados pelo JS depois do load — ver a
+  nota no script no fim do arquivo.
+{%- endcomment -%}
+{%- liquid
+  assign first = section.blocks.first
+  assign pre_desktop = ''
+  assign pre_mobile = ''
+  if first
+    if first.settings.image
+      assign pre_desktop = first.settings.image | image_url: width: 1920
+    elsif first.settings.image_asset != blank
+      assign pre_desktop = first.settings.image_asset | asset_url
+    endif
+    if first.settings.image_mobile
+      assign pre_mobile = first.settings.image_mobile | image_url: width: 1080
+    elsif first.settings.image_asset_mobile != blank
+      assign pre_mobile = first.settings.image_asset_mobile | asset_url
+    endif
+  endif
+-%}
+{%- if pre_mobile != blank -%}
+  <link rel="preload" as="image" href="{{ pre_mobile }}" media="(max-width: 767px)" fetchpriority="high">
+{%- endif -%}
+{%- if pre_desktop != blank -%}
+  <link rel="preload" as="image" href="{{ pre_desktop }}" media="(min-width: 768px)" fetchpriority="high">
+{%- endif -%}
+
 <section class="dc-hero-section" style="padding-block: {{ section.settings.padding_top | default: 18 }}px {{ section.settings.padding_bottom | default: 0 }}px;">
   <h1 class="dc-hero__seo-h1">{{ section.settings.seo_h1 | default: 'DropChina — Cartuchos, Toners, Impressoras e Periféricos com Garantia Oficial' | escape }}</h1>
   <div class="dc-hero__container">
@@ -28,15 +58,23 @@
           {%- if img_src != blank -%}
             <picture>
               {%- if img_mobile_src != blank -%}
-                <source media="(max-width: 767px)" srcset="{{ img_mobile_src }}">
+                {%- if forloop.first -%}
+                  <source media="(max-width: 767px)" srcset="{{ img_mobile_src }}">
+                {%- else -%}
+                  <source media="(max-width: 767px)" data-srcset="{{ img_mobile_src }}">
+                {%- endif -%}
               {%- endif -%}
+              {%- comment -%}
+                Os slides se sobrepõem (position:absolute), então todos contam
+                como "na viewport" e loading="lazy" não adia nada — os três
+                baixavam juntos e disputavam banda com o LCP. Sem `src` no
+                HTML, o navegador não pede nada até o JS hidratar.
+              {%- endcomment -%}
               <img
-                src="{{ img_src }}"
+                {% if forloop.first %}src="{{ img_src }}" fetchpriority="high" loading="eager"{% else %}data-src="{{ img_src }}" loading="lazy" fetchpriority="low"{% endif %}
                 alt="{{ block.settings.alt | default: shop.name | escape }}"
                 width="1920"
                 height="640"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                {% if forloop.first %}fetchpriority="high"{% endif %}
                 draggable="false"
               >
             </picture>
@@ -80,15 +118,41 @@
       var interval = parseInt(slideshow.dataset.autoplay, 10) || 0;
       var timer = null;
 
+      // Troca data-src/data-srcset por src/srcset. Só o slide 1 vem com
+      // imagem no HTML; os outros esperam para não competir com o LCP.
+      function hydrate(n) {
+        var slide = slides[n];
+        if (!slide || slide.dataset.hydrated) return;
+        slide.dataset.hydrated = '1';
+        slide.querySelectorAll('source[data-srcset]').forEach(function(s) {
+          s.srcset = s.dataset.srcset;
+          s.removeAttribute('data-srcset');
+        });
+        slide.querySelectorAll('img[data-src]').forEach(function(im) {
+          im.src = im.dataset.src;
+          im.removeAttribute('data-src');
+        });
+      }
+
       function show(i) {
         idx = ((i % slides.length) + slides.length) % slides.length;
+        hydrate(idx);
+        hydrate((idx + 1) % slides.length);   // o próximo, para a transição não piscar
         slides.forEach(function(s, n) {
-          s.classList.toggle('active', n === idx);
-          s.setAttribute('aria-hidden', n === idx ? 'false' : 'true');
+          var on = n === idx;
+          s.classList.toggle('active', on);
+          s.setAttribute('aria-hidden', on ? 'false' : 'true');
+          // sem isto o slide escondido continua alcançável por Tab —
+          // é foco dentro de aria-hidden, uma armadilha de teclado
+          if (on) s.removeAttribute('tabindex');
+          else s.setAttribute('tabindex', '-1');
         });
         dots.forEach(function(d, n) { d.classList.toggle('active', n === idx); });
         if (currentLabel) currentLabel.textContent = String(idx + 1).padStart(2, '0');
       }
+
+      // estado inicial: slide 1 visível, demais fora da ordem de tabulação
+      slides.forEach(function(s, n) { if (n !== 0) s.setAttribute('tabindex', '-1'); });
       function start() {
         if (!interval || slides.length < 2) return;
         stop();
@@ -119,6 +183,15 @@
       }, { passive: true });
 
       start();
+
+      // depois que a página terminou de carregar e a thread está livre,
+      // adianta o slide seguinte para a primeira transição não piscar
+      var warm = function() {
+        if (window.requestIdleCallback) window.requestIdleCallback(function() { hydrate(1); }, { timeout: 3000 });
+        else setTimeout(function() { hydrate(1); }, 1500);
+      };
+      if (document.readyState === 'complete') warm();
+      else window.addEventListener('load', warm, { once: true });
     });
   });
 </script>

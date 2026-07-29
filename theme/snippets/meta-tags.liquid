@@ -69,6 +69,12 @@
   content="{{ og_description | escape }}"
 >
 
+{%- comment -%}
+  page_image só existe em produto/artigo/coleção com imagem. Na home e nas
+  páginas comuns ficava vazio e a página saía sem og:image nenhum — todo link
+  compartilhado no WhatsApp ou Instagram aparecia sem miniatura. O asset
+  og-image.jpg (1200×630, proporção que as redes esperam) é o fallback.
+{%- endcomment -%}
 {%- if page_image -%}
   <meta
     property="og:image"
@@ -85,6 +91,30 @@
   <meta
     property="og:image:height"
     content="{{ page_image.height }}"
+  >
+  {%- assign social_image = page_image | image_url | split: '//' | last | prepend: 'https://' -%}
+{%- else -%}
+  {%- comment -%} asset_url pode voltar protocol-relative; o split normaliza {%- endcomment -%}
+  {%- assign social_image = 'og-image.jpg' | asset_url | split: '//' | last | prepend: 'https://' -%}
+  <meta
+    property="og:image"
+    content="{{ social_image }}"
+  >
+  <meta
+    property="og:image:secure_url"
+    content="{{ social_image }}"
+  >
+  <meta
+    property="og:image:width"
+    content="1200"
+  >
+  <meta
+    property="og:image:height"
+    content="630"
+  >
+  <meta
+    property="og:image:alt"
+    content="{{ og_title | escape }}"
   >
 {%- endif -%}
 
@@ -117,6 +147,16 @@
   name="twitter:description"
   content="{{ og_description | escape }}"
 >
+{%- comment -%}
+  summary_large_image sem imagem degrada para card de texto — o social_image
+  acima garante a miniatura em todo tipo de página.
+{%- endcomment -%}
+{%- if social_image != blank -%}
+  <meta
+    name="twitter:image"
+    content="{{ social_image }}"
+  >
+{%- endif -%}
 
 <title>
   {{ og_title }}

@@ -3,7 +3,21 @@
   {% if request.design_mode %}
     class="shopify-design-mode"
   {% endif %}
-  lang="{{ request.locale.iso_code }}"
+  {%- comment -%}
+    O idioma primário da loja está como pt-PT (Português de Portugal) no
+    painel, então request.locale.iso_code devolvia "pt-PT" e sinalizava
+    Portugal para buscadores e leitores de tela. A loja é 100% brasileira e
+    só tem um idioma. A correção de raiz é trocar o idioma primário em
+    Configurações → Idiomas — o que mexe em URLs e traduções e é decisão de
+    loja, não de tema. Até lá, normalizamos as variantes de português aqui.
+  {%- endcomment -%}
+  {%- liquid
+    assign iso = request.locale.iso_code
+    if iso contains 'pt'
+      assign iso = 'pt-BR'
+    endif
+  -%}
+  lang="{{ iso }}"
 >
   <head>
     {%- if settings.favicon != blank -%}
@@ -29,9 +43,25 @@
     {%- render 'schema-organization' -%}
     {%- render 'schema-breadcrumb' -%}
     {%- render 'stylesheets' -%}
+    {%- comment -%}
+      Pesos auditados em 29/07/2026 percorrendo home, coleção, produto e página
+      com document.fonts — o navegador só baixa as faces que a página de fato
+      usa. Resultado: Bricolage 700 e 800; Manrope 400/500/600/700/800;
+      JetBrains Mono 400 e 700. Bricolage 500/600 e JetBrains 500 não foram
+      baixados em nenhuma página e saíram daqui.
+
+      Atenção ao mexer: cortar um peso que alguma página usa não quebra o
+      layout de forma óbvia — o navegador sintetiza um "faux bold" mais feio e
+      levemente mais largo. Reaudite com document.fonts antes de remover.
+
+      O CSS carrega sem bloquear a renderização (media=print + onload). Com
+      display=swap o texto aparece na fonte de sistema e troca ao chegar.
+    {%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    {%- assign google_fonts = 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap' -%}
+    <link rel="stylesheet" href="{{ google_fonts }}" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link rel="stylesheet" href="{{ google_fonts }}"></noscript>
     {{ 'dropchina-vision.css' | asset_url | stylesheet_tag }}
     {{ 'dropchina-fantasy.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'dc-product-card.js' | asset_url }}" defer="defer"></script>
