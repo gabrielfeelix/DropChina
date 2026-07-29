@@ -12,7 +12,7 @@ const path = require('path');
   await page.goto('file://' + path.resolve(__dirname, 'test.html'));
   await page.waitForTimeout(600);
   await page.evaluate(() => document.getElementById('g').scrollIntoView({ block: 'center' }));
-  await page.waitForTimeout(4500);
+  await page.waitForTimeout(9000);
 
   const grid = page.locator('#g');
   await grid.screenshot({ path: 'out-rest.png' });

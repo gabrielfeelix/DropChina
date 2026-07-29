@@ -9,9 +9,10 @@
 import * as THREE from 'three';
 import { buildCategory } from './models.js';
 
-const REST_Y = -0.38;              // rotação de repouso (3/4 view)
-const SPIN = 1.15;                 // rad/s no hover
-const DIR = new THREE.Vector3(1, 0.55, 1.25).normalize();
+const REST_Y = -0.14;              // rotação de repouso — quase de frente
+const SPIN = 0.6;                  // rad/s no hover
+// câmera pouco lateral e pouco acima: o objeto encara o visitante
+const DIR = new THREE.Vector3(0.42, 0.38, 1.55).normalize();
 const PAD = 10;                    // folga da região limpa (card sobe 3px no hover)
 const MAX_DPR = 1.5;
 
@@ -22,9 +23,10 @@ function contactShadowTexture() {
   c.width = c.height = 128;
   const g = c.getContext('2d');
   const grad = g.createRadialGradient(64, 64, 0, 64, 64, 62);
-  grad.addColorStop(0, 'rgba(13,17,21,0.50)');
-  grad.addColorStop(0.5, 'rgba(13,17,21,0.16)');
-  grad.addColorStop(1, 'rgba(13,17,21,0)');
+  // cinza-azulado em vez de quase-preto, e bem mais transparente
+  grad.addColorStop(0, 'rgba(86,100,112,0.26)');
+  grad.addColorStop(0.5, 'rgba(86,100,112,0.09)');
+  grad.addColorStop(1, 'rgba(86,100,112,0)');
   g.fillStyle = grad;
   g.fillRect(0, 0, 128, 128);
   const t = new THREE.CanvasTexture(c);
