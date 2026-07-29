@@ -43,16 +43,38 @@
 
 {%- comment -%}
   Ícones 3D: um único canvas WebGL cobre a grid inteira e desenha cada modelo
-  na região do seu card (scissor). O bundle (~148 KB gzip) só é buscado quando
-  a grid chega perto da viewport, então não entra no caminho do LCP. Sem WebGL
-  ou sem chave de modelo no bloco, o SVG chapado continua sendo o ícone.
+  na região do seu card (scissor). Enriquecimento de desktop apenas — o SVG
+  chapado é o ícone de verdade e continua no HTML.
+
+  O portão abaixo é deliberadamente restritivo. Medido no site em 29/07/2026
+  (Lighthouse mobile, Moto G emulado): com o bundle carregando junto da
+  página, o TBT foi de 3,7 s para 48,3 s e a thread principal de 12,5 s para
+  123 s — three.js mais os 13 modelos procedurais custam ~19 s de execução
+  em CPU fraca. No celular não existe hover para justificar isso.
+
+  Por isso: só entra com ponteiro fino (mouse), tela larga, memória e rede
+  folgadas, e ainda assim depois do load, em tempo ocioso. Quem não passa no
+  portão fica com o SVG e não baixa 1 byte a mais.
 {%- endcomment -%}
 <script>
   (function () {
     var root = document.getElementById('dc-cat3d-{{ section.id }}');
     if (!root || !root.querySelector('[data-cat3d-key]')) return;
     if (!window.WebGLRenderingContext || !window.IntersectionObserver) return;
-    var load = function () {
+
+    var mm = window.matchMedia;
+    if (!mm) return;
+    // hover real + ponteiro fino = mouse. Sem isso o 3D é custo sem interação.
+    if (!mm('(hover: hover) and (pointer: fine)').matches) return;
+    if (!mm('(min-width: 1000px)').matches) return;
+    if (mm('(prefers-reduced-motion: reduce)').matches) return;
+
+    var nav = navigator;
+    if (nav.connection && (nav.connection.saveData || /2g/.test(nav.connection.effectiveType || ''))) return;
+    if (nav.deviceMemory && nav.deviceMemory < 4) return;
+    if (nav.hardwareConcurrency && nav.hardwareConcurrency < 4) return;
+
+    var fetchIt = function () {
       if (window.__dcCat3dLoaded) return;
       window.__dcCat3dLoaded = true;
       var s = document.createElement('script');
@@ -60,12 +82,24 @@
       s.defer = true;
       document.head.appendChild(s);
     };
-    var io = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      io.disconnect();
-      load();
-    }, { rootMargin: '400px' });
-    io.observe(root);
+    // depois do load e só em tempo ocioso — nunca disputa com o carregamento
+    var whenIdle = function () {
+      if (window.requestIdleCallback) window.requestIdleCallback(fetchIt, { timeout: 4000 });
+      else setTimeout(fetchIt, 1200);
+    };
+    var armed = false;
+    var arm = function () {
+      if (armed) return;
+      armed = true;
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        whenIdle();
+      }, { rootMargin: '200px' });
+      io.observe(root);
+    };
+    if (document.readyState === 'complete') arm();
+    else window.addEventListener('load', arm, { once: true });
   })();
 </script>
 

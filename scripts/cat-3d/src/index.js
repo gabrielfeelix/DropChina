@@ -50,13 +50,14 @@ class CatGrid {
     this.clock = new THREE.Clock();
 
     if (!this._initGL()) return;
-    this._buildModels();
     this._observe();
     this._bindPointer();
     root.classList.add('dc-cat3d-on');
     this.layout();
-    this.renderAll();
-    if (!reduceMotion) this._intro();
+    // Construir os 13 modelos de uma vez é uma tarefa longa de vários
+    // segundos em CPU fraca. Um por fatia ociosa: a thread principal respira
+    // entre eles e os cards aparecem conforme ficam prontos.
+    this._buildProgressive();
   }
 
   _initGL() {
@@ -97,58 +98,89 @@ class CatGrid {
     return true;
   }
 
-  _buildModels() {
-    if (!SHADOW_TEX) SHADOW_TEX = contactShadowTexture();
-    const shadowMat = new THREE.MeshBasicMaterial({
-      map: SHADOW_TEX,
-      transparent: true,
-      depthWrite: false,
-      toneMapped: false,
+  get _shadowMat() {
+    if (!this.__shadowMat) {
+      if (!SHADOW_TEX) SHADOW_TEX = contactShadowTexture();
+      this.__shadowMat = new THREE.MeshBasicMaterial({
+        map: SHADOW_TEX,
+        transparent: true,
+        depthWrite: false,
+        toneMapped: false,
+      });
+    }
+    return this.__shadowMat;
+  }
+
+  _buildOne(c) {
+    let model;
+    try {
+      model = buildCategory(c.key);
+    } catch (e) {
+      c.dead = true;
+      return;
+    }
+    // sem shadow map — a sombra de contato é uma decalque no chão
+    model.traverse((o) => {
+      if (o.isMesh) {
+        o.castShadow = false;
+        o.receiveShadow = false;
+      }
     });
 
-    for (const c of this.cards) {
-      let model;
-      try {
-        model = buildCategory(c.key);
-      } catch (e) {
-        c.dead = true;
-        continue;
+    const pivot = new THREE.Group();
+    pivot.add(model);
+    pivot.rotation.y = REST_Y;
+    pivot.visible = false;
+    this.scene.add(pivot);
+
+    const box = new THREE.Box3().setFromObject(model);
+    const sphere = box.getBoundingSphere(new THREE.Sphere());
+    // gira em torno do próprio eixo vertical, não do canto do bounding box
+    model.position.x -= sphere.center.x;
+    model.position.z -= sphere.center.z;
+
+    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), this._shadowMat);
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.scale.setScalar(sphere.radius * 2.6);
+    shadow.position.y = box.min.y + 0.002;
+    pivot.add(shadow);
+
+    c.center = new THREE.Vector3(0, sphere.center.y, 0);
+    c.dist = (sphere.radius / Math.tan((this.camera.fov * Math.PI) / 360)) * 1.1;
+    c.baseY = REST_Y;
+    c.hover = 0;   // 0..1, dirige zoom/lift
+    c.spin = 0;    // velocidade angular atual
+    c.target = 0;  // 1 enquanto hover/foco
+    c.pivot = pivot;
+  }
+
+  /** Um modelo por fatia ociosa. Cada buildCategory() custa dezenas de ms em
+   *  CPU fraca; os 13 de enfiada viravam uma tarefa longa que travava a
+   *  thread principal no meio do carregamento. */
+  _buildProgressive() {
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback.bind(window)
+      : (fn) => setTimeout(() => fn({ timeRemaining: () => 0 }), 32);
+    let i = 0;
+    const step = (deadline) => {
+      const started = i;
+      do {
+        this._buildOne(this.cards[i]);
+        i += 1;
+      } while (i < this.cards.length && deadline.timeRemaining && deadline.timeRemaining() > 12);
+      if (i > started) {
+        this.layout();
+        this.renderAll();
       }
-      // sem shadow map — a sombra de contato é uma decalque no chão
-      model.traverse((o) => {
-        if (o.isMesh) {
-          o.castShadow = false;
-          o.receiveShadow = false;
-        }
-      });
-
-      const pivot = new THREE.Group();
-      pivot.add(model);
-      pivot.rotation.y = REST_Y;
-      pivot.visible = false;
-      this.scene.add(pivot);
-
-      const box = new THREE.Box3().setFromObject(model);
-      const sphere = box.getBoundingSphere(new THREE.Sphere());
-      // gira em torno do próprio eixo vertical, não do canto do bounding box
-      model.position.x -= sphere.center.x;
-      model.position.z -= sphere.center.z;
-
-      const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), shadowMat);
-      shadow.rotation.x = -Math.PI / 2;
-      shadow.scale.setScalar(sphere.radius * 2.6);
-      shadow.position.y = box.min.y + 0.002;
-      pivot.add(shadow);
-
-      c.pivot = pivot;
-      c.center = new THREE.Vector3(0, sphere.center.y, 0);
-      c.dist = (sphere.radius / Math.tan((this.camera.fov * Math.PI) / 360)) * 1.1;
-      c.baseY = REST_Y;
-      c.hover = 0;   // 0..1, dirige zoom/lift
-      c.spin = 0;    // velocidade angular atual
-      c.target = 0;  // 1 enquanto hover/foco
-    }
-    this.cards = this.cards.filter((c) => !c.dead);
+      if (i < this.cards.length) {
+        idle(step, { timeout: 1500 });
+      } else {
+        this.cards = this.cards.filter((c) => !c.dead);
+        this.built = true;
+        if (!reduceMotion && this.visible) this.runIntro();
+      }
+    };
+    idle(step, { timeout: 1500 });
   }
 
   /* ---- geometria dos cards em px CSS relativos ao canvas ---- */
@@ -204,6 +236,7 @@ class CatGrid {
   }
 
   drawCard(c, clearPad) {
+    if (!c.pivot) return;   // ainda não construído nesta fatia ociosa
     const pad = clearPad ? PAD : 0;
     const x = Math.max(0, Math.floor(c.x - pad));
     const y = Math.max(0, Math.floor(c.y - pad));
@@ -237,6 +270,7 @@ class CatGrid {
 
   /* ---- loop sob demanda ---- */
   wake(c) {
+    if (!c.pivot) return;
     this.animating.add(c);
     if (this.running || !this.visible) return;
     this.running = true;
@@ -281,17 +315,12 @@ class CatGrid {
     if (!this.animating.size) this.sleep();
   };
 
-  _intro() {
-    // revelação única: cada card dá meia volta escalonada ao entrar em cena
-    this.introDone = false;
-  }
-
   runIntro() {
-    if (this.introDone) return;
+    if (this.introDone || !this.built) return;
     this.introDone = true;
     this.cards.forEach((c, i) => {
       setTimeout(() => {
-        if (!this.visible) return;
+        if (!this.visible || !c.pivot) return;
         c.pivot.rotation.y = REST_Y - Math.PI * 0.85;
         c.spin = SPIN * 1.6;
         this.wake(c);
