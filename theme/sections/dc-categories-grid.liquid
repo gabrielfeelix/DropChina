@@ -42,19 +42,65 @@
 </section>
 
 {%- comment -%}
+  ItemList das categorias. A home só tinha Organization e WebSite; sem isto o
+  Google não entende a grid como uma lista navegável da loja. Só entra quando
+  os blocos têm link de verdade — lista com URL vazia é pior que nenhuma.
+{%- endcomment -%}
+{%- capture category_items -%}
+  {%- assign pos = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'category' and block.settings.link != blank -%}
+      {%- liquid
+        assign pos = pos | plus: 1
+        assign lnk = block.settings.link
+        # settings do tipo url resolvem shopify:// para caminho relativo;
+        # schema.org exige URL absoluta
+        unless lnk contains '://'
+          assign lnk = lnk | prepend: request.origin
+        endunless
+      -%}
+      {%- unless pos == 1 %},{% endunless -%}
+      {
+        "@type": "ListItem",
+        "position": {{ pos }},
+        "name": {{ block.settings.name | strip | json }},
+        "url": {{ lnk | json }}
+      }
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign has_items = category_items | strip -%}
+{%- if has_items != blank -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": {{ section.settings.heading | default: 'Categorias' | json }},
+      "itemListElement": [{{ category_items }}]
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%}
   Ícones 3D: um único canvas WebGL cobre a grid inteira e desenha cada modelo
-  na região do seu card (scissor). Enriquecimento de desktop apenas — o SVG
-  chapado é o ícone de verdade e continua no HTML.
+  na região do seu card (scissor). O SVG chapado segue no HTML como fallback.
 
-  O portão abaixo é deliberadamente restritivo. Medido no site em 29/07/2026
-  (Lighthouse mobile, Moto G emulado): com o bundle carregando junto da
-  página, o TBT foi de 3,7 s para 48,3 s e a thread principal de 12,5 s para
-  123 s — three.js mais os 13 modelos procedurais custam ~19 s de execução
-  em CPU fraca. No celular não existe hover para justificar isso.
+  Histórico, porque a configuração abaixo não é arbitrária. Na primeira
+  versão o bundle carregava junto com a página e o TBT mobile saltou de
+  3,7 s para 48,3 s. As causas, medidas uma a uma com CPU estrangulada em 4x:
+  construir as 13 geometrias custava 2.454 ms (427 mil triângulos para
+  ícones de 130 px) e compilar o three.js, 322 ms.
 
-  Por isso: só entra com ponteiro fino (mouse), tela larga, memória e rede
-  folgadas, e ainda assim depois do load, em tempo ocioso. Quem não passa no
-  portão fica com o SVG e não baixa 1 byte a mais.
+  O que mudou desde então:
+    - geometria enxuta: 427.732 -> 79.720 triângulos, build 2.454 -> 647 ms
+    - construção progressiva: um modelo por fatia ociosa, ~50 ms cada, o que
+      mantém cada tarefa abaixo do limiar de tarefa longa
+    - no celular o 3D é estático: sem animação de entrada e sem giro, que era
+      o que sobrava de custo onde não existe hover
+
+  Com isso o 3D volta ao mobile. O portão hoje barra só quem realmente não
+  aguenta: pouca memória, poucos núcleos, save-data ou rede 2g. Esses ficam
+  com o SVG e não baixam 1 byte a mais.
 {%- endcomment -%}
 <script>
   (function () {
@@ -64,9 +110,6 @@
 
     var mm = window.matchMedia;
     if (!mm) return;
-    // hover real + ponteiro fino = mouse. Sem isso o 3D é custo sem interação.
-    if (!mm('(hover: hover) and (pointer: fine)').matches) return;
-    if (!mm('(min-width: 1000px)').matches) return;
     if (mm('(prefers-reduced-motion: reduce)').matches) return;
 
     var nav = navigator;

@@ -18,6 +18,14 @@ const MAX_DPR = 1.5;
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/**
+ * Sem mouse não há hover, então animação vira custo puro: a revelação de
+ * entrada gastava rAF nos 13 cards por vários segundos sem ninguém para ver
+ * o efeito. No touch o 3D fica estático — mesmo visual, sem o gasto.
+ */
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const animate = !reduceMotion && canHover;
+
 function contactShadowTexture() {
   const c = document.createElement('canvas');
   c.width = c.height = 128;
@@ -154,30 +162,55 @@ class CatGrid {
     c.pivot = pivot;
   }
 
-  /** Um modelo por fatia ociosa. Cada buildCategory() custa dezenas de ms em
-   *  CPU fraca; os 13 de enfiada viravam uma tarefa longa que travava a
-   *  thread principal no meio do carregamento. */
+  /** Um modelo por fatia ociosa, e só para os cards que estão chegando à
+   *  viewport. Cada buildCategory() custa dezenas de ms em CPU fraca; os 13
+   *  de enfiada viravam uma tarefa longa que travava a thread principal.
+   *  No celular a grid tem cinco linhas, então a maioria dos cards nem está
+   *  na tela no carregamento — construir todos ali seria pagar adiantado por
+   *  algo que o visitante talvez nunca role até ver. */
   _buildProgressive() {
+    this.queue = [];
+    this.pending = false;
+
+    this.buildIO = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const c = this.cards.find((x) => x.card === e.target);
+        if (!c || c.pivot || c.queued) continue;
+        c.queued = true;
+        this.queue.push(c);
+        this.buildIO.unobserve(e.target);
+      }
+      this._drain();
+    }, { rootMargin: '400px' });
+
+    for (const c of this.cards) this.buildIO.observe(c.card);
+  }
+
+  _drain() {
+    if (this.pending || !this.queue.length) return;
+    this.pending = true;
     const idle = window.requestIdleCallback
       ? window.requestIdleCallback.bind(window)
-      : (fn) => setTimeout(() => fn({ timeRemaining: () => 0 }), 32);
-    let i = 0;
-    const step = () => {
-      // exatamente um por fatia: dois seguidos já passavam de 500 ms de
-      // tarefa longa em desktop medido
-      this._buildOne(this.cards[i]);
-      i += 1;
-      this.layout();
-      this.renderAll();
-      if (i < this.cards.length) {
-        idle(step, { timeout: 1500 });
-      } else {
-        this.cards = this.cards.filter((c) => !c.dead);
-        this.built = true;
-        if (!reduceMotion && this.visible) this.runIntro();
+      : (fn) => setTimeout(() => fn(), 32);
+    idle(() => {
+      this.pending = false;
+      const c = this.queue.shift();
+      if (c && !c.pivot) {
+        this._buildOne(c);
+        // só o card recém-construído é desenhado. Redesenhar a grid inteira a
+        // cada passo custava 13 passadas de 13 desenhos — 169 no total.
+        if (c.pivot) {
+          this.measure(c);
+          this.drawCard(c, false);
+        }
       }
-    };
-    idle(step, { timeout: 1500 });
+      if (this.queue.length) this._drain();
+      else {
+        this.built = true;
+        if (animate && this.visible) this.runIntro();
+      }
+    }, { timeout: 2000 });
   }
 
   /* ---- geometria dos cards em px CSS relativos ao canvas ---- */
@@ -333,7 +366,7 @@ class CatGrid {
       if (on) {
         this.layout();
         this.renderAll();
-        if (!reduceMotion) this.runIntro();
+        if (animate) this.runIntro();
         if (this.animating.size) this.wake(this.cards[0]);
       } else {
         this.sleep();
@@ -353,7 +386,7 @@ class CatGrid {
   }
 
   _bindPointer() {
-    if (reduceMotion) return;
+    if (!animate) return;
     for (const c of this.cards) {
       const on = () => { c.target = 1; this.wake(c); };
       const off = () => { c.target = 0; this.wake(c); };
@@ -367,6 +400,7 @@ class CatGrid {
   destroy() {
     this.sleep();
     this.io && this.io.disconnect();
+    this.buildIO && this.buildIO.disconnect();
     this.ro && this.ro.disconnect();
     this.renderer && this.renderer.dispose();
     this.renderer && this.renderer.domElement.remove();

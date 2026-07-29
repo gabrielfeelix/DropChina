@@ -539,8 +539,8 @@
         "coupon_code": "DROP10",
         "cta_label": "Quero meu cupom",
         "cta_link": "shopify://collections/all",
-        "delay_seconds": 8,
-        "scroll_pct": 40
+        "delay_seconds": 25,
+        "scroll_pct": 55
       }
     },
     "recently_viewed": {

@@ -2284,5 +2284,26 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Medição e verificação",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Sem estes campos preenchidos a loja não tem dado de campo — nenhuma decisão de performance ou conversão pode ser validada."
+      },
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "ID de medição do GA4",
+        "info": "Formato G-XXXXXXXXXX. Pegue em Google Analytics → Admin → Fluxos de dados."
+      },
+      {
+        "type": "text",
+        "id": "gsc_verification",
+        "label": "Token do Google Search Console",
+        "info": "Só o valor do content da meta google-site-verification, sem as aspas nem a tag."
+      }
+    ]
   }
 ]
