@@ -12,11 +12,13 @@
     {%- endif -%}
   </div>
 
-  <div class="dc-categories__grid">
+  <div class="dc-categories__grid" data-dc-cat3d id="dc-cat3d-{{ section.id }}">
     {%- for block in section.blocks -%}
       {%- if block.type == 'category' -%}
-        <a href="{{ block.settings.link | default: '#' }}" class="dc-cat" {{ block.shopify_attributes }}>
-          <div class="dc-cat__art">
+        <a href="{{ block.settings.link | default: '#' }}" class="dc-cat"
+          {% if block.settings.cat3d_key != blank and block.settings.cat3d_key != 'none' %}data-cat3d-key="{{ block.settings.cat3d_key }}"{% endif %}
+          {{ block.shopify_attributes }}>
+          <div class="dc-cat__art" data-cat3d-art>
             {%- if block.settings.icon_svg != blank -%}
               {{ block.settings.icon_svg }}
             {%- else -%}
@@ -39,7 +41,48 @@
   </div>
 </section>
 
+{%- comment -%}
+  Ícones 3D: um único canvas WebGL cobre a grid inteira e desenha cada modelo
+  na região do seu card (scissor). O bundle (~148 KB gzip) só é buscado quando
+  a grid chega perto da viewport, então não entra no caminho do LCP. Sem WebGL
+  ou sem chave de modelo no bloco, o SVG chapado continua sendo o ícone.
+{%- endcomment -%}
+<script>
+  (function () {
+    var root = document.getElementById('dc-cat3d-{{ section.id }}');
+    if (!root || !root.querySelector('[data-cat3d-key]')) return;
+    if (!window.WebGLRenderingContext || !window.IntersectionObserver) return;
+    var load = function () {
+      if (window.__dcCat3dLoaded) return;
+      window.__dcCat3dLoaded = true;
+      var s = document.createElement('script');
+      s.src = {{ 'dc-cat-3d.js' | asset_url | json }};
+      s.defer = true;
+      document.head.appendChild(s);
+    };
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      load();
+    }, { rootMargin: '400px' });
+    io.observe(root);
+  })();
+</script>
+
 {% stylesheet %}
+  .dc-categories__grid { position: relative; }
+  .dc-cat3d__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  /* com o 3D ativo o SVG chapado sai de cena, e o zoom do hover passa a ser
+     feito pela câmera (a caixa da arte fica parada para o scissor não borrar) */
+  .dc-cat3d-on .dc-cat[data-cat3d-key] .dc-cat__art > svg { visibility: hidden; }
+  .dc-cat3d-on .dc-cat[data-cat3d-key]:hover .dc-cat__art { transform: none; }
   .dc-categories { padding-block: 56px; }
   .dc-categories__head {
     display: flex;
@@ -99,6 +142,9 @@
     cursor: pointer;
     color: #0d1115;
     text-decoration: none;
+    /* sem isto o item de grid herda min-width:auto e a arte de 130px empurra
+       a grid para além da largura da página no mobile */
+    min-width: 0;
   }
   .dc-cat:hover {
     transform: translateY(-3px);
@@ -107,8 +153,9 @@
     box-shadow: 0 16px 36px -18px rgba(13, 17, 21, 0.18);
   }
   .dc-cat__art {
-    width: 130px;
-    height: 110px;
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 13 / 11;
     margin-bottom: 6px;
     display: grid;
     place-items: center;
@@ -156,7 +203,30 @@
         { "type": "collection", "id": "collection", "label": "Coleção (contagem real)", "info": "Se setada, mostra a contagem real de produtos no lugar do label abaixo" },
         { "type": "text", "id": "count", "label": "Contagem (label manual)", "default": "Ver coleção" },
         { "type": "url", "id": "link", "label": "Link" },
-        { "type": "html", "id": "icon_svg", "label": "SVG do ícone (opcional)" }
+        { "type": "html", "id": "icon_svg", "label": "SVG do ícone (opcional)", "info": "Fallback usado quando não há modelo 3D, ou quando o navegador não tem WebGL" },
+        {
+          "type": "select",
+          "id": "cat3d_key",
+          "label": "Modelo 3D",
+          "info": "Renderizado no lugar do SVG. Gira no hover.",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "Nenhum (só o SVG)" },
+            { "value": "impressao-3d", "label": "Impressão 3D" },
+            { "value": "cartuchos-tintas", "label": "Cartuchos & Tintas" },
+            { "value": "toners", "label": "Toners" },
+            { "value": "impressoras", "label": "Impressoras" },
+            { "value": "placas-de-video", "label": "Placas de Vídeo" },
+            { "value": "audio-headsets", "label": "Áudio & Headsets" },
+            { "value": "perifericos", "label": "Periféricos" },
+            { "value": "redes-internet", "label": "Redes & Internet" },
+            { "value": "armazenamento", "label": "Armazenamento" },
+            { "value": "cabos-adaptadores", "label": "Cabos & Adaptadores" },
+            { "value": "papelaria-midia", "label": "Papelaria & Mídia" },
+            { "value": "ofertas-da-semana", "label": "Ofertas da Semana" },
+            { "value": "novidades", "label": "Novidades" }
+          ]
+        }
       ]
     }
   ],
@@ -164,12 +234,12 @@
     {
       "name": "Categorias DropChina",
       "blocks": [
-        { "type": "category", "settings": { "name": "Cartuchos & Tintas", "count": "320+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>" } },
-        { "type": "category", "settings": { "name": "Toners", "count": "180+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='40' width='92' height='60' rx='6' fill='#1a1d20'/><rect x='44' y='50' width='72' height='8' rx='2' fill='#3a414a'/></svg>" } },
-        { "type": "category", "settings": { "name": "Impressoras", "count": "64 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>" } },
-        { "type": "category", "settings": { "name": "Placas de Vídeo", "count": "42 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>" } },
-        { "type": "category", "settings": { "name": "Áudio & Headsets", "count": "150+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/></svg>" } },
-        { "type": "category", "settings": { "name": "Periféricos", "count": "210+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>" } }
+        { "type": "category", "settings": { "cat3d_key": "cartuchos-tintas", "name": "Cartuchos & Tintas", "count": "320+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='36' width='92' height='64' rx='6' fill='#2a3038'/><rect x='44' y='58' width='40' height='34' rx='2' fill='#0e8aa5'/></svg>" } },
+        { "type": "category", "settings": { "cat3d_key": "toners", "name": "Toners", "count": "180+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='56' ry='6' fill='rgba(13,17,21,0.10)'/><rect x='34' y='40' width='92' height='60' rx='6' fill='#1a1d20'/><rect x='44' y='50' width='72' height='8' rx='2' fill='#3a414a'/></svg>" } },
+        { "type": "category", "settings": { "cat3d_key": "impressoras", "name": "Impressoras", "count": "64 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='128' rx='60' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='30' y='22' width='100' height='50' rx='6' fill='#e6e9ee' stroke='#c8cdd4'/><rect x='38' y='68' width='84' height='50' rx='6' fill='#2a3038'/></svg>" } },
+        { "type": "category", "settings": { "cat3d_key": "placas-de-video", "name": "Placas de Vídeo", "count": "42 produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='64' ry='5' fill='rgba(13,17,21,0.10)'/><rect x='20' y='48' width='120' height='46' rx='4' fill='#1a1d20'/><circle cx='48' cy='71' r='10' fill='#0d1115'/><circle cx='94' cy='71' r='10' fill='#0d1115'/><circle cx='48' cy='71' r='5' fill='#22c55e'/><circle cx='94' cy='71' r='5' fill='#22c55e'/></svg>" } },
+        { "type": "category", "settings": { "cat3d_key": "audio-headsets", "name": "Áudio & Headsets", "count": "150+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='44' ry='4' fill='rgba(13,17,21,0.12)'/><path d='M40 70 Q40 30 80 30 Q120 30 120 70' fill='none' stroke='#2a3038' stroke-width='9' stroke-linecap='round'/><rect x='28' y='64' width='22' height='36' rx='10' fill='#0d1115'/><rect x='110' y='64' width='22' height='36' rx='10' fill='#0d1115'/></svg>" } },
+        { "type": "category", "settings": { "cat3d_key": "perifericos", "name": "Periféricos", "count": "210+ produtos", "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='64' ry='4' fill='rgba(13,17,21,0.10)'/><rect x='18' y='60' width='124' height='48' rx='6' fill='#1a1d20'/><rect x='36' y='92' width='80' height='8' rx='1' fill='#3a414a'/></svg>" } }
       ]
     }
   ]

@@ -1,0 +1,15 @@
+{
+  "name": "dc-cat-3d",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bundle dos ícones 3D das categorias da home (theme/assets/dc-cat-3d.js)",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --format=iife --target=es2019 --legal-comments=none --banner:js='/* dc-cat-3d — ícones 3D das categorias. Bundle gerado (three.js r184 tree-shaken + models procedurais). Fonte: scripts/cat-3d/ */' --outfile=../../theme/assets/dc-cat-3d.js",
+    "preview": "npm run build && mkdir -p dist && cp ../../theme/assets/dc-cat-3d.js dist/dc-cat-3d.js && node shot.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "playwright": "^1.49.0",
+    "three": "0.184.0"
+  }
+}

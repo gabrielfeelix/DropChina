@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>test grid</title>
+<style>
+body{margin:0;font-family:system-ui;background:#fff;padding:40px}
+.spacer{height:900px}
+.dc-categories__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;position:relative;max-width:1200px}
+.dc-cat{min-width:0;background:transparent;border:1px solid transparent;border-radius:22px;padding:20px 12px 22px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:transform .22s,background .22s,border-color .22s,box-shadow .22s;cursor:pointer;color:#0d1115;text-decoration:none}
+.dc-cat:hover{transform:translateY(-3px);background:#fff;border-color:#ececef;box-shadow:0 16px 36px -18px rgba(13,17,21,.18)}
+.dc-cat__art{width:100%;max-width:130px;aspect-ratio:13/11;margin-bottom:6px;display:grid;place-items:center;transition:transform .3s ease}
+.dc-cat:hover .dc-cat__art{transform:translateY(-2px) scale(1.04)}
+.dc-cat__name{font-weight:600;font-size:14px;margin-top:4px}
+.dc-cat__count{font-size:12px;color:#6b7280}
+.dc-cat3d__canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.dc-cat3d-on .dc-cat__art > svg{visibility:hidden}
+.dc-cat3d-on .dc-cat:hover .dc-cat__art{transform:none}
+@media (max-width:1100px){.dc-categories__grid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:700px){.dc-categories__grid{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<div class="spacer">scroll…</div>
+<div class="dc-categories__grid" data-dc-cat3d id="g"></div>
+<script>
+const KEYS=[['impressao-3d','Impressão 3D'],['cartuchos-tintas','Cartuchos & Tintas'],['toners','Toners'],['impressoras','Impressoras'],['placas-de-video','Placas de Vídeo'],['audio-headsets','Áudio & Headsets'],['perifericos','Periféricos'],['redes-internet','Redes & Internet'],['armazenamento','Armazenamento'],['cabos-adaptadores','Cabos & Adaptadores'],['papelaria-midia','Papelaria & Mídia'],['ofertas-da-semana','Ofertas da Semana'],['novidades','Novidades']];
+document.getElementById('g').innerHTML = KEYS.map(([k,l])=>`<a href="#" class="dc-cat" data-cat3d-key="${k}"><div class="dc-cat__art" data-cat3d-art><svg viewBox="0 0 160 140" width="100%" height="100%"><rect x="34" y="36" width="92" height="64" rx="6" fill="#2a3038"/></svg></div><div class="dc-cat__name">${l}</div><div class="dc-cat__count">10 produtos</div></a>`).join('');
+</script>
+<script src="./dist/dc-cat-3d.js"></script>
+</body></html>

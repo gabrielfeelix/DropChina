@@ -57,6 +57,7 @@
         "cat_0": {
           "type": "category",
           "settings": {
+            "cat3d_key": "cartuchos-tintas",
             "name": "Cartuchos & Tintas",
             "collection": "cartuchos-de-tinta",
             "count": "Ver coleção",
@@ -67,6 +68,7 @@
         "cat_1": {
           "type": "category",
           "settings": {
+            "cat3d_key": "toners",
             "name": "Toners",
             "collection": "toners",
             "count": "Ver coleção",
@@ -77,6 +79,7 @@
         "cat_2": {
           "type": "category",
           "settings": {
+            "cat3d_key": "impressoras",
             "name": "Impressoras",
             "collection": "impressoras",
             "count": "Ver coleção",
@@ -87,6 +90,7 @@
         "cat_3": {
           "type": "category",
           "settings": {
+            "cat3d_key": "placas-de-video",
             "name": "Placas de Vídeo",
             "collection": "placas-de-video",
             "count": "Ver coleção",
@@ -97,6 +101,7 @@
         "cat_4": {
           "type": "category",
           "settings": {
+            "cat3d_key": "audio-headsets",
             "name": "Áudio & Headsets",
             "collection": "audio",
             "count": "Ver coleção",
@@ -107,6 +112,7 @@
         "cat_5": {
           "type": "category",
           "settings": {
+            "cat3d_key": "perifericos",
             "name": "Periféricos",
             "collection": "perifericos",
             "count": "Ver coleção",
@@ -117,6 +123,7 @@
         "cat_7": {
           "type": "category",
           "settings": {
+            "cat3d_key": "redes-internet",
             "name": "Redes & Internet",
             "collection": "redes",
             "count": "Ver coleção",
@@ -127,6 +134,7 @@
         "cat_8": {
           "type": "category",
           "settings": {
+            "cat3d_key": "armazenamento",
             "name": "Armazenamento",
             "collection": "informatica",
             "count": "Ver coleção",
@@ -137,6 +145,7 @@
         "cat_9": {
           "type": "category",
           "settings": {
+            "cat3d_key": "cabos-adaptadores",
             "name": "Cabos & Adaptadores",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
@@ -146,6 +155,7 @@
         "cat_10": {
           "type": "category",
           "settings": {
+            "cat3d_key": "papelaria-midia",
             "name": "Papelaria & Mídia",
             "collection": "papelaria",
             "count": "Ver coleção",
@@ -156,6 +166,7 @@
         "cat_11": {
           "type": "category",
           "settings": {
+            "cat3d_key": "ofertas-da-semana",
             "name": "Ofertas da Semana",
             "collection": "ofertas-relampago",
             "count": "Até 40% OFF",
@@ -166,6 +177,7 @@
         "cat_12": {
           "type": "category",
           "settings": {
+            "cat3d_key": "novidades",
             "name": "Novidades",
             "count": "Recém-chegados",
             "link": "shopify://collections/all",
@@ -175,6 +187,7 @@
         "cat_3d": {
           "type": "category",
           "settings": {
+            "cat3d_key": "impressao-3d",
             "name": "Impressão 3D",
             "collection": "impressao-3d",
             "count": "Novidade",
