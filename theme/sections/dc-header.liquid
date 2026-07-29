@@ -260,7 +260,9 @@
       {%- if section.settings.logo -%}
         {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name, class: 'dc-mmenu__logo', loading: 'lazy' }}
       {%- else -%}
-        <img src="{{ section.settings.logo_asset | default: 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="135" height="33" class="dc-mmenu__logo" loading="lazy">
+        {%- comment -%} o arquivo é 480x192 (2,5:1); 135x33 declarava 4,09:1 e o
+            navegador reportava a imagem como distorcida {%- endcomment -%}
+        <img src="{{ section.settings.logo_asset | default: 'dropchina-logo-color.png' | asset_url }}" alt="{{ shop.name }}" width="80" height="32" class="dc-mmenu__logo" loading="lazy">
       {%- endif -%}
       <button type="button" class="dc-mmenu__close" data-dc-menu-close aria-label="Fechar menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
