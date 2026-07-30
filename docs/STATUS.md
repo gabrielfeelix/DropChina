@@ -1,6 +1,11 @@
 # STATUS do projeto — DropChina (sync multicanal Bling)
 
-> Foto do estado atual e próximas etapas. Atualizado 17/jun/2026. Branch: `main`.
+> ⚠️ **DESATUALIZADO em partes — leia `handoff-2026-07-30.md` primeiro.**
+> Este doc é de 17/jun/2026. Desde então: o pagamento entrou no ar (Pagar.me/Stone),
+> a configuração fiscal de NF-e foi conferida por completo, e o **import de pedidos
+> Shopify→Bling já está ligado** (aqui embaixo ainda consta como pendente).
+>
+> Foto do estado em 17/jun/2026. Branch: `main`.
 > Leia junto: `go-live-bling-checklist.md` (mestre) e `plano-geral.md` (3 trilhos).
 
 ## Onde estamos
