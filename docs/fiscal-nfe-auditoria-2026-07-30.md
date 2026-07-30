@@ -36,12 +36,14 @@ então voltar pra produção.
 
 ## 🟡 Configurações gerais — o que está desligado
 
+> Atualizado na tarde de 30/jul: os toggles recomendados foram ligados.
+
 | Toggle | Estado | Comentário |
 |---|---|---|
-| Busca automática de NF-e recebidas na SEFAZ | ❌ Desativado | **Ligar.** É o que puxa a nota de entrada do fornecedor — e é dela que sai o NCM correto sem chutar. Ajuda direto nos 23 pendentes. |
-| Lançar estoque ao emitir ou cancelar nota | ❌ Desativado | Decisão de fluxo: se o pedido de venda já baixa o estoque, ligar aqui causaria **baixa dupla**. Conferir antes de mexer. |
-| Lançar contas ao emitir ou cancelar nota | ❌ Desativado | Sem isso o financeiro não gera contas a receber automaticamente. |
-| Marcar envio de e-mail ao emitir nota manualmente | ❌ Desativado | **Cliente não recebe a DANFE por e-mail.** Para venda online isso é esperado pelo consumidor. |
+| Busca automática de NF-e recebidas na SEFAZ | ✅ **Ligado** (filial Matriz) | Puxa a nota de entrada do fornecedor — é dela que sai o NCM correto sem chutar. |
+| Lançar estoque ao emitir ou cancelar nota | ❌ Desativado | Correto por ora. Se o pedido de venda já baixa o estoque, ligar causaria **baixa dupla**. Revisar junto com o fluxo de pedido. |
+| Lançar contas ao emitir ou cancelar nota | ❌ Desativado | Sem isso o financeiro não gera contas a receber automaticamente. Decisão do Augusto. |
+| Marcar envio de e-mail ao emitir nota manualmente | ✅ **Ligado** | Cliente recebe a DANFE. |
 | Exibir totais em listas de NF | ✅ Ativado | ok |
 
 ## 🟡 Configurações de preenchimento
@@ -51,9 +53,9 @@ então voltar pra produção.
 | Frete por conta (padrão) | `0 – CIF (remetente)` | Confere com frete grátis. Quando o cliente paga frete, o correto costuma ser outro código — validar com contador. |
 | Markup para formação de preço | 0,00 | não usado |
 | Espécie (padrão) | vazio | preencher (ex.: VOLUME / CAIXA) |
-| Somar peso dos produtos na nota | ❌ Desativado | **Ligar.** Nota sem peso atrapalha transportadora e etiqueta. |
+| Somar peso dos produtos na nota | ✅ **Ligado** | ok |
 | Calcular volume dos produtos | ❌ Desativado | opcional |
-| Nº do pedido da loja virtual nas informações complementares | ❌ Desativado | **Ligar.** É o que amarra a nota ao pedido da Shopify/ML. |
+| Nº do pedido da loja virtual nas informações complementares | ✅ **Ligado** | amarra a nota ao pedido da Shopify/ML |
 | Mensagem de aproveitamento de crédito do Simples Nacional | ❌ Desativado | Empresa é Simples Nacional — normalmente essa mensagem deve constar. **Perguntar ao contador.** |
 | Retenção de impostos | ✅ Ativado | ok |
 | Mostrar código de rastreio nas info. complementares | ✅ Ativado | ok |
@@ -100,7 +102,7 @@ natureza** — isso não sai pela API, é tela a tela, e é item do contador.
 
 1. Preencher os 23 NCM (contador) → aplicar com `npm run set:ncm`
 2. Conferir série/numeração e CFOP/CSOSN da natureza padrão
-3. Ligar: busca automática de NF-e recebidas, somar peso, nº do pedido nas info. complementares
+3. ~~Ligar: busca automática de NF-e recebidas, somar peso, nº do pedido nas info. complementares~~ ✅ feito em 30/jul
 4. Preencher remetente e e-mail de resposta da DANFE
 5. Ambiente → Homologação → emitir 1 nota de teste → conferir → voltar pra Produção
 6. Renovar o certificado A1 antes de 29/09/2026
