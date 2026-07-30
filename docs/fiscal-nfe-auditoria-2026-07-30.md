@@ -6,9 +6,13 @@
 
 ## Resumo
 
-Certificado, naturezas e ambiente estão de pé. **Nunca foi emitida nenhuma NF-e**
-(API retorna 0 notas, sem filtro e filtrando saída). O que falta é NCM em 23 produtos,
-conferir a numeração/série e decidir um punhado de toggles que hoje estão desligados.
+**A configuração fiscal está completa.** Certificado, ambiente, série, regime, CFOP,
+CSOSN, naturezas e toggles: tudo conferido e de pé em 30/jul/2026.
+
+**Nunca foi emitida nenhuma NF-e** (API retorna 0 notas, sem filtro e filtrando saída).
+
+**O único bloqueio que resta são os 23 produtos sem NCM.** Os outros 137 já podem
+emitir nota hoje.
 
 ## ✅ Certificado digital
 
@@ -76,33 +80,84 @@ então voltar pra produção.
 Relacionado: o **e-mail cadastrado da empresa no Bling é `fgrepresentacoes.sc@gmail.com`**,
 não o `comercial@dropchinaoficial.com.br`. Vale alinhar.
 
-## ✅ Naturezas de operação (via API)
+## ✅ Naturezas de operação
 
 18 cadastradas e ativas. Padrões marcados:
 
-- `Venda de mercadoria a não contribuinte` → **padrão 1** (a de venda)
-- `Compra de mercadoria` → padrão 2
-- `Devolução de venda` → padrão 8
-- `Devolução de compra` → padrão 9
+- `Venda de mercadoria a não contribuinte` → **padrão venda** (é a que sai nas vendas)
+- `Compra de mercadoria` → padrão compra
+- `Devolução de venda` → devolução (entrada)
+- `Devolução de compra` → devolução (saída)
 
-Também existem as variantes "com ST". Falta conferir **CFOP e CSOSN dentro de cada
-natureza** — isso não sai pela API, é tela a tela, e é item do contador.
+Também existem as variantes "com ST".
+
+### Natureza padrão de venda — conteúdo conferido (30/jul)
+
+`Venda de mercadoria a não contribuinte`:
+
+| Campo | Valor |
+|---|---|
+| Série | **1** |
+| Tipo | Saída |
+| Código de regime tributário | **Simples Nacional** (bate com o CRT 1 decidido em jun) |
+| Indicador de presença | **2 – Operação não presencial, pela Internet** (correto p/ e-commerce) |
+| Faturada | ✅ |
+| Consumidor final | ✅ |
+| Operação de devolução | ❌ (correto) |
+
+Regras de tributação — aba ICMS:
+
+| # | Destino | Produto | CFOP | Situação tributária |
+|---|---|---|---|---|
+| 1 | Qualquer | Qualquer | `x108` → **6108** fora do estado | **102** – Tributada sem permissão de crédito |
+| 2 | **PR** | Qualquer | `x102` → **5102** dentro do estado | **102** – Tributada sem permissão de crédito |
+
+O `x` é curinga: o Bling troca por `5` (operação dentro do estado) ou `6` (fora).
+
+➡️ **Isso responde a dúvida "CFOP 6106 vs 6108" que estava aberta no `handoff-shopify-bling-sync.md` desde junho: é 6108.**
+
+## ✅ Controle de numeração
+
+Tabela (CNPJ / Série / Próximo número) **vazia** — é o esperado. O próprio Bling avisa:
+*"O controle do próximo número da nota irá aparecer aqui após novas notas serem criadas."*
+
+A série vem da natureza de operação (**Série 1**), então a primeira nota sai como número **1**.
+Não há nada a configurar aqui.
 
 ## ✅ Impressão
 
 7 itens na primeira página, 47 nas demais. DANFE simplificado lista produtos e exibe total.
 
-## ❌ Ainda não verificado
+## ❌ O que ainda bloqueia
 
-- **Configurações de controle de numeração** — série e próximo número da NF-e. Tela não capturada.
-- **CFOP e CSOSN por natureza de operação** — abrir `Venda de mercadoria a não contribuinte`.
-- **23 produtos sem NCM** — ver `ncm-pendentes-2026-07-30.md`.
+Só uma coisa: **23 produtos sem NCM** — ver `ncm-pendentes-2026-07-30.md`.
+Os outros 137 produtos já estão aptos a emitir.
+
+Itens menores, não bloqueantes:
+- Campo `Espécie` padrão está vazio (ex.: VOLUME / CAIXA)
+- Mensagem de aproveitamento de crédito do Simples Nacional desligada — perguntar ao contador
+- E-mail cadastrado da empresa é `fgrepresentacoes.sc@gmail.com`, não o comercial
 
 ## Ordem sugerida
 
-1. Preencher os 23 NCM (contador) → aplicar com `npm run set:ncm`
-2. Conferir série/numeração e CFOP/CSOSN da natureza padrão
-3. ~~Ligar: busca automática de NF-e recebidas, somar peso, nº do pedido nas info. complementares~~ ✅ feito em 30/jul
-4. Preencher remetente e e-mail de resposta da DANFE
-5. Ambiente → Homologação → emitir 1 nota de teste → conferir → voltar pra Produção
-6. Renovar o certificado A1 antes de 29/09/2026
+1. ~~Ligar busca automática de NF-e recebidas, somar peso, nº do pedido nas info. complementares~~ ✅ 30/jul
+2. ~~Preencher remetente e e-mail de resposta da DANFE~~ ✅ 30/jul (`DropChina` / `comercial@dropchinaoficial.com.br`)
+3. ~~Conferir série/numeração e CFOP/CSOSN da natureza padrão~~ ✅ 30/jul
+4. Ambiente → **2 – Homologação** → emitir 1 nota de teste com produto que já tem NCM → conferir DANFE → voltar pra **1 – Produção**
+5. Preencher os 23 NCM (contador) → aplicar com `npm run set:ncm`
+6. Renovar o certificado A1 antes de **29/09/2026**
+
+## Onde fica cada coisa no painel
+
+Base: **⚙️ (topo direito) → Preferências**.
+
+| O que | Caminho |
+|---|---|
+| Certificado A1 | menu esquerdo → `Certificado Digital` |
+| Ambiente, layout | `Notas Fiscais` → `Configurações de NF-e` → 1. Configurações de emissão |
+| Toggles de estoque/contas/e-mail/SEFAZ | idem → 2. Configurações gerais |
+| Peso, nº do pedido, frete por conta, espécie | idem → 3. Configurações de preenchimento |
+| Série e próximo número | idem → 4. Configurações de controle de numeração |
+| DANFE (itens por página) | idem → 5. Configurações de impressão |
+| Remetente e e-mail da DANFE | idem → 6. Configurações de email |
+| CFOP e CSOSN | `Notas Fiscais` → `Naturezas de operação` (último item do painel direito) |
