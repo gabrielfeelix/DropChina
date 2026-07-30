@@ -39,7 +39,7 @@ Catálogo e estoque já dentro do Bling; falta vínculo dos canais, fiscal no Bl
 3. Augusto: SKU nos 12 anúncios do ML
 4. Gabriel: vínculo ML↔Bling (browser) — Claude confere via API
 5. Shopify: apagar 28 demos → exportar Bling→Shopify
-6. Gabriel: config Shopify (frete Melhor Envio, pagamento Mercado Pago+Pix, impostos, domínio, políticas)
+6. Gabriel: config Shopify (frete Melhor Envio, pagamento Pagar.me, impostos, domínio, políticas)
 7. Markup de preço por canal no Bling
 8. Re-balanço de estoque fresco
 9. Ligar sync (estoque depósito=Todos + pedidos Pago→Em aberto), 16 FULL fora do push

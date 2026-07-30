@@ -40,7 +40,13 @@
 
 {%- if product == blank or product.url == blank -%}
 {%- else -%}
-<article class="dc-card" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+{%- liquid
+  assign card_soldout = false
+  if product.tags contains 'em-breve' or p_var.available == false
+    assign card_soldout = true
+  endif
+-%}
+<article class="dc-card{% if card_soldout %} dc-card--soldout{% endif %}" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
   <div class="dc-card__media">
     <a href="{{ product.url }}" class="dc-card__media-link" aria-label="{{ product.title | escape }}">
       {%- if product.featured_image != blank -%}
@@ -121,8 +127,8 @@
           <span class="dc-card__price{% if on_sale %} dc-card__price--sale{% endif %}">{{ p_var.price | money }}</span>
         </div>
       </div>
-      {%- assign installment = p_var.price | divided_by: 12 -%}
-      <div class="dc-card__installments">em <b>12x {{ installment | money }}</b> sem juros</div>
+      {%- assign installment = p_var.price | divided_by: 10 -%}
+      <div class="dc-card__installments">em até <b>10x {{ installment | money }}</b> sem juros</div>
       {%- if p_var.price >= 100000 -%}
         <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
       {%- endif -%}

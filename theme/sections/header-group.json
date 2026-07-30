@@ -16,8 +16,8 @@
       "settings": {
         "free_shipping_threshold": 100000,
         "discount_code": "DROP10",
-        "discount_pct": 10,
-        "installments": 12
+        "discount_pct": 5,
+        "installments": 10
       }
     },
     "dc_header": {
@@ -104,7 +104,7 @@
         "dep_variedades"
       ],
       "settings": {
-        "announce_items": "Frete grátis por região|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
+        "announce_items": "Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
         "topbar_link_1": "Sobre",
         "topbar_link_1_url": "/pages/sobre",
         "topbar_link_2": "F.A.Q.",

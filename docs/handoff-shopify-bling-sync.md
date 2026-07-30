@@ -94,5 +94,5 @@ Provável: o **token Shopify guardado no Bling não tem permissão de ESCREVER e
 ## Pendências paralelas (não bloqueiam a sync)
 - Contador: 33 NCM de nicho + confirmar CFOP 6106 vs 6108 + origem (importado vs nacional 0).
 - Voltar NF-e pra **Produção**. Ligar emissão automática.
-- Pagamento Shopify (Mercado Pago/Pix), frete (Melhor Envio).
+- Pagamento Shopify: **Pagar.me** (cartão + PIX + boleto, 3 apps). Frete: Melhor Envio.
 - Os 78 produtos sem NCM entram na Shopify quando contador soltar (rodar `upload-bling-to-shopify.mjs` de novo — já pula os existentes).

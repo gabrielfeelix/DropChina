@@ -65,8 +65,32 @@ Melhor Envio/Correios no Bling pra emitir etiqueta centralizada.
 ## 6. Pagamento
 | Canal | Como |
 |---|---|
-| Mercado Livre | Mercado Pago (nativo) — 👤 |
-| Shopify | gateway no Shopify (Shopify Payments / Mercado Pago / Pix) — 👤 |
+| Mercado Livre | Mercado Pago (nativo, já roda) — 👤 |
+| Shopify | **Pagar.me** — cartão + PIX + boleto — 👤 |
+
+> **Gateway definido: Pagar.me** (Augusto fechou em 30/jul/2026 — taxa e plano negociados direto com eles).
+> Mercado Pago está **vetado** na Shopify (Augusto vem sendo bloqueado na plataforma) — não reabrir.
+> Todos os meios de pagamento da loja passam pela Pagar.me; sem split com outro gateway.
+
+Passos da conexão (👤, navegador):
+1. Conta Pagar.me **v5** (não é self-service — abre pelo comercial). ← pré-requisito de tudo
+2. *Configurações → Checkout*: contato por **e-mail**, exigir **nome+sobrenome**, **remover** nome da empresa,
+   complemento **opcional**, telefone **obrigatório**. Formato exigido pela Pagar.me — sem isso a transação quebra.
+3. *Configurações → Pagamentos → Adicionar forma de pagamento → buscar "Pagar.me"*: instalar os **3 apps**
+   (Pagar.me - Cartão, - PIX, - Boleto). Cada um redireciona pro dashboard Pagar.me → escolher a loja → **Autorizar**.
+4. Parcelamento/juros/vencimentos: no **painel da Pagar.me**, não na Shopify (máx. parcelas 1–18, sem juros 1–18,
+   valor mínimo da parcela, juros inicial e incremental, boleto 1–2 dias, expiração do PIX em minutos).
+5. Habilitar na Shopify. Usar **modo teste** antes de abrir pro público.
+6. Opcional, HUB Pagar.me (*Minhas integrações*): desconto % pra PIX/boleto (não incide sobre frete, cumulativo com cupom).
+
+Dados cadastrais: DROPCHINA LTDA · CNPJ 57.306.430/0001-53 · Rua Mandirituba 216, São José dos Pinhais-PR, 83045-030.
+
+### Customização do checkout (plano Basic)
+Dá: logo, cores, tipografia e estilos de seção no checkout & accounts editor; toggles de campo; **web pixels**
+(GA4/Meta) e extensões de app nas páginas **Obrigado** e **Status do pedido**; Shopify Functions.
+Não dá sem Plus: UI extensions nas etapas de informação/entrega/pagamento, Branding API via GraphQL
+(⇒ o visual do checkout **não é versionável** no repo como o tema — é clique no editor), Payment/Delivery Functions.
+`checkout.liquid`, script tags e "scripts adicionais" **não existem mais** em plano nenhum (removidos ago/2024 e ago/2025).
 
 ## 7. Fluxo de pedido (quando ligar a Fase 5)
 Venda no canal → Bling importa pedido → baixa estoque → reenvia saldo aos outros canais → emite NF-e

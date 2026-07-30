@@ -32,7 +32,7 @@ identidade (brand)  ─►  tema Shopify + avatares/templates das redes
 | A2. Fiscal no Bling (certificado A1, regime, CFOP, série, emissão auto) | contador + Augusto | 👤 |
 | A3. 12 SKU no ML + vínculo ML↔Bling | Augusto (SKU) | 👤 / 🤖 confere |
 | A4. Shopify: apagar demos + export Bling→Shopify | A1 (catálogo pronto) | 🤖 limpa / 👤 exporta |
-| A5. Config Shopify: frete (Melhor Envio), pagamento (Mercado Pago+Pix), impostos, políticas, domínio | — | 👤 |
+| A5. Config Shopify: frete (Melhor Envio), pagamento (**Pagar.me** — cartão/PIX/boleto), impostos, políticas, domínio | — | 👤 |
 | A6. Markup de preço por canal | — | 👤 |
 | A7. Ligar sync (estoque depósito=Todos + pedidos Pago→Em aberto), 16 FULL fora | A1-A4 | 👤 |
 | A8. Emissão + envio de NF-e por e-mail automático | A2 | 👤 |

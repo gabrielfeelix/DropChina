@@ -16,10 +16,10 @@
         endif
       endif
       assign discount_code = section.settings.discount_code | default: 'DROP10'
-      assign discount_pct  = section.settings.discount_pct  | default: 10
+      assign discount_pct  = section.settings.discount_pct  | default: 5
       assign discount_amount = cart_total | times: discount_pct | divided_by: 100
       assign pix_total = cart_total | minus: discount_amount
-      assign installments_n = section.settings.installments | default: 12
+      assign installments_n = section.settings.installments | default: 10
       assign installment_val = 0
       if installments_n > 0
         assign installment_val = cart_total | divided_by: installments_n
@@ -40,7 +40,8 @@
       <div class="dc-cart__shipping">
         {%- if missing > 0 -%}
           <p class="dc-cart__shipping-msg">
-            Faltam <b>{{ missing | money }}</b> para <b>frete grátis</b>
+            Faltam <b>{{ missing | money }}</b> para <b>frete grátis garantido</b>
+            <span class="dc-cart__shipping-hint">Sul a partir de R$ 400 · Sudeste/Centro-Oeste R$ 600</span>
           </p>
         {%- else -%}
           <p class="dc-cart__shipping-msg dc-cart__shipping-msg--won">
@@ -374,6 +375,12 @@
     color: #2a3038;
   }
   .dc-cart__shipping-msg b { font-weight: 700; color: #0d1115; }
+  .dc-cart__shipping-hint {
+    display: block;
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: #6b7280;
+  }
   .dc-cart__shipping-msg--won {
     display: inline-flex;
     align-items: center;
@@ -721,10 +728,10 @@
   "name": "DC Cart Sidedrawer",
   "tag": "div",
   "settings": [
-    { "type": "number", "id": "free_shipping_threshold", "label": "Limite frete grátis (em centavos)", "default": 100000, "info": "Ex: 100000 = R$ 1.000,00 — frete grátis universal (N/NE é o teto regional)" },
+    { "type": "number", "id": "free_shipping_threshold", "label": "Limite frete grátis (em centavos)", "default": 100000, "info": "Ex: 100000 = R$ 1.000,00. Use o MAIOR teto regional (N/NE) — a barra promete frete grátis garantido em qualquer região; Sul (R$400) e SE/CO (R$600) ganham antes e isso aparece na dica abaixo da mensagem." },
     { "type": "text", "id": "discount_code", "label": "Cupom (código)", "default": "DROP10" },
-    { "type": "range", "id": "discount_pct", "label": "Desconto Pix (%)", "min": 0, "max": 50, "step": 1, "default": 10 },
-    { "type": "range", "id": "installments", "label": "Parcelas (sem juros)", "min": 1, "max": 18, "step": 1, "default": 12 }
+    { "type": "range", "id": "discount_pct", "label": "Desconto Pix (%)", "min": 0, "max": 50, "step": 1, "default": 5 },
+    { "type": "range", "id": "installments", "label": "Parcelas sem juros", "min": 1, "max": 18, "step": 1, "default": 10 }
   ]
 }
 {% endschema %}

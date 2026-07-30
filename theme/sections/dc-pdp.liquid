@@ -8,8 +8,8 @@
     assign on_sale = true
     assign savings_pct = compare_price | minus: current_price | times: 100 | divided_by: compare_price | round
   endif
-  assign pix_price_cents = current_price | times: 0.9 | round
-  assign installment_cents = current_price | divided_by: 12
+  assign pix_price_cents = current_price | times: 0.95 | round
+  assign installment_cents = current_price | divided_by: 10
 
   assign rating_meta = product_obj.metafields.reviews.rating.value
   assign rating_avg = 0
@@ -203,14 +203,16 @@
           <span class="dc-pdp-info__price-off" data-dc-price-off {% unless on_sale %}hidden{% endunless %}>{%- if on_sale -%}−{{ savings_pct }}%{%- endif -%}</span>
         </div>
         <div class="dc-pdp-info__installments">
-          em <b data-dc-installments>12x {{ installment_cents | money }}</b> sem juros
-          <span class="dc-pdp-info__pix-pill">ou <b data-dc-pix>{{ pix_price_cents | money }}</b> no Pix · <b>10% OFF</b></span>
+          em até <b data-dc-installments>10x {{ installment_cents | money }}</b> sem juros
+          <span class="dc-pdp-info__pix-pill">ou <b data-dc-pix>{{ pix_price_cents | money }}</b> no Pix · <b>5% OFF</b></span>
         </div>
         {%- endif -%}
 
         <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="dc-pdp-info__form">
           {%- if product_obj.has_only_default_variant == false -%}
             {%- for option in product_obj.options_with_values -%}
+              {%- comment -%} opção com 1 valor só (ex.: "Default Title" vindo da API) não vira seletor {%- endcomment -%}
+              {%- if option.values.size < 2 -%}{%- continue -%}{%- endif -%}
               <div class="dc-pdp-field">
                 <div class="dc-pdp-field__head">
                   <span>{{ option.name }}: <b class="dc-pdp-field__active" data-option-index="{{ forloop.index0 }}">{{ option.selected_value }}</b></span>
@@ -277,30 +279,6 @@
             <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener" class="dc-pdp-cep__forgot">Não sei meu CEP</a>
           </div>
         {%- endif -%}
-
-        <div class="dc-pdp-trust">
-          <div class="dc-pdp-trust__item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-            <div>
-              <b>Frete grátis</b>
-              <span>Por região · veja no checkout</span>
-            </div>
-          </div>
-          <div class="dc-pdp-trust__item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-            <div>
-              <b>Garantia oficial</b>
-              <span>12 meses</span>
-            </div>
-          </div>
-          <div class="dc-pdp-trust__item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 4v4h-4"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 20v-4h4"/></svg>
-            <div>
-              <b>Troca fácil</b>
-              <span>7 dias para devolução</span>
-            </div>
-          </div>
-        </div>
 
       </div>
 
@@ -512,8 +490,8 @@
         offEl.hidden = !onSaleNow;
         if (onSaleNow) offEl.textContent = '−' + Math.round((v.compare_at_price - v.price) * 100 / v.compare_at_price) + '%';
       }
-      if (instEl) instEl.textContent = '12x ' + money(Math.floor(v.price / 12));
-      if (pixEl) pixEl.textContent = money(Math.round(v.price * 0.9));
+      if (instEl) instEl.textContent = '10x ' + money(Math.floor(v.price / 10));
+      if (pixEl) pixEl.textContent = money(Math.round(v.price * 0.95));
 
       if (addBtn2) {
         addBtn2.disabled = !v.available;
@@ -1337,38 +1315,6 @@
   }
   .dc-pdp-lightbox__nav--prev { left: 18px; }
   .dc-pdp-lightbox__nav--next { right: 18px; }
-
-  /* Trust */
-  .dc-pdp-trust {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    padding: 18px 0;
-    border-top: 1px solid #ececef;
-    border-bottom: 1px solid #ececef;
-  }
-  .dc-pdp-trust__item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .dc-pdp-trust__item svg {
-    color: #0d1115;
-    flex: none;
-  }
-  .dc-pdp-trust__item b {
-    display: block;
-    font-size: 13px;
-    color: #0d1115;
-    font-weight: 700;
-  }
-  .dc-pdp-trust__item span {
-    font-size: 11.5px;
-    color: #6b7280;
-  }
-  @media (max-width: 700px) {
-    .dc-pdp-trust { grid-template-columns: 1fr; }
-  }
 
   /* Payment */
   .dc-pdp-payment {

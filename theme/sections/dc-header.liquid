@@ -1,7 +1,7 @@
 <script src="{{ 'dc-search.js' | asset_url }}" defer="defer"></script>
 
 {%- comment -%} ============ ANNOUNCEMENT MARQUEE ============ {%- endcomment -%}
-{%- assign announce_items = section.settings.announce_items | default: 'Frete grátis por região|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil' | split: '|' -%}
+{%- assign announce_items = section.settings.announce_items | default: 'Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil' | split: '|' -%}
 
 <div class="dc-announce">
   <div class="dc-announce__marquee">
@@ -1487,7 +1487,7 @@
     { "type": "image_picker", "id": "logo", "label": "Logo customizado (sobrepõe os abaixo)" },
     { "type": "text", "id": "logo_asset", "label": "Logo asset filename", "info": "Ex: dropchina-logo-color.png — usado se não tiver logo acima. Default: dropchina-logo-color.png" },
     { "type": "header", "content": "Announcement marquee" },
-    { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete grátis por região|Até 18x sem juros no cartão|10% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
+    { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
     { "type": "header", "content": "Topbar (links utilitários)" },
     { "type": "text", "id": "topbar_link_1", "label": "Link 1", "default": "Sobre" },
     { "type": "url", "id": "topbar_link_1_url", "label": "Link 1 URL" },
