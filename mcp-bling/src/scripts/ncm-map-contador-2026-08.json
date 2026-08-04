@@ -1,0 +1,28 @@
+{
+  "CLANM-HS-CYBER-12548": { "ncm": "85183000", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PEMPG3D": { "ncm": "40161090", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PTOSF2AB": { "ncm": "84716052", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "EPSON-L3250": { "ncm": "84433111", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "HP-DJ-2975": { "ncm": "84433111", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PANTUM-M7105DW": { "ncm": "84433111", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "GAMA-MARULA-1100": { "ncm": "85163200", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "MONDIAL-SCN16-2000": { "ncm": "85163100", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "moedor de café": { "ncm": "85094090", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "kit com 2": { "ncm": "70134900", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "BOMBA.DAGUA": { "ncm": "84138100", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "kit com 10 pacote": { "ncm": "49019900", "confidence": "HIGH", "basis": "contadora 04/ago" },
+
+  "CLANM-GT730-4GB-12724": { "ncm": "85423190", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PJR7250X4GB": { "ncm": "85423190", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PVGTX1050TI4GBR5128": { "ncm": "85423190", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PA1660S6GR6DF": { "ncm": "85423190", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "ADAPT.UGREEN": { "ncm": "85444200", "confidence": "HIGH", "basis": "contadora 04/ago" },
+
+  "kit gamer eg-54": { "ncm": "84439933", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "kit gamer EVO": { "ncm": "84439933", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PANTUM-P2509W": { "ncm": "84439933", "confidence": "HIGH", "basis": "contadora 04/ago" },
+  "PANTUM-P3305DW": { "ncm": "84433111", "confidence": "HIGH", "basis": "contadora 04/ago" },
+
+  "KIT.COZINHA.12PC": { "ncm": "39241000", "confidence": "HIGH", "basis": "contadora deu 84439933 (toner) por arrasto. 3924.10.00 = serviços de mesa e utensílios de cozinha de plástico — posição usada para utensílio de silicone; cabo de madeira não muda o caráter essencial. Escolha do Gabriel em 04/ago, CONFIRMAR com a contadora." },
+  "50 pacote de Figurinha": { "ncm": "49019900", "confidence": "HIGH", "basis": "contadora deu 84439933 (toner) por arrasto. Alinhado ao 'kit com 10 pacote' (mesmo produto, outra quantidade), que ela mesma classificou como 4901.99.00. Decisão do Gabriel em 04/ago." }
+}
