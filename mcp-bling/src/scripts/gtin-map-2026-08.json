@@ -1,0 +1,28 @@
+{
+  "PJR7250X4GB": {
+    "gtin": "7908445431812",
+    "confidence": "HIGH",
+    "source": "oderco.com.br, ficha técnica → Código de Barras(EAN). Página lida direto (04/ago/2026). Bate com o resumo de busca em 2 fontes independentes."
+  },
+  "PVGTX1050TI4GBR5128": {
+    "gtin": "7908445419766",
+    "confidence": "HIGH",
+    "source": "oderco.com.br, ficha técnica → Código de Barras(EAN). Página lida direto (04/ago/2026)."
+  },
+  "PTOSF2AB": {
+    "gtin": "7908445405394",
+    "confidence": "HIGH",
+    "source": "oderco.com.br, ficha técnica → Código de Barras(EAN). Página lida direto (04/ago/2026)."
+  },
+
+  "MONDIAL-SCN16-2000": {
+    "gtin": "7899882313222",
+    "confidence": "MED",
+    "source": "Resumo de busca, sem leitura da página. ⚠️ NÃO GRAVAR sem conferir a caixa: o produto no Bling é 127V e o EAN encontrado pode ser da versão 220V — a Mondial usa EAN distinto por tensão. Mesma armadilha já registrada para a Midea."
+  },
+  "PA1660S6GR6DF": {
+    "gtin": "7908445415492",
+    "confidence": "LOW",
+    "source": "Só resumo de busca. Página da Oderco deu 404 e o site da PCYES não retornou o produto. NÃO confirmado em fonte primária."
+  }
+}

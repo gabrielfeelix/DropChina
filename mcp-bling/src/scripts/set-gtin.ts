@@ -17,8 +17,10 @@ import { dirname, join } from 'node:path'
 import { findProdutoByCodigo, getProduto, updateProduto } from '../api/produtos.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const MAP = join(__dirname, 'gtin-map.json')
 const dry = process.argv.includes('--dry')
+// --map=<arquivo> permite rodar uma leva nova sem re-PUTar os já gravados.
+const mapArg = process.argv.find((a) => a.startsWith('--map='))?.slice(6)
+const MAP = mapArg ? join(__dirname, mapArg) : join(__dirname, 'gtin-map.json')
 
 interface Entry {
   gtin: string
