@@ -28,7 +28,7 @@
 - Carrossel: 1º slide = promessa/pergunta; último = CTA ("salva" ou "chama no Whats").
 - Todo post fecha com CTA claro: salvar, comentar, ou link na bio / WhatsApp.
 - Legenda com 3-5 hashtags de nicho (não 30). Ex: #impressora #tonercompativel #escritorio #cartuchodetinta #maringa.
-- Enquanto loja esgotada: **NÃO** empurrar "compre agora". Educar + construir lista + aquecer. Vender quando o estoque virar.
+- **Atualizado 04/ago:** a loja **já vende** (pagamento no ar, estoque sincronizado). O CTA de compra está liberado — mas 29% do catálogo segue esgotado, então **conferir disponibilidade antes de destacar um produto** num post. Mantém o mix 80% educar / 20% ofertar por boa prática, não por bloqueio.
 
 ## Fila da semana (preencher)
 | Data | Pilar | Título/hook | Formato | Status | Arquivo |

@@ -2,7 +2,7 @@
 
 > Primeira leva pronta pra agendar (copy + roteiro + CTA). Nicho: impressão/informática.
 > Ao publicar: mover a data pro `calendario-editorial.md` e marcar ✅ aqui.
-> **Contexto:** loja esgotada → CTA é educar/relacionar/lista, NÃO "compre agora".
+> **Contexto (atualizado 04/ago):** a loja **vende** — pagamento no ar e estoque sincronizado. CTA de compra liberado, e o cupom `BEMVINDO10` está ativo pra usar como isca. Ainda assim o mix segue 80% educar / 20% ofertar, por boa prática. Antes de destacar um SKU, conferir se não está entre os 29% esgotados.
 > Confirmar antes de publicar: número WhatsApp oficial, se cupom BEMVINDO10 já existe.
 
 ---

@@ -2,16 +2,25 @@
 
 > **O mapa completo do crescimento sem pagar por clique.** Tudo que a gente vai criar, pra quê
 > serve (em português de gente), a ordem certa e as boas práticas. Feito pra quem não é da área.
-> Criado 2026-07-06. Este é o documento-guia; os detalhes técnicos ficam nos arquivos linkados.
+> Criado 2026-07-06 · **revisado 2026-08-04**. Este é o documento-guia; os detalhes técnicos ficam nos arquivos linkados.
 
 ---
 
 ## 🧠 O princípio (leia isto primeiro)
 **Orgânico = alcance de graça.** Você não paga por clique; você constrói audiência, autoridade e presença no Google que trabalham por você pra sempre. É **lento no começo e depois vira bola de neve** — o post de hoje ainda traz gente daqui a 6 meses.
 
-**Por que agora é a hora perfeita:** a loja está esgotada (estoque não sincronizou ainda). Se a gente pagasse anúncio agora, seria jogar dinheiro fora — mandar gente pra uma loja que não vende. Mas o orgânico a gente **constrói de graça enquanto espera**, e no dia que o estoque voltar já temos audiência, Google nos conhecendo e conteúdo pronto. É plantar antes da colheita.
+**Por que agora é a hora perfeita (atualizado 04/ago):** a loja **já vende** — pagamento no ar,
+estoque sincronizado, fiscal completo. O que trava não é mais o estoque: são **230 visitas em 30
+dias que viraram 0 pedido**, sem nenhuma ferramenta instalada pra saber por quê. Pagar anúncio
+agora seria comprar visita pra um balde furado. O orgânico a gente constrói de graça enquanto
+tapa o furo — e o furo a gente enxerga com o Clarity (grátis).
 
-**Regra única desta fase:** construir e educar, **não** empurrar "compre agora". Vender vem quando o estoque virar.
+> **Mudou desde 06/jul:** a versão original dizia "a loja está esgotada, o orgânico é só esperar
+> o estoque". Isso não vale mais. O motivo de fazer orgânico agora é outro: **é o único tráfego
+> que dá pra trazer sem pagar enquanto a conversão ainda é zero.**
+
+**Regra única desta fase:** construir e educar, **não** empurrar "compre agora". A venda vem quando
+a loja parar de vazar.
 
 ---
 
@@ -28,24 +37,33 @@
 | 8 | **Tagueamento** (GA4/Pixel/Clarity) | ferramentas de medição | saber o que funciona (detalhe no runbook) | grátis | 🟠 alta |
 | 9 | **Lista (e-mail + Whats)** | captura de contatos | falar com quem já te conhece, de graça | grátis | 🟡 média |
 | 10 | **TikTok** | conta comercial no TikTok | alcance explosivo, favorece conta nova | grátis | 🟢 fase 2 |
-| 11 | **Blog/guias no site** | artigos "como escolher toner" etc. | ranquear no Google + ser citado por IA | grátis | 🟢 fase 2 |
+| 11 | ~~**Blog/guias no site**~~ | artigos "como escolher toner" etc. | ranquear no Google + ser citado por IA | grátis | ✅ **FEITO** — 10+ artigos no ar desde 07/jul |
 | 12 | **YouTube** | canal com tutoriais curtos | tutoriais rankeiam e viram autoridade | grátis | ⚪ opcional |
 
 **Pulei de propósito:** Pinterest e Kwai — pouco retorno pro nosso nicho/tempo agora. Reavaliar depois.
 
 ---
 
-## 🎯 Ordem de ataque (faça nesta sequência)
-1. **Fechar a identidade** (nome, @handle igual em tudo, bio, avatar). Tudo nasce disso.
-2. **Instagram Business + Página Facebook** (uma vincula na outra).
-3. **WhatsApp Business** com catálogo dos campeões + mensagem de saudação.
-4. **Google Meu Negócio** (endereço de Maringá já existe — só reivindicar/preencher).
-5. **Google Search Console** (o Google achar o site) — casa com o tagueamento.
-6. **Tagueamento** (GA4/GTM/Pixel/Clarity/LGPD) — ver `../marketing/setup-tagueamento.md`.
-7. **Reclame Aqui + Google Reviews** (criar perfis, começar a pedir avaliação).
-8. **Ligar o motor de conteúdo** (postar 3-5×/semana) — ver `conteudo/`.
-9. **Começar a lista** (newsletter + Whats) — capturar contato desde o 1º visitante.
-10. **Fase 2:** TikTok + blog/guias, quando o de cima estiver rodando.
+## 🎯 Ordem de ataque (reordenada em 04/ago)
+
+A ordem antiga começava pelas contas sociais. Mudou: com tráfego chegando e não convertendo,
+**medir vem antes de atrair**.
+
+1. **Microsoft Clarity** — grátis, um script. Mostra a sessão gravada e onde a pessoa desiste. É o que responde a pergunta de R$ 0 que vale mais hoje.
+2. **Tagueamento** (GA4 → Search Console → Pixel → LGPD) — ver `../marketing/setup-tagueamento.md`. GA4 e Search Console **já têm campo no tema**, é só colar o ID.
+3. **Tapar o vazamento** que o Clarity apontar. Suspeitos conhecidos: card de esgotado apagado demais (29% da vitrine), zero avaliação em produto, frete alto em item pesado.
+4. **Fechar a identidade** (nome, @handle igual em tudo, bio, avatar). Tudo nasce disso.
+5. **Google Meu Negócio** (endereço de Maringá já existe — só reivindicar/preencher). Busca local de alta intenção — pro público PME vale mais que Instagram.
+6. **WhatsApp Business** com catálogo dos campeões + mensagem de saudação.
+7. **Instagram Business + Página Facebook** (uma vincula na outra).
+8. **Reclame Aqui + Google Reviews** (criar perfis, começar a pedir avaliação).
+9. **Ligar o motor de conteúdo** (postar 3-5×/semana) — ver `conteudo/`.
+10. **Começar a lista** (newsletter + Whats) — cupom `BEMVINDO10` **já está ativo**, pode divulgar.
+11. **Fase 2:** TikTok, quando o de cima estiver rodando. (Blog já saiu daqui — está no ar.)
+
+> **A discutir antes de investir em conteúdo:** o público declarado inclui **PMEs** (escritório,
+> papelaria, lan house, contador), e toner é **recompra previsível**, não compra por impulso. Pra
+> esse público, os itens 5 e 6 valem mais que o 7. Decidir onde colocar esforço.
 
 ---
 
@@ -80,7 +98,7 @@ Antes de criar qualquer perfil, travar o básico pra tudo sair igual:
 ### 7. Prova social (reviews) — confiança é conversão
 - **Reclame Aqui:** o brasileiro **consulta antes de comprar de loja nova**. Ter perfil e responder bem = selo de confiança. Sem perfil, a dúvida mata a venda.
 - **Google Reviews:** avaliações na ficha do Google Meu Negócio — estrelas aparecem na busca.
-- **Reviews na loja** (Judge.me): resolve a contradição de hoje (a home diz "verificado" mas o produto diz "sem avaliação"). *(Instalação é do lado Shopify — você resolve aí.)*
+- **Reviews na loja** (Judge.me): resolve a contradição de hoje (a home diz "verificado" mas o produto diz "sem avaliação"). *(Instalação é do lado Shopify — você resolve aí.)* **Segue pendente em 04/ago — nenhum produto tem avaliação, e isso é suspeito nº 1 da conversão zero em loja nova.**
 > **Boa prática:** depois de cada venda, pedir avaliação (Whats/e-mail). Review com foto e nome real vale ouro — sobe conversão 15-30%.
 
 ### 8. Tagueamento (medição)
@@ -88,7 +106,7 @@ Detalhe completo no runbook: **`../marketing/setup-tagueamento.md`**. Resumo: GA
 
 ### 9. Lista própria (e-mail + Whats) — o ativo que é seu
 Seguidor é "alugado" (o algoritmo decide quem vê). **Contato é seu** — você fala direto, de graça, sempre.
-- **Newsletter:** capturar e-mail com isca ("ganhe 10% na 1ª compra" — cupom BEMVINDO10, *você cria no Shopify*).
+- **Newsletter:** capturar e-mail com isca ("ganhe 10% na 1ª compra" — cupom `BEMVINDO10`, **já criado e ativo** desde jul; há também um `DROP10`).
 - **Lista de Whats / grupo VIP:** avisar de reposição e oferta.
 > **Boa prática:** todo visitante é chance de virar contato. Isca clara ("10% OFF") converte muito mais que "assine nossa newsletter".
 

@@ -29,8 +29,8 @@
 | GTM Container ID | ⬜ | GTM-________ | idem |
 | Search Console | ⬜ | — | verificar domínio + enviar sitemap |
 | Google Meu Negócio | ⬜ | — | endereço Maringá-PR já no schema |
-| Merchant Center | ⬜ | — | exige GTIN (gargalo chat Bling) |
-| Microsoft Clarity ID | ⬜ | — | heatmap grátis, ligar já |
+| Merchant Center | ⬜ | — | exige GTIN — **53 produtos sem** (04/ago) |
+| **Microsoft Clarity ID** | ⬜ | — | 🔴 **PRIMEIRO ALVO** — grava sessão, mostra por que não converte |
 
 ## Dados oficiais da empresa (confirmados no schema do tema)
 - **Razão social:** DROPCHINA LTDA
@@ -45,6 +45,11 @@
 - **Primeiro alvo Fase 0:** **Tagueamento** (GA4/GTM/Pixel/Clarity/LGPD) → ver `../marketing/setup-tagueamento.md`.
 - **Budget ferramentas:** **só grátis** por enquanto (Canva grátis, Meta Business Suite, GA4, Clarity, Search Console). Sem mLabs/Canva Pro por ora.
 
+## ✅ Resolvido desde então (verificado 04/ago)
+- **Cupom BEMVINDO10:** **criado e ATIVO** no Shopify. Existe também um `DROP10`. Pode divulgar.
+- **Estoque:** sincronizado Bling↔Shopify, 0 divergências. Deixou de ser bloqueador.
+- **Blog:** 10+ artigos publicados desde 07/jul.
+
 ## ⚠️ Ainda pendente
-- **Cupom BEMVINDO10:** copy da newsletter já promete 10% OFF na 1ª compra, mas o desconto **ainda não foi criado** no Shopify. Precisa existir antes de eu divulgar em post/story.
-- **Conta de anúncio Meta:** login atual é agência (nenhuma é DropChina). Decidir criar/apontar — só urge na Fase 2 (estoque live).
+- **Conta de anúncio Meta:** login atual é agência (nenhuma é DropChina). Decidir criar/apontar — só urge quando abrir mídia paga.
+- **Acesso à loja:** o plano Basic tem 0 vagas de staff; a vaga usada é a de *store owner* (Gabriel). Em andamento: Gabriel vira **colaborador via Shopify Partners** (não consome vaga) e o **Augusto assume como owner**. Ver `docs/handoff-2026-08-03.md`.

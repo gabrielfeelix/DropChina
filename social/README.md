@@ -1,7 +1,12 @@
 # social/ — redes sociais
 
 > Plano da presença em redes sociais da DropChina (nicho suprimentos de impressão/informática,
-> B2C + pequenos negócios). Pesquisa jun/2026.
+> B2C + pequenos negócios). Pesquisa jun/2026 · **nota de 04/ago abaixo**.
+>
+> ⚠️ **Este arquivo trata só de redes sociais, e redes sociais não são mais a próxima ação.**
+> Estado atual: loja vendendo, 230 sessões/mês, 0 pedidos, nenhuma medição instalada. A ordem
+> vigente está em [`STATUS.md`](STATUS.md) — medir e tapar conversão vem antes de abrir perfil.
+> Nenhuma conta social existe ainda; o conteúdo abaixo segue válido para quando chegar a vez.
 
 ## Plataformas (prioridade)
 | Tier | Plataforma | Por quê |
@@ -44,7 +49,7 @@
 
 ## Pré-requisitos que dependem de outras frentes
 - **Domínio verificado** no Meta → depende do domínio estar apontado (ver DNS/Shopify).
-- **Catálogo** vem da Shopify → depende do export Bling→Shopify.
+- ~~**Catálogo** vem da Shopify → depende do export Bling→Shopify.~~ ✅ resolvido — catálogo sincronizado, 0 divergências (04/ago). **Mas 43 produtos do Bling ainda não foram exportados pra loja.**
 - **Identidade visual** (avatar, capas, templates) → depende de `brand/`.
 - Produtos proibidos: respeitar `docs/precificacao-e-restricoes-marketplaces.md` (creatina, etc.).
 
