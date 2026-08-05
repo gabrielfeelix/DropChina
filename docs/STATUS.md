@@ -1,5 +1,13 @@
 # STATUS do projeto — DropChina (sync multicanal Bling)
 
+> # 🛑 ARQUIVO MORTO — NÃO USE
+>
+> **O status atual vive em [`../STATUS.md`](../STATUS.md), na raiz do repositório.**
+>
+> Este arquivo é de **17/jun/2026** e está errado em vários pontos: diz que a loja está esgotada,
+> que o import de pedidos está pendente e que o NCM bloqueia a NF-e. Nada disso vale mais.
+> Mantido só como registro histórico.
+
 > ⚠️ **DESATUALIZADO em partes — leia `handoff-2026-07-30.md` primeiro.**
 > Este doc é de 17/jun/2026. Desde então: o pagamento entrou no ar (Pagar.me/Stone),
 > a configuração fiscal de NF-e foi conferida por completo, e o **import de pedidos
