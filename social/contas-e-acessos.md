@@ -40,7 +40,7 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 | Plataforma | Status | Handle / URL | Observação |
 |---|---|---|---|
 | Instagram Business | ✅ | **@dropchinaoficial** · instagram.com/dropchinaoficial | **criada 23/08** com `contato@` · conta **Comercial** (categoria Produto/serviço) · **vinculada à Página do Facebook** |
-| Página Facebook | ✅ | **facebook.com/dropchinaoficial** · id `61593372286423` | criada 23/08 pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi desativado em definitivo pelo Facebook. Nome de usuário definido e **Instagram vinculado**. ⚠️ categoria ainda "Tecnologia", trocar por Loja de informática. ⚠️ falta dar acesso ao Augusto |
+| Página Facebook | ✅ | **facebook.com/dropchinaoficial** · id `61593372286423` | criada 23/08 pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi desativado em definitivo pelo Facebook. Nome de usuário definido, **Instagram vinculado**, categoria corrigida para Loja de informática e capa aplicada. ⚠️ falta dar acesso ao Augusto |
 | WhatsApp Business | ⬜ | +55 41 99534-2751 | número oficial (header produção) ✅ |
 | TikTok | ⬜ | @dropchinaoficial (só reservar) | Fase 2 — **não criar perfil ativo agora** |
 | YouTube | ✅ | **@Dropchinaoficial** · `youtube.com/channel/UCUkLOO3Nq…` | canal criado 23/08, avatar com o monograma DC · acessa via conta Google `contato@` · publicar só na Fase 5 |
