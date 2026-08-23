@@ -336,7 +336,7 @@
           "settings": {
             "name": "Atendimento",
             "value": "WhatsApp humano",
-            "subtitle": "Seg–Sáb · 8h às 20h"
+            "subtitle": "Seg–Sex · 9h às 19h · Sáb 9h–13h"
           }
         }
       },
@@ -391,7 +391,7 @@
           "settings": {
             "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4'/><path d='M4 13v4a2 2 0 0 0 2 2h2v-6H4'/></svg>",
             "title": "Atendimento humano",
-            "sub": "Seg a sáb, das 8h às 20h"
+            "sub": "Seg a sex das 9h às 19h, sáb das 9h às 13h"
           }
         }
       },

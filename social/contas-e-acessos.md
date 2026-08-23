@@ -40,7 +40,7 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 | Plataforma | Status | Handle / URL | Observação |
 |---|---|---|---|
 | Instagram Business | ✅ | **@dropchinaoficial** · instagram.com/dropchinaoficial | **criada 23/08** com `contato@` · falta virar conta Comercial/Profissional |
-| Página Facebook | ✅ | `facebook.com/dropchinaoficial` | criada 23/08 pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi **desativado em definitivo** pelo Facebook. ⚠️ Definir o **nome de usuário** da Página; até lá a URL é `/people/Dropchina/6159…` |
+| Página Facebook | ✅ | **facebook.com/dropchinaoficial** · id `61593372286423` | criada 23/08 pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi desativado em definitivo pelo Facebook. Nome de usuário definido. ⚠️ categoria ainda "Tecnologia", trocar por Loja de informática |
 | WhatsApp Business | ⬜ | +55 41 99534-2751 | número oficial (header produção) ✅ |
 | TikTok | ⬜ | @dropchinaoficial (só reservar) | Fase 2 — **não criar perfil ativo agora** |
 | YouTube | ✅ | **@Dropchinaoficial** · `youtube.com/channel/UCUkLOO3Nq…` | canal criado 23/08, avatar com o monograma DC · acessa via conta Google `contato@` · publicar só na Fase 5 |
@@ -72,6 +72,7 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 - **Endereço:** Rua Mandirituba, 216, Fundos — Afonso Pena, São José dos Pinhais/PR, 83045-030
   (endereço da Receita, o mesmo do schema do tema e dos termos. O "Maringá" registrado até 23/08
   era **errado**, veio de nota velha)
+- **Horário de atendimento:** Seg a Sex 9h–19h · Sáb 9h–13h · Dom fechado (confirmado pelo Augusto em 23/08 — o site dizia Seg-Sáb 8h-20h, estava errado)
 - **Site:** dropchinaoficial.com.br
 - **Loja Shopify:** akfd19-1c.myshopify.com (plano Basic, BRL)
 

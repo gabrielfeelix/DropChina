@@ -40,7 +40,7 @@
           "settings": {
             "title": "Contato",
             "raw_links": "Fale conosco|/pages/contact\nWhatsApp comercial|https://wa.me/5541995342751\nFAQ|/pages/faq",
-            "extra": "<p>Atendimento<br>Seg–Sáb · 8h às 20h</p>"
+            "extra": "<p>Atendimento<br>Seg–Sex · 9h às 19h<br>Sáb · 9h às 13h</p>"
           }
         }
       },
