@@ -10,6 +10,9 @@
 # Planilhas com dados fiscais/cadastrais sensíveis
 DROPCHINA.xlsx
 *senha*
+# Cofre local de senhas (nunca versionar)
+senhas.local.md
+*.local.md
 
 # Tokens e auth da Shopify CLI
 .shopify/

@@ -72,6 +72,7 @@ Reconstruída por consulta pública (DNS-over-HTTPS). **Copiar exatamente** ao r
 | `autodiscover` | A | `109.106.250.222` |
 | `autoconfig` | A | `109.106.250.222` |
 | `ftp` | CNAME | `dropchinaoficial.com.br.` |
+| `@` | TXT | `google-site-verification=7I4GrtrRrylIo-nCpm_eGJys_0ui5AL3AFWCfCNM4M0` (add. 23/08) |
 | `_dmarc` | TXT | `v=DMARC1; p=none;` |
 | `default._domainkey` | TXT | DKIM RSA — chave completa abaixo |
 
@@ -94,6 +95,7 @@ cPanel.
 | `www` | CNAME | `shops.myshopify.com.` | Shopify |
 | `@` | MX | `0 mail.dropchinaoficial.com.br.` | muda ao trocar de provedor |
 | `@` | TXT | SPF (ver acima) | **muda** ao trocar de provedor |
+| `@` | TXT | `google-site-verification=...` | **copiar** — perde a validação do Search Console se sumir |
 | `_dmarc` | TXT | `v=DMARC1; p=none;` | mantém |
 | `default._domainkey` | TXT | DKIM | **muda** — selector novo do provedor novo |
 | `mail` | A | `109.106.250.222` | só até o e-mail sair |

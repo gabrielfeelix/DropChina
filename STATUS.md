@@ -1,7 +1,7 @@
 # STATUS ATUAL — DropChina
 
 > **Este é o documento de entrada. Se a pergunta é "qual o status atual?", a resposta está aqui.**
-> Última atualização: **04/ago/2026** · Branch: `feat/shopify-ui-institucional`
+> Última atualização: **23/ago/2026** · Branch: `feat/shopify-ui-institucional`
 >
 > ⚠️ Existe um `docs/STATUS.md` antigo (17/jun) — **ignorar**, foi superado por este.
 
@@ -26,8 +26,8 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | **Exclusão Bling → Shopify** | Coberta por `sync-exclusoes-shopify.ts` — ⚠️ **ainda não agendada em cron** |
 | **Catálogo** | 164 produtos no Bling (154 ativos + 6 na lixeira + 4 inativos) · 119 na Shopify · **101/154 com GTIN** |
 | **Vendas** | **0 pedidos na Shopify.** Os 8 do Bling são do Mercado Livre, de nov/2024 |
-| **Medição** | ❌ **Nada.** Sem GA4, GTM, Pixel, Clarity ou banner LGPD |
-| **Marca** | ❌ Sem logo, sem perfil social, sem Google Meu Negócio |
+| **Medição** | 🟡 **Clarity no ar** (`y70lfm3dio`, 23/08) · GA4 criado (`G-KZ4CGVHY7X`) · Search Console validado + sitemap. Falta Pixel, GTM e banner LGPD |
+| **Marca** | 🟡 Instagram **@dropchinaoficial** e YouTube criados (23/08) · sem logo · Google Meu Negócio e Reclame Aqui **já existem sob controle de terceiros** |
 
 ---
 
@@ -38,7 +38,11 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
    produto tem avaliação, frete alto em item pesado
 2. **Gateway nunca testado com cartão real** — o teste de 04/ago validou Shopify→Bling, não a Pagar.me
 3. **43 produtos do Bling sem vínculo** com a loja — nunca foram exportados, não existem na vitrine
-4. **Fundação de marca não iniciada** — escopo contratado, ver `marketing/plano-fundacao-marca.md`
+4. **Fundação de marca iniciada em 23/08** — contas próprias no ar, ver
+   `docs/handoff-2026-08-23.md`. Sobraram 3 bloqueios de terceiros: recurso do Facebook,
+   dono da ficha do Google Meu Negócio, e validação do Reclame Aqui pela contabilidade
+5. **43 produtos fora do sitemap** — 76 no sitemap contra 119 na loja. Fora do sitemap, o Google
+   não indexa. Achado em 23/08, não investigado
 
 ---
 
@@ -50,8 +54,9 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 - [ ] **Clarity** (10 min, começa a gravar sessão desde já) · depois GA4 e Search Console — os
       campos **já existem no tema**, é só colar o ID
 - [ ] Agendar o **cron** dos 2 scripts de sync
-- [ ] Adicionar a DropChina como **empresa cliente no Partner** (org `4YU MKT` já criada) e
-      encaminhar a transferência de **store owner** para o Augusto
+- [x] ~~Transferência de **store owner**~~ ✅ **feito 23/08** — owner agora é
+      `contato@dropchinaoficial.com.br`. Gabriel acessa como colaborador `4YU MKT`
+- [ ] **Conferir cobrança e plano** após a transferência — o novo dono herda a fatura em aberto
 - [ ] Decidir 2 preços divergentes: `ISD Full` (Bling 389 / loja 350) e `tn660 DropChina` (100 / 99)
 - [ ] Suavizar o card de esgotado — 34 produtos, 29% da vitrine
 - [ ] 5 produtos sem imagem de capa: `A1 mini` (ATIVO, R$ 5.999), `Impressora Vinik`, `Sata 240GB`, `Sata 480GB`, `ISD-SIGNAGE-55`
@@ -78,7 +83,8 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | Assunto | Documento |
 |---|---|
 | **Este resumo** | `STATUS.md` (aqui) |
-| Último dia de trabalho detalhado | `docs/handoff-2026-08-03.md` |
+| Último dia de trabalho detalhado | `docs/handoff-2026-08-23.md` — contas de marca e medição |
+| Dia anterior | `docs/handoff-2026-08-03.md` |
 | Dia em que o pagamento entrou no ar | `docs/handoff-2026-07-30.md` |
 | **O que sobe do Bling e o que é botão** | `docs/handoff-2026-08-03.md` §2 |
 | **Fundação de marca** (escopo contratado) | `marketing/plano-fundacao-marca.md` |
