@@ -2,25 +2,102 @@
   assign heading = section.settings.heading | default: 'Talvez você goste'
   assign eyebrow = section.settings.eyebrow | default: 'Recomendados pra você'
   assign limit = section.settings.limit | default: 8
-
-  # 1) recomendações nativas (quando a loja já tiver dados); 2) fallback: mesma coleção.
-  assign rel_list = empty
-  if recommendations.performed and recommendations.products_count > 0
-    assign rel_list = recommendations.products
-  endif
-  if rel_list == empty or rel_list.size == 0
-    for col in product.collections
-      if col.products.size > 1
-        assign rel_list = col.products
-        break
-      endif
-    endfor
-  endif
 -%}
+
+{%- comment -%}
+  Recomendação em cascata, do mais parecido ao mais amplo. Só entra produto
+  DISPONÍVEL — recomendar esgotado é mandar o visitante para uma página que não
+  vende, e 29% da vitrine está esgotada.
+
+  A ordem é: mesmo tipo de produto → mesma marca → recomendações nativas da
+  Shopify → resto das coleções do produto → catálogo. Cada nível só é consultado
+  se o anterior não encheu a régua, e `vistos` impede repetição entre níveis.
+{%- endcomment -%}
+
+{%- capture rel_cards -%}
+  {%- assign vistos = '|' | append: product.id | append: '|' -%}
+  {%- assign mostrados = 0 -%}
+
+  {%- comment -%} 1) Mesmo tipo de produto — toner puxa toner, papel puxa papel {%- endcomment -%}
+  {%- if product.product_type != blank -%}
+    {%- for col in product.collections -%}
+      {%- for p in col.products limit: 50 -%}
+        {%- assign chave = '|' | append: p.id | append: '|' -%}
+        {%- unless vistos contains chave -%}
+          {%- if mostrados < limit and p.available and p.product_type == product.product_type -%}
+            {% render 'dc-product-card', product: p %}
+            {%- assign vistos = vistos | append: p.id | append: '|' -%}
+            {%- assign mostrados = mostrados | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- comment -%} 2) Mesma marca {%- endcomment -%}
+  {%- if mostrados < limit and product.vendor != blank -%}
+    {%- for col in product.collections -%}
+      {%- for p in col.products limit: 50 -%}
+        {%- assign chave = '|' | append: p.id | append: '|' -%}
+        {%- unless vistos contains chave -%}
+          {%- if mostrados < limit and p.available and p.vendor == product.vendor -%}
+            {% render 'dc-product-card', product: p %}
+            {%- assign vistos = vistos | append: p.id | append: '|' -%}
+            {%- assign mostrados = mostrados | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- comment -%} 3) Recomendações nativas — só existem quando a seção é pedida pela API {%- endcomment -%}
+  {%- if mostrados < limit and recommendations.performed and recommendations.products_count > 0 -%}
+    {%- for p in recommendations.products -%}
+      {%- assign chave = '|' | append: p.id | append: '|' -%}
+      {%- unless vistos contains chave -%}
+        {%- if mostrados < limit and p.available -%}
+          {% render 'dc-product-card', product: p %}
+          {%- assign vistos = vistos | append: p.id | append: '|' -%}
+          {%- assign mostrados = mostrados | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- comment -%} 4) Resto das coleções do produto — vizinhança de nicho {%- endcomment -%}
+  {%- if mostrados < limit -%}
+    {%- for col in product.collections -%}
+      {%- for p in col.products limit: 50 -%}
+        {%- assign chave = '|' | append: p.id | append: '|' -%}
+        {%- unless vistos contains chave -%}
+          {%- if mostrados < limit and p.available -%}
+            {% render 'dc-product-card', product: p %}
+            {%- assign vistos = vistos | append: p.id | append: '|' -%}
+            {%- assign mostrados = mostrados | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- comment -%} 5) Último recurso: catálogo, para a seção nunca sair vazia {%- endcomment -%}
+  {%- if mostrados < limit -%}
+    {%- for p in collections.all.products limit: 50 -%}
+      {%- assign chave = '|' | append: p.id | append: '|' -%}
+      {%- unless vistos contains chave -%}
+        {%- if mostrados < limit and p.available -%}
+          {% render 'dc-product-card', product: p %}
+          {%- assign vistos = vistos | append: p.id | append: '|' -%}
+          {%- assign mostrados = mostrados | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
 
 <section
   class="dc-rel-section"
-  {%- if rel_list.size == 0 %} hidden{% endif %}
+  {%- if rel_cards == blank %} hidden{% endif %}
   style="padding-block: {{ section.settings.padding_top | default: 64 }}px {{ section.settings.padding_bottom | default: 80 }}px;"
   data-dc-related
   data-product-id="{{ product.id }}"
@@ -42,16 +119,8 @@
       </div>
     </header>
 
-    {%- if rel_list.size > 0 -%}
-      <div class="dc-rel__track" data-dc-rel-track>
-        {%- assign shown = 0 -%}
-        {%- for p in rel_list -%}
-          {%- if p.id != product.id and shown < limit -%}
-            {% render 'dc-product-card', product: p %}
-            {%- assign shown = shown | plus: 1 -%}
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+    {%- if rel_cards != blank -%}
+      <div class="dc-rel__track" data-dc-rel-track>{{ rel_cards }}</div>
     {%- endif -%}
   </div>
 </section>

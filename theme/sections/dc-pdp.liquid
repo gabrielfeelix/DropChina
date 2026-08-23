@@ -94,12 +94,12 @@
             >
               {%- assign thumb_src = nil -%}
               {%- if media.media_type == 'image' or media.media_type == nil -%}
-                {%- assign thumb_src = media | image_url: width: 120 -%}
+                {%- assign thumb_src = media | image_url: width: 208 -%}
               {%- elsif media.preview_image -%}
-                {%- assign thumb_src = media.preview_image | image_url: width: 120 -%}
+                {%- assign thumb_src = media.preview_image | image_url: width: 208 -%}
               {%- endif -%}
               {%- if thumb_src -%}
-                <img src="{{ thumb_src }}" width="60" height="60" loading="lazy" alt="{{ media.alt | default: product_obj.title | escape }}" data-dc-fit>
+                <img src="{{ thumb_src }}" width="104" height="104" loading="lazy" alt="{{ media.alt | default: product_obj.title | escape }}" data-dc-fit>
                 {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
                   <span class="dc-pdp-gallery__thumb-play" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
                 {%- endif -%}
@@ -399,8 +399,12 @@
     function syncThumbsHeight() {
       if (!thumbsEl || !thumbsStage) return;
       if (window.matchMedia('(max-width: 749px)').matches) { thumbsEl.style.maxHeight = ''; return; }
+      // Teto = o que for menor entre o palco e 4 miniaturas. Fixar em 4 garante que,
+      // com 5 fotos ou mais, sempre haja overflow — e portanto seta visível.
+      var quatro = (4 * 104) + (3 * 10);
       var h = thumbsStage.clientHeight;
-      if (h > 0) thumbsEl.style.maxHeight = h + 'px';
+      var teto = h > 0 ? Math.min(h, quatro) : quatro;
+      thumbsEl.style.maxHeight = teto + 'px';
     }
     function updateThumbNav() {
       if (!thumbsEl) return;
@@ -800,7 +804,7 @@
   /* Gallery */
   .dc-pdp-gallery {
     display: grid;
-    grid-template-columns: 84px 1fr;
+    grid-template-columns: 104px 1fr;
     gap: 14px;
     align-items: start;
     position: sticky;
@@ -840,8 +844,8 @@
   .dc-pdp-gallery__thumbnav[hidden] { display: none; }
   .dc-pdp-gallery__thumbnav:hover { background: #ffffff; transform: translateX(-50%) scale(1.08); }
   .dc-pdp-gallery__thumb {
-    width: 84px;
-    height: 84px;
+    width: 104px;
+    height: 104px;
     border-radius: 16px;
     border: 1.5px solid transparent;
     background: #ececef;
@@ -918,10 +922,15 @@
   }
   .dc-pdp-gallery__slide.dc-has-fill { padding: 0; }
   .dc-pdp-gallery__stage:has(.dc-pdp-gallery__slide.active.dc-has-fill) { padding: 0; background: #fff; }
+  /* Na miniatura a foto nunca é cortada: em 104px um crop esconde o produto.
+     O `cover` continua valendo só no palco grande. */
+  .dc-pdp-gallery__thumb img,
   .dc-pdp-gallery__thumb img.dc-fill {
-    max-width: none; max-height: none;
     width: 100%; height: 100%;
-    object-fit: cover; mix-blend-mode: normal;
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    padding: 6px;
+    mix-blend-mode: multiply;
   }
   .dc-pdp-gallery__thumb.dc-has-fill { padding: 0; }
   .dc-pdp-gallery__nav {
