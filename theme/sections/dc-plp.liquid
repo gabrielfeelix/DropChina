@@ -268,9 +268,18 @@
 
         {%- paginate collection.products by products_per_page -%}
         {%- if collection.products.size > 0 -%}
+          {%- comment -%}
+            Duas passadas: disponíveis primeiro, esgotados depois. Card apagado no
+            meio da vitrine derruba a leitura da página inteira, e 29% do catálogo
+            está esgotado. A ordenação vale dentro da página — a paginação é da
+            Shopify e continua respeitando o `sort_by` escolhido.
+          {%- endcomment -%}
           <div class="dc-plp-grid">
             {%- for p in collection.products -%}
-              {% render 'dc-product-card', product: p %}
+              {%- if p.available -%}{% render 'dc-product-card', product: p %}{%- endif -%}
+            {%- endfor -%}
+            {%- for p in collection.products -%}
+              {%- unless p.available -%}{% render 'dc-product-card', product: p %}{%- endunless -%}
             {%- endfor -%}
           </div>
 

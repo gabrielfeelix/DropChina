@@ -61,8 +61,22 @@
       >
         {%- if tab_collection != blank and tab_collection.products.size > 0 -%}
           <div class="{% if layout == 'carousel' %}dc-pl__carousel{% else %}dc-pl__grid{% endif %}" data-dc-pl-track>
-            {%- for p in tab_collection.products limit: max_products -%}
-              {% render 'dc-product-card', product: p %}
+            {%- comment -%} Disponíveis primeiro; esgotado fecha a fila. {%- endcomment -%}
+            {%- assign vagas = max_products -%}
+            {%- assign usadas = 0 -%}
+            {%- for p in tab_collection.products -%}
+              {%- if usadas < vagas and p.available -%}
+                {% render 'dc-product-card', product: p %}
+                {%- assign usadas = usadas | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- for p in tab_collection.products -%}
+              {%- unless p.available -%}
+                {%- if usadas < vagas -%}
+                  {% render 'dc-product-card', product: p %}
+                  {%- assign usadas = usadas | plus: 1 -%}
+                {%- endif -%}
+              {%- endunless -%}
             {%- endfor -%}
           </div>
           {%- if section.settings.show_view_all -%}
