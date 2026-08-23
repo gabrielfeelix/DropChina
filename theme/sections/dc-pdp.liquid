@@ -392,20 +392,43 @@
     var thumbsEl = container.querySelector('[data-dc-thumbs]');
     var thUp = container.querySelector('[data-dc-thumbs-up]');
     var thDown = container.querySelector('[data-dc-thumbs-down]');
+    var thumbsStage = container.querySelector('.dc-pdp-gallery__stage');
+    // A coluna de thumbs acompanha a altura do palco. Sem isso ela usava um teto fixo
+    // que costumava ser maior que a imagem, então a coluna estourava para baixo e a
+    // seta nunca aparecia — todas as fotos ficavam empilhadas à mostra.
+    function syncThumbsHeight() {
+      if (!thumbsEl || !thumbsStage) return;
+      if (window.matchMedia('(max-width: 749px)').matches) { thumbsEl.style.maxHeight = ''; return; }
+      var h = thumbsStage.clientHeight;
+      if (h > 0) thumbsEl.style.maxHeight = h + 'px';
+    }
     function updateThumbNav() {
       if (!thumbsEl) return;
       var overflow = thumbsEl.scrollHeight - thumbsEl.clientHeight > 4;
-      var atTop = thumbsEl.scrollTop <= 2;
-      var atBottom = thumbsEl.scrollTop >= thumbsEl.scrollHeight - thumbsEl.clientHeight - 2;
-      if (thUp) thUp.hidden = !overflow || atTop;
-      if (thDown) thDown.hidden = !overflow || atBottom;
+      // Com rolagem circular as duas setas ficam sempre disponíveis quando há overflow:
+      // no fim, descer volta ao começo, e vice-versa.
+      if (thUp) thUp.hidden = !overflow;
+      if (thDown) thDown.hidden = !overflow;
+    }
+    function scrollThumbs(dir) {
+      if (!thumbsEl) return;
+      var max = thumbsEl.scrollHeight - thumbsEl.clientHeight;
+      var step = Math.max(94, Math.round(thumbsEl.clientHeight * 0.8));
+      var alvo = thumbsEl.scrollTop + (dir * step);
+      if (dir > 0 && thumbsEl.scrollTop >= max - 2) alvo = 0;
+      else if (dir < 0 && thumbsEl.scrollTop <= 2) alvo = max;
+      thumbsEl.scrollTo({ top: Math.max(0, Math.min(max, alvo)), behavior: 'smooth' });
     }
     if (thumbsEl) {
       thumbsEl.addEventListener('scroll', updateThumbNav, { passive: true });
-      window.addEventListener('resize', updateThumbNav);
-      window.addEventListener('load', updateThumbNav);
-      if (thUp) thUp.addEventListener('click', function() { thumbsEl.scrollBy({ top: -188, behavior: 'smooth' }); });
-      if (thDown) thDown.addEventListener('click', function() { thumbsEl.scrollBy({ top: 188, behavior: 'smooth' }); });
+      window.addEventListener('resize', function() { syncThumbsHeight(); updateThumbNav(); });
+      window.addEventListener('load', function() { syncThumbsHeight(); updateThumbNav(); });
+      if (thumbsStage && 'ResizeObserver' in window) {
+        new ResizeObserver(function() { syncThumbsHeight(); updateThumbNav(); }).observe(thumbsStage);
+      }
+      if (thUp) thUp.addEventListener('click', function() { scrollThumbs(-1); });
+      if (thDown) thDown.addEventListener('click', function() { scrollThumbs(1); });
+      syncThumbsHeight();
       updateThumbNav();
     }
 
