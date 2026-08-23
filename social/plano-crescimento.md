@@ -34,7 +34,7 @@ Objetivo: **entender e destravar a conversão** antes de comprar tráfego. Nada 
 - [ ] **Meta Pixel** + banner LGPD (Consent Mode v2).
 - [ ] **Meta Business Manager** criado + **domínio verificado** (`dropchinaoficial.com.br`).
 - [ ] **Tapar vazamentos de conversão** — card de esgotado apagado demais (29% da vitrine), zero avaliação em produto (Judge.me), frete desproporcional em item pesado.
-- [ ] **Google Meu Negócio** criado (endereço Maringá-PR já existe no schema).
+- [ ] **Google Meu Negócio** criado (endereço São José dos Pinhais-PR já existe no schema).
 - [ ] **Contas sociais** ativas: Instagram Business + Página Facebook vinculada + WhatsApp Business.
 - [ ] **Brand mínimo**: avatar, capas, paleta, 3 templates de post.
 - [x] ~~**Conteúdo estocado**~~ — 7 posts prontos na fila + 10 artigos de blog **já publicados** (07/jul).

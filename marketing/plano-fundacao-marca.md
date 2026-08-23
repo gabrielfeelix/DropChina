@@ -22,7 +22,7 @@ fiscal, sem garantia, sem quem reclamar. No Brasil esse pacote de associações 
 
 | Sinal | Realidade |
 |---|---|
-| Estoque | Próprio, no Brasil, em Maringá-PR |
+| Estoque | Próprio, no Brasil, em São José dos Pinhais-PR |
 | Fiscal | CNPJ, NF-e configurada e emitindo |
 | Reputação | **Vendedor Platinum no Mercado Livre, +50 mil vendas** |
 | Entrega | Nacional, dias — não semanas |
@@ -124,7 +124,7 @@ Tudo depende disso, e é o primeiro sinal visível de que a marca existe.
 
 ### V2. Google Meu Negócio
 **O maior retorno percebido por esforço do plano inteiro.**
-- [ ] Reivindicar a ficha (endereço de Maringá-PR já existe)
+- [ ] Reivindicar a ficha (endereço de São José dos Pinhais-PR já existe)
 - [ ] Preencher 100%: horário, categorias, fotos reais do estoque, link do site, WhatsApp
 - [ ] Primeira publicação de oferta
 
@@ -234,7 +234,7 @@ Esta fase é a que mais rende e a que está inteiramente parada hoje.
       **230 sessões/mês e 0 pedidos**, e ninguém sabe por quê. Isto é o primeiro alvo
 - [ ] **GA4** — campo já existe no tema (*Personalizar → Medição e verificação*)
 - [ ] **Google Search Console** — campo também já existe no tema. Enviar sitemap
-- [ ] **Google Meu Negócio** — endereço de Maringá-PR já existe. Preencher **100%**: horário,
+- [ ] **Google Meu Negócio** — endereço de São José dos Pinhais-PR já existe. Preencher **100%**: horário,
       categorias, fotos reais, link do site, WhatsApp. Ficha completa aparece mais
 - [ ] **Meta Pixel** + verificar domínio — mesmo sem verba, acumula público de graça
 - [ ] **Banner LGPD** (Consent Mode v2)

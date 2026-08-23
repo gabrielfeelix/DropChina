@@ -19,7 +19,7 @@
 | **Google Ads (Performance Max)** | mídia paga de e-commerce | 🔜 depois da base |
 | **Google Search Console** | indexação/SEO da loja | ⏱️ rápido |
 | **Meta Pixel + Conversions API (CAPI)** | rastreio Facebook/Instagram Ads | ⏱️ |
-| **Google Business Profile** | perfil de marca em busca local | ⏱️ **alta** — endereço de Maringá-PR existe, e pro público PME rende mais que Instagram |
+| **Google Business Profile** | perfil de marca em busca local | ⏱️ **alta** — endereço de São José dos Pinhais-PR existe, e pro público PME rende mais que Instagram |
 | **Server-side tagging (sGTM)** | recupera 30-40% de conversão perdida por adblock | 🔜 só >R$100k/mês |
 
 ## ⚠️ Pontos que pegam (Shopify 2026)

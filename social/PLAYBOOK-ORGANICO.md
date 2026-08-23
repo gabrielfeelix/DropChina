@@ -53,7 +53,7 @@ A ordem antiga começava pelas contas sociais. Mudou: com tráfego chegando e n�
 2. **Tagueamento** (GA4 → Search Console → Pixel → LGPD) — ver `../marketing/setup-tagueamento.md`. GA4 e Search Console **já têm campo no tema**, é só colar o ID.
 3. **Tapar o vazamento** que o Clarity apontar. Suspeitos conhecidos: card de esgotado apagado demais (29% da vitrine), zero avaliação em produto, frete alto em item pesado.
 4. **Fechar a identidade** (nome, @handle igual em tudo, bio, avatar). Tudo nasce disso.
-5. **Google Meu Negócio** (endereço de Maringá já existe — só reivindicar/preencher). Busca local de alta intenção — pro público PME vale mais que Instagram.
+5. **Google Meu Negócio** (endereço de São José dos Pinhais já existe — só reivindicar/preencher). Busca local de alta intenção — pro público PME vale mais que Instagram.
 6. **WhatsApp Business** com catálogo dos campeões + mensagem de saudação.
 7. **Instagram Business + Página Facebook** (uma vincula na outra).
 8. **Reclame Aqui + Google Reviews** (criar perfis, começar a pedir avaliação).
@@ -86,8 +86,8 @@ Antes de criar qualquer perfil, travar o básico pra tudo sair igual:
 > **Boa prática:** trate o Whats como caixa registradora, não SAC. Resposta rápida + catálogo + link fácil = venda.
 
 ### 5. Google Meu Negócio (Google Business Profile) — SIM, criar
-**O que é:** a fichinha da empresa que aparece do lado direito quando alguém busca "DropChina" ou "cartucho Maringá" no Google, e no Google Maps.
-**Por que vale muito:** grátis, aparece em busca local de alta intenção (gente pronta pra comprar), e é forte sinal de **confiança** (empresa real, com endereço). A DropChina já tem endereço (Maringá-PR) no sistema, então é só reivindicar e preencher.
+**O que é:** a fichinha da empresa que aparece do lado direito quando alguém busca "DropChina" ou "cartucho São José dos Pinhais" no Google, e no Google Maps.
+**Por que vale muito:** grátis, aparece em busca local de alta intenção (gente pronta pra comprar), e é forte sinal de **confiança** (empresa real, com endereço). A DropChina já tem endereço (São José dos Pinhais-PR) no sistema, então é só reivindicar e preencher.
 > **Boa prática:** preencher 100% (horário, fotos de produto, categorias, link do site/Whats), postar oferta semanal e **responder toda avaliação**. Ficha completa aparece mais.
 
 ### 6. Google Search Console + ser achado no Google

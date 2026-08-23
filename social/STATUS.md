@@ -43,7 +43,7 @@ A versão de 06/jul governava a frente com premissas que caíram. Registrado pra
 - **Medição: zero.** Sem GA4, sem GTM, sem Meta Pixel, sem Clarity, sem banner LGPD.
   Cada dia sem Pixel é público que não acumula — quando ligar ads, começa do zero e caro.
 - **Contas sociais: zero.** Nenhum perfil existe (ver `contas-e-acessos.md`, tudo ⬜).
-- **Google Meu Negócio:** não criado (endereço de Maringá já existe, é só reivindicar).
+- **Google Meu Negócio:** não criado (endereço de São José dos Pinhais já existe, é só reivindicar).
 - **Prova social:** nenhum produto tem avaliação. Judge.me nunca instalado.
 
 ## 🎯 Próximas ações (ordem revisada 04/ago)

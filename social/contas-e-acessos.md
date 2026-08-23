@@ -40,10 +40,10 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 | Plataforma | Status | Handle / URL | Observação |
 |---|---|---|---|
 | Instagram Business | ✅ | **@dropchinaoficial** · instagram.com/dropchinaoficial | **criada 23/08** com `contato@` · falta virar conta Comercial/Profissional |
-| Página Facebook | 🟡 | `DropChina · Suprimentos de Impressão` · handle `dropchinaoficial` | criada pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi **desativado em definitivo** pelo Facebook em 23/08. Categoria: Loja de suprimentos para escritório + Loja de informática. Vincular ao Instagram |
+| Página Facebook | ✅ | `facebook.com/dropchinaoficial` | criada 23/08 pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi **desativado em definitivo** pelo Facebook. ⚠️ Definir o **nome de usuário** da Página; até lá a URL é `/people/Dropchina/6159…` |
 | WhatsApp Business | ⬜ | +55 41 99534-2751 | número oficial (header produção) ✅ |
 | TikTok | ⬜ | @dropchinaoficial (só reservar) | Fase 2 — **não criar perfil ativo agora** |
-| YouTube | ✅ | canal criado 23/08 | acessa via conta Google `contato@` · publicar só na Fase 5 |
+| YouTube | ✅ | **@Dropchinaoficial** · `youtube.com/channel/UCUkLOO3Nq…` | canal criado 23/08, avatar com o monograma DC · acessa via conta Google `contato@` · publicar só na Fase 5 |
 | Kwai | ⬜ | — | opcional |
 
 ## Meta / anúncios
@@ -58,17 +58,20 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 ## Google
 | Item | Status | Valor | Observação |
 |---|---|---|---|
-| GA4 Measurement ID | 🟡 | **`G-KZ4CGVHY7X`** | propriedade criada 23/08 · ligar pelo app **Google & YouTube**, ⚠️ **não** colar no campo do tema (contaria dobrado) |
-| GTM Container ID | ⬜ | GTM-________ | idem |
+| GA4 Measurement ID | ✅ | **`G-KZ4CGVHY7X`** · propriedade `551149346` | ligado pelo app **Google & YouTube** e confirmado no ar. ⚠️ **não** colar no campo do tema (contaria dobrado) |
+| Google Tag | ✅ | **`GT-KDQF3CD7`** | instalada junto com o GA4 pelo app Google & YouTube |
 | Search Console | ✅ | propriedade de **domínio** `dropchinaoficial.com.br` | validado 23/08 por TXT no DNS · **sitemap enviado**, lido com sucesso |
-| Google Meu Negócio | ⏸️ | ficha existente: **DropChina — R. Santo Inácio de Loyola, Guabirotuba, Curitiba-PR** | ⚠️ já gerenciada por `co…@gmail.com`. **"Solicitar acesso" não enviado** — aguardando o Augusto confirmar se o e-mail é dele. O endereço nos docs/schema é Maringá; o DDD oficial 41 é de Curitiba — **conferir qual é o real** |
-| Merchant Center | ⬜ | — | exige GTIN — **53 produtos sem** (04/ago) |
+| Google Meu Negócio | 🟡 | ficha **própria criada 23/08** · `DropChina` · Loja de Informática | verificação por correspondência, **até 5 dias**. Endereço: Rua Mandirituba 216, Fundos — Afonso Pena, São José dos Pinhais/PR, 83045-030 (o fiscal, da Receita). Cobertura: Brasil. Falta corrigir o **horário**, que está "Fechado" — o site diz Seg-Sáb 8h-20h |
+| ⚠️ Ficha FALSA no Google | 🚨 | `DropChina — R. Santo Inácio de Loyola, Guabirotuba, Curitiba-PR, 81520-250` · gerenciada por `co…@gmail.com` | **Não é do Augusto e não é de agência antiga: é alguém se passando pela empresa.** Denunciar em Maps → Sugerir uma edição → Fechar ou remover, e pelo *Business Redressal Complaint Form*. Guardar print antes |
+| Merchant Center | ✅ | conta **`5843491607`** | criada 23/08 e **Active**. ⚠️ O domínio estava reivindicado por outra conta — resolvido com **"Transfer my domain"**, que funcionou porque o Search Console já validava a `contato@`. Feed ainda com 0 produtos (sincroniza em horas) |
 | **Microsoft Clarity ID** | ✅ | **`y70lfm3dio`** | projeto `Dropchina` criado 23/08 · app instalado na Shopify, ligar o embed `Clarity JS` no tema |
 
 ## Dados oficiais da empresa (confirmados no schema do tema)
 - **Razão social:** DROPCHINA LTDA
 - **CNPJ:** 57.306.430/0001-53
-- **Endereço:** Rua Osvaldo Cruz 263, sala 606 — Maringá-PR, 87020-200
+- **Endereço:** Rua Mandirituba, 216, Fundos — Afonso Pena, São José dos Pinhais/PR, 83045-030
+  (endereço da Receita, o mesmo do schema do tema e dos termos. O "Maringá" registrado até 23/08
+  era **errado**, veio de nota velha)
 - **Site:** dropchinaoficial.com.br
 - **Loja Shopify:** akfd19-1c.myshopify.com (plano Basic, BRL)
 
@@ -89,7 +92,10 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
   o campo de sitemap exige a **URL completa** — só `sitemap.xml` é rejeitado. Os 5 sub-sitemaps
   foram lidos com sucesso no mesmo dia: **76 produtos**, 25 coleções, 18 blogs, 5 páginas.
   **Clarity** criado (`y70lfm3dio`) e script confirmado no ar. **GA4** criado (`G-KZ4CGVHY7X`).
-  **Judge.me** instalado e ativo. Descobertas: **Reclame Aqui e Google Meu Negócio já existem** e
+  **Judge.me** instalado e ativo, com seção própria no tema (`dc-judgeme-reviews`).
+  **Merchant Center** criado (`5843491607`) com o domínio recuperado de outra conta.
+  **Página do Facebook** e **canal do YouTube** criados. **Google Meu Negócio próprio** criado e
+  em verificação. Descobertas: **Reclame Aqui e Google Meu Negócio já existem** e
   não estão sob nosso controle. Detalhe completo em `../docs/handoff-2026-08-23.md`. YouTube criado (via conta Google `contato@`). **Titularidade da loja Shopify transferida** de Gabriel para
   `contato@dropchinaoficial.com.br` (conta criada como "Augusto Dropchina"). Caminho usado:
   *Configurações → Geral → Organizações e transferências de loja → Transferir para novo

@@ -1,0 +1,111 @@
+{%- comment -%}
+  Avaliações do Judge.me na PDP.
+
+  Substitui a antiga `dc-pdp-reviews`, que lia `product.metafields.custom.reviews_items`
+  — um metafield preenchido à mão que nunca teve dado. O Judge.me escreve em
+  `product.metafields.judgeme.*`, então as duas nunca poderiam conversar.
+
+  O código do widget vem da instalação do Judge.me. A instrução oficial manda colar em
+  `templates/product.liquid`, que não existe em tema 2.0 — por isso vira seção.
+{%- endcomment -%}
+
+<section
+  id="dc-judgeme-reviews"
+  class="dc-jdgm-section"
+  style="padding-block: {{ section.settings.padding_top | default: 64 }}px {{ section.settings.padding_bottom | default: 80 }}px;"
+>
+  <div class="dc-jdgm__container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <header class="dc-jdgm__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="dc-jdgm__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="dc-jdgm__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <!-- Start of Judge.me code -->
+    {%- assign has_legacy = false -%}
+    {%- if product.metafields.judgeme.widget.size > 20 -%}{%- assign has_legacy = true -%}{%- endif -%}
+    <div style="clear:both"></div>
+    <div
+      id="judgeme_product_reviews"
+      class="jdgm-widget jdgm-review-widget"
+      data-product-title="{{ product.title | escape }}"
+      data-id="{{ product.id }}"
+      data-product-id="{{ product.id }}"
+      data-widget="review"
+      data-auto-install="false"
+      data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}"
+      data-entry-point="review_widget.js"
+      data-entry-key="review-widget/main.js"
+    >
+      {%- if has_legacy -%}
+        <div class="jdgm-legacy-widget-content" style="display: none;">{{ product.metafields.judgeme.widget }}</div>
+      {%- endif -%}
+    </div>
+    {%- if product.metafields.judgeme.review_widget_data -%}
+      <script>
+        jdgm.data ||= {}; jdgm.data.reviewWidget ||= {};
+        jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}
+      </script>
+    {%- endif -%}
+    <!-- End of Judge.me code -->
+  </div>
+</section>
+
+{% stylesheet %}
+  .dc-jdgm-section { background: #ffffff; }
+  .dc-jdgm__container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: 28px;
+  }
+  .dc-jdgm__head { margin-bottom: 36px; }
+  .dc-jdgm__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .dc-jdgm__title {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    font-weight: 700;
+    color: #0d1115;
+    margin: 0;
+  }
+  /* O widget traz o próprio cabeçalho; o nosso já cumpre esse papel. */
+  .dc-jdgm-section .jdgm-rev-widg__title { display: none; }
+
+  @media (max-width: 749px) {
+    .dc-jdgm__container { padding-inline: 20px; }
+    .dc-jdgm__title { font-size: 28px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DC Judge.me Reviews",
+  "tag": "section",
+  "class": "section-dc-judgeme-reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "O que dizem os clientes" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Avaliações verificadas" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    { "name": "DC Judge.me Reviews" }
+  ]
+}
+{% endschema %}

@@ -26,8 +26,8 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | **Exclusão Bling → Shopify** | Coberta por `sync-exclusoes-shopify.ts` — ⚠️ **ainda não agendada em cron** |
 | **Catálogo** | 164 produtos no Bling (154 ativos + 6 na lixeira + 4 inativos) · 119 na Shopify · **101/154 com GTIN** |
 | **Vendas** | **0 pedidos na Shopify.** Os 8 do Bling são do Mercado Livre, de nov/2024 |
-| **Medição** | 🟡 **Clarity no ar** (`y70lfm3dio`, 23/08) · GA4 criado (`G-KZ4CGVHY7X`) · Search Console validado + sitemap. Falta Pixel, GTM e banner LGPD |
-| **Marca** | 🟡 Instagram **@dropchinaoficial** e YouTube criados (23/08) · sem logo · Google Meu Negócio e Reclame Aqui **já existem sob controle de terceiros** |
+| **Medição** | ✅ **Clarity** (`y70lfm3dio`) e **GA4** (`G-KZ4CGVHY7X`) no ar, confirmados no HTML · Search Console validado + sitemap · Merchant Center `5843491607` Active. Falta Pixel e banner LGPD |
+| **Marca** | 🟡 Instagram, Facebook, YouTube e Google Meu Negócio próprios criados (23/08) · logo escolhida, falta vetorizar e aplicar · ⚠️ **ficha FALSA no Google se passando pela empresa** e Reclame Aqui sob controle de terceiro |
 
 ---
 
@@ -72,6 +72,8 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 ### Decisões pendentes
 - **B2C × PME** — o público declarado inclui PMEs, e toner é recompra, não impulso. Muda se o
   esforço vai para Instagram ou para Google/WhatsApp. Ver `marketing/plano-fundacao-marca.md`
+- **Ficha falsa no Google** — denunciar a `DropChina` de Guabirotuba/Curitiba, que é terceiro se
+  passando pela empresa. Ver `docs/handoff-2026-08-23.md`
 - **Marca DropChina em massa** nos toners/papel — o Augusto pediu. Tensão: marca própria em item de
   terceiro é motivo de denúncia no ML
 - **Provedor de e-mail** para sair do revendedor
@@ -127,6 +129,8 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | Depósito Bling | Geral, id `14888019804` |
 | Location Shopify | `gid://shopify/Location/91848278235` |
 | CNPJ | DROPCHINA LTDA · 57.306.430/0001-53 |
+| Endereço (Receita) | Rua Mandirituba, 216, Fundos — Afonso Pena, São José dos Pinhais/PR, 83045-030 |
+| Contas de marca | GA4 `G-KZ4CGVHY7X` · Google Tag `GT-KDQF3CD7` · Clarity `y70lfm3dio` · Merchant Center `5843491607` · IG/FB/YT `@dropchinaoficial` |
 | WhatsApp oficial | 41 99534-2751 |
 | Sessões / pedidos | ~230 por 30 dias · **0 pedidos** |
 
