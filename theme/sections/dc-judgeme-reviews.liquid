@@ -81,8 +81,11 @@
     color: #0d1115;
     margin: 0;
   }
-  /* O widget traz o próprio cabeçalho; o nosso já cumpre esse papel. */
-  .dc-jdgm-section .jdgm-rev-widg__title { display: none; }
+  /* O widget traz o próprio título ("Avaliações de Clientes"); o nosso já cumpre
+     esse papel, então some com ele em todas as variantes de markup do Judge.me. */
+  .dc-jdgm-section .jdgm-rev-widg__title,
+  .dc-jdgm-section .jdgm-widget .jdgm-rev-widg__title,
+  .dc-jdgm-section .jdgm-rev-widg__header > .jdgm-rev-widg__title { display: none !important; }
 
   @media (max-width: 749px) {
     .dc-jdgm__container { padding-inline: 20px; }
