@@ -159,9 +159,22 @@
 
       <div class="dc-pdp-info">
         <div class="dc-pdp-info__tags">
-          {%- for tag in product_obj.tags limit: 3 -%}
-            {%- assign t_upper = tag | upcase -%}
-            <span class="dc-pdp-tag {% if t_upper contains 'MAIS VENDIDO' or t_upper contains 'BEST' %}dc-pdp-tag--best{% endif %}">{{ tag | escape }}</span>
+          {%- comment -%}
+            As tags `categoria-*` e `marca-*` são taxonomia interna da loja: aparecer
+            como "CATEGORIA-IMPRESSAO-3D" numa pílula preta não diz nada ao cliente e
+            só repete a categoria e a marca que já estão no breadcrumb e logo abaixo.
+          {%- endcomment -%}
+          {%- assign mostradas = 0 -%}
+          {%- for tag in product_obj.tags -%}
+            {%- assign t_low = tag | downcase -%}
+            {%- unless t_low contains 'categoria-' or t_low contains 'marca-' or t_low == 'em-breve' -%}
+              {%- if mostradas < 3 -%}
+                {%- assign t_upper = tag | upcase -%}
+                {%- assign t_label = tag | replace: '-', ' ' -%}
+                <span class="dc-pdp-tag {% if t_upper contains 'MAIS VENDIDO' or t_upper contains 'BEST' %}dc-pdp-tag--best{% endif %}">{{ t_label | escape }}</span>
+                {%- assign mostradas = mostradas | plus: 1 -%}
+              {%- endif -%}
+            {%- endunless -%}
           {%- endfor -%}
         </div>
         {%- if product_obj.vendor != blank -%}
@@ -844,6 +857,10 @@
   .dc-pdp-gallery__thumbnav[hidden] { display: none; }
   .dc-pdp-gallery__thumbnav:hover { background: #ffffff; transform: translateX(-50%) scale(1.08); }
   .dc-pdp-gallery__thumb {
+    /* `flex: 0 0 auto` é o que faz a coluna estourar e rolar. Sem isso o flex
+       encolhe as miniaturas para caber no teto: elas achatam, nunca há overflow
+       e a seta de navegação nunca aparece. */
+    flex: 0 0 auto;
     width: 104px;
     height: 104px;
     border-radius: 16px;
@@ -888,14 +905,14 @@
     aspect-ratio: 1 / 1;
     display: grid;
     place-items: center;
-    padding: 48px;
+    padding: 28px;
   }
   .dc-pdp-gallery__slide {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
-    padding: 48px;
+    padding: 28px;
     /* SEM opacity transition pq opacity < 1 cria stacking context e
        quebra mix-blend-mode da imagem (fica isolado do bg cinza).
        Usamos visibility + display none nos inativos. */
@@ -905,8 +922,8 @@
   .dc-pdp-gallery__img,
   .dc-pdp-gallery__slide img,
   .dc-pdp-gallery__thumb img {
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 100%;
+    max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
