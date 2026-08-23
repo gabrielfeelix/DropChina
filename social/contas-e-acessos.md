@@ -40,7 +40,7 @@ no registro.br até 2034 e é nosso —, mas até lá vale ter recuperação sec
 | Plataforma | Status | Handle / URL | Observação |
 |---|---|---|---|
 | Instagram Business | ✅ | **@dropchinaoficial** · instagram.com/dropchinaoficial | **criada 23/08** com `contato@` · falta virar conta Comercial/Profissional |
-| Página Facebook | ⬜ | `dropchinaoficial` (reservar o mesmo handle) | vincular ao Instagram |
+| Página Facebook | 🟡 | `DropChina · Suprimentos de Impressão` · handle `dropchinaoficial` | criada pelo **perfil pessoal real do Gabriel** — o perfil com nome de empresa foi **desativado em definitivo** pelo Facebook em 23/08. Categoria: Loja de suprimentos para escritório + Loja de informática. Vincular ao Instagram |
 | WhatsApp Business | ⬜ | +55 41 99534-2751 | número oficial (header produção) ✅ |
 | TikTok | ⬜ | @dropchinaoficial (só reservar) | Fase 2 — **não criar perfil ativo agora** |
 | YouTube | ✅ | canal criado 23/08 | acessa via conta Google `contato@` · publicar só na Fase 5 |
