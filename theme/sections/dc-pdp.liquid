@@ -74,7 +74,7 @@
 
 <script src="{{ 'dc-image-fit.js' | asset_url }}" defer></script>
 
-<section class="dc-pdp section section--page-width" style="padding-block: {{ section.settings.padding_top | default: 24 }}px 0;">
+<section class="dc-pdp" style="padding-block: {{ section.settings.padding_top | default: 24 }}px 0;">
   <div class="dc-pdp__container">
     <div class="dc-pdp__layout">
 
@@ -806,7 +806,7 @@
   }
   .dc-pdp__layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: 56px;
     align-items: start;
   }
