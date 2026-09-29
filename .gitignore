@@ -58,3 +58,8 @@ banner*.png
 
 # MCP local (cwd absoluto, específico da máquina)
 .mcp.json
+
+# Fotos de produto baixadas para upload (já hospedadas na Shopify; regeneráveis)
+catalogo/filamentos-bambu/**/*.webp
+catalogo/filamentos-bambu/**/*.jpg
+catalogo/filamentos-bambu/**/*.png

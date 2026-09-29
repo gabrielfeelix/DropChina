@@ -31,6 +31,16 @@
     endif
   endif
   assign img_count = product.images.size
+
+  # Bloco rico opcional: tudo depois de <div class="dc-rich"> (último elemento da descrição).
+  # Só produtos que trazem o bloco mudam; o resto do catálogo segue igual.
+  assign rich_html = ''
+  if desc contains '<div class="dc-rich">'
+    assign rich_html = desc | split: '<div class="dc-rich">' | last | remove_last: '</div>'
+    # Imagens compartilhadas moram em assets/ do tema: a descrição usa src="dc-asset:arquivo".
+    assign asset_base = 'dc-rich-base.txt' | asset_url | split: 'dc-rich-base.txt' | first
+    assign rich_html = rich_html | replace: 'dc-asset:', asset_base
+  endif
 -%}
 
 <section
@@ -93,6 +103,11 @@
         </section>
       {%- endif -%}
 
+      {%- if rich_html != blank -%}
+        <section class="dc-story__sec dc-story__richSec">
+          <div class="dc-rich">{{ rich_html }}</div>
+        </section>
+      {%- endif -%}
       {%- if has_specs == false and intro_text == blank and product.description != blank -%}
         <section class="dc-story__sec">
           <div class="dc-story__rte rte">{{ product.description }}</div>
@@ -242,6 +257,58 @@
   .dc-story__specsMedia img { width: auto; height: auto; max-width: 80%; max-height: 80%; object-fit: contain; mix-blend-mode: multiply; }
 
   .dc-story__rte { color: #3a414b; font-size: 16.5px; line-height: 1.75; }
+
+  /* Bloco rico (descrição com <div class="dc-rich">): seções editoriais com imagem */
+  .dc-rich { display: grid; gap: 56px; color: #3a414b; font-size: 16px; line-height: 1.7; }
+  .dc-rich h3 {
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    margin: 0 0 14px; font-size: clamp(22px, 2.6vw, 30px);
+    letter-spacing: -.03em; font-weight: 800; color: #0f1115; line-height: 1.1;
+  }
+  .dc-rich p { margin: 0 0 12px; }
+  .dc-rich .dc-rich__kicker {
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    color: #0f4fa8; font-weight: 700; margin: 0 0 10px;
+  }
+  .dc-rich img { display: block; width: 100%; height: auto; }
+  .dc-rich__feature { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+  .dc-rich__feature--rev figure { order: 2; }
+  .dc-rich__feature figure {
+    margin: 0; aspect-ratio: 1 / 1; background: #eef2f7; border: 1px solid #dfe4ea;
+    border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  .dc-rich__feature figure img { height: 100%; object-fit: cover; }
+  .dc-rich__feature ul { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+  .dc-rich__feature li { position: relative; padding-left: 28px; }
+  .dc-rich__feature li::before {
+    content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 14px; border-radius: 50%;
+    background: radial-gradient(circle, #0f4fa8 0 3px, rgba(15,79,168,.15) 4px);
+  }
+  .dc-rich__banner { margin: 0; }
+  .dc-rich__banner img { border-radius: 24px; border: 1px solid #dfe4ea; }
+  .dc-rich__banner figcaption { margin-top: 12px; font-size: 14px; color: #5f6673; text-align: center; }
+  .dc-rich__params table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .dc-rich__params th, .dc-rich__params td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #e6eaef; }
+  .dc-rich__params th {
+    width: 42%; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #7a808c;
+  }
+  .dc-rich__params td { font-weight: 700; color: #0f1115; font-variant-numeric: tabular-nums; }
+  .dc-rich__params tr:last-child th, .dc-rich__params tr:last-child td { border-bottom: 0; }
+  .dc-rich__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .dc-rich__cards article {
+    background: #f4f6f9; border: 1px solid #e3e7ec; border-radius: 20px; padding: 22px 22px 18px;
+  }
+  .dc-rich__cards h4 {
+    margin: 0 0 8px; font-size: 15px; font-weight: 800; color: #0f1115; letter-spacing: -.01em;
+  }
+  .dc-rich__cards p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+  @media (max-width: 860px) {
+    .dc-rich { gap: 40px; }
+    .dc-rich__feature { grid-template-columns: 1fr; gap: 22px; }
+    .dc-rich__feature--rev figure { order: 0; }
+    .dc-rich__cards { grid-template-columns: 1fr; }
+    .dc-rich__params th { width: 50%; }
+  }
 
   /* Foto contextual (dc-image-fit.js): preenche o card edge-to-edge */
   .dc-story__heroCard.dc-has-fill,

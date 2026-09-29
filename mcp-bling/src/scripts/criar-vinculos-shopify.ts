@@ -9,6 +9,9 @@
  *   npx tsx src/scripts/criar-vinculos-shopify.ts         # cria
  *
  * Idempotente: pula produto que já tem vínculo nesse canal.
+ * Manda o preço da coluna Preco: sem ele o vínculo nasce com preco 0, e é esse o preço que a
+ * Shopify lê no "Sincronizar preços". PUT em /produtos/lojas/{id} devolve 404 (29/set) —
+ * para corrigir preço de vínculo, apagar e recriar.
  */
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -23,8 +26,8 @@ const dry = process.argv.includes('--dry')
 async function main() {
   const linhas = readFileSync(CSV, 'utf8').split(/\r?\n/).filter((l) => l.trim())
   const rows = linhas.slice(1).map((l) => {
-    const [sku, idBling, idShopify] = l.split(';')
-    return { sku, idBling: Number(idBling), idShopify: (idShopify ?? '').trim() }
+    const [sku, idBling, idShopify, preco] = l.split(';')
+    return { sku, idBling: Number(idBling), idShopify: (idShopify ?? '').trim(), preco: Number(preco) || undefined }
   }).filter((r) => r.idBling && r.idShopify)
 
   console.log(`📄 ${rows.length} vínculos no CSV`)
@@ -34,7 +37,7 @@ async function main() {
       const ex: any = await withBling((b) => b.produtosLojas.get({ idLoja: LOJA_ID, idProduto: r.idBling } as any))
       if ((ex.data ?? []).length) { jaTem++; continue }
       if (dry) { console.log(`   + ${r.sku.padEnd(28).slice(0, 28)} Bling ${r.idBling} → loja ${r.idShopify}`); ok++; continue }
-      await withBling((b) => b.produtosLojas.create({ codigo: r.idShopify, produto: { id: r.idBling }, loja: { id: LOJA_ID } } as any))
+      await withBling((b) => b.produtosLojas.create({ codigo: r.idShopify, preco: r.preco, produto: { id: r.idBling }, loja: { id: LOJA_ID } } as any))
       ok++
     } catch (e) {
       erros++; console.log(`   ⚠️ ${r.sku}: ${e instanceof Error ? e.message : e}`)

@@ -119,16 +119,39 @@
       </div>
       <button type="button" class="dc-card__add dc-card__add--soldout" disabled>Em breve</button>
     {%- else -%}
+      {%- comment -%}
+        O card mostra só o que o checkout cobra (Pagar.me):
+        - Pix: desconto único da loja (8%). O metafield `dropchina.pix_price` NÃO é usado — a
+          Pagar.me não aplica preço de Pix por produto, e em 29/09 ele anunciava R$ 10.000 na
+          P2S enquanto o checkout cobrava R$ 13.165.
+        - Parcelas: até 10x sem juros, parcela mínima R$ 59 (Pagar.me, 29/09).
+          `dropchina.installments_max` só pode reduzir, nunca passar de 10.
+        Mesma regra da PDP (sections/dc-pdp.liquid).
+      {%- endcomment -%}
+      {%- assign pix_pct = 8 -%}
+      {%- assign pix_factor = 100 | minus: pix_pct -%}
+      {%- assign card_pix = p_var.price | times: pix_factor | divided_by: 100 -%}
+      {%- assign card_inst_n = p_var.price | divided_by: 5900 -%}
+      {%- if card_inst_n > 10 -%}{%- assign card_inst_n = 10 -%}{%- endif -%}
+      {%- assign card_inst_meta = product.metafields.dropchina.installments_max.value | default: 10 -%}
+      {%- if card_inst_meta > 0 and card_inst_meta < card_inst_n -%}{%- assign card_inst_n = card_inst_meta -%}{%- endif -%}
+      {%- if card_inst_n < 1 -%}{%- assign card_inst_n = 1 -%}{%- endif -%}
+      {%- assign installment = p_var.price | divided_by: card_inst_n -%}
+
       <div class="dc-card__price-stack">
         {%- if on_sale -%}
           <span class="dc-card__price-old">{{ p_var.compare_at_price | money }}</span>
         {%- endif -%}
         <div class="dc-card__price-row">
-          <span class="dc-card__price{% if on_sale %} dc-card__price--sale{% endif %}">{{ p_var.price | money }}</span>
+          <span class="dc-card__price{% if on_sale %} dc-card__price--sale{% endif %}">{{ card_pix | money }}</span>
+          <span class="dc-card__price-tag">no Pix</span>
         </div>
       </div>
-      {%- assign installment = p_var.price | divided_by: 10 -%}
-      <div class="dc-card__installments">em até <b>10x {{ installment | money }}</b> sem juros</div>
+      {%- if card_inst_n > 1 -%}
+        <div class="dc-card__installments">ou <b>{{ card_inst_n }}x {{ installment | money }}</b> sem juros</div>
+      {%- else -%}
+        <div class="dc-card__installments">ou <b>{{ p_var.price | money }}</b> no cartão</div>
+      {%- endif -%}
       {%- if p_var.price >= 100000 -%}
         <div class="dc-card__shipping"><span class="dc-card__pulse"></span> Frete grátis</div>
       {%- endif -%}

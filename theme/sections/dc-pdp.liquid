@@ -8,8 +8,20 @@
     assign on_sale = true
     assign savings_pct = compare_price | minus: current_price | times: 100 | divided_by: compare_price | round
   endif
-  assign pix_price_cents = current_price | times: 0.95 | round
-  assign installment_cents = current_price | divided_by: 10
+  assign pix_price_cents = current_price | times: 0.92 | round
+  # Parcelas: até 10x sem juros, parcela mínima R$ 59 (Pagar.me, 29/09). Mesma regra do dc-product-card.
+  assign inst_n = current_price | divided_by: 5900
+  if inst_n > 10
+    assign inst_n = 10
+  endif
+  assign inst_meta = product_obj.metafields.dropchina.installments_max.value | default: 10
+  if inst_meta > 0 and inst_meta < inst_n
+    assign inst_n = inst_meta
+  endif
+  if inst_n < 1
+    assign inst_n = 1
+  endif
+  assign installment_cents = current_price | divided_by: inst_n
 
   assign rating_meta = product_obj.metafields.reviews.rating.value
   assign rating_avg = 0
@@ -216,8 +228,8 @@
           <span class="dc-pdp-info__price-off" data-dc-price-off {% unless on_sale %}hidden{% endunless %}>{%- if on_sale -%}−{{ savings_pct }}%{%- endif -%}</span>
         </div>
         <div class="dc-pdp-info__installments">
-          em até <b data-dc-installments>10x {{ installment_cents | money }}</b> sem juros
-          <span class="dc-pdp-info__pix-pill">ou <b data-dc-pix>{{ pix_price_cents | money }}</b> no Pix · <b>5% OFF</b></span>
+          em até <b data-dc-installments data-max="{{ inst_meta }}">{{ inst_n }}x {{ installment_cents | money }}</b> sem juros
+          <span class="dc-pdp-info__pix-pill">ou <b data-dc-pix>{{ pix_price_cents | money }}</b> no Pix · <b>8% OFF</b></span>
         </div>
         {%- endif -%}
 
@@ -530,8 +542,12 @@
         offEl.hidden = !onSaleNow;
         if (onSaleNow) offEl.textContent = '−' + Math.round((v.compare_at_price - v.price) * 100 / v.compare_at_price) + '%';
       }
-      if (instEl) instEl.textContent = '10x ' + money(Math.floor(v.price / 10));
-      if (pixEl) pixEl.textContent = money(Math.round(v.price * 0.95));
+      if (instEl) {
+        var n = Math.min(10, Math.floor(v.price / 5900), parseInt(instEl.dataset.max, 10) || 10);
+        if (n < 1) n = 1;
+        instEl.textContent = n + 'x ' + money(Math.floor(v.price / n));
+      }
+      if (pixEl) pixEl.textContent = money(Math.round(v.price * 0.92));
 
       if (addBtn2) {
         addBtn2.disabled = !v.available;

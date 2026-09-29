@@ -1,0 +1,24 @@
+{
+ "PLA_Basic": {
+  "fonte": "Bambu Lab Technical Data Sheet V3.0 (oficial)",
+  "url_pdf": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf",
+  "url_pagina": "https://us.store.bambulab.com/products/pla-basic-filament",
+  "diametro": "1.75 mm (+/-0.03)",
+  "peso_liquido": "1 kg",
+  "carretel": "ABS, 200 mm diam x 67 mm altura",
+  "bico_temp": "190-230 C",
+  "mesa_temp": "35-45 C",
+  "velocidade": "< 300 mm/s",
+  "bicos_suportados": "0.2 / 0.4 / 0.6 / 0.8 mm",
+  "secagem": "Estufa 50 C, 8 h; umidade < 20% RH (selado com dessecante)",
+  "densidade": "1.24 g/cm3",
+  "temp_fusao": "160 C",
+  "hdt_0_45mpa": "57 C",
+  "compatibilidade": "Todas as series AMS (loja); refil exige carretel",
+  "extras_pagina": "Facil de imprimir, acabamento liso, biodegradavel, RFID"
+ },
+ "PLA_Lite": {
+  "fonte": null,
+  "nota": "PLA Lite NAO existe nas lojas oficiais acessiveis (us/eu/store.bambulab.com: 404). Produto de mercado China/Asia; paginas oficiais bambulab.cn/store.bambulab.cn bloqueadas por desafio Cloudflare (403). Nenhum valor oficial coletado. Valores vistos em snippets de busca de revendedores/JD (NAO oficiais, nao usar sem confirmar): bico 190-220 C, mesa 35-55 C, velocidade <300 mm/s, densidade 1.24 g/cm3."
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "_origem": "WhatsApp Augusto 29/09/2026. Preco = venda no cartao (sem juros). Pix: ver _pix.",
+ "_estoque_inicial": 10,
+ "produtos": [
+  {
+   "nome": "Filamento PLA Lite Branco 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Branco",
+   "preco": 119.0,
+   "custo": 69.9,
+   "pix_pedido": 109.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-branco/",
+   "sku": "PLA-LITE-BRANCO-BAMBU",
+   "gtin": "6937285501103"
+  },
+  {
+   "nome": "Filamento PLA Lite Preto 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Preto",
+   "preco": 119.0,
+   "custo": 69.9,
+   "pix_pedido": 109.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-preto/",
+   "sku": "PLA-LITE-PRETO-BAMBU",
+   "gtin": "6937285501127"
+  },
+  {
+   "nome": "Filamento PLA Lite Azul 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Azul",
+   "preco": 129.0,
+   "custo": 89.0,
+   "pix_pedido": 119.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-azul/",
+   "sku": "PLA-LITE-AZUL-BAMBU",
+   "gtin": "6937285505613"
+  },
+  {
+   "nome": "Filamento PLA Lite Amarelo Girassol 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Amarelo Girassol",
+   "preco": 129.0,
+   "custo": 89.0,
+   "pix_pedido": 119.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-amarelo-girassol-thbbd/",
+   "sku": "PLA-LITE-AMARELO-GIRASSOL-BAMBU",
+   "gtin": "6937285505620"
+  },
+  {
+   "nome": "Filamento PLA Lite Cinza 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Cinza",
+   "preco": 129.0,
+   "custo": 89.0,
+   "pix_pedido": 119.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-cinza/",
+   "sku": "PLA-LITE-CINZA-BAMBU",
+   "gtin": "6937285501066"
+  },
+  {
+   "nome": "Filamento PLA Lite Verde 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Verde",
+   "preco": 129.0,
+   "custo": 89.0,
+   "pix_pedido": 119.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-verde/",
+   "sku": "PLA-LITE-VERDE-BAMBU",
+   "gtin": "6937285505637"
+  },
+  {
+   "nome": "Filamento PLA Lite Vermelho 1kg Bambu Lab com Carretel Reutilizável",
+   "linha": "PLA Lite",
+   "cor": "Vermelho",
+   "preco": 129.0,
+   "custo": 89.0,
+   "pix_pedido": 119.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-vermelho/",
+   "sku": "PLA-LITE-VERMELHO-BAMBU",
+   "gtin": "6937285500977"
+  },
+  {
+   "nome": "Filamento PLA Basic Laranja 1kg Bambu Lab",
+   "linha": "PLA Basic",
+   "cor": "Laranja",
+   "preco": 179.0,
+   "custo": 98.0,
+   "pix_pedido": 169.0,
+   "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-c-carretel-reutilizavel-cor-laranja-10300/",
+   "sku": "PLA-BASIC-LARANJA-BAMBU",
+   "gtin": "6975337032311"
+  }
+ ],
+ "_pix": "8% global na Pagar.me (decidido 29/09 com Augusto). Tema ajustado localmente, push so apos painel Pagar.me."
+}

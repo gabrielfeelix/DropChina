@@ -1,7 +1,7 @@
 <script src="{{ 'dc-search.js' | asset_url }}" defer="defer"></script>
 
 {%- comment -%} ============ ANNOUNCEMENT MARQUEE ============ {%- endcomment -%}
-{%- assign announce_items = section.settings.announce_items | default: 'Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil' | split: '|' -%}
+{%- assign announce_items = section.settings.announce_items | default: 'Frete grátis por região|Até 10x sem juros no cartão|8% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil' | split: '|' -%}
 
 <div class="dc-announce">
   <div class="dc-announce__marquee">
@@ -120,6 +120,33 @@
       </button>
       {%- comment -%} Nav primária via settings explícitos (5 slots).
           Cada slot tem label/url/tag (badge opcional ex: "-40%"). {%- endcomment -%}
+      {%- comment -%} Selo do link de ofertas: maior desconto real (compare-at > preço)
+          entre os disponíveis da coleção. Sem desconto cadastrado, cai no Pix.
+          Substitui o badge fixo do setting (o "-40%" antigo não batia com nenhum produto). {%- endcomment -%}
+      {%- liquid
+        assign ofertas_tag = ''
+        for i in (1..6)
+          assign k_url = 'nav_link_' | append: i | append: '_url'
+          assign u = section.settings[k_url] | append: ''
+          if u contains 'ofertas'
+            assign of_handle = u | split: '/' | last
+            assign max_off = 0
+            for p in collections[of_handle].products
+              if p.available and p.compare_at_price > p.price
+                assign off = p.compare_at_price | minus: p.price | times: 100 | divided_by: p.compare_at_price
+                if off > max_off
+                  assign max_off = off
+                endif
+              endif
+            endfor
+            if max_off > 0
+              assign ofertas_tag = 'até −' | append: max_off | append: '%'
+            else
+              assign ofertas_tag = '8% Pix'
+            endif
+          endif
+        endfor
+      -%}
       {%- liquid
         assign novo_until = section.settings.novo_until | default: '2026-10-01'
         assign now_ts = 'now' | date: '%s' | plus: 0
@@ -136,8 +163,24 @@
         {%- assign nav_label = section.settings[key_label] -%}
         {%- assign nav_url   = section.settings[key_url] | default: '#' -%}
         {%- assign nav_tag   = section.settings[key_tag] -%}
+        {%- assign nav_url_t = nav_url | append: '' -%}
+        {%- if ofertas_tag != blank and nav_url_t contains 'ofertas' -%}{%- assign nav_tag = ofertas_tag -%}{%- endif -%}
         {%- if nav_label != blank -%}
-          <a href="{{ nav_url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ forloop.index0 }}">
+          {%- comment -%} Painel escolhido pelo destino do link (antes era pela posição:
+              o 5º link abria o 5º painel — "Ofertas" abria Beleza). {%- endcomment -%}
+          {%- assign nav_url_s = nav_url | append: '' -%}
+          {%- assign nav_mega = '-1' -%}
+          {%- assign nav_blocks = section.blocks | where: 'type', 'mega_cat' -%}
+          {%- for b in nav_blocks -%}
+            {%- assign b_link = b.settings.link | append: '' -%}
+            {%- if b_link != blank and b_link == nav_url_s -%}{%- assign nav_mega = forloop.index0 | append: '' -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if nav_mega == '-1' and nav_url_s contains 'ofertas' -%}
+            {%- assign nav_mega = 'ofertas' -%}
+            {%- assign ofertas_handle = nav_url_s | split: '/' | last -%}
+            {%- assign ofertas_url = nav_url_s -%}
+          {%- endif -%}
+          <a href="{{ nav_url }}" class="dc-nav__link" data-dc-mega-link data-mega-idx="{{ nav_mega }}">
             {{ nav_label }}
             {%- if nav_tag != blank -%}
               {%- unless nav_tag == 'NOVO' and novo_active == false -%}
@@ -247,6 +290,58 @@
             </div>
           </div>
         {%- endfor -%}
+
+        {%- if ofertas_handle != blank -%}
+          {%- assign of_col = collections[ofertas_handle] -%}
+          {%- assign pix_pct = 8 -%}
+          {%- assign pix_factor = 100 | minus: pix_pct -%}
+          <div class="dc-mega__panel dc-mega__panel--ofertas" data-mega-panel="ofertas" hidden>
+            <div class="dc-offers">
+              <div class="dc-offers__hero">
+                <span class="dc-offers__eyebrow"><span class="dc-offers__pulse" aria-hidden="true"></span>Ofertas relâmpago</span>
+                <p class="dc-offers__title">Tecnologia com preço de oportunidade.</p>
+                <ul class="dc-offers__perks">
+                  <li><b>{{ pix_pct }}% OFF</b> no Pix</li>
+                  <li>Até <b>10x</b> sem juros</li>
+                  <li>Envio em até <b>24h</b></li>
+                </ul>
+                <a href="{{ ofertas_url }}" class="dc-offers__cta">
+                  Ver todas as ofertas
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+              <div class="dc-offers__grid">
+                {%- assign of_count = 0 -%}
+                {%- for p in of_col.products -%}
+                  {%- unless p.available -%}{%- continue -%}{%- endunless -%}
+                  {%- assign of_count = of_count | plus: 1 -%}
+                  {%- assign pix_price = p.price | times: pix_factor | divided_by: 100 -%}
+                  <a href="{{ p.url }}" class="dc-mega__product dc-offers__card">
+                    <div class="dc-mega__product-art">
+                      {%- if p.compare_at_price > p.price -%}
+                        {%- assign off = p.compare_at_price | minus: p.price | times: 100 | divided_by: p.compare_at_price -%}
+                        <span class="dc-offers__off">−{{ off }}%</span>
+                      {%- endif -%}
+                      {%- if p.featured_image -%}
+                        {{ p.featured_image | image_url: width: 220 | image_tag: alt: p.title, loading: 'lazy', class: 'dc-mega__product-img' }}
+                      {%- endif -%}
+                    </div>
+                    <div>
+                      <div class="dc-mega__product-brand">{{ p.vendor }}</div>
+                      <div class="dc-mega__product-title dc-offers__name">{{ p.title }}</div>
+                      <div class="dc-offers__prices">
+                        {%- if p.compare_at_price > p.price -%}<s>{{ p.compare_at_price | money }}</s>{%- endif -%}
+                        <span class="dc-mega__product-price">{{ p.price | money }}</span>
+                      </div>
+                      <div class="dc-offers__pix">{{ pix_price | money }} no Pix</div>
+                    </div>
+                  </a>
+                  {%- if of_count == 4 -%}{%- break -%}{%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   {%- endif -%}
@@ -317,6 +412,8 @@
             <a href="{{ section.settings[mm_key_url] | default: '#' }}">
               {{ mm_label }}
               {%- assign mm_tag = section.settings[mm_key_tag] -%}
+              {%- assign mm_url_t = section.settings[mm_key_url] | append: '' -%}
+              {%- if ofertas_tag != blank and mm_url_t contains 'ofertas' -%}{%- assign mm_tag = ofertas_tag -%}{%- endif -%}
               {%- if mm_tag != blank -%}{%- unless mm_tag == 'NOVO' and novo_active == false -%}<span class="dc-nav__tag">{{ mm_tag }}</span>{%- endunless -%}{%- endif -%}
             </a>
           {%- endif -%}
@@ -365,8 +462,9 @@
     var closeTimer = null;
 
     function showPanel(idx) {
-      panels.forEach(function(p) { p.hidden = parseInt(p.dataset.megaPanel, 10) !== idx; });
-      items.forEach(function(i) { i.classList.toggle('active', parseInt(i.dataset.megaCat, 10) === idx); });
+      idx = String(idx);
+      panels.forEach(function(p) { p.hidden = p.dataset.megaPanel !== idx; });
+      items.forEach(function(i) { i.classList.toggle('active', i.dataset.megaCat === idx); });
     }
     function openMega(idx) {
       if (!mega) return;
@@ -374,7 +472,7 @@
       mega.hidden = false;
       if (trigger) trigger.setAttribute('aria-expanded', 'true');
       if (trigger) trigger.classList.add('open');
-      if (typeof idx === 'number') showPanel(idx);
+      if (idx != null) showPanel(idx);
     }
     function closeMega() {
       closeTimer = setTimeout(function() {
@@ -399,16 +497,17 @@
       mega.addEventListener('mouseleave', closeMega);
       items.forEach(function(it) {
         it.addEventListener('mouseenter', function() {
-          showPanel(parseInt(it.dataset.megaCat, 10));
+          showPanel(it.dataset.megaCat);
         });
       });
     }
     nav.addEventListener('mouseleave', closeMega);
 
     links.forEach(function(l) {
-      var i = parseInt(l.dataset.megaIdx, 10);
+      var i = l.dataset.megaIdx;
+      var existe = mega && mega.querySelector('[data-mega-panel="' + i + '"]');
       l.addEventListener('mouseenter', function() {
-        if (panels.length > i) openMega(i);
+        if (existe) openMega(i);
         else closeMega();
       });
     });
@@ -1262,6 +1361,104 @@
     font-family: "Bricolage Grotesque", "Manrope", sans-serif;
   }
 
+  /* Painel de ofertas (megamenu) */
+  .dc-offers {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .dc-offers__hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px 20px;
+    border-radius: 16px;
+    background: radial-gradient(120% 90% at 100% 0%, rgba(214, 40, 40, 0.55) 0%, rgba(214, 40, 40, 0) 60%), #0d1115;
+    color: #ffffff;
+  }
+  .dc-offers__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #ffb4b4;
+  }
+  .dc-offers__pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ff4d4d;
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.6);
+    animation: dc-offers-pulse 1.8s ease-out infinite;
+  }
+  @keyframes dc-offers-pulse {
+    to { box-shadow: 0 0 0 8px rgba(255, 77, 77, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .dc-offers__pulse { animation: none; } }
+  .dc-offers__title {
+    margin: 0;
+    font-family: "Bricolage Grotesque", "Manrope", sans-serif;
+    font-size: 21px;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .dc-offers__perks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .dc-offers__perks li::before { content: '✓'; color: #ff6b6b; font-weight: 700; margin-right: 8px; }
+  .dc-offers__perks b { color: #ffffff; }
+  .dc-offers__cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: #d62828;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .dc-offers__cta:hover { background: #b81f1f; transform: translateY(-1px); }
+  .dc-offers__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .dc-offers__card .dc-mega__product-art { position: relative; background: #f4f5f7; }
+  .dc-offers__off {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #d62828;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .dc-offers__name { -webkit-line-clamp: 2; line-clamp: 2; min-height: 2.5em; line-height: 1.25; }
+  .dc-offers__prices { display: flex; align-items: baseline; gap: 6px; margin-top: 4px; }
+  .dc-offers__prices s { font-size: 11.5px; color: #9aa0a6; }
+  .dc-offers__pix { font-size: 11.5px; color: #d62828; font-weight: 600; margin-top: 2px; }
+
   /* SEARCH dropdown */
   .dc-search-input__results-wrapper {
     position: absolute;
@@ -1487,7 +1684,7 @@
     { "type": "image_picker", "id": "logo", "label": "Logo customizado (sobrepõe os abaixo)" },
     { "type": "text", "id": "logo_asset", "label": "Logo asset filename", "info": "Ex: dropchina-logo-color.png — usado se não tiver logo acima. Default: dropchina-logo-color.png" },
     { "type": "header", "content": "Announcement marquee" },
-    { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
+    { "type": "text", "id": "announce_items", "label": "Items (separados por |)", "default": "Frete grátis por região|Até 10x sem juros no cartão|8% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil" },
     { "type": "header", "content": "Topbar (links utilitários)" },
     { "type": "text", "id": "topbar_link_1", "label": "Link 1", "default": "Sobre" },
     { "type": "url", "id": "topbar_link_1_url", "label": "Link 1 URL" },

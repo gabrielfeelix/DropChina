@@ -1,0 +1,62 @@
+{
+  "PLA-LITE-BRANCO-BAMBU": {
+    "productId": "gid://shopify/Product/10317897335003",
+    "handle": "filamento-pla-lite-branco-1kg-bambu-lab"
+  },
+  "PLA-LITE-PRETO-BAMBU": {
+    "productId": "gid://shopify/Product/10317897957595",
+    "handle": "filamento-pla-lite-preto-1kg-bambu-lab"
+  },
+  "PLA-LITE-AZUL-BAMBU": {
+    "productId": "gid://shopify/Product/10317898088667",
+    "handle": "filamento-pla-lite-azul-1kg-bambu-lab"
+  },
+  "PLA-LITE-AMARELO-GIRASSOL-BAMBU": {
+    "productId": "gid://shopify/Product/10317898219739",
+    "handle": "filamento-pla-lite-amarelo-girassol-1kg-bambu-lab"
+  },
+  "PLA-LITE-CINZA-BAMBU": {
+    "productId": "gid://shopify/Product/10317898350811",
+    "handle": "filamento-pla-lite-cinza-1kg-bambu-lab"
+  },
+  "PLA-LITE-VERDE-BAMBU": {
+    "productId": "gid://shopify/Product/10317898481883",
+    "handle": "filamento-pla-lite-verde-1kg-bambu-lab"
+  },
+  "PLA-LITE-VERMELHO-BAMBU": {
+    "productId": "gid://shopify/Product/10317898612955",
+    "handle": "filamento-pla-lite-vermelho-1kg-bambu-lab"
+  },
+  "PLA-BASIC-LARANJA-BAMBU": {
+    "productId": "gid://shopify/Product/10317898809563",
+    "handle": "filamento-pla-basic-laranja-1kg-bambu-lab"
+  },
+  "PETG-BASIC-BRANCO-BAMBU": {
+    "productId": "gid://shopify/Product/10317965263067",
+    "handle": "filamento-petg-basic-branco-1kg-bambu-lab"
+  },
+  "PETG-BASIC-CINZA-BAMBU": {
+    "productId": "gid://shopify/Product/10317965328603",
+    "handle": "filamento-petg-basic-cinza-1kg-bambu-lab"
+  },
+  "PETG-BASIC-MARROM-BAMBU": {
+    "productId": "gid://shopify/Product/10317965459675",
+    "handle": "filamento-petg-basic-marrom-1kg-bambu-lab"
+  },
+  "PETG-BASIC-AZUL-BAMBU": {
+    "productId": "gid://shopify/Product/10317965525211",
+    "handle": "filamento-petg-basic-azul-1kg-bambu-lab"
+  },
+  "PETG-BASIC-VERMELHO-BAMBU": {
+    "productId": "gid://shopify/Product/10317965557979",
+    "handle": "filamento-petg-basic-vermelho-1kg-bambu-lab"
+  },
+  "PETG-BASIC-AMARELO-BAMBU": {
+    "productId": "gid://shopify/Product/10317965623515",
+    "handle": "filamento-petg-basic-amarelo-1kg-bambu-lab"
+  },
+  "PETG-BASIC-PRETO-BAMBU": {
+    "productId": "gid://shopify/Product/10317965721819",
+    "handle": "filamento-petg-basic-preto-1kg-bambu-lab"
+  }
+}

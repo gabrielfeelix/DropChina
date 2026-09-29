@@ -1,7 +1,7 @@
 # STATUS ATUAL — DropChina
 
 > **Este é o documento de entrada. Se a pergunta é "qual o status atual?", a resposta está aqui.**
-> Última atualização: **23/ago/2026** · Branch: `feat/shopify-ui-institucional`
+> Última atualização: **29/set/2026** · Branch: `feat/shopify-ui-institucional`
 >
 > ⚠️ Existe um `docs/STATUS.md` antigo (17/jun) — **ignorar**, foi superado por este.
 
@@ -28,6 +28,27 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | **Vendas** | **0 pedidos na Shopify.** Os 8 do Bling são do Mercado Livre, de nov/2024 |
 | **Medição** | ✅ **Clarity** (`y70lfm3dio`) e **GA4** (`G-KZ4CGVHY7X`) no ar, confirmados no HTML · Search Console validado + sitemap · Merchant Center `5843491607` Active. Falta Pixel e banner LGPD |
 | **Marca** | 🟡 Instagram, Facebook, YouTube e Google Meu Negócio próprios criados (23/08) · logo escolhida, falta vetorizar e aplicar · ⚠️ **ficha FALSA no Google se passando pela empresa** e Reclame Aqui sob controle de terceiro |
+
+---
+
+## 29/set/2026 — filamentos Bambu, Pix 8%, parcelamento
+
+- **15 filamentos Bambu no ar** (Bling + Shopify, vinculados, estoque 10): 7 PLA Lite, 1 PLA Basic laranja,
+  7 PETG Basic. Dados em `catalogo/filamentos-bambu-*.json`, descrições em `catalogo/filamentos-bambu/descricoes.md`.
+  Scripts: `criar-filamentos-bambu.ts` (Bling), `criar-filamentos-shopify.ts`, `filamentos-midia.ts` (galeria + descrição rica).
+- **Pix 8%** na Pagar.me e no tema. **Parcelamento Pagar.me:** 10x sem juros, máx 12x, parcela mínima R$ 59.
+  ⚠️ Juros estão 0/0 — 11x e 12x saem sem juros até alguém definir a taxa. Tema calcula parcelas com o mínimo de R$ 59.
+- **Custo dos 7 PETG não informado** (campo vazio no Bling). PETG: Bling/vínculo 204,90; Shopify 189,90 com riscado 204,90
+  (editado no painel por Gabriel) — "Sincronizar preços" no Bling volta a loja para 204,90.
+- **Novas coleções:** impressoras-3d, filamentos-3d, filamentos-pla, filamentos-petg, filamentos-de-natal, cameras-videoconferencia.
+  Publicação via REST `published: true` (o app não tem `write_publications`).
+- **Tema:** megamenu abre painel pelo destino do link (antes pela posição); painel de Ofertas com selo do maior desconto real;
+  card/PDP mostram só o que o checkout cobra (metafield `dropchina.pix_price` ignorado); descrição rica `<div class="dc-rich">`
+  em `dc-pdp-story.liquid` (imagens compartilhadas em `assets/dc-fil-*`, via `src="dc-asset:"`).
+- **Vínculo multiloja:** criado por API nasce com `preco 0` se não mandar o preço; PUT em `/produtos/lojas/{id}` dá 404 —
+  corrigir = apagar e recriar (`criar-vinculos-shopify.ts` agora manda o preço).
+- Pesquisa de preço vs concorrência (119 produtos): `catalogo/precos-concorrencia/resultado-2026-09-29.csv` — 41 mais caros.
+- Pendente: banner de Natal (briefing `marketing/briefing-banner-natal-filamentos.md`, Vitória); certificado A1 vencia 29/09.
 
 ---
 

@@ -1,0 +1,405 @@
+{
+ "linha_specs": {
+  "fonte": "Bambu Lab Technical Data Sheet V3.0 (oficial)",
+  "url_pdf": "https://store.bblcdn.com/s1/default/cb94589bf7994fdcbfa833badefae9cd/Bambu_PETG_Basic_Technical_Data_Sheet.pdf",
+  "url_pagina": "https://us.store.bambulab.com/products/petg-basic",
+  "diametro": "1.75 mm",
+  "peso_liquido": "1 kg",
+  "carretel": "ABS (70 C), 200 mm diam x 67 mm altura",
+  "bico_temp": "230-260 C",
+  "mesa_temp": "65-75 C",
+  "velocidade": "< 200 mm/s",
+  "bicos_suportados": "0.2 / 0.4 / 0.6 / 0.8 mm",
+  "ventilador": "0-60%",
+  "retracao": "0.4-0.8 mm @ 30-60 mm/s",
+  "camara": "35-50 C",
+  "placas": "Cool Plate Supertack / Textured PEI / Smooth PEI",
+  "secagem": "Estufa forcada 65 C 8 h; mesa X1/P/H2 80 C 12 h; AMS 2 Pro/HT 65 C 8 h",
+  "umidade": "< 20% RH (selado com dessecante)",
+  "densidade": "1.25 g/cm3",
+  "temp_transicao_vitrea": "69 C",
+  "vicat": "69 C",
+  "hdt_0_45mpa": "71 C",
+  "hdt_1_8mpa": "68 C",
+  "absorcao_agua": "0.45% (25 C, 55% RH)",
+  "tracao_xy": "51 +/- 1 MPa",
+  "impacto_xy": "34.2 +/- 4.1 kJ/m2",
+  "compatibilidade": "Todas as impressoras Bambu; AMS, AMS 2 Pro, AMS HT, AMS Lite",
+  "rfid": true,
+  "extras_pagina": "RFID, menos stringing, superficie lisa, UL GREENGUARD; TDS diz \"PLA-level strength\"",
+  "pdfs_extra": [
+   "SDS",
+   "RoHS",
+   "REACH",
+   "EN71",
+   "TSCA",
+   "Hex Code Table (links no us_next da pagina)"
+  ]
+ },
+ "imagens_compartilhadas": [
+  {
+   "file": "oficial-shared-01.jpg",
+   "w": 1500,
+   "h": 1500,
+   "desc": "spools branco/cinza/azul-marinho"
+  },
+  {
+   "file": "oficial-shared-02.jpg",
+   "w": 2800,
+   "h": 2800,
+   "desc": "pecas impressas empilhadas + RFID"
+  },
+  {
+   "file": "oficial-shared-03.jpg",
+   "w": 2400,
+   "h": 918,
+   "desc": "banner RFID/AMS"
+  }
+ ],
+ "produtos": [
+  {
+   "cor": "branco",
+   "slug": "petg-basic-branco",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-branco-1kg-bambu-lab-8t0fi/",
+   "artbox_sku": "4409-G00-W00-1.75-1000-SPL",
+   "gtin": "6937285509727",
+   "artbox_estoque": 16,
+   "codigo_cor_bambu": "30106",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "White (30106)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "cinza",
+   "slug": "petg-basic-cinza",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-cinza-1kg-bambu-lab-1rx94/",
+   "artbox_sku": "4409-G00-D00-1.75-1000-SPL",
+   "gtin": "6937285509734",
+   "artbox_estoque": 14,
+   "codigo_cor_bambu": "30107",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Gray (30107)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "marrom",
+   "slug": "petg-basic-marrom",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-marrom-1kg-bambu-lab-4t1pi/",
+   "artbox_sku": "4409-G00-N00-1.75-1000-SPL",
+   "gtin": "6937285510044",
+   "artbox_estoque": 16,
+   "codigo_cor_bambu": "30800",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Dark Brown (30800)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "azul",
+   "slug": "petg-basic-azul",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-azul-1kg-bambu-lab-dvays/",
+   "artbox_sku": "4409-G00-B00-1.75-1000-SPL",
+   "gtin": "6937285509765",
+   "artbox_estoque": 24,
+   "codigo_cor_bambu": "30603",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Reflex Blue (30603)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "vermelho",
+   "slug": "petg-basic-vermelho",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-vermelho-1kg-bambu-lab-jcy2s/",
+   "artbox_sku": "4409-G00-R00-1.75-1000-SPL",
+   "gtin": "6937285509741",
+   "artbox_estoque": 21,
+   "codigo_cor_bambu": "30201",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Red (30201)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "amarelo",
+   "slug": "petg-basic-amarelo",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-amarelo-1kg-bambu-lab-1ox1j/",
+   "artbox_sku": "4409-G00-Y00-1.75-1000-SPL",
+   "gtin": "6937285509758",
+   "artbox_estoque": 37,
+   "codigo_cor_bambu": "30402",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Yellow (30402)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  },
+  {
+   "cor": "preto",
+   "slug": "petg-basic-preto",
+   "artbox_url": "https://maker.artbox3d.com.br/produtos/petg-basic-preto-1kg-bambu-lab-1j8r1/",
+   "artbox_sku": "4409-G00-K00-1.75-1000-SPL",
+   "gtin": "6937285509710",
+   "artbox_estoque": 0,
+   "codigo_cor_bambu": "30105",
+   "codigo_artbox_confere": true,
+   "nome_oficial_cor": "Black (30105)",
+   "images": [
+    {
+     "file": "oficial-01.jpg",
+     "w": 2400,
+     "h": 2400,
+     "origem": "oficial"
+    },
+    {
+     "file": "01.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "02.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "03.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "04.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    },
+    {
+     "file": "05.webp",
+     "w": 1200,
+     "h": 1200,
+     "origem": "artbox"
+    }
+   ]
+  }
+ ],
+ "notas": [
+  "Cores oficiais US: Reflex Blue=azul, Dark Brown=marrom, Gray=cinza; codigos 30xxx conferem com \"Codigo do Filamento\" da Artbox.",
+  "Imagens oficiais por cor vem de PNG 2400px (sem transparencia) convertidas para JPG q95.",
+  "Artbox webp: originais 1200x1200 (JPG no CDN Nuvemshop) recodificados em webp q95; variante webp do CDN so vai ate 1024.",
+  "Artbox img tipo prateleira contem credito de terceiro \"@morething\" (nao Artbox); mantida.",
+  "US store lista tambem Orange(30301), Green, Navy Blue, Dark Beige, Misty Blue, Pine Green, Metal — fora do escopo."
+ ]
+}

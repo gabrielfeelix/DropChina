@@ -1,0 +1,125 @@
+{
+ "_origem": "WhatsApp Augusto 29/09/2026: PETG Basic Bambu, preço 189,90. Custo NÃO informado (pendente). Estoque 10 como os PLA. | 29/09: preço subiu para 204,90 (decisão Gabriel), sem preço riscado.",
+ "_estoque_inicial": 10,
+ "produtos": [
+  {
+   "nome": "Filamento PETG Basic Branco 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Branco",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-BRANCO-BAMBU",
+   "gtin": "6937285509727",
+   "codigo_cor_bambu": "30106",
+   "imagens": [
+    "petg-basic-branco/01.webp",
+    "petg-basic-branco/oficial-01.jpg",
+    "petg-basic-branco/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-branco-1kg-bambu-lab-8t0fi/"
+  },
+  {
+   "nome": "Filamento PETG Basic Cinza 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Cinza",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-CINZA-BAMBU",
+   "gtin": "6937285509734",
+   "codigo_cor_bambu": "30107",
+   "imagens": [
+    "petg-basic-cinza/01.webp",
+    "petg-basic-cinza/oficial-01.jpg",
+    "petg-basic-cinza/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-cinza-1kg-bambu-lab-1rx94/"
+  },
+  {
+   "nome": "Filamento PETG Basic Marrom 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Marrom",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-MARROM-BAMBU",
+   "gtin": "6937285510044",
+   "codigo_cor_bambu": "30800",
+   "imagens": [
+    "petg-basic-marrom/01.webp",
+    "petg-basic-marrom/oficial-01.jpg",
+    "petg-basic-marrom/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-marrom-1kg-bambu-lab-4t1pi/"
+  },
+  {
+   "nome": "Filamento PETG Basic Azul 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Azul",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-AZUL-BAMBU",
+   "gtin": "6937285509765",
+   "codigo_cor_bambu": "30603",
+   "imagens": [
+    "petg-basic-azul/01.webp",
+    "petg-basic-azul/oficial-01.jpg",
+    "petg-basic-azul/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-azul-1kg-bambu-lab-dvays/"
+  },
+  {
+   "nome": "Filamento PETG Basic Vermelho 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Vermelho",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-VERMELHO-BAMBU",
+   "gtin": "6937285509741",
+   "codigo_cor_bambu": "30201",
+   "imagens": [
+    "petg-basic-vermelho/01.webp",
+    "petg-basic-vermelho/oficial-01.jpg",
+    "petg-basic-vermelho/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-vermelho-1kg-bambu-lab-jcy2s/"
+  },
+  {
+   "nome": "Filamento PETG Basic Amarelo 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Amarelo",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-AMARELO-BAMBU",
+   "gtin": "6937285509758",
+   "codigo_cor_bambu": "30402",
+   "imagens": [
+    "petg-basic-amarelo/01.webp",
+    "petg-basic-amarelo/oficial-01.jpg",
+    "petg-basic-amarelo/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-amarelo-1kg-bambu-lab-1ox1j/"
+  },
+  {
+   "nome": "Filamento PETG Basic Preto 1kg Bambu Lab",
+   "linha": "PETG Basic",
+   "cor": "Preto",
+   "preco": 204.9,
+   "custo": null,
+   "sku": "PETG-BASIC-PRETO-BAMBU",
+   "gtin": "6937285509710",
+   "codigo_cor_bambu": "30105",
+   "imagens": [
+    "petg-basic-preto/01.webp",
+    "petg-basic-preto/oficial-01.jpg",
+    "petg-basic-preto/03.webp",
+    "_shared-petg-basic/oficial-shared-02.jpg"
+   ],
+   "ref": "https://maker.artbox3d.com.br/produtos/petg-basic-preto-1kg-bambu-lab-1j8r1/"
+  }
+ ]
+}

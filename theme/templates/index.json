@@ -436,7 +436,7 @@
             "eyebrow": "LEITOR DE CARTÃO",
             "title": "Leitura rápida para o seu dia a dia.",
             "cta_label": "Ver opções",
-            "link": "shopify://collections/perifericos"
+            "link": "shopify://products/leitor-de-cartao-2-em-1-ugreen-80191-usb-a-usb-c-preto"
           }
         },
         "c4": {
@@ -447,7 +447,7 @@
             "eyebrow": "PAPEL FOTOGRÁFICO",
             "title": "Imagens nítidas para cada detalhe.",
             "cta_label": "Ver opções",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/papeis"
           }
         }
       },
@@ -469,19 +469,84 @@
     "brand_carousel_main": {
       "type": "brand-carousel",
       "blocks": {
-        "br_00": { "type": "brand", "settings": { "alt": "ISD Tech" } },
-        "br_01": { "type": "brand", "settings": { "alt": "HP" } },
-        "br_02": { "type": "brand", "settings": { "alt": "Epson" } },
-        "br_03": { "type": "brand", "settings": { "alt": "Brother" } },
-        "br_04": { "type": "brand", "settings": { "alt": "Samsung" } },
-        "br_05": { "type": "brand", "settings": { "alt": "Pantum" } },
-        "br_06": { "type": "brand", "settings": { "alt": "JBL" } },
-        "br_07": { "type": "brand", "settings": { "alt": "Pcyes" } },
-        "br_08": { "type": "brand", "settings": { "alt": "Clanm" } },
-        "br_09": { "type": "brand", "settings": { "alt": "Ugreen" } },
-        "br_10": { "type": "brand", "settings": { "alt": "Pineng" } },
-        "br_11": { "type": "brand", "settings": { "alt": "Evolut" } },
-        "br_12": { "type": "brand", "settings": { "alt": "Masterprint" } }
+        "br_00": {
+          "type": "brand",
+          "settings": {
+            "alt": "ISD Tech"
+          }
+        },
+        "br_01": {
+          "type": "brand",
+          "settings": {
+            "alt": "HP"
+          }
+        },
+        "br_02": {
+          "type": "brand",
+          "settings": {
+            "alt": "Epson"
+          }
+        },
+        "br_03": {
+          "type": "brand",
+          "settings": {
+            "alt": "Brother"
+          }
+        },
+        "br_04": {
+          "type": "brand",
+          "settings": {
+            "alt": "Samsung"
+          }
+        },
+        "br_05": {
+          "type": "brand",
+          "settings": {
+            "alt": "Pantum"
+          }
+        },
+        "br_06": {
+          "type": "brand",
+          "settings": {
+            "alt": "JBL"
+          }
+        },
+        "br_07": {
+          "type": "brand",
+          "settings": {
+            "alt": "Pcyes"
+          }
+        },
+        "br_08": {
+          "type": "brand",
+          "settings": {
+            "alt": "Clanm"
+          }
+        },
+        "br_09": {
+          "type": "brand",
+          "settings": {
+            "alt": "Ugreen"
+          }
+        },
+        "br_10": {
+          "type": "brand",
+          "settings": {
+            "alt": "Pineng"
+          }
+        },
+        "br_11": {
+          "type": "brand",
+          "settings": {
+            "alt": "Evolut"
+          }
+        },
+        "br_12": {
+          "type": "brand",
+          "settings": {
+            "alt": "Masterprint"
+          }
+        }
       },
       "block_order": [
         "br_00",
@@ -552,12 +617,62 @@
         "padding_top": 24,
         "padding_bottom": 56
       }
+    },
+    "filamentos_home": {
+      "type": "dc-product-list",
+      "blocks": {
+        "fil_todos": {
+          "type": "tab",
+          "settings": {
+            "label": "Todos",
+            "collection": "filamentos-3d"
+          }
+        },
+        "fil_pla": {
+          "type": "tab",
+          "settings": {
+            "label": "PLA",
+            "collection": "filamentos-pla"
+          }
+        },
+        "fil_petg": {
+          "type": "tab",
+          "settings": {
+            "label": "PETG",
+            "collection": "filamentos-petg"
+          }
+        },
+        "fil_natal": {
+          "type": "tab",
+          "settings": {
+            "label": "Cores de Natal",
+            "collection": "filamentos-de-natal"
+          }
+        }
+      },
+      "block_order": [
+        "fil_todos",
+        "fil_pla",
+        "fil_petg",
+        "fil_natal"
+      ],
+      "settings": {
+        "eyebrow": "IMPRESSÃO 3D",
+        "heading": "Filamentos Bambu Lab",
+        "max_products": 10,
+        "layout": "grid",
+        "show_view_all": true,
+        "view_all_label": "Ver todos os filamentos",
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "hero_main",
     "categories_grid",
     "best_sellers",
+    "filamentos_home",
     "promo_banners_main",
     "second_collection",
     "recently_viewed",

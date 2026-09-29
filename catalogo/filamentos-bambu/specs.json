@@ -1,0 +1,520 @@
+[
+ {
+  "slug": "pla-lite-branco",
+  "nome": "Filamento PLA Lite Branco 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-branco/",
+  "images": [
+   {
+    "file": "pla-lite-branco/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-branco/02.webp",
+    "w": 1024,
+    "h": 1024
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-W0-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4735
+  },
+  "gtin": "6937285501103",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": "16103"
+ },
+ {
+  "slug": "pla-lite-preto",
+  "nome": "Filamento PLA Lite Preto 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-preto/",
+  "images": [
+   {
+    "file": "pla-lite-preto/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-preto/02.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-preto/03.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-preto/04.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-preto/05.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-preto/06.webp",
+    "w": 130,
+    "h": 130
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-K0-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4647
+  },
+  "gtin": "6937285501127",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": null
+ },
+ {
+  "slug": "pla-lite-azul",
+  "nome": "Filamento PLA Lite Azul 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-azul/",
+  "images": [
+   {
+    "file": "pla-lite-azul/01.webp",
+    "w": 480,
+    "h": 480
+   },
+   {
+    "file": "pla-lite-azul/02.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-azul/03.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-azul/04.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-azul/05.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-azul/06.webp",
+    "w": 130,
+    "h": 130
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-B1-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4601
+  },
+  "gtin": "6937285505613",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": null
+ },
+ {
+  "slug": "pla-lite-amarelo-girassol",
+  "nome": "Filamento PLA Lite Amarelo Girassol 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-amarelo-girassol-thbbd/",
+  "images": [
+   {
+    "file": "pla-lite-amarelo-girassol/01.webp",
+    "w": 480,
+    "h": 480
+   },
+   {
+    "file": "pla-lite-amarelo-girassol/02.webp",
+    "w": 480,
+    "h": 480
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-Y1-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4830
+  },
+  "gtin": "6937285505620",
+  "gtin_alt_tag": [
+   "6937285501110"
+  ],
+  "codigo_cor_bambu": "16401"
+ },
+ {
+  "slug": "pla-lite-cinza",
+  "nome": "Filamento PLA Lite Cinza 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-cinza/",
+  "images": [
+   {
+    "file": "pla-lite-cinza/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-cinza/02.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-cinza/03.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-cinza/04.webp",
+    "w": 480,
+    "h": 480
+   },
+   {
+    "file": "pla-lite-cinza/05.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-cinza/06.webp",
+    "w": 130,
+    "h": 130
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-D0-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4645
+  },
+  "gtin": "6937285501066",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": null
+ },
+ {
+  "slug": "pla-lite-verde",
+  "nome": "Filamento PLA Lite Verde 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-verde/",
+  "images": [
+   {
+    "file": "pla-lite-verde/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-verde/02.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-verde/03.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-verde/04.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-verde/05.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-verde/06.webp",
+    "w": 130,
+    "h": 130
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-G1-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4609
+  },
+  "gtin": "6937285505637",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": null
+ },
+ {
+  "slug": "pla-lite-vermelho",
+  "nome": "Filamento PLA Lite Vermelho 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-lite-c-carretel-reutilizavel-vermelho/",
+  "images": [
+   {
+    "file": "pla-lite-vermelho/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-vermelho/02.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-lite-vermelho/03.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-vermelho/04.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-vermelho/05.webp",
+    "w": 130,
+    "h": 130
+   },
+   {
+    "file": "pla-lite-vermelho/06.webp",
+    "w": 130,
+    "h": 130
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Lite",
+   "diametro_mm": 1.75,
+   "diametro_tol_mm": 0.03,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel",
+   "rfid": true,
+   "ams_compat": "Bambu Lab AMS e AMS Lite (RFID auto-perfil)",
+   "temp_impressao_c": 210,
+   "acabamento": "fosco",
+   "certificacao": "RoHS (UE)",
+   "tracao_mpa": "32+-5",
+   "alongamento_ruptura_pct": "11.2+-3.1",
+   "flexao_mpa": "51+-3",
+   "modulo_flexao_mpa": "2240+-120",
+   "impacto_charpy_kj_m2": "19.0+-3.7",
+   "bico_c": null,
+   "mesa_c": null,
+   "velocidade": null,
+   "secagem": null,
+   "sku_artbox": "4274-A18-R0-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.2,
+   "preco_artbox_brl": 135.0,
+   "descricao_chars": 4613
+  },
+  "gtin": "6937285500977",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": null
+ },
+ {
+  "slug": "pla-basic-laranja",
+  "nome": "Filamento PLA Basic Laranja 1kg Bambu Lab",
+  "ref": "https://maker.artbox3d.com.br/produtos/filamento-3d-bambu-lab-pla-c-carretel-reutilizavel-cor-laranja-10300/",
+  "images": [
+   {
+    "file": "pla-basic-laranja/01.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-basic-laranja/02.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-basic-laranja/03.webp",
+    "w": 1024,
+    "h": 1024
+   },
+   {
+    "file": "pla-basic-laranja/04.webp",
+    "w": 1024,
+    "h": 1024
+   }
+  ],
+  "specs": {
+   "material": "PLA",
+   "linha": "PLA Basic",
+   "diametro_mm": 1.75,
+   "peso_liquido_kg": 1,
+   "carretel": "reutilizavel (titulo do anuncio)",
+   "rfid": null,
+   "ams_compat": null,
+   "bico_c": "190-230",
+   "mesa_c": "35-45 (com cola PVP)",
+   "velocidade_max_mm_s": 300,
+   "secagem": "55C 8h",
+   "umidade_armazenagem": "<20% UR selado com dessecante",
+   "densidade_g_cm3": 1.24,
+   "vicat_c": 57,
+   "fusao_c": 160,
+   "tracao_mpa": "39+-2",
+   "flexao_mpa": "76+-3",
+   "impacto_kj_m2": "26.6+-2.8",
+   "sku_artbox": "3875-A00-A0-1.75-1000-SPL",
+   "pacote_mm": [
+    22.0,
+    22.0,
+    8.0
+   ],
+   "peso_pacote_kg": 1.0,
+   "preco_artbox_brl": 190.0,
+   "descricao_chars": 4301
+  },
+  "gtin": "6975337032311",
+  "gtin_alt_tag": null,
+  "codigo_cor_bambu": "10300"
+ }
+]

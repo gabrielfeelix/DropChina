@@ -16,7 +16,7 @@
       "settings": {
         "free_shipping_threshold": 100000,
         "discount_code": "DROP10",
-        "discount_pct": 5,
+        "discount_pct": 8,
         "installments": 10
       }
     },
@@ -39,7 +39,7 @@
             "name": "Impressão 3D",
             "badge": "NOVO",
             "icon": "cube",
-            "items": "Impressoras 3D|/collections/impressao-3d\nFilamentos & Resinas|/collections/impressao-3d\nPeças & Acessórios 3D|/collections/impressao-3d",
+            "items": "Impressoras 3D|/collections/impressoras-3d\nFilamentos PLA|/collections/filamentos-pla\nFilamentos PETG|/collections/filamentos-petg\nTodos os filamentos|/collections/filamentos-3d\nVer tudo em Impressão 3D|/collections/impressao-3d",
             "featured_collection": "impressao-3d",
             "link": "shopify://collections/impressao-3d"
           }
@@ -49,7 +49,7 @@
           "settings": {
             "name": "Informática",
             "icon": "gpu",
-            "items": "Áudio & Headsets|/collections/audio\nTeclados & Mouses|/collections/teclados\nPlacas de Vídeo|/collections/placas-de-video\nMonitores|/collections/monitores\nPeriféricos|/collections/perifericos\nRedes & Streaming|/collections/redes\nMini PCs & Computadores|/collections/mini-pcs",
+            "items": "Áudio & Headsets|/collections/audio\nTeclados & Mouses|/collections/teclados\nPlacas de Vídeo|/collections/placas-de-video\nPeriféricos|/collections/perifericos\nRedes & Streaming|/collections/redes\nMini PCs & Computadores|/collections/mini-pcs",
             "featured_collection": "audio",
             "link": "shopify://collections/informatica"
           }
@@ -79,7 +79,7 @@
             "name": "Automação",
             "badge": "NOVO",
             "icon": "gpu",
-            "items": "Câmeras de Videoconferência|/collections/automacao\nTotens de Autoatendimento|/collections/totens-de-autoatendimento\nVer tudo em Automação|/collections/automacao",
+            "items": "Câmeras de Videoconferência|/collections/cameras-videoconferencia\nTotens de Autoatendimento|/collections/totens-de-autoatendimento\nVer tudo em Automação|/collections/automacao",
             "featured_collection": "automacao",
             "link": "shopify://collections/automacao"
           }
@@ -104,7 +104,7 @@
         "dep_variedades"
       ],
       "settings": {
-        "announce_items": "Frete grátis por região|Até 10x sem juros no cartão|5% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
+        "announce_items": "Frete grátis por região|Até 10x sem juros no cartão|8% OFF no Pix em toda a loja|Garantia oficial em todos os produtos|Envio em até 24h para todo o Brasil",
         "topbar_link_1": "Sobre",
         "topbar_link_1_url": "/pages/sobre",
         "topbar_link_2": "F.A.Q.",

@@ -664,6 +664,15 @@ header.header .header__row--bottom .menu-list__link:hover .menu-list__link-title
   line-height: 1;
 }
 .dc-card__price--sale { color: var(--success, #16a34a); }
+/* "no Pix" ao lado do preço do card — o valor em destaque é o do Pix, e este rótulo
+   evita que o cliente leia como preço de cartão. Ver snippets/dc-product-card.liquid. */
+.dc-card__price-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--success, #16a34a);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
 .dc-card__price-off {
   font-size: 12px;
   font-weight: 700;
