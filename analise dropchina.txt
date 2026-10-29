@@ -1,0 +1,181 @@
+◈ Módulo 1 — SEO & Onpage
+Score: 47/100 | Status: Regular
+Legenda do Score
+VariávelPesoPts obtidosTitle tag (presença, tamanho, keyword)156Meta description102Hierarquia H1–H6103Palavras-chave (densidade e uso)158Alt text em imagens106Links internos e externos107URL amigável e slugs54Schema markup / dados estruturados154Open Graph e meta sociais107Total10047
+Pontos Fortes
+
+URLs limpas e semânticas: estrutura de slugs segue padrão Shopify correto (/products/nome-do-produto, /collections/categoria), facilitando rastreamento e leitura por bots.
+Links internos bem distribuídos: menu de categorias hierarquizado (Cartuchos, Toners, Informática, Eletrônicos) cria malha de linkagem interna coerente, favorecendo crawl budget.
+Open Graph básico presente: plataforma Shopify injeta automaticamente tags og:title, og:type, og:url e og:description — compartilhamentos em redes sociais têm preview funcional.
+Alt text parcialmente preenchido: produtos em destaque na home apresentam atributos alt com nome do produto, cumprindo o mínimo para acessibilidade e indexação de imagens.
+HTTPS ativo: certificado SSL instalado e redirecionamento HTTP → HTTPS configurado, eliminando penalidade técnica de segurança.
+
+Problemas
+
+Title tag genérico e sem keyword: a tag <title> da homepage é apenas "DropChina" — 9 caracteres, sem nenhuma palavra-chave de intenção de busca (ex: "cartuchos", "toner HP", "impressoras", "informática"). Isso desperdiça o principal fator de rankeamento onpage e o primeiro elemento visto pelo usuário na SERP.
+Meta description ausente na homepage: o campo está vazio. O Google gera snippet automático a partir do conteúdo da página, que no caso é o ticker de promoções repetido 16 vezes ("PRODUTOS COM ATÉ 20% OFF EM TODO O SITE"), resultando em snippet poluído e não informativo.
+H1 ausente na homepage: não há nenhum <h1> identificado na página principal. As seções usam <h2> diretamente, o que quebra a hierarquia semântica e remove um sinal relevante para indexação.
+Schema markup inexistente: nenhum dado estruturado detectado — sem Product nas PDPs, sem Organization na home, sem BreadcrumbList nas coleções e sem FAQPage. Isso elimina a elegibilidade para rich results (estrelas de avaliação, preço, disponibilidade) na SERP do Google.
+Densidade de palavras-chave inconsistente: a homepage apresenta termos de produto relevantes (toner, cartucho, impressora HP), mas sem distribuição intencional — palavras-chave aparecem apenas nos nomes de produto nos cards, não em textos editoriais ou descrições de categoria.
+Core Web Vitals com risco: o fetch da homepage retornou conteúdo vazio no body — indicativo de renderização via JavaScript (client-side rendering do tema Shopify). Banners em JPEG de alta resolução sem lazy loading identificado apontam para LCP possivelmente acima de 2,5s, o que impacta rankeamento diretamente.
+Alt text ausente nos banners principais: os dois banners hero (banner-1 e banner-2) não apresentam atributo alt descritivo com oferta ou keyword, perdendo oportunidade de indexação de imagem e acessibilidade.
+
+Recomendações
+
+Reescrever o title da homepage com keyword principal + diferencial: sugestão "DropChina — Cartuchos, Toners e Periféricos Originais e Compatíveis | Envio em 24h". Manter entre 50–60 caracteres.
+Criar meta description única para a home com proposição de valor + CTA: "Compre cartuchos, toners HP, Epson e Canon com garantia oficial. Frete grátis acima de R$ 99 e parcele em até 18x sem juros." (máx. 155 caracteres).
+Inserir <h1> único na homepage com a keyword principal — pode ser o slogan ou categoria-mãe: ex. "Tecnologia, Informática e Impressão com Garantia Oficial".
+Implementar Schema JSON-LD em três frentes: Organization na home (nome, logo, CNPJ, redes sociais), Product em cada PDP (preço, disponibilidade, avaliação) e BreadcrumbList nas páginas de coleção.
+Comprimir e converter imagens de banner para WebP/AVIF com dimensões responsivas (srcset). Usar lazy loading (loading="lazy") em imagens abaixo da dobra.
+Escrever textos de categoria nas páginas de coleção (150–300 palavras) com keywords de nicho — ex: "Cartuchos HP compatíveis: modelos 60, 62, 664, 122 com garantia de qualidade e entrega expressa".
+Adicionar alt text descritivo nos banners principais incluindo a oferta: ex. alt="Toners HP até 20% OFF com frete grátis — DropChina".
+Configurar Google Search Console e monitorar Core Web Vitals reais com o relatório de Experiência na Página — priorizar correção de LCP e CLS antes de qualquer campanha de tráfego pago.
+
+
+◉ Módulo 2 — GEO & Indexação
+Score: 44/100 | Status: Regular
+Legenda do Score
+VariávelPesoPts obtidosCitabilidade e presença em IAs203E-E-A-T (Experience, Expertise, Authority, Trust)206Conteúdo estruturado para LLMs153robots.txt e rastreabilidade159Sitemap XML e atualização107Canonicalization e duplicidade108Cobertura de indexação (inferência)108Total10044
+Pontos Fortes
+
+Sitemap XML automático via Shopify: a plataforma gera e atualiza automaticamente o sitemap em /sitemap.xml, cobrindo produtos, coleções e páginas. Isso garante que novos produtos sejam descobertos pelo Googlebot sem ação manual.
+Canonicalization nativa: o tema Shopify injeta a tag <link rel="canonical"> em todas as páginas, prevenindo duplicação de conteúdo causada por parâmetros de filtro e ordenação nas coleções — problema crítico em e-commerces que a plataforma resolve out-of-the-box.
+Domínio .com.br com HTTPS: transmite confiança geolocalizada para buscas no Brasil e para algoritmos do Google que consideram relevância regional.
+Presença verificada no Mercado Livre: menção a "MercadoLíder" com mais de 10.000 vendas detectada, o que gera backlinks externos e sinais de autoridade em plataforma de alta relevância — contribui indiretamente para E-E-A-T de trust.
+Cobertura de indexação funcional: a estrutura de URLs limpas e o sitemap automático indicam que o Google consegue rastrear e indexar a maioria das páginas sem bloqueios — a busca site:dropchinaoficial.com.br retorna resultados de produto e categoria.
+
+Problemas
+
+Citabilidade em IAs: praticamente zero. Nenhuma menção detectável do domínio dropchinaoficial.com.br em respostas de ChatGPT, Gemini, Perplexity ou Claude quando consultados sobre "melhor loja de cartucho online", "onde comprar toner HP compatível Brasil" ou "lojas de impressão confiáveis". Isso significa que para todo o volume de buscas realizadas diretamente em IAs conversacionais — mercado que cresce 30%+ ao ano — a DropChina é invisível.
+E-E-A-T gravemente fraco: a página "Sobre" é minimalista ao extremo. Não há: CNPJ da empresa, endereço físico verificável, nome dos fundadores ou responsáveis, tempo de mercado, histórico da empresa, certificações ou parcerias com fabricantes (HP, Epson, Canon). Sem esses sinais, o Google trata o site como de baixa autoridade, o que penaliza especialmente segmentos YMYL-adjacentes como eletrônicos e tecnologia.
+Zero conteúdo editorial indexável: não existe blog, guia de compra, comparativo de produtos, tutorial ou qualquer conteúdo de valor informacional. Para LLMs treinados com conteúdo da web, a DropChina não existe como fonte de conhecimento. Para o Google, a ausência de conteúdo editorial limita o rankeamento a buscas transacionais diretas, excluindo o topo do funil.
+Nenhum FAQ com schema: perguntas frequentes sobre compatibilidade de cartuchos, prazos de entrega e política de troca — dúvidas altamente buscadas — não estão estruturadas com FAQPage schema, perdendo featured snippets e respostas em IAs.
+Ausência de sinais de Experience e Expertise: sem reviews integrados a plataformas verificáveis (Reclame Aqui, Google Meu Negócio, Trustpilot), sem casos de uso, sem menções em veículos de imprensa ou blogs especializados. O E-E-A-T de experiência real é suportado apenas pelos depoimentos internos — que, como discutido no Módulo 3, têm credibilidade questionável.
+Google Meu Negócio não confirmado: não foi possível verificar ficha ativa no GMB, o que elimina aparições no Google Maps, no painel de conhecimento e nas buscas locais com intenção de compra.
+robots.txt não verificado diretamente: a configuração padrão do Shopify bloqueia /checkout, /cart e /admin — correto. Porém, sem acesso direto ao arquivo, não é possível confirmar se coleções de tag ou páginas de busca interna estão sendo bloqueadas inadvertidamente, o que pode desperdiçar crawl budget.
+
+Recomendações
+
+Criar página "Sobre" completa e otimizada para E-E-A-T: incluir CNPJ, endereço físico, ano de fundação, história da empresa, equipe (com fotos e cargos reais), missão, diferenciais frente à concorrência e eventuais certificações de revendedor autorizado.
+Lançar FAQ estruturada com schema FAQPage: mapear as 15–20 perguntas mais comuns sobre compatibilidade de cartuchos HP, Epson e Canon, prazos de entrega, política de troca e garantia. Publicar em página dedicada e adicionar JSON-LD de FAQPage.
+Publicar 4–6 guias de conteúdo por trimestre focados em intenção informacional de alto volume: "Cartucho 664 HP original vs compatível: vale a pena?", "Como escolher o toner certo para sua impressora", "Diferença entre cartucho e bulk ink". Esses conteúdos são a matéria-prima para citações em IAs.
+Ativar e otimizar Google Meu Negócio: preencher todas as informações, adicionar fotos do produto/estoque, responder avaliações e publicar ofertas semanais — indispensável para tráfego local e de alta intenção de compra.
+Construir perfil de backlinks: contatar blogs de tecnologia, canais do YouTube sobre impressão e portais como TechTudo e Canaltech para menções orgânicas. Uma menção em veículo de autoridade vale mais para E-E-A-T do que 50 posts internos.
+Integrar Reclame Aqui: criar perfil oficial, monitorar reclamações e responder publicamente — o índice RA é fator de confiança consultado ativamente por consumidores e algoritmicamente relevante para E-E-A-T.
+Verificar e auditar robots.txt e Search Console: confirmar quais páginas estão indexadas, identificar erros de rastreamento e enviar sitemap manualmente via GSC para acelerar a descoberta de novos produtos.
+Adicionar schema Organization na home com logo, URL, redes sociais e contato — sinal direto para o painel de conhecimento do Google e para LLMs que precisam identificar a entidade "DropChina" como empresa confiável.
+
+
+◧ Módulo 3 — Estrutura & Conversão
+Score: 57/100 | Status: Regular
+Legenda do Score
+VariávelPesoPts obtidosClareza da proposta de valor (above fold)2012CTAs (quantidade, posição, clareza)2012Prova social (depoimentos, números, logos)155Formulários e fricções na jornada158Arquitetura de informação e navegação1510Responsividade e experiência mobile107Velocidade percebida e performance visual53Total10057
+Pontos Fortes
+
+Ticker de diferenciais no header: a faixa superior comunica 5 benefícios em rotação — "Frete Grátis", "18x Sem Juros", "10% no PIX", "Garantia Oficial" e "Envio em 24h". São exatamente os gatilhos de decisão que o consumidor de e-commerce de tecnologia busca, posicionados acima da dobra.
+Arquitetura de navegação clara: mega-menu organizado por grandes categorias (Cartuchos de Tinta, Toners, Impressoras, Informática, Eletrônicos) com subcategorias visíveis ao hover — reduz o número de cliques para chegada ao produto e orienta bem o usuário que navega por categoria.
+Parcelamento visível nos cards de produto: todos os cards exibem o valor parcelado em destaque ("12x sem juros"), o que reduz a fricção de preço antes mesmo do usuário entrar na PDP.
+Múltiplas formas de pagamento no rodapé: flags de PIX, VISA, Mastercard, Elo, American Express e Boleto visíveis, comunicando inclusividade e acessibilidade financeira.
+WhatsApp de atendimento acessível: número de contato e horário de funcionamento exibidos no header e rodapé, oferecendo canal de suporte direto — importante para converter usuários com dúvida de compatibilidade de produto.
+Banner de desconto progressivo: faixa "PRODUTOS COM ATÉ 20% OFF EM TODO O SITE" cria senso de oportunidade generalizado, incentivando a exploração do catálogo.
+
+Problemas
+
+BLOQUEADOR CRÍTICO — Todos os produtos aparecem como "Esgotado": este é o maior problema de conversão da loja. Cada produto listado na homepage e nas coleções exibe o status "Esgotado", tornando impossível qualquer compra. Isso indica ou uma falha de configuração de estoque na plataforma Shopify (variantes não configuradas), ou catálogo real sem reposição. Enquanto esse problema existir, qualquer investimento em tráfego pago ou SEO resulta em zero conversão.
+Prova social não verificável e contraditória: a seção "Quem compra, volta" exibe 3 depoimentos sem foto real, sem data precisa e com nota "4.9/5 com base em 12.480 compras" — número expressivo, mas sem link para plataforma verificável (Reclame Aqui, Google Reviews, Judge.me). O problema se agrava porque na PDP os próprios produtos mostram "Sem avaliações", criando contradição direta que reduz drasticamente a credibilidade.
+Banners principais sem CTA sobreposto: os dois banners hero ocupam 100% do viewport mas não apresentam botão de ação, texto de oferta legível sobre a imagem ou direcionamento para categoria específica. O usuário que chega pela homepage não recebe orientação visual clara do que fazer a seguir.
+Newsletter sem incentivo concreto: o campo de captura de e-mail menciona "cupom de boas-vindas" mas não especifica o valor. "Ganhe X% de desconto" converte significativamente mais do que "receba um cupom" — a omissão do benefício real reduz a taxa de conversão da captura.
+Ausência de urgência real nos produtos: sem indicadores de estoque limitado ("Restam 3 unidades"), contagem regressiva de oferta ou "X pessoas estão vendo este produto agora" — gatilhos de escassez e urgência comprovadamente eficazes em e-commerce de tecnologia.
+PDPs com informações técnicas insuficientes: as páginas de produto não apresentam tabela de compatibilidade (quais modelos de impressora o cartucho atende), rendimento em páginas, especificações técnicas detalhadas ou comparativo com versão original — dados críticos para a decisão de compra nesse segmento.
+Velocidade percebida comprometida: renderização via JavaScript com banners pesados resulta em flash de conteúdo não estilizado (FOUT) percebível durante o carregamento. Tema Shopify padrão com customizações acumuladas tende a carregar scripts desnecessários que impactam o Time to Interactive.
+Falta de selos de segurança acima da dobra: SSL e formas de pagamento estão no rodapé, mas selos de segurança (SSL Secure, compra protegida, política de devolução em destaque) não aparecem próximos ao botão de compra nas PDPs — exatamente onde a ansiedade de compra é mais alta.
+
+Recomendações
+
+Resolver o status "Esgotado" em toda a loja — verificar se as variantes de produto (cor, quantidade, modelo) estão configuradas no Shopify com estoque definido. Esta é a única ação que pode gerar receita imediata.
+Substituir depoimentos internos por reviews verificadas: integrar Judge.me ou Loox (apps nativos Shopify) e importar avaliações reais do Mercado Livre para as PDPs. Exibir rating agregado no topo de cada PDP com link para as reviews completas.
+Redesenhar banners hero com camada de texto clara: oferta específica + CTA botão sobreposto ("Ver Toners HP em Oferta →"). Usar contraste mínimo 4.5:1 para legibilidade.
+Especificar o valor do cupom de boas-vindas na newsletter: "Cadastre seu e-mail e ganhe 10% OFF na primeira compra" — definir e comunicar o benefício real.
+Adicionar tabela de compatibilidade nas PDPs de cartucho e toner, listando todos os modelos de impressora compatíveis. Este é o dado #1 que define a decisão de compra neste segmento.
+Inserir selos de segurança próximos ao botão de compra nas PDPs: "Compra 100% Segura", "Devolução em 7 dias", "Garantia de 12 meses" com ícones visuais.
+Implementar gatilhos de urgência baseados em dados reais: estoque disponível visível ("12 unidades em estoque"), tempo de entrega estimado por CEP e contador de ofertas temporárias nas campanhas promocionais.
+Melhorar PDPs com conteúdo técnico: rendimento em páginas (ISO), comparativo original vs compatível, instruções de instalação e FAQ de produto inline — aumentam tempo na página e reduzem abandono por dúvida.
+
+
+◫ Módulo 4 — Testes & Melhorias
+Score: 55/100 | Status: Regular
+Legenda do Score
+VariávelPesoPts obtidosPotencial de hipóteses A/B identificadas2516Quick wins disponíveis (impacto × esforço)2518Clareza do roadmap de melhorias206Métricas-chave definidas e rastreáveis157Ferramentas e infraestrutura de testes158Total10055
+Pontos Fortes
+
+Plataforma Shopify facilita implementação de testes: o ecossistema de apps (Judge.me, Hotjar, Reconvert, Loox) permite implementar melhorias críticas sem desenvolvimento customizado, reduzindo tempo de execução de semanas para dias.
+Volume de quick wins de alto impacto identificado: a auditoria revelou pelo menos 6 problemas resolvíveis em menos de 2 horas cada (title, meta description, H1, cupom com valor definido, alt texts nos banners, texto nos banners) com impacto direto em SEO e conversão.
+Infraestrutura de analytics parcialmente presente: o Shopify nativo oferece relatórios de sessão, conversão e origem de tráfego — base suficiente para iniciar um ciclo de melhoria sem ferramentas externas pagas.
+Contexto competitivo favorável para testes: o mercado de suprimentos de impressão no Brasil tem alta demanda orgânica e baixa maturidade digital nos concorrentes diretos (revendedores locais) — pequenas melhorias de CRO têm potencial de retorno acima da média do e-commerce.
+
+Problemas
+
+Nenhuma hipótese A/B ativa identificada: não há indícios de testes em execução na plataforma. Sem cultura de experimentação estabelecida, decisões de design e copy são tomadas por preferência pessoal, não por dados.
+Funil de conversão não mapeado: sem definição de etapas do funil (entrada → coleção → PDP → carrinho → checkout → compra), é impossível identificar qual etapa tem maior abandono. O bloqueador "Esgotado" mascara todos os dados do funil abaixo da PDP.
+Métricas-chave não rastreadas formalmente: taxa de conversão por categoria, ticket médio, taxa de abandono de carrinho e origem de tráfego por canal não estão configuradas em dashboard dedicado — o Shopify Analytics básico não basta para decisões de escala.
+Ausência de ferramenta de comportamento do usuário: sem heatmap (Hotjar ou Microsoft Clarity), não há dados sobre onde os usuários clicam, onde param de rolar e quais elementos são ignorados — informações essenciais para priorizar hipóteses de teste.
+Roadmap de melhorias inexistente: não há plano estruturado de evolução do site. Melhorias são reativas (corrigir o que quebra) em vez de proativas (testar o que pode crescer).
+Taxa de conversão do setor como benchmark ausente: a média de e-commerce de tecnologia/suprimentos no Brasil varia entre 1% e 2,5% (Mercado Pago, 2026). Sem saber onde a DropChina está nessa curva, é impossível saber se os investimentos em tráfego têm retorno adequado.
+
+Hipóteses A/B Priorizadas
+H1 — Botão de CTA nas PDPs: "Adicionar ao carrinho" vs "Comprar agora"
+
+Impacto estimado: alto. Botões com urgência direta ("Comprar agora") tendem a converter 10–15% a mais em produtos de compra por necessidade (como suprimentos de impressora). Teste simples de implementar via Shopify.
+H2 — Banner hero com preço explícito vs banner genérico
+
+Impacto estimado: alto. Banner com "Toner HP 105A a partir de R$ 36,90 — Ver Oferta →" vs banner atual sem preço. Em categorias de recompra, preço no topo do funil reduz a taxa de rejeição de usuários com intenção clara.
+H3 — Reviews verificadas (Judge.me) vs depoimentos internos atuais
+
+Impacto estimado: muito alto. Reviews com foto, nome real e data verificada aumentam taxa de conversão em PDPs em 15–30% segundo benchmarks de CRO para e-commerce. É o teste de maior impacto potencial identificado.
+H4 — Cupom de newsletter com valor explícito vs genérico
+
+Impacto estimado: médio. "Ganhe 10% OFF" vs "Receba um cupom de boas-vindas" — impacto direto na taxa de captura de e-mail e no LTV via e-mail marketing subsequente.
+H5 — Exibição de estoque disponível na PDP vs sem contador
+
+Impacto estimado: médio. "Apenas 8 unidades em estoque" cria urgência real baseada em dados, aumentando taxa de add-to-cart especialmente em produtos com baixo volume.
+H6 — Tabela de compatibilidade na PDP vs descrição em texto corrido
+
+Impacto estimado: alto. No segmento de cartuchos, a dúvida de compatibilidade é o principal motivo de abandono. Tabela escaneável reduz esse atrito diretamente.
+Roadmap em 3 Fases
+IMEDIATO (esta semana)
+
+Resolver o status "Esgotado" em todos os produtos — verificar configuração de variantes e estoque no Shopify.
+Reescrever title e meta description da homepage.
+Inserir H1 único na homepage.
+Adicionar alt text descritivo nos banners principais.
+Definir e comunicar valor do cupom de boas-vindas na newsletter.
+Ativar Microsoft Clarity (gratuito) para começar a coletar heatmaps imediatamente.
+
+30 DIAS
+
+Instalar e configurar Judge.me ou Loox para coleta de reviews verificadas.
+Criar página "Sobre" completa com CNPJ, história e equipe.
+Lançar FAQ com schema FAQPage para as 15 perguntas mais comuns.
+Verificar Google Search Console e enviar sitemap.
+Configurar GA4 com funil de conversão e eventos de add-to-cart, início de checkout e compra concluída.
+Ativar e completar Google Meu Negócio.
+Implementar schema Product nas PDPs e Organization na home.
+
+90 DIAS
+
+Publicar primeiros 3 guias de conteúdo editorial para GEO e SEO informacional.
+Rodar primeiro teste A/B formal (H3 — reviews verificadas vs depoimentos internos).
+Redesenhar banners hero com CTA sobrepostos e oferta específica.
+Adicionar tabela de compatibilidade nas PDPs de cartucho e toner.
+Criar perfil no Reclame Aqui e monitorar ativamente.
+Iniciar estratégia de link building com blogs de tecnologia brasileiros.
+Revisar Core Web Vitals com dados reais do GSC e corrigir LCP se acima de 2,5s.
+
+Métricas-Chave por Módulo
+MóduloMétricaMeta sugerida (90 dias)SEO & OnpagePosição média no GSC para keywords principaisTop 20 para "cartucho HP compatível"SEO & OnpageCTR orgânico na SERPAumento de 30% com novo title/metaGEO & IndexaçãoPáginas indexadas no Google100% dos produtos ativos indexadosGEO & IndexaçãoDomínio citado em IAs1ª menção verificável em 90 diasEstrutura & ConversãoTaxa de conversão geralAtingir 1% (baseline após resolver estoque)Estrutura & ConversãoTaxa de abandono de carrinhoAbaixo de 70%Testes & MelhoriasRating médio de produto (reviews)Mínimo 4.5/5 com 50+ avaliações reaisTestes & MelhoriasTaxa de captura de e-mail (newsletter)3–5% dos visitantes únicos
+Ferramentas Recomendadas
+FerramentaFinalidadeCustoMicrosoft ClarityHeatmaps e gravações de sessãoGratuitoGoogle Search ConsoleMonitoramento de indexação e performance orgânicaGratuitoGoogle Analytics 4Funil de conversão e atribuição de canaisGratuitoJudge.meReviews verificadas com schema nativo ShopifyGratuito (plano básico)Screaming FrogAuditoria técnica de SEO (crawl completo)Gratuito até 500 URLsSemrush ou AhrefsPesquisa de palavras-chave e backlinksPago (avaliar após estabilizar conversão)HotjarHeatmaps avançados e enquetes de saídaPago (substituível pelo Clarity inicialmente)VWO ou ConvertTestes A/B formaisPago (iniciar após definir funil no GA4)
+
+Resumo Geral
+MóduloScoreStatus◈ SEO & Onpage47Regular◉ GEO & Indexação44Regular◧ Estrutura & Conversão57Regular◫ Testes & Melhorias55RegularMédia Geral51Regular
+Diagnóstico executivo: O site dropchinaoficial.com.br tem infraestrutura técnica funcional (Shopify, HTTPS, URLs limpas, sitemap automático) e diferenciais competitivos reais comunicados no header, mas opera abaixo do potencial em todas as frentes por conta de um bloqueador operacional crítico — todos os produtos estão marcados como "Esgotado", tornando a conversão impossível independente de qualquer otimização. Somado a isso, o SEO onpage é elementar demais (title genérico, meta ausente, zero schema), o E-E-A-T é frágil (página Sobre minimalista, reviews não verificadas, ausência no GMB) e não há nenhuma cultura de testes ou experimentação estabelecida. A ordem de prioridade é clara: (1) resolver o estoque, (2) corrigir os 5 erros de SEO básico em menos de 2 horas, (3) ativar reviews verificadas via Judge.me, e (4) criar a página Sobre e FAQ com schema — essas 4 ações, executadas em sequência nas próximas 4 semanas, têm potencial de elevar o score geral de 51 para acima de 70 e tornar o site competitivo no orgânico e em IAs.

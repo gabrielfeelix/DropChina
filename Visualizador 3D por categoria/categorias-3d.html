@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Elementos 3D — Categorias</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:'Inter Tight',Helvetica,Arial,sans-serif;background:#F7F9FA;color:#1B2226;display:grid;grid-template-columns:280px 1fr}
+  three-d-stage:not(:defined){visibility:hidden}
+  aside{border-right:1px solid #E4E9EC;padding:28px 20px;overflow:auto;background:#fff}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A959B;margin:0 0 6px}
+  h1{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0 0 20px}
+  nav{display:flex;flex-direction:column;gap:4px}
+  button{font:inherit;font-size:14px;text-align:left;padding:11px 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:#39444B;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:44px}
+  button:hover{background:#F2F5F6}
+  button[aria-current="true"]{background:#1B2226;color:#fff}
+  button span.dot{width:7px;height:7px;border-radius:50%;background:#1E93A8;flex:none;opacity:.35}
+  button[aria-current="true"] span.dot{opacity:1;background:#F3C233}
+  main{position:relative;min-width:0}
+  three-d-stage{width:100%;height:100%;display:block}
+  .caption{position:absolute;left:32px;top:28px;pointer-events:none}
+  .caption p{margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A959B}
+  .caption h2{margin:4px 0 0;font-size:30px;font-weight:700;letter-spacing:-.02em}
+  footer{position:absolute;left:32px;bottom:26px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#98A2A8;pointer-events:none}
+</style>
+</head>
+<body>
+<aside>
+  <p class="eyebrow">Nossa loja</p>
+  <h1>Elementos 3D<br>por categoria</h1>
+  <nav id="nav"></nav>
+</aside>
+<main>
+  <three-d-stage name="categoria" background="#F7F9FA" autorotate></three-d-stage>
+  <div class="caption"><p>Categoria</p><h2 id="title">—</h2></div>
+</main>
+<script src="./three-d-stage.js"></script>
+<script type="module">
+  import { CATEGORIES, buildCategory } from './models.js';
+  const stage = document.querySelector('three-d-stage');
+  await stage.ready;
+  const nav = document.getElementById('nav');
+  const title = document.getElementById('title');
+  const btns = CATEGORIES.map(c => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="dot"></span>';
+    b.append(c.label);
+    b.onclick = () => select(c.key);
+    nav.append(b);
+    return b;
+  });
+  function select(key) {
+    const i = CATEGORIES.findIndex(c => c.key === key);
+    btns.forEach((b, j) => b.setAttribute('aria-current', j === i));
+    title.textContent = CATEGORIES[i].label;
+    stage.setAttribute('name', key);
+    stage.setObject(buildCategory(key));
+    location.hash = key;
+  }
+  const initial = CATEGORIES.some(c => c.key === location.hash.slice(1)) ? location.hash.slice(1) : CATEGORIES[0].key;
+  select(initial);
+  // watchdog: some hosts detach/pause the canvas — keep the loop alive
+  let last = -1;
+  setInterval(() => {
+    const f = stage._renderer && stage._renderer.info.render.frame;
+    if (f === last && stage._renderer) stage._renderer.setAnimationLoop(stage._loop);
+    last = f;
+  }, 1000);
+</script>
+</body>
+</html>
