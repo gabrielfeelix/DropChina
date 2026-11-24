@@ -74,25 +74,31 @@
   páginas comuns ficava vazio e a página saía sem og:image nenhum — todo link
   compartilhado no WhatsApp ou Instagram aparecia sem miniatura. O asset
   og-image.jpg (1200×630, proporção que as redes esperam) é o fallback.
+  Coleção sem imagem própria usa collection.featured_image (cai na foto do
+  1º produto) — senão todo link de coleção saía com o banner geral.
 {%- endcomment -%}
-{%- if page_image -%}
+{%- assign og_img = page_image -%}
+{%- if og_img == blank and template.name == 'collection' and collection.featured_image -%}
+  {%- assign og_img = collection.featured_image -%}
+{%- endif -%}
+{%- if og_img -%}
   <meta
     property="og:image"
-    content="http:{{ page_image | image_url }}"
+    content="http:{{ og_img | image_url }}"
   >
   <meta
     property="og:image:secure_url"
-    content="https:{{ page_image | image_url }}"
+    content="https:{{ og_img | image_url }}"
   >
   <meta
     property="og:image:width"
-    content="{{ page_image.width }}"
+    content="{{ og_img.width }}"
   >
   <meta
     property="og:image:height"
-    content="{{ page_image.height }}"
+    content="{{ og_img.height }}"
   >
-  {%- assign social_image = page_image | image_url | split: '//' | last | prepend: 'https://' -%}
+  {%- assign social_image = og_img | image_url | split: '//' | last | prepend: 'https://' -%}
 {%- else -%}
   {%- comment -%} asset_url pode voltar protocol-relative; o split normaliza {%- endcomment -%}
   {%- assign social_image = 'og-image.jpg' | asset_url | split: '//' | last | prepend: 'https://' -%}
