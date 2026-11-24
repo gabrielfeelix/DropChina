@@ -1,7 +1,7 @@
 # STATUS ATUAL — DropChina
 
 > **Este é o documento de entrada. Se a pergunta é "qual o status atual?", a resposta está aqui.**
-> Última atualização: **29/set/2026** · Branch: `feat/shopify-ui-institucional`
+> Última atualização: **24/nov/2026** · Branch: `feat/shopify-ui-institucional`
 >
 > ⚠️ Existe um `docs/STATUS.md` antigo (17/jun) — **ignorar**, foi superado por este.
 
@@ -28,6 +28,34 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 | **Vendas** | **0 pedidos na Shopify.** Os 8 do Bling são do Mercado Livre, de nov/2024 |
 | **Medição** | ✅ **Clarity** (`y70lfm3dio`) e **GA4** (`G-KZ4CGVHY7X`) no ar, confirmados no HTML · Search Console validado + sitemap · Merchant Center `5843491607` Active. Falta Pixel e banner LGPD |
 | **Marca** | 🟡 Instagram, Facebook, YouTube e Google Meu Negócio próprios criados (23/08) · logo escolhida, falta vetorizar e aplicar · ⚠️ **ficha FALSA no Google se passando pela empresa** e Reclame Aqui sob controle de terceiro |
+
+---
+
+## 24/nov/2026 — scooters AZM X13 + X15, coleção Mobilidade Elétrica
+
+- **X15 criada e no ar** (Shopify `10445208682715`, Bling pai `16739874702`, vínculos criados com preço 6.000).
+  4 cores: Branco, Prateado, Cinza-escuro, Preto (SKU `DC-AZM-X15-<COR>`), 10 un. cada, cartão R$ 6.000.
+  Fotos sem a logo AZM do vendedor, quadradas 1200×1200, em `catalogo/scooter-x15/<cor>/`.
+  Scripts: `criar-x15-shopify.ts`, `criar-x15-bling.ts`, `x15-midia.ts`.
+- **X13:** vínculos Bling recriados com **5.500** (estavam 4.500 = Pix; "Sincronizar preços" derrubaria o cartão).
+  5 cores confirmadas pelo Augusto (rosa não existe). Garantia 3 meses de fábrica (Augusto, 24/nov).
+- **Coleção `mobilidade-eletrica`** criada e publicada (smart, tag `categoria-mobilidade-eletrica`) — X13 + X15.
+- **Decisão de preço:** preço Shopify = cartão. Pix = desconto % da Pagar.me, igual pra loja toda → vai passar de **8% para 5%**.
+- **Pagar.me:** 3 falhas de 18/nov (A1 Combo, R$ 3.962,70) = recusa do emissor (1007/1025/1019), não da loja.
+  3 cartões em 4 min às 3h → padrão de teste de cartão. Chave secreta em `mcp-bling/.env` (`PAGARME_SECRET_KEY`).
+- **CLI Shopify:** sessão venceu em 30/jul. Login é por código de dispositivo — dá pra autorizar pelo celular.
+
+### Pendências (24/nov)
+- **Tema (precisa CLI logado ou editor):**
+  - Trocar banner X13 por `banners/scooters/banner-scooter-x13-desktop-v3.jpeg` (5 cores, sem rosa). Mobile da X13 também diz 6 cores.
+  - Banner X15: link `/search?q=scooter` → `/products/scooter-eletrica-dc-azm-x15-1000w-aro-14-bateria-de-litio-removivel`.
+  - Motos na home (destaque) e "Mobilidade Elétrica" no menu principal.
+  - Pix 8% → 5% no tema (`pix_pct` em `dc-product-card.liquid`, `dc-pdp.liquid`, `dc-header.liquid`; textos em `header-group.json`, `dc-faq.liquid`, `meta-tags.liquid`) — **só depois** de trocar na Pagar.me (HUB → Minhas integrações → Shopify → desconto Pix).
+  - ⚠️ Banners das scooters só existem no tema live: `theme pull` antes de qualquer push.
+- **Banners:** preços "R$ 4.500 / R$ 5.000 à vista" não batem com Pix 5% (5.225 / 5.700).
+- **X15:** fotos de vermelho e azul (banner mostra; Augusto confirmar se existem).
+- **NCM** vazio em X13 e X15 — Augusto vai ver com o contador. Custo (COGS) das motos não informado.
+- `pix_price` (metafield) da X13 = 4500 e da X15 removido do script — tema ignora; limpar.
 
 ---
 
