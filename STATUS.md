@@ -52,7 +52,7 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
   - ✅ Menu: 7º link "Mobilidade" na barra (`nav_link_7`) + departamento `dep_mobilidade` (ícone `scooter`) no "Todas as categorias".
   - ✅ Grade de categorias: card `cat_mob` com modelo 3D `mobilidade-eletrica` (scooter em `scripts/cat-3d/src/models.js`).
   - ✅ Card: "Frete grátis" (≥ R$ 1.000) não aparece mais em item > 30 kg.
-  - Pix 8% → 5% no tema (`pix_pct` em `dc-product-card.liquid`, `dc-pdp.liquid`, `dc-header.liquid`; textos em `header-group.json`, `dc-faq.liquid`, `meta-tags.liquid`) — **só depois** de trocar na Pagar.me (HUB → Minhas integrações → Shopify → desconto Pix).
+  - Pix 8% → 5% no tema (`pix_pct` em `dc-product-card.liquid`, `dc-pdp.liquid`, `dc-header.liquid`; textos em `header-group.json`, `dc-faq.liquid`, `meta-tags.liquid`) — **só depois** de trocar na Pagar.me (tentar nesta ordem: Shopify https://admin.shopify.com/store/akfd19-1c/settings/payments → Pagar.me → Gerir; ou Apps → Pagar.me; ou HUB Pagar.me → integração Shopify → desconto Pix. Dash da Pagar.me não tem o campo). Só dá pra fazer no PC com acesso à Shopify.
   - ⚠️ Assets dos banners das scooters (exceto x13-v3) só existem no tema live: nunca push sem `--only`.
 - **Banners:** preços "R$ 4.500 / R$ 5.000 à vista" não batem com Pix 5% (5.225 / 5.700).
 - **X15:** fotos de vermelho e azul (banner mostra; Augusto confirmar se existem).
