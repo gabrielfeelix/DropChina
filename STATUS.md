@@ -47,11 +47,11 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 
 ### Pendências (24/nov)
 - **Tema (precisa CLI logado ou editor):**
-  - Trocar banner X13 por `banners/scooters/banner-scooter-x13-desktop-v3.jpeg` (5 cores, sem rosa). Mobile da X13 também diz 6 cores.
-  - Banner X15: link `/search?q=scooter` → `/products/scooter-eletrica-dc-azm-x15-1000w-aro-14-bateria-de-litio-removivel`.
-  - Motos na home (destaque) e "Mobilidade Elétrica" no menu principal.
+  - ✅ Feito 24/nov via CLI (`--only --nodelete`): banner X13 v3 (5 cores), link do banner X15 → PDP, seção `mobilidade_home` na home.
+  - Banner **mobile** da X13 ainda diz 6 cores (falta arte mobile).
+  - "Mobilidade Elétrica" no **menu principal** — só pelo admin (Navegação); app não tem scope de menu.
   - Pix 8% → 5% no tema (`pix_pct` em `dc-product-card.liquid`, `dc-pdp.liquid`, `dc-header.liquid`; textos em `header-group.json`, `dc-faq.liquid`, `meta-tags.liquid`) — **só depois** de trocar na Pagar.me (HUB → Minhas integrações → Shopify → desconto Pix).
-  - ⚠️ Banners das scooters só existem no tema live: `theme pull` antes de qualquer push.
+  - ⚠️ Assets dos banners das scooters (exceto x13-v3) só existem no tema live: nunca push sem `--only`.
 - **Banners:** preços "R$ 4.500 / R$ 5.000 à vista" não batem com Pix 5% (5.225 / 5.700).
 - **X15:** fotos de vermelho e azul (banner mostra; Augusto confirmar se existem).
 - **NCM** vazio em X13 e X15 — Augusto vai ver com o contador. Custo (COGS) das motos não informado.

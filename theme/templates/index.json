@@ -12,9 +12,29 @@
     "hero_main": {
       "type": "dc-hero-slideshow",
       "blocks": {
+        "slide_scooter_x13": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-scooter-x13-desktop-v3.jpeg",
+            "image_asset_mobile": "banner-scooter-x13-mobile.jpeg",
+            "alt": "Scooter Elétrica DC AZM X13 — até 45 km de autonomia, 5 cores",
+            "link": "shopify://products/scooter-eletrica-dc-azm-x13-1000w-aro-14-bateria-de-litio-removivel"
+          }
+        },
+        "slide_scooter_x15": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-scooter-x15-desktop.jpeg",
+            "image_asset_mobile": "banner-scooter-x15-mobile.jpeg",
+            "alt": "Scooter Elétrica DC AZM X15 — motor 1000W, até 55 km por carga",
+            "link": "shopify://products/scooter-eletrica-dc-azm-x15-1000w-aro-14-bateria-de-litio-removivel"
+          }
+        },
         "slide_snapmaker": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Snapmaker_U1__Impressao_3D_Multicolor.png",
+            "image_mobile": "shopify://shop_images/Snapmaker_U1__Impressao_3D_Sem_Limites.png",
             "image_asset": "banner-snapmaker-u1-desktop.jpeg",
             "image_asset_mobile": "banner-snapmaker-u1-mobile.jpeg",
             "alt": "Snapmaker U1 — impressora 3D multicolor com 4 cabeçotes independentes",
@@ -24,6 +44,8 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Filamentos_Premium_em_Destaque.png",
+            "image_mobile": "shopify://shop_images/Publicidade_futurista_de_filamentos_3D_premium_c7d576f6-c59e-485b-a531-29fe715c5562.png",
             "image_asset": "banner-1-oficial-desktop.jpeg",
             "image_asset_mobile": "banner-1-oficial-mobile.jpeg",
             "alt": "DropChina — ofertas oficiais em tecnologia e impressão",
@@ -33,19 +55,24 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Black_Friday_DropChina__Impressoras_em_Oferta.png",
+            "image_mobile": "shopify://shop_images/Black_Friday_das_Impressoras_3D.png",
             "image_asset": "banner-2-oficial-desktop.jpeg",
             "image_asset_mobile": "banner-2-oficial-mobile.jpeg",
             "alt": "DropChina — destaques e promoções da loja",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/impressoras"
           }
         }
       },
       "block_order": [
+        "slide_scooter_x13",
+        "slide_scooter_x15",
         "slide_snapmaker",
         "slide_1",
         "slide_2"
       ],
       "settings": {
+        "seo_h1": "DropChina — Cartuchos, Toners, Impressoras e Periféricos com Garantia Oficial",
         "autoplay_ms": 6500,
         "padding_top": 18,
         "padding_bottom": 0
@@ -54,145 +81,147 @@
     "categories_grid": {
       "type": "dc-categories-grid",
       "blocks": {
+        "cat_3d": {
+          "type": "category",
+          "settings": {
+            "name": "Impressão 3D",
+            "collection": "impressao-3d",
+            "count": "Novidade",
+            "link": "shopify://collections/impressao-3d",
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"126\" rx=\"48\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"34\" y=\"26\" width=\"92\" height=\"88\" rx=\"8\" fill=\"none\" stroke=\"#2a3038\" stroke-width=\"6\"></rect><rect x=\"46\" y=\"40\" width=\"68\" height=\"6\" rx=\"3\" fill=\"#3a414a\"></rect><rect x=\"72\" y=\"40\" width=\"12\" height=\"30\" rx=\"2\" fill=\"#0e8aa5\"></rect><rect x=\"56\" y=\"66\" width=\"48\" height=\"8\" rx=\"2\" fill=\"#3a414a\"></rect><rect x=\"64\" y=\"84\" width=\"32\" height=\"22\" rx=\"3\" fill=\"#f5c518\"></rect><rect x=\"64\" y=\"84\" width=\"32\" height=\"8\" rx=\"3\" fill=\"#ffd23f\"></rect></svg>",
+            "cat3d_key": "impressao-3d"
+          }
+        },
         "cat_0": {
           "type": "category",
           "settings": {
-            "cat3d_key": "cartuchos-tintas",
             "name": "Cartuchos & Tintas",
             "collection": "cartuchos-de-tinta",
             "count": "Ver coleção",
             "link": "shopify://collections/cartuchos-de-tinta",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='40' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='58' y='30' width='44' height='84' rx='6' fill='#2a3038'/><rect x='58' y='30' width='44' height='20' rx='6' fill='#3a414a'/><rect x='66' y='40' width='28' height='8' rx='2' fill='#1a1d20'/><rect x='58' y='92' width='44' height='22' rx='6' fill='#0e8aa5'/><rect x='72' y='114' width='16' height='6' rx='2' fill='#1a1d20'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"126\" rx=\"40\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"58\" y=\"30\" width=\"44\" height=\"84\" rx=\"6\" fill=\"#2a3038\"></rect><rect x=\"58\" y=\"30\" width=\"44\" height=\"20\" rx=\"6\" fill=\"#3a414a\"></rect><rect x=\"66\" y=\"40\" width=\"28\" height=\"8\" rx=\"2\" fill=\"#1a1d20\"></rect><rect x=\"58\" y=\"92\" width=\"44\" height=\"22\" rx=\"6\" fill=\"#0e8aa5\"></rect><rect x=\"72\" y=\"114\" width=\"16\" height=\"6\" rx=\"2\" fill=\"#1a1d20\"></rect></svg>",
+            "cat3d_key": "cartuchos-tintas"
           }
         },
         "cat_1": {
           "type": "category",
           "settings": {
-            "cat3d_key": "toners",
             "name": "Toners",
             "collection": "toners",
             "count": "Ver coleção",
             "link": "shopify://collections/toners",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='52' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='28' y='52' width='104' height='40' rx='12' fill='#2a3038'/><rect x='28' y='52' width='104' height='14' rx='12' fill='#3a414a'/><rect x='118' y='58' width='16' height='28' rx='6' fill='#0e8aa5'/><rect x='40' y='72' width='60' height='6' rx='3' fill='#1a1d20'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"52\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"28\" y=\"52\" width=\"104\" height=\"40\" rx=\"12\" fill=\"#2a3038\"></rect><rect x=\"28\" y=\"52\" width=\"104\" height=\"14\" rx=\"12\" fill=\"#3a414a\"></rect><rect x=\"118\" y=\"58\" width=\"16\" height=\"28\" rx=\"6\" fill=\"#0e8aa5\"></rect><rect x=\"40\" y=\"72\" width=\"60\" height=\"6\" rx=\"3\" fill=\"#1a1d20\"></rect></svg>",
+            "cat3d_key": "toners"
           }
         },
         "cat_2": {
           "type": "category",
           "settings": {
-            "cat3d_key": "impressoras",
             "name": "Impressoras",
             "collection": "impressoras",
             "count": "Ver coleção",
             "link": "shopify://collections/impressoras",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='50' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='46' y='24' width='68' height='24' rx='4' fill='#eef1f5'/><rect x='34' y='46' width='92' height='44' rx='8' fill='#2a3038'/><rect x='34' y='46' width='92' height='14' rx='8' fill='#3a414a'/><rect x='46' y='90' width='68' height='24' rx='4' fill='#eef1f5'/><rect x='52' y='96' width='56' height='4' rx='2' fill='#ccd3db'/><circle cx='114' cy='68' r='4' fill='#22c55e'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"126\" rx=\"50\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"46\" y=\"24\" width=\"68\" height=\"24\" rx=\"4\" fill=\"#eef1f5\"></rect><rect x=\"34\" y=\"46\" width=\"92\" height=\"44\" rx=\"8\" fill=\"#2a3038\"></rect><rect x=\"34\" y=\"46\" width=\"92\" height=\"14\" rx=\"8\" fill=\"#3a414a\"></rect><rect x=\"46\" y=\"90\" width=\"68\" height=\"24\" rx=\"4\" fill=\"#eef1f5\"></rect><rect x=\"52\" y=\"96\" width=\"56\" height=\"4\" rx=\"2\" fill=\"#ccd3db\"></rect><circle cx=\"114\" cy=\"68\" r=\"4\" fill=\"#22c55e\"></circle></svg>",
+            "cat3d_key": "impressoras"
           }
         },
         "cat_3": {
           "type": "category",
           "settings": {
-            "cat3d_key": "placas-de-video",
             "name": "Placas de Vídeo",
             "collection": "placas-de-video",
             "count": "Ver coleção",
             "link": "shopify://collections/placas-de-video",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='120' rx='58' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='20' y='46' width='120' height='48' rx='6' fill='#2a3038'/><rect x='20' y='46' width='120' height='14' rx='6' fill='#3a414a'/><circle cx='50' cy='74' r='13' fill='#1a1d20'/><circle cx='95' cy='74' r='13' fill='#1a1d20'/><circle cx='50' cy='74' r='5' fill='#0e8aa5'/><circle cx='95' cy='74' r='5' fill='#0e8aa5'/><rect x='24' y='94' width='30' height='10' rx='2' fill='#3a414a'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"120\" rx=\"58\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"20\" y=\"46\" width=\"120\" height=\"48\" rx=\"6\" fill=\"#2a3038\"></rect><rect x=\"20\" y=\"46\" width=\"120\" height=\"14\" rx=\"6\" fill=\"#3a414a\"></rect><circle cx=\"50\" cy=\"74\" r=\"13\" fill=\"#1a1d20\"></circle><circle cx=\"95\" cy=\"74\" r=\"13\" fill=\"#1a1d20\"></circle><circle cx=\"50\" cy=\"74\" r=\"5\" fill=\"#0e8aa5\"></circle><circle cx=\"95\" cy=\"74\" r=\"5\" fill=\"#0e8aa5\"></circle><rect x=\"24\" y=\"94\" width=\"30\" height=\"10\" rx=\"2\" fill=\"#3a414a\"></rect></svg>",
+            "cat3d_key": "placas-de-video"
           }
         },
         "cat_4": {
           "type": "category",
           "settings": {
-            "cat3d_key": "audio-headsets",
             "name": "Áudio & Headsets",
             "collection": "audio",
             "count": "Ver coleção",
             "link": "shopify://collections/audio",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M42 78 Q42 34 80 34 Q118 34 118 78' fill='none' stroke='#2a3038' stroke-width='10' stroke-linecap='round'/><rect x='30' y='72' width='22' height='38' rx='9' fill='#2a3038'/><rect x='108' y='72' width='22' height='38' rx='9' fill='#2a3038'/><rect x='34' y='76' width='14' height='30' rx='7' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"42\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><path d=\"M42 78 Q42 34 80 34 Q118 34 118 78\" fill=\"none\" stroke=\"#2a3038\" stroke-width=\"10\" stroke-linecap=\"round\"></path><rect x=\"30\" y=\"72\" width=\"22\" height=\"38\" rx=\"9\" fill=\"#2a3038\"></rect><rect x=\"108\" y=\"72\" width=\"22\" height=\"38\" rx=\"9\" fill=\"#2a3038\"></rect><rect x=\"34\" y=\"76\" width=\"14\" height=\"30\" rx=\"7\" fill=\"#0e8aa5\"></rect></svg>",
+            "cat3d_key": "audio-headsets"
           }
         },
         "cat_5": {
           "type": "category",
           "settings": {
-            "cat3d_key": "perifericos",
             "name": "Periféricos",
             "collection": "perifericos",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='34' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='56' y='28' width='48' height='90' rx='24' fill='#2a3038'/><rect x='56' y='28' width='48' height='42' rx='24' fill='#3a414a'/><rect x='77' y='38' width='6' height='20' rx='3' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"126\" rx=\"34\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"56\" y=\"28\" width=\"48\" height=\"90\" rx=\"24\" fill=\"#2a3038\"></rect><rect x=\"56\" y=\"28\" width=\"48\" height=\"42\" rx=\"24\" fill=\"#3a414a\"></rect><rect x=\"77\" y=\"38\" width=\"6\" height=\"20\" rx=\"3\" fill=\"#0e8aa5\"></rect></svg>",
+            "cat3d_key": "perifericos"
           }
         },
         "cat_7": {
           "type": "category",
           "settings": {
-            "cat3d_key": "redes-internet",
             "name": "Redes & Internet",
             "collection": "redes",
             "count": "Ver coleção",
             "link": "shopify://collections/redes",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='122' rx='48' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='38' y='78' width='84' height='30' rx='8' fill='#2a3038'/><rect x='38' y='78' width='84' height='10' rx='8' fill='#3a414a'/><circle cx='54' cy='96' r='3.5' fill='#22c55e'/><circle cx='68' cy='96' r='3.5' fill='#22c55e'/><circle cx='82' cy='96' r='3.5' fill='#0e8aa5'/><path d='M60 74 L60 58 M100 74 L100 58' stroke='#1a1d20' stroke-width='4' stroke-linecap='round'/><path d='M74 66 Q80 56 86 66' fill='none' stroke='#0e8aa5' stroke-width='3.5' stroke-linecap='round'/><path d='M68 62 Q80 46 92 62' fill='none' stroke='#3a414a' stroke-width='3.5' stroke-linecap='round'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"122\" rx=\"48\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"38\" y=\"78\" width=\"84\" height=\"30\" rx=\"8\" fill=\"#2a3038\"></rect><rect x=\"38\" y=\"78\" width=\"84\" height=\"10\" rx=\"8\" fill=\"#3a414a\"></rect><circle cx=\"54\" cy=\"96\" r=\"3.5\" fill=\"#22c55e\"></circle><circle cx=\"68\" cy=\"96\" r=\"3.5\" fill=\"#22c55e\"></circle><circle cx=\"82\" cy=\"96\" r=\"3.5\" fill=\"#0e8aa5\"></circle><path d=\"M60 74 L60 58 M100 74 L100 58\" stroke=\"#1a1d20\" stroke-width=\"4\" stroke-linecap=\"round\"></path><path d=\"M74 66 Q80 56 86 66\" fill=\"none\" stroke=\"#0e8aa5\" stroke-width=\"3.5\" stroke-linecap=\"round\"></path><path d=\"M68 62 Q80 46 92 62\" fill=\"none\" stroke=\"#3a414a\" stroke-width=\"3.5\" stroke-linecap=\"round\"></path></svg>",
+            "cat3d_key": "redes-internet"
           }
         },
         "cat_8": {
           "type": "category",
           "settings": {
-            "cat3d_key": "armazenamento",
             "name": "Armazenamento",
             "collection": "informatica",
             "count": "Ver coleção",
             "link": "shopify://collections/informatica",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='42' y='44' width='76' height='24' rx='5' fill='#2a3038'/><rect x='42' y='44' width='76' height='9' rx='5' fill='#3a414a'/><circle cx='106' cy='56' r='3' fill='#22c55e'/><rect x='42' y='74' width='76' height='24' rx='5' fill='#2a3038'/><rect x='42' y='74' width='76' height='9' rx='5' fill='#3a414a'/><circle cx='106' cy='86' r='3' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"44\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"42\" y=\"44\" width=\"76\" height=\"24\" rx=\"5\" fill=\"#2a3038\"></rect><rect x=\"42\" y=\"44\" width=\"76\" height=\"9\" rx=\"5\" fill=\"#3a414a\"></rect><circle cx=\"106\" cy=\"56\" r=\"3\" fill=\"#22c55e\"></circle><rect x=\"42\" y=\"74\" width=\"76\" height=\"24\" rx=\"5\" fill=\"#2a3038\"></rect><rect x=\"42\" y=\"74\" width=\"76\" height=\"9\" rx=\"5\" fill=\"#3a414a\"></rect><circle cx=\"106\" cy=\"86\" r=\"3\" fill=\"#0e8aa5\"></circle></svg>",
+            "cat3d_key": "armazenamento"
           }
         },
         "cat_9": {
           "type": "category",
           "settings": {
-            "cat3d_key": "cabos-adaptadores",
             "name": "Cabos & Adaptadores",
+            "collection": "",
             "count": "Ver coleção",
             "link": "shopify://collections/perifericos",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='66' y='30' width='28' height='40' rx='4' fill='#3a414a'/><rect x='72' y='24' width='16' height='10' rx='2' fill='#0e8aa5'/><rect x='74' y='38' width='12' height='16' rx='2' fill='#1a1d20'/><path d='M80 70 Q80 92 60 96 Q40 100 40 116' fill='none' stroke='#2a3038' stroke-width='6' stroke-linecap='round'/><rect x='34' y='112' width='14' height='10' rx='2' fill='#2a3038'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"42\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"66\" y=\"30\" width=\"28\" height=\"40\" rx=\"4\" fill=\"#3a414a\"></rect><rect x=\"72\" y=\"24\" width=\"16\" height=\"10\" rx=\"2\" fill=\"#0e8aa5\"></rect><rect x=\"74\" y=\"38\" width=\"12\" height=\"16\" rx=\"2\" fill=\"#1a1d20\"></rect><path d=\"M80 70 Q80 92 60 96 Q40 100 40 116\" fill=\"none\" stroke=\"#2a3038\" stroke-width=\"6\" stroke-linecap=\"round\"></path><rect x=\"34\" y=\"112\" width=\"14\" height=\"10\" rx=\"2\" fill=\"#2a3038\"></rect></svg>",
+            "cat3d_key": "cabos-adaptadores"
           }
         },
         "cat_10": {
           "type": "category",
           "settings": {
-            "cat3d_key": "papelaria-midia",
             "name": "Papelaria & Mídia",
             "collection": "papelaria",
             "count": "Ver coleção",
             "link": "shopify://collections/papelaria",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='42' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='56' y='32' width='56' height='76' rx='6' fill='#dfe4ea'/><rect x='44' y='40' width='56' height='76' rx='6' fill='#ffffff' stroke='#ccd3db' stroke-width='2'/><rect x='54' y='54' width='36' height='5' rx='2' fill='#cdd3db'/><rect x='54' y='66' width='36' height='5' rx='2' fill='#cdd3db'/><rect x='54' y='78' width='24' height='5' rx='2' fill='#0e8aa5'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"126\" rx=\"42\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><rect x=\"56\" y=\"32\" width=\"56\" height=\"76\" rx=\"6\" fill=\"#dfe4ea\"></rect><rect x=\"44\" y=\"40\" width=\"56\" height=\"76\" rx=\"6\" fill=\"#ffffff\" stroke=\"#ccd3db\" stroke-width=\"2\"></rect><rect x=\"54\" y=\"54\" width=\"36\" height=\"5\" rx=\"2\" fill=\"#cdd3db\"></rect><rect x=\"54\" y=\"66\" width=\"36\" height=\"5\" rx=\"2\" fill=\"#cdd3db\"></rect><rect x=\"54\" y=\"78\" width=\"24\" height=\"5\" rx=\"2\" fill=\"#0e8aa5\"></rect></svg>",
+            "cat3d_key": "papelaria-midia"
           }
         },
         "cat_11": {
           "type": "category",
           "settings": {
-            "cat3d_key": "ofertas-da-semana",
             "name": "Ofertas da Semana",
             "collection": "ofertas-relampago",
             "count": "Até 40% OFF",
             "link": "shopify://collections/ofertas-relampago",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='44' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M52 34 L96 34 L120 74 L88 106 Q82 112 76 106 L52 82 Z' fill='#f5c518'/><circle cx='72' cy='54' r='7' fill='#1a1d20'/><path d='M74 90 L102 62' stroke='#1a1d20' stroke-width='5' stroke-linecap='round'/><circle cx='78' cy='68' r='4.5' fill='#1a1d20'/><circle cx='98' cy='86' r='4.5' fill='#1a1d20'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"44\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><path d=\"M52 34 L96 34 L120 74 L88 106 Q82 112 76 106 L52 82 Z\" fill=\"#f5c518\"></path><circle cx=\"72\" cy=\"54\" r=\"7\" fill=\"#1a1d20\"></circle><path d=\"M74 90 L102 62\" stroke=\"#1a1d20\" stroke-width=\"5\" stroke-linecap=\"round\"></path><circle cx=\"78\" cy=\"68\" r=\"4.5\" fill=\"#1a1d20\"></circle><circle cx=\"98\" cy=\"86\" r=\"4.5\" fill=\"#1a1d20\"></circle></svg>",
+            "cat3d_key": "ofertas-da-semana"
           }
         },
         "cat_12": {
           "type": "category",
           "settings": {
-            "cat3d_key": "novidades",
             "name": "Novidades",
+            "collection": "",
             "count": "Recém-chegados",
             "link": "shopify://collections/all",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='124' rx='40' ry='5' fill='rgba(13,17,21,0.08)'/><path d='M80 28 L90 62 L124 72 L90 82 L80 116 L70 82 L36 72 L70 62 Z' fill='#f5c518'/><path d='M116 34 L120 46 L132 50 L120 54 L116 66 L112 54 L100 50 L112 46 Z' fill='#2a3038'/><path d='M46 92 L49 101 L58 104 L49 107 L46 116 L43 107 L34 104 L43 101 Z' fill='#0e8aa5'/></svg>"
-          }
-        },
-        "cat_3d": {
-          "type": "category",
-          "settings": {
-            "cat3d_key": "impressao-3d",
-            "name": "Impressão 3D",
-            "collection": "impressao-3d",
-            "count": "Novidade",
-            "link": "shopify://collections/impressao-3d",
-            "icon_svg": "<svg viewBox='0 0 160 140' width='100%' height='100%'><ellipse cx='80' cy='126' rx='48' ry='5' fill='rgba(13,17,21,0.08)'/><rect x='34' y='26' width='92' height='88' rx='8' fill='none' stroke='#2a3038' stroke-width='6'/><rect x='46' y='40' width='68' height='6' rx='3' fill='#3a414a'/><rect x='72' y='40' width='12' height='30' rx='2' fill='#0e8aa5'/><rect x='56' y='66' width='48' height='8' rx='2' fill='#3a414a'/><rect x='64' y='84' width='32' height='22' rx='3' fill='#f5c518'/><rect x='64' y='84' width='32' height='8' rx='3' fill='#ffd23f'/></svg>"
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"40\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><path d=\"M80 28 L90 62 L124 72 L90 82 L80 116 L70 82 L36 72 L70 62 Z\" fill=\"#f5c518\"></path><path d=\"M116 34 L120 46 L132 50 L120 54 L116 66 L112 54 L100 50 L112 46 Z\" fill=\"#2a3038\"></path><path d=\"M46 92 L49 101 L58 104 L49 107 L46 116 L43 107 L34 104 L43 101 Z\" fill=\"#0e8aa5\"></path></svg>",
+            "cat3d_key": "novidades"
           }
         }
       },
@@ -228,35 +257,40 @@
           "type": "tab",
           "settings": {
             "label": "Mais vendidos",
-            "collection": "mais-vendidos"
+            "collection": "mais-vendidos",
+            "collection_handle": ""
           }
         },
         "tab_2": {
           "type": "tab",
           "settings": {
             "label": "Cartuchos",
-            "collection": "cartuchos-de-tinta"
+            "collection": "cartuchos-de-tinta",
+            "collection_handle": ""
           }
         },
         "tab_3": {
           "type": "tab",
           "settings": {
             "label": "Toners",
-            "collection": "toners"
+            "collection": "toners",
+            "collection_handle": ""
           }
         },
         "tab_4": {
           "type": "tab",
           "settings": {
             "label": "Placas de vídeo",
-            "collection": "placas-de-video"
+            "collection": "placas-de-video",
+            "collection_handle": ""
           }
         },
         "tab_5": {
           "type": "tab",
           "settings": {
             "label": "Mini PCs",
-            "collection": "mini-pcs"
+            "collection": "mini-pcs",
+            "collection_handle": ""
           }
         },
         "tab_6": {
@@ -283,125 +317,64 @@
         "layout": "grid",
         "show_view_all": true,
         "view_all_label": "Ver todos os produtos",
+        "countdown_end": "",
         "padding_top": 56,
         "padding_bottom": 56
       }
     },
-    "second_collection": {
+    "filamentos_home": {
       "type": "dc-product-list",
       "blocks": {
-        "tab_1": {
+        "fil_todos": {
           "type": "tab",
           "settings": {
-            "label": "Ofertas-relâmpago",
-            "collection": "ofertas-relampago",
-            "collection_handle": "ofertas-relampago"
+            "label": "Todos",
+            "collection": "filamentos-3d",
+            "collection_handle": ""
+          }
+        },
+        "fil_pla": {
+          "type": "tab",
+          "settings": {
+            "label": "PLA",
+            "collection": "filamentos-pla",
+            "collection_handle": ""
+          }
+        },
+        "fil_petg": {
+          "type": "tab",
+          "settings": {
+            "label": "PETG",
+            "collection": "filamentos-petg",
+            "collection_handle": ""
+          }
+        },
+        "fil_natal": {
+          "type": "tab",
+          "settings": {
+            "label": "Cores de Natal",
+            "collection": "filamentos-de-natal",
+            "collection_handle": ""
           }
         }
       },
       "block_order": [
-        "tab_1"
+        "fil_todos",
+        "fil_pla",
+        "fil_petg",
+        "fil_natal"
       ],
       "settings": {
-        "eyebrow": "OFERTAS-RELÂMPAGO",
-        "heading": "Aproveite antes que acabe",
-        "max_products": 12,
-        "layout": "carousel",
-        "show_view_all": false,
-        "padding_top": 32,
+        "eyebrow": "IMPRESSÃO 3D",
+        "heading": "Filamentos Bambu Lab",
+        "max_products": 10,
+        "layout": "grid",
+        "show_view_all": true,
+        "view_all_label": "Ver todos os filamentos",
+        "countdown_end": "",
+        "padding_top": 24,
         "padding_bottom": 56
       }
-    },
-    "testimonials_section": {
-      "type": "testimonials",
-      "blocks": {
-        "plat_1": {
-          "type": "platform",
-          "settings": {
-            "name": "Mercado Livre",
-            "value": "MercadoLíder Platinum",
-            "subtitle": "+10 mil vendas"
-          }
-        },
-        "plat_2": {
-          "type": "platform",
-          "settings": {
-            "name": "Garantia",
-            "value": "12 meses oficial",
-            "subtitle": "Em todos os produtos"
-          }
-        },
-        "plat_3": {
-          "type": "platform",
-          "settings": {
-            "name": "Atendimento",
-            "value": "WhatsApp humano",
-            "subtitle": "Seg–Sex · 9h às 19h · Sáb 9h–13h"
-          }
-        }
-      },
-      "block_order": [
-        "plat_1",
-        "plat_2",
-        "plat_3"
-      ],
-      "name": "Testimonials",
-      "settings": {
-        "eyebrow": "REPUTAÇÃO NO MERCADO LIVRE",
-        "heading": "Vendedor Platinum, avaliado por quem compra",
-        "subheading": "Nossa reputação é pública e verificável no Mercado Livre.",
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "show_platforms": true,
-        "cta_label": "Ver avaliações no Mercado Livre",
-        "cta_link": "https://lista.mercadolivre.com.br/loja/dropchina-297222/"
-      }
-    },
-    "trust_badges_main": {
-      "type": "trust-badges",
-      "blocks": {
-        "b1": {
-          "type": "badge",
-          "settings": {
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 7h11v9H3z'/><path d='M14 10h4l3 3v3h-7z'/><circle cx='7' cy='18' r='1.6'/><circle cx='17' cy='18' r='1.6'/></svg>",
-            "title": "Frete grátis",
-            "sub": "Por região · veja no checkout"
-          }
-        },
-        "b2": {
-          "type": "badge",
-          "settings": {
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z'/><path d='m9 12 2 2 4-4'/></svg>",
-            "title": "Garantia oficial",
-            "sub": "12 meses em todos os produtos"
-          }
-        },
-        "b3": {
-          "type": "badge",
-          "settings": {
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M3 12a9 9 0 0 1 15.5-6.3L21 8'/><path d='M21 4v4h-4'/><path d='M21 12a9 9 0 0 1-15.5 6.3L3 16'/><path d='M3 20v-4h4'/></svg>",
-            "title": "Troca fácil",
-            "sub": "7 dias para trocar ou devolver"
-          }
-        },
-        "b4": {
-          "type": "badge",
-          "settings": {
-            "icon_svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#0d1115' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' width='24' height='24'><path d='M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4'/><path d='M4 13v4a2 2 0 0 0 2 2h2v-6H4'/></svg>",
-            "title": "Atendimento humano",
-            "sub": "Seg a sex das 9h às 19h, sáb das 9h às 13h"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ],
-      "settings": {}
     },
     "promo_banners_main": {
       "type": "promo-cards",
@@ -466,85 +439,198 @@
         "padding_bottom": 48
       }
     },
+    "second_collection": {
+      "type": "dc-product-list",
+      "blocks": {
+        "tab_1": {
+          "type": "tab",
+          "settings": {
+            "label": "Ofertas-relâmpago",
+            "collection": "ofertas-relampago",
+            "collection_handle": "ofertas-relampago"
+          }
+        }
+      },
+      "block_order": [
+        "tab_1"
+      ],
+      "settings": {
+        "eyebrow": "OFERTAS-RELÂMPAGO",
+        "heading": "Aproveite antes que acabe",
+        "max_products": 12,
+        "layout": "carousel",
+        "show_view_all": false,
+        "view_all_label": "Ver todos os produtos",
+        "countdown_end": "",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "recently_viewed": {
+      "type": "dc-recently-viewed",
+      "settings": {
+        "eyebrow": "VOCÊ VIU",
+        "heading": "Vistos recentemente",
+        "max_items": 5,
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
+    },
+    "featured_product_main": {
+      "type": "dc-featured-product",
+      "settings": {
+        "eyebrow": "Destaque · Impressão 3D",
+        "collection_handle": "impressao-3d",
+        "product": "impressora-3d-snapmaker-u1-multicolor-4-cabecotes-127-220v-branco",
+        "cta_label": "Adicionar ao carrinho",
+        "show_stock_bar": true,
+        "stock_low_threshold": 10,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "testimonials_section": {
+      "type": "testimonials",
+      "blocks": {
+        "plat_1": {
+          "type": "platform",
+          "settings": {
+            "name": "Mercado Livre",
+            "value": "MercadoLíder Platinum",
+            "subtitle": "+10 mil vendas"
+          }
+        },
+        "plat_2": {
+          "type": "platform",
+          "settings": {
+            "name": "Garantia",
+            "value": "12 meses oficial",
+            "subtitle": "Em todos os produtos"
+          }
+        },
+        "plat_3": {
+          "type": "platform",
+          "settings": {
+            "name": "Atendimento",
+            "value": "WhatsApp humano",
+            "subtitle": "Seg–Sex · 9h às 19h · Sáb 9h–13h"
+          }
+        }
+      },
+      "block_order": [
+        "plat_1",
+        "plat_2",
+        "plat_3"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "eyebrow": "REPUTAÇÃO NO MERCADO LIVRE",
+        "heading": "Vendedor Platinum, avaliado por quem compra",
+        "subheading": "Nossa reputação é pública e verificável no Mercado Livre.",
+        "stat_rating": "",
+        "stat_count": "",
+        "stat_recommend": "",
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "show_platforms": true,
+        "cta_label": "Ver avaliações no Mercado Livre",
+        "cta_link": "https://lista.mercadolivre.com.br/loja/dropchina-297222/"
+      }
+    },
     "brand_carousel_main": {
       "type": "brand-carousel",
       "blocks": {
         "br_00": {
           "type": "brand",
           "settings": {
-            "alt": "ISD Tech"
+            "alt": "ISD Tech",
+            "link": ""
           }
         },
         "br_01": {
           "type": "brand",
           "settings": {
-            "alt": "HP"
+            "alt": "HP",
+            "link": ""
           }
         },
         "br_02": {
           "type": "brand",
           "settings": {
-            "alt": "Epson"
+            "alt": "Epson",
+            "link": ""
           }
         },
         "br_03": {
           "type": "brand",
           "settings": {
-            "alt": "Brother"
+            "alt": "Brother",
+            "link": ""
           }
         },
         "br_04": {
           "type": "brand",
           "settings": {
-            "alt": "Samsung"
+            "alt": "Samsung",
+            "link": ""
           }
         },
         "br_05": {
           "type": "brand",
           "settings": {
-            "alt": "Pantum"
+            "alt": "Pantum",
+            "link": ""
           }
         },
         "br_06": {
           "type": "brand",
           "settings": {
-            "alt": "JBL"
+            "alt": "JBL",
+            "link": ""
           }
         },
         "br_07": {
           "type": "brand",
           "settings": {
-            "alt": "Pcyes"
+            "alt": "Pcyes",
+            "link": ""
           }
         },
         "br_08": {
           "type": "brand",
           "settings": {
-            "alt": "Clanm"
+            "alt": "Clanm",
+            "link": ""
           }
         },
         "br_09": {
           "type": "brand",
           "settings": {
-            "alt": "Ugreen"
+            "alt": "Ugreen",
+            "link": ""
           }
         },
         "br_10": {
           "type": "brand",
           "settings": {
-            "alt": "Pineng"
+            "alt": "Pineng",
+            "link": ""
           }
         },
         "br_11": {
           "type": "brand",
           "settings": {
-            "alt": "Evolut"
+            "alt": "Evolut",
+            "link": ""
           }
         },
         "br_12": {
           "type": "brand",
           "settings": {
-            "alt": "Masterprint"
+            "alt": "Masterprint",
+            "link": ""
           }
         }
       },
@@ -584,17 +670,49 @@
         "padding_bottom": 56
       }
     },
-    "featured_product_main": {
-      "type": "dc-featured-product",
-      "settings": {
-        "eyebrow": "Destaque · Impressão 3D",
-        "product": "impressora-3d-snapmaker-u1-multicolor-4-cabecotes-127-220v-branco",
-        "collection_handle": "impressao-3d",
-        "cta_label": "Adicionar ao carrinho",
-        "show_stock_bar": true,
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
+    "trust_badges_main": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"#0d1115\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"24\" height=\"24\"><path d=\"M3 7h11v9H3z\"></path><path d=\"M14 10h4l3 3v3h-7z\"></path><circle cx=\"7\" cy=\"18\" r=\"1.6\"></circle><circle cx=\"17\" cy=\"18\" r=\"1.6\"></circle></svg>",
+            "title": "Frete grátis",
+            "sub": "Por região · veja no checkout"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"#0d1115\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"24\" height=\"24\"><path d=\"M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3Z\"></path><path d=\"m9 12 2 2 4-4\"></path></svg>",
+            "title": "Garantia oficial",
+            "sub": "12 meses em todos os produtos"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"#0d1115\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"24\" height=\"24\"><path d=\"M3 12a9 9 0 0 1 15.5-6.3L21 8\"></path><path d=\"M21 4v4h-4\"></path><path d=\"M21 12a9 9 0 0 1-15.5 6.3L3 16\"></path><path d=\"M3 20v-4h4\"></path></svg>",
+            "title": "Troca fácil",
+            "sub": "7 dias para trocar ou devolver"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"#0d1115\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"24\" height=\"24\"><path d=\"M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-2v-6h4\"></path><path d=\"M4 13v4a2 2 0 0 0 2 2h2v-6H4\"></path></svg>",
+            "title": "Atendimento humano",
+            "sub": "Seg a sex das 9h às 19h, sáb das 9h às 13h"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {}
     },
     "signup_popup": {
       "type": "dc-signup-popup",
@@ -602,67 +720,37 @@
         "heading": "10% OFF na primeira compra",
         "subheading": "Cadastre seu e-mail e receba o cupom na hora — mais ofertas exclusivas em tech.",
         "coupon_code": "DROP10",
+        "placeholder": "seu@email.com.br",
         "cta_label": "Quero meu cupom",
         "cta_link": "shopify://collections/all",
+        "legal": "Sem spam. Cancele quando quiser.",
         "delay_seconds": 25,
         "scroll_pct": 55
       }
     },
-    "recently_viewed": {
-      "type": "dc-recently-viewed",
-      "settings": {
-        "eyebrow": "VOCÊ VIU",
-        "heading": "Vistos recentemente",
-        "max_items": 5,
-        "padding_top": 24,
-        "padding_bottom": 56
-      }
-    },
-    "filamentos_home": {
+    "mobilidade_home": {
       "type": "dc-product-list",
       "blocks": {
-        "fil_todos": {
+        "mob_todas": {
           "type": "tab",
           "settings": {
-            "label": "Todos",
-            "collection": "filamentos-3d"
-          }
-        },
-        "fil_pla": {
-          "type": "tab",
-          "settings": {
-            "label": "PLA",
-            "collection": "filamentos-pla"
-          }
-        },
-        "fil_petg": {
-          "type": "tab",
-          "settings": {
-            "label": "PETG",
-            "collection": "filamentos-petg"
-          }
-        },
-        "fil_natal": {
-          "type": "tab",
-          "settings": {
-            "label": "Cores de Natal",
-            "collection": "filamentos-de-natal"
+            "label": "Scooters elétricas",
+            "collection": "mobilidade-eletrica",
+            "collection_handle": ""
           }
         }
       },
       "block_order": [
-        "fil_todos",
-        "fil_pla",
-        "fil_petg",
-        "fil_natal"
+        "mob_todas"
       ],
       "settings": {
-        "eyebrow": "IMPRESSÃO 3D",
-        "heading": "Filamentos Bambu Lab",
-        "max_products": 10,
+        "eyebrow": "NOVIDADE · MOBILIDADE ELÉTRICA",
+        "heading": "Scooters elétricas AZM",
+        "max_products": 8,
         "layout": "grid",
         "show_view_all": true,
-        "view_all_label": "Ver todos os filamentos",
+        "view_all_label": "Ver mobilidade elétrica",
+        "countdown_end": "",
         "padding_top": 24,
         "padding_bottom": 56
       }
@@ -671,6 +759,7 @@
   "order": [
     "hero_main",
     "categories_grid",
+    "mobilidade_home",
     "best_sellers",
     "filamentos_home",
     "promo_banners_main",
