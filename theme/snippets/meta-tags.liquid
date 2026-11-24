@@ -84,11 +84,11 @@
 {%- if og_img -%}
   <meta
     property="og:image"
-    content="http:{{ og_img | image_url }}"
+    content="https:{{ og_img | image_url: width: 1200, format: 'jpg' }}"
   >
   <meta
     property="og:image:secure_url"
-    content="https:{{ og_img | image_url }}"
+    content="https:{{ og_img | image_url: width: 1200, format: 'jpg' }}"
   >
   <meta
     property="og:image:width"
@@ -98,7 +98,7 @@
     property="og:image:height"
     content="{{ og_img.height }}"
   >
-  {%- assign social_image = og_img | image_url | split: '//' | last | prepend: 'https://' -%}
+  {%- assign social_image = og_img | image_url: width: 1200, format: 'jpg' | split: '//' | last | prepend: 'https://' -%}
 {%- else -%}
   {%- comment -%} asset_url pode voltar protocol-relative; o split normaliza {%- endcomment -%}
   {%- assign social_image = 'og-image.jpg' | asset_url | split: '//' | last | prepend: 'https://' -%}
