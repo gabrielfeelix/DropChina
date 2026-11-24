@@ -223,10 +223,22 @@
             "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"40\" ry=\"5\" fill=\"rgba(13,17,21,0.08)\"></ellipse><path d=\"M80 28 L90 62 L124 72 L90 82 L80 116 L70 82 L36 72 L70 62 Z\" fill=\"#f5c518\"></path><path d=\"M116 34 L120 46 L132 50 L120 54 L116 66 L112 54 L100 50 L112 46 Z\" fill=\"#2a3038\"></path><path d=\"M46 92 L49 101 L58 104 L49 107 L46 116 L43 107 L34 104 L43 101 Z\" fill=\"#0e8aa5\"></path></svg>",
             "cat3d_key": "novidades"
           }
+        },
+        "cat_mob": {
+          "type": "category",
+          "settings": {
+            "cat3d_key": "mobilidade-eletrica",
+            "name": "Mobilidade Elétrica",
+            "collection": "mobilidade-eletrica",
+            "count": "Novidade",
+            "link": "shopify://collections/mobilidade-eletrica",
+            "icon_svg": "<svg viewbox=\"0 0 160 140\" width=\"100%\" height=\"100%\"><ellipse cx=\"80\" cy=\"124\" rx=\"56\" ry=\"6\" fill=\"rgba(13,17,21,0.08)\"></ellipse><circle cx=\"44\" cy=\"100\" r=\"18\" fill=\"#1b2226\"></circle><circle cx=\"44\" cy=\"100\" r=\"8\" fill=\"#1e93a8\"></circle><circle cx=\"118\" cy=\"100\" r=\"18\" fill=\"#1b2226\"></circle><circle cx=\"118\" cy=\"100\" r=\"8\" fill=\"#1e93a8\"></circle><rect x=\"56\" y=\"84\" width=\"50\" height=\"10\" rx=\"4\" fill=\"#1b2226\"></rect><rect x=\"30\" y=\"62\" width=\"44\" height=\"26\" rx=\"10\" fill=\"#e4e9ec\"></rect><rect x=\"32\" y=\"54\" width=\"40\" height=\"10\" rx=\"5\" fill=\"#1b2226\"></rect><rect x=\"98\" y=\"40\" width=\"14\" height=\"52\" rx=\"6\" fill=\"#e4e9ec\" transform=\"rotate(18 105 66)\"></rect><rect x=\"96\" y=\"30\" width=\"26\" height=\"6\" rx=\"3\" fill=\"#2e373d\"></rect></svg>"
+          }
         }
       },
       "block_order": [
         "cat_3d",
+        "cat_mob",
         "cat_0",
         "cat_1",
         "cat_2",

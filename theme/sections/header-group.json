@@ -92,10 +92,22 @@
             "items": "Ver tudo em Variedades|/collections/variedades",
             "link": "shopify://collections/variedades"
           }
+        },
+        "dep_mobilidade": {
+          "type": "mega_cat",
+          "settings": {
+            "name": "Mobilidade Elétrica",
+            "badge": "NOVO",
+            "icon": "scooter",
+            "items": "Scooters elétricas|/collections/mobilidade-eletrica\nVer tudo em Mobilidade Elétrica|/collections/mobilidade-eletrica",
+            "featured_collection": "mobilidade-eletrica",
+            "link": "shopify://collections/mobilidade-eletrica"
+          }
         }
       },
       "block_order": [
         "dep_3d",
+        "dep_mobilidade",
         "dep_impressao",
         "dep_informatica",
         "dep_papelaria",
@@ -142,7 +154,10 @@
         "secondary_link_2": "F.A.Q.",
         "secondary_link_2_url": "/pages/faq",
         "secondary_link_3": "",
-        "secondary_link_3_url": ""
+        "secondary_link_3_url": "",
+        "nav_link_7": "Mobilidade",
+        "nav_link_7_url": "shopify://collections/mobilidade-eletrica",
+        "nav_link_7_tag": ""
       }
     }
   },

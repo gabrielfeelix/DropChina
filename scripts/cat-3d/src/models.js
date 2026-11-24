@@ -400,6 +400,52 @@ const BUILD = {
     return g;
   },
 
+  'mobilidade-eletrica': () => {
+    const g = group('scooter');
+    const R = 0.074;
+    // rodas: pneu (torus) + aro + cubo com anel de destaque
+    [[-0.175, 'rear'], [0.185, 'front']].forEach(([x, id]) => {
+      const tire = new THREE.Mesh(new THREE.TorusGeometry(R, 0.024, 10, 32), MATS.ink);
+      tire.name = 'tire_' + id;
+      g.add(at(tire, x, R + 0.024, 0));
+      g.add(at(cyl(R * 0.78, 0.034, MATS.graphite, 'rim_' + id, 28), x, R + 0.024, 0, Math.PI / 2));
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(R * 0.62, 0.0055, 6, 24), MATS.teal);
+      ring.name = 'rim_ring_' + id;
+      g.add(at(ring, x, R + 0.024, 0.019));
+      g.add(at(cyl(0.018, 0.05, MATS.shell, 'hub_' + id, 16), x, R + 0.024, 0, Math.PI / 2));
+    });
+    const axleY = R + 0.024;
+    // assoalho e carenagem traseira (corpo claro, como a X15 prata)
+    g.add(at(rbox(0.25, 0.028, 0.105, 0.012, MATS.ink, 'floorboard'), 0.015, axleY + 0.012, 0));
+    g.add(at(rbox(0.215, 0.105, 0.118, 0.04, MATS.shell, 'rear_body'), -0.118, axleY + 0.072, 0));
+    g.add(at(rbox(0.12, 0.022, 0.12, 0.01, MATS.graphite, 'rear_trim'), -0.14, axleY + 0.022, 0));
+    // banco + encosto do garupa
+    g.add(at(rbox(0.19, 0.032, 0.108, 0.015, MATS.ink, 'seat'), -0.105, axleY + 0.140, 0));
+    g.add(at(rbox(0.026, 0.062, 0.086, 0.011, MATS.ink, 'backrest'), -0.222, axleY + 0.178, 0, 0, 0, 0.22));
+    // escudo frontal inclinado (coluna da direção)
+    const lean = 0.34;
+    g.add(at(rbox(0.062, 0.215, 0.108, 0.026, MATS.shell, 'leg_shield'), 0.118, axleY + 0.118, 0, 0, 0, lean));
+    g.add(at(rbox(0.052, 0.06, 0.112, 0.012, MATS.graphite, 'shield_band'), 0.104, axleY + 0.07, 0, 0, 0, lean));
+    // farol de LED (faixa) e painel
+    g.add(at(rbox(0.014, 0.026, 0.078, 0.007, MATS.teal, 'led_headlight'), 0.162, axleY + 0.185, 0, 0, 0, lean));
+    // garfo dianteiro
+    [-1, 1].forEach(sd => g.add(at(cyl(0.008, 0.13, MATS.graphite, 'fork_' + (sd > 0 ? 'r' : 'l'), 10),
+      0.165, axleY + 0.055, sd * 0.026, 0, 0, lean)));
+    const fender = new THREE.Mesh(new THREE.TorusGeometry(R + 0.032, 0.012, 6, 20, Math.PI * 0.62), MATS.shell);
+    fender.name = 'front_fender';
+    g.add(at(fender, 0.185, axleY, 0, 0, 0, Math.PI * 0.26));
+    // guidão: coluna, barra, manoplas e espelhos
+    g.add(at(cyl(0.011, 0.075, MATS.graphite, 'stem', 10), 0.074, axleY + 0.258, 0, 0, 0, lean));
+    g.add(at(cyl(0.009, 0.20, MATS.graphite, 'handlebar', 10), 0.062, axleY + 0.292, 0, Math.PI / 2));
+    [-1, 1].forEach(sd => {
+      const id = sd > 0 ? 'r' : 'l';
+      g.add(at(cyl(0.0125, 0.045, MATS.ink, 'grip_' + id, 10), 0.062, axleY + 0.292, sd * 0.088, Math.PI / 2));
+      g.add(at(cyl(0.004, 0.07, MATS.graphite, 'mirror_arm_' + id, 6), 0.05, axleY + 0.33, sd * 0.07, sd * -0.35, 0, 0));
+      g.add(at(rbox(0.012, 0.03, 0.046, 0.01, MATS.ink, 'mirror_' + id), 0.05, axleY + 0.37, sd * 0.083));
+    });
+    return g;
+  },
+
   novidades: () => {
     const g = group('sparkle');
     const big = extrude(starShape(0.26, 0.055, 4, Math.PI / 2), 0.055, MATS.yellow, 'star_big');
@@ -425,7 +471,8 @@ export const CATEGORIES = [
   { key: 'cabos-adaptadores', label: 'Cabos & Adaptadores' },
   { key: 'papelaria-midia',   label: 'Papelaria & Mídia' },
   { key: 'ofertas-da-semana', label: 'Ofertas da Semana' },
-  { key: 'novidades',         label: 'Novidades' }
+  { key: 'novidades',         label: 'Novidades' },
+  { key: 'mobilidade-eletrica', label: 'Mobilidade Elétrica' }
 ];
 
 export function buildCategory(key) {

@@ -19,7 +19,7 @@ body{margin:0;font-family:system-ui;background:#fff;padding:40px}
 <div class="spacer">scroll…</div>
 <div class="dc-categories__grid" data-dc-cat3d id="g"></div>
 <script>
-const KEYS=[['impressao-3d','Impressão 3D'],['cartuchos-tintas','Cartuchos & Tintas'],['toners','Toners'],['impressoras','Impressoras'],['placas-de-video','Placas de Vídeo'],['audio-headsets','Áudio & Headsets'],['perifericos','Periféricos'],['redes-internet','Redes & Internet'],['armazenamento','Armazenamento'],['cabos-adaptadores','Cabos & Adaptadores'],['papelaria-midia','Papelaria & Mídia'],['ofertas-da-semana','Ofertas da Semana'],['novidades','Novidades']];
+const KEYS=[['impressao-3d','Impressão 3D'],['cartuchos-tintas','Cartuchos & Tintas'],['toners','Toners'],['impressoras','Impressoras'],['placas-de-video','Placas de Vídeo'],['audio-headsets','Áudio & Headsets'],['perifericos','Periféricos'],['redes-internet','Redes & Internet'],['armazenamento','Armazenamento'],['cabos-adaptadores','Cabos & Adaptadores'],['papelaria-midia','Papelaria & Mídia'],['ofertas-da-semana','Ofertas da Semana'],['novidades','Novidades'],['mobilidade-eletrica','Mobilidade Elétrica']];
 document.getElementById('g').innerHTML = KEYS.map(([k,l])=>`<a href="#" class="dc-cat" data-cat3d-key="${k}"><div class="dc-cat__art" data-cat3d-art><svg viewBox="0 0 160 140" width="100%" height="100%"><rect x="34" y="36" width="92" height="64" rx="6" fill="#2a3038"/></svg></div><div class="dc-cat__name">${l}</div><div class="dc-cat__count">10 produtos</div></a>`).join('');
 </script>
 <script src="./dist/dc-cat-3d.js"></script>

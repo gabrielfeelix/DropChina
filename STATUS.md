@@ -49,7 +49,9 @@ quê. O gargalo deixou de ser operacional e virou **conversão**.
 - **Tema (precisa CLI logado ou editor):**
   - ✅ Feito 24/nov via CLI (`--only --nodelete`): banner X13 v3 (5 cores), link do banner X15 → PDP, seção `mobilidade_home` na home.
   - Banner **mobile** da X13 ainda diz 6 cores (falta arte mobile).
-  - "Mobilidade Elétrica" no **menu principal** — só pelo admin (Navegação); app não tem scope de menu.
+  - ✅ Menu: 7º link "Mobilidade" na barra (`nav_link_7`) + departamento `dep_mobilidade` (ícone `scooter`) no "Todas as categorias".
+  - ✅ Grade de categorias: card `cat_mob` com modelo 3D `mobilidade-eletrica` (scooter em `scripts/cat-3d/src/models.js`).
+  - ✅ Card: "Frete grátis" (≥ R$ 1.000) não aparece mais em item > 30 kg.
   - Pix 8% → 5% no tema (`pix_pct` em `dc-product-card.liquid`, `dc-pdp.liquid`, `dc-header.liquid`; textos em `header-group.json`, `dc-faq.liquid`, `meta-tags.liquid`) — **só depois** de trocar na Pagar.me (HUB → Minhas integrações → Shopify → desconto Pix).
   - ⚠️ Assets dos banners das scooters (exceto x13-v3) só existem no tema live: nunca push sem `--only`.
 - **Banners:** preços "R$ 4.500 / R$ 5.000 à vista" não batem com Pix 5% (5.225 / 5.700).
